@@ -1,0 +1,13 @@
+<div>
+    <h2>Canvas</h2>
+    <div>
+        <label>This is the count for textbox: {{ tbox }}</label>
+        <br/>
+        <label>This is the count for image: {{ img }}</label>
+        <br/>
+        <label>This is the count for button: {{ btn }}</label>
+    </div>
+    <div *ngFor="let p of addedPallete">
+        <p>{{ p }}</p>
+    </div>
+</div>
