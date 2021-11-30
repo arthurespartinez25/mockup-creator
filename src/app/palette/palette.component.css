@@ -1,0 +1,11 @@
+.palette-container {
+  height: 100vh;
+  max-width: 600px;
+  padding: 10px;
+  flex-grow: 1;
+}
+
+.palette-item:hover {
+  cursor: pointer;
+  background-color: #cccccc;
+}
