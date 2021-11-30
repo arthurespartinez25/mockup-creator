@@ -1,9 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { SharedService } from 'src/app/shared.service';
-/*
-import { CanvasComponent } from './canvas/canvas.component';
-import { WindowPaletteComponent } from './window_palette/window_palette.component';
-*/
+
 
 @Component({
   selector: 'UI-window',
@@ -13,6 +10,7 @@ import { WindowPaletteComponent } from './window_palette/window_palette.componen
 export class UIWindowComponent implements OnInit {
 
   @Input() addedPallete: any[]=[];
+  @Output() addToCanvas: any[]=[];
 
   constructor(private sharedService:SharedService) { }
 

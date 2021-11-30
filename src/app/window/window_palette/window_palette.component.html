@@ -1,17 +1,25 @@
-<div>
-    <label>Palette</label>
-    <div>
-        <ul class="html-item">
-            <li class="item-textbox disable-select"(click)="addTextbox()">text box</li>
-            <!--
-                <li class="item-textbox" name="textbox" [(ngModel)]="textbox" id="textbox">text box</li>
-            -->
-            <li class="item-image disable-select" (click)="addImage()">image</li>
-            <li class="item-button disable-select" (click)="addButton()">button</li>
-        </ul>
+<div class="window-row">
+    <div class="left">
+        <label><strong>Palette</strong></label>
+        <div>
+            <ul class="html-item">
+                <li class="item-textbox disable-select" (click)="addTextbox()">text box</li>
+                <!--
+                    <li class="item-textbox" name="textbox" [(ngModel)]="textbox" id="textbox">text box</li>
+                -->
+                <li class="item-image disable-select" (click)="addLabel()">label</li>
+                <li class="item-button disable-select" (click)="addButton()">button</li>
+            </ul>
+        </div>
+    </div>
+    <div class="right">
+        <!--
+        <window-canvas></window-canvas>
+        <window-canvas [addedPalette]="addToCanvas" [item]="data" [innerHTML]="canvas"></window-canvas>
+        -->
+        <window-canvas [addedPalette]="addToCanvas" [item]="data"></window-canvas>
     </div>
 </div>
-
 <!--
     <script src="script.js"></script>
 -->
