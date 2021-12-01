@@ -1,4 +1,10 @@
-import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'app-palette',
@@ -6,7 +12,10 @@ import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
   styleUrls: ['./palette.component.css'],
 })
 export class PaletteComponent implements OnInit {
-  constructor(private renderer: Renderer2) {}
+  @ViewChild('canvas')
+  canvas!: ElementRef;
+
+  constructor(private renderer: Renderer2, private el: ElementRef) {}
 
   ngOnInit(): void {}
 
@@ -16,7 +25,7 @@ export class PaletteComponent implements OnInit {
     this.renderer.setProperty(newButton, 'type', 'button');
     this.renderer.addClass(newButton, 'btn-primary');
     this.renderer.appendChild(newButton, text);
-    this.renderer.appendChild(document.body, newButton);
+    this.renderer.appendChild(this.canvas.nativeElement, newButton);
     return newButton;
   }
   createLabel() {
