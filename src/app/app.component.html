@@ -11,8 +11,27 @@
 <!-- <app-navbar></app-navbar> -->
 
 <div class="content" role="main">
-  <app-palette></app-palette>
-  <app-canvas></app-canvas>
+  <!-- PALETTE SECTION -->
+
+  <div id="palette-container">
+    <ul class="list-group">
+      <li class="list-group-item palette-item" (click)="createButton()">
+        Button
+      </li>
+      <li class="list-group-item palette-item" (click)="createInput()">
+        Text Input
+      </li>
+      <li class="list-group-item palette-item" (click)="createLabel()">
+        Label
+      </li>
+    </ul>
+  </div>
+
+  <!-- CANVAS SECTION -->
+
+  <div id="canvas-container">
+    <div id="canvas" #canvas></div>
+  </div>
 </div>
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
