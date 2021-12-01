@@ -1,11 +1,16 @@
 <div class="palette-container">
-  <ul class="list-group">
-    <li class="list-group-item palette-item" (click)="createButton()">
+  <div class="example-list" [cdkDropListData]="container" cdkDropList id="list-2" cdkDropListConnectedTo="list-1" (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let item of container" cdkDrag>{{item}}</div>
+    <ul class="list-group">
+    
+    <li class="list-group-item palette-item" (click)="createButton()" cdkDrag >
       Button
     </li>
-    <li class="list-group-item palette-item" (click)="createInput()">
+    <li class="list-group-item palette-item" (click)="createInput()" cdkDrag>
       Text Input
     </li>
-    <li class="list-group-item palette-item" (click)="createLabel()">Label</li>
+    <li class="list-group-item palette-item" (click)="createLabel()" cdkDrag>Label</li>
+  
   </ul>
+</div>
 </div>
