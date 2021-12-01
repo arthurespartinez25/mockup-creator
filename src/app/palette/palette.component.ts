@@ -12,7 +12,7 @@ export class PaletteComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  container = ['A'];
+  container = ['Button1', 'Text Input', 'Label'];
 
   drop(event: CdkDragDrop<string[]>) {
     if(event.previousContainer.id === event.container.id)
@@ -21,11 +21,14 @@ export class PaletteComponent implements OnInit {
     }
     else
     {
-      transferArrayItem(event.previousContainer.data,
+      copyArrayItem(event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex);
     }
+  }
+  noReturnPredicate() {
+    return false;
   }
   /*drop(event: CdkDragDrop<string[]>)
   {

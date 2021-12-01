@@ -1,7 +1,12 @@
 <div cdkDropListGroup>
 <div class="canvas-container">
   <div id="canvas" #canvas>
-    <div class="example-list"  [cdkDropListData]="container" cdkDropList id="list-1" cdkDropListConnectedTo="list-2" (cdkDropListDropped)="drop($event)">
+    <div class="example-list" 
+    cdkDropList
+    [cdkDropListData]="container" 
+    cdkDropList id="list-1" 
+    cdkDropListConnectedTo="list-2" 
+    (cdkDropListDropped)="drop($event)">
       <div class="example-box" *ngFor="let item of container" cdkDrag>{{item}}</div>
     </div>
   </div>
