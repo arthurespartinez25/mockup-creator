@@ -1,5 +1,6 @@
 import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { CdkDragDrop, CdkDrag, moveItemInArray, transferArrayItem, copyArrayItem} from '@angular/cdk/drag-drop';
+import {SharedService} from "../shared/shared.service";
 
 @Component({
   selector: 'app-canvas',
@@ -8,10 +9,13 @@ import { CdkDragDrop, CdkDrag, moveItemInArray, transferArrayItem, copyArrayItem
 })
 export class CanvasComponent implements OnInit {
 
-  constructor(private renderer: Renderer2) {}
+  
 
-  ngOnInit(): void {
+  constructor(private renderer: Renderer2, private shared:SharedService) {
+    this.shared.comp1Val = this.container;
   }
+
+  
 
   container = [''];
   /*drop(event: CdkDragDrop<string[]>)
@@ -47,5 +51,8 @@ export class CanvasComponent implements OnInit {
         event.previousIndex,
         event.currentIndex);
     }
+  }
+  ngOnInit(): void {
+    
   }
 }

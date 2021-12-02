@@ -1,6 +1,8 @@
 import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { CdkDragDrop, CdkDrag, moveItemInArray, transferArrayItem, copyArrayItem} from '@angular/cdk/drag-drop';
 import { CanvasComponent } from '../canvas/canvas.component';
+import {SharedService} from "../shared/shared.service";
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-palette',
@@ -8,9 +10,12 @@ import { CanvasComponent } from '../canvas/canvas.component';
   styleUrls: ['./palette.component.css'],
 })
 export class PaletteComponent implements OnInit {
-  constructor(private renderer: Renderer2) {}
+  comp1Val: any = [];
+  constructor(private renderer: Renderer2, private shared:SharedService) {
+    this.comp1Val = this.shared.comp1Val;
+  }
   canvas = CanvasComponent;
-  ngOnInit(): void {}
+  
 
   container = ['Button1', 'Text Input', 'Label'];
 
@@ -38,17 +43,21 @@ export class PaletteComponent implements OnInit {
     }
   }*/
 
-  
+  createButton() {
+    //this.container[0] = this.container[1].slice(this.container[1].indexOf('Button1')),this.container[0];
+    //this.container.push('Button1');
+    this.shared.comp1Val.push('Button1');
+  }
   
   createLabel() {
     //this.container[0] = this.container[1].slice(this.container[1].indexOf('Button1')),this.container[0];
-    this.container.push('Button1');
+    //this.container.push('Button1');
+    this.shared.comp1Val.push('Label1');
   }
   createInput() {
-    const newInput = this.renderer.createElement('input');
-    this.renderer.addClass(newInput, 'form-control');
-    this.renderer.appendChild(document.body, newInput);
-    this.renderer.setAttribute(newInput, 'placeholder', 'NEW INPUT');
-    return newInput;
+    this.shared.comp1Val.push('Text Input');
+  }
+  ngOnInit(): void {
+    //this.message = this.shared.message;
   }
 }

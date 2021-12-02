@@ -12,15 +12,15 @@
     <ul class="list-group">
     
     <li class="list-group-item palette-item example-box" *ngFor="let item of container" cdkDrag>
-       <div *ngIf="item == 'Button1'" (click)="createLabel()">
+       <div *ngIf="item == 'Button1'" (click)="createButton()">
           {{item}}
         </div>
 
-        <div *ngIf="item == 'Text Input'">
+        <div *ngIf="item == 'Text Input' " (click)="createInput()">
           {{item}}
         </div>
 
-        <div *ngIf="item == 'Label'">
+        <div *ngIf="item == 'Label'" (click)="createLabel()">
           {{item}}
         </div>
     </li>

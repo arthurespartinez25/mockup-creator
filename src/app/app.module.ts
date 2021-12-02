@@ -10,6 +10,10 @@ import { CanvasComponent } from './canvas/canvas.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
+import { SharedService } from './shared/shared.service';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,8 +26,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     AppRoutingModule,
     DragDropModule,
     BrowserAnimationsModule
+    
   ],
-  providers: [],
+  providers: [SharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
