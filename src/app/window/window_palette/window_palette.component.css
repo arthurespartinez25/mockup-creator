@@ -1,0 +1,37 @@
+.disable-select {
+  -webkit-user-select: none;  
+  -moz-user-select: none;    
+  -ms-user-select: none;      
+  user-select: none;
+}
+.window-row {
+  display: flex;
+  background-color: azure;
+}
+
+.window-column {
+  height: 500px;
+  width: 200px;
+  flex: 50%;
+  background-color: cadetblue;
+  margin: 10px;
+}
+
+.column {
+  float: left;
+}
+
+.left {
+  height: 500px;
+  width: 200px;
+  background-color: cadetblue;
+  margin: 10px;
+}
+
+.right {
+  height: 500px;
+  width: 500px;
+  background-color: cadetblue;
+  margin: 10px;
+}
+
