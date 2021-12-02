@@ -52,7 +52,7 @@ export class PaletteComponent implements OnInit {
   createLabel() {
     //this.container[0] = this.container[1].slice(this.container[1].indexOf('Button1')),this.container[0];
     //this.container.push('Button1');
-    this.shared.comp1Val.push('Label1');
+    this.shared.comp1Val.push('Label');
   }
   createInput() {
     this.shared.comp1Val.push('Text Input');
