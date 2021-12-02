@@ -39,17 +39,4 @@ export class AppComponent implements OnInit {
     this.renderer.appendChild(newButton, text); //append the text into the button tag
     this.renderer.appendChild(this.canvas.nativeElement, newButton); //append the button to the canvas div
   }
-  createLabel() {
-    const newLabel = this.renderer.createElement('p');
-    const text = this.renderer.createText('LABEL');
-    this.renderer.addClass(newLabel, 'h2');
-    this.renderer.appendChild(newLabel, text);
-    this.renderer.appendChild(this.canvas.nativeElement, newLabel);
-  }
-  createInput() {
-    const newInput = this.renderer.createElement('input');
-    this.renderer.addClass(newInput, 'form-control');
-    this.renderer.appendChild(this.canvas.nativeElement, newInput);
-    this.renderer.setAttribute(newInput, 'placeholder', 'NEW INPUT');
-  }
 }
