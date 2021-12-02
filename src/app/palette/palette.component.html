@@ -6,11 +6,11 @@
   [cdkDropListEnterPredicate]="noReturnPredicate"
   cdkDropListSortingDisabled
   cdkDropListConnectedTo="list-1" 
-  (cdkDropListDropped)="drop($event)">
+  >
     
     <ul class="list-group">
     
-    <li class="list-group-item palette-item example-box" *ngFor="let item of container" cdkDrag>
+    <li class="list-group-item palette-item example-box" *ngFor="let item of container" (click)="createLabel()" cdkDrag>
       {{item}}
     </li>
   

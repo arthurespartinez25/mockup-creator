@@ -14,19 +14,7 @@ export class PaletteComponent implements OnInit {
 
   container = ['Button1', 'Text Input', 'Label'];
 
-  drop(event: CdkDragDrop<string[]>) {
-    if(event.previousContainer.id === event.container.id)
-    {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    }
-    else
-    {
-      copyArrayItem(event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex);
-    }
-  }
+  
   noReturnPredicate() {
     return false;
   }

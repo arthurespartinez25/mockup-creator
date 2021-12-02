@@ -13,7 +13,7 @@ export class CanvasComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  container = ['A'];
+  container = [''];
   /*drop(event: CdkDragDrop<string[]>)
   {
 
@@ -40,6 +40,8 @@ export class CanvasComponent implements OnInit {
     }
     else
     {
+      console.log(event.currentIndex)
+      
       copyArrayItem(event.previousContainer.data,
         event.container.data,
         event.previousIndex,
