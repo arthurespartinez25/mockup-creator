@@ -1,0 +1,42 @@
+<div>
+    <label><strong>Canvas</strong></label>
+    <div>
+        <label>This is the count for textbox: {{ tbox }}</label>
+        <br/>
+        <label>This is the count for image: {{ lbl }}</label>
+        <br/>
+        <label>This is the count for button: {{ btn }}</label>
+    </div>
+        <div class="canvas" *ngFor="let p of addedPalette">
+            <div>
+                {{ p }}
+            </div>
+        </div>
+
+    <script>
+        function loadDOM () {
+            document.getElementsByClassName("canvas").value = addedPalette.innerHTML;
+        }
+    </script>
+
+<!--
+<script>
+    let canvas = document.querySelector("canvas");
+    var id = document.getElementById("p");
+    if (id.length > 0) {
+        alert (id[0].value);
+    }
+    console.log(" --- ");
+    console.log(canvas);
+    console.log(id);
+    console.log(" --- ");
+
+    //var stringToHTML = function (canvas) {
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(id, 'text/html');
+        //return doc.body.canvas;
+    //};
+    canvas.appendChild(doc.body.firstChild);
+</script>
+-->
+</div>
