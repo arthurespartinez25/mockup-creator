@@ -6,12 +6,23 @@
   [cdkDropListEnterPredicate]="noReturnPredicate"
   cdkDropListSortingDisabled
   cdkDropListConnectedTo="list-1" 
+  
   >
     
     <ul class="list-group">
     
-    <li class="list-group-item palette-item example-box" *ngFor="let item of container" (click)="createLabel()" cdkDrag>
-      {{item}}
+    <li class="list-group-item palette-item example-box" *ngFor="let item of container" cdkDrag>
+       <div *ngIf="item == 'Button1'" (click)="createLabel()">
+          {{item}}
+        </div>
+
+        <div *ngIf="item == 'Text Input'">
+          {{item}}
+        </div>
+
+        <div *ngIf="item == 'Label'">
+          {{item}}
+        </div>
     </li>
   
   </ul>

@@ -9,15 +9,19 @@
     (cdkDropListDropped)="drop($event)">
       
       <div class="example-box" *ngFor="let item of container; let i = index" cdkDrag>
+
         <div *ngIf="item == 'Button1'">
           <button>{{item}}</button>
         </div>
+
         <div *ngIf="item == 'Text Input'">
           <input class="form-control" type="text" placeholder="Default input">
         </div>
+
         <div *ngIf="item == 'Label'">
           <h2>SHABU</h2>
         </div>
+        
       </div>
 
     </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { CdkDragDrop, CdkDrag, moveItemInArray, transferArrayItem, copyArrayItem} from '@angular/cdk/drag-drop';
-
+import { CanvasComponent } from '../canvas/canvas.component';
 
 @Component({
   selector: 'app-palette',
@@ -9,7 +9,7 @@ import { CdkDragDrop, CdkDrag, moveItemInArray, transferArrayItem, copyArrayItem
 })
 export class PaletteComponent implements OnInit {
   constructor(private renderer: Renderer2) {}
-
+  canvas = CanvasComponent;
   ngOnInit(): void {}
 
   container = ['Button1', 'Text Input', 'Label'];
@@ -38,22 +38,11 @@ export class PaletteComponent implements OnInit {
     }
   }*/
 
-  createButton() {
-    const newButton = this.renderer.createElement('button');
-    const text = this.renderer.createText('BUTTON');
-    this.renderer.setProperty(newButton, 'type', 'button');
-    this.renderer.addClass(newButton, 'btn-primary');
-    this.renderer.appendChild(newButton, text);
-    this.renderer.appendChild(document.body, newButton);
-    return newButton;
-  }
+  
+  
   createLabel() {
-    const newLabel = this.renderer.createElement('p');
-    const text = this.renderer.createText('LABEL');
-    this.renderer.addClass(newLabel, 'h2');
-    this.renderer.appendChild(newLabel, text);
-    this.renderer.appendChild(document.body, newLabel);
-    return newLabel;
+    //this.container[0] = this.container[1].slice(this.container[1].indexOf('Button1')),this.container[0];
+    this.container.push('Button1');
   }
   createInput() {
     const newInput = this.renderer.createElement('input');
