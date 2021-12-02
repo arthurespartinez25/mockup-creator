@@ -1,0 +1,16 @@
+.canvas-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  padding: 20px;
+  flex-grow: 3;
+  background-color: gray;
+}
+
+.canvas {
+  min-width: 848px;
+  min-height: 480px;
+  background-color: white;
+}
