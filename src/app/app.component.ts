@@ -1,4 +1,10 @@
-import { DragDrop, DragDropModule } from '@angular/cdk/drag-drop';
+import {
+  DragDrop,
+  DragDropConfig,
+  DragDropModule,
+  DragRef,
+  DragRefConfig,
+} from '@angular/cdk/drag-drop';
 import {
   Component,
   ElementRef,
@@ -25,7 +31,8 @@ export class AppComponent implements OnInit {
 
   createButton() {
     const newButton = this.renderer.createElement('button');
-    this.drag.createDrag(newButton);
+    let ref = this.drag.createDrag(newButton);
+    ref.withBoundaryElement(this.canvas);
     const text = this.renderer.createText('BUTTON');
     this.renderer.setProperty(newButton, 'type', 'button');
     this.renderer.addClass(newButton, 'btn-primary');
