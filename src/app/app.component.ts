@@ -1,3 +1,4 @@
+import { DragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 import {
   Component,
   ElementRef,
@@ -16,7 +17,7 @@ export class AppComponent implements OnInit {
 
   @ViewChild('canvas') canvas!: ElementRef;
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2, private drag: DragDrop) {}
 
   ngOnInit(): void {
     throw new Error('Method not implemented.');
@@ -24,6 +25,7 @@ export class AppComponent implements OnInit {
 
   createButton() {
     const newButton = this.renderer.createElement('button');
+    this.drag.createDrag(newButton);
     const text = this.renderer.createText('BUTTON');
     this.renderer.setProperty(newButton, 'type', 'button');
     this.renderer.addClass(newButton, 'btn-primary');

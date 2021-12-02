@@ -6,19 +6,19 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PaletteComponent } from './palette/palette.component';
 import { CanvasComponent } from './canvas/canvas.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     PaletteComponent,
-    CanvasComponent
+    CanvasComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
+  providers: [DragDropModule],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
