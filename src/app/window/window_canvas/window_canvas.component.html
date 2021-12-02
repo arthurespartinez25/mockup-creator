@@ -8,8 +8,17 @@
         <label>This is the count for button: {{ btn }}</label>
     </div>
         <div class="canvas" *ngFor="let p of addedPalette">
-            <p>{{ p }}</p>
+            <div>
+                {{ p }}
+            </div>
         </div>
+
+    <script>
+        function loadDOM () {
+            document.getElementsByClassName("canvas").value = addedPalette.innerHTML;
+        }
+    </script>
+
 <!--
 <script>
     let canvas = document.querySelector("canvas");

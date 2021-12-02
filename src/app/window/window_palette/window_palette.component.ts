@@ -11,7 +11,7 @@ export class WindowPaletteComponent implements OnInit {
   @ViewChild("canvas", {
     read: ElementRef
   })
-  public canvas: ElementRef | undefined;
+  public canvas!: ElementRef;
 
   post = '';
   strTextbox = 'You added a TextBox.';
@@ -30,7 +30,7 @@ export class WindowPaletteComponent implements OnInit {
     //this.addToCanvas.push(this.strTextbox);
     this.data = 1;
     this.sharedService.sendClickEvent();
-    //this.addToCanvas.push(this.createInput());
+    this.addToCanvas.push(this.createInput() + " " + this.createInput().toString);
   }
 
   addLabel(){
@@ -38,7 +38,7 @@ export class WindowPaletteComponent implements OnInit {
     //this.addToCanvas.push(this.strLabel);
     this.data = 2;
     this.sharedService.sendClickEvent();
-    //this.addToCanvas.push(this.createLabel());
+    this.addToCanvas.push(this.createLabel() + " " + this.createLabel().toString);
   }
   
   addButton(){
@@ -46,7 +46,7 @@ export class WindowPaletteComponent implements OnInit {
     //this.addToCanvas.push(this.strButton);
     this.data = 3;
     this.sharedService.sendClickEvent();
-    //this.addToCanvas.push(this.createButton());
+    this.addToCanvas.push(this.createButton() + " " + this.createButton().toString);
   }
 
   createInput() {
@@ -54,7 +54,7 @@ export class WindowPaletteComponent implements OnInit {
     this.renderer.addClass(newInput, 'form-control');
     this.renderer.appendChild(document.body, newInput);
     this.renderer.setAttribute(newInput, 'placeholder', 'NEW INPUT');
-    return newInput;
+    return newInput.innerHTML;
   }
   
   createLabel() {
@@ -65,7 +65,7 @@ export class WindowPaletteComponent implements OnInit {
     this.renderer.appendChild(document.body, newLabel);
     //this.canvas = newLabel.querySelector('.canvas');
     //this.renderer.appendChild(document.getElementsByClassName('canvas'), newLabel);
-    return newLabel;
+    return newLabel.innerHTML;
   }
   
   createButton() {
@@ -75,6 +75,6 @@ export class WindowPaletteComponent implements OnInit {
     this.renderer.addClass(newButton, 'btn-primary');
     this.renderer.appendChild(newButton, text);
     this.renderer.appendChild(document.body, newButton);
-    return newButton;
+    return newButton.innerHTML;
   }
 }
