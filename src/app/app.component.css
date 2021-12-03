@@ -40,6 +40,7 @@
   min-width: 848px;
   min-height: 480px;
   background-color: white;
+  overflow: none;
 }
 
 /********************** CODE CSS ********************/
@@ -75,4 +76,9 @@ a.custom-nav-link:hover {
 
 .custom-nav h1 {
   margin: 0;
+}
+
+.always-on-top {
+  position: fixed;
+  z-index: 999;
 }
