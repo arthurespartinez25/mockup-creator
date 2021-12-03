@@ -12,25 +12,30 @@
 
 <div class="content" role="main">
   <!-- PALETTE SECTION -->
-
   <div id="palette-container">
-    <button class="accordion palette-item">Navbar</button>
+    <button class="accordion palette-item" (click)="createNav()">Navbar</button>
     <button class="accordion palette-item">Link</button>
     <button class="accordion palette-item">Header</button>
     <button class="accordion palette-item">Paragraph</button>
-    <button class="accordion palette-item">Label</button>
+    <button class="accordion palette-item" (click)="createLabel()">
+      Label
+    </button>
     <button class="accordion palette-item" (click)="createButton()">
       Button
     </button>
     <button class="accordion palette-item" (click)="createDropdown()">
       Dropdown
     </button>
-    <button class="accordion palette-item">Checkbox</button>
+    <button class="accordion palette-item" (click)="createCheckbox()">
+      Checkbox
+    </button>
     <button class="accordion palette-item">Radio</button>
     <button class="accordion palette-item">Input Field</button>
     <button class="accordion palette-item">Textbox</button>
     <button class="accordion palette-item">Date Picker</button>
-    <button class="accordion palette-item">Modal</button>
+    <button class="accordion palette-item" (click)="createModal()">
+      Modal
+    </button>
     <button class="accordion palette-item">Popup</button>
     <button class="accordion palette-item">Image</button>
 
