@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     /* throw new Error('Method not implemented.'); */
-    this.theDiv = `<h2>test</h2>`
+    this.theDiv = `<h2>test</h2>`;
   }
 
   createButton() {
@@ -50,25 +50,24 @@ export class AppComponent implements OnInit {
   }
 
   createDropdown() {
-    
-    const newDiv = this.renderer.createElement('div'); 
-    const drpButton = this.renderer.createElement('button'); 
-    const menuDiv = this.renderer.createElement('div'); 
-    const menu1 = this.renderer.createElement('a'); 
-    const menu2 = this.renderer.createElement('a'); 
-    const menu3 = this.renderer.createElement('a'); 
+    const newDiv = this.renderer.createElement('div');
+    const drpButton = this.renderer.createElement('button');
+    const menuDiv = this.renderer.createElement('div');
+    const menu1 = this.renderer.createElement('a');
+    const menu2 = this.renderer.createElement('a');
+    const menu3 = this.renderer.createElement('a');
     /* const firstDiv = this.renderer.insertBefore(newDiv, drpButton, this.canvas.nativeElement.firstChild); 
-    const secondDiv = this.renderer.insertBefore(newDiv, menuDiv, this.canvas.nativeElement.firstChild); */ 
-    this.renderer.appendChild(newDiv, drpButton); 
-    this.renderer.appendChild(newDiv, menuDiv); 
-    this.renderer.appendChild(menuDiv, menu1); 
-    this.renderer.appendChild(menuDiv, menu2); 
-    this.renderer.appendChild(menuDiv, menu3); 
+    const secondDiv = this.renderer.insertBefore(newDiv, menuDiv, this.canvas.nativeElement.firstChild); */
+    this.renderer.appendChild(newDiv, drpButton);
+    this.renderer.appendChild(newDiv, menuDiv);
+    this.renderer.appendChild(menuDiv, menu1);
+    this.renderer.appendChild(menuDiv, menu2);
+    this.renderer.appendChild(menuDiv, menu3);
 
-    let ref = this.drag.createDrag(drpButton); 
-    ref.withBoundaryElement(this.canvas); 
+    let ref = this.drag.createDrag(drpButton);
+    ref.withBoundaryElement(this.canvas);
 
-    const text = this.renderer.createText('IbabaMoPo'); 
+    const text = this.renderer.createText('Dropdown');
     const menu1Text = this.renderer.createText('Menu1');
     const menu2Text = this.renderer.createText('Menu2');
     const menu3Text = this.renderer.createText('Menu3');
@@ -87,17 +86,20 @@ export class AppComponent implements OnInit {
     this.renderer.addClass(menu1, 'dropdown-item');
     this.renderer.addClass(menu2, 'dropdown-item');
     this.renderer.addClass(menu3, 'dropdown-item');
-    
+
     this.renderer.setAttribute(drpButton, 'data-toggle', 'dropdown');
     this.renderer.setAttribute(drpButton, 'aria-haspopup', 'true');
     this.renderer.setAttribute(drpButton, 'aria-expanded', 'false');
-    this.renderer.setAttribute(menuDiv, 'aria-labelledby', 'dropdownMenuButton');
+    this.renderer.setAttribute(
+      menuDiv,
+      'aria-labelledby',
+      'dropdownMenuButton'
+    );
 
-    this.renderer.appendChild(drpButton, text); 
-    this.renderer.appendChild(menu1, menu1Text); 
-    this.renderer.appendChild(menu2, menu2Text); 
-    this.renderer.appendChild(menu3, menu3Text); 
+    this.renderer.appendChild(drpButton, text);
+    this.renderer.appendChild(menu1, menu1Text);
+    this.renderer.appendChild(menu2, menu2Text);
+    this.renderer.appendChild(menu3, menu3Text);
     this.renderer.appendChild(this.canvas.nativeElement, newDiv);
-
   }
 }
