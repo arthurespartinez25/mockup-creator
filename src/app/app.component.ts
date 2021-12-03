@@ -68,7 +68,7 @@ export class AppComponent implements OnInit {
     let ref = this.drag.createDrag(drpButton); 
     ref.withBoundaryElement(this.canvas); 
 
-    const text = this.renderer.createText('IbabaMoPo'); 
+    const text = this.renderer.createText('Dropdown'); 
     const menu1Text = this.renderer.createText('Menu1');
     const menu2Text = this.renderer.createText('Menu2');
     const menu3Text = this.renderer.createText('Menu3');
