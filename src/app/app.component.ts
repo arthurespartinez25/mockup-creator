@@ -51,10 +51,10 @@ export class AppComponent implements OnInit {
     const newCheckbox = this.renderer.createElement('input'); 
     const checkboxLabel = this.renderer.createElement('label'); 
 
-    this.renderer.appendChild(mainDiv, newCheckbox); 
     this.renderer.appendChild(mainDiv, checkboxLabel); 
+    this.renderer.appendChild(checkboxLabel, newCheckbox); 
 
-    let ref = this.drag.createDrag(mainDiv); 
+    let ref = this.drag.createDrag(checkboxLabel); 
     ref.withBoundaryElement(this.canvas); 
 
     this.renderer.addClass(mainDiv, 'form-check');
