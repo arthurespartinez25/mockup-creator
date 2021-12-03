@@ -11,8 +11,36 @@
 <!-- <app-navbar></app-navbar> -->
 
 <div class="content" role="main">
-  <app-palette></app-palette>
-  <app-canvas></app-canvas>
+  <!-- PALETTE SECTION -->
+
+  <div id="palette-container">
+    <button class="accordion" (click)="createButton()">Button</button>
+    <button class="accordion">Dropbox</button>
+    <button class="accordion">Checkbox</button>
+    <button class="accordion">Radio</button>
+    <button class="accordion">Input Field</button>
+    <button class="accordion">Textbox</button>
+
+    <!-- <ul class="list-group">
+      <li class="list-group-item palette-item" (click)="createButton()">
+        Button
+      </li>
+      <li class="list-group-item palette-item">Text Input</li>
+      <li class="list-group-item palette-item">Label</li>
+    </ul> -->
+  </div>
+
+  <!-- CANVAS SECTION -->
+
+  <div id="canvas-container">
+    <div id="canvas" #canvas></div>
+  </div>
+
+  <!-- CODE SECTION -->
+
+  <div id="code-container">
+    <code><!-- INSERT CODE HERE VIA INTERPOLATION --></code>
+  </div>
 </div>
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
