@@ -14,15 +14,11 @@
   padding: 10px;
   align-items: center;
   justify-content: center;
+  overflow-y: auto;
 }
 
-.palette-item:hover {
-  cursor: pointer;
-  background-color: #cccccc;
-}
-
-.sample {
-  background-color: blue;
+.palette-item {
+  padding: 10px;
 }
 
 /********************** CANVAS CSS ********************/
