@@ -56,46 +56,48 @@ export class AppComponent implements OnInit {
     const modalHeader = this.renderer.createElement('div'); //create dom element
     const modalHeaderButton = this.renderer.createElement('button'); //create dom element
     const modalTitle = this.renderer.createElement('h5'); //create dom element
-    const modalTitleText = this.renderer.createText('MODAL'); //add text to button
+    const modalTitleText = this.renderer.createText('MODAL'); //add text for Header
     const modalBody = this.renderer.createElement('div'); //create dom element
     const modalPar = this.renderer.createElement('p'); //create dom element
-    const modalText = this.renderer.createText('Hi, I am your Modal'); //add text to button
+    const modalText = this.renderer.createText('Hi, I am your Modal'); //Text within the Modal
     const modalFooter = this.renderer.createElement('div'); //create dom element
     const modalButtonClose = this.renderer.createElement('button'); //create dom element
-    const modalButtonCloseText = this.renderer.createText('Close'); //add text to modal body
+    const modalButtonCloseText = this.renderer.createText('Close'); //add text to button
     const modalButtonSave = this.renderer.createElement('button'); //create dom element
-    const modalButtonSaveText = this.renderer.createText('Save Changes'); //add text to modal body
+    const modalButtonSaveText = this.renderer.createText('Save Changes'); //add text to button
 
     let ref = this.drag.createDrag(modalContainer); //make the element draggable with createDrag, then store the reference to ref
 
     ref.withBoundaryElement(this.canvas); //set the draggable area to only be the canvas
 
-    //modalContainer.withBoundaryElement(this.canvas); //set the draggable area to only be the canvas
-    this.renderer.setProperty(modalContainer, 'id', 'exampleModal'); //add type attribute to div
-    //this.renderer.setProperty(modalContainer, 'tabindex', '-1'); //add type attribute to div
-    this.renderer.setProperty(modalContainer, 'aria-labelledby', 'exampleModalLabel'); //add type attribute to div
-    this.renderer.setProperty(modalContainer, 'aria-hidden', 'true'); //add type attribute to div
-    this.renderer.setProperty(modalHeaderButton, 'data-bs-dismiss', 'modal'); //add data-bs-dismiss attribute to modalHeaderButton
-    this.renderer.setProperty(modalHeaderButton, 'aria-label', 'Close'); //add aria-label attribute to modalHeaderButton
+    /***********************************/
+    //properties commented below maybe used for future reference
+
+    //this.renderer.setProperty(modalContainer, 'id', 'exampleModal'); //add id attribute to modalContainer
+    //this.renderer.setProperty(modalContainer, 'tabindex', '-1'); //add tabindex attribute to modalContainer
+    //this.renderer.setProperty(modalContainer, 'aria-labelledby', 'exampleModalLabel'); //add type attribute to div
+    //this.renderer.setProperty(modalContainer, 'aria-hidden', 'true'); //add type attribute to div
+    //this.renderer.setProperty(modalHeaderButton, 'data-bs-dismiss', 'modal'); //add data-bs-dismiss attribute to modalHeaderButton
+    //this.renderer.setProperty(modalHeaderButton, 'aria-label', 'Close'); //add aria-label attribute to modalHeaderButton
     this.renderer.setProperty(modalHeaderButton, 'type', 'button'); //add type attribute to button
-    this.renderer.setProperty(modalButtonClose, 'data-bs-dismiss', 'modal'); //add aria-label attribute to modalButtonClose
-    this.renderer.setProperty(modalButtonClose, 'type', 'button'); //add type attribute to button
-    this.renderer.setProperty(modalButtonSave, 'type', 'button'); //add type attribute to button
+    //this.renderer.setProperty(modalButtonClose, 'data-bs-dismiss', 'modal'); //add aria-label attribute to modalButtonClose
+    this.renderer.setProperty(modalButtonClose, 'type', 'button'); //add type attribute to modalButtonClose
+    this.renderer.setProperty(modalButtonSave, 'type', 'button'); //add type attribute to modalButtonSave
 
     //this.renderer.addClass(modalContainer, 'modal'); //add css class to the button
     //this.renderer.addClass(modalContainer, 'fade'); //add css class to the button
-    this.renderer.addClass(modalContainer, 'always-on-top'); //add css class to the button
-    this.renderer.addClass(modalDialog, 'modal-dialog'); //add css class to the button
-    this.renderer.addClass(modalContent, 'modal-content'); //add css class to the button
-    this.renderer.addClass(modalHeader, 'modal-header'); //add css class to the button
-    this.renderer.addClass(modalTitle, 'modal-title'); //add css class to the button
-    this.renderer.addClass(modalHeaderButton, 'btn-close'); //add css class to the button
-    this.renderer.addClass(modalBody, 'modal-body'); //add css class to the button
-    this.renderer.addClass(modalFooter, 'modal-footer'); //add css class to the button
-    this.renderer.addClass(modalButtonClose, 'btn'); //add css class to the button
-    this.renderer.addClass(modalButtonClose, 'btn-secondary'); //add css class to the button
-    this.renderer.addClass(modalButtonSave, 'btn'); //add css class to the button
-    this.renderer.addClass(modalButtonSave, 'btn-primary'); //add css class to the button
+    this.renderer.addClass(modalContainer, 'always-on-top'); //add css class to the modalContainer
+    this.renderer.addClass(modalDialog, 'modal-dialog'); //add css class to the modalDialog
+    this.renderer.addClass(modalContent, 'modal-content'); //add css class to the modalContent
+    this.renderer.addClass(modalHeader, 'modal-header'); //add css class to the modalHeader
+    this.renderer.addClass(modalTitle, 'modal-title'); //add css class to the modalTitle
+    this.renderer.addClass(modalHeaderButton, 'btn-close'); //add css class to the modalHeaderButton
+    this.renderer.addClass(modalBody, 'modal-body'); //add css class to the modalBody
+    this.renderer.addClass(modalFooter, 'modal-footer'); //add css class to the modalFooter
+    this.renderer.addClass(modalButtonClose, 'btn'); //add css class to the modalButtonClose
+    this.renderer.addClass(modalButtonClose, 'btn-secondary'); //add css class to the modalButtonClose
+    this.renderer.addClass(modalButtonSave, 'btn'); //add css class to the modalButtonSave
+    this.renderer.addClass(modalButtonSave, 'btn-primary'); //add css class to the modalButtonSave
 
     this.renderer.appendChild(modalContainer, modalDialog); //append modalDialog to modalContainer
     this.renderer.appendChild(modalDialog, modalContent); //append modalContent to modalDialog
@@ -112,9 +114,12 @@ export class AppComponent implements OnInit {
     this.renderer.appendChild(modalFooter, modalButtonClose); //append modalButton1 to modalFooter
     this.renderer.appendChild(modalFooter, modalButtonSave); //append modalButton2 to modalFooter
 
-    this.renderer.appendChild(this.canvas.nativeElement, modalContainer); //append the button to the canvas div
+    this.renderer.appendChild(this.canvas.nativeElement, modalContainer); //append the modalContainer to the canvas div
 
     
+      
+    /******************reference for modal trigger function***********************/
+    // code below can be used as reference
     /*
     const modalButton = this.renderer.createElement('button'); //create dom element
     let ref = this.drag.createDrag(modalButton); //make the element draggable with createDrag, then store the reference to ref
@@ -127,10 +132,8 @@ export class AppComponent implements OnInit {
     this.renderer.addClass(modalButton, 'btn-primary'); //add css class to the MODAL
     this.renderer.appendChild(modalButton, text); //append the text into the LABEL
     this.renderer.appendChild(this.canvas.nativeElement, modalButton); //append the button to the canvas div\
-    
     */
-      
-    /******************reference for modal function***********************/
+   
     /*
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
