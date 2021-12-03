@@ -46,4 +46,37 @@ export class AppComponent implements OnInit {
 
     this.renderer.appendChild(this.canvas.nativeElement, newButton); //append the button to the canvas div
   }
+  createCheckbox() {
+    const newCheckbox = this.renderer.createElement('input'); 
+    const checkboxLabel = this.renderer.createElement('label'); 
+
+    let ref2 = this.drag.createDrag(newCheckbox); 
+    let ref3 = this.drag.createDrag(checkboxLabel); 
+    ref2.withBoundaryElement(this.canvas); 
+    ref3.withBoundaryElement(this.canvas); 
+
+    const text = this.renderer.createText('Checkbox'); 
+    this.renderer.addClass(newCheckbox, 'form-check-input');
+    this.renderer.addClass(checkboxLabel, 'form-check-label');
+
+    this.renderer.setProperty(newCheckbox, 'type', 'checkbox'); 
+    this.renderer.setProperty(newCheckbox, 'id', 'checkBoxID');
+    this.renderer.setAttribute(checkboxLabel, 'for', 'checkBoxID');
+
+    this.renderer.appendChild(checkboxLabel, text); 
+    this.renderer.appendChild(this.canvas.nativeElement, newCheckbox); 
+    this.renderer.appendChild(this.canvas.nativeElement, checkboxLabel); 
+  }
+  createLabel() {
+    const checkboxLabel = this.renderer.createElement('label'); 
+
+    let ref3 = this.drag.createDrag(checkboxLabel); 
+    ref3.withBoundaryElement(this.canvas); 
+
+    const text = this.renderer.createText('Label'); 
+    this.renderer.addClass(checkboxLabel, 'form-check-label');
+
+    this.renderer.appendChild(checkboxLabel, text); 
+    this.renderer.appendChild(this.canvas.nativeElement, checkboxLabel); 
+  }
 }
