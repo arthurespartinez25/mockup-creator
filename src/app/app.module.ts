@@ -17,7 +17,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     PaletteComponent,
     CanvasComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule],
   providers: [DragDropModule],
   bootstrap: [AppComponent],
 })

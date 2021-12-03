@@ -4,6 +4,8 @@ import {
   DragDropModule,
   DragRef,
   DragRefConfig,
+  CdkDrag,
+  CdkDragEnd,
 } from '@angular/cdk/drag-drop';
 import {
   Component,
@@ -29,7 +31,23 @@ export class AppComponent implements OnInit {
     /* throw new Error('Method not implemented.'); */
   }
 
-  createButton() {
+  mousePosition = {
+    x: 0,
+    y: 0
+  };
+  mousePosition2 = {
+    x: 0,
+    y: 0
+  };
+
+  onMouseDown(event: { screenX: number; screenY: number; }) {
+    this.mousePosition.x = event.screenX;
+    this.mousePosition.y = event.screenY;
+  }
+
+  createButton( event: { screenX: number; screenY: number; }) {
+    //console.log(event.screenX);
+    if (this.mousePosition.x === event.screenX && this.mousePosition.y === event.screenY){
     const newButton = this.renderer.createElement('button'); //create dom element
 
     let ref = this.drag.createDrag(newButton); //make the element draggable with createDrag, then store the reference to ref
@@ -45,5 +63,36 @@ export class AppComponent implements OnInit {
     this.renderer.appendChild(newButton, text); //append the text into the button tag
 
     this.renderer.appendChild(this.canvas.nativeElement, newButton); //append the button to the canvas div
+    }
   }
+
+   mouseUp($event: CdkDragEnd){
+     
+    console.log($event.source.getFreeDragPosition());
+    this.mousePosition2.x = $event.source.getFreeDragPosition().x;
+    this.mousePosition2.y = $event.source.getFreeDragPosition().y;
+   }
+  dragRelease( event: { screenX: number; screenY: number; }){
+    // console.log("Jude " +event.screenX);
+    // this.mousePosition2.x = event.screenX;
+    // this.mousePosition2.y = event.screenY;
+  }
+  onDragEnded(event: CdkDragEnd){
+    //console.log(this.mousePosition2.x);
+    event.source._dragRef.reset();
+    const newButton = this.renderer.createElement('button');
+    const text = this.renderer.createText('BUTTON');
+    this.renderer.setProperty(newButton, 'type', 'button');
+    this.renderer.addClass(newButton, 'btn-primary');
+    this.renderer.appendChild(newButton, text);
+    this.renderer.appendChild(document.body, newButton);
+    this.renderer.setStyle(newButton, 'position', 'absolute');
+    this.renderer.setStyle(newButton, 'left', this.mousePosition2.x+ "px");
+    this.renderer.setStyle(newButton, 'bottom', this.mousePosition2.y + "px");
+    
+    return newButton;
+    
+}
+
+  
 }
