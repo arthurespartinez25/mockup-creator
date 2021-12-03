@@ -60,8 +60,6 @@ export class AppComponent implements OnInit {
   }
 
    mouseUp($event: CdkDragEnd){
-     
-    console.log($event.source.getFreeDragPosition());
     const { offsetLeft, offsetTop } = $event.source.element.nativeElement;
     const { x, y } = $event.distance;
     this.mousePosition2.x = offsetLeft + x;
