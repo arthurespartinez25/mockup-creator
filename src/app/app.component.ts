@@ -29,6 +29,42 @@ export class AppComponent implements OnInit {
     /* throw new Error('Method not implemented.'); */
   }
 
+  createNav() {
+    const newNav = this.renderer.createElement('div'); //create dom element
+    let ref = this.drag.createDrag(newNav); //make the element draggable with createDrag, then store the reference to ref
+    ref.withBoundaryElement(this.canvas); //set the draggable area to only be the canvas
+
+    const newLabel = this.renderer.createElement('h1');
+    const text = this.renderer.createText('NAV');
+
+    const link1 = this.renderer.createElement('a');
+    const link2 = this.renderer.createElement('a');
+    const link3 = this.renderer.createElement('a');
+
+    this.renderer.appendChild(link1, this.renderer.createText('LINK1'));
+    this.renderer.appendChild(link2, this.renderer.createText('LINK2'));
+    this.renderer.appendChild(link3, this.renderer.createText('LINK3'));
+
+    this.renderer.setProperty(link1, 'href', '#');
+    this.renderer.setProperty(link2, 'href', '#');
+    this.renderer.setProperty(link3, 'href', '#');
+
+    this.renderer.appendChild(newLabel, text);
+    this.renderer.appendChild(newNav, newLabel);
+    this.renderer.appendChild(newNav, link1);
+    this.renderer.appendChild(newNav, link2);
+    this.renderer.appendChild(newNav, link3);
+
+    this.renderer.addClass(link1, 'custom-nav-link');
+    this.renderer.addClass(link2, 'custom-nav-link');
+    this.renderer.addClass(link3, 'custom-nav-link');
+
+    this.renderer.addClass(newNav, 'navbar'); //add css class to the button
+    this.renderer.addClass(newNav, 'custom-nav'); //add css class to the button
+
+    this.renderer.appendChild(this.canvas.nativeElement, newNav); //append the button to the canvas div
+  }
+
   createButton() {
     const newButton = this.renderer.createElement('button'); //create dom element
 
@@ -47,9 +83,7 @@ export class AppComponent implements OnInit {
     this.renderer.appendChild(this.canvas.nativeElement, newButton); //append the button to the canvas div
   }
 
-  
   createModal() {
-
     const modalContainer = this.renderer.createElement('div'); //create dom element
     const modalDialog = this.renderer.createElement('div'); //create dom element
     const modalContent = this.renderer.createElement('div'); //create dom element
@@ -116,8 +150,6 @@ export class AppComponent implements OnInit {
 
     this.renderer.appendChild(this.canvas.nativeElement, modalContainer); //append the modalContainer to the canvas div
 
-    
-      
     /******************reference for modal trigger function***********************/
     // code below can be used as reference
     /*
@@ -133,7 +165,7 @@ export class AppComponent implements OnInit {
     this.renderer.appendChild(modalButton, text); //append the text into the LABEL
     this.renderer.appendChild(this.canvas.nativeElement, modalButton); //append the button to the canvas div\
     */
-   
+
     /*
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -158,6 +190,42 @@ export class AppComponent implements OnInit {
       </div>
     </div>
     */
+  }
+  createCheckbox() {
+    const mainDiv = this.renderer.createElement('div');
+    const newCheckbox = this.renderer.createElement('input');
+    const checkboxLabel = this.renderer.createElement('label');
 
+    this.renderer.appendChild(mainDiv, checkboxLabel);
+    this.renderer.appendChild(checkboxLabel, newCheckbox);
+
+    let ref = this.drag.createDrag(checkboxLabel);
+    ref.withBoundaryElement(this.canvas);
+
+    this.renderer.addClass(mainDiv, 'form-check');
+    this.renderer.addClass(newCheckbox, 'form-check-input');
+    this.renderer.addClass(checkboxLabel, 'form-check-label');
+
+    this.renderer.setProperty(newCheckbox, 'type', 'checkbox');
+    this.renderer.setProperty(newCheckbox, 'id', 'flexCheckDefault');
+    this.renderer.setProperty(newCheckbox, 'value', 'checkbox');
+
+    const text = this.renderer.createText('Label');
+    this.renderer.setAttribute(checkboxLabel, 'for', 'flexCheckDefault');
+    this.renderer.appendChild(checkboxLabel, text);
+
+    this.renderer.appendChild(this.canvas.nativeElement, mainDiv);
+  }
+  createLabel() {
+    const checkboxLabel = this.renderer.createElement('label');
+
+    let ref3 = this.drag.createDrag(checkboxLabel);
+    ref3.withBoundaryElement(this.canvas);
+
+    const text = this.renderer.createText('Label');
+    this.renderer.addClass(checkboxLabel, 'form-check-label');
+
+    this.renderer.appendChild(checkboxLabel, text);
+    this.renderer.appendChild(this.canvas.nativeElement, checkboxLabel);
   }
 }
