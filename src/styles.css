@@ -518,7 +518,7 @@ aside p.termin-aside a:hover {
 }
 
 .accordion {
-  backgroud-color: #222;
+  background-color: #222;
   color: #666;
   cursor: pointer;
   padding: 14px;
@@ -532,6 +532,7 @@ aside p.termin-aside a:hover {
 .active,
 .accordion:hover {
   background-color: #333;
+  color: white;
 }
 
 .panel {
