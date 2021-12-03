@@ -24,6 +24,9 @@
       <li class="list-group-item palette-item" (click)="createLabel()">
         Label
       </li>
+      <li class="list-group-item palette-item" (click)="print()">
+        Export HTML
+      </li>
     </ul>
   </div>
 
@@ -31,6 +34,13 @@
 
   <div id="canvas-container">
     <div id="canvas" #canvas></div>
+  </div>
+
+
+<!-- CANVAS SECTION -->
+
+  <div id="canvas-container">
+    <div id="canvas-html" #canvashtml></div>
   </div>
 </div>
 

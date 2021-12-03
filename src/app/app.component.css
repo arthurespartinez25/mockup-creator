@@ -36,3 +36,10 @@
   min-height: 480px;
   background-color: white;
 }
+
+#canvas-html {
+  width: 300px;
+  height: 480px;
+  padding: 20px;
+  background-color: white;
+}
