@@ -15,8 +15,8 @@
 
   <div id="palette-container" >
     <button class="accordion" (click)="createButton($event)" cdkDrag (cdkDragEnded)="mouseUp($event)"  
-    (cdkDragEnded)="onDragEnded($event)" (mousedown)="onMouseDown($event)" 
-    (mouseleave)="dragRelease($event)">Button</button>
+    (cdkDragEnded)="onDragEndedButton($event)" (mousedown)="onMouseDown($event)" 
+    >Button</button>
 
     <button class="accordion" cdkDrag (cdkDragEnded)="onDragEnded($event)">Dropbox</button>
 
