@@ -55,7 +55,7 @@ export class AppComponent implements OnInit {
     this.renderer.appendChild(this.canvas.nativeElement,mainDiv);
   }
 
-  createDate(){     //should this need label, then same problem with createRadio
+  createDate(){
     const newDate = this.renderer.createElement('input');
     let ref = this.drag.createDrag(newDate);
     this.renderer.setProperty(newDate,'type','date');
