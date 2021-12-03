@@ -30,32 +30,29 @@ export class AppComponent implements OnInit {
     /* throw new Error('Method not implemented.'); */
   }
 
-  createRadio(){
+  createRadio(){ //based on checkbox function
+    const mainDiv = this.renderer.createElement('div');    
     const newRadio = this.renderer.createElement('input');
-    let ref =this.drag.createDrag(newRadio);
+    let newLabel = this.renderer.createElement('label');
+    
+    this.renderer.appendChild(mainDiv,newLabel);
+    this.renderer.appendChild(newLabel,newRadio);
+    let ref =this.drag.createDrag(newLabel);
     ref.withBoundaryElement(this.canvas);
-    const text1 = this.renderer.createText('randomtext');
+
+    this.renderer.addClass(mainDiv,'form-check');
+    this.renderer.addClass(newRadio,'form-check-input');
+    this.renderer.addClass(newLabel,'form-check-label');
+
     this.renderer.setProperty(newRadio,'type','radio');
     this.renderer.setProperty(newRadio,'name','flexRadioDefault');    //used to group radio buttons
     this.renderer.setProperty(newRadio,'id','flexRadioDefault'+this.radioIdLabel);
-    this.renderer.addClass(newRadio,'form-check-input');
-    //console.log('defaultTextforRadio'+this.radioIdLabel);
-    //this.renderer.appendChild(newRadio,text1);
 
-    // for the label ****Not joining with Radio*****
-    let newLabel = this.renderer.createElement('label');
-    let ref1 =this.drag.createDrag(newLabel);
-    ref1.withBoundaryElement(this.canvas);
     const text = this.renderer.createText('defaulttext');
-    //this.renderer.setProperty(newLabel,'type','label');
-    this.renderer.setProperty(newLabel,'for',newRadio.id); //somehow will not display in code to match bootstrap style of radio *Might be the only thing needed to link label and radio*
-    this.renderer.addClass(newLabel,'form-check-label');
-    this.renderer.appendChild(newLabel, text);
+    this.renderer.setProperty(newLabel,'for',newRadio.id);
+    this.renderer.appendChild(newLabel,text);
 
-    this.radioIdLabel++;
-    this.renderer.appendChild(newRadio,newLabel);
-    this.renderer.appendChild(this.canvas.nativeElement,newRadio);
-    this.renderer.appendChild(this.canvas.nativeElement,newLabel);
+    this.renderer.appendChild(this.canvas.nativeElement,mainDiv);
   }
 
   createDate(){     //should this need label, then same problem with createRadio
