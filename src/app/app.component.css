@@ -51,3 +51,11 @@
   padding: 20px;
   background-color: black;
 }
+#canvas {
+  overflow: none;
+}
+
+.always-on-top {
+  position: fixed;
+  z-index: 999;
+}
