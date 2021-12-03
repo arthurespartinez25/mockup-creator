@@ -29,6 +29,19 @@ export class AppComponent implements OnInit {
     /* throw new Error('Method not implemented.'); */
   }
 
+  createNav() {
+    const newElem = this.renderer.createElement('div'); //create dom element
+
+    let ref = this.drag.createDrag(newElem); //make the element draggable with createDrag, then store the reference to ref
+
+    ref.withBoundaryElement(this.canvas); //set the draggable area to only be the canvas
+
+    this.renderer.addClass(newElem, 'navbar'); //add css class to the button
+    this.renderer.addClass(newElem, 'custom-nav'); //add css class to the button
+
+    this.renderer.appendChild(this.canvas.nativeElement, newElem); //append the button to the canvas div
+  }
+
   createButton() {
     const newButton = this.renderer.createElement('button'); //create dom element
 

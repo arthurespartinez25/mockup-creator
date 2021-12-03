@@ -55,3 +55,10 @@
   padding: 20px;
   background-color: black;
 }
+
+/********************** COMPONENT CSS ********************/
+
+.custom-nav {
+  background-color: blue;
+  height: 10%;
+}
