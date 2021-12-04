@@ -82,3 +82,11 @@ a.custom-nav-link:hover {
   position: fixed;
   z-index: 999;
 }
+
+.inputFieldContainer {
+  min-width: 130px;
+}
+
+.inputField {
+  margin: 2px;
+}
