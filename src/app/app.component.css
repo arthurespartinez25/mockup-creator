@@ -51,3 +51,10 @@
   padding: 20px;
   background-color: black;
 }
+
+/********************** IMG CSS ********************/
+
+.img-rounded {
+  max-width: 600px; 
+  height: 200px;
+}

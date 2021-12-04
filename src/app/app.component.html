@@ -30,7 +30,7 @@
     <button class="accordion palette-item">Date Picker</button>
     <button class="accordion palette-item">Modal</button>
     <button class="accordion palette-item">Popup</button>
-    <button class="accordion palette-item">Image</button>
+    <button class="accordion palette-item" (click)="addImage()">Image</button>
 
     <!-- <ul class="list-group">
       <li class="list-group-item palette-item" (click)="createButton()">
@@ -50,7 +50,7 @@
   <!-- CODE SECTION -->
 
   <div id="code-container">
-    <code><!-- INSERT CODE HERE VIA INTERPOLATION --></code>
+    <code><!-- INSERT CODE HERE VIA INTERPOLATION -->  {{canvasTag + addHTML() + endTag}} </code>
   </div>
 </div>
 
