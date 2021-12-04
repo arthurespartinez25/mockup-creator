@@ -3,6 +3,14 @@
   flex-direction: row;
 }
 
+.draggable{
+  cursor: grab;
+  position:absolute;
+  z-index: 5;
+  --size: calc(100% - 2*var(--padding));
+  pointer-events: none;
+}
+
 /********************** PALETTE CSS ********************/
 
 #palette-container {
@@ -55,3 +63,8 @@
   padding: 20px;
   background-color: black;
 }
+
+.cdk-drag-preview{
+  opacity: 0.5;
+}
+

@@ -13,7 +13,8 @@
 <div class="content" role="main">
   <!-- PALETTE SECTION -->
 
-  <div id="palette-container" >
+  <!-- copy all function then rename "onDragEndedButton" for another element function -->
+  <div id="palette-container" cdkDropListGroup cdkDropList cdkDropListSortingDisabled>
     <button class="accordion" (click)="createButton($event)" cdkDrag (cdkDragEnded)="mouseUp($event)"  
     (cdkDragEnded)="onDragEndedButton($event)" (mousedown)="onMouseDown($event)" 
     >Button</button>
@@ -39,8 +40,11 @@
 
   <!-- CANVAS SECTION -->
 
-  <div id="canvas-container">
-    <div id="canvas" #canvas></div>
+  <div id="canvas-container" >
+    <div id="canvas" #canvas (mouseenter)="domInsideCanvas=true"
+    (mouseleave)="domInsideCanvas=false">
+      
+    </div>
   </div>
 
   <!-- CODE SECTION -->
