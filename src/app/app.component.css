@@ -90,3 +90,9 @@ a.custom-nav-link:hover {
 .inputField {
   margin: 2px;
 }
+
+.headerFunc {
+  font-size: 25px;
+  font-weight: bold;
+  font-family: "Times New Roman", Times, serif;
+}
