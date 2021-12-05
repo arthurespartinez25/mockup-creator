@@ -10,8 +10,6 @@
 <!-- Toolbar -->
 <!-- <app-navbar></app-navbar> -->
 
-
-
 <div class="content" role="main">
   <!-- PALETTE SECTION -->
   <div id="palette-container">
@@ -19,12 +17,18 @@
     <button class="accordion palette-item">Link</button>
     <button class="accordion palette-item">Header</button>
     <button class="accordion palette-item">Paragraph</button>
-    <button class="accordion palette-item" (click)="createLabel()">Label</button>
+    <button class="accordion palette-item" (click)="createLabel()">
+      Label
+    </button>
     <button class="accordion palette-item" (click)="createButton()">
       Button
     </button>
-    <button class="accordion palette-item">Dropbox</button>
-    <button class="accordion palette-item" (click)="createCheckbox()">Checkbox</button>
+    <button class="accordion palette-item" (click)="createDropdown()">
+      Dropdown
+    </button>
+    <button class="accordion palette-item" (click)="createCheckbox()">
+      Checkbox
+    </button>
     <button class="accordion palette-item">Radio</button>
     <button class="accordion palette-item" (click)="createInputField()">Input Field</button>
     <button class="accordion palette-item">Textbox</button>
