@@ -14,15 +14,11 @@
   padding: 10px;
   align-items: center;
   justify-content: center;
+  overflow-y: auto;
 }
 
-.palette-item:hover {
-  cursor: pointer;
-  background-color: #cccccc;
-}
-
-.sample {
-  background-color: blue;
+.palette-item {
+  padding: 10px;
 }
 
 /********************** CANVAS CSS ********************/
@@ -44,6 +40,7 @@
   min-width: 848px;
   min-height: 480px;
   background-color: white;
+  overflow: none;
 }
 
 /********************** CODE CSS ********************/
@@ -54,4 +51,42 @@
   width: 100%;
   padding: 20px;
   background-color: black;
+}
+
+/********************** COMPONENT CSS ********************/
+
+.custom-nav {
+  background-color: #3772ff;
+  height: 10%;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+}
+
+a.custom-nav-link {
+  color: #e6e8e6;
+  margin: 0px 15px;
+}
+
+a.custom-nav-link:hover {
+  color: #080708;
+}
+
+.custom-nav h1 {
+  margin: 0;
+}
+
+.always-on-top {
+  position: fixed;
+  z-index: 999;
+}
+
+.inputFieldContainer {
+  min-width: 130px;
+}
+
+.inputField {
+  margin: 2px;
 }
