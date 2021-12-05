@@ -286,4 +286,23 @@ export class AppComponent implements OnInit {
     this.renderer.appendChild(checkboxLabel, text);
     this.renderer.appendChild(this.canvas.nativeElement, checkboxLabel);
   }
+  createInputField() {
+    const container = this.renderer.createElement('div');
+    const inputField = this.renderer.createElement('input');
+
+    let ref3 = this.drag.createDrag(inputField);
+    ref3.withBoundaryElement(this.canvas);
+
+    /*const text = this.renderer.createText('Enter text here');*/
+
+    //this.renderer.addClass(inputField, 'form-control');
+    //this.renderer.addClass(container, 'form-group');
+    this.renderer.addClass(container, 'inputFieldContainer');
+    this.renderer.addClass(inputField, 'inputField');
+    this.renderer.setProperty(inputField, 'type', 'text');
+    this.renderer.setProperty(inputField, 'placeholder', 'INPUT');
+    //this.renderer.appendChild(inputField, text);
+    this.renderer.appendChild(container, inputField);
+    this.renderer.appendChild(this.canvas.nativeElement, inputField);
+  }
 }
