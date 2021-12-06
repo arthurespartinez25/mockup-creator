@@ -12,42 +12,71 @@
 
 <div class="content" role="main">
   <!-- PALETTE SECTION -->
-  <div id="palette-container">
-    <button class="accordion palette-item" (click)="createNav()">Navbar</button>
-    <button class="accordion palette-item" (click)="createLink()">Link</button>
-    <button class="accordion palette-item" (click)="createHeader()">
+  <div id="palette-container" cdkDropListGroup cdkDropList cdkDropListSortingDisabled>
+
+    <button class="accordion palette-item" (click)="createNav($event)"cdkDrag 
+    (cdkDragEnded)="onDragEndedNav($event)" (mousedown)="onMouseDown($event)">Navbar
+    <img *cdkDragPreview src="https://c.tenor.com/xBBcuBlshRUAAAAC/horny-jail.gif" ></button>
+
+    <button class="accordion palette-item" (click)="createLink($event)" cdkDrag 
+    (cdkDragEnded)="onDragEndedLink($event)" (mousedown)="onMouseDown($event)">Link</button>
+
+    <button class="accordion palette-item" (click)="createHeader($event)" cdkDrag 
+    (cdkDragEnded)="onDragEndedHeader($event)" (mousedown)="onMouseDown($event)">
       Header
     </button>
-    <button class="accordion palette-item" (click)="createParagraph()">
+
+    <button class="accordion palette-item" (click)="createParagraph($event)" cdkDrag 
+    (cdkDragEnded)="onDragEndedParagraph($event)" (mousedown)="onMouseDown($event)">
       Paragraph
     </button>
-    <button class="accordion palette-item" (click)="createLabel()">
+
+    <button class="accordion palette-item" (click)="createLabel($event)" cdkDrag 
+    (cdkDragEnded)="onDragEndedLabel($event)" (mousedown)="onMouseDown($event)">
       Label
     </button>
-    <button class="accordion palette-item" (click)="createButton()">
+
+    <button class="accordion palette-item" (click)="createButton($event)" cdkDrag 
+    (cdkDragEnded)="onDragEndedButton($event)" (mousedown)="onMouseDown($event)" >
       Button
     </button>
-    <button class="accordion palette-item" (click)="createDropdown()">
+
+    <button class="accordion palette-item" (click)="createDropdown($event)" cdkDrag 
+    (cdkDragEnded)="onDragEndedDrop($event)" (mousedown)="onMouseDown($event)">
       Dropdown
     </button>
-    <button class="accordion palette-item" (click)="createCheckbox()">
+
+    <button class="accordion palette-item" (click)="createCheckbox($event)" cdkDrag 
+    (cdkDragEnded)="onDragEndedCheck($event)" (mousedown)="onMouseDown($event)">
       Checkbox
     </button>
-    <button class="accordion palette-item" (click)="createRadio()">
+
+    <button class="accordion palette-item" (click)="createRadio($event)" cdkDrag 
+    (cdkDragEnded)="onDragEndedRadio($event)" (mousedown)="onMouseDown($event)">
       Radio
     </button>
-    <button class="accordion palette-item" (click)="createInputField()">
+
+    <button class="accordion palette-item" (click)="createInputField($event)" cdkDrag 
+    (cdkDragEnded)="onDragEndedInput($event)" (mousedown)="onMouseDown($event)">
       Input Field
     </button>
+
     <button class="accordion palette-item">Textbox</button>
-    <button class="accordion palette-item" (click)="createDate()">
+
+    <button class="accordion palette-item" (click)="createDate($event)" cdkDrag 
+    (cdkDragEnded)="onDragEndedDate($event)" (mousedown)="onMouseDown($event)">
       DatePicker
     </button>
-    <button class="accordion palette-item" (click)="createModal()">
+
+    <button class="accordion palette-item" (click)="createModal($event)" cdkDrag 
+    (cdkDragEnded)="onDragEndedModal($event)" (mousedown)="onMouseDown($event)">
       Modal
     </button>
+
     <button class="accordion palette-item">Popup</button>
-    <button class="accordion palette-item" (click)="addImage()">Image</button>
+
+    <button class="accordion palette-item" (click)="addImage($event)" cdkDrag 
+    (cdkDragEnded)="onDragEndedImage($event)" (mousedown)="onMouseDown($event)">Image</button>
 
     <!-- <ul class="list-group">
       <li class="list-group-item palette-item" (click)="createButton()">
@@ -61,7 +90,9 @@
   <!-- CANVAS SECTION -->
 
   <div id="canvas-container">
-    <div id="canvas" #canvas></div>
+    <div id="canvas" #canvas
+    (mouseenter)="domInsideCanvas=true"
+    (mouseleave)="domInsideCanvas=false"></div>
   </div>
 
   <!-- CODE SECTION -->
