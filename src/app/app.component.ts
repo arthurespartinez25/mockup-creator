@@ -5,6 +5,7 @@ import {
   DragRef,
   DragRefConfig,
 } from '@angular/cdk/drag-drop';
+import { Container } from '@angular/compiler/src/i18n/i18n_ast';
 import { registerLocaleData } from '@angular/common';
 import {
   Component,
@@ -346,5 +347,37 @@ export class AppComponent implements OnInit {
     //this.renderer.appendChild(inputField, text);
     this.renderer.appendChild(container, inputField);
     this.renderer.appendChild(this.canvas.nativeElement, inputField);
+  }
+  createParagraph() {
+    const container = this.renderer.createElement('div');
+    const paragraph = this.renderer.createElement('p');
+
+    let ref3 = this.drag.createDrag(container);
+    ref3.withBoundaryElement(this.canvas);
+
+    const text = this.renderer.createText('Enter text here');
+
+    //this.renderer.addClass(paragraph, 'form-control');
+    //this.renderer.addClass(container, 'form-group');
+    this.renderer.addClass(container, 'paragraphContainer');
+    this.renderer.addClass(paragraph, 'paragraph');
+    //this.renderer.appendChild(inputField, text);
+    this.renderer.appendChild(paragraph, text);
+    this.renderer.appendChild(container, paragraph);
+    this.renderer.appendChild(this.canvas.nativeElement, container);
+  }
+  createLink() {
+    const Link = this.renderer.createElement('a');
+
+    let ref3 = this.drag.createDrag(Link);
+    ref3.withBoundaryElement(this.canvas);
+
+    this.renderer.setProperty(Link, 'href', '#');
+
+    const text = this.renderer.createText('Link');
+    this.renderer.addClass(Link, 'Link');
+
+    this.renderer.appendChild(Link, text);
+    this.renderer.appendChild(this.canvas.nativeElement, Link);
   }
 }
