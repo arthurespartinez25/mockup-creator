@@ -24,9 +24,9 @@ export class AppComponent implements OnInit {
   title = 'mockup-creator';
   canvasTag = '<div _ngcontent-sxs-c31="" id="canvas">';
   endTag = '</div>';
-  htmlCode: String[] = [' '];
   radioIdLabel = 1;
   theDiv: string;
+  codeString: String = " ";
 
   @ViewChild('canvas') canvas!: ElementRef;
 
@@ -71,6 +71,8 @@ export class AppComponent implements OnInit {
     this.renderer.addClass(newNav, 'custom-nav'); //add css class to the button
 
     this.renderer.appendChild(this.canvas.nativeElement, newNav); //append the button to the canvas div
+
+    this.putInHTML(newNav.outerHTML); //generation of HTML code
   }
 
   createRadio() {
@@ -101,6 +103,8 @@ export class AppComponent implements OnInit {
     this.renderer.appendChild(newLabel, text);
 
     this.renderer.appendChild(this.canvas.nativeElement, mainDiv);
+
+    this.putInHTML(mainDiv.outerHTML); //generation of HTML code
   }
 
   createDate() {
@@ -111,6 +115,8 @@ export class AppComponent implements OnInit {
     this.renderer.setProperty(newDate, 'name', 'date');
 
     this.renderer.appendChild(this.canvas.nativeElement, newDate);
+
+    this.putInHTML(newDate.outerHTML); //generation of HTML code
   }
 
   createButton() {
@@ -129,10 +135,13 @@ export class AppComponent implements OnInit {
     this.renderer.appendChild(newButton, text); //append the text into the button tag
 
     this.renderer.appendChild(this.canvas.nativeElement, newButton); //append the button to the canvas div
+
+    this.putInHTML(newButton.outerHTML); //generation of HTML code
   }
 
   addHTML() {
-    return this.htmlCode.toString(); //returns whole HTML code of the canvas div
+    return this.codeString;
+    //return this.htmlCode.toString(); //returns whole HTML code of the canvas div
   }
 
   addImage() {
@@ -148,12 +157,14 @@ export class AppComponent implements OnInit {
     this.renderer.addClass(newImage, 'img-rounded');
     this.renderer.appendChild(newImage, text);
     this.renderer.appendChild(this.canvas.nativeElement, newImage);
-    this.putInHTML();
+    this.putInHTML(newImage.outerHTML);
   }
 
-  putInHTML() {
-    this.htmlCode.push(this.canvas.nativeElement.outerHTML.toString());
+  putInHTML(str: any) {
+    this.codeString = this.codeString + " " + str;
+    //this.htmlCode.push(this.canvas.nativeElement.outerHTML.toString());
   }
+
   createDropdown() {
     const newDiv = this.renderer.createElement('div');
     const drpButton = this.renderer.createElement('button');
@@ -206,6 +217,8 @@ export class AppComponent implements OnInit {
     this.renderer.appendChild(menu2, menu2Text);
     this.renderer.appendChild(menu3, menu3Text);
     this.renderer.appendChild(this.canvas.nativeElement, newDiv);
+
+    this.putInHTML(newDiv.outerHTML); //generation of HTML code
   }
 
   createModal() {
@@ -315,6 +328,8 @@ export class AppComponent implements OnInit {
       </div>
     </div>
     */
+
+    this.putInHTML(modalContainer.outerHTML); //generation of HTML code
   }
 
   createCheckbox() {
@@ -341,6 +356,8 @@ export class AppComponent implements OnInit {
     this.renderer.appendChild(checkboxLabel, text);
 
     this.renderer.appendChild(this.canvas.nativeElement, mainDiv);
+
+    this.putInHTML(mainDiv.outerHTML); //generation of HTML code
   }
 
   createLabel() {
@@ -354,6 +371,8 @@ export class AppComponent implements OnInit {
 
     this.renderer.appendChild(checkboxLabel, text);
     this.renderer.appendChild(this.canvas.nativeElement, checkboxLabel);
+
+    this.putInHTML(checkboxLabel.outerHTML); //generation of HTML code
   }
   createInputField() {
     const container = this.renderer.createElement('div');
@@ -373,6 +392,8 @@ export class AppComponent implements OnInit {
     //this.renderer.appendChild(inputField, text);
     this.renderer.appendChild(container, inputField);
     this.renderer.appendChild(this.canvas.nativeElement, inputField);
+
+    this.putInHTML(container.outerHTML); //generation of HTML code
   }
 
   createHeader() {
@@ -384,6 +405,8 @@ export class AppComponent implements OnInit {
     this.renderer.addClass(headerFunc, 'form-check-label');
     this.renderer.appendChild(headerFunc, text);
     this.renderer.appendChild(this.canvas.nativeElement, headerFunc);
+
+    this.putInHTML(headerFunc.outerHTML); //generation of HTML code
   }
 
   createParagraph() {
@@ -403,6 +426,8 @@ export class AppComponent implements OnInit {
     this.renderer.appendChild(paragraph, text);
     this.renderer.appendChild(container, paragraph);
     this.renderer.appendChild(this.canvas.nativeElement, container);
+
+    this.putInHTML(container.outerHTML); //generation of HTML code
   }
   createLink() {
     const Link = this.renderer.createElement('a');
@@ -417,5 +442,7 @@ export class AppComponent implements OnInit {
 
     this.renderer.appendChild(Link, text);
     this.renderer.appendChild(this.canvas.nativeElement, Link);
+
+    this.putInHTML(Link.outerHTML); //generation of HTML code
   }
 }
