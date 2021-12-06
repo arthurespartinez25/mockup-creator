@@ -13,10 +13,10 @@ export class ButtonComponent implements IComponent {
     key: '',
     id: '',
     value: 'Button',
-    class: 'btn-primary',
-    style: 'string',
-    typeObj: '',
-    type: '',
+    class: '',
+    style: '',
+    typeObj: 'button',
+    type: 'button',
   };
 
   constructor() {
@@ -29,7 +29,11 @@ export class ButtonComponent implements IComponent {
     return this.props;
   }
 
-  set property(value: IProperty) {}
+  set property(value: IProperty) {
+    if (value) {
+      this.props = value;
+    }
+  }
 
   get htmlCode(): string {
     let tmpHtmlCode = '<button';

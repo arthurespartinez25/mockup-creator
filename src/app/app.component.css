@@ -35,22 +35,25 @@
 }
 
 #canvas {
+  display: grid;
   width: 848px;
   height: 480px;
   min-width: 848px;
   min-height: 480px;
   background-color: white;
-  overflow: none;
+}
+
+.wrapper {
+  width: fit-content;
+  height: fit-content;
+  margin: 0;
 }
 
 /********************** CODE CSS ********************/
 
 #code-container {
-  padding: 30px;
   height: 100vh;
   width: 100%;
-  padding: 20px;
-  background-color: black;
 }
 
 /********************** IMG CSS ********************/

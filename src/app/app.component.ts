@@ -1,17 +1,6 @@
-import {
-  DragDrop,
-  DragDropConfig,
-  DragDropModule,
-  DragRef,
-  DragRefConfig,
-} from '@angular/cdk/drag-drop';
-import { Container } from '@angular/compiler/src/i18n/i18n_ast';
-import { registerLocaleData } from '@angular/common';
+import { DragDrop } from '@angular/cdk/drag-drop';
 import {
   Component,
-  ComponentFactory,
-  ComponentFactoryResolver,
-  ComponentRef,
   ElementRef,
   OnInit,
   Renderer2,
@@ -19,6 +8,7 @@ import {
 } from '@angular/core';
 import { IComponent } from './interfaces/icomponent';
 import { ButtonComponent } from './components/button/button.component';
+import { IProperty } from './interfaces/iproperty';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +17,17 @@ import { ButtonComponent } from './components/button/button.component';
 })
 export class AppComponent implements OnInit {
   title = 'mockup-creator';
-  componentMap = new Map<string, IComponent>();
+  componentList: IComponent[] = [];
+
+  selected: IProperty = {
+    key: '',
+    id: '',
+    value: '',
+    class: '',
+    style: '',
+    typeObj: '',
+    type: '',
+  };
 
   private _styleStart = '<style>';
   private _styleEnd = '</style>';
@@ -37,11 +37,7 @@ export class AppComponent implements OnInit {
 
   @ViewChild('canvas') canvas!: ElementRef;
 
-  constructor(
-    private renderer: Renderer2,
-    private drag: DragDrop,
-    private factoryResolver: ComponentFactoryResolver
-  ) {}
+  constructor(private renderer: Renderer2, private drag: DragDrop) {}
 
   ngOnInit(): void {
     /* throw new Error('Method not implemented.'); */
@@ -52,18 +48,55 @@ export class AppComponent implements OnInit {
     switch (component) {
       case 'button':
         temp = new ButtonComponent();
+        
         break;
 
       default:
         temp = new ButtonComponent();
     }
 
-    this.componentMap.set(temp.props.key, temp);
+    this.componentList.push(temp);
+  }
 
-    this.componentMap.forEach((comp) => {
-      console.log(comp.props.key);
+  get style(): string {
+    return this._styleBody;
+  }
+
+  set style(value: string) {
+    this._styleBody = value;
+  }
+
+  styleHandler(event: any) {
+    this._styleBody = event.target.value;
+  }
+
+  private htmlBody(): string {
+    let tmpHtmlBody = '\n';
+
+    this.componentList.forEach((value) => {
+      tmpHtmlBody = tmpHtmlBody + value.htmlCode + '\n';
     });
-    console.log('END OF LIST');
+    return tmpHtmlBody;
+  }
+
+  get htmlCode(): string {
+    return (
+      this._htmlStart +
+      '\n' +
+      this.htmlBody() +
+      '\n' +
+      this._htmlEnd +
+      '\n' +
+      this._styleStart +
+      '\n' +
+      this.style +
+      '\n' +
+      this._styleEnd
+    );
+  }
+
+  clickHandler(component: IComponent) {
+    this.selected = component.props;
   }
 
   createNav() {

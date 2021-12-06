@@ -62,27 +62,90 @@
 
   <div id="canvas-container">
     <div id="canvas" #canvas>
-      <div
-        *ngFor="let component of componentMap | keyvalue"
-        [ngClass]="component.value.props.class"
-        [ngSwitch]="component.value.props.typeObj"
-        cdkDrag
+      <app-wrapper
+        class="wrapper"
+        *ngFor="let component of componentList"
+        (click)="clickHandler(component)"
+        [childComp]="component"
       >
-        <app-button
-          [property]="component.value.props"
-          *ngSwitchCase="'button'"
-        ></app-button>
-      </div>
+      </app-wrapper>
     </div>
   </div>
 
   <!-- CODE SECTION -->
 
   <div id="code-container">
-    <code
-      ><!-- INSERT CODE HERE VIA INTERPOLATION -->
-      <!-- {{ canvasTag + addHTML() + endTag }} -->
-    </code>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link active"
+          id="properties-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#properties"
+          type="button"
+          role="tab"
+          aria-controls="properties"
+          aria-selected="true"
+        >
+          Properties
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="css-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#css"
+          type="button"
+          role="tab"
+          aria-controls="css"
+          aria-selected="false"
+        >
+          CSS
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="code-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#code"
+          type="button"
+          role="tab"
+          aria-controls="code"
+          aria-selected="false"
+        >
+          CODE
+        </button>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div
+        class="tab-pane fade show active"
+        id="properties"
+        role="tabpanel"
+        aria-labelledby="properties-tab"
+      >
+        <app-property [property]="selected"></app-property>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="css"
+        role="tabpanel"
+        aria-labelledby="css-tab"
+      >
+        <h3 style="background-color: white; margin: 0">css</h3>
+        <textarea style="margin: 0" cols="30" rows="5"></textarea>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="code"
+        role="tabpanel"
+        aria-labelledby="code-tab"
+      >
+        <code [innerText]="htmlCode"> </code>
+      </div>
+    </div>
   </div>
 </div>
 

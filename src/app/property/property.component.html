@@ -1,0 +1,75 @@
+<div>
+  <table border="1" [cellSpacing]="1">
+    <tr>
+      <th colspan="2">Component Property</th>
+    </tr>
+    <tr>
+      <th><label>id</label></th>
+      <td>
+        <input
+          type="text"
+          [id]="props.id"
+          [value]="props.id"
+          (keyup)="idChangeHandler($event)"
+        />
+      </td>
+    </tr>
+    <tr>
+      <th><label>value</label></th>
+      <td>
+        <input
+          type="text"
+          [value]="props.value"
+          (keyup)="valueChangeHandler($event)"
+        />
+      </td>
+    </tr>
+    <tr>
+      <th><label>type</label></th>
+      <td>
+        <input
+          type="text"
+          [value]="props.type"
+          (keyup)="typeChangeHandler($event)"
+        />
+      </td>
+    </tr>
+    <tr>
+      <th><label>class</label></th>
+      <td>
+        <input
+          type="text"
+          [value]="props.class"
+          (keyup)="classChangeHandler($event)"
+        />
+      </td>
+    </tr>
+    <tr>
+      <th><label>style</label></th>
+      <td>
+        <textarea
+          name="style"
+          id="taID"
+          [value]="props.style"
+          cols="21"
+          rows="5"
+          (keyup)="styleChangeHandler($event)"
+        ></textarea>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<style>
+  th {
+    background-color: thistle;
+  }
+  tr {
+    background-color: white;
+    border: solid;
+  }
+  input,
+  textarea {
+    border: none;
+  }
+</style>

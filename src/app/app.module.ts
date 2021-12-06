@@ -7,9 +7,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ButtonComponent } from './components/button/button.component';
+import { PropertyComponent } from './property/property.component';
+import { WrapperComponent } from './wrapper/wrapper.component';
 
 @NgModule({
-  declarations: [AppComponent, ButtonComponent],
+  declarations: [AppComponent, ButtonComponent, PropertyComponent, WrapperComponent],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
   providers: [DragDropModule],
   bootstrap: [AppComponent],
