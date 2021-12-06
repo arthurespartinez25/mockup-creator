@@ -46,4 +46,13 @@ export class AppComponent implements OnInit {
 
     this.renderer.appendChild(this.canvas.nativeElement, newButton); //append the button to the canvas div
   }
+
+  createTextbox() {
+    const newTextbox = this.renderer.createElement('textarea');
+    let ref = this.drag.createDrag(newTextbox);
+    ref.withBoundaryElement(this.canvas);
+    this.renderer.setProperty(newTextbox, 'placeholder', 'Insert text here...');
+    this.renderer.addClass(newTextbox, 'textarea');
+    this.renderer.appendChild(this.canvas.nativeElement, newTextbox);
+  }
 }
