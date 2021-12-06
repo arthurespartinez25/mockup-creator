@@ -97,6 +97,11 @@ a.custom-nav-link:hover {
   margin: 2px;
 }
 
+.headerFunc {
+  font-size: 25px;
+  font-weight: bold;
+  font-family: "Times New Roman", Times, serif;
+}
 .paragraphContainer {
   width: fit-content;
   height: fit-content;

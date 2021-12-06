@@ -374,6 +374,18 @@ export class AppComponent implements OnInit {
     this.renderer.appendChild(container, inputField);
     this.renderer.appendChild(this.canvas.nativeElement, inputField);
   }
+
+  createHeader() {
+    const headerFunc = this.renderer.createElement('label');
+    let ref3 = this.drag.createDrag(headerFunc);
+    ref3.withBoundaryElement(this.canvas);
+    const text = this.renderer.createText('THIS IS YOUR HEADER');
+    this.renderer.addClass(headerFunc, 'headerFunc');
+    this.renderer.addClass(headerFunc, 'form-check-label');
+    this.renderer.appendChild(headerFunc, text);
+    this.renderer.appendChild(this.canvas.nativeElement, headerFunc);
+  }
+
   createParagraph() {
     const container = this.renderer.createElement('div');
     const paragraph = this.renderer.createElement('p');
