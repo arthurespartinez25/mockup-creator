@@ -9,6 +9,13 @@
 
 <!-- Toolbar -->
 <!-- <app-navbar></app-navbar> -->
+<!-- Bootstrap 4-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!--Bootstrap 5
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+-->
 
 <div class="content" role="main">
   <!-- PALETTE SECTION -->
@@ -54,6 +61,17 @@
   </div>
 </div>
 
+<script>
+  /* Bootstrap 4 */
+  $(function () {
+    $('[data-toggle="popover"]').popover()
+  })
+  /*Bootstrap 5
+  var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popver"]'))
+  var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+    return new bootstrap.Popover(popoverTriggerEl)
+  })*/
+</script>
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
 <!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
