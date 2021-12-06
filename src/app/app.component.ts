@@ -26,7 +26,6 @@ export class AppComponent implements OnInit {
   endTag = '</div>';
   htmlCode: String[] = [' '];
   radioIdLabel = 1;
-  theDiv: string;
 
   @ViewChild('canvas') canvas!: ElementRef;
 
@@ -34,7 +33,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     /* throw new Error('Method not implemented.'); */
-    this.theDiv = `<h2>test</h2>`;
   }
 
   createNav() {
