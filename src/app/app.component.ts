@@ -46,4 +46,17 @@ export class AppComponent implements OnInit {
 
     this.renderer.appendChild(this.canvas.nativeElement, newButton); //append the button to the canvas div
   }
+
+  createPopup() {
+    const newPopup = this.renderer.createElement('button');
+    const text = this.renderer.createText("Popup");
+    let ref = this.drag.createDrag(newPopup);
+    ref.withBoundaryElement(this.canvas);
+    this.renderer.setProperty(newPopup, 'type', 'button');
+    this.renderer.addClass(newPopup, 'popup');
+    this.renderer.setProperty(newPopup, 'data-toggle', "popover");
+    this.renderer.setProperty(newPopup, 'data-content', "This is a popup");
+    this.renderer.appendChild(newPopup, text);
+    this.renderer.appendChild(this.canvas.nativeElement, newPopup);
+  }
 }
