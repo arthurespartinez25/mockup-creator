@@ -67,6 +67,7 @@
         *ngFor="let component of componentList"
         (click)="clickHandler(component)"
         [childComp]="component"
+        [canvasRef]="component.canvas"
       >
       </app-wrapper>
     </div>

@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { DragDrop } from '@angular/cdk/drag-drop';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { IComponent } from '../interfaces/icomponent';
 import { IProperty } from '../interfaces/iproperty';
 
@@ -9,6 +10,7 @@ import { IProperty } from '../interfaces/iproperty';
 })
 export class WrapperComponent implements OnInit {
   child: IComponent;
+  canvas: ElementRef;
 
   @Input() get childComp(): IComponent {
     return this.child;
@@ -20,7 +22,17 @@ export class WrapperComponent implements OnInit {
     }
   }
 
-  constructor() {}
+  @Input() get canvasRef(): ElementRef {
+    return this.canvas;
+  }
 
-  ngOnInit(): void {}
+  set canvasRef(value: ElementRef) {
+    this.canvas = value;
+  }
+
+  constructor(private ref: ElementRef, private drag: DragDrop) {}
+
+  ngOnInit(): void {
+    this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
+  }
 }

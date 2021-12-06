@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
 
@@ -9,6 +9,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
   </button>`,
 })
 export class ButtonComponent implements IComponent {
+  canvas: ElementRef;
   props: IProperty = {
     key: '',
     id: '',
@@ -19,7 +20,8 @@ export class ButtonComponent implements IComponent {
     type: 'button',
   };
 
-  constructor() {
+  constructor(canvas: ElementRef) {
+    this.canvas = canvas;
     let date = Date.now();
     this.props.key = date.toString();
     this.props.id = 'button' + date.toString();

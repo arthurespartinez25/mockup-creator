@@ -47,12 +47,12 @@ export class AppComponent implements OnInit {
     let temp: IComponent;
     switch (component) {
       case 'button':
-        temp = new ButtonComponent();
-        
+        temp = new ButtonComponent(this.canvas);
+
         break;
 
       default:
-        temp = new ButtonComponent();
+        temp = new ButtonComponent(this.canvas);
     }
 
     this.componentList.push(temp);
@@ -171,9 +171,6 @@ export class AppComponent implements OnInit {
   }
 
   createButton() {
-    console.log('button');
-    let newButton = new ButtonComponent();
-
     /* const newButton = this.renderer.createElement('button'); //create dom element
 
     let ref = this.drag.createDrag(newButton); //make the element draggable with createDrag, then store the reference to ref
