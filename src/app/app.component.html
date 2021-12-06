@@ -14,11 +14,11 @@
   <!-- PALETTE SECTION -->
   <div id="palette-container">
     <button class="accordion palette-item" (click)="createNav()">Navbar</button>
-    <button class="accordion palette-item" (click)="createLink()">
-      Link</button>
+    <button class="accordion palette-item" (click)="createLink()">Link</button>
     <button class="accordion palette-item">Header</button>
     <button class="accordion palette-item" (click)="createParagraph()">
-      Paragraph</button>
+      Paragraph
+    </button>
     <button class="accordion palette-item" (click)="createLabel()">
       Label
     </button>
@@ -45,7 +45,7 @@
       Modal
     </button>
     <button class="accordion palette-item">Popup</button>
-    <button class="accordion palette-item">Image</button>
+    <button class="accordion palette-item" (click)="addImage()">Image</button>
 
     <!-- <ul class="list-group">
       <li class="list-group-item palette-item" (click)="createButton()">
@@ -65,7 +65,10 @@
   <!-- CODE SECTION -->
 
   <div id="code-container">
-    <code><!-- INSERT CODE HERE VIA INTERPOLATION --></code>
+    <code
+      ><!-- INSERT CODE HERE VIA INTERPOLATION -->
+      {{ canvasTag + addHTML() + endTag }}
+    </code>
   </div>
 </div>
 
