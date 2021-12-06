@@ -13,6 +13,7 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
+import { faWrench, faEdit, faCode } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,9 @@ import {
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+  faWrench = faWrench;
+  faEdit = faEdit;
+  faCode = faCode;
   title = 'mockup-creator';
   radioIdLabel = 1;
   theDiv: string;

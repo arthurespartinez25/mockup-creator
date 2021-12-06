@@ -9,6 +9,7 @@ import { CanvasComponent } from './canvas/canvas.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     PaletteComponent,
     CanvasComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, FontAwesomeModule],
   providers: [DragDropModule],
   bootstrap: [AppComponent],
 })
