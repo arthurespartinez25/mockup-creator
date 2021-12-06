@@ -24,7 +24,7 @@
     <button class="accordion palette-item" (click)="createLabel()">
       Label
     </button>
-    <button class="accordion palette-item" (click)="createButton()">
+    <button class="accordion palette-item" (click)="addComponent('button')">
       Button
     </button>
     <button class="accordion palette-item" (click)="createDropdown()">
@@ -61,7 +61,19 @@
   <!-- CANVAS SECTION -->
 
   <div id="canvas-container">
-    <div id="canvas" #canvas></div>
+    <div id="canvas" #canvas>
+      <div
+        *ngFor="let component of componentMap | keyvalue"
+        [ngClass]="component.value.props.class"
+        [ngSwitch]="component.value.props.typeObj"
+        cdkDrag
+      >
+        <app-button
+          [property]="component.value.props"
+          *ngSwitchCase="'button'"
+        ></app-button>
+      </div>
+    </div>
   </div>
 
   <!-- CODE SECTION -->
@@ -69,7 +81,7 @@
   <div id="code-container">
     <code
       ><!-- INSERT CODE HERE VIA INTERPOLATION -->
-      {{ canvasTag + addHTML() + endTag }}
+      <!-- {{ canvasTag + addHTML() + endTag }} -->
     </code>
   </div>
 </div>

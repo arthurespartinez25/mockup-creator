@@ -9,11 +9,16 @@ import { Container } from '@angular/compiler/src/i18n/i18n_ast';
 import { registerLocaleData } from '@angular/common';
 import {
   Component,
+  ComponentFactory,
+  ComponentFactoryResolver,
+  ComponentRef,
   ElementRef,
   OnInit,
   Renderer2,
   ViewChild,
 } from '@angular/core';
+import { IComponent } from './interfaces/icomponent';
+import { ButtonComponent } from './components/button/button.component';
 
 @Component({
   selector: 'app-root',
@@ -22,17 +27,43 @@ import {
 })
 export class AppComponent implements OnInit {
   title = 'mockup-creator';
-  canvasTag = '<div _ngcontent-sxs-c31="" id="canvas">';
-  endTag = '</div>';
-  htmlCode: String[] = [' '];
-  radioIdLabel = 1;
+  componentMap = new Map<string, IComponent>();
+
+  private _styleStart = '<style>';
+  private _styleEnd = '</style>';
+  private _styleBody = '';
+  private _htmlStart = '<!doctype html>\n<html lang="en">';
+  private _htmlEnd = '</html>';
 
   @ViewChild('canvas') canvas!: ElementRef;
 
-  constructor(private renderer: Renderer2, private drag: DragDrop) {}
+  constructor(
+    private renderer: Renderer2,
+    private drag: DragDrop,
+    private factoryResolver: ComponentFactoryResolver
+  ) {}
 
   ngOnInit(): void {
     /* throw new Error('Method not implemented.'); */
+  }
+
+  addComponent(component: string) {
+    let temp: IComponent;
+    switch (component) {
+      case 'button':
+        temp = new ButtonComponent();
+        break;
+
+      default:
+        temp = new ButtonComponent();
+    }
+
+    this.componentMap.set(temp.props.key, temp);
+
+    this.componentMap.forEach((comp) => {
+      console.log(comp.props.key);
+    });
+    console.log('END OF LIST');
   }
 
   createNav() {
@@ -88,11 +119,6 @@ export class AppComponent implements OnInit {
 
     this.renderer.setProperty(newRadio, 'type', 'radio');
     this.renderer.setProperty(newRadio, 'name', 'flexRadioDefault'); //used to group radio buttons
-    this.renderer.setProperty(
-      newRadio,
-      'id',
-      'flexRadioDefault' + this.radioIdLabel
-    );
 
     const text = this.renderer.createText('defaulttext');
     this.renderer.setProperty(newLabel, 'for', newRadio.id);
@@ -112,7 +138,10 @@ export class AppComponent implements OnInit {
   }
 
   createButton() {
-    const newButton = this.renderer.createElement('button'); //create dom element
+    console.log('button');
+    let newButton = new ButtonComponent();
+
+    /* const newButton = this.renderer.createElement('button'); //create dom element
 
     let ref = this.drag.createDrag(newButton); //make the element draggable with createDrag, then store the reference to ref
 
@@ -126,11 +155,7 @@ export class AppComponent implements OnInit {
 
     this.renderer.appendChild(newButton, text); //append the text into the button tag
 
-    this.renderer.appendChild(this.canvas.nativeElement, newButton); //append the button to the canvas div
-  }
-
-  addHTML() {
-    return this.htmlCode.toString(); //returns whole HTML code of the canvas div
+    this.renderer.appendChild(this.canvas.nativeElement, newButton); //append the button to the canvas div */
   }
 
   addImage() {
@@ -149,9 +174,8 @@ export class AppComponent implements OnInit {
     this.putInHTML();
   }
 
-  putInHTML() {
-    this.htmlCode.push(this.canvas.nativeElement.outerHTML.toString());
-  }
+  putInHTML() {}
+
   createDropdown() {
     const newDiv = this.renderer.createElement('div');
     const drpButton = this.renderer.createElement('button');
