@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
   title = 'mockup-creator';
   canvasTag = '<div _ngcontent-sxs-c31="" id="canvas">';
   endTag = '</div>';
-  htmlCode: String[] = [" "];
+  htmlCode: String[] = [' '];
 
   @ViewChild('canvas') canvas!: ElementRef;
 
@@ -48,27 +48,29 @@ export class AppComponent implements OnInit {
     this.renderer.appendChild(newButton, text); //append the text into the button tag
 
     this.renderer.appendChild(this.canvas.nativeElement, newButton); //append the button to the canvas div
-
-    this.putInHTML();
   }
 
-  addHTML(){
+  addHTML() {
     return this.htmlCode.toString(); //returns whole HTML code of the canvas div
   }
 
-  addImage(){
+  addImage() {
     const newImage = this.renderer.createElement('img');
     let ref = this.drag.createDrag(newImage);
     ref.withBoundaryElement(this.canvas);
     const text = this.renderer.createText('IMAGE');
-    this.renderer.setProperty(newImage, 'src', 'https://mdbootstrap.com/img/new/standard/city/047.jpg');
+    this.renderer.setProperty(
+      newImage,
+      'src',
+      'https://mdbootstrap.com/img/new/standard/city/047.jpg'
+    );
     this.renderer.addClass(newImage, 'img-rounded');
-    this.renderer.appendChild(newImage,text);
+    this.renderer.appendChild(newImage, text);
     this.renderer.appendChild(this.canvas.nativeElement, newImage);
     this.putInHTML();
   }
 
-  putInHTML(){
+  putInHTML() {
     this.htmlCode.push(this.canvas.nativeElement.outerHTML.toString());
   }
 }
