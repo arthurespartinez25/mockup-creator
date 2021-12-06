@@ -49,6 +49,19 @@ export class AppComponent implements OnInit {
   }
 
   createPopup() {
+    //add bootstrap 4, jquery to canvas
+    if(this.popupCount == 0){
+      const ssheet = this.renderer.createElement('link');
+      this.renderer.setAttribute(ssheet, 'rel', "stylesheet");
+      this.renderer.setAttribute(ssheet, 'href', "https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css");
+      const queryScript = this.renderer.createElement('script');
+      this.renderer.setAttribute(queryScript, 'src', "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js");
+      const bootstrapScript = this.renderer.createElement('script');
+      this.renderer.setAttribute(bootstrapScript, 'src', "https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js");
+      this.renderer.appendChild(this.canvas.nativeElement, ssheet);
+      this.renderer.appendChild(this.canvas.nativeElement, queryScript);
+      this.renderer.appendChild(this.canvas.nativeElement, bootstrapScript);
+    }
     const newPopup = this.renderer.createElement('button');
     const text = this.renderer.createText("Popup");
     let ref = this.drag.createDrag(newPopup);
@@ -59,22 +72,16 @@ export class AppComponent implements OnInit {
     this.renderer.setAttribute(newPopup, 'data-content', "This is a popup");
     this.renderer.appendChild(newPopup, text);
     this.renderer.appendChild(this.canvas.nativeElement, newPopup);
-    //one time insert jquery code to canvas
-    /*if(this.popupCount == 0){
-      const bootstrapScript = this.renderer.createElement('script');
-      this.renderer.setAttribute(bootstrapScript, 'src', "https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js");
-      const queryScript = this.renderer.createElement('script');
-      this.renderer.setAttribute(queryScript, 'src', "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js");
+    //one time insert function code to canvas
+    if(this.popupCount == 0){
       const functionScript = this.renderer.createElement('script');
       const functionScriptText = this.renderer.createText("$(function () { $(\'[data-toggle=\"popover\"]\').popover()})");
-      this.renderer.appendChild(this.canvas.nativeElement, bootstrapScript);
-      this.renderer.appendChild(this.canvas.nativeElement, queryScript);
       this.renderer.appendChild(functionScript, functionScriptText);
       this.renderer.appendChild(this.canvas.nativeElement, functionScript);
       this.popupCount++;
     }
     else
       this.popupCount++;
-    */
+    console.log(this.canvas.nativeElement.outerHTML);
   }
 }
