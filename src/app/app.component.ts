@@ -99,6 +99,8 @@ export class AppComponent implements OnInit {
     this.selected = component.props;
   }
 
+  /****************** OLD CODE STARTS HERE **********************/
+
   createNav() {
     const newNav = this.renderer.createElement('div'); //create dom element
     let ref = this.drag.createDrag(newNav); //make the element draggable with createDrag, then store the reference to ref
