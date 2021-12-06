@@ -5,6 +5,8 @@ import {
   DragRef,
   DragRefConfig,
 } from '@angular/cdk/drag-drop';
+import { Container } from '@angular/compiler/src/i18n/i18n_ast';
+import { registerLocaleData } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -20,6 +22,10 @@ import {
 })
 export class AppComponent implements OnInit {
   title = 'mockup-creator';
+  canvasTag = '<div _ngcontent-sxs-c31="" id="canvas">';
+  endTag = '</div>';
+  htmlCode: String[] = [' '];
+  radioIdLabel = 1;
   theDiv: string;
 
   @ViewChild('canvas') canvas!: ElementRef;
@@ -67,6 +73,46 @@ export class AppComponent implements OnInit {
     this.renderer.appendChild(this.canvas.nativeElement, newNav); //append the button to the canvas div
   }
 
+  createRadio() {
+    //based on checkbox function
+    const mainDiv = this.renderer.createElement('div');
+    const newRadio = this.renderer.createElement('input');
+    let newLabel = this.renderer.createElement('label');
+
+    this.renderer.appendChild(mainDiv, newLabel);
+    this.renderer.appendChild(newLabel, newRadio);
+    let ref = this.drag.createDrag(newLabel);
+    ref.withBoundaryElement(this.canvas);
+
+    this.renderer.addClass(mainDiv, 'form-check');
+    this.renderer.addClass(newRadio, 'form-check-input');
+    this.renderer.addClass(newLabel, 'form-check-label');
+
+    this.renderer.setProperty(newRadio, 'type', 'radio');
+    this.renderer.setProperty(newRadio, 'name', 'flexRadioDefault'); //used to group radio buttons
+    this.renderer.setProperty(
+      newRadio,
+      'id',
+      'flexRadioDefault' + this.radioIdLabel
+    );
+
+    const text = this.renderer.createText('defaulttext');
+    this.renderer.setProperty(newLabel, 'for', newRadio.id);
+    this.renderer.appendChild(newLabel, text);
+
+    this.renderer.appendChild(this.canvas.nativeElement, mainDiv);
+  }
+
+  createDate() {
+    const newDate = this.renderer.createElement('input');
+    let ref = this.drag.createDrag(newDate);
+    this.renderer.setProperty(newDate, 'type', 'date');
+    this.renderer.setProperty(newDate, 'id', 'defaultDate');
+    this.renderer.setProperty(newDate, 'name', 'date');
+
+    this.renderer.appendChild(this.canvas.nativeElement, newDate);
+  }
+
   createButton() {
     const newButton = this.renderer.createElement('button'); //create dom element
 
@@ -85,6 +131,29 @@ export class AppComponent implements OnInit {
     this.renderer.appendChild(this.canvas.nativeElement, newButton); //append the button to the canvas div
   }
 
+  addHTML() {
+    return this.htmlCode.toString(); //returns whole HTML code of the canvas div
+  }
+
+  addImage() {
+    const newImage = this.renderer.createElement('img');
+    let ref = this.drag.createDrag(newImage);
+    ref.withBoundaryElement(this.canvas);
+    const text = this.renderer.createText('IMAGE');
+    this.renderer.setProperty(
+      newImage,
+      'src',
+      'https://mdbootstrap.com/img/new/standard/city/047.jpg'
+    );
+    this.renderer.addClass(newImage, 'img-rounded');
+    this.renderer.appendChild(newImage, text);
+    this.renderer.appendChild(this.canvas.nativeElement, newImage);
+    this.putInHTML();
+  }
+
+  putInHTML() {
+    this.htmlCode.push(this.canvas.nativeElement.outerHTML.toString());
+  }
   createDropdown() {
     const newDiv = this.renderer.createElement('div');
     const drpButton = this.renderer.createElement('button');
@@ -317,6 +386,36 @@ export class AppComponent implements OnInit {
     this.renderer.appendChild(this.canvas.nativeElement, headerFunc);
   }
 
+  createParagraph() {
+    const container = this.renderer.createElement('div');
+    const paragraph = this.renderer.createElement('p');
+
+    let ref3 = this.drag.createDrag(container);
+    ref3.withBoundaryElement(this.canvas);
+
+    const text = this.renderer.createText('Enter text here');
+
+    //this.renderer.addClass(paragraph, 'form-control');
+    //this.renderer.addClass(container, 'form-group');
+    this.renderer.addClass(container, 'paragraphContainer');
+    this.renderer.addClass(paragraph, 'paragraph');
+    //this.renderer.appendChild(inputField, text);
+    this.renderer.appendChild(paragraph, text);
+    this.renderer.appendChild(container, paragraph);
+    this.renderer.appendChild(this.canvas.nativeElement, container);
+  }
+  createLink() {
+    const Link = this.renderer.createElement('a');
+
+    let ref3 = this.drag.createDrag(Link);
+    ref3.withBoundaryElement(this.canvas);
+
+    this.renderer.setProperty(Link, 'href', '#');
+
+    const text = this.renderer.createText('Link');
+    this.renderer.addClass(Link, 'Link');
+
+    this.renderer.appendChild(Link, text);
+    this.renderer.appendChild(this.canvas.nativeElement, Link);
+  }
 }
-
-

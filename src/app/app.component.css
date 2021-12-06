@@ -53,6 +53,12 @@
   background-color: black;
 }
 
+/********************** IMG CSS ********************/
+
+.img-rounded {
+  max-width: 600px;
+  height: 200px;
+}
 /********************** COMPONENT CSS ********************/
 
 .custom-nav {
@@ -95,4 +101,19 @@ a.custom-nav-link:hover {
   font-size: 25px;
   font-weight: bold;
   font-family: "Times New Roman", Times, serif;
+}
+.paragraphContainer {
+  width: fit-content;
+  height: fit-content;
+  margin: 2px;
+}
+
+.paragraph {
+  margin: 2px;
+  width: 200px;
+}
+
+.Link {
+  color: #417ff3;
+  margin: 0px 15px;
 }

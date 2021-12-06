@@ -14,11 +14,13 @@
   <!-- PALETTE SECTION -->
   <div id="palette-container">
     <button class="accordion palette-item" (click)="createNav()">Navbar</button>
-    <button class="accordion palette-item">Link</button>
+    <button class="accordion palette-item" (click)="createLink()">Link</button>
     <button class="accordion palette-item" (click)="createHeader()">
       Header
     </button>
-    <button class="accordion palette-item">Paragraph</button>
+    <button class="accordion palette-item" (click)="createParagraph()">
+      Paragraph
+    </button>
     <button class="accordion palette-item" (click)="createLabel()">
       Label
     </button>
@@ -31,17 +33,21 @@
     <button class="accordion palette-item" (click)="createCheckbox()">
       Checkbox
     </button>
-    <button class="accordion palette-item">Radio</button>
+    <button class="accordion palette-item" (click)="createRadio()">
+      Radio
+    </button>
     <button class="accordion palette-item" (click)="createInputField()">
       Input Field
     </button>
     <button class="accordion palette-item">Textbox</button>
-    <button class="accordion palette-item">Date Picker</button>
+    <button class="accordion palette-item" (click)="createDate()">
+      DatePicker
+    </button>
     <button class="accordion palette-item" (click)="createModal()">
       Modal
     </button>
     <button class="accordion palette-item">Popup</button>
-    <button class="accordion palette-item">Image</button>
+    <button class="accordion palette-item" (click)="addImage()">Image</button>
 
     <!-- <ul class="list-group">
       <li class="list-group-item palette-item" (click)="createButton()">
@@ -61,7 +67,10 @@
   <!-- CODE SECTION -->
 
   <div id="code-container">
-    <code><!-- INSERT CODE HERE VIA INTERPOLATION --></code>
+    <code
+      ><!-- INSERT CODE HERE VIA INTERPOLATION -->
+      {{ canvasTag + addHTML() + endTag }}
+    </code>
   </div>
 </div>
 
