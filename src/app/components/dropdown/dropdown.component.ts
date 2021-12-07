@@ -13,7 +13,7 @@ export class DropdownComponent implements OnInit,IComponent {
     key: '',
     id: '',
     value: 'Dropdown',
-    class: 'btn btn-secondary dropdown-toggle',
+    class: 'btn btn-secondary',
     style: '',
     typeObj: 'dropdown',
     type: 'button',
