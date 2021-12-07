@@ -9,6 +9,7 @@ import {
 import { IComponent } from './interfaces/icomponent';
 import { ButtonComponent } from './components/button/button.component';
 import { IProperty } from './interfaces/iproperty';
+import { LabelComponent } from './components/label/label.component';
 
 @Component({
   selector: 'app-root',
@@ -48,6 +49,11 @@ export class AppComponent implements OnInit {
     switch (component) {
       case 'button':
         temp = new ButtonComponent(this.canvas);
+
+        break;
+
+      case 'label':
+        temp = new LabelComponent(this.canvas);
 
         break;
 
