@@ -13,8 +13,8 @@ export class CheckboxComponent implements OnInit, IComponent {
     key: '',
     id: '',
     value: 'Checkbox',
-    class: '',
-    style: '',
+    class: 'form-check-input',
+    style: 'cursor: pointer;',
     typeObj: 'checkbox',
     type: 'checkbox',
   };
@@ -38,7 +38,9 @@ export class CheckboxComponent implements OnInit, IComponent {
   }
 
   get htmlCode(): string {
-    return 'TEST';
+    let tmpHtmlCode = '<div';
+
+    return tmpHtmlCode;
   }
 
   ngOnInit(): void {
