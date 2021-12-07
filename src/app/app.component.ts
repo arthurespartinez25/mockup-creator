@@ -1,4 +1,4 @@
-import { DragDrop } from '@angular/cdk/drag-drop';
+import { CdkDragEnd, DragDrop } from '@angular/cdk/drag-drop';
 import {
   Component,
   ElementRef,
@@ -8,7 +8,10 @@ import {
 } from '@angular/core';
 import { IComponent } from './interfaces/icomponent';
 import { ButtonComponent } from './components/button/button.component';
+import { ButtonDragComponent } from './components/buttonDrag/buttonDrag.component';
+
 import { IProperty } from './interfaces/iproperty';
+import { IMouse } from './interfaces/imouse';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +21,10 @@ import { IProperty } from './interfaces/iproperty';
 export class AppComponent implements OnInit {
   title = 'mockup-creator';
   componentList: IComponent[] = [];
+  mouse: IMouse = {
+    xmouse: 0,
+    ymouse: 0,
+  };
 
   selected: IProperty = {
     key: '',
@@ -48,7 +55,6 @@ export class AppComponent implements OnInit {
     switch (component) {
       case 'button':
         temp = new ButtonComponent(this.canvas);
-
         break;
 
       default:
@@ -97,7 +103,45 @@ export class AppComponent implements OnInit {
 
   clickHandler(component: IComponent) {
     this.selected = component.props;
+    
   }
+
+  //---------------------------------------------
+
+  mousePositionX = 110;
+  mousePositionY= 110;
+  
+
+  onDragEnded(event: CdkDragEnd){
+    event.source._dragRef.reset();
+    const { offsetLeft, offsetTop } = event.source.element.nativeElement;
+    const { x, y } = event.distance;
+    this.mouse.xmouse = offsetLeft + x;
+    this.mouse.ymouse = offsetTop + y;
+    
+}
+
+  onDragEndedAddComponent(component: string) {
+    let temp: IComponent;
+    switch (component) {
+      case 'button':
+        let temp2 = new ButtonDragComponent(this.canvas, this.mouse);
+        //temp2.mouse = this.mouse;
+        //temp = new ButtonDragComponent(this.canvas);
+        
+        this.componentList.push(temp2);
+        break;
+
+      default:
+        temp = new ButtonComponent(this.canvas);
+    }
+
+    //this.componentList.push(temp);
+  }
+
+  
+
+  //----------------------------------------------
 
   /****************** OLD CODE STARTS HERE **********************/
 

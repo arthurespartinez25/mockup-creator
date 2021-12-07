@@ -5,4 +5,6 @@ export interface IComponent {
   canvas: ElementRef;
   props: IProperty;
   get htmlCode(): string;
+  
+
 }
