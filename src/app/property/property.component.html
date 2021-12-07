@@ -57,6 +57,14 @@
         ></textarea>
       </td>
     </tr>
+    <tr *ngIf="props.name">
+      <th><label>name</label></th>
+      <input
+        type="text"
+        [value]="this.props.name"
+        (keyup)="nameChangeHandler($event)"
+      />
+    </tr>
   </table>
 </div>
 
