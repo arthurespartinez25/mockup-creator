@@ -116,8 +116,8 @@ export class AppComponent implements OnInit {
     event.source._dragRef.reset();
     const { offsetLeft, offsetTop } = event.source.element.nativeElement;
     const { x, y } = event.distance;
-    this.mouse.xmouse = offsetLeft + x;
-    this.mouse.ymouse = offsetTop + y;
+    this.mousePositionX = offsetLeft + x;
+    this.mousePositionY = offsetTop + y;
     
 }
 
@@ -125,18 +125,14 @@ export class AppComponent implements OnInit {
     let temp: IComponent;
     switch (component) {
       case 'button':
-        let temp2 = new ButtonDragComponent(this.canvas, this.mouse);
-        //temp2.mouse = this.mouse;
-        //temp = new ButtonDragComponent(this.canvas);
-        
-        this.componentList.push(temp2);
+        temp = new ButtonDragComponent(this.canvas);
         break;
 
       default:
         temp = new ButtonComponent(this.canvas);
     }
 
-    //this.componentList.push(temp);
+    this.componentList.push(temp);
   }
 
   

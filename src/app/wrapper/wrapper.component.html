@@ -1,6 +1,9 @@
 <div class="wrapper" [ngSwitch]="child.props.typeObj">
-  <app-button [property]="child.props" *ngSwitchCase="'button'"></app-button>
-  <app-buttonDrag [property]="child.props" *ngSwitchCase="'buttonDrag'"></app-buttonDrag>
-  
+  <app-button [property]="child.props" *ngSwitchCase="'button'" ></app-button>
+  <app-buttonDrag [property]="child.props" *ngSwitchCase="'buttonDrag'" [ngStyle]="{
+    'position': 'absolute',
+    'left': xmouse + 'px',
+    'top': ymouse + 'px'
+  }">
+  </app-buttonDrag>
 </div>
-

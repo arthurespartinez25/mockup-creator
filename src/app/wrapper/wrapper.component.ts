@@ -12,6 +12,14 @@ export class WrapperComponent implements OnInit {
   child: IComponent;
   canvas: ElementRef;
 
+  @Input() mousePositionX: any;
+  @Input() mousePositionY: any;
+
+  xmouse = 0;
+  ymouse = 0;
+  
+  
+
   @Input() get childComp(): IComponent {
     return this.child;
   }
@@ -34,5 +42,7 @@ export class WrapperComponent implements OnInit {
 
   ngOnInit(): void {
     this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
+    this.xmouse = this.mousePositionX;
+    this.ymouse = this.mousePositionY;
   }
 }
