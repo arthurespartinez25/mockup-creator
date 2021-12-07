@@ -39,6 +39,11 @@ export class CheckboxComponent implements OnInit, IComponent {
 
   get htmlCode(): string {
     let tmpHtmlCode = '<div';
+    tmpHtmlCode += ' class="form-check" id="' + this.props.id + '">';
+    tmpHtmlCode +="\n" + ' <input class="' +  this.props.class + '" type="' +  this.props.type + '" style="' + this.props.style + '" id="flexCheckDefault">';
+    tmpHtmlCode +="\n" + ' <label class="form-check-label" for="flexCheckDefault"> ' + this.props.value + ' </label>';
+    tmpHtmlCode +="\n" + ' </div>';
+    
 
     return tmpHtmlCode;
   }
