@@ -69,7 +69,9 @@
   <div id="code-container">
     <code
       ><!-- INSERT CODE HERE VIA INTERPOLATION -->
-      {{ canvasTag }}<br> <br> {{ addHTML() }} <br><br> {{endTag }}
+      {{ canvasTag }}<br> <br> 
+        <code [innerText]="addHTML()"></code>
+      <br><br> {{endTag }}
     </code>
   </div>
 </div>

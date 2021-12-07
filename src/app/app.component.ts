@@ -139,7 +139,7 @@ export class AppComponent implements OnInit {
     this.putInHTML(newButton.outerHTML); //generation of HTML code
   }
 
-  addHTML() {
+  addHTML(){
     return this.codeString;
     //return this.htmlCode.toString(); //returns whole HTML code of the canvas div
   }
@@ -161,7 +161,7 @@ export class AppComponent implements OnInit {
   }
 
   putInHTML(str: any) {
-    this.codeString = this.codeString + " " + str;
+    this.codeString = this.codeString + "\n" + str;
     //this.htmlCode.push(this.canvas.nativeElement.outerHTML.toString());
   }
 
