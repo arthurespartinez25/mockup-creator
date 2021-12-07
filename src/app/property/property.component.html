@@ -44,6 +44,16 @@
         />
       </td>
     </tr>
+    <tr *ngIf="props.placeholder">
+      <th><label>placeholder</label></th>
+      <td>
+        <input
+          type="text"
+          [value]="props.placeholder"
+          (keyup)="placeholderChangeHandler($event)"
+        />
+      </td>
+    </tr>
     <tr>
       <th><label>style</label></th>
       <td>

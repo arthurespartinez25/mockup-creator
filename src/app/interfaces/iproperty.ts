@@ -6,4 +6,5 @@ export interface IProperty {
   style: string;
   typeObj: string;
   type: string;
+  placeholder?: string;
 }
