@@ -9,148 +9,149 @@
 
 <!-- Toolbar -->
 <!-- <app-navbar></app-navbar> -->
-
-<div class="content" role="main">
-  <!-- PALETTE SECTION -->
-  <div id="palette-container">
-    <button class="accordion palette-item" (click)="createNav()">Navbar</button>
-    <button class="accordion palette-item">Link</button>
-    <button class="accordion palette-item">Header</button>
-    <button class="accordion palette-item">Paragraph</button>
-    <button class="accordion palette-item" (click)="createLabel()">
-      Label
-    </button>
-    <button class="accordion palette-item" (click)="createButton()">
-      Button
-    </button>
-    <button class="accordion palette-item" (click)="createDropdown()">
-      Dropdown
-    </button>
-    <button class="accordion palette-item" (click)="createCheckbox()">
-      Checkbox
-    </button>
-    <button class="accordion palette-item" (click)="createRadio()">
-      Radio
-    </button>
-    <button class="accordion palette-item" (click)="createInputField()">
-      Input Field
-    </button>
-    <button class="accordion palette-item">Textbox</button>
-    <button class="accordion palette-item" (click)="createDate()">
-      DatePicker
-    </button>
-    <button class="accordion palette-item" (click)="createModal()">
-      Modal
-    </button>
-    <button class="accordion palette-item">Popup</button>
-    <button class="accordion palette-item">Image</button>
-
-    <!-- <ul class="list-group">
-      <li class="list-group-item palette-item" (click)="createButton()">
-        Button
-      </li>
-      <li class="list-group-item palette-item">Text Input</li>
-      <li class="list-group-item palette-item">Label</li>
-    </ul> -->
-  </div>
-
-  <!-- CANVAS SECTION -->
-
-  <div id="canvas-container">
-    <div id="canvas" #canvas></div>
-  </div>
-
-  <!-- CODE SECTION -->
-  <div id="code-container">
-    <div class="container">
-
-      <div class="row my-first-row" id="tab-row">
-        <div class="col my-col">
-          <div class="tabsDiv">
-            <nav class="navbar navbar-dark bg-dark" id="navHeader">
-              <h5 class="text-light propertyHeader"><fa-icon [icon]="faWrench"></fa-icon> Component Property</h5>
-            </nav>
-          </div>
-          <form>
-            <div class="form-row shadow-lg p-3 mb-5 bg-white rounded">
-              <div class="form-group">
-                  <label for="nameOnCard">id</label>
-                  <input type="email" class="form-control" id="nameOnCard" placeholder="componentID">
-              </div>
-              <div class="form-group">
-                <label for="nameOnCard">value</label>
-                <input type="email" class="form-control" id="nameOnCard" placeholder="Button">
-              </div>
-              <div class="form-group">
-                <label for="nameOnCard">type</label>
-                <input type="email" class="form-control" id="nameOnCard" placeholder="button">
-              </div>
-              <div class="form-group">
-                <label for="nameOnCard">class</label>
-                <input type="email" class="form-control" id="nameOnCard" placeholder="btn-primary">
-              </div>
-              <div class="form-group">
-                <label for="exampleFormControlTextarea1">style</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-              </div>
-            </div>
-          </form>
-        </div>
-        
-        <div class="col my-col">
-          <div class="tabsDiv">
-            <nav class="navbar navbar-dark bg-dark" id="navHeader">
-              <h5 class="text-light propertyHeader"><fa-icon [icon]="faEdit"></fa-icon> CSS</h5>
-            </nav>
-          </div>
-          <form>
-            <div class="form-row shadow-lg p-3 mb-5 bg-white rounded">
-              <div class="form-group">
-                <label for="exampleFormControlTextarea1">style</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="7"></textarea>
-              </div>
-            </div>
-          </form>
-        </div>
-
-        <div class="w-100"></div>
-
-        <div class="col my-second-row" id="code-row">
-          <div class="codeDiv">
-            <nav class="navbar navbar-dark bg-dark" id="navHeader">
-              <h5 class="text-light propertyHeader"><fa-icon [icon]="faCode"></fa-icon> Code Section</h5>
-            </nav>
-          </div>
-          <code>
-            &lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>
-            &lt;title&gt;HTML Tutorial&lt;/title&gt;<br>
-            &lt;body&gt;<br><br>
-            &lt;h1&gt;This is a heading&lt;/h1&gt;<br>
-            &lt;p&gt;This is a paragraph.&lt;/p&gt;<br><br>
-            
-            &lt;h1&gt;This is a heading&lt;/h1&gt;<br>
-            &lt;p&gt;This is a paragraph.&lt;/p&gt;<br><br>
-            
-            &lt;h1&gt;This is a heading&lt;/h1&gt;<br>
-            &lt;p&gt;This is a paragraph.&lt;/p&gt;<br><br>
-            
-            &lt;h1&gt;This is a heading&lt;/h1&gt;<br>
-            &lt;p&gt;This is a paragraph.&lt;/p&gt;<br><br>
-            
-            &lt;h1&gt;This is a heading&lt;/h1&gt;<br>
-            &lt;p&gt;This is a paragraph.&lt;/p&gt;<br><br>
-            
-            &lt;h1&gt;This is a heading&lt;/h1&gt;<br>
-            &lt;p&gt;This is a paragraph.&lt;/p&gt;<br><br>
-            &lt;/body&gt;<br>
-            &lt;/html&gt;
-          </code>
-        </div>
-
+<div class="container-fluid" role="main">
+  <div class="row">
+      <!-- PALETTE SECTION -->
+      <div id="palette-container" class="col-12 col-md-2">
+        <button class="accordion palette-item" (click)="createNav()">Navbar</button>
+        <button class="accordion palette-item">Link</button>
+        <button class="accordion palette-item">Header</button>
+        <button class="accordion palette-item">Paragraph</button>
+        <button class="accordion palette-item" (click)="createLabel()">
+          Label
+        </button>
+        <button class="accordion palette-item" (click)="createButton()">
+          Button
+        </button>
+        <button class="accordion palette-item" (click)="createDropdown()">
+          Dropdown
+        </button>
+        <button class="accordion palette-item" (click)="createCheckbox()">
+          Checkbox
+        </button>
+        <button class="accordion palette-item" (click)="createRadio()">
+          Radio
+        </button>
+        <button class="accordion palette-item" (click)="createInputField()">
+          Input Field
+        </button>
+        <button class="accordion palette-item">Textbox</button>
+        <button class="accordion palette-item" (click)="createDate()">
+          DatePicker
+        </button>
+        <button class="accordion palette-item" (click)="createModal()">
+          Modal
+        </button>
+        <button class="accordion palette-item">Popup</button>
+        <button class="accordion palette-item">Image</button>
+    
+        <!-- <ul class="list-group">
+          <li class="list-group-item palette-item" (click)="createButton()">
+            Button
+          </li>
+          <li class="list-group-item palette-item">Text Input</li>
+          <li class="list-group-item palette-item">Label</li>
+        </ul> -->
       </div>
-      
-    </div>
-  </div>
+    
+      <!-- CANVAS SECTION -->
+    
+      <div id="canvas-container" class="col-12 col-md-6">
+        <div id="canvas" #canvas class="h-75"></div>
+      </div>
+    
+      <!-- CODE SECTION -->
+      <div id="code-container" class="col-12 col-md-4">
+        <div class="container">
+    
+          <div class="row my-first-row" id="tab-row">
+            <div class="col my-col">
+              <div class="tabsDiv">
+                <nav class="navbar navbar-dark bg-dark" id="navHeader">
+                  <h5 class="text-light propertyHeader"><fa-icon [icon]="faWrench"></fa-icon> Component Property</h5>
+                </nav>
+              </div>
+              <form>
+                <div class="form-row shadow-lg p-3 mb-5 bg-white rounded">
+                  <div class="form-group">
+                      <label for="nameOnCard">id</label>
+                      <input type="email" class="form-control" id="nameOnCard" placeholder="componentID">
+                  </div>
+                  <div class="form-group">
+                    <label for="nameOnCard">value</label>
+                    <input type="email" class="form-control" id="nameOnCard" placeholder="Button">
+                  </div>
+                  <div class="form-group">
+                    <label for="nameOnCard">type</label>
+                    <input type="email" class="form-control" id="nameOnCard" placeholder="button">
+                  </div>
+                  <div class="form-group">
+                    <label for="nameOnCard">class</label>
+                    <input type="email" class="form-control" id="nameOnCard" placeholder="btn-primary">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleFormControlTextarea1">style</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                  </div>
+                </div>
+              </form>
+            </div>
+            
+            <div class="col my-col">
+              <div class="tabsDiv">
+                <nav class="navbar navbar-dark bg-dark" id="navHeader">
+                  <h5 class="text-light propertyHeader"><fa-icon [icon]="faEdit"></fa-icon> CSS</h5>
+                </nav>
+              </div>
+              <form>
+                <div class="form-row shadow-lg p-3 mb-5 bg-white rounded">
+                  <div class="form-group">
+                    <label for="exampleFormControlTextarea1">style</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="7"></textarea>
+                  </div>
+                </div>
+              </form>
+            </div>
+    
+            <div class="w-100"></div>
+    
+            <div class="col my-second-row" id="code-row">
+              <div class="codeDiv">
+                <nav class="navbar navbar-dark bg-dark" id="navHeader">
+                  <h5 class="text-light propertyHeader"><fa-icon [icon]="faCode"></fa-icon> Code Section</h5>
+                </nav>
+              </div>
+              <code>
+                &lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>
+                &lt;title&gt;HTML Tutorial&lt;/title&gt;<br>
+                &lt;body&gt;<br><br>
+                &lt;h1&gt;This is a heading&lt;/h1&gt;<br>
+                &lt;p&gt;This is a paragraph.&lt;/p&gt;<br><br>
+                
+                &lt;h1&gt;This is a heading&lt;/h1&gt;<br>
+                &lt;p&gt;This is a paragraph.&lt;/p&gt;<br><br>
+                
+                &lt;h1&gt;This is a heading&lt;/h1&gt;<br>
+                &lt;p&gt;This is a paragraph.&lt;/p&gt;<br><br>
+                
+                &lt;h1&gt;This is a heading&lt;/h1&gt;<br>
+                &lt;p&gt;This is a paragraph.&lt;/p&gt;<br><br>
+                
+                &lt;h1&gt;This is a heading&lt;/h1&gt;<br>
+                &lt;p&gt;This is a paragraph.&lt;/p&gt;<br><br>
+                
+                &lt;h1&gt;This is a heading&lt;/h1&gt;<br>
+                &lt;p&gt;This is a paragraph.&lt;/p&gt;<br><br>
+                &lt;/body&gt;<br>
+                &lt;/html&gt;
+              </code>
+            </div>
+    
+          </div>
+          
+        </div>
+      </div>
+
 </div>
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
