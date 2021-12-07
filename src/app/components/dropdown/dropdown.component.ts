@@ -37,7 +37,18 @@ export class DropdownComponent implements OnInit,IComponent {
   }
   
   get htmlCode(): string {
-    return "test";
+    let tmpHtmlCode = '<div';
+    tmpHtmlCode += ' class="dropdown" id="' + this.props.id + '">';
+    tmpHtmlCode +="\n" + ' <button class="' +  this.props.class + '" type="' +  this.props.type + '" style="' + this.props.style + '" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> ' + this.props.value + ' </button>';
+    tmpHtmlCode +="\n" + ' <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">';
+    tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">Choice 1</a>';
+    tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">Choice 2</a>';
+    tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">Choice 3</a>';
+    tmpHtmlCode +="\n" + ' </div>';
+    tmpHtmlCode +="\n" + ' </div>';
+    
+
+    return tmpHtmlCode;
   }
 
   ngOnInit(): void {
