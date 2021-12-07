@@ -9,6 +9,7 @@ import {
 import { IComponent } from './interfaces/icomponent';
 import { ButtonComponent } from './components/button/button.component';
 import { IProperty } from './interfaces/iproperty';
+import { DatepickerComponent } from './components/datepicker/datepicker.component';
 
 @Component({
   selector: 'app-root',
@@ -50,7 +51,10 @@ export class AppComponent implements OnInit {
         temp = new ButtonComponent(this.canvas);
 
         break;
-
+      case 'datepicker':
+        temp = new DatepickerComponent(this.canvas);
+        break;
+        
       default:
         temp = new ButtonComponent(this.canvas);
     }
