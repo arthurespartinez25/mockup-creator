@@ -9,6 +9,7 @@ import {
 import { IComponent } from './interfaces/icomponent';
 import { ButtonComponent } from './components/button/button.component';
 import { IProperty } from './interfaces/iproperty';
+import { ModalComponent } from './components/modal/modal.component';
 
 @Component({
   selector: 'app-root',
@@ -42,6 +43,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     /* throw new Error('Method not implemented.'); */
   }
+  
 
   addComponent(component: string) {
     let temp: IComponent;
@@ -50,9 +52,13 @@ export class AppComponent implements OnInit {
         temp = new ButtonComponent(this.canvas);
 
         break;
+      case 'modal':
+        temp = new ModalComponent(this.canvas);
+        
+        break;
 
       default:
-        temp = new ButtonComponent(this.canvas);
+        temp = new ModalComponent(this.canvas);
     }
 
     this.componentList.push(temp);
@@ -263,6 +269,7 @@ export class AppComponent implements OnInit {
   }
 
   createModal() {
+    /*
     const modalContainer = this.renderer.createElement('div'); //create dom element
     const modalDialog = this.renderer.createElement('div'); //create dom element
     const modalContent = this.renderer.createElement('div'); //create dom element
@@ -283,7 +290,7 @@ export class AppComponent implements OnInit {
 
     ref.withBoundaryElement(this.canvas); //set the draggable area to only be the canvas
 
-    /***********************************/
+    /***********************************
     //properties commented below maybe used for future reference
 
     //this.renderer.setProperty(modalContainer, 'id', 'exampleModal'); //add id attribute to modalContainer
