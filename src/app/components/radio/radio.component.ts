@@ -21,8 +21,8 @@ export class RadioComponent implements OnInit,IComponent {
   };
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
   }
+
   constructor(canvas: ElementRef) {
     this.canvas = canvas;
     let date = Date.now();
