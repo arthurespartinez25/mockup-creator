@@ -1,5 +1,6 @@
 import { DragDrop } from '@angular/cdk/drag-drop';
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Target } from '@angular/compiler';
+import { Component, ElementRef, Input, OnInit, Directive } from '@angular/core';
 import { IComponent } from '../interfaces/icomponent';
 import { IProperty } from '../interfaces/iproperty';
 
@@ -8,6 +9,7 @@ import { IProperty } from '../interfaces/iproperty';
   templateUrl: './wrapper.component.html',
   styleUrls: ['./wrapper.component.css'],
 })
+
 export class WrapperComponent implements OnInit {
   child: IComponent;
   canvas: ElementRef;
@@ -18,8 +20,6 @@ export class WrapperComponent implements OnInit {
   xmouse = 0;
   ymouse = 0;
   
-  
-
   @Input() get childComp(): IComponent {
     return this.child;
   }
@@ -41,8 +41,14 @@ export class WrapperComponent implements OnInit {
   constructor(private ref: ElementRef, private drag: DragDrop) {}
 
   ngOnInit(): void {
-    this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
+    //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
     this.xmouse = this.mousePositionX;
     this.ymouse = this.mousePositionY;
   }
+  element1 = document.getElementsByClassName('buttonDrag');
+  
+  ngAfterContentInit(){
+    
+  }
+  
 }

@@ -1,3 +1,4 @@
+import { Target } from '@angular/compiler';
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
@@ -5,11 +6,12 @@ import { IMouse } from '../../interfaces/imouse';
 
 @Component({
   selector: 'app-buttonDrag',
-  template: `<button [id]="props.id" [style]="props.style" [type]="props.type"
-  >
+  template: `<button cdkDrag cdkDragBoundary="#canvas" [id]="props.id" [style]="props.style" [type]="props.type"
+  (mousedown)="rawr()">
     {{ props.value }}
   </button>`,
 })
+
 export class ButtonDragComponent implements IComponent  {
   canvas: ElementRef;
   props: IProperty = {
@@ -19,7 +21,7 @@ export class ButtonDragComponent implements IComponent  {
     class: '',
     style: '',
     typeObj: 'buttonDrag',
-    type: 'button',
+    type: '',
   };
 
   constructor(canvas: ElementRef) {
@@ -28,6 +30,10 @@ export class ButtonDragComponent implements IComponent  {
     this.props.key = date.toString();
     this.props.id = 'button' + date.toString();
   }
+  rawr(){
+
+  }
+  
 
   @Input() get property(): IProperty {
     return this.props;
