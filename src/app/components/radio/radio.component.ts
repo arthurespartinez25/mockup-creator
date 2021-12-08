@@ -13,7 +13,7 @@ export class RadioComponent implements OnInit,IComponent {
     key: '',
     id: '',
     value: 'RadioButton',
-    class: '',
+    class: 'form-check-input',
     style: '',
     typeObj: 'radio',
     type: 'radio',
@@ -27,7 +27,7 @@ export class RadioComponent implements OnInit,IComponent {
     this.canvas = canvas;
     let date = Date.now();
     this.props.key = date.toString();
-    this.props.id = 'button' + date.toString();
+    this.props.id = 'radio' + date.toString();
   }
   
 
@@ -42,7 +42,7 @@ export class RadioComponent implements OnInit,IComponent {
   }
 
   get htmlCode(): string {
-    let tmpHtmlCode = '<div> \n <input';
+    let tmpHtmlCode = '<div class="form-check"> \n <input';
    
     if (this.props.class.trim().length > 0) {
       tmpHtmlCode += ' class="' + this.props.class + '"';
@@ -67,7 +67,7 @@ export class RadioComponent implements OnInit,IComponent {
     }
 
     //for label part
-    tmpHtmlCode += '> \n <label';
+    tmpHtmlCode += '> \n <label class="form-check-label';
     if (this.props.id.trim().length > 0) {
       tmpHtmlCode += ' for="' + this.props.id + '"';
     }
