@@ -24,11 +24,10 @@ export class DatepickerComponent implements OnInit,IComponent {
     this.canvas = canvas;
     let date = Date.now();
     this.props.key = date.toString();
-    this.props.id = 'button' + date.toString();
+    this.props.id = 'date' + date.toString();
   }
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
   }
 
   @Input() get property(): IProperty {
