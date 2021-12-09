@@ -39,6 +39,22 @@ export class NavbarComponent implements IComponent {
     }
   }
   get htmlCode(): string {
-    return '<navbar></navbar>';
+    let htmlCode = `<nav`;
+
+    if (this.props.id.trim().length > 0) {
+      htmlCode += ' id="' + this.props.id + '"';
+    }
+
+    if (this.props.class.trim().length > 0) {
+      htmlCode += ' class="' + this.props.class + '"';
+    }
+
+    if (this.props.style.trim().length > 0) {
+      htmlCode += ' style="' + this.props.style + '"';
+    }
+
+    htmlCode += '>' + this.props.value + '</nav>';
+
+    return htmlCode;
   }
 }
