@@ -16,6 +16,7 @@ import { LabelComponent } from './components/label/label.component';
 import { RadioComponent } from './components/radio/radio.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
@@ -53,6 +54,10 @@ export class AppComponent implements OnInit {
   addComponent(component: string) {
     let temp: IComponent;
     switch (component) {
+      case 'nav':
+        temp = new NavbarComponent(this.canvas);
+        break;
+
       case 'button':
         temp = new ButtonComponent(this.canvas);
         break;
