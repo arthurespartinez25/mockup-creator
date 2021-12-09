@@ -1,4 +1,4 @@
-import { DragDrop } from '@angular/cdk/drag-drop';
+import { CdkDragEnd, DragDrop } from '@angular/cdk/drag-drop';
 import {
   Component,
   ElementRef,
@@ -15,6 +15,7 @@ import { LabelComponent } from './components/label/label.component';
 import { RadioComponent } from './components/radio/radio.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
+import { ButtonDragComponent } from './components/buttonDrag/buttonDrag.component';
 
 @Component({
   selector: 'app-root',
@@ -85,6 +86,38 @@ export class AppComponent implements OnInit {
 
     this.componentList.push(temp);
   }
+  //----------------------------------------------------------------------------
+
+
+  mousePositionX = 110;
+  mousePositionY= 110;
+  
+
+  onDragEnded(event: CdkDragEnd){
+    event.source._dragRef.reset();
+    const { offsetLeft, offsetTop } = event.source.element.nativeElement;
+    const { x, y } = event.distance;
+    this.mousePositionX = offsetLeft + x;
+    this.mousePositionY = offsetTop + y;
+    
+}
+
+  onDragEndedAddComponent(component: string) {
+    let temp: IComponent;
+    switch (component) {
+      case 'button':
+        temp = new ButtonDragComponent(this.canvas);
+        break;
+
+      default:
+        temp = new ButtonComponent(this.canvas);
+    }
+
+    this.componentList.push(temp);
+  }
+
+  //----------------------------------------------------------------------------
+
 
   get style(): string {
     return this._styleBody;

@@ -12,7 +12,7 @@
 
 <div class="content" role="main">
   <!-- PALETTE SECTION -->
-  <div id="palette-container">
+  <div id="palette-container" cdkDropListGroup cdkDropList cdkDropListSortingDisabled>
     <button class="accordion palette-item" (click)="createNav()">Navbar</button>
     <button class="accordion palette-item" (click)="createLink()">Link</button>
     <button class="accordion palette-item" (click)="createHeader()">
@@ -24,9 +24,12 @@
     <button class="accordion palette-item" (click)="addComponent('label')">
       Label
     </button>
-    <button class="accordion palette-item" (click)="addComponent('button')">
+
+    <button class="accordion palette-item" (click)="addComponent('button')"
+    cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddComponent('button')">
       Button
     </button>
+
     <button class="accordion palette-item" (click)="addComponent('dropdown')">
       Dropdown
     </button>
@@ -70,6 +73,8 @@
         (click)="clickHandler(component)"
         [childComp]="component"
         [canvasRef]="component.canvas"
+        [mousePositionX]="mousePositionX" 
+        [mousePositionY]="mousePositionY"
       >
       </app-wrapper>
     </div>
