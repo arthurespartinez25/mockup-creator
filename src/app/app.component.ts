@@ -110,6 +110,8 @@ export class AppComponent implements OnInit {
 
   mousePositionX = 110;
   mousePositionY= 110;
+
+  domInsideCanvas = false;
   
 
   onDragEnded(event: CdkDragEnd){
@@ -122,17 +124,20 @@ export class AppComponent implements OnInit {
 }
 
   onDragEndedAddComponent(component: string) {
-    let temp: IComponent;
-    switch (component) {
-      case 'button':
-        temp = new ButtonDragComponent(this.canvas);
-        break;
+    if(this.domInsideCanvas == true)
+    {
+      let temp: IComponent;
+      switch (component) {
+        case 'button':
+          temp = new ButtonDragComponent(this.canvas);
+          break;
 
-      default:
-        temp = new ButtonComponent(this.canvas);
+        default:
+          temp = new ButtonComponent(this.canvas);
+      }
+
+      this.componentList.push(temp);
     }
-
-    this.componentList.push(temp);
   }
 
   

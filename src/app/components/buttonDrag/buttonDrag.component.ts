@@ -21,7 +21,7 @@ export class ButtonDragComponent implements IComponent  {
     class: '',
     style: '',
     typeObj: 'buttonDrag',
-    type: '',
+    type: 'button',
   };
 
   constructor(canvas: ElementRef) {
