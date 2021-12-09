@@ -18,6 +18,12 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { ButtonDragComponent } from './components/buttonDrag/buttonDrag.component';
 import { LabelDragComponent } from './components/labelDrag/labelDrag.component';
 import { CheckboxDragComponent } from './components/checkboxDrag/checkboxDrag.component';
+import { DropdownDragComponent } from './components/dropdownDrag/dropdownDrag.component';
+import { ImageDragComponent } from './components/imageDrag/imageDrag.component';
+import { RadioDragComponent } from './components/radioDrag/radioDrag.component';
+import { TextboxDragComponent } from './components/textboxDrag/textboxDrag.component';
+
+
 
 @Component({
   selector: 'app-root',
@@ -120,6 +126,23 @@ export class AppComponent implements OnInit {
         temp = new CheckboxDragComponent(this.canvas);
         break;
       
+
+      case 'dropdown':
+        temp = new DropdownDragComponent(this.canvas);
+
+        break;
+
+      case 'img':
+          temp = new ImageDragComponent(this.canvas);
+          break;
+
+      case 'radio':
+        temp = new RadioDragComponent(this.canvas);
+        break;
+
+      case 'textbox':
+        temp = new TextboxDragComponent(this.canvas);
+        break;
 
       default:
         temp = new ButtonComponent(this.canvas);

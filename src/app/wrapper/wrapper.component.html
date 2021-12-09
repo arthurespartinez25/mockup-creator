@@ -9,6 +9,13 @@
 
   <app-image [property]="child.props" *ngSwitchCase="'img'"></app-image>
 
+  <app-imageDrag [property]="child.props" *ngSwitchCase="'imgDrag'"
+  [ngStyle]="{
+    'position': 'absolute',
+    'left': xmouse + 'px',
+    'top': ymouse + 'px'
+  }"></app-imageDrag>
+
   <app-label [property]="child.props" *ngSwitchCase="'label'"></app-label>
   <app-labelDrag [property]="child.props" *ngSwitchCase="'labelDrag'"[ngStyle]="{
     'position': 'absolute',
@@ -18,7 +25,21 @@
 
   <app-textbox [property]="child.props" *ngSwitchCase="'textbox'"></app-textbox>
 
+  <app-textboxDrag [property]="child.props" *ngSwitchCase="'textboxDrag'"
+  [ngStyle]="{
+    'position': 'absolute',
+    'left': xmouse + 'px',
+    'top': ymouse + 'px'
+  }"></app-textboxDrag>
+
   <app-radio [property]="child.props" *ngSwitchCase="'radio'"></app-radio>
+
+  <app-radioDrag [property]="child.props" *ngSwitchCase="'radioDrag'"
+  [ngStyle]="{
+    'position': 'absolute',
+    'left': xmouse + 'px',
+    'top': ymouse + 'px'
+  }"></app-radioDrag>
 
   <app-checkbox
     [property]="child.props"
@@ -34,5 +55,12 @@
     [property]="child.props"
     *ngSwitchCase="'dropdown'"
   ></app-dropdown>
+
+  <app-dropdownDrag [property]="child.props" *ngSwitchCase="'dropdownDrag'" [ngStyle]="{
+      'position': 'absolute',
+      'left': xmouse + 'px',
+      'top': ymouse + 'px'
+    }">
+  </app-dropdownDrag>
 
 </div>
