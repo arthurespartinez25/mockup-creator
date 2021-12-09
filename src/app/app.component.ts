@@ -10,6 +10,7 @@ import { IComponent } from './interfaces/icomponent';
 import { ButtonComponent } from './components/button/button.component';
 import { IProperty } from './interfaces/iproperty';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
 
 @Component({
   selector: 'app-root',
@@ -53,6 +54,11 @@ export class AppComponent implements OnInit {
         break;
       case 'checkbox':
         temp = new CheckboxComponent(this.canvas);
+
+        break;
+
+      case 'dropdown':
+        temp = new DropdownComponent(this.canvas);
 
         break;
 
