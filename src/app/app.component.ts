@@ -9,6 +9,7 @@ import {
 import { IComponent } from './interfaces/icomponent';
 import { ButtonComponent } from './components/button/button.component';
 import { IProperty } from './interfaces/iproperty';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
 
 @Component({
   selector: 'app-root',
@@ -48,6 +49,11 @@ export class AppComponent implements OnInit {
     switch (component) {
       case 'button':
         temp = new ButtonComponent(this.canvas);
+
+        break;
+
+      case 'dropdown':
+        temp = new DropdownComponent(this.canvas);
 
         break;
 
