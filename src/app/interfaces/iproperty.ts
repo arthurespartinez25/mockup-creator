@@ -7,4 +7,6 @@ export interface IProperty {
   typeObj: string;
   type: string;
   placeholder?: string;
+  rows?: number;
+  cols?: number;
 }

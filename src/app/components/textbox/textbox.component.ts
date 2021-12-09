@@ -4,7 +4,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
 
 @Component({
   selector: 'app-textbox',
-  template: `<textarea [id]="props.id" [style]="props.style" [placeholder]="props.placeholder">
+  template: `<textarea [id]="props.id" [style]="props.style" [placeholder]="props.placeholder" [rows]="props.rows" [cols]="props.cols">
     {{ props.value }}
   </textarea>`,
 })
@@ -19,6 +19,8 @@ export class TextboxComponent implements IComponent {
     typeObj: 'textbox',
     type: 'textbox',
     placeholder: 'Type your text here...',
+    rows: 3,
+    cols: 20
   };
   constructor(canvas: ElementRef) {
     this.canvas = canvas;

@@ -47,4 +47,12 @@ export class PropertyComponent implements OnInit {
   placeholderChangeHandler(event: any){
     this.props.placeholder = event.target.value;
   }
+
+  rowsChangeHandler(event: any){
+    this.props.rows = event.target.value;
+  }
+
+  colsChangeHandler(event: any){
+    this.props.cols = event.target.value;
+  }
 }
