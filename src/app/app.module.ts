@@ -9,10 +9,9 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ButtonComponent } from './components/button/button.component';
 import { PropertyComponent } from './property/property.component';
 import { WrapperComponent } from './wrapper/wrapper.component';
-import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
-  declarations: [AppComponent, ButtonComponent, PropertyComponent, WrapperComponent, ModalComponent],
+  declarations: [AppComponent, ButtonComponent, PropertyComponent, WrapperComponent],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
   providers: [DragDropModule],
   bootstrap: [AppComponent],
