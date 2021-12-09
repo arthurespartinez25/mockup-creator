@@ -57,6 +57,15 @@
         ></textarea>
       </td>
     </tr>
+    <tr *ngIf="props.typeObj == 'popup'">
+      <th><label>data-bs-content</label></th>
+      <td>
+        <input
+          type="text"
+          [value]="props.content"
+          (keyup)="contentChangeHandler($event)"
+        />
+    </tr>
   </table>
 </div>
 

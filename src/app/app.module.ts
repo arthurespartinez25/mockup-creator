@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,5 +16,6 @@ import { PopupComponent } from './components/popup/popup.component';
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
   providers: [DragDropModule],
   bootstrap: [AppComponent],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class AppModule {}
