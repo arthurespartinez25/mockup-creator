@@ -43,4 +43,8 @@ export class PropertyComponent implements OnInit {
   classChangeHandler(event: any) {
     this.props.class = event.target.value;
   }
+  
+  nameChangeHandler(event:any){
+    this.props.name = event.target.value;
+  }
 }
