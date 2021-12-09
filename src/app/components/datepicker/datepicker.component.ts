@@ -6,14 +6,14 @@ import { IProperty } from 'src/app/interfaces/iproperty';
   selector: 'app-datepicker',
   //templateUrl: './datepicker.component.html',
   //styleUrls: ['./datepicker.component.css']
-  template: `<input [type]="props.type" [id]="props.id">`
+  template: `<input [type]="props.type" [id]="props.id" [value]="props.value">`
 })
 export class DatepickerComponent implements OnInit,IComponent {
   canvas: ElementRef;
   props: IProperty = {
     key: '',
     id: '',
-    value: '',
+    value: '2021-12-25',
     class: '',
     style: '',
     typeObj: 'datepicker',
@@ -56,6 +56,10 @@ export class DatepickerComponent implements OnInit,IComponent {
 
     if (this.props.style.trim().length > 0) {
       tmpHtmlCode += ' style="' + this.props.style + '"';
+    }
+
+    if(this.props.value.trim().length > 0){
+      tmpHtmlCode += ' value="' + this.props.value + '"';
     }
 
     //tmpHtmlCode += '>' + this.props.value + '</input>';
