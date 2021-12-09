@@ -44,6 +44,36 @@
         />
       </td>
     </tr>
+    <tr *ngIf="props.typeObj == 'textbox'">
+      <th><label>placeholder</label></th>
+      <td>
+        <input
+          type="text"
+          [value]="props.placeholder"
+          (keyup)="placeholderChangeHandler($event)"
+        />
+      </td>
+    </tr>
+    <tr *ngIf="props.typeObj == 'textbox'">
+      <th><label>rows</label></th>
+      <td>
+        <input
+          type="number"
+          [value]="props.rows"
+          (keyup)="rowsChangeHandler($event)"
+        />
+      </td>
+    </tr>
+    <tr *ngIf="props.typeObj == 'textbox'">
+      <th><label>columns</label></th>
+      <td>
+        <input
+          type="number"
+          [value]="props.cols"
+          (keyup)="colsChangeHandler($event)"
+        />
+      </td>
+    </tr>
     <tr>
       <th><label>style</label></th>
       <td>
