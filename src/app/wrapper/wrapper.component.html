@@ -10,6 +10,11 @@
   <app-image [property]="child.props" *ngSwitchCase="'img'"></app-image>
 
   <app-label [property]="child.props" *ngSwitchCase="'label'"></app-label>
+  <app-labelDrag [property]="child.props" *ngSwitchCase="'labelDrag'"[ngStyle]="{
+    'position': 'absolute',
+    'left': xmouse + 'px',
+    'top': ymouse + 'px'
+  }"></app-labelDrag>
 
   <app-textbox [property]="child.props" *ngSwitchCase="'textbox'"></app-textbox>
 
@@ -19,6 +24,11 @@
     [property]="child.props"
     *ngSwitchCase="'checkbox'"
   ></app-checkbox>
+  <app-checkboxDrag [property]="child.props" *ngSwitchCase="'checkboxDrag'"[ngStyle]="{
+    'position': 'absolute',
+    'left': xmouse + 'px',
+    'top': ymouse + 'px'
+  }"></app-checkboxDrag>
 
   <app-dropdown
     [property]="child.props"

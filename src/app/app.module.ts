@@ -13,8 +13,10 @@ import { PropertyComponent } from './property/property.component';
 import { WrapperComponent } from './wrapper/wrapper.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
+import { CheckboxDragComponent } from './components/checkboxDrag/checkboxDrag.component';
 import { RadioComponent } from './components/radio/radio.component';
 import { LabelComponent } from './components/label/label.component';
+import { LabelDragComponent } from './components/labelDrag/labelDrag.component';
 import { ImageComponent } from './components/image/image.component';
 
 @NgModule({
@@ -30,6 +32,8 @@ import { ImageComponent } from './components/image/image.component';
     LabelComponent,
     ImageComponent,
     ButtonDragComponent,
+    LabelDragComponent,
+    CheckboxDragComponent
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule],
   providers: [DragDropModule],

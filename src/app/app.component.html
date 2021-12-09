@@ -21,7 +21,8 @@
     <button class="accordion palette-item" (click)="createParagraph()">
       Paragraph
     </button>
-    <button class="accordion palette-item" (click)="addComponent('label')">
+    <button class="accordion palette-item" (click)="addComponent('label')"
+    cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddComponent('label')">
       Label
     </button>
 
@@ -33,7 +34,8 @@
     <button class="accordion palette-item" (click)="addComponent('dropdown')">
       Dropdown
     </button>
-    <button class="accordion palette-item" (click)="addComponent('checkbox')">
+    <button class="accordion palette-item" (click)="addComponent('checkbox')"
+    cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddComponent('checkbox')">
       Checkbox
     </button>
     <button class="accordion palette-item" (click)="addComponent('radio')">

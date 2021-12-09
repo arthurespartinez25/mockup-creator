@@ -16,6 +16,8 @@ import { RadioComponent } from './components/radio/radio.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { ButtonDragComponent } from './components/buttonDrag/buttonDrag.component';
+import { LabelDragComponent } from './components/labelDrag/labelDrag.component';
+import { CheckboxDragComponent } from './components/checkboxDrag/checkboxDrag.component';
 
 @Component({
   selector: 'app-root',
@@ -111,6 +113,13 @@ export class AppComponent implements OnInit {
       case 'button':
         temp = new ButtonDragComponent(this.canvas);
         break;
+      case 'label':
+        temp = new LabelDragComponent(this.canvas);
+        break;
+      case 'checkbox':
+        temp = new CheckboxDragComponent(this.canvas);
+        break;
+      
 
       default:
         temp = new ButtonComponent(this.canvas);
@@ -162,6 +171,7 @@ export class AppComponent implements OnInit {
 
   clickHandler(component: IComponent) {
     this.selected = component.props;
+    console.log(this.selected)
   }
 
   /****************** OLD CODE STARTS HERE **********************/
