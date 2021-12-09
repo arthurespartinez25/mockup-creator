@@ -10,6 +10,7 @@ import { IComponent } from './interfaces/icomponent';
 import { ButtonComponent } from './components/button/button.component';
 import { TextboxComponent } from './components/textbox/textbox.component';
 import { IProperty } from './interfaces/iproperty';
+import { LabelComponent } from './components/label/label.component';
 import { RadioComponent } from './components/radio/radio.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
@@ -67,6 +68,11 @@ export class AppComponent implements OnInit {
 
       case 'dropdown':
         temp = new DropdownComponent(this.canvas);
+
+        break;
+
+      case 'label':
+        temp = new LabelComponent(this.canvas);
 
         break;
 

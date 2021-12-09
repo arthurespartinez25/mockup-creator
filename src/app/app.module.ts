@@ -13,7 +13,7 @@ import { WrapperComponent } from './wrapper/wrapper.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { RadioComponent } from './components/radio/radio.component';
-
+import { LabelComponent } from './components/label/label.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +24,7 @@ import { RadioComponent } from './components/radio/radio.component';
     CheckboxComponent,
     RadioComponent,
     TextboxComponent,
+    LabelComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
   providers: [DragDropModule],

@@ -1,5 +1,6 @@
 <div class="wrapper" [ngSwitch]="child.props.typeObj">
   <app-button [property]="child.props" *ngSwitchCase="'button'"></app-button>
+  <app-label [property]="child.props" *ngSwitchCase="'label'"></app-label>
   <app-textbox [property]="child.props" *ngSwitchCase="'textbox'"></app-textbox>
   <app-radio [property]="child.props" *ngSwitchCase="'radio'"></app-radio>
   <app-checkbox
