@@ -1,4 +1,17 @@
 <div class="wrapper" [ngSwitch]="child.props.typeObj">
   <app-button [property]="child.props" *ngSwitchCase="'button'"></app-button>
-  <app-datepicker [property]="child.props" *ngSwitchCase="'datepicker'"></app-datepicker>
+  <app-datepicker
+    [property]="child.props"
+    *ngSwitchCase="'datepicker'"
+  ></app-datepicker>
+  <app-textbox [property]="child.props" *ngSwitchCase="'textbox'"></app-textbox>
+  <app-radio [property]="child.props" *ngSwitchCase="'radio'"></app-radio>
+  <app-checkbox
+    [property]="child.props"
+    *ngSwitchCase="'checkbox'"
+  ></app-checkbox>
+  <app-dropdown
+    [property]="child.props"
+    *ngSwitchCase="'dropdown'"
+  ></app-dropdown>
 </div>

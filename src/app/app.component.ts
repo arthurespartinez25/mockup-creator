@@ -8,8 +8,12 @@ import {
 } from '@angular/core';
 import { IComponent } from './interfaces/icomponent';
 import { ButtonComponent } from './components/button/button.component';
+import { TextboxComponent } from './components/textbox/textbox.component';
 import { IProperty } from './interfaces/iproperty';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
+import { RadioComponent } from './components/radio/radio.component';
+import { CheckboxComponent } from './components/checkbox/checkbox.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
 
 @Component({
   selector: 'app-root',
@@ -49,12 +53,27 @@ export class AppComponent implements OnInit {
     switch (component) {
       case 'button':
         temp = new ButtonComponent(this.canvas);
+        break;
+      case 'textbox':
+        temp = new TextboxComponent(this.canvas);
+        break;
+      case 'radio':
+        temp = new RadioComponent(this.canvas);
+        break;
+
+      case 'checkbox':
+        temp = new CheckboxComponent(this.canvas);
+
+        break;
+
+      case 'dropdown':
+        temp = new DropdownComponent(this.canvas);
 
         break;
       case 'datepicker':
         temp = new DatepickerComponent(this.canvas);
         break;
-        
+
       default:
         temp = new ButtonComponent(this.canvas);
     }
@@ -219,7 +238,7 @@ export class AppComponent implements OnInit {
     const menu1 = this.renderer.createElement('a');
     const menu2 = this.renderer.createElement('a');
     const menu3 = this.renderer.createElement('a');
-    /* const firstDiv = this.renderer.insertBefore(newDiv, drpButton, this.canvas.nativeElement.firstChild); 
+    /* const firstDiv = this.renderer.insertBefore(newDiv, drpButton, this.canvas.nativeElement.firstChild);
     const secondDiv = this.renderer.insertBefore(newDiv, menuDiv, this.canvas.nativeElement.firstChild); */
     this.renderer.appendChild(newDiv, drpButton);
     this.renderer.appendChild(newDiv, menuDiv);
@@ -475,5 +494,13 @@ export class AppComponent implements OnInit {
 
     this.renderer.appendChild(Link, text);
     this.renderer.appendChild(this.canvas.nativeElement, Link);
+  }
+  createTextbox() {
+    const newTextbox = this.renderer.createElement('textarea');
+    let ref = this.drag.createDrag(newTextbox);
+    ref.withBoundaryElement(this.canvas);
+    this.renderer.setProperty(newTextbox, 'placeholder', 'Insert text here...');
+    this.renderer.addClass(newTextbox, 'textarea');
+    this.renderer.appendChild(this.canvas.nativeElement, newTextbox);
   }
 }
