@@ -9,4 +9,5 @@ export interface IProperty {
   placeholder?: string;
   rows?: number;
   cols?: number;
+  name?: string;
 }

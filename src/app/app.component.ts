@@ -10,6 +10,9 @@ import { IComponent } from './interfaces/icomponent';
 import { ButtonComponent } from './components/button/button.component';
 import { TextboxComponent } from './components/textbox/textbox.component';
 import { IProperty } from './interfaces/iproperty';
+import { RadioComponent } from './components/radio/radio.component';
+import { CheckboxComponent } from './components/checkbox/checkbox.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
 
 @Component({
   selector: 'app-root',
@@ -53,6 +56,20 @@ export class AppComponent implements OnInit {
       case 'textbox':
         temp = new TextboxComponent(this.canvas);
         break;
+      case 'radio':
+        temp = new RadioComponent(this.canvas);
+        break;
+
+      case 'checkbox':
+        temp = new CheckboxComponent(this.canvas);
+
+        break;
+
+      case 'dropdown':
+        temp = new DropdownComponent(this.canvas);
+
+        break;
+
       default:
         temp = new ButtonComponent(this.canvas);
     }
