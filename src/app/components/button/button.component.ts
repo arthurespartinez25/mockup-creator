@@ -4,7 +4,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
 
 @Component({
   selector: 'app-button',
-  template: `<button [id]="props.id" [style]="props.style" [type]="props.type">
+  template: `<button cdkDrag cdkDragBoundary="#canvas" [id]="props.id" [style]="props.style" [type]="props.type">
     {{ props.value }}
   </button>`,
 })

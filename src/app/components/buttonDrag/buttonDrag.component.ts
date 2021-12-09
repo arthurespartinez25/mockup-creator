@@ -4,7 +4,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
 
 @Component({
   selector: 'app-buttonDrag',
-  template: `<button [id]="props.id" [style]="props.style" [type]="props.type">
+  template: `<button cdkDrag cdkDragBoundary="#canvas" [id]="props.id" [style]="props.style" [type]="props.type">
     {{ props.value }}
   </button>`,
 })
@@ -16,7 +16,7 @@ export class ButtonDragComponent implements IComponent {
     value: 'Button',
     class: '',
     style: '',
-    typeObj: 'button',
+    typeObj: 'buttonDrag',
     type: 'button',
   };
 

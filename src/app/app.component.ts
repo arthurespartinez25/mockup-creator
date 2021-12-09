@@ -91,6 +91,7 @@ export class AppComponent implements OnInit {
 
   mousePositionX = 110;
   mousePositionY= 110;
+  domInsideCanvas = false;
   
 
   onDragEnded(event: CdkDragEnd){
@@ -103,6 +104,8 @@ export class AppComponent implements OnInit {
 }
 
   onDragEndedAddComponent(component: string) {
+    if(this.domInsideCanvas == true)
+    {
     let temp: IComponent;
     switch (component) {
       case 'button':
@@ -114,6 +117,7 @@ export class AppComponent implements OnInit {
     }
 
     this.componentList.push(temp);
+    }
   }
 
   //----------------------------------------------------------------------------

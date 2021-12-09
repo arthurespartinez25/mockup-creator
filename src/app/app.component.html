@@ -66,7 +66,8 @@
   <!-- CANVAS SECTION -->
 
   <div id="canvas-container">
-    <div id="canvas" #canvas>
+    <div id="canvas" #canvas (mouseenter)="domInsideCanvas=true"
+    (mouseleave)="domInsideCanvas=false">
       <app-wrapper
         *ngFor="let component of componentList"
         class="wrapper"

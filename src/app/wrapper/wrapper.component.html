@@ -1,15 +1,28 @@
 <div class="wrapper" [ngSwitch]="child.props.typeObj">
   <app-button [property]="child.props" *ngSwitchCase="'button'"></app-button>
+
+  <app-buttonDrag [property]="child.props" *ngSwitchCase="'buttonDrag'"[ngStyle]="{
+    'position': 'absolute',
+    'left': xmouse + 'px',
+    'top': ymouse + 'px'
+  }"></app-buttonDrag>
+
   <app-image [property]="child.props" *ngSwitchCase="'img'"></app-image>
+
   <app-label [property]="child.props" *ngSwitchCase="'label'"></app-label>
+
   <app-textbox [property]="child.props" *ngSwitchCase="'textbox'"></app-textbox>
+
   <app-radio [property]="child.props" *ngSwitchCase="'radio'"></app-radio>
+
   <app-checkbox
     [property]="child.props"
     *ngSwitchCase="'checkbox'"
   ></app-checkbox>
+
   <app-dropdown
     [property]="child.props"
     *ngSwitchCase="'dropdown'"
   ></app-dropdown>
+
 </div>

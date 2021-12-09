@@ -39,6 +39,8 @@ export class WrapperComponent implements OnInit {
   constructor(private ref: ElementRef, private drag: DragDrop) {}
 
   ngOnInit(): void {
-    this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
+    //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
+    this.xmouse = this.mousePositionX;
+    this.ymouse = this.mousePositionY;
   }
 }
