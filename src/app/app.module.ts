@@ -9,10 +9,20 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ButtonComponent } from './components/button/button.component';
 import { PropertyComponent } from './property/property.component';
 import { WrapperComponent } from './wrapper/wrapper.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
+import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { RadioComponent } from './components/radio/radio.component';
 
 @NgModule({
-  declarations: [AppComponent, ButtonComponent, PropertyComponent, WrapperComponent, RadioComponent],
+  declarations: [
+    AppComponent,
+    ButtonComponent,
+    PropertyComponent,
+    WrapperComponent,
+    DropdownComponent,
+    CheckboxComponent,
+    RadioComponent,
+  ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
   providers: [DragDropModule],
   bootstrap: [AppComponent],
