@@ -17,6 +17,7 @@ import { RadioComponent } from './components/radio/radio.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 @Component({
   selector: 'app-root',
@@ -79,6 +80,10 @@ export class AppComponent implements OnInit {
         break;
       case 'datepicker':
         temp = new DatepickerComponent(this.canvas);
+        break;
+
+      case 'modal':
+        temp = new ModalComponent(this.canvas);
         break;
 
       case 'label':
@@ -300,6 +305,7 @@ export class AppComponent implements OnInit {
   }
 
   createModal() {
+    /*
     const modalContainer = this.renderer.createElement('div'); //create dom element
     const modalDialog = this.renderer.createElement('div'); //create dom element
     const modalContent = this.renderer.createElement('div'); //create dom element
@@ -320,7 +326,7 @@ export class AppComponent implements OnInit {
 
     ref.withBoundaryElement(this.canvas); //set the draggable area to only be the canvas
 
-    /***********************************/
+    /*********************************** /
     //properties commented below maybe used for future reference
 
     //this.renderer.setProperty(modalContainer, 'id', 'exampleModal'); //add id attribute to modalContainer
