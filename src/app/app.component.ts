@@ -10,6 +10,7 @@ import { IComponent } from './interfaces/icomponent';
 import { ButtonComponent } from './components/button/button.component';
 import { TextboxComponent } from './components/textbox/textbox.component';
 import { IProperty } from './interfaces/iproperty';
+import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { ImageComponent } from './components/image/image.component';
 import { LabelComponent } from './components/label/label.component';
 import { RadioComponent } from './components/radio/radio.component';
@@ -70,6 +71,9 @@ export class AppComponent implements OnInit {
       case 'dropdown':
         temp = new DropdownComponent(this.canvas);
 
+        break;
+      case 'datepicker':
+        temp = new DatepickerComponent(this.canvas);
         break;
 
       case 'label':

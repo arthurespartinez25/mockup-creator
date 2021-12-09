@@ -13,6 +13,7 @@ import { WrapperComponent } from './wrapper/wrapper.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { RadioComponent } from './components/radio/radio.component';
+import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { LabelComponent } from './components/label/label.component';
 import { ImageComponent } from './components/image/image.component';
 
@@ -26,6 +27,7 @@ import { ImageComponent } from './components/image/image.component';
     CheckboxComponent,
     RadioComponent,
     TextboxComponent,
+    DatepickerComponent,
     LabelComponent,
     ImageComponent,
   ],
