@@ -9,6 +9,7 @@ import {
 import { IComponent } from './interfaces/icomponent';
 import { ButtonComponent } from './components/button/button.component';
 import { IProperty } from './interfaces/iproperty';
+import { ImageComponent } from './components/image/image.component';
 
 @Component({
   selector: 'app-root',
@@ -50,7 +51,9 @@ export class AppComponent implements OnInit {
         temp = new ButtonComponent(this.canvas);
 
         break;
-
+      case 'img':
+        temp = new ImageComponent(this.canvas);
+        break;
       default:
         temp = new ButtonComponent(this.canvas);
     }
