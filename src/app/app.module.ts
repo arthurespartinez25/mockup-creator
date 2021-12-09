@@ -16,6 +16,7 @@ import { RadioComponent } from './components/radio/radio.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { LabelComponent } from './components/label/label.component';
 import { ImageComponent } from './components/image/image.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { ImageComponent } from './components/image/image.component';
     DatepickerComponent,
     LabelComponent,
     ImageComponent,
+    NavbarComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
   providers: [DragDropModule],
