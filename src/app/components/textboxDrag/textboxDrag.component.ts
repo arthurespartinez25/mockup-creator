@@ -3,12 +3,12 @@ import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
 
 @Component({
-  selector: 'app-textbox',
+  selector: 'app-textboxDrag',
   template: `<textarea cdkDrag cdkDragBoundary="#canvas" [id]="props.id" [style]="props.style" [placeholder]="props.placeholder" [rows]="props.rows" [cols]="props.cols">
     {{ props.value }}
   </textarea>`,
 })
-export class TextboxComponent implements IComponent {
+export class TextboxDragComponent implements IComponent {
   canvas: ElementRef;
   props: IProperty = {
     key: '',
@@ -16,7 +16,7 @@ export class TextboxComponent implements IComponent {
     value: '',
     class: '',
     style: '',
-    typeObj: 'textbox',
+    typeObj: 'textboxDrag',
     type: 'textbox',
     placeholder: 'Type your text here...',
     rows: 3,

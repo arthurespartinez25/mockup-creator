@@ -30,19 +30,24 @@
       Button
     </button>
 
-    <button class="accordion palette-item" (click)="addComponent('dropdown')">
+    <button class="accordion palette-item" (click)="addComponent('dropdown')"
+    cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddComponent('dropdown')">
       Dropdown
     </button>
     <button class="accordion palette-item" (click)="addComponent('checkbox')">
       Checkbox
     </button>
-    <button class="accordion palette-item" (click)="addComponent('radio')">
+
+    <button class="accordion palette-item" (click)="addComponent('radio')"
+    cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddComponent('radio')">
       Radio
     </button>
+
     <button class="accordion palette-item" (click)="createInputField()">
       Input Field
     </button>
-    <button class="accordion palette-item" (click)="addComponent('textbox')">
+    <button class="accordion palette-item" (click)="addComponent('textbox')"
+    cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddComponent('textbox')">
       Textbox
     </button>
     <button class="accordion palette-item" (click)="createDate()">
@@ -52,7 +57,9 @@
       Modal
     </button>
     <button class="accordion palette-item">Popup</button>
-    <button class="accordion palette-item" (click)="addComponent('img')">Image</button>
+
+    <button class="accordion palette-item" (click)="addComponent('img')"
+    cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddComponent('img')">Image</button>
 
     <!-- <ul class="list-group">
       <li class="list-group-item palette-item" (click)="createButton()">
