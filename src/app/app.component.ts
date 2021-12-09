@@ -1,6 +1,8 @@
 import { DragDrop } from '@angular/cdk/drag-drop';
 import {
   Component,
+  ComponentFactoryResolver,
+  ComponentRef,
   ElementRef,
   OnInit,
   Renderer2,
@@ -23,6 +25,8 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
 export class AppComponent implements OnInit {
   title = 'mockup-creator';
   componentList: IComponent[] = [];
+  selectedComponent: IComponent;
+  ref: ComponentRef<any>;
 
   selected: IProperty = {
     key: '',
@@ -42,7 +46,7 @@ export class AppComponent implements OnInit {
 
   @ViewChild('canvas') canvas!: ElementRef;
 
-  constructor(private renderer: Renderer2, private drag: DragDrop) {}
+  constructor(private renderer: Renderer2, private drag: DragDrop, private componentFactoryResolver: ComponentFactoryResolver) {}
 
   ngOnInit(): void {
     /* throw new Error('Method not implemented.'); */
@@ -80,6 +84,7 @@ export class AppComponent implements OnInit {
 
     this.componentList.push(temp);
   }
+
 
   get style(): string {
     return this._styleBody;
@@ -120,6 +125,14 @@ export class AppComponent implements OnInit {
 
   clickHandler(component: IComponent) {
     this.selected = component.props;
+    this.selectedComponent = component;
+  }
+
+  deleteComponent(){
+    let componentIndex = this.componentList.indexOf(this.selectedComponent);
+    if(componentIndex !== -1){
+      this.componentList.splice(componentIndex,1);
+    }
   }
 
   /****************** OLD CODE STARTS HERE **********************/
