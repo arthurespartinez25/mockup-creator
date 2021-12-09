@@ -10,6 +10,7 @@ import { IComponent } from './interfaces/icomponent';
 import { ButtonComponent } from './components/button/button.component';
 import { TextboxComponent } from './components/textbox/textbox.component';
 import { IProperty } from './interfaces/iproperty';
+import { ImageComponent } from './components/image/image.component';
 import { LabelComponent } from './components/label/label.component';
 import { RadioComponent } from './components/radio/radio.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
@@ -75,7 +76,9 @@ export class AppComponent implements OnInit {
         temp = new LabelComponent(this.canvas);
 
         break;
-
+      case 'img':
+        temp = new ImageComponent(this.canvas);
+        break;
       default:
         temp = new ButtonComponent(this.canvas);
     }

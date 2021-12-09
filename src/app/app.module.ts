@@ -14,6 +14,8 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { RadioComponent } from './components/radio/radio.component';
 import { LabelComponent } from './components/label/label.component';
+import { ImageComponent } from './components/image/image.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +27,7 @@ import { LabelComponent } from './components/label/label.component';
     RadioComponent,
     TextboxComponent,
     LabelComponent,
+    ImageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
   providers: [DragDropModule],
