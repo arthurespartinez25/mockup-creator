@@ -21,25 +21,27 @@
     <button class="accordion palette-item" (click)="createParagraph()">
       Paragraph
     </button>
-    <button class="accordion palette-item" (click)="createLabel()">
+    <button class="accordion palette-item" (click)="addComponent('label')">
       Label
     </button>
     <button class="accordion palette-item" (click)="addComponent('button')">
       Button
     </button>
-    <button class="accordion palette-item" (click)="createDropdown()">
+    <button class="accordion palette-item" (click)="addComponent('dropdown')">
       Dropdown
     </button>
-    <button class="accordion palette-item" (click)="createCheckbox()">
+    <button class="accordion palette-item" (click)="addComponent('checkbox')">
       Checkbox
     </button>
-    <button class="accordion palette-item" (click)="createRadio()">
+    <button class="accordion palette-item" (click)="addComponent('radio')">
       Radio
     </button>
     <button class="accordion palette-item" (click)="createInputField()">
       Input Field
     </button>
-    <button class="accordion palette-item">Textbox</button>
+    <button class="accordion palette-item" (click)="addComponent('textbox')">
+      Textbox
+    </button>
     <button class="accordion palette-item" (click)="createDate()">
       DatePicker
     </button>
