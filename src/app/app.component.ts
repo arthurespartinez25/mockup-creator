@@ -1,6 +1,7 @@
 import { DragDrop } from '@angular/cdk/drag-drop';
 import {
   Component,
+  ComponentRef,
   ElementRef,
   OnInit,
   Renderer2,
@@ -18,6 +19,10 @@ import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { InputComponent } from './components/input/input.component';
+import { HeaderComponent } from './components/header/header.component';
+import { LinkComponent } from './components/link/link.component';
+import { ParagraphComponent } from './components/paragraph/paragraph.component';
 
 @Component({
   selector: 'app-root',
@@ -27,6 +32,8 @@ import { ModalComponent } from './components/modal/modal.component';
 export class AppComponent implements OnInit {
   title = 'mockup-creator';
   componentList: IComponent[] = [];
+  selectedComponent: IComponent;
+  ref: ComponentRef<any>;
 
   selected: IProperty = {
     key: '',
@@ -57,6 +64,12 @@ export class AppComponent implements OnInit {
     switch (component) {
       case 'nav':
         temp = new NavbarComponent(this.canvas);
+        break;
+      case 'link':
+        temp = new LinkComponent(this.canvas);
+        break;
+      case 'paragraph':
+        temp = new ParagraphComponent(this.canvas);
         break;
 
       case 'button':
@@ -93,6 +106,15 @@ export class AppComponent implements OnInit {
       case 'img':
         temp = new ImageComponent(this.canvas);
         break;
+
+      case 'header':
+        temp = new HeaderComponent(this.canvas);
+        break;
+
+      case 'input':
+        temp = new InputComponent(this.canvas);
+        break;
+
       default:
         temp = new ButtonComponent(this.canvas);
     }
@@ -139,7 +161,15 @@ export class AppComponent implements OnInit {
 
   clickHandler(component: IComponent) {
     this.selected = component.props;
+    this.selectedComponent = component;
   }
+
+  // deleteComponent(){
+  //   let componentIndex = this.componentList.indexOf(this.selectedComponent);
+  //   if(componentIndex !== -1){
+  //     this.componentList.splice(componentIndex,1);
+  //   }
+  // }
 
   /****************** OLD CODE STARTS HERE **********************/
 
@@ -387,7 +417,6 @@ export class AppComponent implements OnInit {
     this.renderer.appendChild(modalButton, text); //append the text into the LABEL
     this.renderer.appendChild(this.canvas.nativeElement, modalButton); //append the button to the canvas div\
     */
-
     /*
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">

@@ -18,6 +18,10 @@ import { LabelComponent } from './components/label/label.component';
 import { ImageComponent } from './components/image/image.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { InputComponent } from './components/input/input.component';
+import { HeaderComponent } from './components/header/header.component';
+import { LinkComponent } from './components/link/link.component';
+import { ParagraphComponent } from './components/paragraph/paragraph.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +38,10 @@ import { ModalComponent } from './components/modal/modal.component';
     ImageComponent,
     NavbarComponent,
     ModalComponent,
+    InputComponent,
+    HeaderComponent,
+    LinkComponent,
+    ParagraphComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
   providers: [DragDropModule],
