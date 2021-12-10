@@ -17,6 +17,7 @@ import { DatepickerComponent } from './components/datepicker/datepicker.componen
 import { LabelComponent } from './components/label/label.component';
 import { ImageComponent } from './components/image/image.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ModalComponent } from './components/modal/modal.component';
 import { InputComponent } from './components/input/input.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LinkComponent } from './components/link/link.component';
@@ -37,6 +38,7 @@ import { PopupComponent } from './components/popup/popup.component';
     LabelComponent,
     ImageComponent,
     NavbarComponent,
+    ModalComponent,
     InputComponent,
     HeaderComponent,
     LinkComponent,

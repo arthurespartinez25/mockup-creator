@@ -35,4 +35,7 @@ export class WrapperComponent implements OnInit {
   ngOnInit(): void {
     this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
   }
+  removeElement(remove:IComponent):void {
+
+  }
 }

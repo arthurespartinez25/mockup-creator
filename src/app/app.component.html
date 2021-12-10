@@ -48,7 +48,7 @@
     <button class="accordion palette-item" (click)="addComponent('datepicker')">
       DatePicker
     </button>
-    <button class="accordion palette-item" (click)="createModal()">
+    <button class="accordion palette-item" (click)="addComponent('modal')">
       Modal
     </button>
     <button class="accordion palette-item" (click)="addComponent('popup')">
@@ -72,7 +72,7 @@
   <div id="canvas-container">
     <div id="canvas" #canvas>
       <app-wrapper
-        *ngFor="let component of componentList"
+        *ngFor="let component of componentList; let i = index"
         class="wrapper"
         (click)="clickHandler(component)"
         [childComp]="component"

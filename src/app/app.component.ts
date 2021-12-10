@@ -1,5 +1,7 @@
 import { DragDrop } from '@angular/cdk/drag-drop';
 import {
+  AfterViewChecked,
+  AfterViewInit,
   Component,
   ComponentRef,
   ElementRef,
@@ -19,18 +21,21 @@ import { RadioComponent } from './components/radio/radio.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ModalComponent } from './components/modal/modal.component';
 import { InputComponent } from './components/input/input.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LinkComponent } from './components/link/link.component';
 import { ParagraphComponent } from './components/paragraph/paragraph.component';
+import { FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'mockup-creator';
+  index: number;
   componentList: IComponent[] = [];
   selectedComponent: IComponent;
   ref: ComponentRef<any>;
@@ -58,10 +63,16 @@ export class AppComponent implements OnInit {
   private _popupFunction =
     '<script>\nvar popoverTriggerList = [].slice.call(document.querySelectorAll(\'[data-bs-toggle="popover"]\'))\nvar popoverList = popoverTriggerList.map(function (popoverTriggerEl) {\nreturn new bootstrap.Popover(popoverTriggerEl)\n})\n</script>';
 
+  @ViewChild('PropertyComponent') property: boolean;
   @ViewChild('canvas') canvas!: ElementRef;
 
   constructor(private renderer: Renderer2, private drag: DragDrop) {}
+  delete: boolean;
 
+  ngAfterViewInit(): void {
+    //throw new Error('Method not implemented.');
+    //this.removeElement();
+  }
   ngOnInit(): void {
     /* throw new Error('Method not implemented.'); */
   }
@@ -100,6 +111,10 @@ export class AppComponent implements OnInit {
         break;
       case 'datepicker':
         temp = new DatepickerComponent(this.canvas);
+        break;
+
+      case 'modal':
+        temp = new ModalComponent(this.canvas);
         break;
 
       case 'label':
@@ -177,6 +192,37 @@ export class AppComponent implements OnInit {
   clickHandler(component: IComponent) {
     this.selected = component.props;
     this.selectedComponent = component;
+  }
+  receiveMessage($event: boolean) {
+    if ($event == true) {
+      //removeElement(component: IComponent): void {
+      //console.log(componentID);
+      //let temp: IComponent;
+      //temp = new ButtonComponent(this.canvas);
+      //this.temp = component.props
+      //this.componentList.splice(component);
+      //this.componentList.splice(componentID,1);
+
+      let componentIndex = this.componentList.indexOf(this.selectedComponent);
+      if (componentIndex !== -1) {
+        this.componentList.splice(componentIndex, 1);
+        this.selected.id = '';
+        this.selected.type = '';
+        this.selected.key = '';
+        this.selected.value = '';
+        this.selected.class = '';
+        this.selected.style = '';
+        this.selected.typeObj = '';
+        this.selected.placeholder = '';
+        this.selected.rows = -1;
+        this.selected.cols = -1;
+        this.selected.name = '';
+        console.log('Deleted');
+        $event = false;
+      }
+    } else {
+      console.log('Nothing to delete');
+    }
   }
 
   // deleteComponent(){
@@ -350,6 +396,7 @@ export class AppComponent implements OnInit {
   }
 
   createModal() {
+    /*
     const modalContainer = this.renderer.createElement('div'); //create dom element
     const modalDialog = this.renderer.createElement('div'); //create dom element
     const modalContent = this.renderer.createElement('div'); //create dom element
@@ -370,7 +417,7 @@ export class AppComponent implements OnInit {
 
     ref.withBoundaryElement(this.canvas); //set the draggable area to only be the canvas
 
-    /***********************************/
+    /*********************************** /
     //properties commented below maybe used for future reference
 
     //this.renderer.setProperty(modalContainer, 'id', 'exampleModal'); //add id attribute to modalContainer
@@ -431,7 +478,6 @@ export class AppComponent implements OnInit {
     this.renderer.appendChild(modalButton, text); //append the text into the LABEL
     this.renderer.appendChild(this.canvas.nativeElement, modalButton); //append the button to the canvas div\
     */
-
     /*
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
