@@ -17,6 +17,8 @@ import { RadioComponent } from './components/radio/radio.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { InputComponent } from './components/input/input.component';
+import { HeaderComponent } from './components/header/header.component';
 import { LinkComponent } from './components/link/link.component';
 import { ParagraphComponent } from './components/paragraph/paragraph.component';
 
@@ -96,6 +98,15 @@ export class AppComponent implements OnInit {
       case 'img':
         temp = new ImageComponent(this.canvas);
         break;
+
+      case 'header':
+        temp = new HeaderComponent(this.canvas);
+        break;
+
+      case 'input':
+        temp = new InputComponent(this.canvas);
+        break;
+
       default:
         temp = new ButtonComponent(this.canvas);
     }
