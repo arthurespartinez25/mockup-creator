@@ -17,6 +17,8 @@ import { DatepickerComponent } from './components/datepicker/datepicker.componen
 import { LabelComponent } from './components/label/label.component';
 import { ImageComponent } from './components/image/image.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { LinkComponent } from './components/link/link.component';
+import { ParagraphComponent } from './components/paragraph/paragraph.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     LabelComponent,
     ImageComponent,
     NavbarComponent,
+    LinkComponent,
+    ParagraphComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
   providers: [DragDropModule],
