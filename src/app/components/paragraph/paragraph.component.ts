@@ -5,7 +5,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
 @Component({
   selector: 'app-paragraph',
   templateUrl: './paragraph.component.html',
-  styleUrls: ['./paragraph.component.css']
+  styleUrls: ['./paragraph.component.css'],
 })
 export class ParagraphComponent implements OnInit, IComponent {
   canvas: ElementRef;
@@ -19,13 +19,13 @@ export class ParagraphComponent implements OnInit, IComponent {
     type: '',
   };
 
-  constructor(canvas: ElementRef) { 
+  constructor(canvas: ElementRef) {
     this.canvas = canvas;
     let date = Date.now();
     this.props.key = date.toString();
     this.props.id = 'paragraph' + date.toString();
   }
-  
+
   @Input() get property(): IProperty {
     return this.props;
   }
@@ -59,7 +59,5 @@ export class ParagraphComponent implements OnInit, IComponent {
     return tmpHtmlCode;
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

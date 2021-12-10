@@ -1,6 +1,7 @@
 import { DragDrop } from '@angular/cdk/drag-drop';
 import {
   Component,
+  ComponentRef,
   ElementRef,
   OnInit,
   Renderer2,
@@ -30,6 +31,8 @@ import { ParagraphComponent } from './components/paragraph/paragraph.component';
 export class AppComponent implements OnInit {
   title = 'mockup-creator';
   componentList: IComponent[] = [];
+  selectedComponent: IComponent;
+  ref: ComponentRef<any>;
 
   selected: IProperty = {
     key: '',
@@ -114,6 +117,7 @@ export class AppComponent implements OnInit {
     this.componentList.push(temp);
   }
 
+
   get style(): string {
     return this._styleBody;
   }
@@ -153,7 +157,15 @@ export class AppComponent implements OnInit {
 
   clickHandler(component: IComponent) {
     this.selected = component.props;
+    this.selectedComponent = component;
   }
+
+  // deleteComponent(){
+  //   let componentIndex = this.componentList.indexOf(this.selectedComponent);
+  //   if(componentIndex !== -1){
+  //     this.componentList.splice(componentIndex,1);
+  //   }
+  // }
 
   /****************** OLD CODE STARTS HERE **********************/
 
