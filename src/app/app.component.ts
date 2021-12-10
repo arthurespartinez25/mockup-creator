@@ -17,6 +17,8 @@ import { RadioComponent } from './components/radio/radio.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { LinkComponent } from './components/link/link.component';
+import { ParagraphComponent } from './components/paragraph/paragraph.component';
 
 @Component({
   selector: 'app-root',
@@ -56,6 +58,12 @@ export class AppComponent implements OnInit {
     switch (component) {
       case 'nav':
         temp = new NavbarComponent(this.canvas);
+        break;
+      case 'link':
+        temp = new LinkComponent(this.canvas);
+        break;
+      case 'paragraph':
+        temp = new ParagraphComponent(this.canvas);
         break;
 
       case 'button':
