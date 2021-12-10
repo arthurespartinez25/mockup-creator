@@ -22,6 +22,7 @@ import { InputComponent } from './components/input/input.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LinkComponent } from './components/link/link.component';
 import { ParagraphComponent } from './components/paragraph/paragraph.component';
+import { PopupComponent } from './components/popup/popup.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { ParagraphComponent } from './components/paragraph/paragraph.component';
     HeaderComponent,
     LinkComponent,
     ParagraphComponent,
+    PopupComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
   providers: [DragDropModule],

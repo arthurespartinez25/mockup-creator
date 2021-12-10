@@ -9,7 +9,6 @@
 
 <!-- Toolbar -->
 <!-- <app-navbar></app-navbar> -->
-
 <div class="content" role="main">
   <!-- PALETTE SECTION -->
   <div id="palette-container">
@@ -52,7 +51,9 @@
     <button class="accordion palette-item" (click)="addComponent('modal')">
       Modal
     </button>
-    <button class="accordion palette-item">Popup</button>
+    <button class="accordion palette-item" (click)="addComponent('popup')">
+      Popup
+    </button>
     <button class="accordion palette-item" (click)="addComponent('img')">
       Image
     </button>
@@ -163,7 +164,6 @@
     </div>
   </div>
 </div>
-
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
 <!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->

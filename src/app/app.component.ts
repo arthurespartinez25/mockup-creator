@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import { IComponent } from './interfaces/icomponent';
 import { ButtonComponent } from './components/button/button.component';
+import { PopupComponent } from './components/popup/popup.component';
 import { TextboxComponent } from './components/textbox/textbox.component';
 import { IProperty } from './interfaces/iproperty';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
@@ -49,11 +50,18 @@ export class AppComponent implements OnInit, AfterViewInit {
     type: '',
   };
 
+  public _popupCount = 0;
   private _styleStart = '<style>';
   private _styleEnd = '</style>';
   private _styleBody = '';
   private _htmlStart = '<!doctype html>\n<html lang="en">';
   private _htmlEnd = '</html>';
+  private _bootstrapLink =
+    '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">';
+  private _bootstrapScript =
+    '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>';
+  private _popupFunction =
+    '<script>\nvar popoverTriggerList = [].slice.call(document.querySelectorAll(\'[data-bs-toggle="popover"]\'))\nvar popoverList = popoverTriggerList.map(function (popoverTriggerEl) {\nreturn new bootstrap.Popover(popoverTriggerEl)\n})\n</script>';
 
   @ViewChild('PropertyComponent') property: boolean;
   @ViewChild('canvas') canvas!: ElementRef;
@@ -124,7 +132,10 @@ export class AppComponent implements OnInit, AfterViewInit {
       case 'input':
         temp = new InputComponent(this.canvas);
         break;
-
+      case 'popup':
+        this._popupCount++;
+        temp = new PopupComponent(this.canvas);
+        break;
       default:
         temp = new ButtonComponent(this.canvas);
     }
@@ -154,13 +165,22 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   get htmlCode(): string {
+    let bootstrap = '';
+    let script = '';
+    if (this._popupCount > 0) {
+      bootstrap += this._bootstrapLink + '\n' + this._bootstrapScript + '\n';
+      script += this._popupFunction + '\n';
+    }
+
     return (
       this._htmlStart +
       '\n' +
+      bootstrap +
       this.htmlBody() +
       '\n' +
       this._htmlEnd +
       '\n' +
+      script +
       this._styleStart +
       '\n' +
       this.style +
