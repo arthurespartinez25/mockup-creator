@@ -1,7 +1,6 @@
 import { DragDrop } from '@angular/cdk/drag-drop';
 import {
   Component,
-  ComponentFactoryResolver,
   ComponentRef,
   ElementRef,
   OnInit,
@@ -46,7 +45,7 @@ export class AppComponent implements OnInit {
 
   @ViewChild('canvas') canvas!: ElementRef;
 
-  constructor(private renderer: Renderer2, private drag: DragDrop, private componentFactoryResolver: ComponentFactoryResolver) {}
+  constructor(private renderer: Renderer2, private drag: DragDrop) {}
 
   ngOnInit(): void {
     /* throw new Error('Method not implemented.'); */
