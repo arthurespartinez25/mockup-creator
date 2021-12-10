@@ -17,4 +17,6 @@
     *ngSwitchCase="'dropdown'"
   ></app-dropdown>
   <app-navbar [property]="child.props" *ngSwitchCase="'nav'"></app-navbar>
+  <app-input [property]="child.props" *ngSwitchCase="'input'"></app-input>
+  <app-header [property]="child.props" *ngSwitchCase="'header'"></app-header>
 </div>
