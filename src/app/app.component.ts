@@ -19,6 +19,8 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { InputComponent } from './components/input/input.component';
 import { HeaderComponent } from './components/header/header.component';
+import { LinkComponent } from './components/link/link.component';
+import { ParagraphComponent } from './components/paragraph/paragraph.component';
 
 @Component({
   selector: 'app-root',
@@ -59,6 +61,12 @@ export class AppComponent implements OnInit {
       case 'nav':
         temp = new NavbarComponent(this.canvas);
         break;
+      case 'link':
+        temp = new LinkComponent(this.canvas);
+        break;
+      case 'paragraph':
+        temp = new ParagraphComponent(this.canvas);
+        break;
 
       case 'button':
         temp = new ButtonComponent(this.canvas);
@@ -98,7 +106,7 @@ export class AppComponent implements OnInit {
       case 'input':
         temp = new InputComponent(this.canvas);
         break;
-      
+
       default:
         temp = new ButtonComponent(this.canvas);
     }

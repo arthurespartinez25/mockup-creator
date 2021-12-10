@@ -19,6 +19,8 @@ import { ImageComponent } from './components/image/image.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { InputComponent } from './components/input/input.component';
 import { HeaderComponent } from './components/header/header.component';
+import { LinkComponent } from './components/link/link.component';
+import { ParagraphComponent } from './components/paragraph/paragraph.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { HeaderComponent } from './components/header/header.component';
     NavbarComponent,
     InputComponent,
     HeaderComponent,
+    LinkComponent,
+    ParagraphComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
   providers: [DragDropModule],
