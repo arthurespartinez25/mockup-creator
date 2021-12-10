@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { IComponent } from '../interfaces/icomponent';
 import { IProperty } from '../interfaces/iproperty';
 
 @Component({
@@ -7,6 +8,8 @@ import { IProperty } from '../interfaces/iproperty';
 })
 export class PropertyComponent implements OnInit {
   props: IProperty;
+  componentList: IComponent[] = [];
+  selectedcomp: IComponent;
 
   @Input() get property(): IProperty {
     return this.props;
@@ -18,8 +21,31 @@ export class PropertyComponent implements OnInit {
     }
   }
 
+  @Input() get compList(){
+    return this.componentList;
+  }
+  set compList(value: IComponent[]){
+    this.componentList = value;
+  }
+
+  @Input() get selectedIdx(){
+    return this.selectedcomp;
+  }
+  set selectedIdx( value: IComponent){
+    this.selectedcomp = value;
+  }
+
   constructor() {
     this.props = this.property;
+    this.componentList = this.compList;
+    this.selectedcomp = this.selectedIdx;
+  }
+
+  deleteComponent(){
+    let componentIndex = this.componentList.indexOf(this.selectedcomp);
+    if(componentIndex !== -1){
+      this.componentList.splice(componentIndex,1);
+    }
   }
 
   ngOnInit(): void {}

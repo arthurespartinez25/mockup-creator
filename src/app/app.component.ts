@@ -127,12 +127,12 @@ export class AppComponent implements OnInit {
     this.selectedComponent = component;
   }
 
-  deleteComponent(){
-    let componentIndex = this.componentList.indexOf(this.selectedComponent);
-    if(componentIndex !== -1){
-      this.componentList.splice(componentIndex,1);
-    }
-  }
+  // deleteComponent(){
+  //   let componentIndex = this.componentList.indexOf(this.selectedComponent);
+  //   if(componentIndex !== -1){
+  //     this.componentList.splice(componentIndex,1);
+  //   }
+  // }
 
   /****************** OLD CODE STARTS HERE **********************/
 
