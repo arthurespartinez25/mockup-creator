@@ -10,11 +10,13 @@ import { IComponent } from './interfaces/icomponent';
 import { ButtonComponent } from './components/button/button.component';
 import { TextboxComponent } from './components/textbox/textbox.component';
 import { IProperty } from './interfaces/iproperty';
+import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { ImageComponent } from './components/image/image.component';
 import { LabelComponent } from './components/label/label.component';
 import { RadioComponent } from './components/radio/radio.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
@@ -52,6 +54,10 @@ export class AppComponent implements OnInit {
   addComponent(component: string) {
     let temp: IComponent;
     switch (component) {
+      case 'nav':
+        temp = new NavbarComponent(this.canvas);
+        break;
+
       case 'button':
         temp = new ButtonComponent(this.canvas);
         break;
@@ -70,6 +76,9 @@ export class AppComponent implements OnInit {
       case 'dropdown':
         temp = new DropdownComponent(this.canvas);
 
+        break;
+      case 'datepicker':
+        temp = new DatepickerComponent(this.canvas);
         break;
 
       case 'label':
