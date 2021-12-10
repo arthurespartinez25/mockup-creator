@@ -18,10 +18,17 @@ import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { CheckboxDragComponent } from './components/checkboxDrag/checkboxDrag.component';
 import { RadioComponent } from './components/radio/radio.component';
 import { RadioDragComponent } from './components/radioDrag/radioDrag.component';
+import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { LabelComponent } from './components/label/label.component';
 import { LabelDragComponent } from './components/labelDrag/labelDrag.component';
 import { ImageComponent } from './components/image/image.component';
 import { ImageDragComponent } from './components/imageDrag/imageDrag.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { ModalComponent } from './components/modal/modal.component';
+import { InputComponent } from './components/input/input.component';
+import { HeaderComponent } from './components/header/header.component';
+import { LinkComponent } from './components/link/link.component';
+import { ParagraphComponent } from './components/paragraph/paragraph.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +40,7 @@ import { ImageDragComponent } from './components/imageDrag/imageDrag.component';
     CheckboxComponent,
     RadioComponent,
     TextboxComponent,
+    DatepickerComponent,
     LabelComponent,
     ImageComponent,
     ButtonDragComponent,
@@ -42,6 +50,12 @@ import { ImageDragComponent } from './components/imageDrag/imageDrag.component';
     TextboxDragComponent,
     LabelDragComponent,
     CheckboxDragComponent,
+    NavbarComponent,
+    ModalComponent,
+    InputComponent,
+    HeaderComponent,
+    LinkComponent,
+    ParagraphComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule],
   providers: [DragDropModule],

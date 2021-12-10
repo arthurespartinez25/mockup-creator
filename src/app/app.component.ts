@@ -1,6 +1,9 @@
 import { CdkDragEnd, DragDrop } from '@angular/cdk/drag-drop';
 import {
+  AfterViewChecked,
+  AfterViewInit,
   Component,
+  ComponentRef,
   ElementRef,
   OnInit,
   Renderer2,
@@ -10,6 +13,7 @@ import { IComponent } from './interfaces/icomponent';
 import { ButtonComponent } from './components/button/button.component';
 import { TextboxComponent } from './components/textbox/textbox.component';
 import { IProperty } from './interfaces/iproperty';
+import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { ImageComponent } from './components/image/image.component';
 import { LabelComponent } from './components/label/label.component';
 import { RadioComponent } from './components/radio/radio.component';
@@ -24,15 +28,25 @@ import { RadioDragComponent } from './components/radioDrag/radioDrag.component';
 import { TextboxDragComponent } from './components/textboxDrag/textboxDrag.component';
 
 
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { ModalComponent } from './components/modal/modal.component';
+import { InputComponent } from './components/input/input.component';
+import { HeaderComponent } from './components/header/header.component';
+import { LinkComponent } from './components/link/link.component';
+import { ParagraphComponent } from './components/paragraph/paragraph.component';
+import { FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'mockup-creator';
+  index: number;
   componentList: IComponent[] = [];
+  selectedComponent: IComponent;
+  ref: ComponentRef<any>;
 
   selected: IProperty = {
     key: '',
@@ -50,10 +64,16 @@ export class AppComponent implements OnInit {
   private _htmlStart = '<!doctype html>\n<html lang="en">';
   private _htmlEnd = '</html>';
 
+  @ViewChild('PropertyComponent') property: boolean;
   @ViewChild('canvas') canvas!: ElementRef;
 
   constructor(private renderer: Renderer2, private drag: DragDrop) {}
+  delete: boolean;
 
+  ngAfterViewInit(): void {
+    //throw new Error('Method not implemented.');
+    //this.removeElement();
+  }
   ngOnInit(): void {
     /* throw new Error('Method not implemented.'); */
   }
@@ -61,6 +81,16 @@ export class AppComponent implements OnInit {
   addComponent(component: string) {
     let temp: IComponent;
     switch (component) {
+      case 'nav':
+        temp = new NavbarComponent(this.canvas);
+        break;
+      case 'link':
+        temp = new LinkComponent(this.canvas);
+        break;
+      case 'paragraph':
+        temp = new ParagraphComponent(this.canvas);
+        break;
+
       case 'button':
         temp = new ButtonComponent(this.canvas);
         break;
@@ -80,6 +110,13 @@ export class AppComponent implements OnInit {
         temp = new DropdownComponent(this.canvas);
 
         break;
+      case 'datepicker':
+        temp = new DatepickerComponent(this.canvas);
+        break;
+
+      case 'modal':
+        temp = new ModalComponent(this.canvas);
+        break;
 
       case 'label':
         temp = new LabelComponent(this.canvas);
@@ -88,6 +125,15 @@ export class AppComponent implements OnInit {
       case 'img':
         temp = new ImageComponent(this.canvas);
         break;
+
+      case 'header':
+        temp = new HeaderComponent(this.canvas);
+        break;
+
+      case 'input':
+        temp = new InputComponent(this.canvas);
+        break;
+
       default:
         temp = new ButtonComponent(this.canvas);
     }
@@ -194,8 +240,46 @@ export class AppComponent implements OnInit {
 
   clickHandler(component: IComponent) {
     this.selected = component.props;
-    console.log(this.selected)
+    this.selectedComponent = component;
   }
+  receiveMessage($event: boolean) {
+    if ($event == true) {
+      //removeElement(component: IComponent): void {
+      //console.log(componentID);
+      //let temp: IComponent;
+      //temp = new ButtonComponent(this.canvas);
+      //this.temp = component.props
+      //this.componentList.splice(component);
+      //this.componentList.splice(componentID,1);
+
+      let componentIndex = this.componentList.indexOf(this.selectedComponent);
+      if (componentIndex !== -1) {
+        this.componentList.splice(componentIndex, 1);
+        this.selected.id = '';
+        this.selected.type = '';
+        this.selected.key = '';
+        this.selected.value = '';
+        this.selected.class = '';
+        this.selected.style = '';
+        this.selected.typeObj = '';
+        this.selected.placeholder = '';
+        this.selected.rows = -1;
+        this.selected.cols = -1;
+        this.selected.name = '';
+        console.log('Deleted');
+        $event = false;
+      }
+    } else {
+      console.log('Nothing to delete');
+    }
+  }
+
+  // deleteComponent(){
+  //   let componentIndex = this.componentList.indexOf(this.selectedComponent);
+  //   if(componentIndex !== -1){
+  //     this.componentList.splice(componentIndex,1);
+  //   }
+  // }
 
   /****************** OLD CODE STARTS HERE **********************/
 
@@ -361,6 +445,7 @@ export class AppComponent implements OnInit {
   }
 
   createModal() {
+    /*
     const modalContainer = this.renderer.createElement('div'); //create dom element
     const modalDialog = this.renderer.createElement('div'); //create dom element
     const modalContent = this.renderer.createElement('div'); //create dom element
@@ -381,7 +466,7 @@ export class AppComponent implements OnInit {
 
     ref.withBoundaryElement(this.canvas); //set the draggable area to only be the canvas
 
-    /***********************************/
+    /*********************************** /
     //properties commented below maybe used for future reference
 
     //this.renderer.setProperty(modalContainer, 'id', 'exampleModal'); //add id attribute to modalContainer
@@ -442,7 +527,6 @@ export class AppComponent implements OnInit {
     this.renderer.appendChild(modalButton, text); //append the text into the LABEL
     this.renderer.appendChild(this.canvas.nativeElement, modalButton); //append the button to the canvas div\
     */
-
     /*
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">

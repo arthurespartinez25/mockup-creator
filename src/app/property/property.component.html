@@ -1,7 +1,14 @@
 <div>
-  <table border="1" [cellSpacing]="1">
+  <table border="1" [cellSpacing]="1" style="background-color: white">
     <tr>
       <th colspan="2">Component Property</th>
+      <!-- <button 
+      (click)="removeElement()"
+      type="button" 
+      class="btn btn-danger" 
+      title="Delete Element">
+        <span aria-hidden="true">&times;</span> 
+      </button>-->
     </tr>
     <tr>
       <th><label>id</label></th>
@@ -130,8 +137,16 @@
         (keyup)="nameChangeHandler($event)"
       />
     </tr>
+    <tr>
+      <button (click)="deleteComponent()">Delete Component</button>
+    </tr>
   </table>
 </div>
+<!--
+<button (click)="removeElement($event)" type="button" class="btn btn-danger delete" title="Delete Element">
+  <span aria-hidden="true">&times;</span>
+</button>
+-->
 
 <style>
   th {
@@ -144,5 +159,14 @@
   input,
   textarea {
     border: none;
+  }
+
+  .delete {
+    max-height: 50px;
+    max-width: 60px;
+    position: absolute;
+    bottom: 26%;
+    right: 34%;
+    z-index: 9999;
   }
 </style>

@@ -43,4 +43,7 @@ export class WrapperComponent implements OnInit {
     this.xmouse = this.mousePositionX;
     this.ymouse = this.mousePositionY;
   }
+  removeElement(remove:IComponent):void {
+
+  }
 }
