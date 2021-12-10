@@ -6,7 +6,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
 
 @Component({
   selector: 'app-popup',
-  template: `<button [id]="props.id" [style]="props.style" [type]="props.type" data-bs-toggle="popover" [data-bs-content]="props.content">
+  template: `<button [id]="props.id" [style]="props.style" [type]="props.type">
   {{ props.value }}
   </button>`
 })
