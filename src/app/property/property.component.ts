@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { IComponent } from '../interfaces/icomponent';
 import { IProperty } from '../interfaces/iproperty';
 
 @Component({
@@ -7,10 +8,12 @@ import { IProperty } from '../interfaces/iproperty';
 })
 export class PropertyComponent implements OnInit {
   props: IProperty;
+  delete:boolean;
 
   @Input() get property(): IProperty {
     return this.props;
   }
+  @Output() messageEvent = new EventEmitter<boolean>();
 
   set property(value: IProperty) {
     if (value) {
@@ -57,5 +60,11 @@ export class PropertyComponent implements OnInit {
   }
   nameChangeHandler(event: any) {
     this.props.name = event.target.value;
+  }
+
+  
+  removeElement() {
+    this.delete = true;
+    this.messageEvent.emit(this.delete);
   }
 }
