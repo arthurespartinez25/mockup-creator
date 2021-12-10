@@ -1,6 +1,7 @@
 import { DragDrop } from '@angular/cdk/drag-drop';
 import {
   Component,
+  ComponentRef,
   ElementRef,
   OnInit,
   Renderer2,
@@ -9,7 +10,19 @@ import {
 import { IComponent } from './interfaces/icomponent';
 import { ButtonComponent } from './components/button/button.component';
 import { PopupComponent } from './components/popup/popup.component';
+import { TextboxComponent } from './components/textbox/textbox.component';
 import { IProperty } from './interfaces/iproperty';
+import { DatepickerComponent } from './components/datepicker/datepicker.component';
+import { ImageComponent } from './components/image/image.component';
+import { LabelComponent } from './components/label/label.component';
+import { RadioComponent } from './components/radio/radio.component';
+import { CheckboxComponent } from './components/checkbox/checkbox.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { InputComponent } from './components/input/input.component';
+import { HeaderComponent } from './components/header/header.component';
+import { LinkComponent } from './components/link/link.component';
+import { ParagraphComponent } from './components/paragraph/paragraph.component';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +32,8 @@ import { IProperty } from './interfaces/iproperty';
 export class AppComponent implements OnInit {
   title = 'mockup-creator';
   componentList: IComponent[] = [];
+  selectedComponent: IComponent;
+  ref: ComponentRef<any>;
 
   selected: IProperty = {
     key: '',
@@ -37,11 +52,11 @@ export class AppComponent implements OnInit {
   private _htmlStart = '<!doctype html>\n<html lang="en">';
   private _htmlEnd = '</html>';
   private _bootstrapLink =
-  '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">';
+    '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">';
   private _bootstrapScript =
-  '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>';
+    '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>';
   private _popupFunction =
-  '<script>\nvar popoverTriggerList = [].slice.call(document.querySelectorAll(\'[data-bs-toggle=\"popover\"]\'))\nvar popoverList = popoverTriggerList.map(function (popoverTriggerEl) {\nreturn new bootstrap.Popover(popoverTriggerEl)\n})\n</script>';
+    '<script>\nvar popoverTriggerList = [].slice.call(document.querySelectorAll(\'[data-bs-toggle="popover"]\'))\nvar popoverList = popoverTriggerList.map(function (popoverTriggerEl) {\nreturn new bootstrap.Popover(popoverTriggerEl)\n})\n</script>';
 
   @ViewChild('canvas') canvas!: ElementRef;
 
@@ -54,8 +69,53 @@ export class AppComponent implements OnInit {
   addComponent(component: string) {
     let temp: IComponent;
     switch (component) {
+      case 'nav':
+        temp = new NavbarComponent(this.canvas);
+        break;
+      case 'link':
+        temp = new LinkComponent(this.canvas);
+        break;
+      case 'paragraph':
+        temp = new ParagraphComponent(this.canvas);
+        break;
+
       case 'button':
         temp = new ButtonComponent(this.canvas);
+        break;
+      case 'textbox':
+        temp = new TextboxComponent(this.canvas);
+        break;
+      case 'radio':
+        temp = new RadioComponent(this.canvas);
+        break;
+
+      case 'checkbox':
+        temp = new CheckboxComponent(this.canvas);
+
+        break;
+
+      case 'dropdown':
+        temp = new DropdownComponent(this.canvas);
+
+        break;
+      case 'datepicker':
+        temp = new DatepickerComponent(this.canvas);
+        break;
+
+      case 'label':
+        temp = new LabelComponent(this.canvas);
+
+        break;
+      case 'img':
+        temp = new ImageComponent(this.canvas);
+        break;
+
+      case 'header':
+        temp = new HeaderComponent(this.canvas);
+        break;
+
+      case 'input':
+        temp = new InputComponent(this.canvas);
         break;
       case 'popup':
         this._popupCount++;
@@ -90,9 +150,9 @@ export class AppComponent implements OnInit {
   }
 
   get htmlCode(): string {
-    let bootstrap = "";
-    let script = "";
-    if(this._popupCount > 0){
+    let bootstrap = '';
+    let script = '';
+    if (this._popupCount > 0) {
       bootstrap += this._bootstrapLink + '\n' + this._bootstrapScript + '\n';
       script += this._popupFunction + '\n';
     }
@@ -116,7 +176,15 @@ export class AppComponent implements OnInit {
 
   clickHandler(component: IComponent) {
     this.selected = component.props;
+    this.selectedComponent = component;
   }
+
+  // deleteComponent(){
+  //   let componentIndex = this.componentList.indexOf(this.selectedComponent);
+  //   if(componentIndex !== -1){
+  //     this.componentList.splice(componentIndex,1);
+  //   }
+  // }
 
   /****************** OLD CODE STARTS HERE **********************/
 
@@ -490,5 +558,13 @@ export class AppComponent implements OnInit {
 
     this.renderer.appendChild(Link, text);
     this.renderer.appendChild(this.canvas.nativeElement, Link);
+  }
+  createTextbox() {
+    const newTextbox = this.renderer.createElement('textarea');
+    let ref = this.drag.createDrag(newTextbox);
+    ref.withBoundaryElement(this.canvas);
+    this.renderer.setProperty(newTextbox, 'placeholder', 'Insert text here...');
+    this.renderer.addClass(newTextbox, 'textarea');
+    this.renderer.appendChild(this.canvas.nativeElement, newTextbox);
   }
 }
