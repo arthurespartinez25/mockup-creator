@@ -7,6 +7,7 @@
     'top': ymouse + 'px'
   }"></app-buttonDrag>
 
+  <app-popup [property]="child.props" *ngSwitchCase="'popup'"></app-popup>
   <app-datepicker
     [property]="child.props"
     *ngSwitchCase="'datepicker'"
