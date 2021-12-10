@@ -71,7 +71,7 @@
   <div id="canvas-container">
     <div id="canvas" #canvas>
       <app-wrapper
-        *ngFor="let component of componentList"
+        *ngFor="let component of componentList; let i = index"
         class="wrapper"
         (click)="clickHandler(component)"
         [childComp]="component"
@@ -137,7 +137,11 @@
         role="tabpanel"
         aria-labelledby="properties-tab"
       >
-        <app-property [property]="selected" [selectedIdx]="selectedComponent" [compList]="componentList"></app-property>
+        <app-property
+          [property]="selected"
+          [selectedIdx]="selectedComponent"
+          [compList]="componentList"
+        ></app-property>
       </div>
       <div
         class="tab-pane fade"

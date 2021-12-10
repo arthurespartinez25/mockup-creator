@@ -1,5 +1,7 @@
 import { DragDrop } from '@angular/cdk/drag-drop';
 import {
+  AfterViewChecked,
+  AfterViewInit,
   Component,
   ComponentRef,
   ElementRef,
@@ -23,14 +25,16 @@ import { InputComponent } from './components/input/input.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LinkComponent } from './components/link/link.component';
 import { ParagraphComponent } from './components/paragraph/paragraph.component';
+import { FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'mockup-creator';
+  index: number;
   componentList: IComponent[] = [];
   selectedComponent: IComponent;
   ref: ComponentRef<any>;
@@ -51,10 +55,16 @@ export class AppComponent implements OnInit {
   private _htmlStart = '<!doctype html>\n<html lang="en">';
   private _htmlEnd = '</html>';
 
+  @ViewChild('PropertyComponent') property: boolean;
   @ViewChild('canvas') canvas!: ElementRef;
 
   constructor(private renderer: Renderer2, private drag: DragDrop) {}
+  delete: boolean;
 
+  ngAfterViewInit(): void {
+    //throw new Error('Method not implemented.');
+    //this.removeElement();
+  }
   ngOnInit(): void {
     /* throw new Error('Method not implemented.'); */
   }
@@ -162,6 +172,37 @@ export class AppComponent implements OnInit {
   clickHandler(component: IComponent) {
     this.selected = component.props;
     this.selectedComponent = component;
+  }
+  receiveMessage($event: boolean) {
+    if ($event == true) {
+      //removeElement(component: IComponent): void {
+      //console.log(componentID);
+      //let temp: IComponent;
+      //temp = new ButtonComponent(this.canvas);
+      //this.temp = component.props
+      //this.componentList.splice(component);
+      //this.componentList.splice(componentID,1);
+
+      let componentIndex = this.componentList.indexOf(this.selectedComponent);
+      if (componentIndex !== -1) {
+        this.componentList.splice(componentIndex, 1);
+        this.selected.id = '';
+        this.selected.type = '';
+        this.selected.key = '';
+        this.selected.value = '';
+        this.selected.class = '';
+        this.selected.style = '';
+        this.selected.typeObj = '';
+        this.selected.placeholder = '';
+        this.selected.rows = -1;
+        this.selected.cols = -1;
+        this.selected.name = '';
+        console.log('Deleted');
+        $event = false;
+      }
+    } else {
+      console.log('Nothing to delete');
+    }
   }
 
   // deleteComponent(){
