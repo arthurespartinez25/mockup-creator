@@ -1,34 +1,29 @@
-import { ElementRef } from '@angular/core';
-import { Input } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
 
 @Component({
-  selector: 'app-popup',
-  template: `<button cdkDrag cdkDragBoundary="#canvas" [id]="props.id" [style]="props.style" [type]="props.type">
-  {{ props.value }}
-  </button>`
+  selector: 'app-paragraphDrag',
+  templateUrl: './paragraphDrag.component.html',
+  styleUrls: ['./paragraphDrag.component.css'],
 })
-export class PopupComponent implements IComponent {
-
+export class ParagraphDragComponent implements OnInit, IComponent {
   canvas: ElementRef;
   props: IProperty = {
     key: '',
     id: '',
-    value: 'Popup',
-    class: '',
-    style: '',
-    typeObj: 'popup',
-    type: 'button',
-    content: "Popup text here..."
+    value: 'Paragraph',
+    class: 'lead',
+    style: 'color: red;',
+    typeObj: 'paragraphDrag',
+    type: '',
   };
 
   constructor(canvas: ElementRef) {
     this.canvas = canvas;
     let date = Date.now();
     this.props.key = date.toString();
-    this.props.id = 'popup' + date.toString();
+    this.props.id = 'paragraph' + date.toString();
   }
 
   @Input() get property(): IProperty {
@@ -42,7 +37,7 @@ export class PopupComponent implements IComponent {
   }
 
   get htmlCode(): string {
-    let tmpHtmlCode = '<button';
+    let tmpHtmlCode = '<p';
     if (this.props.id.trim().length > 0) {
       tmpHtmlCode += ' id="' + this.props.id + '"';
     }
@@ -59,15 +54,10 @@ export class PopupComponent implements IComponent {
       tmpHtmlCode += ' style="' + this.props.style + '"';
     }
 
-    tmpHtmlCode += ' data-bs-toggle="' + "popover" + '"';
-
-    if (this.props.content != undefined) {
-      tmpHtmlCode += ' data-bs-content="' + this.props.content + '"';
-    }
-
-    tmpHtmlCode += '>' + this.props.value + '</button>';
+    tmpHtmlCode += '>' + this.props.value + '</p>';
 
     return tmpHtmlCode;
   }
 
+  ngOnInit(): void {}
 }

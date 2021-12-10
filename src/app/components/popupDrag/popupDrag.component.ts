@@ -5,12 +5,12 @@ import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
 
 @Component({
-  selector: 'app-popup',
+  selector: 'app-popupDrag',
   template: `<button cdkDrag cdkDragBoundary="#canvas" [id]="props.id" [style]="props.style" [type]="props.type">
   {{ props.value }}
   </button>`
 })
-export class PopupComponent implements IComponent {
+export class PopupDragComponent implements IComponent {
 
   canvas: ElementRef;
   props: IProperty = {
@@ -19,7 +19,7 @@ export class PopupComponent implements IComponent {
     value: 'Popup',
     class: '',
     style: '',
-    typeObj: 'popup',
+    typeObj: 'popupDrag',
     type: 'button',
     content: "Popup text here..."
   };

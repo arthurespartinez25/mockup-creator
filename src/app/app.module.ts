@@ -24,12 +24,16 @@ import { LabelDragComponent } from './components/labelDrag/labelDrag.component';
 import { ImageComponent } from './components/image/image.component';
 import { ImageDragComponent } from './components/imageDrag/imageDrag.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { NavbarDragComponent } from './components/navbarDrag/navbarDrag.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { ModalDragComponent } from './components/modalDrag/modalDrag.component';
 import { InputComponent } from './components/input/input.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LinkComponent } from './components/link/link.component';
 import { ParagraphComponent } from './components/paragraph/paragraph.component';
+import { ParagraphDragComponent } from './components/paragraphDrag/paragraphDrag.component';
 import { PopupComponent } from './components/popup/popup.component';
+import { PopupDragComponent } from './components/popupDrag/popupDrag.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +62,10 @@ import { PopupComponent } from './components/popup/popup.component';
     LinkComponent,
     ParagraphComponent,
     PopupComponent,
+    PopupDragComponent,
+    ParagraphDragComponent,
+    NavbarDragComponent,
+    ModalDragComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule],
   providers: [DragDropModule],

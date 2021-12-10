@@ -13,7 +13,8 @@
   <!-- PALETTE SECTION -->
 
   <div id="palette-container" cdkDropListGroup cdkDropList cdkDropListSortingDisabled>
-    <button class="accordion palette-item" (click)="addComponent('nav')">
+    <button class="accordion palette-item" (click)="addComponent('nav')"
+    cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddComponent('nav')">
       Navbar
     </button>
     <button class="accordion palette-item" (click)="addComponent('link')">
@@ -22,7 +23,8 @@
     <button class="accordion palette-item" (click)="addComponent('header')">
       Header
     </button>
-    <button class="accordion palette-item" (click)="addComponent('paragraph')">
+    <button class="accordion palette-item" (click)="addComponent('paragraph')"
+    cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddComponent('paragraph')">
       Paragraph
     </button>
     <button class="accordion palette-item" (click)="addComponent('label')"
@@ -58,10 +60,12 @@
     <button class="accordion palette-item" (click)="addComponent('datepicker')">
       DatePicker
     </button>
-    <button class="accordion palette-item" (click)="addComponent('modal')">
+    <button class="accordion palette-item" (click)="addComponent('modal')"
+    cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddComponent('modal')">
       Modal
     </button>
-<button class="accordion palette-item" (click)="addComponent('popup')">
+<button class="accordion palette-item" (click)="addComponent('popup')"
+cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddComponent('popup')">
   Popup
 </button>
 

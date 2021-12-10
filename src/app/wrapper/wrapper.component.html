@@ -8,10 +8,19 @@
   }"></app-buttonDrag>
 
   <app-popup [property]="child.props" *ngSwitchCase="'popup'"></app-popup>
+
+  <app-popupDrag [property]="child.props" *ngSwitchCase="'popupDrag'"
+  [ngStyle]="{
+    'position': 'absolute',
+    'left': xmouse + 'px',
+    'top': ymouse + 'px'
+  }"></app-popupDrag>
+
   <app-datepicker
     [property]="child.props"
     *ngSwitchCase="'datepicker'"
   ></app-datepicker>
+
   <app-image [property]="child.props" *ngSwitchCase="'img'"></app-image>
 
   <app-imageDrag [property]="child.props" *ngSwitchCase="'imgDrag'"
@@ -47,6 +56,14 @@
   }"></app-radioDrag>
 
   <app-modal [property]="child.props" *ngSwitchCase="'modal'"></app-modal>
+
+  <app-modalDrag [property]="child.props" *ngSwitchCase="'modalDrag'"
+  [ngStyle]="{
+    'position': 'absolute',
+    'left': xmouse + 'px',
+    'top': ymouse + 'px'
+  }"></app-modalDrag>
+
   <app-checkbox
     [property]="child.props"
     *ngSwitchCase="'checkbox'"
@@ -70,11 +87,32 @@
   </app-dropdownDrag>
 
   <app-navbar [property]="child.props" *ngSwitchCase="'nav'"></app-navbar>
+
+  <app-navbarDrag [property]="child.props" *ngSwitchCase="'navDrag'"
+  [ngStyle]="{
+    'position': 'absolute',
+    'left': xmouse + 'px',
+    'top': ymouse + 'px',
+    'width':'62.2vw',
+    'display':'inline-block'
+  }"></app-navbarDrag>
+
   <app-input [property]="child.props" *ngSwitchCase="'input'"></app-input>
   <app-header [property]="child.props" *ngSwitchCase="'header'"></app-header>
   <app-link [property]="child.props" *ngSwitchCase="'link'"></app-link>
+
   <app-paragraph
     [property]="child.props"
     *ngSwitchCase="'paragraph'"
   ></app-paragraph>
+
+  <app-paragraphDrag
+    [property]="child.props"
+    *ngSwitchCase="'paragraphDrag'"
+    [ngStyle]="{
+      'position': 'absolute',
+      'left': xmouse + 'px',
+      'top': ymouse + 'px'
+    }"
+  ></app-paragraphDrag>
 </div>

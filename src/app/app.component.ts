@@ -27,6 +27,7 @@ import { DropdownDragComponent } from './components/dropdownDrag/dropdownDrag.co
 import { ImageDragComponent } from './components/imageDrag/imageDrag.component';
 import { RadioDragComponent } from './components/radioDrag/radioDrag.component';
 import { TextboxDragComponent } from './components/textboxDrag/textboxDrag.component';
+import { PopupDragComponent } from './components/popupDrag/popupDrag.component';
 
 
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -36,6 +37,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { LinkComponent } from './components/link/link.component';
 import { ParagraphComponent } from './components/paragraph/paragraph.component';
 import { FormArray } from '@angular/forms';
+import { ParagraphDragComponent } from './components/paragraphDrag/paragraphDrag.component';
+import { NavbarDragComponent } from './components/navbarDrag/navbarDrag.component';
+import { ModalDragComponent } from './components/modalDrag/modalDrag.component';
 
 @Component({
   selector: 'app-root',
@@ -183,7 +187,6 @@ export class AppComponent implements OnInit, AfterViewInit {
         temp = new CheckboxDragComponent(this.canvas);
         break;
       
-
       case 'dropdown':
         temp = new DropdownDragComponent(this.canvas);
 
@@ -199,6 +202,23 @@ export class AppComponent implements OnInit, AfterViewInit {
 
       case 'textbox':
         temp = new TextboxDragComponent(this.canvas);
+        break;
+
+      case 'popup':
+        this._popupCount++;
+        temp = new PopupDragComponent(this.canvas);
+        break;
+
+      case 'paragraph':
+        temp = new ParagraphDragComponent(this.canvas);
+        break;
+
+      case 'nav':
+        temp = new NavbarDragComponent(this.canvas);
+        break;
+      
+      case 'modal':
+        temp = new ModalDragComponent(this.canvas);
         break;
 
       default:
