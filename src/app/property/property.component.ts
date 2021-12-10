@@ -21,17 +21,17 @@ export class PropertyComponent implements OnInit {
     }
   }
 
-  @Input() get compList(){
+  @Input() get compList() {
     return this.componentList;
   }
-  set compList(value: IComponent[]){
+  set compList(value: IComponent[]) {
     this.componentList = value;
   }
 
-  @Input() get selectedIdx(){
+  @Input() get selectedIdx() {
     return this.selectedcomp;
   }
-  set selectedIdx( value: IComponent){
+  set selectedIdx(value: IComponent) {
     this.selectedcomp = value;
   }
 
@@ -41,10 +41,10 @@ export class PropertyComponent implements OnInit {
     this.selectedcomp = this.selectedIdx;
   }
 
-  deleteComponent(){
+  deleteComponent() {
     let componentIndex = this.componentList.indexOf(this.selectedcomp);
-    if(componentIndex !== -1){
-      this.componentList.splice(componentIndex,1);
+    if (componentIndex !== -1) {
+      this.componentList.splice(componentIndex, 1);
     }
   }
 
