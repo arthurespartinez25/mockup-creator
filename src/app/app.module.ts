@@ -14,6 +14,13 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { RadioComponent } from './components/radio/radio.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
+import { LabelComponent } from './components/label/label.component';
+import { ImageComponent } from './components/image/image.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { InputComponent } from './components/input/input.component';
+import { HeaderComponent } from './components/header/header.component';
+import { LinkComponent } from './components/link/link.component';
+import { ParagraphComponent } from './components/paragraph/paragraph.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +33,13 @@ import { DatepickerComponent } from './components/datepicker/datepicker.componen
     RadioComponent,
     TextboxComponent,
     DatepickerComponent,
+    LabelComponent,
+    ImageComponent,
+    NavbarComponent,
+    InputComponent,
+    HeaderComponent,
+    LinkComponent,
+    ParagraphComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
   providers: [DragDropModule],

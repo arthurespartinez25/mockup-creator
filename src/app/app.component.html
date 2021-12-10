@@ -13,15 +13,19 @@
 <div class="content" role="main">
   <!-- PALETTE SECTION -->
   <div id="palette-container">
-    <button class="accordion palette-item" (click)="createNav()">Navbar</button>
-    <button class="accordion palette-item" (click)="createLink()">Link</button>
-    <button class="accordion palette-item" (click)="createHeader()">
+    <button class="accordion palette-item" (click)="addComponent('nav')">
+      Navbar
+    </button>
+    <button class="accordion palette-item" (click)="addComponent('link')">
+      Link
+    </button>
+    <button class="accordion palette-item" (click)="addComponent('header')">
       Header
     </button>
-    <button class="accordion palette-item" (click)="createParagraph()">
+    <button class="accordion palette-item" (click)="addComponent('paragraph')">
       Paragraph
     </button>
-    <button class="accordion palette-item" (click)="createLabel()">
+    <button class="accordion palette-item" (click)="addComponent('label')">
       Label
     </button>
     <button class="accordion palette-item" (click)="addComponent('button')">
@@ -36,7 +40,7 @@
     <button class="accordion palette-item" (click)="addComponent('radio')">
       Radio
     </button>
-    <button class="accordion palette-item" (click)="createInputField()">
+    <button class="accordion palette-item" (click)="addComponent('input')">
       Input Field
     </button>
     <button class="accordion palette-item" (click)="addComponent('textbox')">
@@ -49,7 +53,9 @@
       Modal
     </button>
     <button class="accordion palette-item">Popup</button>
-    <button class="accordion palette-item" (click)="addImage()">Image</button>
+    <button class="accordion palette-item" (click)="addComponent('img')">
+      Image
+    </button>
 
     <!-- <ul class="list-group">
       <li class="list-group-item palette-item" (click)="createButton()">
@@ -70,6 +76,7 @@
         (click)="clickHandler(component)"
         [childComp]="component"
         [canvasRef]="component.canvas"
+        [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
       >
       </app-wrapper>
     </div>

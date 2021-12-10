@@ -49,6 +49,11 @@
   margin: 0;
 }
 
+.nav-wrapper {
+  width: 100% !important;
+  height: fit-content;
+}
+
 /********************** CODE CSS ********************/
 
 #code-container {
