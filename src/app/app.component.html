@@ -51,7 +51,8 @@
     cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddComponent('radio')">
       Radio
     </button>
-    <button class="accordion palette-item" (click)="addComponent('input')">
+    <button class="accordion palette-item" (click)="addComponent('input')"
+    cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddComponent('input')">
       Input Field
     </button>
     <button class="accordion palette-item" (click)="addComponent('textbox')"

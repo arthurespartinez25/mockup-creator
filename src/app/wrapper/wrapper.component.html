@@ -104,6 +104,12 @@
   }"></app-navbarDrag>
 
   <app-input [property]="child.props" *ngSwitchCase="'input'"></app-input>
+  <app-inputDrag [property]="child.props" *ngSwitchCase="'inputDrag'" [ngStyle]="{
+    'position': 'absolute',
+    'left': xmouse + 'px',
+    'top': ymouse + 'px'
+  }">
+  </app-inputDrag>
 
   <app-header [property]="child.props" *ngSwitchCase="'header'"></app-header>
   <app-headerDrag [property]="child.props" *ngSwitchCase="'headerDrag'" [ngStyle]="{

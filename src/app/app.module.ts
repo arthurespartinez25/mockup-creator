@@ -29,6 +29,7 @@ import { NavbarDragComponent } from './components/navbarDrag/navbarDrag.componen
 import { ModalComponent } from './components/modal/modal.component';
 import { ModalDragComponent } from './components/modalDrag/modalDrag.component';
 import { InputComponent } from './components/input/input.component';
+import { InputDragComponent } from './components/inputDrag/inputDrag.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HeaderDragComponent } from './components/headerDrag/headerDrag.component';
 import { LinkComponent } from './components/link/link.component';
@@ -70,6 +71,7 @@ import { PopupDragComponent } from './components/popupDrag/popupDrag.component';
     ModalDragComponent,
     DatepickerDragComponent,
     HeaderDragComponent,
+    InputDragComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule],
   providers: [DragDropModule],
