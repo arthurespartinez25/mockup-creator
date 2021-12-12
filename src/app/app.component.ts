@@ -40,6 +40,7 @@ import { FormArray } from '@angular/forms';
 import { ParagraphDragComponent } from './components/paragraphDrag/paragraphDrag.component';
 import { NavbarDragComponent } from './components/navbarDrag/navbarDrag.component';
 import { ModalDragComponent } from './components/modalDrag/modalDrag.component';
+import { DatepickerDragComponent } from './components/datepickerDrag/datepickerDrag.component';
 
 @Component({
   selector: 'app-root',
@@ -219,6 +220,10 @@ export class AppComponent implements OnInit, AfterViewInit {
       
       case 'modal':
         temp = new ModalDragComponent(this.canvas);
+        break;
+
+      case 'datepicker':
+        temp = new DatepickerDragComponent(this.canvas);
         break;
 
       default:

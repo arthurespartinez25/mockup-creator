@@ -20,6 +20,12 @@
     [property]="child.props"
     *ngSwitchCase="'datepicker'"
   ></app-datepicker>
+  <app-datepickerDrag [property]="child.props" *ngSwitchCase="'datepickerDrag'"
+  [ngStyle]="{
+    'position': 'absolute',
+    'left': xmouse + 'px',
+    'top': ymouse + 'px'
+  }"></app-datepickerDrag>
 
   <app-image [property]="child.props" *ngSwitchCase="'img'"></app-image>
 

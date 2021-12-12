@@ -19,6 +19,7 @@ import { CheckboxDragComponent } from './components/checkboxDrag/checkboxDrag.co
 import { RadioComponent } from './components/radio/radio.component';
 import { RadioDragComponent } from './components/radioDrag/radioDrag.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
+import { DatepickerDragComponent } from './components/datepickerDrag/datepickerDrag.component';
 import { LabelComponent } from './components/label/label.component';
 import { LabelDragComponent } from './components/labelDrag/labelDrag.component';
 import { ImageComponent } from './components/image/image.component';
@@ -66,6 +67,7 @@ import { PopupDragComponent } from './components/popupDrag/popupDrag.component';
     ParagraphDragComponent,
     NavbarDragComponent,
     ModalDragComponent,
+    DatepickerDragComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule],
   providers: [DragDropModule],

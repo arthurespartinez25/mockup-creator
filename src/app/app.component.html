@@ -57,7 +57,8 @@
     cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddComponent('textbox')">
       Textbox
     </button>
-    <button class="accordion palette-item" (click)="addComponent('datepicker')">
+    <button class="accordion palette-item" (click)="addComponent('datepicker')"
+    cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddComponent('datepicker')">
       DatePicker
     </button>
     <button class="accordion palette-item" (click)="addComponent('modal')"
