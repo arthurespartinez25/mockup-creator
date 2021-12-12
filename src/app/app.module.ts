@@ -33,6 +33,7 @@ import { InputDragComponent } from './components/inputDrag/inputDrag.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HeaderDragComponent } from './components/headerDrag/headerDrag.component';
 import { LinkComponent } from './components/link/link.component';
+import { LinkDragComponent } from './components/linkDrag/linkDrag.component';
 import { ParagraphComponent } from './components/paragraph/paragraph.component';
 import { ParagraphDragComponent } from './components/paragraphDrag/paragraphDrag.component';
 import { PopupComponent } from './components/popup/popup.component';
@@ -72,6 +73,7 @@ import { PopupDragComponent } from './components/popupDrag/popupDrag.component';
     DatepickerDragComponent,
     HeaderDragComponent,
     InputDragComponent,
+    LinkDragComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule],
   providers: [DragDropModule],

@@ -120,6 +120,12 @@
   </app-headerDrag>
 
   <app-link [property]="child.props" *ngSwitchCase="'link'"></app-link>
+  <app-linkDrag [property]="child.props" *ngSwitchCase="'linkDrag'" [ngStyle]="{
+    'position': 'absolute',
+    'left': xmouse + 'px',
+    'top': ymouse + 'px'
+  }">
+  </app-linkDrag>
 
   <app-paragraph
     [property]="child.props"

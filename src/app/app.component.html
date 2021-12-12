@@ -17,7 +17,8 @@
     cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddComponent('nav')">
       Navbar
     </button>
-    <button class="accordion palette-item" (click)="addComponent('link')">
+    <button class="accordion palette-item" (click)="addComponent('link')"
+    cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddComponent('link')">
       Link
     </button>
     <button class="accordion palette-item" (click)="addComponent('header')"

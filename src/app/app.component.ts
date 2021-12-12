@@ -43,6 +43,7 @@ import { ModalDragComponent } from './components/modalDrag/modalDrag.component';
 import { DatepickerDragComponent } from './components/datepickerDrag/datepickerDrag.component';
 import { HeaderDragComponent } from './components/headerDrag/headerDrag.component';
 import { InputDragComponent } from './components/inputDrag/inputDrag.component';
+import { LinkDragComponent } from './components/linkDrag/linkDrag.component';
 
 @Component({
   selector: 'app-root',
@@ -234,6 +235,10 @@ export class AppComponent implements OnInit, AfterViewInit {
 
       case 'input':
         temp = new InputDragComponent(this.canvas);
+        break;
+
+      case 'link':
+        temp = new LinkDragComponent(this.canvas);
         break;
 
       default:
