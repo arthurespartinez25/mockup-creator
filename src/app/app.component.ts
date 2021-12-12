@@ -41,6 +41,7 @@ import { ParagraphDragComponent } from './components/paragraphDrag/paragraphDrag
 import { NavbarDragComponent } from './components/navbarDrag/navbarDrag.component';
 import { ModalDragComponent } from './components/modalDrag/modalDrag.component';
 import { DatepickerDragComponent } from './components/datepickerDrag/datepickerDrag.component';
+import { HeaderDragComponent } from './components/headerDrag/headerDrag.component';
 
 @Component({
   selector: 'app-root',
@@ -224,6 +225,10 @@ export class AppComponent implements OnInit, AfterViewInit {
 
       case 'datepicker':
         temp = new DatepickerDragComponent(this.canvas);
+        break;
+
+      case 'header':
+        temp = new HeaderDragComponent(this.canvas);
         break;
 
       default:

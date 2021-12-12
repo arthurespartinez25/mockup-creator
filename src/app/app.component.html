@@ -20,7 +20,8 @@
     <button class="accordion palette-item" (click)="addComponent('link')">
       Link
     </button>
-    <button class="accordion palette-item" (click)="addComponent('header')">
+    <button class="accordion palette-item" (click)="addComponent('header')"
+    cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddComponent('header')">
       Header
     </button>
     <button class="accordion palette-item" (click)="addComponent('paragraph')"
