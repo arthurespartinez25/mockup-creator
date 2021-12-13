@@ -297,11 +297,34 @@ export class AppComponent implements OnInit, AfterViewInit {
       this._styleEnd
     );
   }
+  mouseMoveX = 0;
+  mouseMoveY = 0;
 
+  mouseGalawX(event: any){
+    //const { x, y } = event.;
+    //this.mouseMoveX = event.offsetX;
+    //this.mouseMoveY = event.offsetY;
+    this.mouseMoveX = 0;
+    this.mouseMoveY = 0;
+    let el = event.srcElement;
+    while(el){
+      
+      this.mouseMoveX += el.offsetLeft;
+      this.mouseMoveY += el.offsetTop;
+      el = el.parentElement;
+    }
+    return { offsetTop:this.mouseMoveX , offsetLeft:this.mouseMoveY }
+
+  }
+  jude = "aw";
   clickHandler(component: IComponent) {
     this.selected = component.props;
     this.selectedComponent = component;
+    this.jude = this.selected.style;
+    this.selected.style = this.selected.style + "position:absolute;left:"+this.mouseMoveX+"px;top:"+this.mouseMoveY+"px;";
   }
+
+  
   receiveMessage($event: boolean) {
     if ($event == true) {
       //removeElement(component: IComponent): void {

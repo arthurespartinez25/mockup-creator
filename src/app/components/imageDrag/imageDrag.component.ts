@@ -13,7 +13,7 @@ export class ImageDragComponent implements OnInit, IComponent {
     props: IProperty = {
       key: '',
       id: '',
-      value: '',
+      value: 'https://mdbootstrap.com/img/new/standard/city/047.jpg',
       class: 'img-rounded',
       style: '',
       typeObj: 'imgDrag',
@@ -39,7 +39,8 @@ export class ImageDragComponent implements OnInit, IComponent {
   
     get htmlCode(): string {
       let tmpHtmlCode = '<img';
-      tmpHtmlCode += ' class="' + this.props.class + '" id="' + this.props.id + '" type="' +  this.props.type + '" style="' + this.props.style + '" src = "https://mdbootstrap.com/img/new/standard/city/047.jpg">' + this.props.value + ' </img>';
+      tmpHtmlCode += ' class="' + this.props.class + '" id="' + this.props.id + '" type="' +  this.props.type 
+       '" style="' + this.props.style + '" src = " ' + this.props.value + '"> </img>';
       
       return tmpHtmlCode;
     }

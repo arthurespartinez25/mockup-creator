@@ -9,7 +9,7 @@
 
 <!-- Toolbar -->
 <!-- <app-navbar></app-navbar> -->
-<div class="content" role="main">
+<div class="content" role="main" >
   <!-- PALETTE SECTION -->
 
   <div id="palette-container" cdkDropListGroup cdkDropList cdkDropListSortingDisabled>
@@ -87,9 +87,9 @@ cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddCompo
 
   <!-- CANVAS SECTION -->
 
-  <div id="canvas-container">
+  <div id="canvas-container" >
     <div id="canvas" #canvas (mouseenter)="domInsideCanvas=true"
-    (mouseleave)="domInsideCanvas=false">
+    (mouseleave)="domInsideCanvas=false" >
       <app-wrapper
         *ngFor="let component of componentList; let i = index"
         class="wrapper"
@@ -99,6 +99,7 @@ cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddCompo
         [mousePositionX]="mousePositionX" 
         [mousePositionY]="mousePositionY"
         [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
+        (mouseup)="mouseGalawX($event)"
       >
       </app-wrapper>
     </div>
@@ -194,3 +195,4 @@ cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddCompo
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 <router-outlet></router-outlet>
+{{mouseMoveX+"   "+mouseMoveY}}
