@@ -68,11 +68,10 @@
     cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddComponent('modal')">
       Modal
     </button>
-<button class="accordion palette-item" (click)="addComponent('popup')"
-cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddComponent('popup')">
-  Popup
-</button>
-
+    <button class="accordion palette-item" (click)="addComponent('popup')"
+    cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddComponent('popup')">
+      Popup
+    </button>
     <button class="accordion palette-item" (click)="addComponent('img')"
     cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddComponent('img')">Image</button>
 
@@ -96,7 +95,7 @@ cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddCompo
         (click)="clickHandler(component)"
         [childComp]="component"
         [canvasRef]="component.canvas"
-        [mousePositionX]="mousePositionX" 
+        [mousePositionX]="mousePositionX"
         [mousePositionY]="mousePositionY"
         [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
       >

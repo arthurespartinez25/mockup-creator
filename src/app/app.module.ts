@@ -76,7 +76,7 @@ import { PopupDragComponent } from './components/popupDrag/popupDrag.component';
     LinkDragComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule],
-  providers: [DragDropModule],
+  providers: [DragDropModule, AppComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

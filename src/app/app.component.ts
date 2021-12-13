@@ -165,7 +165,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   mousePositionX = 110;
   mousePositionY= 110;
   domInsideCanvas = false;
-  
+
 
   onDragEnded(event: CdkDragEnd){
     event.source._dragRef.reset();
@@ -173,7 +173,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     const { x, y } = event.distance;
     this.mousePositionX = offsetLeft + x;
     this.mousePositionY = offsetTop + y;
-    
+
 }
 
   onDragEndedAddComponent(component: string) {
@@ -190,7 +190,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       case 'checkbox':
         temp = new CheckboxDragComponent(this.canvas);
         break;
-      
+
       case 'dropdown':
         temp = new DropdownDragComponent(this.canvas);
 
@@ -209,7 +209,6 @@ export class AppComponent implements OnInit, AfterViewInit {
         break;
 
       case 'popup':
-        this._popupCount++;
         temp = new PopupDragComponent(this.canvas);
         break;
 
@@ -220,7 +219,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       case 'nav':
         temp = new NavbarDragComponent(this.canvas);
         break;
-      
+
       case 'modal':
         temp = new ModalDragComponent(this.canvas);
         break;

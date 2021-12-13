@@ -4,9 +4,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
 
 @Component({
   selector: 'app-textboxDrag',
-  template: `<textarea cdkDrag cdkDragBoundary="#canvas" [id]="props.id" [style]="props.style" [placeholder]="props.placeholder" [rows]="props.rows" [cols]="props.cols">
-    {{ props.value }}
-  </textarea>`,
+  template: `<textarea cdkDrag cdkDragBoundary="#canvas" [id]="props.id" [style]="props.style" [placeholder]="props.placeholder" [rows]="props.rows" [cols]="props.cols">{{props.value}}</textarea>`
 })
 export class TextboxDragComponent implements IComponent {
   canvas: ElementRef;
