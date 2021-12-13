@@ -1,4 +1,4 @@
-import { CdkDragEnd, DragDrop } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragEnd, DragDrop } from '@angular/cdk/drag-drop';
 import {
   AfterViewChecked,
   AfterViewInit,
@@ -50,7 +50,7 @@ import { LinkDragComponent } from './components/linkDrag/linkDrag.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   title = 'mockup-creator';
   index: number;
   componentList: IComponent[] = [];
@@ -86,12 +86,13 @@ export class AppComponent implements OnInit, AfterViewInit {
   constructor(private renderer: Renderer2, private drag: DragDrop) {}
   delete: boolean;
 
-  ngAfterViewInit(): void {
-    //throw new Error('Method not implemented.');
-    //this.removeElement();
-  }
+ 
   ngOnInit(): void {
     /* throw new Error('Method not implemented.'); */
+    
+  }
+  ngAfterViewInit(): void {
+      
   }
 
   addComponent(component: string) {
@@ -160,7 +161,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.componentList.push(temp);
   }
   //----------------------------------------------------------------------------
-
+  
 
   mousePositionX = 110;
   mousePositionY= 110;
@@ -300,28 +301,40 @@ export class AppComponent implements OnInit, AfterViewInit {
   mouseMoveX = 0;
   mouseMoveY = 0;
 
-  mouseGalawX(event: any){
+  mouseGalawX($event: any){
     //const { x, y } = event.;
-    //this.mouseMoveX = event.offsetX;
+    //this.mouseMoveX = event.offsetX + event.distanceX;
     //this.mouseMoveY = event.offsetY;
-    this.mouseMoveX = 0;
-    this.mouseMoveY = 0;
-    let el = event.srcElement;
-    while(el){
-      
-      this.mouseMoveX += el.offsetLeft;
-      this.mouseMoveY += el.offsetTop;
-      el = el.parentElement;
-    }
-    return { offsetTop:this.mouseMoveX , offsetLeft:this.mouseMoveY }
+    //let x = event.target.getBoundingClientRect();
+    /*let x = document.body.getBoundingClientRect();
+    let y = $event.target.getBoundingClientRect();
+    this.mouseMoveX = y.left - x.left;
+    this.mouseMoveY = y.top - x.top;*/
+    //this.mouseMoveX = $event.source.getFreeDragPosition().x;
+    //this.mouseMoveY = $event.source.getFreeDragPosition().y;
+  }
+  @ViewChild(ButtonComponent) btnCmp : ButtonComponent;
 
+  ngAfterViewChecked(): void {
+    console.log(this.btnCmp.mousePositionXV2);
+    this.mouseMoveX = this.btnCmp.mousePositionXV2;
+    this.mouseMoveY = this.btnCmp.mousePositionYV2;
   }
   jude = "aw";
   clickHandler(component: IComponent) {
     this.selected = component.props;
     this.selectedComponent = component;
     this.jude = this.selected.style;
-    this.selected.style = this.selected.style + "position:absolute;left:"+this.mouseMoveX+"px;top:"+this.mouseMoveY+"px;";
+    let regexLeft = /left(.+?);/;
+    let regexTop = /top(.+?);/;
+    let regexPosition = /position(.+?);/;
+    this.jude = this.jude.replace(regexLeft,"");
+    this.jude = this.jude.replace(regexTop,"");
+    this.jude = this.jude.replace(regexPosition,"");
+    this.selected.style = this.jude + 
+    "left:"+this.mouseMoveX+"px;"+
+    "top:"+this.mouseMoveY+"px;"+
+    "position:absolute;";
   }
 
   

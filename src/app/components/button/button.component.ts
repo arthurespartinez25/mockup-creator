@@ -1,12 +1,14 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { CdkDragEnd } from '@angular/cdk/drag-drop';
+import { Component, ComponentRef, ElementRef, Input, OnInit } from '@angular/core';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
 
 @Component({
   selector: 'app-button',
-  template: `<button cdkDrag cdkDragBoundary="#canvas" [id]="props.id" [style]="props.style" [type]="props.type">
+  template: `<button cdkDrag cdkDragBoundary="#canvas"
+  (cdkDragEnded)="onDragEnded($event)"  [id]="props.id" [style]="props.style" [type]="props.type">
     {{ props.value }}
-  </button>`,
+  </button>{{mousePositionXV2}}`,
 })
 export class ButtonComponent implements IComponent {
   canvas: ElementRef;
@@ -19,6 +21,18 @@ export class ButtonComponent implements IComponent {
     typeObj: 'button',
     type: 'button',
   };
+
+  mousePositionXV2 = 110;
+  mousePositionYV2= 110;
+  
+
+  onDragEnded($event: any){
+    //const { offsetLeft, offsetTop } = event.source.element.nativeElement;
+    //const { x, y } = event.distance;
+    this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
+    this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
+    
+}
 
   constructor(canvas: ElementRef) {
     this.canvas = canvas;

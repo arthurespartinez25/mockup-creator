@@ -99,7 +99,7 @@ cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddCompo
         [mousePositionX]="mousePositionX" 
         [mousePositionY]="mousePositionY"
         [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
-        (mouseup)="mouseGalawX($event)"
+        (mousedown)="mouseGalawX($event)"
       >
       </app-wrapper>
     </div>
@@ -195,4 +195,4 @@ cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddCompo
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 <router-outlet></router-outlet>
-{{mouseMoveX+"   "+mouseMoveY}}
+{{mouseMoveX+"  {}{} "+mouseMoveY}}
