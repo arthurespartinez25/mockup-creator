@@ -44,6 +44,7 @@ import { DatepickerDragComponent } from './components/datepickerDrag/datepickerD
 import { HeaderDragComponent } from './components/headerDrag/headerDrag.component';
 import { InputDragComponent } from './components/inputDrag/inputDrag.component';
 import { LinkDragComponent } from './components/linkDrag/linkDrag.component';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -83,7 +84,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('PropertyComponent') property: boolean;
   @ViewChild('canvas') canvas!: ElementRef;
 
-  constructor(private renderer: Renderer2, private drag: DragDrop) {}
+  constructor(private renderer: Renderer2, private drag: DragDrop, private doms : DomSanitizer) {}
   delete: boolean;
 
   ngAfterViewInit(): void {
@@ -302,6 +303,19 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.selected = component.props;
     this.selectedComponent = component;
   }
+
+  cssReceiveMessage(event: any){
+    let styleTemp = event.target.value;
+    this.style = styleTemp.toString();
+    console.log(this.style);
+  }
+
+  /*
+  getCSSStyle(style: string){
+    return this.doms.bypassSecurityTrustStyle(style);
+  }
+  */
+
   receiveMessage($event: boolean) {
     if ($event == true) {
       //removeElement(component: IComponent): void {

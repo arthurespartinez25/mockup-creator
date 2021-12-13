@@ -87,9 +87,13 @@ cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddCompo
 
   <!-- CANVAS SECTION -->
 
-  <div id="canvas-container">
-    <div id="canvas" #canvas (mouseenter)="domInsideCanvas=true"
-    (mouseleave)="domInsideCanvas=false">
+  <div id="canvas-container"  >
+    <div id="canvas" #canvas 
+    (mouseenter)="domInsideCanvas=true"
+    (mouseleave)="domInsideCanvas=false"
+    [style]=" this.style "
+    ><!--[style]="getCSSStyle(this.style)"-->
+    
       <app-wrapper
         *ngFor="let component of componentList; let i = index"
         class="wrapper"
@@ -171,8 +175,14 @@ cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddCompo
         role="tabpanel"
         aria-labelledby="css-tab"
       >
-        <h3 style="background-color: white; margin: 0">css</h3>
-        <textarea style="margin: 0" cols="30" rows="5"></textarea>
+        <h3 
+        style="background-color: white; margin: 0" >css</h3>
+        <textarea 
+        style="margin: 0" 
+        cols="30" 
+        rows="5"
+        [value]="style"
+        (keyup)="cssReceiveMessage($event)"></textarea>
       </div>
       <div
         class="tab-pane fade"
