@@ -2,12 +2,12 @@
   <table border="1" [cellSpacing]="1" style="background-color: white">
     <tr>
       <th colspan="2">Component Property</th>
-      <!-- <button
+      <!-- <button 
       (click)="removeElement()"
-      type="button"
-      class="btn btn-danger"
+      type="button" 
+      class="btn btn-danger" 
       title="Delete Element">
-        <span aria-hidden="true">&times;</span>
+        <span aria-hidden="true">&times;</span> 
       </button>-->
     </tr>
     <tr>
@@ -51,6 +51,16 @@
         />
       </td>
     </tr>
+    <tr *ngIf="props.typeObj == 'checkbox'">
+      <th><label>checked</label></th>
+      <td>
+        <input
+          type="text"
+          [value]="props.checked"
+          (keyup)="checkedChangeHandler($event)"
+        />
+      </td>
+    </tr>
     <tr *ngIf="props.typeObj == 'textbox'">
       <th><label>placeholder</label></th>
       <td>
@@ -81,6 +91,37 @@
         />
       </td>
     </tr>
+    
+    <tr *ngIf="props.typeObj == 'textboxDrag'">
+      <th><label>placeholder</label></th>
+      <td>
+        <input
+          type="text"
+          [value]="props.placeholder"
+          (keyup)="placeholderChangeHandler($event)"
+        />
+      </td>
+    </tr>
+    <tr *ngIf="props.typeObj == 'textboxDrag'">
+      <th><label>rows</label></th>
+      <td>
+        <input
+          type="number"
+          [value]="props.rows"
+          (keyup)="rowsChangeHandler($event)"
+        />
+      </td>
+    </tr>
+    <tr *ngIf="props.typeObj == 'textboxDrag'">
+      <th><label>columns</label></th>
+      <td>
+        <input
+          type="number"
+          [value]="props.cols"
+          (keyup)="colsChangeHandler($event)"
+        />
+      </td>
+    </tr>
 
     <tr>
       <th><label>style</label></th>
@@ -95,8 +136,7 @@
         ></textarea>
       </td>
     </tr>
-
-    <tr *ngIf="props.typeObj == 'popup'">
+    <tr *ngIf="props.typeObj == 'popup' || 'popupDrag'">
       <th><label>data-bs-content</label></th>
       <td>
         <input
@@ -104,18 +144,19 @@
           [value]="props.content"
           (keyup)="contentChangeHandler($event)"
         />
+        <tr *ngIf="props.name">
+          <th><label>name</label></th>
+          <input
+            type="text"
+            [value]="this.props.name"
+            (keyup)="nameChangeHandler($event)"
+          />
+        </tr>
+        <tr>
+          
+        </tr>
       </td>
     </tr>
-
-    <tr *ngIf="props.name">
-      <th><label>name</label></th>
-      <input
-        type="text"
-        [value]="this.props.name"
-        (keyup)="nameChangeHandler($event)"
-      />
-    </tr>
-
     <button (click)="deleteComponent()">Delete Component</button>
   </table>
 </div>
