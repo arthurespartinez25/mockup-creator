@@ -15,7 +15,7 @@ export class ImageComponent implements OnInit, IComponent {
       id: '',
       value: 'https://mdbootstrap.com/img/new/standard/city/047.jpg',
       class: 'img-rounded',
-      style: '',
+      style: 'max-width: 600px; height: 200px;',
       typeObj: 'img',
       type: '',
     };
