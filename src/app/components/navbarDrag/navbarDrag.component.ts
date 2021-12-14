@@ -17,8 +17,7 @@ export class NavbarDragComponent implements IComponent {
     style: `color: white;
     padding: 10px;
     background-color: #12355B;
-    font-size: 20px;`
-    ,
+    font-size: 20px;`,
     typeObj: 'navDrag',
     type: '',
   };
@@ -27,7 +26,7 @@ export class NavbarDragComponent implements IComponent {
     this.canvas = canvas;
     let date = Date.now();
     this.props.key = date.toString();
-    this.props.id = 'button' + date.toString();
+    this.props.id = 'nav' + date.toString();
   }
 
   @Input() get property(): IProperty {

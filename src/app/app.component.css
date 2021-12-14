@@ -3,30 +3,13 @@
   flex-direction: row;
 }
 
-/********************** PALETTE CSS ********************/
-
-#palette-container {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  max-width: 600px;
-  min-width: 15%;
-  padding: 10px;
-  align-items: center;
-  justify-content: center;
-  overflow-y: auto;
-}
-
-.palette-item {
-  padding: 10px;
-}
-
 /********************** CANVAS CSS ********************/
 
 #canvas-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   height: 100vh;
   width: 100%;
   padding: 20px;
@@ -36,7 +19,7 @@
 
 #canvas {
   display: grid;
-  width: 848px;
+  width: 100%;
   height: 480px;
   min-width: 848px;
   min-height: 480px;
@@ -56,9 +39,45 @@
 
 /********************** CODE CSS ********************/
 
+.tab-container {
+  height: 100%;
+  width: 100%;
+  background-color: white;
+}
+
+.css-textarea-container {
+  height: 100%;
+  width: 100%;
+  background-color: white;
+}
+
 #code-container {
   height: 100vh;
+  width: 25%;
+  max-width: 300px;
+  min-width: 250px;
+  overflow-y: auto;
+}
+
+#code {
+  background-color: white;
+  padding: 10px;
+  height: 100%;
+}
+
+code {
+  color: black;
+}
+
+#css-textarea {
   width: 100%;
+  height: 100%;
+  resize: none;
+  overflow-y: auto;
+}
+
+#css-textarea:focus {
+  outline: none;
 }
 
 /********************** IMG CSS ********************/
@@ -126,9 +145,9 @@ a.custom-nav-link:hover {
   margin: 0px 15px;
 }
 
-.delete{
-  max-height:50px; 
-  max-width:60px; 
+.delete {
+  max-height: 50px;
+  max-width: 60px;
   position: absolute;
   bottom: 26%;
   right: 34%;

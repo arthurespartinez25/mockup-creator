@@ -1,0 +1,65 @@
+#properties {
+  height: 100%;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+tr.properties-table-row {
+  border: solid 1px black;
+}
+
+th.properties-table-header {
+  color: white;
+  background-color: #16324f;
+  padding: 5px;
+}
+th.properties-table-header label {
+  font-weight: lighter;
+}
+
+td.properties-table-data {
+}
+
+td.properties-table-data input,
+td.properties-table-data textarea {
+  width: 100%;
+  margin: 0;
+  align-self: center;
+}
+
+td.properties-table-data input:focus,
+td.properties-table-data textarea:focus {
+  border: none;
+  outline: none;
+}
+
+#taID {
+  resize: none;
+}
+
+#properties-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px;
+  align-items: center;
+  background-color: white;
+  color: #16324f;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+#properties-header #delete {
+  border-radius: 10px;
+  padding: 5px 10px;
+  color: white;
+  background-color: #c51b29;
+  border: none;
+  font-weight: lighter;
+}
+
+#properties-table {
+  width: 100%;
+}
