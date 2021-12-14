@@ -95,6 +95,7 @@
         (click)="clickHandler(component)"
         [childComp]="component"
         [canvasRef]="component.canvas"
+        [componentList]="componentList"
         [mousePositionX]="mousePositionX"
         [mousePositionY]="mousePositionY"
         [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"

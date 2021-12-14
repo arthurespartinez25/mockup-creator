@@ -52,7 +52,7 @@
     'top': ymouse + 'px'
   }"></app-textboxDrag>
 
-  <app-radio [property]="child.props" *ngSwitchCase="'radio'"></app-radio>
+  <app-radio [property]="child.props" [componentList]="compList" *ngSwitchCase="'radio'"></app-radio>
 
   <app-radioDrag [property]="child.props" *ngSwitchCase="'radioDrag'"
   [ngStyle]="{
