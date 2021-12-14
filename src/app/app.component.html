@@ -93,14 +93,15 @@ cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddCompo
       <app-wrapper
         *ngFor="let component of componentList; let i = index"
         class="wrapper"
-        (click)="clickHandler(component)"
+        (mouseup)="clickHandler(component)"
         [childComp]="component"
         [canvasRef]="component.canvas"
         [mousePositionX]="mousePositionX" 
         [mousePositionY]="mousePositionY"
         [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
         (mousedown)="mouseGalawX($event)"
-        (x1)="doSomething1($event)"
+        (updateDataEvent2)="passData2($event)"
+        (updateDataEventX)="passDataX($event)"
       >
       </app-wrapper>
     </div>
@@ -196,4 +197,3 @@ cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddCompo
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 <router-outlet></router-outlet>
-{{mouseMoveX+"  {}{} "+mouseMoveY}}

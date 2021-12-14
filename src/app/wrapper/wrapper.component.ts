@@ -1,5 +1,5 @@
 import { DragDrop } from '@angular/cdk/drag-drop';
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IComponent } from '../interfaces/icomponent';
 import { IProperty } from '../interfaces/iproperty';
 
@@ -14,6 +14,8 @@ export class WrapperComponent implements OnInit {
 
   @Input() mousePositionX: any;
   @Input() mousePositionY: any;
+  @Output() updateDataEvent2= new EventEmitter<any>();
+  @Output() updateDataEventX= new EventEmitter<any>();
 
   xmouse = 0;
   ymouse = 0;
@@ -45,5 +47,13 @@ export class WrapperComponent implements OnInit {
   }
   removeElement(remove:IComponent):void {
 
+  }
+  passData(item: any){
+    //console.warn(item);
+    this.updateDataEvent2.emit(item);
+  }
+  passDataY(item: any){
+    //console.warn(item);
+    this.updateDataEventX.emit(item);
   }
 }

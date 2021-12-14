@@ -110,7 +110,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
       case 'button':
         temp = new ButtonComponent(this.canvas);
-        this.btnCmp = temp as ButtonComponent;
         break;
       case 'textbox':
         temp = new TextboxComponent(this.canvas);
@@ -270,7 +269,10 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     let tmpHtmlBody = '\n';
 
     this.componentList.forEach((value) => {
+      let regexPosition = /sticky/;
+      
       tmpHtmlBody = tmpHtmlBody + value.htmlCode + '\n';
+      tmpHtmlBody = tmpHtmlBody.replace(regexPosition,"absolute");
     });
     return tmpHtmlBody;
   }
@@ -315,23 +317,25 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     //this.mouseMoveY = $event.source.getFreeDragPosition().y;
   }
 
-  doSomething1(mousePositionXV2: any){
-    console.log(mousePositionXV2);
-  }
-  @ViewChild(ButtonComponent) btnCmp : ButtonComponent;
   
+  
+  
+  passData2(item: any){
+    //console.warn(item);
+    this.mouseMoveX = item;
+  }
+  passDataX(item: any){
+    //console.warn(item);
+    this.mouseMoveY = item;
+  }
 
   ngAfterViewChecked(){
-      console.log(this.btnCmp.getX());
-    //console.log(this.btnCmp.mousePositionXV2);
-    //this.mouseMoveX = this.btnCmp.mousePositionXV2;
-    //this.mouseMoveY = this.btnCmp.mousePositionYV2;
+     
   }
   jude = "aw";
   clickHandler(component: IComponent) {
     this.selected = component.props;
     this.selectedComponent = component;
-
     this.jude = this.selected.style;
     let regexLeft = /left(.+?);/;
     let regexTop = /top(.+?);/;
@@ -339,13 +343,14 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.jude = this.jude.replace(regexLeft,"");
     this.jude = this.jude.replace(regexTop,"");
     this.jude = this.jude.replace(regexPosition,"");
-    this.mouseMoveX = this.btnCmp.mousePositionXV2;
-    this.mouseMoveY = this.btnCmp.mousePositionYV2;
-
+    this.selected.style = this.selected.style;
+    //this.mouseMoveX = this.mouseMoveX;
+    //this.mouseMoveY = this.btnCmp.mousePositionYV2;
     this.selected.style = this.jude + 
+    "position:sticky;"+
     "left:"+this.mouseMoveX+"px;"+
-    "top:"+this.mouseMoveY+"px;"+
-    "position:absolute;";
+    "top:"+this.mouseMoveY+"px;"/*+
+    "position:fixed;"*/;
   }
 
   

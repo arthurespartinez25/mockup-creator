@@ -6,14 +6,14 @@ import { IProperty } from 'src/app/interfaces/iproperty';
 @Component({
   selector: 'app-button',
   template: `<button cdkDrag cdkDragBoundary="#canvas"
-  (cdkDragEnded)="onDragEnded($event)"  [id]="props.id" [style]="props.style" [type]="props.type">
+  (cdkDragEnded)="onDragEnded($event)" [id]="props.id" [style]="props.style" [type]="props.type">
     {{ props.value }}
-  </button>{{mousePositionXV2}}`,
+  </button>`,
 })
 
 export class ButtonComponent implements IComponent {
-  @Output() x1 = new EventEmitter<number>();
-  @Output() y1 = new EventEmitter<number>();
+ 
+  
   canvas: ElementRef;
   props: IProperty = {
     key: '',
@@ -24,23 +24,18 @@ export class ButtonComponent implements IComponent {
     typeObj: 'button',
     type: 'button',
   };
-
-  mousePositionXV2 = 110;
+  //(cdkDragEnded)="onDragEnded($event)"
+  @Output() updateDataEvent= new EventEmitter<any>();
+  @Output() updateDataEventY= new EventEmitter<any>();
+  mousePositionXV2 = 310;
   mousePositionYV2= 110;
 
-  
-  
-
   onDragEnded($event: any){
-    //const { offsetLeft, offsetTop } = event.source.element.nativeElement;
-    //const { x, y } = event.distance;
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
     this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
-    this.x1.emit(this.mousePositionXV2);
-    this.y1.emit(this.mousePositionYV2);
-}
-  getX(){
-    return this.mousePositionXV2;
+    
+    this.updateDataEvent.emit(this.mousePositionXV2);
+    this.updateDataEventY.emit(this.mousePositionYV2);
   }
 
   constructor(canvas: ElementRef) {
