@@ -76,7 +76,7 @@
           [disabled]="!this.props.id"
           type="number"
           [value]="props.rows"
-          (keyup)="rowsChangeHandler($event)"
+          (change)="rowsChangeHandler($event)"
         />
       </td>
     </tr>
@@ -87,7 +87,7 @@
           [disabled]="!this.props.id"
           type="number"
           [value]="props.cols"
-          (keyup)="colsChangeHandler($event)"
+          (change)="colsChangeHandler($event)"
         />
       </td>
     </tr>
@@ -121,7 +121,7 @@
           [disabled]="!this.props.id"
           type="number"
           [value]="props.cols"
-          (keyup)="colsChangeHandler($event)"
+          (change)="colsChangeHandler($event)"
         />
       </td>
     </tr>

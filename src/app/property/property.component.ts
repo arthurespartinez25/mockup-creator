@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IComponent } from '../interfaces/icomponent';
 import { IProperty } from '../interfaces/iproperty';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-property',
@@ -45,7 +46,7 @@ export class PropertyComponent implements OnInit {
     this.selectedcomp = value;
   }
 
-  constructor() {
+  constructor(private popup: AppComponent) {
     this.props = this.property;
     this.componentList = this.compList;
     this.selectedcomp = this.selectedIdx;
@@ -54,6 +55,8 @@ export class PropertyComponent implements OnInit {
   deleteComponent() {
     let componentIndex = this.componentList.indexOf(this.selectedcomp);
     if (componentIndex !== -1) {
+      if(this.componentList[componentIndex].props.typeObj == "popup")
+        this.popup._popupCount--;
       this.componentList.splice(componentIndex, 1);
       this.props = this.defaultProps;
     }
