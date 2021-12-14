@@ -126,7 +126,7 @@
         ></textarea>
       </td>
     </tr>
-    <tr *ngIf="props.typeObj == 'popup' || 'popupDrag'">
+    <tr *ngIf="props.typeObj == 'popup'">
       <th><label>data-bs-content</label></th>
       <td>
         <input
@@ -134,18 +134,16 @@
           [value]="props.content"
           (keyup)="contentChangeHandler($event)"
         />
-        <tr *ngIf="props.name">
-          <th><label>name</label></th>
-          <input
-            type="text"
-            [value]="this.props.name"
-            (keyup)="nameChangeHandler($event)"
-          />
-        </tr>
-        <tr>
-          
-        </tr>
       </td>
+    </tr>
+
+    <tr *ngIf="props.name">
+      <th><label>name</label></th>
+      <input
+        type="text"
+        [value]="this.props.name"
+        (keyup)="nameChangeHandler($event)"
+      />
     </tr>
     <button (click)="deleteComponent()">Delete Component</button>
   </table>
