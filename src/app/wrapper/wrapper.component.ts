@@ -13,6 +13,7 @@ export class WrapperComponent implements OnInit {
   child: IComponent;
   canvas: ElementRef;
   compList: IComponent[] = [];
+  canvasWidth: string;
 
   @Input() mousePositionX: any;
   @Input() mousePositionY: any;
@@ -36,6 +37,7 @@ export class WrapperComponent implements OnInit {
 
   set canvasRef(value: ElementRef) {
     this.canvas = value;
+    this.canvasWidth = getComputedStyle(this.canvas.nativeElement).width;
   }
 
   @Input()get componentList(): IComponent[]{
@@ -53,7 +55,5 @@ export class WrapperComponent implements OnInit {
     this.xmouse = this.mousePositionX;
     this.ymouse = this.mousePositionY;
   }
-  removeElement(remove:IComponent):void {
-
-  }
+  removeElement(remove: IComponent): void {}
 }
