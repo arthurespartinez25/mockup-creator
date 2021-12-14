@@ -54,7 +54,7 @@
 
   <app-radio [property]="child.props" [componentList]="compList" *ngSwitchCase="'radio'"></app-radio>
 
-  <app-radioDrag [property]="child.props" *ngSwitchCase="'radioDrag'"
+  <app-radioDrag [property]="child.props" [componentList]="compList" *ngSwitchCase="'radioDrag'"
   [ngStyle]="{
     'position': 'absolute',
     'left': xmouse + 'px',

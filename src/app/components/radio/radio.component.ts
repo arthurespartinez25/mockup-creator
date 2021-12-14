@@ -53,11 +53,11 @@ export class RadioComponent implements OnInit,IComponent {
 
   isChecked(event : any) {
     for(let x=0; x <this.compList.length; x++){
-      if(this.compList[x].props.typeObj == 'radio'){
+      if(this.compList[x].props.typeObj == 'radio' || this.compList[x].props.typeObj == 'radioDrag'){
         if(this.compList[x].props.name == this.props.name){
           this.compList[x].props.checked = 'false';
           // console.log(this.compList[x].props.value + ":" + this.compList[x].props.checked);
-          this.compList[x].htmlCode;
+          //this.compList[x].htmlCode;
         }
       }
     }
