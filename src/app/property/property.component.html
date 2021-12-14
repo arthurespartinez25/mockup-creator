@@ -58,7 +58,7 @@
         />
       </td>
     </tr>
-    <tr class="properties-table-row" *ngIf="props.typeObj == 'textbox'">
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'textbox' || props.typeObj == 'input' || props.typeObj == 'inputDrag'">
       <th class="properties-table-header"><label>placeholder</label></th>
       <td class="properties-table-data">
         <input
