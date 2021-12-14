@@ -11,6 +11,7 @@ import { IProperty } from '../interfaces/iproperty';
 export class WrapperComponent implements OnInit {
   child: IComponent;
   canvas: ElementRef;
+  canvasWidth: string;
 
   @Input() mousePositionX: any;
   @Input() mousePositionY: any;
@@ -34,6 +35,7 @@ export class WrapperComponent implements OnInit {
 
   set canvasRef(value: ElementRef) {
     this.canvas = value;
+    this.canvasWidth = getComputedStyle(this.canvas.nativeElement).width;
   }
 
   constructor(private ref: ElementRef, private drag: DragDrop) {}
@@ -43,7 +45,5 @@ export class WrapperComponent implements OnInit {
     this.xmouse = this.mousePositionX;
     this.ymouse = this.mousePositionY;
   }
-  removeElement(remove:IComponent):void {
-
-  }
+  removeElement(remove: IComponent): void {}
 }

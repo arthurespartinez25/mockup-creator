@@ -26,7 +26,7 @@ export class NavbarComponent implements IComponent {
     this.canvas = canvas;
     let date = Date.now();
     this.props.key = date.toString();
-    this.props.id = 'button' + date.toString();
+    this.props.id = 'nav' + date.toString();
   }
 
   @Input() get property(): IProperty {

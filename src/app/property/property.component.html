@@ -1,19 +1,23 @@
-<div>
-  <table border="1" [cellSpacing]="1" style="background-color: white">
-    <tr>
-      <th colspan="2">Component Property</th>
-      <!-- <button 
-      (click)="removeElement()"
-      type="button" 
-      class="btn btn-danger" 
-      title="Delete Element">
-        <span aria-hidden="true">&times;</span> 
-      </button>-->
-    </tr>
-    <tr>
-      <th><label>id</label></th>
-      <td>
+<div id="properties">
+  <div id="properties-header">
+    Component Property
+    <button
+      [ngClass]="{ invisible: !this.props.id }"
+      id="delete"
+      (click)="deleteComponent()"
+    >
+      Remove
+    </button>
+  </div>
+
+  <table id="properties-table" border="1" [cellSpacing]="1">
+    <tr class="properties-table-row">
+      <th class="properties-table-header" class="properties-table-header">
+        <label>id</label>
+      </th>
+      <td class="properties-table-data">
         <input
+          [disabled]="!this.props.id"
           type="text"
           [id]="props.id"
           [value]="props.id"
@@ -21,91 +25,66 @@
         />
       </td>
     </tr>
-    <tr>
-      <th><label>value</label></th>
-      <td>
+    <tr class="properties-table-row">
+      <th class="properties-table-header"><label>value</label></th>
+      <td class="properties-table-data">
         <input
+          [disabled]="!this.props.id"
           type="text"
           [value]="props.value"
           (keyup)="valueChangeHandler($event)"
         />
       </td>
     </tr>
-    <tr>
-      <th><label>type</label></th>
-      <td>
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'input'">
+      <th class="properties-table-header"><label>type</label></th>
+      <td class="properties-table-data">
         <input
+          [disabled]="!this.props.id"
           type="text"
           [value]="props.type"
           (keyup)="typeChangeHandler($event)"
         />
       </td>
     </tr>
-    <tr>
-      <th><label>class</label></th>
-      <td>
+    <tr class="properties-table-row">
+      <th class="properties-table-header"><label>class</label></th>
+      <td class="properties-table-data">
         <input
+          [disabled]="!this.props.id"
           type="text"
           [value]="props.class"
           (keyup)="classChangeHandler($event)"
         />
       </td>
     </tr>
-    <tr *ngIf="props.typeObj == 'textbox'">
-      <th><label>placeholder</label></th>
-      <td>
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'textbox'">
+      <th class="properties-table-header"><label>placeholder</label></th>
+      <td class="properties-table-data">
         <input
+          [disabled]="!this.props.id"
           type="text"
           [value]="props.placeholder"
           (keyup)="placeholderChangeHandler($event)"
         />
       </td>
     </tr>
-    <tr *ngIf="props.typeObj == 'textbox'">
-      <th><label>rows</label></th>
-      <td>
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'textbox'">
+      <th class="properties-table-header"><label>rows</label></th>
+      <td class="properties-table-data">
         <input
+          [disabled]="!this.props.id"
           type="number"
           [value]="props.rows"
           (keyup)="rowsChangeHandler($event)"
         />
       </td>
     </tr>
-    <tr *ngIf="props.typeObj == 'textbox'">
-      <th><label>columns</label></th>
-      <td>
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'textbox'">
+      <th class="properties-table-header"><label>columns</label></th>
+      <td class="properties-table-data">
         <input
-          type="number"
-          [value]="props.cols"
-          (keyup)="colsChangeHandler($event)"
-        />
-      </td>
-    </tr>
-    
-    <tr *ngIf="props.typeObj == 'textboxDrag'">
-      <th><label>placeholder</label></th>
-      <td>
-        <input
-          type="text"
-          [value]="props.placeholder"
-          (keyup)="placeholderChangeHandler($event)"
-        />
-      </td>
-    </tr>
-    <tr *ngIf="props.typeObj == 'textboxDrag'">
-      <th><label>rows</label></th>
-      <td>
-        <input
-          type="number"
-          [value]="props.rows"
-          (keyup)="rowsChangeHandler($event)"
-        />
-      </td>
-    </tr>
-    <tr *ngIf="props.typeObj == 'textboxDrag'">
-      <th><label>columns</label></th>
-      <td>
-        <input
+          [disabled]="!this.props.id"
           type="number"
           [value]="props.cols"
           (keyup)="colsChangeHandler($event)"
@@ -113,10 +92,45 @@
       </td>
     </tr>
 
-    <tr>
-      <th><label>style</label></th>
-      <td>
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'textboxDrag'">
+      <th class="properties-table-header"><label>placeholder</label></th>
+      <td class="properties-table-data">
+        <input
+          [disabled]="!this.props.id"
+          type="text"
+          [value]="props.placeholder"
+          (keyup)="placeholderChangeHandler($event)"
+        />
+      </td>
+    </tr>
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'textboxDrag'">
+      <th class="properties-table-header"><label>rows</label></th>
+      <td class="properties-table-data">
+        <input
+          [disabled]="!this.props.id"
+          type="number"
+          [value]="props.rows"
+          (keyup)="rowsChangeHandler($event)"
+        />
+      </td>
+    </tr>
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'textboxDrag'">
+      <th class="properties-table-header"><label>columns</label></th>
+      <td class="properties-table-data">
+        <input
+          [disabled]="!this.props.id"
+          type="number"
+          [value]="props.cols"
+          (keyup)="colsChangeHandler($event)"
+        />
+      </td>
+    </tr>
+
+    <tr class="properties-table-row">
+      <th class="properties-table-header"><label>style</label></th>
+      <td class="properties-table-data">
         <textarea
+          [disabled]="!this.props.id"
           name="style"
           id="taID"
           [value]="props.style"
@@ -126,28 +140,31 @@
         ></textarea>
       </td>
     </tr>
-    <tr *ngIf="props.typeObj == 'popup' || 'popupDrag'">
-      <th><label>data-bs-content</label></th>
-      <td>
+    <tr
+      class="properties-table-row"
+      *ngIf="props.typeObj == 'popup' || props.typeObj == 'popupDrag'"
+    >
+      <th class="properties-table-header"><label>data-bs-content</label></th>
+      <td class="properties-table-data">
         <input
+          [disabled]="!this.props.id"
           type="text"
           [value]="props.content"
           (keyup)="contentChangeHandler($event)"
         />
-        <tr *ngIf="props.name">
-          <th><label>name</label></th>
-          <input
-            type="text"
-            [value]="this.props.name"
-            (keyup)="nameChangeHandler($event)"
-          />
-        </tr>
-        <tr>
-          
-        </tr>
       </td>
     </tr>
-    <button (click)="deleteComponent()">Delete Component</button>
+    <tr class="properties-table-row" *ngIf="props.name">
+      <th class="properties-table-header"><label>name</label></th>
+      <td class="properties-table-data">
+        <input
+          [disabled]="!this.props.id"
+          type="text"
+          [value]="this.props.name"
+          (keyup)="nameChangeHandler($event)"
+        />
+      </td>
+    </tr>
   </table>
 </div>
 <!--

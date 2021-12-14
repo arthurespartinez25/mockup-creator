@@ -5,11 +5,21 @@ import { IProperty } from '../interfaces/iproperty';
 @Component({
   selector: 'app-property',
   templateUrl: './property.component.html',
+  styleUrls: ['./property.component.css'],
 })
 export class PropertyComponent implements OnInit {
   props: IProperty;
   componentList: IComponent[] = [];
   selectedcomp: IComponent;
+  defaultProps: IProperty = {
+    key: '',
+    id: '',
+    value: '',
+    class: '',
+    style: '',
+    typeObj: '',
+    type: '',
+  };
 
   @Input() get property(): IProperty {
     return this.props;
@@ -45,6 +55,7 @@ export class PropertyComponent implements OnInit {
     let componentIndex = this.componentList.indexOf(this.selectedcomp);
     if (componentIndex !== -1) {
       this.componentList.splice(componentIndex, 1);
+      this.props = this.defaultProps;
     }
   }
 
