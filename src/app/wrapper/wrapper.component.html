@@ -78,17 +78,14 @@
     }"
   ></app-textboxDrag>
 
-  <app-radio [property]="child.props" *ngSwitchCase="'radio'"></app-radio>
+  <app-radio [property]="child.props" [componentList]="compList" *ngSwitchCase="'radio'"></app-radio>
 
-  <app-radioDrag
-    [property]="child.props"
-    *ngSwitchCase="'radioDrag'"
-    [ngStyle]="{
-      position: 'absolute',
-      left: xmouse + 'px',
-      top: ymouse + 'px'
-    }"
-  ></app-radioDrag>
+  <app-radioDrag [property]="child.props" [componentList]="compList" *ngSwitchCase="'radioDrag'"
+  [ngStyle]="{
+    'position': 'absolute',
+    'left': xmouse + 'px',
+    'top': ymouse + 'px'
+  }"></app-radioDrag>
 
   <app-modal [property]="child.props" *ngSwitchCase="'modal'"></app-modal>
 
