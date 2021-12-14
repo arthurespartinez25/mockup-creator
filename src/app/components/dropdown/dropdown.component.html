@@ -3,9 +3,8 @@
   <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="visually-hidden">Toggle Dropdown</span>
   </button>
+  
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">ActionY</a></li>
-    <li><a class="dropdown-item" href="#">Another action</a></li>
-    <li><a class="dropdown-item" href="#">Something else here</a></li>
+    <li *ngFor="let value of fakeArray; let i = index"><a class="dropdown-item" href="#">Link {{ i }}</a></li>
   </ul>
 </div>

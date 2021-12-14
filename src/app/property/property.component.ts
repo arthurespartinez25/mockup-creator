@@ -20,6 +20,7 @@ export class PropertyComponent implements OnInit {
     style: '',
     typeObj: '',
     type: '',
+    numOfLinks: undefined
   };
 
   @Input() get property(): IProperty {
@@ -100,5 +101,8 @@ export class PropertyComponent implements OnInit {
   }
   nameChangeHandler(event: any) {
     this.props.name = event.target.value;
+  }
+  numOfLinksChangeHandler(event: any) {
+    this.props.numOfLinks = event.target.value;
   }
 }

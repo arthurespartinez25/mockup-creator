@@ -11,4 +11,5 @@ export interface IProperty {
   rows?: number;
   cols?: number;
   name?: string;
+  numOfLinks?: string;
 }
