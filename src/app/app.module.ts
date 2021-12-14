@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -75,7 +76,7 @@ import { PopupDragComponent } from './components/popupDrag/popupDrag.component';
     InputDragComponent,
     LinkDragComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule, HttpClientModule],
   providers: [DragDropModule],
   bootstrap: [AppComponent],
 })

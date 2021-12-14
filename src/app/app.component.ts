@@ -9,6 +9,7 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http'
 import { IComponent } from './interfaces/icomponent';
 import { ButtonComponent } from './components/button/button.component';
 import { PopupComponent } from './components/popup/popup.component';
@@ -57,6 +58,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   componentList: IComponent[] = [];
   selectedComponent: IComponent;
   ref: ComponentRef<any>;
+  readonly CSS_URL ='../app/app.component.css';
 
   selected: IProperty = {
     key: '',
@@ -84,7 +86,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('PropertyComponent') property: boolean;
   @ViewChild('canvas') canvas!: ElementRef;
 
-  constructor(private renderer: Renderer2, private drag: DragDrop, private doms : DomSanitizer) {}
+  constructor(private renderer: Renderer2, private drag: DragDrop, private doms : DomSanitizer, private http:HttpClient) {}
   delete: boolean;
 
   ngAfterViewInit(): void {
@@ -304,17 +306,94 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.selectedComponent = component;
   }
 
-  cssReceiveMessage(event: any){
-    let styleTemp = event.target.value;
-    this.style = styleTemp.toString();
-    console.log(this.style);
+  /*
+  readDocument() {
+    let fileReader = new FileReader();
+    fileReader.onload = (e) => {
+      console.log(fileReader.result);
+    }
+    fileReader.readAsText(this.file);
   }
+  */
+
 
   /*
+  posts:any;
+
+  getPosts(){
+    this.posts = this.http.get('app/app.component.css')
+      .subscribe(data => {
+        console.log(data.toString);
+    });
+    console.log(this.posts);
+    
+
+    //readCSSFile(this.CSS_URL);
+  }
+
+  readCSSFile (url: any) {
+    this.http.get(url)
+      .subscribe(
+        cssData => {
+          console.log(cssData)
+        },
+        err => {
+          console.log(err)
+        });
+   }
+
+  /*
+  readFileAsync(fileName: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+        this.http.get('http://localhost:4200/assets/backStock.json')
+            .subscribe(data => {
+              resolve(data);
+              return;
+            });
+    });
+  }
+  */
+
   getCSSStyle(style: string){
     return this.doms.bypassSecurityTrustStyle(style);
   }
-  */
+  
+  cssReceiveMessage(event: any){
+    let styleTemp = event.target.value;
+    this.style = styleTemp.toString();
+    this.http.get('/app/app.component.css').subscribe(data => {
+      //console.log('data', data.toString());
+      console.log(data.toString());
+    });
+    //this.getPosts();
+    //console.log(this.style);
+    
+    /*const fs = 'fs';
+    fs.readFile('./app.component.css', 'utf8', (err: any, data: any) => {
+      if(err){
+        console.log(err);
+        return;
+      }
+      console.log(data);
+      fs.writeFile('./app.component.css', data+"\n"+this.style, (err:any) =>{
+        if(err){
+          console.log(err);
+          return;
+        }
+      })
+    });
+    */
+
+
+    //File file = ResourceUtils 
+    //var reader = new FileReader();
+    //reader.readAsText(['./app.component.css'])
+    //this.httpClient.get(['./app.component.css'], { responseType: 'text' })
+    //.subscribe((data: any) => this.style = data);
+  }
+
+  
+  
 
   receiveMessage($event: boolean) {
     if ($event == true) {
@@ -737,3 +816,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.renderer.appendChild(this.canvas.nativeElement, newTextbox);
   }
 }
+function readCSSFile(arg0: string) {
+  throw new Error('Function not implemented.');
+}
+
