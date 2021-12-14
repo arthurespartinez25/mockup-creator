@@ -1,5 +1,5 @@
 import { CdkDragEnd } from '@angular/cdk/drag-drop';
-import { Component, ComponentRef, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, ComponentRef, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
 
@@ -10,7 +10,10 @@ import { IProperty } from 'src/app/interfaces/iproperty';
     {{ props.value }}
   </button>{{mousePositionXV2}}`,
 })
+
 export class ButtonComponent implements IComponent {
+  @Output() x1 = new EventEmitter<number>();
+  @Output() y1 = new EventEmitter<number>();
   canvas: ElementRef;
   props: IProperty = {
     key: '',
@@ -24,6 +27,8 @@ export class ButtonComponent implements IComponent {
 
   mousePositionXV2 = 110;
   mousePositionYV2= 110;
+
+  
   
 
   onDragEnded($event: any){
@@ -31,8 +36,12 @@ export class ButtonComponent implements IComponent {
     //const { x, y } = event.distance;
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
     this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
-    
+    this.x1.emit(this.mousePositionXV2);
+    this.y1.emit(this.mousePositionYV2);
 }
+  getX(){
+    return this.mousePositionXV2;
+  }
 
   constructor(canvas: ElementRef) {
     this.canvas = canvas;

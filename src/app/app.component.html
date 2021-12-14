@@ -100,6 +100,7 @@ cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddCompo
         [mousePositionY]="mousePositionY"
         [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
         (mousedown)="mouseGalawX($event)"
+        (x1)="doSomething1($event)"
       >
       </app-wrapper>
     </div>

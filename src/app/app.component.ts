@@ -92,7 +92,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     
   }
   ngAfterViewInit(): void {
-      
+    
   }
 
   addComponent(component: string) {
@@ -110,6 +110,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
       case 'button':
         temp = new ButtonComponent(this.canvas);
+        this.btnCmp = temp as ButtonComponent;
         break;
       case 'textbox':
         temp = new TextboxComponent(this.canvas);
@@ -245,7 +246,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       default:
         temp = new ButtonComponent(this.canvas);
     }
-
+    
     this.componentList.push(temp);
     }
   }
@@ -313,17 +314,24 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     //this.mouseMoveX = $event.source.getFreeDragPosition().x;
     //this.mouseMoveY = $event.source.getFreeDragPosition().y;
   }
-  @ViewChild(ButtonComponent) btnCmp : ButtonComponent;
 
-  ngAfterViewChecked(): void {
-    console.log(this.btnCmp.mousePositionXV2);
-    this.mouseMoveX = this.btnCmp.mousePositionXV2;
-    this.mouseMoveY = this.btnCmp.mousePositionYV2;
+  doSomething1(mousePositionXV2: any){
+    console.log(mousePositionXV2);
+  }
+  @ViewChild(ButtonComponent) btnCmp : ButtonComponent;
+  
+
+  ngAfterViewChecked(){
+      console.log(this.btnCmp.getX());
+    //console.log(this.btnCmp.mousePositionXV2);
+    //this.mouseMoveX = this.btnCmp.mousePositionXV2;
+    //this.mouseMoveY = this.btnCmp.mousePositionYV2;
   }
   jude = "aw";
   clickHandler(component: IComponent) {
     this.selected = component.props;
     this.selectedComponent = component;
+
     this.jude = this.selected.style;
     let regexLeft = /left(.+?);/;
     let regexTop = /top(.+?);/;
@@ -331,6 +339,9 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.jude = this.jude.replace(regexLeft,"");
     this.jude = this.jude.replace(regexTop,"");
     this.jude = this.jude.replace(regexPosition,"");
+    this.mouseMoveX = this.btnCmp.mousePositionXV2;
+    this.mouseMoveY = this.btnCmp.mousePositionYV2;
+
     this.selected.style = this.jude + 
     "left:"+this.mouseMoveX+"px;"+
     "top:"+this.mouseMoveY+"px;"+
