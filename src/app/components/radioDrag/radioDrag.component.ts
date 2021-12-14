@@ -9,6 +9,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
 })
 export class RadioDragComponent implements OnInit,IComponent {
   canvas: ElementRef;
+  compList: IComponent[]=[];
   props: IProperty = {
     key: '',
     id: '',
@@ -18,6 +19,7 @@ export class RadioDragComponent implements OnInit,IComponent {
     typeObj: 'radioDrag',
     type: 'radio',
     name: 'defaultName',
+    checked: 'false',
   };
 
   ngOnInit(): void {
@@ -40,6 +42,33 @@ export class RadioDragComponent implements OnInit,IComponent {
       this.props = value;
     }
   }
+
+  @Input() get componentList(): IComponent[]{
+    return this.compList;
+  }
+
+  set componentList(value: IComponent[]){
+    this.compList = value;
+  }
+
+
+  isChecked(event : any) {
+    for(let x=0; x <this.compList.length; x++){
+      if(this.compList[x].props.typeObj == 'radio' || this.compList[x].props.typeObj == 'radioDrag'){
+        if(this.compList[x].props.name == this.props.name){
+          this.compList[x].props.checked = 'false';
+           console.log(this.compList[x].props.value + ":" + this.compList[x].props.checked);
+          //this.compList[x].htmlCode;
+        }
+      }
+    }
+
+  if ( event.target.checked ) {
+    this.props.checked = 'true';
+  }
+
+}
+
 
   get htmlCode(): string {
     let tmpHtmlCode = '<div class="form-check"> \n <input';
@@ -64,6 +93,12 @@ export class RadioDragComponent implements OnInit,IComponent {
 
     if (this.props.style.trim().length > 0) {
       tmpHtmlCode += ' style="' + this.props.style + '"';
+    }
+
+    if (this.props.checked == "true"){
+      tmpHtmlCode += ' checked'
+    }else{
+     tmpHtmlCode=tmpHtmlCode.replace(' checked','');
     }
 
     //for label part
