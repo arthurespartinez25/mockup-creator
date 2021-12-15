@@ -9,6 +9,20 @@
 
 <!-- Toolbar -->
 <!-- <app-navbar></app-navbar> -->
+
+<head>
+  <style>
+    head{
+        display:block;
+    }
+    body{
+      background-color: azure;
+    }
+  </style>
+<div [innerText]="this.style"></div>
+</head>
+
+<body class="mat-typography">
 <div class="content" role="main">
   <!-- PALETTE SECTION -->
 
@@ -91,8 +105,8 @@ cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddCompo
     <div id="canvas" #canvas 
     (mouseenter)="domInsideCanvas=true"
     (mouseleave)="domInsideCanvas=false"
-    [style]="getCSSStyle(this.style)"
     >
+    <!--[style]="getCSSStyle(this.style)"-->
       <app-wrapper
         *ngFor="let component of componentList; let i = index"
         class="wrapper"
@@ -181,10 +195,9 @@ cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddCompo
         cols="30" 
         rows="5"
         [value]="style"
-        (keyup)="cssReceiveMessage($event)"></textarea>
-        <!--<div *ngModel='let post of posts'>
-          {{ post }}
-        </div>-->
+        (keyup)="cssReceiveMessage($event)"
+        (keyup)="refresh()"></textarea>
+        <!--<a routerLink="/refresh">Testing</a>-->
       </div>
       <div
         class="tab-pane fade"
@@ -205,4 +218,7 @@ cdkDrag (cdkDragEnded)="onDragEnded($event)" (cdkDragEnded)="onDragEndedAddCompo
 <!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
-<router-outlet></router-outlet>
+<!--<router-outlet></router-outlet> -->
+
+</body>
+

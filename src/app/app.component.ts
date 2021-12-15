@@ -9,6 +9,8 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http'
 import { IComponent } from './interfaces/icomponent';
 import { ButtonComponent } from './components/button/button.component';
@@ -46,12 +48,15 @@ import { HeaderDragComponent } from './components/headerDrag/headerDrag.componen
 import { InputDragComponent } from './components/inputDrag/inputDrag.component';
 import { LinkDragComponent } from './components/linkDrag/linkDrag.component';
 import { DomSanitizer } from '@angular/platform-browser';
+import { BehaviorSubject } from 'rxjs';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.css']
 })
+
 export class AppComponent implements OnInit, AfterViewInit {
   title = 'mockup-creator';
   index: number;
@@ -59,6 +64,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   selectedComponent: IComponent;
   ref: ComponentRef<any>;
   readonly CSS_URL ='../app/app.component.css';
+  refreshCSS = new BehaviorSubject<boolean>(true);
 
   selected: IProperty = {
     key: '',
@@ -73,7 +79,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   public _popupCount = 0;
   private _styleStart = '<style>';
   private _styleEnd = '</style>';
-  private _styleBody = '';
+  private _styleBody = 'body{background-color:aquamarine;}';
   private _htmlStart = '<!doctype html>\n<html lang="en">';
   private _htmlEnd = '</html>';
   private _bootstrapLink =
@@ -86,7 +92,14 @@ export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('PropertyComponent') property: boolean;
   @ViewChild('canvas') canvas!: ElementRef;
 
-  constructor(private renderer: Renderer2, private drag: DragDrop, private doms : DomSanitizer, private http:HttpClient) {}
+  constructor(
+    private renderer: Renderer2, 
+    private drag: DragDrop, 
+    private doms : DomSanitizer, 
+    private http:HttpClient,
+    public _router: Router,
+    public _location: Location
+    ) {}
   delete: boolean;
 
   ngAfterViewInit(): void {
@@ -356,11 +369,37 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   getCSSStyle(style: string){
     return this.doms.bypassSecurityTrustStyle(style);
+    this.refreshCSS.next(true);
+  }
+
+  refresh(): void{
+    this._router.navigateByUrl("/refresh", {skipLocationChange:true}).then(() => {
+      //console.log([decodeURI(this._location.path())]);
+      this._router.navigate([decodeURI(this._location.path())]);
+    });
+  }
+
+  cssString(){
+    console.log(
+      this._styleStart +
+      '\n' +
+      this.style +
+      '\n' +
+      this._styleEnd
+    );
+    return(
+      this._styleStart +
+      '\n' +
+      this.style +
+      '\n' +
+      this._styleEnd
+    );
   }
   
   cssReceiveMessage(event: any){
     let styleTemp = event.target.value;
     this.style = styleTemp.toString();
+    /*
     this.http.get('/app/app.component.css').subscribe(data => {
       //console.log('data', data.toString());
       console.log(data.toString());
