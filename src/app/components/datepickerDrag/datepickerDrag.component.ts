@@ -6,7 +6,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
   selector: 'app-datepickerDrag',
   //templateUrl: './datepicker.component.html',
   //styleUrls: ['./datepicker.component.css']
-  template: `<input cdkDrag cdkDragBoundary="#canvas" [type]="props.type" [id]="props.id" [value]="props.value" (change)="dateValue($event)">`
+  template: `<input cdkDrag cdkDragBoundary="#canvas" [type]="props.type" [id]="props.id" [value]="props.value" [class]="props.class" [style]="props.style" (change)="dateValue($event)">`
 })
 export class DatepickerDragComponent implements OnInit,IComponent {
   canvas: ElementRef;
