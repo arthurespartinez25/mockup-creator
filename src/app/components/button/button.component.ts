@@ -6,7 +6,11 @@ import { IProperty } from 'src/app/interfaces/iproperty';
 @Component({
   selector: 'app-button',
   template: `<button cdkDrag cdkDragBoundary="#canvas"
-  (cdkDragEnded)="onDragEnded($event)" [id]="props.id" [style]="props.style" [type]="props.type">
+  (cdkDragEnded)="onDragEnded($event)" [id]="props.id" [style]="props.style"  [ngStyle]="{
+    'position': 'absolute',
+    'left': theX + 'px',
+    'top': theY + 'px'
+  }" [type]="props.type">
     {{ props.value }}
   </button>`,
 })
@@ -20,15 +24,19 @@ export class ButtonComponent implements IComponent {
     id: '',
     value: 'Button',
     class: '',
-    style: '',
+    style: 'position:absolute;left:0px;top:0px;',
     typeObj: 'button',
     type: 'button',
   };
   //(cdkDragEnded)="onDragEnded($event)"
   @Output() updateDataEvent= new EventEmitter<any>();
   @Output() updateDataEventY= new EventEmitter<any>();
+  @Input() xcanvas: any;
+  @Input() ycanvas: any;
   mousePositionXV2 = 310;
   mousePositionYV2= 110;
+  theX = 0;
+  theY = 0;
 
   onDragEnded($event: any){
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
@@ -76,5 +84,11 @@ export class ButtonComponent implements IComponent {
     tmpHtmlCode += '>' + this.props.value + '</button>';
 
     return tmpHtmlCode;
+  }
+
+  ngOnInit(): void {
+    //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
+    this.theX = this.xcanvas;
+    this.theY = this.ycanvas;
   }
 }

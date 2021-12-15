@@ -1,17 +1,18 @@
 <div class="wrapper" [ngSwitch]="child.props.typeObj" >
-  <app-button [property]="child.props" *ngSwitchCase="'button'" (updateDataEvent)="passData($event)"
-  (updateDataEventY)="passDataY($event)" [ngStyle]="{
-    
-    'left': '0px',
-    'top': '0px'
-  }"></app-button>
+  <app-button  [property]="child.props" *ngSwitchCase="'button'" (updateDataEvent)="passData($event)"
+  (updateDataEventY)="passDataY($event)" [xcanvas]="xcanvas" 
+  [ycanvas]="ycanvas"></app-button>
 
-  <app-button [property]="child.props" *ngSwitchCase="'buttonDrag'"[ngStyle]="{
+  <app-buttonDrag #rawr [property]="child.props" *ngSwitchCase="'buttonDrag'"[ngStyle]="{
     'position': 'absolute',
     'left': xmouse + 'px',
     'top': ymouse + 'px'
   }"(updateDataEvent)="passData($event)"
-  (updateDataEventY)="passDataY($event)"></app-button>
+  (updateDataEventY)="passDataY($event)"
+  [xcanvas]="xcanvas" 
+  [ycanvas]="ycanvas"
+  [xmouse]="xmouse" 
+  [ymouse]="ymouse"></app-buttonDrag>
 
   <app-popup [property]="child.props" *ngSwitchCase="'popup'"></app-popup>
 

@@ -14,11 +14,17 @@ export class WrapperComponent implements OnInit {
 
   @Input() mousePositionX: any;
   @Input() mousePositionY: any;
+  @Input() canvasLeft: any;
+  @Input() canvasTop: any;
+  @Input() xCounter: any;
   @Output() updateDataEvent2= new EventEmitter<any>();
   @Output() updateDataEventX= new EventEmitter<any>();
 
   xmouse = 0;
   ymouse = 0;
+  xcanvas = 0;
+  ycanvas = 0;
+  xCounterstrike = 0;
 
   @Input() get childComp(): IComponent {
     return this.child;
@@ -44,6 +50,9 @@ export class WrapperComponent implements OnInit {
     //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
     this.xmouse = this.mousePositionX;
     this.ymouse = this.mousePositionY;
+    this.xcanvas = this.canvasLeft;
+    this.ycanvas = this.canvasTop;
+    this.xCounterstrike = this.xCounter;
   }
   removeElement(remove:IComponent):void {
 

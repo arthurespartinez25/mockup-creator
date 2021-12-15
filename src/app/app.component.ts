@@ -86,6 +86,10 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   constructor(private renderer: Renderer2, private drag: DragDrop) {}
   delete: boolean;
 
+  canvasLeft = 0;
+  canvasTop = 0;
+  xCounter = 0;
+
  
   ngOnInit(): void {
     /* throw new Error('Method not implemented.'); */
@@ -157,7 +161,10 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       default:
         temp = new ButtonComponent(this.canvas);
     }
-
+    this.xCounter++;
+    console.log(this.xCounter);
+    this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
+    this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
     this.componentList.push(temp);
   }
   //----------------------------------------------------------------------------
@@ -245,7 +252,10 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       default:
         temp = new ButtonComponent(this.canvas);
     }
-    
+    this.xCounter++;
+    console.log(this.xCounter);
+    this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
+    this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
     this.componentList.push(temp);
     }
   }
