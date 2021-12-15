@@ -17,10 +17,8 @@ export class DropdownComponent implements OnInit,IComponent {
     style: '',
     typeObj: 'dropdown',
     type: 'button',
-    numOfLinks: '3',
+    numOfLinks: 3,
   };
-
-  fakeArray = new Array(this.props.numOfLinks);
 
   constructor(canvas: ElementRef) { 
     this.canvas = canvas;
@@ -38,7 +36,6 @@ export class DropdownComponent implements OnInit,IComponent {
       this.props = value;
     }
   }
-  
   get htmlCode(): string {
     let tmpHtmlCode = '<div';
     tmpHtmlCode += ' class="dropdown" id="' + this.props.id + '">';
@@ -54,8 +51,10 @@ export class DropdownComponent implements OnInit,IComponent {
   
     return tmpHtmlCode;
   } 
+
+  newNum: number = Number(this.props.numOfLinks);
   ngOnInit(): void {
-    
+    console.log(this.props.numOfLinks);
   }
 
 }

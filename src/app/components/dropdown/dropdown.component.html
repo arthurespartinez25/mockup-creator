@@ -5,6 +5,6 @@
   </button>
   
   <ul class="dropdown-menu">
-    <li *ngFor="let value of fakeArray; let i = index"><a class="dropdown-item" href="#">Link {{ i }}</a></li>
+    <li><a *ngFor="let item of [].constructor(props.numOfLinks); let i = index"class="dropdown-item" href="#">Link {{ i }}</a></li>
   </ul>
 </div>
