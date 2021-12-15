@@ -58,6 +58,39 @@
         />
       </td>
     </tr>
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'dropdown'">
+      <th class="properties-table-header"><label>link 1 value</label></th>
+      <td class="properties-table-data">
+        <input
+          [disabled]="!this.props.id"
+          type="text"
+          [value]="props.link1"
+          (keyup)="link1ChangeHandler($event)"
+        />
+      </td>
+    </tr>
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'dropdown'">
+      <th class="properties-table-header"><label>link 2 value</label></th>
+      <td class="properties-table-data">
+        <input
+          [disabled]="!this.props.id"
+          type="text"
+          [value]="props.link2"
+          (keyup)="link2ChangeHandler($event)"
+        />
+      </td>
+    </tr>
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'dropdown'">
+      <th class="properties-table-header"><label>link 3 value</label></th>
+      <td class="properties-table-data">
+        <input
+          [disabled]="!this.props.id"
+          type="text"
+          [value]="props.link3"
+          (keyup)="link3ChangeHandler($event)"
+        />
+      </td>
+    </tr>
     <tr class="properties-table-row" *ngIf="props.typeObj == 'textbox'">
       <th class="properties-table-header"><label>placeholder</label></th>
       <td class="properties-table-data">
