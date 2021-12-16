@@ -4,9 +4,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
 
 @Component({
   selector: 'app-textbox',
-  template: `<textarea cdkDrag cdkDragBoundary="#canvas" [id]="props.id" [style]="props.style" [placeholder]="props.placeholder" [rows]="props.rows" [cols]="props.cols">
-    {{ props.value }}
-  </textarea>`,
+  template: `<textarea cdkDrag cdkDragBoundary="#canvas" [(ngModel)]="textInput" [id]="props.id" [style]="props.style" [placeholder]="props.placeholder" [rows]="props.rows" [cols]="props.cols" [value]="props.value"></textarea>`
 })
 export class TextboxComponent implements IComponent {
   canvas: ElementRef;
@@ -39,6 +37,10 @@ export class TextboxComponent implements IComponent {
     }
   }
 
+  set textInput(val:string){
+    this.props.value = val;
+  }
+
   get htmlCode(): string {
     let tmpHtmlCode = '<textarea';
     if (this.props.id.trim().length > 0) {
@@ -57,8 +59,20 @@ export class TextboxComponent implements IComponent {
       tmpHtmlCode += ' placeholder="' + this.props.placeholder + '"';
     }
 
+    if (this.props.rows != 0){
+      tmpHtmlCode += ' rows="' + this.props.rows + '"';
+    }
+
+    if (this.props.cols != 0){
+      tmpHtmlCode += ' cols="' + this.props.cols + '"';
+    }
+
     tmpHtmlCode += '>' + this.props.value + '</textarea>';
 
     return tmpHtmlCode;
+  }
+
+  changeEvent(event: any){
+    this.props.value = event.target.value;
   }
 }

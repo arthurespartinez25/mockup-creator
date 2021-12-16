@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ButtonComponent } from './components/button/button.component';
@@ -76,8 +77,8 @@ import { PopupDragComponent } from './components/popupDrag/popupDrag.component';
     InputDragComponent,
     LinkDragComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule, HttpClientModule],
-  providers: [DragDropModule],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule, FormsModule, HttpClientModule],
+  providers: [DragDropModule, AppComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

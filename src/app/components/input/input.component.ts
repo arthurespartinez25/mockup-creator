@@ -12,7 +12,8 @@ export class InputComponent implements OnInit, IComponent {
   props: IProperty = {
     key: '',
     id: '',
-    value: 'Input',
+    value: '',
+    placeholder: 'Input field',
     class: 'form-control',
     style: 'width:200px;',
     typeObj: 'input',
@@ -35,6 +36,11 @@ export class InputComponent implements OnInit, IComponent {
       this.props = value;
     }
   }
+
+  set textInput(val:string){
+    this.props.value = val;
+  }
+
   get htmlCode(): string {
     let tmpHtmlCode = '<input';
     if (this.props.id.trim().length > 0) {
@@ -57,7 +63,7 @@ export class InputComponent implements OnInit, IComponent {
       tmpHtmlCode += ' style="' + this.props.style + '"';
     }
 
-    tmpHtmlCode += '>';
+    tmpHtmlCode += ' placeholder="' + this.props.placeholder + '">';
 
     return tmpHtmlCode;
   }

@@ -17,6 +17,7 @@ export class CheckboxDragComponent implements OnInit, IComponent {
     style: 'cursor: pointer;',
     typeObj: 'checkboxDrag',
     type: 'checkbox',
+    checked: 'true',
   };
 
 
@@ -37,10 +38,26 @@ export class CheckboxDragComponent implements OnInit, IComponent {
     }
   }
 
+  isChecked(event) {
+    if ( event.target.checked ) {
+      this.props.checked = "true";
+      console.log(this.props.checked);
+    }
+    else {
+      this.props.checked = "false";
+      console.log(this.props.checked);
+    }
+  }
+
   get htmlCode(): string {
     let tmpHtmlCode = '<div';
     tmpHtmlCode += ' class="form-check" id="' + this.props.id + '">';
-    tmpHtmlCode +="\n" + ' <input class="' +  this.props.class + '" type="' +  this.props.type + '" style="' + this.props.style + '" id="flexCheckDefault">';
+    if (this.props.checked == "true") {
+      tmpHtmlCode +="\n" + ' <input id="'+ this.props.id + ' class="' +  this.props.class + '" type="' +  this.props.type + '" style="' + this.props.style + '" id="flexCheckDefault" checked>';
+    }
+    else {
+      tmpHtmlCode +="\n" + ' <input id="'+ this.props.id + ' class="' +  this.props.class + '" type="' +  this.props.type + '" style="' + this.props.style + '" id="flexCheckDefault">';
+    }
     tmpHtmlCode +="\n" + ' <label class="form-check-label" for="flexCheckDefault"> ' + this.props.value + ' </label>';
     tmpHtmlCode +="\n" + ' </div>';
     

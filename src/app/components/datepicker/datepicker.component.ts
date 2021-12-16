@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Event } from '@angular/router';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
 
@@ -6,7 +7,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
   selector: 'app-datepicker',
   //templateUrl: './datepicker.component.html',
   //styleUrls: ['./datepicker.component.css']
-  template: `<input cdkDrag cdkDragBoundary="#canvas" [type]="props.type" [id]="props.id" [value]="props.value">`
+  template: `<input cdkDrag cdkDragBoundary="#canvas" [type]="props.type" [id]="props.id" [value]="props.value" [class]="props.class" [style]="props.style" (change)="dateValue($event)">`
 })
 export class DatepickerComponent implements OnInit,IComponent {
   canvas: ElementRef;
@@ -39,6 +40,10 @@ export class DatepickerComponent implements OnInit,IComponent {
       this.props = value;
     }
   }
+
+  dateValue(val: any){
+      this.props.value = val.target.value;
+    }
 
   get htmlCode(): string {
     let tmpHtmlCode = '<input';
