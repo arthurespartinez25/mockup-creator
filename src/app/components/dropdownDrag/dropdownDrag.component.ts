@@ -17,6 +17,9 @@ export class DropdownDragComponent implements OnInit,IComponent {
     style: '',
     typeObj: 'dropdownDrag',
     type: 'button',
+    link1: 'Link 1',
+    link2: 'Link 2',
+    link3: 'Link 3',
   };
 
   constructor(canvas: ElementRef) { 
@@ -41,9 +44,9 @@ export class DropdownDragComponent implements OnInit,IComponent {
     tmpHtmlCode += ' class="dropdown" id="' + this.props.id + '">';
     tmpHtmlCode +="\n" + ' <button class="' +  this.props.class + '" type="' +  this.props.type + '" style="' + this.props.style + '" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> ' + this.props.value + ' </button>';
     tmpHtmlCode +="\n" + ' <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">';
-    tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">Choice 1</a>';
-    tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">Choice 2</a>';
-    tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">Choice 3</a>';
+    tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.link1 + '</a>';
+    tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.link2 + '</a>';
+    tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.link3 + '</a>';
     tmpHtmlCode +="\n" + ' </div>';
     tmpHtmlCode +="\n" + ' </div>';
     
