@@ -3,11 +3,7 @@
   (updateDataEventY)="passDataY($event)" [xcanvas]="xcanvas" 
   [ycanvas]="ycanvas"></app-button>
 
-  <app-buttonDrag #rawr [property]="child.props" *ngSwitchCase="'buttonDrag'"[ngStyle]="{
-    'position': 'absolute',
-    'left': xmouse + 'px',
-    'top': ymouse + 'px'
-  }"(updateDataEvent)="passData($event)"
+  <app-buttonDrag #rawr [property]="child.props" *ngSwitchCase="'buttonDrag'"(updateDataEvent)="passData($event)"
   (updateDataEventY)="passDataY($event)"
   [xcanvas]="xcanvas" 
   [ycanvas]="ycanvas"

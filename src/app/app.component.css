@@ -35,7 +35,7 @@
 }
 
 #canvas {
-  display: grid;
+  display:grid;
   width: 848px;
   height: 480px;
   min-width: 848px;
@@ -44,6 +44,8 @@
 }
 
 .wrapper {
+  grid-column: 1;
+  grid-row: 1;
   width: fit-content;
   height: fit-content;
   margin: 0;
