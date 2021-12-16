@@ -17,6 +17,9 @@ export class DropdownDragComponent implements OnInit,IComponent {
     style: '',
     typeObj: 'dropdownDrag',
     type: 'button',
+    link1: 'Link 1',
+    link2: 'Link 2',
+    link3: 'Link 3',
   };
 
   constructor(canvas: ElementRef) { 
