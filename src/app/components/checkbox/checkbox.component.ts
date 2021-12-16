@@ -8,6 +8,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
   styleUrls: ['./checkbox.component.css']
 })
 export class CheckboxComponent implements OnInit, IComponent {
+  val: string;
   canvas: ElementRef;
   props: IProperty = {
     key: '',
@@ -17,8 +18,8 @@ export class CheckboxComponent implements OnInit, IComponent {
     style: 'cursor: pointer;',
     typeObj: 'checkbox',
     type: 'checkbox',
+    checked: 'true',
   };
-
 
   constructor(canvas: ElementRef) {
     this.canvas = canvas;
@@ -36,11 +37,30 @@ export class CheckboxComponent implements OnInit, IComponent {
       this.props = value;
     }
   }
+  
+  isChecked(event) {
+    if ( event.target.checked ) {
+      this.props.checked = "true";
+      console.log(this.props.checked);
+    }
+    else {
+      this.props.checked = "false";
+      console.log(this.props.checked);
+    }
+  }
 
   get htmlCode(): string {
     let tmpHtmlCode = '<div';
-    tmpHtmlCode += ' class="form-check" id="' + this.props.id + '">';
-    tmpHtmlCode +="\n" + ' <input class="' +  this.props.class + '" type="' +  this.props.type + '" style="' + this.props.style + '" id="flexCheckDefault">';
+    tmpHtmlCode += ' class="form-check">';
+    
+    if (this.props.checked == "true") {
+      tmpHtmlCode +="\n" + ' <input id="'+ this.props.id + ' class="' +  this.props.class + '" type="' +  this.props.type + '" style="' + this.props.style + '" id="flexCheckDefault" checked>';
+    }
+    else {
+      tmpHtmlCode +="\n" + ' <input id="'+ this.props.id + ' class="' +  this.props.class + '" type="' +  this.props.type + '" style="' + this.props.style + '" id="flexCheckDefault">';
+    }
+    
+    
     tmpHtmlCode +="\n" + ' <label class="form-check-label" for="flexCheckDefault"> ' + this.props.value + ' </label>';
     tmpHtmlCode +="\n" + ' </div>';
     
@@ -49,6 +69,8 @@ export class CheckboxComponent implements OnInit, IComponent {
   }
 
   ngOnInit(): void {
-  }
+  } 
+
+  
 
 }

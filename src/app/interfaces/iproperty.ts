@@ -14,4 +14,5 @@ export interface IProperty {
   link1?: string;
   link2?: string;
   link3?: string;
+  checked?: string;
 }

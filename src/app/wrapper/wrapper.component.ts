@@ -1,4 +1,5 @@
 import { DragDrop } from '@angular/cdk/drag-drop';
+import { Icu } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { IComponent } from '../interfaces/icomponent';
 import { IProperty } from '../interfaces/iproperty';
@@ -11,6 +12,7 @@ import { IProperty } from '../interfaces/iproperty';
 export class WrapperComponent implements OnInit {
   child: IComponent;
   canvas: ElementRef;
+  compList: IComponent[] = [];
   canvasWidth: string;
 
   @Input() mousePositionX: any;
@@ -36,6 +38,14 @@ export class WrapperComponent implements OnInit {
   set canvasRef(value: ElementRef) {
     this.canvas = value;
     this.canvasWidth = getComputedStyle(this.canvas.nativeElement).width;
+  }
+
+  @Input()get componentList(): IComponent[]{
+    return this.compList;
+  }
+
+  set componentList(value: IComponent[]){
+    this.compList = value;
   }
 
   constructor(private ref: ElementRef, private drag: DragDrop) {}
