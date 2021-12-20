@@ -29,7 +29,8 @@
   min-width: 1280px;
   min-height: 720px;
   background-color: white;
-  /* overflow: hidden; */
+  flex-wrap: wrap;
+  overflow: hidden;
   
 }
 
