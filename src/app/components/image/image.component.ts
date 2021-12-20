@@ -39,8 +39,8 @@ export class ImageComponent implements OnInit, IComponent {
   
     get htmlCode(): string {
       let tmpHtmlCode = '<img';
-      tmpHtmlCode += ' class="' + this.props.class + '" id="' + this.props.id + '" type="' +  this.props.type 
-       '" style="' + this.props.style + '" src = " ' + this.props.value + '"> </img>';
+      tmpHtmlCode += ' class="' + this.props.class + '" id="' + this.props.id + '" type="' +  this.props.type + 
+      '" style="' + this.props.style + '" src = " ' + this.props.value + '"> </img>';
       
       return tmpHtmlCode;
     }
