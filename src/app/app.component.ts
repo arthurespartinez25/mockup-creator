@@ -346,22 +346,28 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   clickHandler(component: IComponent) {
     this.selected = component.props;
     this.selectedComponent = component;
-    this.jude = this.selected.style;
-    let regexLeft = /left(.+?);/;
-    let regexTop = /top(.+?);/;
-    let regexPosition = /position(.+?);/;
-    this.jude = this.jude.replace(regexLeft,"");
-    this.jude = this.jude.replace(regexTop,"");
-    this.jude = this.jude.replace(regexPosition,"");
-    this.selected.style = this.selected.style;
-    //this.mouseMoveX = this.mouseMoveX;
-    //this.mouseMoveY = this.btnCmp.mousePositionYV2;
-    this.selected.style = this.jude + 
-    "position:sticky;"+
-    "left:"+this.mouseMoveX+"px;"+
-    "top:"+this.mouseMoveY+"px;"/*+
-    "position:fixed;"*/;
+    if(this.mouseMoveX !=0 && this.mouseMoveY !=0)
+    {
+      this.jude = this.selected.style;
+      let regexLeft = /left(.+?);/;
+      let regexTop = /top(.+?);/;
+      let regexPosition = /position(.+?);/;
+      this.jude = this.jude.replace(regexLeft,"");
+      this.jude = this.jude.replace(regexTop,"");
+      this.jude = this.jude.replace(regexPosition,"");
+      this.selected.style = this.selected.style;
+      //this.mouseMoveX = this.mouseMoveX;
+      //this.mouseMoveY = this.btnCmp.mousePositionYV2;
+      this.selected.style = this.jude + 
+      "position:sticky;"+
+      "left:"+this.mouseMoveX+"px;"+
+      "top:"+this.mouseMoveY+"px;"/*+
+      "position:fixed;"*/;
+      this.mouseMoveX = 0;
+      this.mouseMoveY = 0;
+    }
   }
+  
 
   
   receiveMessage($event: boolean) {
