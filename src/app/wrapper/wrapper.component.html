@@ -41,7 +41,13 @@
   <app-datepicker
     [property]="child.props"
     *ngSwitchCase="'datepicker'"
-  ></app-datepicker>
+    (updateDataEvent)="passData($event)"
+    (updateDataEventY)="passDataY($event)" 
+    [xcanvas]="xcanvas" 
+    [ycanvas]="ycanvas"
+  >
+  </app-datepicker>
+
   <app-datepickerDrag
     [property]="child.props"
     *ngSwitchCase="'datepickerDrag'"
@@ -52,7 +58,14 @@
     }"
   ></app-datepickerDrag>
 
-  <app-image [property]="child.props" *ngSwitchCase="'img'"></app-image>
+  <app-image [property]="child.props" 
+  *ngSwitchCase="'img'"
+  (updateDataEvent)="passData($event)"
+  (updateDataEventY)="passDataY($event)" 
+  [xcanvas]="xcanvas" 
+  [ycanvas]="ycanvas">
+
+  </app-image>
 
   <app-imageDrag
     [property]="child.props"
@@ -75,7 +88,13 @@
     }"
   ></app-labelDrag>
 
-  <app-textbox [property]="child.props" *ngSwitchCase="'textbox'"></app-textbox>
+  <app-textbox [property]="child.props" 
+  *ngSwitchCase="'textbox'"
+  (updateDataEvent)="passData($event)"
+  (updateDataEventY)="passDataY($event)" 
+  [xcanvas]="xcanvas" 
+  [ycanvas]="ycanvas">
+  </app-textbox>
 
   <app-textboxDrag
     [property]="child.props"
@@ -96,7 +115,13 @@
     'top': ymouse + 'px'
   }"></app-radioDrag>
 
-  <app-modal [property]="child.props" *ngSwitchCase="'modal'"></app-modal>
+  <app-modal [property]="child.props" 
+  *ngSwitchCase="'modal'"
+  (updateDataEvent)="passData($event)"
+  (updateDataEventY)="passDataY($event)" 
+  [xcanvas]="xcanvas" 
+  [ycanvas]="ycanvas">
+  </app-modal>
 
   <app-modalDrag
     [property]="child.props"
@@ -143,7 +168,8 @@
   (updateDataEvent)="passData($event)"
   (updateDataEventY)="passDataY($event)" 
   [xcanvas]="xcanvas" 
-  [ycanvas]="ycanvas"></app-navbar>
+  [ycanvas]="ycanvas"
+  [canvasW]="canvasW"></app-navbar>
 
   <app-navbarDrag
     [property]="child.props"
@@ -157,7 +183,14 @@
     [ngStyle]="{ width: canvasWidth }"
   ></app-navbarDrag>
 
-  <app-input [property]="child.props" *ngSwitchCase="'input'"></app-input>
+  <app-input [property]="child.props" 
+  *ngSwitchCase="'input'"
+  (updateDataEvent)="passData($event)"
+  (updateDataEventY)="passDataY($event)" 
+  [xcanvas]="xcanvas" 
+  [ycanvas]="ycanvas">
+  </app-input>
+
   <app-inputDrag
     [property]="child.props"
     *ngSwitchCase="'inputDrag'"
@@ -169,7 +202,13 @@
   >
   </app-inputDrag>
 
-  <app-header [property]="child.props" *ngSwitchCase="'header'"></app-header>
+  <app-header [property]="child.props" 
+  *ngSwitchCase="'header'"
+  (updateDataEvent)="passData($event)"
+  (updateDataEventY)="passDataY($event)" 
+  [xcanvas]="xcanvas" 
+  [ycanvas]="ycanvas">></app-header>
+
   <app-headerDrag
     [property]="child.props"
     *ngSwitchCase="'headerDrag'"

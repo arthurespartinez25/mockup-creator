@@ -87,6 +87,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   canvasLeft = 0;
   canvasTop = 0;
+  canvasW = 0;
   xCounter = 0;
 
  
@@ -164,6 +165,8 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     console.log(this.xCounter);
     this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
     this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
+    this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
+    console.log(this.canvasW+"rawr");
     this.componentList.push(temp);
   }
   //----------------------------------------------------------------------------
@@ -339,7 +342,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   clickHandler(component: IComponent) {
     this.selected = component.props;
     this.selectedComponent = component;
-    if(this.mouseMoveX !=0 && this.mouseMoveY !=0 && this.selected.typeObj!="nav")
+    if(this.mouseMoveX !=0 && this.mouseMoveY !=0 )
     {
       this.jude = this.selected.style;
       let regexLeft = /left(.+?);/;
@@ -359,20 +362,40 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.mouseMoveX = 0;
       this.mouseMoveY = 0;
     }
-    else if(this.mouseMoveX !=0 && this.selected.typeObj=="nav")
+    else if(this.mouseMoveY !=0 && this.selected.typeObj=="nav")
     {
       this.jude = this.selected.style;
-      let regexTop = /margin-top:(.+?);/;
+      let regexLeft = /left(.+?);/;
+      let regexTop = /top(.+?);/;
+      let regexPosition = /position(.+?);/;
+      this.jude = this.jude.replace(regexLeft,"");
       this.jude = this.jude.replace(regexTop,"");
+      this.jude = this.jude.replace(regexPosition,"");
       this.selected.style = this.selected.style;
       //this.mouseMoveX = this.mouseMoveX;
       //this.mouseMoveY = this.btnCmp.mousePositionYV2;
-      this.selected.style = this.jude +
-      "margin-top:"+this.mouseMoveX+"px;"/*+
+      this.selected.style = this.jude + 
+      "position:sticky;"+
+      "left:"+this.mouseMoveX+"px;"+
+      "top:"+this.mouseMoveY+"px;"/*+
       "position:fixed;"*/;
       this.mouseMoveX = 0;
       this.mouseMoveY = 0;
     }
+    // else if(this.mouseMoveX !=0 && this.selected.typeObj=="nav")
+    // {
+    //   // this.jude = this.selected.style;
+    //   // let regexTop = /margin-top:(.+?);/;
+    //   // this.jude = this.jude.replace(regexTop,"");
+    //   // this.selected.style = this.selected.style;
+    //   // //this.mouseMoveX = this.mouseMoveX;
+    //   // //this.mouseMoveY = this.btnCmp.mousePositionYV2;
+    //   // this.selected.style = this.jude +
+    //   // "margin-top:"+this.mouseMoveX+"px;"/*+
+    //   // "position:fixed;"*/;
+    //   // this.mouseMoveX = 0;
+    //   // this.mouseMoveY = 0;
+    // }
   }
   
 

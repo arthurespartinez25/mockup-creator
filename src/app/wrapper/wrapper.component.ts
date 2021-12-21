@@ -19,6 +19,7 @@ export class WrapperComponent implements OnInit {
   @Input() mousePositionY: any;
   @Input() canvasLeft: any;
   @Input() canvasTop: any;
+  @Input() canvasW: any;
   @Input() xCounter: any;
   @Output() updateDataEvent2= new EventEmitter<any>();
   @Output() updateDataEventX= new EventEmitter<any>();
@@ -28,6 +29,7 @@ export class WrapperComponent implements OnInit {
   xcanvas = 0;
   ycanvas = 0;
   xCounterstrike = 0;
+  canvasWW = 0;
 
   @Input() get childComp(): IComponent {
     return this.child;
@@ -65,6 +67,7 @@ export class WrapperComponent implements OnInit {
     this.xcanvas = this.canvasLeft;
     this.ycanvas = this.canvasTop;
     this.xCounterstrike = this.xCounter;
+    this.canvasWW = this.canvasW;
   }
   removeElement(remove:IComponent):void {
 

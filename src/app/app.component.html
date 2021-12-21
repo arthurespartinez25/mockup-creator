@@ -144,6 +144,7 @@
       cdkDrag
       (cdkDragEnded)="onDragEnded($event)"
       (cdkDragEnded)="onDragEndedAddComponent('popup')"
+      [hidden]="true"
     >
       Popup
     </button>
@@ -186,6 +187,7 @@
         [mousePositionY]="mousePositionY"
         [canvasLeft]="canvasLeft" 
         [canvasTop]="canvasTop"
+        [canvasW]="canvasW"
         [xCounter]="xCounter"
         [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
         (mousedown)="mouseGalawX($event)"

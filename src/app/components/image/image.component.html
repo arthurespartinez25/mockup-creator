@@ -1,2 +1,10 @@
-<img cdkDrag cdkDragBoundary="#canvas" [class]="props.class" [id]="props.id" [style]="props.style" src= "{{props.value}}"> 
+<img cdkDrag cdkDragBoundary="#canvas" [class]="props.class" [id]="props.id" 
+[style]="props.style" 
+(cdkDragEnded)="onDragEnded($event)"
+[ngStyle]="{
+    'position': 'absolute',
+    'left': theX + 'px',
+    'top': theY + 'px'
+  }"
+src= "{{props.value}}"> 
     

@@ -22,7 +22,14 @@
 </div>
 -->
 
-<div cdkDrag cdkDragBoundary="#canvas" [id]="props.id" class="always-on-top">
+<div cdkDrag cdkDragBoundary="#canvas" [id]="props.id" class="always-on-top"
+(cdkDragEnded)="onDragEnded($event)"
+[ngStyle]="{
+  'position': 'absolute',
+  'left': theX + 'px',
+  'top': theY + 'px'
+}" 
+>
   <div class="modal-dialog">
     <div class="modal-content" [style]="props.style">
       <div class="modal-header">

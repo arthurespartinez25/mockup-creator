@@ -19,31 +19,36 @@ export class NavbarComponent implements IComponent {
     padding: 10px;
     background-color: #12355B;
     font-size: 20px;
-    margin-top:0px;`,
+    position:absolute;left:0px;top:0px;`,
     typeObj: 'nav',
     type: '',
   };
-
+  
   @Output() updateDataEvent= new EventEmitter<any>();
   @Output() updateDataEventY= new EventEmitter<any>();
   @Input() xcanvas: any;
   @Input() ycanvas: any;
+  @Input() canvasW: any;
   mousePositionXV2 = 310;
   mousePositionYV2= 110;
   theX = 0;
   theY = 0;
+  theCanvasWidth = 0;
 
   ngOnInit(): void {
     //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
     this.theX = this.xcanvas;
     this.theY = this.ycanvas;
+    this.theCanvasWidth = this.canvasW;
+    
   }
 
-  onDragEnded(event: CdkDragEnd){
-    const { offsetWidth, offsetTop } = event.source.element.nativeElement;
-    this.mousePositionXV2 = offsetTop;
+  onDragEnded($event: any){
+    this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
+    this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
     
     this.updateDataEvent.emit(this.mousePositionXV2);
+    this.updateDataEventY.emit(this.mousePositionYV2);
   }
 
   constructor(canvas: ElementRef) {

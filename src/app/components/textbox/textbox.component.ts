@@ -1,10 +1,19 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
 
 @Component({
   selector: 'app-textbox',
-  template: `<textarea cdkDrag cdkDragBoundary="#canvas" [(ngModel)]="textInput" [id]="props.id" [style]="props.style" [placeholder]="props.placeholder" [rows]="props.rows" [cols]="props.cols" [value]="props.value"></textarea>`
+  template: `<textarea cdkDrag cdkDragBoundary="#canvas" 
+  [(ngModel)]="textInput" [id]="props.id" [style]="props.style" 
+  [placeholder]="props.placeholder" [rows]="props.rows" 
+  [cols]="props.cols" [value]="props.value"
+  (cdkDragEnded)="onDragEnded($event)"
+  [ngStyle]="{
+    'position': 'absolute',
+    'left': theX + 'px',
+    'top': theY + 'px'
+  }"></textarea>`
 })
 export class TextboxComponent implements IComponent {
   canvas: ElementRef;
@@ -13,13 +22,37 @@ export class TextboxComponent implements IComponent {
     id: '',
     value: '',
     class: '',
-    style: '',
+    style: 'position:absolute;left:0px;top:0px;',
     typeObj: 'textbox',
     type: 'textbox',
     placeholder: 'Type your text here...',
     rows: 3,
     cols: 20
   };
+
+  @Output() updateDataEvent= new EventEmitter<any>();
+  @Output() updateDataEventY= new EventEmitter<any>();
+  @Input() xcanvas: any;
+  @Input() ycanvas: any;
+  mousePositionXV2 = 310;
+  mousePositionYV2= 110;
+  theX = 0;
+  theY = 0;
+
+  ngOnInit(): void {
+    //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
+    this.theX = this.xcanvas;
+    this.theY = this.ycanvas;
+  }
+
+  onDragEnded($event: any){
+    this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
+    this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
+    
+    this.updateDataEvent.emit(this.mousePositionXV2);
+    this.updateDataEventY.emit(this.mousePositionYV2);
+  }
+
   constructor(canvas: ElementRef) {
     this.canvas = canvas;
     let date = Date.now();
