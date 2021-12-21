@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
 
@@ -15,11 +15,34 @@ export class CheckboxComponent implements OnInit, IComponent {
     id: '',
     value: 'Checkbox',
     class: 'form-check-input',
-    style: 'cursor: pointer;',
+    style: '',
     typeObj: 'checkbox',
     type: 'checkbox',
     checked: 'true',
   };
+
+  @Output() updateDataEvent= new EventEmitter<any>();
+  @Output() updateDataEventY= new EventEmitter<any>();
+  @Input() xcanvas: any;
+  @Input() ycanvas: any;
+  mousePositionXV2 = 310;
+  mousePositionYV2= 110;
+  theX = 0;
+  theY = 0;
+
+  ngOnInit(): void {
+    //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
+    this.theX = this.xcanvas;
+    this.theY = this.ycanvas;
+  }
+
+  onDragEnded($event: any){
+    this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
+    this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
+    
+    this.updateDataEvent.emit(this.mousePositionXV2);
+    this.updateDataEventY.emit(this.mousePositionYV2);
+  }
 
   constructor(canvas: ElementRef) {
     this.canvas = canvas;
@@ -68,8 +91,6 @@ export class CheckboxComponent implements OnInit, IComponent {
     return tmpHtmlCode;
   }
 
-  ngOnInit(): void {
-  } 
 
   
 

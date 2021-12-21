@@ -64,7 +64,11 @@
     }"
   ></app-imageDrag>
 
-  <app-label [property]="child.props" *ngSwitchCase="'label'"></app-label>
+  <app-label [property]="child.props" *ngSwitchCase="'label'"
+  (updateDataEvent)="passData($event)"
+  (updateDataEventY)="passDataY($event)" 
+  [xcanvas]="xcanvas" 
+  [ycanvas]="ycanvas"></app-label>
   <app-labelDrag
     [property]="child.props"
     *ngSwitchCase="'labelDrag'"
@@ -87,7 +91,11 @@
     }"
   ></app-textboxDrag>
 
-  <app-radio [property]="child.props" [componentList]="compList" *ngSwitchCase="'radio'"></app-radio>
+  <app-radio [property]="child.props" [componentList]="compList" *ngSwitchCase="'radio'"
+  (updateDataEvent)="passData($event)"
+    (updateDataEventY)="passDataY($event)" 
+    [xcanvas]="xcanvas" 
+    [ycanvas]="ycanvas"></app-radio>
 
   <app-radioDrag [property]="child.props" [componentList]="compList" *ngSwitchCase="'radioDrag'"
   [ngStyle]="{
@@ -111,7 +119,10 @@
   <app-checkbox
     [property]="child.props"
     *ngSwitchCase="'checkbox'"
-  ></app-checkbox>
+    (updateDataEvent)="passData($event)"
+    (updateDataEventY)="passDataY($event)" 
+    [xcanvas]="xcanvas" 
+    [ycanvas]="ycanvas"></app-checkbox>
   <app-checkboxDrag
     [property]="child.props"
     *ngSwitchCase="'checkboxDrag'"
@@ -201,7 +212,10 @@
   <app-paragraph
     [property]="child.props"
     *ngSwitchCase="'paragraph'"
-  ></app-paragraph>
+    (updateDataEvent)="passData($event)"
+    (updateDataEventY)="passDataY($event)" 
+    [xcanvas]="xcanvas" 
+    [ycanvas]="ycanvas"></app-paragraph>
 
   <app-paragraphDrag
     [property]="child.props"
