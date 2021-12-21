@@ -161,7 +161,10 @@
   <app-dropdown
     [property]="child.props"
     *ngSwitchCase="'dropdown'"
-  ></app-dropdown>
+    (updateDataEvent)="passData($event)"
+    (updateDataEventY)="passDataY($event)" 
+    [xcanvas]="xcanvas" 
+    [ycanvas]="ycanvas"></app-dropdown>
 
   <app-dropdownDrag
     [property]="child.props"
