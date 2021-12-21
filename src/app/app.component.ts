@@ -75,7 +75,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     type: '',
   };
 
-  public cssRuleCount = 0;
+  public cssRuleCount = document.styleSheets[0].cssRules.length;
   public _popupCount = 0;
   private _styleStart = '<style>';
   private _styleEnd = '</style>';
@@ -343,43 +343,92 @@ export class AppComponent implements OnInit, AfterViewInit {
     );
   }
   
-  cssReceiveMessage(event: any){
-    let styleTemp = event.target.value;
-    this.style = styleTemp.toString();
+  cssReceiveMessage(){
+    this.style = "";
+
+    let  newCssRuleCount = document.styleSheets[0].cssRules.length;
+
+    for(let i=this.cssRuleCount; i < newCssRuleCount; i++){
+      this.style += document.styleSheets[0].cssRules[i].cssText.toString();
+      this.style += "\n";
+      //console.log(document.styleSheets[0].cssRules[i].cssText.toString());
+    }
   }
 
 
-  addCSSRule() {
-    console.log(this.style);
-    this.cssRuleCount = document.styleSheets[0].cssRules.length;
+  addCSSRule(cssString: string) {
+    //console.log(this.style);
+    let  newCssRuleCount = document.styleSheets[0].cssRules.length;
     //const select = document.querySelector('styleSelectorID');
-      //let cssRuleString = document.styleSheets[0].cssRules[this.cssRuleCount].cssText.toString();
-      let cssRuleStringTemp: string; 
-      let cssRuleStringID = "#power";
-      let ruleFound = 0;
-    for(let i=this.cssRuleCount; i < this.cssRuleCount; i++){
-      cssRuleStringTemp = document.styleSheets[0].cssRules[i].cssText;
-      console.log(cssRuleStringTemp.toString());
-      if(cssRuleStringTemp.toString().includes(cssRuleStringID.toString())){
-        console.log("rule found!");
+    //let cssRuleString = document.styleSheets[0].cssRules[this.cssRuleCount].cssText.toString();
+    let cssRuleStringTemp: string; 
+    let cssRuleStringClassID = cssString.substring(0, cssString.indexOf('{'));
+    let ruleFound = 0;
+    let ruleNumber;
+    let classNumber;
+    let idNumber;
+      if(cssString[0] == '.'){
+        console.log(cssRuleStringClassID + " is a class selector");
+        classNumber = 1;
+      }else if(cssString[0] == '#'){
+        console.log(cssRuleStringClassID + " is an ID selector");
+        idNumber = 1;
+      }
+    for(let i=this.cssRuleCount; i < newCssRuleCount; i++){
+      cssRuleStringTemp = document.styleSheets[0].cssRules[i].cssText.toString();
+      if(cssRuleStringTemp.substring(0, cssString.indexOf('{')) === (cssRuleStringClassID).toString())
+      {
+        console.log("Class found!");
         ruleFound = 1;
+        ruleNumber = i;
+      }
+      else if(cssRuleStringTemp.substring(0, cssString.indexOf('{')) === (cssRuleStringClassID).toString())
+      {
+      console.log("ID found!");
+      ruleFound = 1;
+      ruleNumber = i;
       }
     }
     if(ruleFound == 1){
-      document.styleSheets.item(0)?.insertRule("\n" + this.style + "\n", document.styleSheets[0].cssRules.length);
-      document.styleSheets.item(0)?.deleteRule(document.styleSheets[0].cssRules.length-1);
-      console.log("this CSS rule exist, updating...");
+      console.log("this is the ruleNumber: " + ruleNumber);
+      document.styleSheets.item(0)?.insertRule("\n" + cssString + "\n", document.styleSheets[0].cssRules.length);
+      document.styleSheets.item(0)?.deleteRule(ruleNumber);
+      console.log(
+        "this CSS rule exist, updating..." + 
+        document.styleSheets[0].cssRules[ruleNumber].cssText.toString() +
+        " to " + 
+        document.styleSheets[0].cssRules[document.styleSheets[0].cssRules.length-1].cssText.toString()
+      );
       ruleFound = 0;
-    }else{
-      document.styleSheets.item(0)?.insertRule("\n" + this.style + "\n", document.styleSheets[0].cssRules.length);
-      console.log("adding style to: " + document.styleSheets[0].cssRules[this.cssRuleCount+1].cssText.toString());
+    }else if(ruleFound == 0){
+      document.styleSheets.item(0)?.insertRule("\n" + cssString + "\n", document.styleSheets[0].cssRules.length);
+      console.log("adding style to: " + document.styleSheets[0].cssRules[this.cssRuleCount].cssText.toString());
     }
-    console.log(this.cssRuleCount);
+    console.log("this is the starting number: " + this.cssRuleCount);
+    console.log(document.styleSheets.item(0));
   }
-  deleteCSSRule() {
-    console.log(this.style);
-    console.log("deleting: " + document.styleSheets.item(document.styleSheets[0].cssRules.length));
-    document.styleSheets.item(0)?.deleteRule(document.styleSheets[0].cssRules.length-1);
+
+
+  deleteCSSRule(cssString: string) {
+    let  newCssRuleCount = document.styleSheets[0].cssRules.length;
+    let cssRuleStringTemp: string; 
+    let cssRuleStringClassID = cssString.substring(0, cssString.indexOf('{'));
+    let ruleFound = 0;
+    let ruleNumber;
+    for(let i=this.cssRuleCount; i < newCssRuleCount; i++){
+      cssRuleStringTemp = document.styleSheets[0].cssRules[i].cssText.toString();
+      if(cssRuleStringTemp.includes(cssRuleStringClassID)){
+        console.log("rule found!");
+        ruleFound = 1;
+        ruleNumber = i;
+      }
+    }
+    if(ruleFound == 1){
+      document.styleSheets.item(0)?.deleteRule(ruleNumber);
+      console.log("rule" + ruleNumber + " deleted");
+    }else if(ruleFound == 0){
+      console.log("rule doesn't exist");
+    }
   }
 
   /*

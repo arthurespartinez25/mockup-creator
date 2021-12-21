@@ -260,18 +260,28 @@
       >
         <h3 
         style="background-color: #2e9c6b; margin: 0" 
-        (click)="addCSSRule()">Add CSS Rule</h3>
+        (click)="addCSSRule(cssTextArea.value)"
+        (click)="cssReceiveMessage()">Add CSS Rule</h3>
         <h3
         style="background-color: #a83241; margin: 0" 
-        (click)="deleteCSSRule()">Delete CSS Rule</h3>
+        (click)="deleteCSSRule(cssTextArea.value)"
+        (click)="cssReceiveMessage()">Delete CSS Rule</h3>
+        <textarea 
+        style="margin: 0; width: 100%;" 
+        cols="30" 
+        rows="5"
+        #cssTextArea
+        ></textarea>
         <textarea 
         style="margin: 0" 
         cols="30" 
         rows="5"
-        [value]="style"
         name="css-textarea" id="css-textarea"
+        [innerHTML]="style"></textarea>
+        <!-- include this on the textarea above if need be.
         (keyup)="cssReceiveMessage($event)"
-        (keyup)="refresh()"></textarea>
+        (keyup)="refresh()"
+        -->
         <!--<a routerLink="/refresh">Testing</a>-->
       </div>
       <div
