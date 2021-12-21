@@ -17,7 +17,6 @@
   padding: 20px;
   flex-grow: 3;
   background-color: gray;
-  overflow: auto;
 }
 
 #canvas {
@@ -27,8 +26,6 @@
   min-width: 1280px;
   min-height: 720px;
   background-color: white;
-  flex-wrap: wrap;
-  overflow: hidden;
   
 }
 

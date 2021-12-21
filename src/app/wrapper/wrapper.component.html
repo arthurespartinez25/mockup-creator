@@ -138,7 +138,12 @@
   >
   </app-dropdownDrag>
 
-  <app-navbar [property]="child.props" *ngSwitchCase="'nav'"></app-navbar>
+  <app-navbar [property]="child.props" 
+  *ngSwitchCase="'nav'"
+  (updateDataEvent)="passData($event)"
+  (updateDataEventY)="passDataY($event)" 
+  [xcanvas]="xcanvas" 
+  [ycanvas]="ycanvas"></app-navbar>
 
   <app-navbarDrag
     [property]="child.props"
@@ -176,7 +181,12 @@
   >
   </app-headerDrag>
 
-  <app-link [property]="child.props" *ngSwitchCase="'link'"></app-link>
+  <app-link [property]="child.props" 
+  *ngSwitchCase="'link'"
+  (updateDataEvent)="passData($event)"
+  (updateDataEventY)="passDataY($event)" 
+  [xcanvas]="xcanvas" 
+  [ycanvas]="ycanvas"></app-link>
   <app-linkDrag
     [property]="child.props"
     *ngSwitchCase="'linkDrag'"

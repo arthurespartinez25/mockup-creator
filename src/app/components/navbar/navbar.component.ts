@@ -1,4 +1,5 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { CdkDragEnd } from '@angular/cdk/drag-drop';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
 
@@ -17,10 +18,33 @@ export class NavbarComponent implements IComponent {
     style: `color: white;
     padding: 10px;
     background-color: #12355B;
-    font-size: 20px`,
+    font-size: 20px;
+    margin-top:0px;`,
     typeObj: 'nav',
     type: '',
   };
+
+  @Output() updateDataEvent= new EventEmitter<any>();
+  @Output() updateDataEventY= new EventEmitter<any>();
+  @Input() xcanvas: any;
+  @Input() ycanvas: any;
+  mousePositionXV2 = 310;
+  mousePositionYV2= 110;
+  theX = 0;
+  theY = 0;
+
+  ngOnInit(): void {
+    //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
+    this.theX = this.xcanvas;
+    this.theY = this.ycanvas;
+  }
+
+  onDragEnded(event: CdkDragEnd){
+    const { offsetWidth, offsetTop } = event.source.element.nativeElement;
+    this.mousePositionXV2 = offsetTop;
+    
+    this.updateDataEvent.emit(this.mousePositionXV2);
+  }
 
   constructor(canvas: ElementRef) {
     this.canvas = canvas;

@@ -48,9 +48,10 @@ export class ButtonComponent implements IComponent {
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
     this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
     
-    this.updateDataEvent.emit(this.mousePositionXV2 + this.theX);
-    this.updateDataEventY.emit(this.mousePositionYV2 + this.theY);
+    this.updateDataEvent.emit(this.mousePositionXV2);
+    this.updateDataEventY.emit(this.mousePositionYV2);
   }
+  
 
   constructor(canvas: ElementRef) {
     this.canvas = canvas;

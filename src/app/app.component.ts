@@ -339,7 +339,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   clickHandler(component: IComponent) {
     this.selected = component.props;
     this.selectedComponent = component;
-    if(this.mouseMoveX !=0 && this.mouseMoveY !=0)
+    if(this.mouseMoveX !=0 && this.mouseMoveY !=0 && this.selected.typeObj!="nav")
     {
       this.jude = this.selected.style;
       let regexLeft = /left(.+?);/;
@@ -355,6 +355,20 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       "position:sticky;"+
       "left:"+this.mouseMoveX+"px;"+
       "top:"+this.mouseMoveY+"px;"/*+
+      "position:fixed;"*/;
+      this.mouseMoveX = 0;
+      this.mouseMoveY = 0;
+    }
+    else if(this.mouseMoveX !=0 && this.selected.typeObj=="nav")
+    {
+      this.jude = this.selected.style;
+      let regexTop = /margin-top:(.+?);/;
+      this.jude = this.jude.replace(regexTop,"");
+      this.selected.style = this.selected.style;
+      //this.mouseMoveX = this.mouseMoveX;
+      //this.mouseMoveY = this.btnCmp.mousePositionYV2;
+      this.selected.style = this.jude +
+      "margin-top:"+this.mouseMoveX+"px;"/*+
       "position:fixed;"*/;
       this.mouseMoveX = 0;
       this.mouseMoveY = 0;
