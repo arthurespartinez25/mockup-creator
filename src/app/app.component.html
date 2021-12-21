@@ -10,19 +10,6 @@
 <!-- Toolbar -->
 <!-- <app-navbar></app-navbar> -->
 
-<head>
-  <style>
-    head{
-        display:block;
-    }
-    body{
-      background-color: azure;
-    }
-  </style>
-<div [innerText]="this.style"></div>
-</head>
-
-<body class="mat-typography">
 <div class="content" role="main">
   <!-- PALETTE SECTION -->
 
@@ -272,7 +259,11 @@
         aria-labelledby="css-tab"
       >
         <h3 
-        style="background-color: white; margin: 0" >css</h3>
+        style="background-color: #2e9c6b; margin: 0" 
+        (click)="addCSSRule()">Add CSS Rule</h3>
+        <h3
+        style="background-color: #a83241; margin: 0" 
+        (click)="deleteCSSRule()">Delete CSS Rule</h3>
         <textarea 
         style="margin: 0" 
         cols="30" 
@@ -304,5 +295,4 @@
 
 <!--<router-outlet></router-outlet> -->
 
-</body>
 

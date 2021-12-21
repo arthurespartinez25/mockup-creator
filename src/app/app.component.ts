@@ -75,10 +75,11 @@ export class AppComponent implements OnInit, AfterViewInit {
     type: '',
   };
 
+  public cssRuleCount = 0;
   public _popupCount = 0;
   private _styleStart = '<style>';
   private _styleEnd = '</style>';
-  private _styleBody = 'body{background-color:aquamarine;}';
+  private _styleBody = '';
   private _htmlStart = '<!doctype html>\n<html lang="en">';
   private _htmlEnd = '</html>';
   private _bootstrapLink =
@@ -313,54 +314,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.selectedComponent = component;
   }
 
-  /*
-  readDocument() {
-    let fileReader = new FileReader();
-    fileReader.onload = (e) => {
-      console.log(fileReader.result);
-    }
-    fileReader.readAsText(this.file);
-  }
-  */
-
-
-  /*
-  posts:any;
-
-  getPosts(){
-    this.posts = this.http.get('app/app.component.css')
-      .subscribe(data => {
-        console.log(data.toString);
-    });
-    console.log(this.posts);
-    
-
-    //readCSSFile(this.CSS_URL);
-  }
-
-  readCSSFile (url: any) {
-    this.http.get(url)
-      .subscribe(
-        cssData => {
-          console.log(cssData)
-        },
-        err => {
-          console.log(err)
-        });
-   }
-
-  /*
-  readFileAsync(fileName: string): Promise<any> {
-    return new Promise((resolve, reject) => {
-        this.http.get('http://localhost:4200/assets/backStock.json')
-            .subscribe(data => {
-              resolve(data);
-              return;
-            });
-    });
-  }
-  */
-
   getCSSStyle(style: string){
     return this.doms.bypassSecurityTrustStyle(style);
     this.refreshCSS.next(true);
@@ -393,40 +346,56 @@ export class AppComponent implements OnInit, AfterViewInit {
   cssReceiveMessage(event: any){
     let styleTemp = event.target.value;
     this.style = styleTemp.toString();
-    /*
-    this.http.get('/app/app.component.css').subscribe(data => {
-      //console.log('data', data.toString());
-      console.log(data.toString());
-    });
-    //this.getPosts();
-    //console.log(this.style);
-    
-    /*const fs = 'fs';
-    fs.readFile('./app.component.css', 'utf8', (err: any, data: any) => {
-      if(err){
-        console.log(err);
-        return;
-      }
-      console.log(data);
-      fs.writeFile('./app.component.css', data+"\n"+this.style, (err:any) =>{
-        if(err){
-          console.log(err);
-          return;
-        }
-      })
-    });
-    */
-
-
-    //File file = ResourceUtils 
-    //var reader = new FileReader();
-    //reader.readAsText(['./app.component.css'])
-    //this.httpClient.get(['./app.component.css'], { responseType: 'text' })
-    //.subscribe((data: any) => this.style = data);
   }
 
-  
-  
+
+  addCSSRule() {
+    console.log(this.style);
+    this.cssRuleCount = document.styleSheets[0].cssRules.length;
+    //const select = document.querySelector('styleSelectorID');
+      //let cssRuleString = document.styleSheets[0].cssRules[this.cssRuleCount].cssText.toString();
+      let cssRuleStringTemp: string; 
+      let cssRuleStringID = "#power";
+      let ruleFound = 0;
+    for(let i=this.cssRuleCount; i < this.cssRuleCount; i++){
+      cssRuleStringTemp = document.styleSheets[0].cssRules[i].cssText;
+      console.log(cssRuleStringTemp.toString());
+      if(cssRuleStringTemp.toString().includes(cssRuleStringID.toString())){
+        console.log("rule found!");
+        ruleFound = 1;
+      }
+    }
+    if(ruleFound == 1){
+      document.styleSheets.item(0)?.insertRule("\n" + this.style + "\n", document.styleSheets[0].cssRules.length);
+      document.styleSheets.item(0)?.deleteRule(document.styleSheets[0].cssRules.length-1);
+      console.log("this CSS rule exist, updating...");
+      ruleFound = 0;
+    }else{
+      document.styleSheets.item(0)?.insertRule("\n" + this.style + "\n", document.styleSheets[0].cssRules.length);
+      console.log("adding style to: " + document.styleSheets[0].cssRules[this.cssRuleCount+1].cssText.toString());
+    }
+    console.log(this.cssRuleCount);
+  }
+  deleteCSSRule() {
+    console.log(this.style);
+    console.log("deleting: " + document.styleSheets.item(document.styleSheets[0].cssRules.length));
+    document.styleSheets.item(0)?.deleteRule(document.styleSheets[0].cssRules.length-1);
+  }
+
+  /*
+  changeHandler(event: any) {
+    //this.style(String(event.target.value));
+    //console.log("'"+event.target.value+"'")
+    let _cssLength = new Array(document.styleSheets.item(0));
+    //document.styleSheets.item(0)?.deleteRule();
+    //console.log(_cssLength.length);
+    console.log(document.styleSheets.item(0));
+    console.log(document.styleSheets[0].cssRules.length);
+    document.styleSheets.item(0)?.insertRule("\n" + event.target.value, document.styleSheets[0].cssRules.length);
+    console.log("deleting: " + document.styleSheets.item(document.styleSheets[0].cssRules.length));
+    document.styleSheets.item(0)?.deleteRule(document.styleSheets[0].cssRules.length-1);
+  }
+  */
 
   receiveMessage($event: boolean) {
     if ($event == true) {
