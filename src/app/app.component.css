@@ -21,9 +21,7 @@
 }
 
 #canvas {
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
   width: 1280px;
   height: 720px;
   min-width: 1280px;
@@ -35,6 +33,8 @@
 }
 
 .wrapper {
+  grid-column: 1;
+  grid-row: 1;
   width: fit-content;
   height: fit-content;
   margin: 0;

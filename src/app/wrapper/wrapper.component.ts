@@ -1,6 +1,6 @@
 import { DragDrop } from '@angular/cdk/drag-drop';
 import { Icu } from '@angular/compiler/src/i18n/i18n_ast';
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IComponent } from '../interfaces/icomponent';
 import { IProperty } from '../interfaces/iproperty';
 
@@ -17,9 +17,17 @@ export class WrapperComponent implements OnInit {
 
   @Input() mousePositionX: any;
   @Input() mousePositionY: any;
+  @Input() canvasLeft: any;
+  @Input() canvasTop: any;
+  @Input() xCounter: any;
+  @Output() updateDataEvent2= new EventEmitter<any>();
+  @Output() updateDataEventX= new EventEmitter<any>();
 
   xmouse = 0;
   ymouse = 0;
+  xcanvas = 0;
+  ycanvas = 0;
+  xCounterstrike = 0;
 
   @Input() get childComp(): IComponent {
     return this.child;
@@ -54,6 +62,19 @@ export class WrapperComponent implements OnInit {
     //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
     this.xmouse = this.mousePositionX;
     this.ymouse = this.mousePositionY;
+    this.xcanvas = this.canvasLeft;
+    this.ycanvas = this.canvasTop;
+    this.xCounterstrike = this.xCounter;
   }
-  removeElement(remove: IComponent): void {}
+  removeElement(remove:IComponent):void {
+
+  }
+  passData(item: any){
+    //console.warn(item);
+    this.updateDataEvent2.emit(item);
+  }
+  passDataY(item: any){
+    //console.warn(item);
+    this.updateDataEventX.emit(item);
+  }
 }

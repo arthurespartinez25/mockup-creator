@@ -1,4 +1,4 @@
-import { CdkDragEnd, DragDrop } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragEnd, DragDrop } from '@angular/cdk/drag-drop';
 import {
   AfterViewChecked,
   AfterViewInit,
@@ -49,7 +49,7 @@ import { LinkDragComponent } from './components/linkDrag/linkDrag.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css', './app.palette.component.css'],
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   title = 'mockup-creator';
   index: number;
   componentList: IComponent[] = [];
@@ -85,12 +85,17 @@ export class AppComponent implements OnInit, AfterViewInit {
   constructor(private renderer: Renderer2, private drag: DragDrop) {}
   delete: boolean;
 
-  ngAfterViewInit(): void {
-    //throw new Error('Method not implemented.');
-    //this.removeElement();
-  }
+  canvasLeft = 0;
+  canvasTop = 0;
+  xCounter = 0;
+
+ 
   ngOnInit(): void {
     /* throw new Error('Method not implemented.'); */
+    
+  }
+  ngAfterViewInit(): void {
+    
   }
 
   addComponent(component: string) {
@@ -155,7 +160,10 @@ export class AppComponent implements OnInit, AfterViewInit {
       default:
         temp = new ButtonComponent(this.canvas);
     }
-
+    this.xCounter++;
+    console.log(this.xCounter);
+    this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
+    this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
     this.componentList.push(temp);
   }
   //----------------------------------------------------------------------------
@@ -235,12 +243,14 @@ export class AppComponent implements OnInit, AfterViewInit {
         case 'link':
           temp = new LinkDragComponent(this.canvas);
           break;
-
         default:
           temp = new ButtonComponent(this.canvas);
       }
-
-      this.componentList.push(temp);
+    this.xCounter++;
+    console.log(this.xCounter);
+    this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
+    this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
+    this.componentList.push(temp);
     }
   }
 
@@ -262,7 +272,10 @@ export class AppComponent implements OnInit, AfterViewInit {
     let tmpHtmlBody = '\n';
 
     this.componentList.forEach((value) => {
+      let regexPosition = /sticky/;
+      
       tmpHtmlBody = tmpHtmlBody + value.htmlCode + '\n';
+      tmpHtmlBody = tmpHtmlBody.replace(regexPosition,"absolute");
     });
     return tmpHtmlBody;
   }
@@ -291,11 +304,65 @@ export class AppComponent implements OnInit, AfterViewInit {
       this._styleEnd
     );
   }
+  mouseMoveX = 0;
+  mouseMoveY = 0;
 
+  mouseGalawX($event: any){
+    //const { x, y } = event.;
+    //this.mouseMoveX = event.offsetX + event.distanceX;
+    //this.mouseMoveY = event.offsetY;
+    //let x = event.target.getBoundingClientRect();
+    /*let x = document.body.getBoundingClientRect();
+    let y = $event.target.getBoundingClientRect();
+    this.mouseMoveX = y.left - x.left;
+    this.mouseMoveY = y.top - x.top;*/
+    //this.mouseMoveX = $event.source.getFreeDragPosition().x;
+    //this.mouseMoveY = $event.source.getFreeDragPosition().y;
+  }
+
+  
+  
+  
+  passData2(item: any){
+    //console.warn(item);
+    this.mouseMoveX = item;
+  }
+  passDataX(item: any){
+    //console.warn(item);
+    this.mouseMoveY = item;
+  }
+
+  ngAfterViewChecked(){
+     
+  }
+  jude = "aw";
   clickHandler(component: IComponent) {
     this.selected = component.props;
     this.selectedComponent = component;
+    if(this.mouseMoveX !=0 && this.mouseMoveY !=0)
+    {
+      this.jude = this.selected.style;
+      let regexLeft = /left(.+?);/;
+      let regexTop = /top(.+?);/;
+      let regexPosition = /position(.+?);/;
+      this.jude = this.jude.replace(regexLeft,"");
+      this.jude = this.jude.replace(regexTop,"");
+      this.jude = this.jude.replace(regexPosition,"");
+      this.selected.style = this.selected.style;
+      //this.mouseMoveX = this.mouseMoveX;
+      //this.mouseMoveY = this.btnCmp.mousePositionYV2;
+      this.selected.style = this.jude + 
+      "position:sticky;"+
+      "left:"+this.mouseMoveX+"px;"+
+      "top:"+this.mouseMoveY+"px;"/*+
+      "position:fixed;"*/;
+      this.mouseMoveX = 0;
+      this.mouseMoveY = 0;
+    }
   }
+  
+
+  
   receiveMessage($event: boolean) {
     if ($event == true) {
       //removeElement(component: IComponent): void {

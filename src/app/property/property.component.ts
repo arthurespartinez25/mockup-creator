@@ -74,6 +74,8 @@ export class PropertyComponent implements OnInit {
   }
 
   styleChangeHandler(event: any) {
+    let x = event.target.value;
+    
     this.props.style = event.target.value;
   }
 

@@ -9,7 +9,7 @@
 
 <!-- Toolbar -->
 <!-- <app-navbar></app-navbar> -->
-<div class="content" role="main">
+<div class="content" role="main" >
   <!-- PALETTE SECTION -->
 
   <div
@@ -184,7 +184,13 @@
         [componentList]="componentList"
         [mousePositionX]="mousePositionX"
         [mousePositionY]="mousePositionY"
+        [canvasLeft]="canvasLeft" 
+        [canvasTop]="canvasTop"
+        [xCounter]="xCounter"
         [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
+        (mousedown)="mouseGalawX($event)"
+        (updateDataEvent2)="passData2($event)"
+        (updateDataEventX)="passDataX($event)"
       >
       </app-wrapper>
     </div>
