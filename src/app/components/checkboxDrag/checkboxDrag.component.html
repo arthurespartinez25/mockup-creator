@@ -1,0 +1,24 @@
+<div cdkDrag cdkDragBoundary="#canvas">
+    <div *ngIf="props.checked=='true'; else unchecked" class="form-check" >
+        <input [id]="props.id" [class]="props.class" [type]="props.type" [style]="props.style" (change)="isChecked($event)" checked>
+        <label class="form-check-label" [for]="props.id">
+            {{ props.value }}
+        </label>
+    </div>
+    <ng-template #unchecked>
+        <div *ngIf="props.checked=='false'; else anyData" class="form-check">
+            <input [id]="props.id" [class]="props.class" [type]="props.type" [style]="props.style" (change)="isChecked($event)">
+            <label class="form-check-label" [for]="props.id">
+                {{ props.value }}
+            </label>
+        </div>
+    </ng-template>
+    <ng-template #anyData>
+        <div class="form-check">
+            <input [id]="props.id" [class]="props.class" [type]="props.type" [style]="props.style" (change)="isChecked($event)">
+            <label class="form-check-label" [for]="props.id">
+                {{ props.value }}
+            </label>
+        </div>
+    </ng-template>
+</div>

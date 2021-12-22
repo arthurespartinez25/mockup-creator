@@ -1,0 +1,9 @@
+<input [(ngModel)]="textInput" cdkDrag cdkDragBoundary="#canvas" [value]="props.value" 
+[placeholder]="props.placeholder" [class]="props.class" 
+[type]="props.type" [id]="props.id" [style]="props.style"
+(cdkDragEnded)="onDragEnded($event)" 
+[ngStyle]="{
+    'position': 'absolute',
+    'left': theX + 'px',
+    'top': theY + 'px'
+  }">
