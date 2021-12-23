@@ -268,4 +268,13 @@
       top: ymouse + 'px'
     }"
   ></app-paragraphDrag>
+
+  <app-table
+    [property]="child.props"
+    *ngSwitchCase="'table'"
+    (updateDataEvent)="passData($event)"
+    (updateDataEventY)="passDataY($event)" 
+    [xcanvas]="xcanvas" 
+    [ycanvas]="ycanvas"></app-table>
+
 </div>

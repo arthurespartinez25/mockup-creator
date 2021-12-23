@@ -43,6 +43,7 @@ import { DatepickerDragComponent } from './components/datepickerDrag/datepickerD
 import { HeaderDragComponent } from './components/headerDrag/headerDrag.component';
 import { InputDragComponent } from './components/inputDrag/inputDrag.component';
 import { LinkDragComponent } from './components/linkDrag/linkDrag.component';
+import { TableComponent } from './components/table/table.component';
 
 @Component({
   selector: 'app-root',
@@ -157,6 +158,9 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       case 'popup':
         this._popupCount++;
         temp = new PopupComponent(this.canvas);
+        break;
+      case 'table':
+        temp = new TableComponent(this.canvas);
         break;
       default:
         temp = new ButtonComponent(this.canvas);

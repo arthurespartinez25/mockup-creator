@@ -1,0 +1,37 @@
+<div cdkDrag cdkDragBoundary="#canvas" (cdkDragEnded)="onDragEnded($event)" [id]="props.id" [style]="props.style"
+[ngStyle]="{
+    'position': 'absolute',
+    'left': theX + 'px',
+    'top': theY + 'px'
+  }">
+    <table [class]="props.class">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Heading 1</th>
+            <th scope="col">Heading 2</th>
+            <th scope="col">Heading 3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
