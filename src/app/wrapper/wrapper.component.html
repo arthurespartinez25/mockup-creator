@@ -1,9 +1,9 @@
 <div
   class="wrapper"
   [ngSwitch]="child.props.typeObj"
-  [ngStyle]="{
-    width: child.props.typeObj == 'navDrag' ? canvasWidth : 'auto'
-  }"
+  [ngStyle]="{'position':child.props.typeObj == 'buttonDrag'?'absolute':'',
+              'top':child.props.typeObj == 'buttonDrag'?ymouse+'px':'',
+              'left':child.props.typeObj == 'buttonDrag'?xmouse+'px':''}"
 >
   <app-button  
   [property]="child.props" 

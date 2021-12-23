@@ -46,9 +46,10 @@ export class ButtonDragComponent implements IComponent {
     //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
     this.theX = this.xcanvas;
     this.theY = this.ycanvas;
-    this.props.style='position:absolute;left:'+this.xmouse+';top:'+this.ymouse+'px;';
+    
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
+    this.props.style='position:absolute;left:'+(this.xmouse-this.theX)+';top:'+(this.ymouse-this.theY)+'px;';
   }
 
   onDragEnded($event: CdkDragEnd){
@@ -58,18 +59,9 @@ export class ButtonDragComponent implements IComponent {
     this.mousePositionYV2 = offsetTop + y;*/
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
     this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
-    if(this.onetimeBool == true)
-    {
-      this.updateDataEvent.emit(this.mousePositionXV2);
-      this.updateDataEventY.emit(this.mousePositionYV2);
-      console.log(this.theX);
-      this.onetimeBool = false;
-    }
-    else
-    {
-      this.updateDataEvent.emit(this.mousePositionXV2);
-      this.updateDataEventY.emit(this.mousePositionYV2);
-    }
+      this.updateDataEvent.emit(this.mousePositionXV2 + this.dagaX - this.theX);
+      this.updateDataEventY.emit(this.mousePositionYV2 + this.dagaY - this.theY);
+    
   }
 
 
