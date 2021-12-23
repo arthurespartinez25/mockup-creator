@@ -1,3 +1,5 @@
-<label cdkDrag cdkDragBoundary="#canvas" [id]="props.id" [style]="props.style">
-    {{ props.value }}
-</label>
+<div cdkDrag cdkDragBoundary="#canvas" style="resize: both; overflow:auto;">
+    <label [id]="props.id" [style]="props.style">
+        {{ props.value }}
+    </label>
+</div>
