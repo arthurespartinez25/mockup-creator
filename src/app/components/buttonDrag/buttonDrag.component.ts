@@ -43,25 +43,18 @@ export class ButtonDragComponent implements IComponent {
   onetimeBool = true;
 
   ngOnInit(): void {
-    //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
     this.theX = this.xcanvas;
     this.theY = this.ycanvas;
-    
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
     this.props.style='position:absolute;left:'+(this.xmouse-this.theX)+';top:'+(this.ymouse-this.theY)+'px;';
   }
 
   onDragEnded($event: CdkDragEnd){
-   /* const { offsetLeft, offsetTop } = event.source.element.nativeElement;
-    const { x, y } = event.distance;
-    this.mousePositionXV2 = offsetLeft + x;
-    this.mousePositionYV2 = offsetTop + y;*/
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
     this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
-      this.updateDataEvent.emit(this.mousePositionXV2 + this.dagaX - this.theX);
-      this.updateDataEventY.emit(this.mousePositionYV2 + this.dagaY - this.theY);
-    
+    this.updateDataEvent.emit(this.mousePositionXV2 + this.dagaX - this.theX);
+    this.updateDataEventY.emit(this.mousePositionYV2 + this.dagaY - this.theY);
   }
 
 

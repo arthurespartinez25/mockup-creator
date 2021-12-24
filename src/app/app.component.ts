@@ -181,6 +181,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     const { x, y } = event.distance;
     this.mousePositionX = offsetLeft + x;
     this.mousePositionY = offsetTop + y;
+    
   }
 
   onDragEndedAddComponent(component: string) {
@@ -311,16 +312,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   mouseMoveY = 0;
 
   mouseGalawX($event: any){
-    //const { x, y } = event.;
-    //this.mouseMoveX = event.offsetX + event.distanceX;
-    //this.mouseMoveY = event.offsetY;
-    //let x = event.target.getBoundingClientRect();
-    /*let x = document.body.getBoundingClientRect();
-    let y = $event.target.getBoundingClientRect();
-    this.mouseMoveX = y.left - x.left;
-    this.mouseMoveY = y.top - x.top;*/
-    //this.mouseMoveX = $event.source.getFreeDragPosition().x;
-    //this.mouseMoveY = $event.source.getFreeDragPosition().y;
   }
 
   

@@ -1,9 +1,9 @@
 <div
   class="wrapper"
   [ngSwitch]="child.props.typeObj"
-  [ngStyle]="{'position':child.props.typeObj == 'buttonDrag'?'absolute':'',
-              'top':child.props.typeObj == 'buttonDrag'?ymouse+'px':'',
-              'left':child.props.typeObj == 'buttonDrag'?xmouse+'px':''}"
+  [ngStyle]="{'position':child.props.typeObj == 'buttonDrag'||'headerDrag'?'absolute':'',
+              'top':child.props.typeObj == 'buttonDrag'||'headerDrag'?ymouse+'px':'',
+              'left':child.props.typeObj == 'buttonDrag'||'headerDrag'?xmouse+'px':''}"
 >
   <app-button  
   [property]="child.props" 
@@ -226,11 +226,12 @@
   <app-headerDrag
     [property]="child.props"
     *ngSwitchCase="'headerDrag'"
-    [ngStyle]="{
-      position: 'absolute',
-      left: xmouse + 'px',
-      top: ymouse + 'px'
-    }"
+    (updateDataEvent)="passData($event)"
+  (updateDataEventY)="passDataY($event)"
+  [xcanvas]="xcanvas" 
+  [ycanvas]="ycanvas"
+  [xmouse]="xmouse" 
+  [ymouse]="ymouse"
   >
   </app-headerDrag>
 
