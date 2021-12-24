@@ -14,7 +14,7 @@ export class DropdownComponent implements OnInit,IComponent {
     id: '',
     value: 'Dropdown',
     class: 'btn btn-secondary',
-    style: '',
+    style: 'position:absolute;left:0px;top:0px;',
     typeObj: 'dropdown',
     type: 'button',
     link1: 'Link 1',

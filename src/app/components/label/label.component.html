@@ -1,8 +1,3 @@
-<label cdkDrag cdkDragBoundary="#canvas" (cdkDragEnded)="onDragEnded($event)" [id]="props.id" [style]="props.style"
-[ngStyle]="{
-    'position': 'absolute',
-    'left': theX + 'px',
-    'top': theY + 'px'
-  }">
+<label cdkDrag cdkDragBoundary="#canvas" (cdkDragEnded)="onDragEnded($event)" [id]="props.id" [style]="props.style">
     {{ props.value }}
 </label>
