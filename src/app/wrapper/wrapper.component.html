@@ -10,6 +10,7 @@
     child.props.typeObj ===  'datepickerDrag' ?'absolute':
     child.props.typeObj ===  'modalDrag' ?'absolute':
     child.props.typeObj ===  'imgDrag' ?'absolute':
+    child.props.typeObj ===  'linkDrag' ?'absolute':
     child.props.typeObj === 'navDrag'?'absolute'
     :'absolute'
     ,
@@ -20,6 +21,7 @@
     child.props.typeObj === 'textboxDrag'?ymouse+'px':
     child.props.typeObj === 'datepickerDrag'?ymouse+'px':
     child.props.typeObj ===  'modalDrag' ?ymouse+'px':
+    child.props.typeObj ===  'linkDrag' ?ymouse+'px':
     child.props.typeObj ===  'imgDrag' ?ymouse+'px':
     child.props.typeObj === 'navDrag'?ymouse+'px'
     :ycanvas+'px'
@@ -31,6 +33,7 @@
     child.props.typeObj === 'textboxDrag'?xmouse+'px':
     child.props.typeObj === 'datepickerDrag'?xmouse+'px':
     child.props.typeObj ===  'modalDrag' ?xmouse+'px':
+    child.props.typeObj ===  'linkDrag' ?xmouse+'px':
     child.props.typeObj ===  'imgDrag' ?xmouse+'px':
     child.props.typeObj === 'inputDrag'?xmouse+'px'
     :xcanvas+'px'
@@ -280,11 +283,12 @@
   <app-linkDrag
     [property]="child.props"
     *ngSwitchCase="'linkDrag'"
-    [ngStyle]="{
-      position: 'absolute',
-      left: xmouse + 'px',
-      top: ymouse + 'px'
-    }"
+    (updateDataEvent)="passData($event)"
+    (updateDataEventY)="passDataY($event)"
+    [xcanvas]="xcanvas" 
+    [ycanvas]="ycanvas"
+    [xmouse]="xmouse" 
+    [ymouse]="ymouse"
   >
   </app-linkDrag>
 

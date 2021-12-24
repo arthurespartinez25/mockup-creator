@@ -24,10 +24,9 @@
 
 <div cdkDrag cdkDragBoundary="#canvas" [id]="props.id" class="always-on-top"
 (cdkDragEnded)="onDragEnded($event)"
-
 >
-  <div class="modal-dialog">
-    <div class="modal-content" [style]="props.style">
+  <div class="modal-dialog" >
+    <div class="modal-content" [style]="props.style" >
       <div class="modal-header">
         <h5 class="modal-title">Modal</h5>
         <button type="button" class="close">
