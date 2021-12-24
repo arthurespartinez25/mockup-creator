@@ -57,10 +57,6 @@ export class HeaderDragComponent implements OnInit, IComponent {
     this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
     this.updateDataEvent.emit(this.mousePositionXV2 + this.dagaX - this.theX);
     this.updateDataEventY.emit(this.mousePositionYV2 + this.dagaY - this.theY);
-    console.log(this.theX);
-    console.log(this.theY);
-    console.log(this.dagaX);
-    console.log(this.dagaY);
   }
 
   ngAfterViewInit(){}

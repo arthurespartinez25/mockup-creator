@@ -28,7 +28,7 @@ export class NavbarComponent implements IComponent {
   @Output() updateDataEventY= new EventEmitter<any>();
   @Input() xcanvas: any;
   @Input() ycanvas: any;
-  @Input() canvasW: any;
+  @Input() canvasWW: any;
   mousePositionXV2 = 310;
   mousePositionYV2= 110;
   theX = 0;
@@ -39,7 +39,7 @@ export class NavbarComponent implements IComponent {
     //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
     this.theX = this.xcanvas;
     this.theY = this.ycanvas;
-    this.theCanvasWidth = this.canvasW;
+    this.theCanvasWidth = this.canvasWW;
     
   }
 

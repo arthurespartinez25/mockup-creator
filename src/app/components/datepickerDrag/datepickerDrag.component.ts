@@ -1,4 +1,5 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { CdkDragEnd } from '@angular/cdk/drag-drop';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
 
@@ -6,7 +7,15 @@ import { IProperty } from 'src/app/interfaces/iproperty';
   selector: 'app-datepickerDrag',
   //templateUrl: './datepicker.component.html',
   //styleUrls: ['./datepicker.component.css']
-  template: `<input cdkDrag cdkDragBoundary="#canvas" [type]="props.type" [id]="props.id" [value]="props.value" [class]="props.class" [style]="props.style" (change)="dateValue($event)">`
+  template: `<input cdkDrag cdkDragBoundary="#canvas" [type]="props.type" [id]="props.id" 
+  [value]="props.value" [class]="props.class" [style]="props.style" 
+  (change)="dateValue($event)"
+  (cdkDragEnded)="onDragEnded($event)" 
+  [ngStyle]="{
+    'position': 'fixed',
+    'left': dagaX + 'px',
+    'top': dagaY + 'px'
+  }">`
 })
 export class DatepickerDragComponent implements OnInit,IComponent {
   canvas: ElementRef;
@@ -20,6 +29,35 @@ export class DatepickerDragComponent implements OnInit,IComponent {
     type: 'date',
   };
 
+  @Output() updateDataEvent= new EventEmitter<any>();
+  @Output() updateDataEventY= new EventEmitter<any>();
+  @Input() xcanvas: any;
+  @Input() ycanvas: any;
+  @Input() xmouse: any;
+  @Input() ymouse: any;
+  mousePositionXV2 = 310;
+  mousePositionYV2= 110;
+  theX = 0;
+  theY = 0;
+  dagaX = 0;
+  dagaY = 0;
+  onetimeBool = true;
+
+  ngOnInit(): void {
+    this.theX = this.xcanvas;
+    this.theY = this.ycanvas;
+    this.dagaX = this.xmouse;
+    this.dagaY = this.ymouse;
+    this.props.style='position:absolute;left:'+(this.dagaX-this.theX)+';top:'+(this.dagaY-this.theY)+'px;';
+  }
+
+  onDragEnded($event: CdkDragEnd){
+    this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
+    this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
+    this.updateDataEvent.emit(this.mousePositionXV2 + this.dagaX - this.theX);
+    this.updateDataEventY.emit(this.mousePositionYV2 + this.dagaY - this.theY);
+  }
+
   constructor(canvas: ElementRef) {
     this.canvas = canvas;
     let date = Date.now();
@@ -27,8 +65,6 @@ export class DatepickerDragComponent implements OnInit,IComponent {
     this.props.id = 'date' + date.toString();
   }
 
-  ngOnInit(): void {
-  }
 
   @Input() get property(): IProperty {
     return this.props;

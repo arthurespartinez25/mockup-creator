@@ -9,11 +9,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
   [placeholder]="props.placeholder" [rows]="props.rows" 
   [cols]="props.cols" [value]="props.value"
   (cdkDragEnded)="onDragEnded($event)"
-  [ngStyle]="{
-    'position': 'absolute',
-    'left': theX + 'px',
-    'top': theY + 'px'
-  }"></textarea>`
+  ></textarea>`
 })
 export class TextboxComponent implements IComponent {
   canvas: ElementRef;

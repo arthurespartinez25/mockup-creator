@@ -89,6 +89,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   canvasTop = 0;
   canvasW = 0;
   xCounter = 0;
+  jjj=true;
 
  
   ngOnInit(): void {
@@ -250,11 +251,13 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         default:
           temp = new ButtonComponent(this.canvas);
       }
-    this.xCounter++;
-    console.log(this.xCounter);
-    this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
-    this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
-    this.componentList.push(temp);
+      this.xCounter++;
+      console.log(this.xCounter);
+      this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
+      this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
+      this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
+      console.log(this.canvasW+"rawr");
+      this.componentList.push(temp);
     }
   }
 
@@ -353,7 +356,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.mouseMoveX = 0;
       this.mouseMoveY = 0;
     }
-    else if(this.mouseMoveY !=0 && this.selected.typeObj=="nav")
+    else if(this.mouseMoveY !=0 && (this.selected.typeObj=="nav"||"navDrag"))
     {
       this.jude = this.selected.style;
       let regexLeft = /left(.+?);/;
