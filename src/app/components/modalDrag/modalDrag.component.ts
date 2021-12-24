@@ -39,7 +39,7 @@ export class ModalDragComponent implements IComponent {
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
-    this.props.style='width:200px;position:absolute;left:'+(this.dagaX-this.theX)+';top:'+(this.dagaY-this.theY)+'px;';
+    this.props.style='position:sticky;left:'+(this.dagaX-this.theX)+';top:'+(this.dagaY-this.theY)+'px;';
   }
 
   onDragEnded($event: CdkDragEnd){

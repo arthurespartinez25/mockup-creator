@@ -47,10 +47,8 @@ export class LinkDragComponent implements OnInit, IComponent {
     this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
     this.updateDataEvent.emit(this.mousePositionXV2 + this.dagaX - this.theX);
     this.updateDataEventY.emit(this.mousePositionYV2 + this.dagaY - this.theY);
-    console.log(this.mousePositionXV2);
-    console.log(this.mousePositionYV2);
   }
-  
+
   constructor(canvas: ElementRef) { 
     this.canvas = canvas;
     let date = Date.now();
@@ -91,6 +89,6 @@ export class LinkDragComponent implements OnInit, IComponent {
     return tmpHtmlCode;
   }
 
- 
+  
 
 }
