@@ -48,7 +48,7 @@ export class DatepickerDragComponent implements OnInit,IComponent {
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
-    this.props.style='position:absolute;left:'+(this.dagaX-this.theX)+';top:'+(this.dagaY-this.theY)+'px;';
+    this.props.style='position:absolute;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
   }
 
   onDragEnded($event: CdkDragEnd){

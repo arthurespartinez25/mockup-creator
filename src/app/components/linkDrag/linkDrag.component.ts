@@ -39,7 +39,7 @@ export class LinkDragComponent implements OnInit, IComponent {
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
-    this.props.style='text-decoration: none;position:sticky;left:'+(this.dagaX-this.theX)+';top:'+(this.dagaY-this.theY)+'px;';
+    this.props.style='text-decoration: none;position:sticky;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
   }
 
   onDragEnded($event: CdkDragEnd){

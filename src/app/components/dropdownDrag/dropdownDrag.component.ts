@@ -42,7 +42,7 @@ export class DropdownDragComponent implements OnInit,IComponent {
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
-    this.props.style='position:sticky;left:'+(this.dagaX-this.theX)+';top:'+(this.dagaY-this.theY)+'px;';
+    this.props.style='position:sticky;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
   }
 
   onDragEnded($event: CdkDragEnd){
@@ -72,9 +72,26 @@ export class DropdownDragComponent implements OnInit,IComponent {
   }
   
   get htmlCode(): string {
-    let tmpHtmlCode = '<div';
+    let jude = this.props.style;
+    let regexLeft = /left(.+?);/;
+    let regexTop = /top(.+?);/;
+    let regexPosition = /position(.+?);/;
+    // let styleLeft = jude.match(/left(.+?);/g);
+    // let styleTop = jude.match(/top(.+?);/g);
+    // console.log(styleLeft);
+    // console.log(jude);
+
+    //let divStyle = '"style=position:absolute;left:'+this.dagaX+'px;top:'+this.dagaY+'px;"';
+
+    jude = jude.replace(regexLeft,"");
+    jude = jude.replace(regexTop,"");
+    jude = jude.replace(regexPosition,"");
+    //this.props.style = jude;
+
+    let tmpHtmlCode = '<div'+ '"style="' + this.props.style +'"'
+    ;
     tmpHtmlCode += ' class="dropdown" id="' + this.props.id + '">';
-    tmpHtmlCode +="\n" + ' <button class="' +  this.props.class + '" type="' +  this.props.type + '" style="' + this.props.style + '" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> ' + this.props.value + ' </button>';
+    tmpHtmlCode +="\n" + ' <button class="' +  this.props.class + '" type="' +  this.props.type + '" style="' + jude + '" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> ' + this.props.value + ' </button>';
     tmpHtmlCode +="\n" + ' <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">';
     tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.link1 + '</a>';
     tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.link2 + '</a>';

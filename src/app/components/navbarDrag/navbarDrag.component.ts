@@ -47,7 +47,7 @@ export class NavbarDragComponent implements IComponent {
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
     this.props.style='color: white;padding: 10px;background-color: #12355B;font-size: 20px;position:absolute;left:'
-    +(this.dagaX-this.theX)+';top:'+(this.dagaY-this.theY)+'px;';
+    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
   }
 
   onDragEnded($event: any){

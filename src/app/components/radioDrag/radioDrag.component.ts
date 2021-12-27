@@ -42,7 +42,7 @@ export class RadioDragComponent implements OnInit,IComponent {
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
-    this.props.style='text-decoration: none;position:sticky;left:'+(this.dagaX-this.theX)+';top:'+(this.dagaY-this.theY)+'px;';
+    this.props.style='text-decoration: none;position:sticky;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
   }
 
   onDragEnded($event: CdkDragEnd){
@@ -100,7 +100,23 @@ export class RadioDragComponent implements OnInit,IComponent {
 
 
   get htmlCode(): string {
-    let tmpHtmlCode = '<div class="form-check"> \n <input';
+    let jude = this.props.style;
+      let regexLeft = /left(.+?);/;
+      let regexTop = /top(.+?);/;
+      let regexPosition = /position(.+?);/;
+      // let styleLeft = jude.match(/left(.+?);/g);
+      // let styleTop = jude.match(/top(.+?);/g);
+      // console.log(styleLeft);
+      // console.log(jude);
+
+      //let divStyle = '"style=position:absolute;left:'+this.dagaX+'px;top:'+this.dagaY+'px;"';
+
+      jude = jude.replace(regexLeft,"");
+      jude = jude.replace(regexTop,"");
+      jude = jude.replace(regexPosition,"");
+      //this.props.style = jude;
+
+    let tmpHtmlCode = '<div class="form-check"'+ ' style="' + this.props.style +'"> \n <input';
    
     if (this.props.class.trim().length > 0) {
       tmpHtmlCode += ' class="' + this.props.class + '"';
@@ -121,7 +137,7 @@ export class RadioDragComponent implements OnInit,IComponent {
     }
 
     if (this.props.style.trim().length > 0) {
-      tmpHtmlCode += ' style="' + this.props.style + '"';
+      tmpHtmlCode += ' style="' + jude + '"';
     }
 
     if (this.props.checked == "true"){

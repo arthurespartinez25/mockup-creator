@@ -47,7 +47,7 @@ export class ButtonDragComponent implements IComponent {
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
-    this.props.style='position:absolute;left:'+(this.xmouse-this.theX)+';top:'+(this.ymouse-this.theY)+'px;';
+    this.props.style='position:absolute;left:'+(this.xmouse-this.theX)+'px;top:'+(this.ymouse-this.theY)+'px;';
   }
 
   onDragEnded($event: CdkDragEnd){
@@ -76,7 +76,7 @@ export class ButtonDragComponent implements IComponent {
   }
 
   get htmlCode(): string {
-    let tmpHtmlCode = '<button';
+    let tmpHtmlCode = '<div><button';
     if (this.props.id.trim().length > 0) {
       tmpHtmlCode += ' id="' + this.props.id + '"';
     }
@@ -93,7 +93,7 @@ export class ButtonDragComponent implements IComponent {
       tmpHtmlCode += ' style="' + this.props.style + '"';
     }
 
-    tmpHtmlCode += '>' + this.props.value + '</button>';
+    tmpHtmlCode += '>' + this.props.value + '</button></div>';
 
     return tmpHtmlCode;
   }
