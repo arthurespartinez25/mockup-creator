@@ -88,11 +88,13 @@ export class DropdownDragComponent implements OnInit,IComponent {
     jude = jude.replace(regexPosition,"");
     //this.props.style = jude;
 
-    let tmpHtmlCode = '<div'+ '"style="' + this.props.style +'"'
-    ;
-    tmpHtmlCode += ' class="dropdown" id="' + this.props.id + '">';
-    tmpHtmlCode +="\n" + ' <button class="' +  this.props.class + '" type="' +  this.props.type + '" style="' + jude + '" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> ' + this.props.value + ' </button>';
-    tmpHtmlCode +="\n" + ' <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">';
+    let tmpHtmlCode = '<div class="btn-group"'+ ' style="' + this.props.style +'"';
+    tmpHtmlCode += 'id="' + this.props.id + '">';
+    tmpHtmlCode +="\n" + ' <button class="' +  this.props.class + '" type="' +  this.props.type + '" style="' + jude + '"> ' + this.props.value + ' </button>';
+    tmpHtmlCode +="\n" + ' <button' + ' type="' +  this.props.type + '" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
+    tmpHtmlCode +="\n" + ' <span class="sr-only">Toggle Dropdown</span>';
+    tmpHtmlCode +="\n" + ' </button>';
+    tmpHtmlCode +="\n" + ' <div class="dropdown-menu">';
     tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.link1 + '</a>';
     tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.link2 + '</a>';
     tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.link3 + '</a>';
