@@ -274,6 +274,8 @@
         role="tabpanel"
         aria-labelledby="code-tab"
       >
+      <button class="btnCopy" (click)="copyMessage(htmlCode)">Copy</button>
+      <button class="btnCopy" (click)="downloadCode(htmlCode)">Download</button>
         <code [innerText]="htmlCode"> </code>
       </div>
     </div>

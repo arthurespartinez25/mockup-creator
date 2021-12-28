@@ -157,3 +157,18 @@ a.custom-nav-link:hover {
   bottom: 26%;
   right: 34%;
 }
+
+.btnCopy{
+  width: 20%;
+  max-width: 270px;
+  min-width: 220px;
+  overflow-y: auto;
+  background-color: green;
+  color: white;
+  border-radius: 10px;
+  padding: 5px 10px;
+  border: none;
+  font-weight: bolder;
+  font-size: x-large;
+  margin-bottom: 5px;
+}

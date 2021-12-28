@@ -403,7 +403,32 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     //   // this.mouseMoveY = 0;
     // }
   }
-  
+  copyMessage(val: string){
+    const selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = val;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
+  }
+  downloadCode(val: string){
+    let file = new Blob([val], {type: '.html'});
+    let a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+    a.href = url;
+    a.download = 'index';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function() {
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);  
+    }, 0); 
+  }
 
   
   receiveMessage($event: boolean) {
