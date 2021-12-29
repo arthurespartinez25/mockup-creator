@@ -30,7 +30,7 @@ export class WrapperComponent implements OnInit {
   ycanvas = 0;
   xCounterstrike = 0;
   canvasWW = 0;
-
+  jude=false;
   @Input() get childComp(): IComponent {
     return this.child;
   }
@@ -59,7 +59,7 @@ export class WrapperComponent implements OnInit {
   }
 
   constructor(private ref: ElementRef, private drag: DragDrop) {}
-
+  stylish ={};
   ngOnInit(): void {
     //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
     this.xmouse = this.mousePositionX;

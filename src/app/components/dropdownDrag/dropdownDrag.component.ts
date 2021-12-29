@@ -1,4 +1,5 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { CdkDragEnd } from '@angular/cdk/drag-drop';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
 
@@ -22,6 +23,37 @@ export class DropdownDragComponent implements OnInit,IComponent {
     link3: 'Link 3',
   };
 
+  @Output() updateDataEvent= new EventEmitter<any>();
+  @Output() updateDataEventY= new EventEmitter<any>();
+  @Input() xcanvas: any;
+  @Input() ycanvas: any;
+  @Input() xmouse: any;
+  @Input() ymouse: any;
+  mousePositionXV2 = 310;
+  mousePositionYV2= 110;
+  theX = 0;
+  theY = 0;
+  dagaX = 0;
+  dagaY = 0;
+  onetimeBool = true;
+
+  ngOnInit(): void {
+    this.theX = this.xcanvas;
+    this.theY = this.ycanvas;
+    this.dagaX = this.xmouse;
+    this.dagaY = this.ymouse;
+    this.props.style='position:sticky;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+  }
+
+  onDragEnded($event: CdkDragEnd){
+    this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
+    this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
+    this.updateDataEvent.emit(this.mousePositionXV2 + this.dagaX - this.theX);
+    this.updateDataEventY.emit(this.mousePositionYV2 + this.dagaY - this.theY);
+    console.log(this.mousePositionXV2);
+    console.log(this.mousePositionYV2);
+  }
+
   constructor(canvas: ElementRef) { 
     this.canvas = canvas;
     let date = Date.now();
@@ -40,10 +72,29 @@ export class DropdownDragComponent implements OnInit,IComponent {
   }
   
   get htmlCode(): string {
-    let tmpHtmlCode = '<div';
-    tmpHtmlCode += ' class="dropdown" id="' + this.props.id + '">';
-    tmpHtmlCode +="\n" + ' <button class="' +  this.props.class + '" type="' +  this.props.type + '" style="' + this.props.style + '" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> ' + this.props.value + ' </button>';
-    tmpHtmlCode +="\n" + ' <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">';
+    let jude = this.props.style;
+    let regexLeft = /left(.+?);/;
+    let regexTop = /top(.+?);/;
+    let regexPosition = /position(.+?);/;
+    // let styleLeft = jude.match(/left(.+?);/g);
+    // let styleTop = jude.match(/top(.+?);/g);
+    // console.log(styleLeft);
+    // console.log(jude);
+
+    //let divStyle = '"style=position:absolute;left:'+this.dagaX+'px;top:'+this.dagaY+'px;"';
+
+    jude = jude.replace(regexLeft,"");
+    jude = jude.replace(regexTop,"");
+    jude = jude.replace(regexPosition,"");
+    //this.props.style = jude;
+
+    let tmpHtmlCode = '<div class="btn-group"'+ ' style="' + this.props.style +'"';
+    tmpHtmlCode += 'id="' + this.props.id + '">';
+    tmpHtmlCode +="\n" + ' <button class="' +  this.props.class + '" type="' +  this.props.type + '" style="' + jude + '"> ' + this.props.value + ' </button>';
+    tmpHtmlCode +="\n" + ' <button' + ' type="' +  this.props.type + '" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
+    tmpHtmlCode +="\n" + ' <span class="sr-only">Toggle Dropdown</span>';
+    tmpHtmlCode +="\n" + ' </button>';
+    tmpHtmlCode +="\n" + ' <div class="dropdown-menu">';
     tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.link1 + '</a>';
     tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.link2 + '</a>';
     tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.link3 + '</a>';
@@ -54,7 +105,6 @@ export class DropdownDragComponent implements OnInit,IComponent {
     return tmpHtmlCode;
   }
 
-  ngOnInit(): void {
-  }
+ 
 
 }

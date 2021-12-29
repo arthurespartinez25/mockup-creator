@@ -6,11 +6,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
 @Component({
   selector: 'app-button',
   template: `<button cdkDrag cdkDragBoundary="#canvas"
-  (cdkDragEnded)="onDragEnded($event)" [id]="props.id" [style]="props.style"  [ngStyle]="{
-    'position': 'absolute',
-    'left': theX + 'px',
-    'top': theY + 'px'
-  }" [type]="props.type">
+  (cdkDragEnded)="onDragEnded($event)" [id]="props.id" [style]="props.style"   [type]="props.type">
     {{ props.value }}
   </button>`,
 })

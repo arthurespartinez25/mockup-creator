@@ -1,15 +1,7 @@
-<label class="text" cdkDrag [cdkDragDisabled]="!props.draggable" cdkDragBoundary="#canvas" [id]="props.id" [style]="props.style">
+<label cdkDrag cdkDragBoundary="#canvas" [id]="props.id" [style]="props.style" (cdkDragEnded)="onDragEnded($event)" [ngStyle]="{
+    'position': 'fixed',
+    'left': dagaX + 'px',
+    'top': dagaY + 'px'
+  }">
     {{ props.value }}
 </label>
-
-<style>
-    .text{
-        resize: both;
-        min-width: 70px;
-        min-height: 20px;
-        overflow:auto;
-    }
-    .text:hover {
-  background-color: yellow;
-}
-</style>

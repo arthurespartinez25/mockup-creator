@@ -71,6 +71,10 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   private _styleStart = '<style>';
   private _styleEnd = '</style>';
   private _styleBody = '';
+  private _styleBody1 = '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">';
+  private _styleBody2 = '<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>';
+  private _styleBody3 = '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>';
+  private _styleBody4 = '<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>';
   private _htmlStart = '<!doctype html>\n<html lang="en">';
   private _htmlEnd = '</html>';
   private _bootstrapLink =
@@ -90,6 +94,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   canvasTop = 0;
   canvasW = 0;
   xCounter = 0;
+  jjj=true;
 
  
   ngOnInit(): void {
@@ -190,6 +195,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     const { x, y } = event.distance;
     this.mousePositionX = offsetLeft + x;
     this.mousePositionY = offsetTop + y;
+    
   }
 
   onDragEndedAddComponent(component: string) {
@@ -258,11 +264,13 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         default:
           temp = new ButtonComponent(this.canvas);
       }
-    this.xCounter++;
-    console.log(this.xCounter);
-    this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
-    this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
-    this.componentList.push(temp);
+      this.xCounter++;
+      console.log(this.xCounter);
+      this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
+      this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
+      this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
+      console.log(this.canvasW+"rawr");
+      this.componentList.push(temp);
     }
   }
 
@@ -307,6 +315,14 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     return (
       this._htmlStart +
       '\n' +
+      this._styleBody1 +
+      '\n' +
+      this._styleBody2 +
+      '\n' +
+      this._styleBody3 +
+      '\n' +
+      this._styleBody4 +
+      '\n' +
       bootstrap +
       this.htmlBody() +
       '\n' +
@@ -324,16 +340,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   mouseMoveY = 0;
 
   mouseGalawX($event: any){
-    //const { x, y } = event.;
-    //this.mouseMoveX = event.offsetX + event.distanceX;
-    //this.mouseMoveY = event.offsetY;
-    //let x = event.target.getBoundingClientRect();
-    /*let x = document.body.getBoundingClientRect();
-    let y = $event.target.getBoundingClientRect();
-    this.mouseMoveX = y.left - x.left;
-    this.mouseMoveY = y.top - x.top;*/
-    //this.mouseMoveX = $event.source.getFreeDragPosition().x;
-    //this.mouseMoveY = $event.source.getFreeDragPosition().y;
   }
 
   
@@ -375,7 +381,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.mouseMoveX = 0;
       this.mouseMoveY = 0;
     }
-    else if(this.mouseMoveY !=0 && this.selected.typeObj=="nav")
+    else if(this.mouseMoveY !=0 && (this.selected.typeObj=="nav"||"navDrag"))
     {
       this.jude = this.selected.style;
       let regexLeft = /left(.+?);/;
@@ -410,7 +416,32 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     //   // this.mouseMoveY = 0;
     // }
   }
-  
+  copyMessage(val: string){
+    const selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = val;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
+  }
+  downloadCode(val: string){
+    let file = new Blob([val], {type: '.html'});
+    let a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+    a.href = url;
+    a.download = 'index';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function() {
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);  
+    }, 0); 
+  }
 
   
   receiveMessage($event: boolean) {

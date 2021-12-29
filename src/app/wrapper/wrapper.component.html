@@ -2,9 +2,57 @@
   class="wrapper"
   [ngSwitch]="child.props.typeObj"
   [ngStyle]="{
-    width: child.props.typeObj == 'navDrag' ? canvasWidth : 'auto'
-  }"
->
+    'position':
+    child.props.typeObj === 'headerDrag' ?'absolute':
+    child.props.typeObj ===  'buttonDrag' ?'absolute':
+    child.props.typeObj ===  'inputDrag' ?'absolute':
+    child.props.typeObj ===  'textboxDrag' ?'absolute':
+    child.props.typeObj ===  'datepickerDrag' ?'absolute':
+    child.props.typeObj ===  'modalDrag' ?'absolute':
+    child.props.typeObj ===  'imgDrag' ?'absolute':
+    child.props.typeObj ===  'linkDrag' ?'absolute':
+    child.props.typeObj ===  'paragraphDrag' ?'absolute':
+    child.props.typeObj ===  'labelDrag' ?'absolute':
+    child.props.typeObj ===  'dropdownDrag' ?'absolute':
+    child.props.typeObj ===  'checkboxDrag' ?'absolute':
+    child.props.typeObj ===  'radioDrag' ?'absolute':
+    child.props.typeObj === 'navDrag'?'absolute'
+    :'absolute'
+    ,
+    'top':
+    child.props.typeObj === 'headerDrag'?ymouse+'px':
+    child.props.typeObj === 'buttonDrag'?ymouse+'px':
+    child.props.typeObj === 'inputDrag'?ymouse+'px':
+    child.props.typeObj === 'textboxDrag'?ymouse+'px':
+    child.props.typeObj === 'datepickerDrag'?ymouse+'px':
+    child.props.typeObj ===  'modalDrag' ?ymouse+'px':
+    child.props.typeObj ===  'linkDrag' ?ymouse+'px':
+    child.props.typeObj ===  'imgDrag' ?ymouse+'px':
+    child.props.typeObj ===  'paragraphDrag' ?ymouse+'px':
+    child.props.typeObj ===  'labelDrag' ?ymouse+'px':
+    child.props.typeObj ===  'dropdownDrag' ?ymouse+'px':
+    child.props.typeObj ===  'checkboxDrag' ?ymouse+'px':
+    child.props.typeObj ===  'radioDrag' ?ymouse+'px':
+    child.props.typeObj === 'navDrag'?ymouse+'px'
+    :ycanvas+'px'
+    ,
+    
+    'left':
+    child.props.typeObj === 'buttonDrag'?xmouse+'px':
+    child.props.typeObj === 'headerDrag'?xmouse+'px':
+    child.props.typeObj === 'textboxDrag'?xmouse+'px':
+    child.props.typeObj === 'datepickerDrag'?xmouse+'px':
+    child.props.typeObj ===  'modalDrag' ?xmouse+'px':
+    child.props.typeObj ===  'linkDrag' ?xmouse+'px':
+    child.props.typeObj ===  'imgDrag' ?xmouse+'px':
+    child.props.typeObj ===  'paragraphDrag' ?xmouse+'px':
+    child.props.typeObj ===  'labelDrag' ?xmouse+'px':
+    child.props.typeObj ===  'dropdownDrag' ?xmouse+'px':
+    child.props.typeObj ===  'checkboxDrag' ?xmouse+'px':
+    child.props.typeObj ===  'radioDrag' ?xmouse+'px':
+    child.props.typeObj === 'inputDrag'?xmouse+'px'
+    :xcanvas+'px'
+  }">
   <app-button  
   [property]="child.props" 
   *ngSwitchCase="'button'" 
@@ -51,11 +99,12 @@
   <app-datepickerDrag
     [property]="child.props"
     *ngSwitchCase="'datepickerDrag'"
-    [ngStyle]="{
-      position: 'absolute',
-      left: xmouse + 'px',
-      top: ymouse + 'px'
-    }"
+    (updateDataEvent)="passData($event)"
+    (updateDataEventY)="passDataY($event)"
+    [xcanvas]="xcanvas" 
+    [ycanvas]="ycanvas"
+    [xmouse]="xmouse" 
+    [ymouse]="ymouse"
   ></app-datepickerDrag>
 
   <app-image [property]="child.props" 
@@ -70,11 +119,12 @@
   <app-imageDrag
     [property]="child.props"
     *ngSwitchCase="'imgDrag'"
-    [ngStyle]="{
-      position: 'absolute',
-      left: xmouse + 'px',
-      top: ymouse + 'px'
-    }"
+    (updateDataEvent)="passData($event)"
+    (updateDataEventY)="passDataY($event)"
+    [xcanvas]="xcanvas" 
+    [ycanvas]="ycanvas"
+    [xmouse]="xmouse" 
+    [ymouse]="ymouse"
   ></app-imageDrag>
 
   <app-label [property]="child.props" *ngSwitchCase="'label'"
@@ -85,11 +135,12 @@
   <app-labelDrag
     [property]="child.props"
     *ngSwitchCase="'labelDrag'"
-    [ngStyle]="{
-      position: 'absolute',
-      left: xmouse + 'px',
-      top: ymouse + 'px'
-    }"
+    (updateDataEvent)="passData($event)"
+    (updateDataEventY)="passDataY($event)"
+    [xcanvas]="xcanvas" 
+    [ycanvas]="ycanvas"
+    [xmouse]="xmouse" 
+    [ymouse]="ymouse"
   ></app-labelDrag>
 
   <app-textbox [property]="child.props" 
@@ -103,11 +154,12 @@
   <app-textboxDrag
     [property]="child.props"
     *ngSwitchCase="'textboxDrag'"
-    [ngStyle]="{
-      position: 'absolute',
-      left: xmouse + 'px',
-      top: ymouse + 'px'
-    }"
+    (updateDataEvent)="passData($event)"
+  (updateDataEventY)="passDataY($event)"
+  [xcanvas]="xcanvas" 
+  [ycanvas]="ycanvas"
+  [xmouse]="xmouse" 
+  [ymouse]="ymouse"
   ></app-textboxDrag>
 
   <app-radio [property]="child.props" [componentList]="compList" *ngSwitchCase="'radio'"
@@ -117,11 +169,13 @@
     [ycanvas]="ycanvas"></app-radio>
 
   <app-radioDrag [property]="child.props" [componentList]="compList" *ngSwitchCase="'radioDrag'"
-  [ngStyle]="{
-    'position': 'absolute',
-    'left': xmouse + 'px',
-    'top': ymouse + 'px'
-  }"></app-radioDrag>
+  (updateDataEvent)="passData($event)"
+  (updateDataEventY)="passDataY($event)"
+  [xcanvas]="xcanvas" 
+  [ycanvas]="ycanvas"
+  [xmouse]="xmouse" 
+  [ymouse]="ymouse"
+  ></app-radioDrag>
 
   <app-modal [property]="child.props" 
   *ngSwitchCase="'modal'"
@@ -134,11 +188,12 @@
   <app-modalDrag
     [property]="child.props"
     *ngSwitchCase="'modalDrag'"
-    [ngStyle]="{
-      position: 'absolute',
-      left: xmouse + 'px',
-      top: ymouse + 'px'
-    }"
+    (updateDataEvent)="passData($event)"
+    (updateDataEventY)="passDataY($event)"
+    [xcanvas]="xcanvas" 
+    [ycanvas]="ycanvas"
+    [xmouse]="xmouse" 
+    [ymouse]="ymouse"
   ></app-modalDrag>
 
   <app-checkbox
@@ -151,11 +206,12 @@
   <app-checkboxDrag
     [property]="child.props"
     *ngSwitchCase="'checkboxDrag'"
-    [ngStyle]="{
-      position: 'absolute',
-      left: xmouse + 'px',
-      top: ymouse + 'px'
-    }"
+    (updateDataEvent)="passData($event)"
+    (updateDataEventY)="passDataY($event)"
+    [xcanvas]="xcanvas" 
+    [ycanvas]="ycanvas"
+    [xmouse]="xmouse" 
+    [ymouse]="ymouse"
   ></app-checkboxDrag>
 
   <app-dropdown
@@ -169,11 +225,12 @@
   <app-dropdownDrag
     [property]="child.props"
     *ngSwitchCase="'dropdownDrag'"
-    [ngStyle]="{
-      position: 'absolute',
-      left: xmouse + 'px',
-      top: ymouse + 'px'
-    }"
+    (updateDataEvent)="passData($event)"
+    (updateDataEventY)="passDataY($event)"
+    [xcanvas]="xcanvas" 
+    [ycanvas]="ycanvas"
+    [xmouse]="xmouse" 
+    [ymouse]="ymouse"
   >
   </app-dropdownDrag>
 
@@ -183,17 +240,18 @@
   (updateDataEventY)="passDataY($event)" 
   [xcanvas]="xcanvas" 
   [ycanvas]="ycanvas"
-  [canvasW]="canvasW"></app-navbar>
+  [canvasWW]="canvasWW"></app-navbar>
 
   <app-navbarDrag
     [property]="child.props"
     *ngSwitchCase="'navDrag'"
-    [ngStyle]="{
-      position: 'absolute',
-      left: xmouse + 'px',
-      top: ymouse + 'px',
-      display: 'inline-block'
-    }"
+    (updateDataEvent)="passData($event)"
+  (updateDataEventY)="passDataY($event)"
+  [xcanvas]="xcanvas" 
+  [ycanvas]="ycanvas"
+  [xmouse]="xmouse" 
+  [ymouse]="ymouse"
+  [canvasWW]="canvasWW"
     [ngStyle]="{ width: canvasWidth }"
   ></app-navbarDrag>
 
@@ -208,11 +266,12 @@
   <app-inputDrag
     [property]="child.props"
     *ngSwitchCase="'inputDrag'"
-    [ngStyle]="{
-      position: 'absolute',
-      left: xmouse + 'px',
-      top: ymouse + 'px'
-    }"
+    (updateDataEvent)="passData($event)"
+    (updateDataEventY)="passDataY($event)"
+    [xcanvas]="xcanvas" 
+    [ycanvas]="ycanvas"
+    [xmouse]="xmouse" 
+    [ymouse]="ymouse"
   >
   </app-inputDrag>
 
@@ -226,11 +285,12 @@
   <app-headerDrag
     [property]="child.props"
     *ngSwitchCase="'headerDrag'"
-    [ngStyle]="{
-      position: 'absolute',
-      left: xmouse + 'px',
-      top: ymouse + 'px'
-    }"
+    (updateDataEvent)="passData($event)"
+  (updateDataEventY)="passDataY($event)"
+  [xcanvas]="xcanvas" 
+  [ycanvas]="ycanvas"
+  [xmouse]="xmouse" 
+  [ymouse]="ymouse"
   >
   </app-headerDrag>
 
@@ -243,11 +303,12 @@
   <app-linkDrag
     [property]="child.props"
     *ngSwitchCase="'linkDrag'"
-    [ngStyle]="{
-      position: 'absolute',
-      left: xmouse + 'px',
-      top: ymouse + 'px'
-    }"
+    (updateDataEvent)="passData($event)"
+    (updateDataEventY)="passDataY($event)"
+    [xcanvas]="xcanvas" 
+    [ycanvas]="ycanvas"
+    [xmouse]="xmouse" 
+    [ymouse]="ymouse"
   >
   </app-linkDrag>
 
@@ -262,10 +323,11 @@
   <app-paragraphDrag
     [property]="child.props"
     *ngSwitchCase="'paragraphDrag'"
-    [ngStyle]="{
-      position: 'absolute',
-      left: xmouse + 'px',
-      top: ymouse + 'px'
-    }"
+    (updateDataEvent)="passData($event)"
+    (updateDataEventY)="passDataY($event)"
+    [xcanvas]="xcanvas" 
+    [ycanvas]="ycanvas"
+    [xmouse]="xmouse" 
+    [ymouse]="ymouse"
   ></app-paragraphDrag>
 </div>
