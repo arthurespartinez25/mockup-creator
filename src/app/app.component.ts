@@ -388,20 +388,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.mouseMoveX = 0;
       this.mouseMoveY = 0;
     }
-    // else if(this.mouseMoveX !=0 && this.selected.typeObj=="nav")
-    // {
-    //   // this.jude = this.selected.style;
-    //   // let regexTop = /margin-top:(.+?);/;
-    //   // this.jude = this.jude.replace(regexTop,"");
-    //   // this.selected.style = this.selected.style;
-    //   // //this.mouseMoveX = this.mouseMoveX;
-    //   // //this.mouseMoveY = this.btnCmp.mousePositionYV2;
-    //   // this.selected.style = this.jude +
-    //   // "margin-top:"+this.mouseMoveX+"px;"/*+
-    //   // "position:fixed;"*/;
-    //   // this.mouseMoveX = 0;
-    //   // this.mouseMoveY = 0;
-    // }
   }
   copyMessage(val: string){
     const selBox = document.createElement('textarea');
@@ -430,16 +416,61 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     }, 0); 
   }
 
+  addComponentFB()
+  {
+    
+      let temp: IComponent;
+      temp = new ButtonDragComponent(this.canvas);
+      this.xCounter++;
+      this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
+      this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
+      this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
+
+      temp = new HeaderDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft+450;
+      this.mousePositionY = this.canvasTop+140;
+      this.componentList.push(temp);
+      setTimeout(() => {
+        temp = new InputDragComponent(this.canvas);
+        this.mousePositionX = this.canvasLeft+500;
+        this.mousePositionY = this.canvasTop+200;
+        this.componentList.push(temp);
+    }, 1);
+      setTimeout(() => {
+      temp = new LabelDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft+450;
+      this.mousePositionY = this.canvasTop+200;
+      this.componentList.push(temp);
+   }, 1);
+      setTimeout(() => {
+        temp = new InputDragComponent(this.canvas);
+        this.mousePositionX = this.canvasLeft+500;
+        this.mousePositionY = this.canvasTop+250;
+        this.componentList.push(temp);
+    }, 1);
+      setTimeout(() => {
+      temp = new LabelDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft+450;
+      this.mousePositionY = this.canvasTop+250;
+      this.componentList.push(temp);
+    }, 1);
+    setTimeout(() => {
+      temp = new CheckboxDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft+450;
+      this.mousePositionY = this.canvasTop+300;
+      this.componentList.push(temp);
+    }, 1);
+    setTimeout(() => {
+      temp = new ButtonDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft+450;
+      this.mousePositionY = this.canvasTop+350;
+      this.componentList.push(temp);
+    }, 1);
+  }
+
   
   receiveMessage($event: boolean) {
     if ($event == true) {
-      //removeElement(component: IComponent): void {
-      //console.log(componentID);
-      //let temp: IComponent;
-      //temp = new ButtonComponent(this.canvas);
-      //this.temp = component.props
-      //this.componentList.splice(component);
-      //this.componentList.splice(componentID,1);
 
       let componentIndex = this.componentList.indexOf(this.selectedComponent);
       if (componentIndex !== -1) {
