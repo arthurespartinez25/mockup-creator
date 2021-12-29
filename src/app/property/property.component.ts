@@ -19,6 +19,7 @@ export class PropertyComponent implements OnInit {
     style: '',
     typeObj: '',
     type: '',
+    draggable: true,
   };
 
   @Input() get property(): IProperty {
@@ -126,4 +127,9 @@ export class PropertyComponent implements OnInit {
   checkedChangeHandler(event: any) {
     this.props.checked = event.target.value;
   }
+  enableDragging(event: any) {
+    this.props.draggable = !this.props.draggable;
+    //console.log(this.props.draggable);
+  }
+  
 }

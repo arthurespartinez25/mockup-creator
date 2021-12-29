@@ -64,6 +64,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     style: '',
     typeObj: '',
     type: '',
+    draggable: true,
   };
 
   public _popupCount = 0;
@@ -175,6 +176,14 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   mousePositionY = 110;
   domInsideCanvas = false;
 
+  /*
+  disableDragging(){
+    let componentIndex = this.componentList.indexOf(this.selectedComponent);
+    if (componentIndex !== -1) {
+      this.selected.draggable = false;
+    }
+  }*/
+
   onDragEnded(event: CdkDragEnd) {
     event.source._dragRef.reset();
     const { offsetLeft, offsetTop } = event.source.element.nativeElement;
@@ -258,6 +267,10 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
 
   //----------------------------------------------------------------------------
+
+  get dragDisabled(): boolean {
+    return this.dragDisabled;
+  }
 
   get style(): string {
     return this._styleBody;
@@ -424,6 +437,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         this.selected.rows = -1;
         this.selected.cols = -1;
         this.selected.name = '';
+        this.selected.draggable = false;
         console.log('Deleted');
         $event = false;
       }

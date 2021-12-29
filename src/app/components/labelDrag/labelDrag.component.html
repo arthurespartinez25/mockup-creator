@@ -1,5 +1,15 @@
-<div cdkDrag cdkDragBoundary="#canvas" style="resize: both; overflow:auto;">
-    <label [id]="props.id" [style]="props.style">
-        {{ props.value }}
-    </label>
-</div>
+<label class="text" cdkDrag [cdkDragDisabled]="!props.draggable" cdkDragBoundary="#canvas" [id]="props.id" [style]="props.style">
+    {{ props.value }}
+</label>
+
+<style>
+    .text{
+        resize: both;
+        min-width: 70px;
+        min-height: 20px;
+        overflow:auto;
+    }
+    .text:hover {
+  background-color: yellow;
+}
+</style>

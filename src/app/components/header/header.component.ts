@@ -12,9 +12,9 @@ export class HeaderComponent implements OnInit, IComponent {
   props: IProperty = {
     key: '',
     id: '',
-    value: 'H1 HEADING',
+    value: 'Text Here',
     class: 'h1',
-    style: 'color:red;position:absolute;left:0px;top:0px;',
+    style: 'color:grey;position:absolute;left:0px;top:0px;',
     typeObj: 'header',
     type: '',
   };

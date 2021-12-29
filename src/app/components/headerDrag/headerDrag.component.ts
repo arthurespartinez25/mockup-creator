@@ -12,9 +12,9 @@ export class HeaderDragComponent implements OnInit, IComponent {
   props: IProperty = {
     key: '',
     id: '',
-    value: 'H1 HEADING',
+    value: 'Text Here',
     class: 'h1',
-    style: 'color:red;',
+    style: 'color:grey;',
     typeObj: 'headerDrag',
     type: '',
   };

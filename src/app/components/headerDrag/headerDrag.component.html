@@ -1,1 +1,3 @@
-<p cdkDrag cdkDragBoundary="#canvas" [class]="props.class" [id]="props.id" [style]="props.style"> {{ props.value }}</p>
+<p class="text" cdkDrag [cdkDragDisabled]="!props.draggable" cdkDragBoundary="#canvas" [class]="props.class" [id]="props.id" [style]="props.style"> 
+    {{ props.value }}
+</p>
