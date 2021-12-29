@@ -19,6 +19,8 @@ export class PropertyComponent implements OnInit {
     style: '',
     typeObj: '',
     type: '',
+    tblCols: 3,
+    tblRows: 4,
   };
 
   @Input() get property(): IProperty {
@@ -112,4 +114,15 @@ export class PropertyComponent implements OnInit {
   checkedChangeHandler(event: any) {
     this.props.checked = event.target.value;
   }
+  /* CODE BELOW IS FOR TABLE ELEMENT */
+
+  tblRowsChangeHandler(event: any) {
+    this.props.tblRows = event.target.value;
+    console.log(this.props.tblRows);
+  }
+  tblColsChangeHandler(event: any) {
+    this.props.tblCols = event.target.value;
+    console.log(this.props.tblCols);
+  }
+  /* END OF CODE FOR TABLE ELEMENT */
 }

@@ -17,6 +17,8 @@ export class TableComponent implements OnInit, IComponent  {
     style: 'position:absolute;left:0px;top:0px;',
     typeObj: 'table',
     type: '',
+    tblRows: 4,
+    tblCols: 4,
   };
 
   @Output() updateDataEvent= new EventEmitter<any>();
