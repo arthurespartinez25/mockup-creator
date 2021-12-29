@@ -43,8 +43,8 @@
         <input
           [disabled]="!this.props.id"
           type="checkbox"
+          [checked]="this.props.draggable"
           (change)="enableDragging($event)"
-          [value]="props.draggable"
         />
       </td>
     </tr>
