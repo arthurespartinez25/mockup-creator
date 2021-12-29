@@ -15,7 +15,7 @@ export class HeaderDragComponent implements OnInit, IComponent {
     id: '',
     value: 'Text Here',
     class: 'h1',
-    style: 'color:grey;',
+    style: '',
     typeObj: 'headerDrag',
     type: '',
   };
@@ -49,7 +49,7 @@ export class HeaderDragComponent implements OnInit, IComponent {
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
-    this.props.style='color:red;position:absolute;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    this.props.style='color:grey;position:absolute;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
   }
 
   onDragEnded($event: CdkDragEnd){
