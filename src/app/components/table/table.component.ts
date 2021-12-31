@@ -29,6 +29,10 @@ export class TableComponent implements OnInit, IComponent  {
   mousePositionYV2= 110;
   theX = 0;
   theY = 0;
+  tblRows = 4;
+  tblCols = 4;
+  tblColsArray : any = [];
+  tblRowsArray : any = [];
 
   ngOnInit(): void {
     //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
@@ -49,6 +53,25 @@ export class TableComponent implements OnInit, IComponent  {
     let date = Date.now();
     this.props.key = date.toString();
     this.props.id = 'table' + date.toString();
+    
+    /*
+    for(let i=0; i<=this.tblRows; i++){
+      for(let j=0; j<=this.tblCols; j++){
+        if (i == 0){
+          if (j == 0){
+          this.tblRowsArray[i][j] = "#";
+          }
+          else{
+            this.tblRowsArray[i][j] = "Head" + (i+1).toString();
+          }
+        }
+        else{
+          this.tblRowsArray[i][j] = "value";
+        }
+      }
+    }
+    console.log(this.tblRowsArray[this.tblRowsArray.length].toString());
+    */
    }
   
    @Input() get property(): IProperty {

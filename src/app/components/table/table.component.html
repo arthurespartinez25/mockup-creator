@@ -5,33 +5,46 @@
     'top': theY + 'px'
   }"> 
     <table [class]="props.class">
-        <thead>
+         <!--<thead *ngFor="let rows of this.tblRowsArray; let i = index;">
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">Heading 1</th>
-            <th scope="col">Heading 2</th>
-            <th scope="col">Heading 3</th>
+            <th> {{ rows }} </th>
+          </tr>           
+       </thead>
+       <tbody>
+          <tr *ngFor="let rows of this.tblRowsArray">
+              
+              <td> {{ rows }} </td>
           </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Cell</td>
-            <td>Cell</td>
-            <td>Cell</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Cell</td>
-            <td>Cell</td>
-            <td>Cell</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Cell</td>
-            <td>Cell</td>
-            <td>Cell</td>
-          </tr>
-        </tbody>
-      </table>
+      </tbody>-->
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th *ngFor="let columns of tblColsArray;">
+            {{columns}}
+          </th>
+        </tr>
+      </thead>
+      <tbody >
+        <tr *ngFor="let rows of tblRowsArray;">
+          <th scope="row">1</th>
+          <td *ngFor="let columns of tblColsArray;">
+            {{rows[columns]}}
+          </td>
+          <td>Cell</td>
+          <td>Cell</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Cell</td>
+          <td>Cell</td>
+          <td>Cell</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Cell</td>
+          <td>Cell</td>
+          <td>Cell</td>
+        </tr>
+      </tbody>
+    </table>
 </div>

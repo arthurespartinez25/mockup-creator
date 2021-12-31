@@ -164,6 +164,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         break;
       default:
         temp = new ButtonComponent(this.canvas);
+        console.log("No Component Added");
     }
     this.xCounter++;
     console.log(this.xCounter);
