@@ -52,6 +52,18 @@ export class LabelDragComponent implements OnInit, IComponent {
       this.props.style='position:absolute;left:'
     +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
+    else if(this.whatComponent2=="confirmLabelPass")
+    {
+      this.props.value = "Confirm Password";
+      this.props.style='position:absolute;left:'
+    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    }
+    else if(this.whatComponent2=="emailLabel")
+    {
+      this.props.value = "Email";
+      this.props.style='position:absolute;left:'
+    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    }
     else
     {
       this.props.style='position:absolute;left:'

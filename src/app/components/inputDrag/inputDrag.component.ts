@@ -54,6 +54,19 @@ export class InputDragComponent implements OnInit, IComponent {
       this.props.style='width:200px;position:absolute;left:'
       +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
+    else if(this.whatComponent2=="registerInputPass")
+    {
+      this.props.placeholder = "Confirm Password";
+      this.props.style='width:200px;position:absolute;left:'
+      +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    }
+    else if(this.whatComponent2=="registerInputEmail")
+    {
+      this.props.placeholder = "Email Address";
+      this.props.type="email";
+      this.props.style='width:200px;position:absolute;left:'
+      +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    }
     else
     {
       this.props.style='width:200px;position:absolute;left:'

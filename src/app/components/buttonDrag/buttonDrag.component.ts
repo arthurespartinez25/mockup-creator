@@ -55,6 +55,13 @@ export class ButtonDragComponent implements IComponent {
       +'width: 20%;max-width: 270px;min-width: 220px; overflow-y: auto;background-color: blue;color: red;border-radius: 10px;'
       +'padding: 5px 10px; border: none;font-weight: bolder; font-size: x-large; margin-bottom: 5px;';
     }
+    if(this.whatComponent2=="RegisterButton")
+    {
+      this.props.value = "Register";
+      this.props.style='position:absolute;left:'+(this.xmouse-this.theX)+'px;top:'+(this.ymouse-this.theY)+'px;'
+      +'width: 20%;max-width: 270px;min-width: 220px; overflow-y: auto;background-color: blue;color: red;border-radius: 10px;'
+      +'padding: 5px 10px; border: none;font-weight: bolder; font-size: x-large; margin-bottom: 5px;';
+    }
     else
     {
       this.props.value = "Button";
