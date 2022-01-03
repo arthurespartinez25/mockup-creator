@@ -485,6 +485,137 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
 
   
+  addComponentSearchScreen()
+  {
+    //Jan 3, 2021 - 1:20pm
+    //left side of the form
+      let temp: IComponent;
+      temp = new ButtonDragComponent(this.canvas);
+      this.xCounter++;
+      this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
+      this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
+      this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
+
+      this.whatComponent = "SearchHeader";
+      temp = new HeaderDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft+250;
+      this.mousePositionY = this.canvasTop+140;
+      this.componentList.push(temp);
+      setTimeout(() => {
+        temp = new InputDragComponent(this.canvas);
+        this.mousePositionX = this.canvasLeft+300;
+        this.mousePositionY = this.canvasTop+200;
+        this.componentList.push(temp);
+      }, 1);
+      setTimeout(() => {
+      temp = new LabelDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft+250;
+      this.mousePositionY = this.canvasTop+200;
+      this.componentList.push(temp);
+      }, 1);
+      setTimeout(() => {
+        temp = new InputDragComponent(this.canvas);
+        this.mousePositionX = this.canvasLeft+300;
+        this.mousePositionY = this.canvasTop+250;
+        this.componentList.push(temp);
+      }, 1);
+      setTimeout(() => {
+      temp = new LabelDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft+250;
+      this.mousePositionY = this.canvasTop+250;
+      this.componentList.push(temp);
+      }, 1);
+      setTimeout(() => {
+        temp = new DatepickerDragComponent(this.canvas);
+        this.mousePositionX = this.canvasLeft+300;
+        this.mousePositionY = this.canvasTop+310;
+        this.componentList.push(temp);
+      }, 1);
+      setTimeout(() => {
+        temp = new LabelDragComponent(this.canvas);
+        this.mousePositionX = this.canvasLeft+250;
+        this.mousePositionY = this.canvasTop+310;
+        this.componentList.push(temp);
+      }, 1);
+      setTimeout(() => {
+        temp = new InputDragComponent(this.canvas);
+        this.mousePositionX = this.canvasLeft+300;
+        this.mousePositionY = this.canvasTop+350;
+        this.componentList.push(temp);
+      }, 1);
+      setTimeout(() => {
+        temp = new LabelDragComponent(this.canvas);
+        this.mousePositionX = this.canvasLeft+250;
+        this.mousePositionY = this.canvasTop+350;
+        this.componentList.push(temp);
+      }, 1);
+      setTimeout(() => {
+        temp = new InputDragComponent(this.canvas);
+        this.mousePositionX = this.canvasLeft+300;
+        this.mousePositionY = this.canvasTop+400;
+        this.componentList.push(temp);
+      }, 1);
+      setTimeout(() => {
+        temp = new LabelDragComponent(this.canvas);
+        this.mousePositionX = this.canvasLeft+250;
+        this.mousePositionY = this.canvasTop+400;
+        this.componentList.push(temp);
+      }, 1);
+      setTimeout(() => {
+        temp = new InputDragComponent(this.canvas);
+        this.mousePositionX = this.canvasLeft+300;
+        this.mousePositionY = this.canvasTop+450;
+        this.componentList.push(temp);
+      }, 1);
+      setTimeout(() => {
+        temp = new LabelDragComponent(this.canvas);
+        this.mousePositionX = this.canvasLeft+250;
+        this.mousePositionY = this.canvasTop+450;
+        this.componentList.push(temp);
+      }, 1);
+
+      // right side of the form
+      setTimeout(() => {
+        temp = new InputDragComponent(this.canvas);
+        this.mousePositionX = this.canvasLeft+700;
+        this.mousePositionY = this.canvasTop+200;
+        this.componentList.push(temp);
+      }, 1);
+      setTimeout(() => {
+        temp = new LabelDragComponent(this.canvas);
+        this.mousePositionX = this.canvasLeft+650;
+        this.mousePositionY = this.canvasTop+200;
+        this.componentList.push(temp);
+      }, 1);
+      setTimeout(() => {
+        temp = new DatepickerDragComponent(this.canvas);
+        this.mousePositionX = this.canvasLeft+700;
+        this.mousePositionY = this.canvasTop+250;
+        this.componentList.push(temp);
+      }, 1);
+      setTimeout(() => {
+        temp = new LabelDragComponent(this.canvas);
+        this.mousePositionX = this.canvasLeft+650;
+        this.mousePositionY = this.canvasTop+250;
+        this.componentList.push(temp);
+      }, 1);
+
+      //buttons
+      setTimeout(() => {
+        temp = new ButtonDragComponent(this.canvas);
+        this.mousePositionX = this.canvasLeft+900;
+        this.mousePositionY = this.canvasTop+500;
+        this.componentList.push(temp);
+      }, 1);
+      setTimeout(() => {
+        temp = new ButtonDragComponent(this.canvas);
+        this.mousePositionX = this.canvasLeft+980;
+        this.mousePositionY = this.canvasTop+500;
+        this.componentList.push(temp);
+      }, 1);
+  }
+
+  
   receiveMessage($event: boolean) {
     if ($event == true) {
 
