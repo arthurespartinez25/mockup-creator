@@ -26,6 +26,7 @@ export class LabelDragComponent implements OnInit, IComponent {
   @Input() ycanvas: any;
   @Input() xmouse: any;
   @Input() ymouse: any;
+  @Input() whatComponent2:any;
   mousePositionXV2 = 310;
   mousePositionYV2= 110;
   theX = 0;
@@ -39,7 +40,23 @@ export class LabelDragComponent implements OnInit, IComponent {
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
-    this.props.style='position:absolute;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    if(this.whatComponent2=="loginLabelUser")
+    {
+      this.props.value = "Username";
+      this.props.style='position:absolute;left:'
+    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    }
+    else if(this.whatComponent2=="loginLabelPass")
+    {
+      this.props.value = "Password";
+      this.props.style='position:absolute;left:'
+    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    }
+    else
+    {
+      this.props.style='position:absolute;left:'
+    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    }
   }
 
   onDragEnded($event: CdkDragEnd){

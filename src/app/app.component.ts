@@ -424,42 +424,48 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
       this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
 
-      this.whatComponent = "login";
+      this.whatComponent = "loginHeader";
       temp = new HeaderDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft+450;
       this.mousePositionY = this.canvasTop+140;
       this.componentList.push(temp);
       setTimeout(() => {
+        this.whatComponent = "loginInputUser";
         temp = new InputDragComponent(this.canvas);
-        this.mousePositionX = this.canvasLeft+500;
+        this.mousePositionX = this.canvasLeft+530;
         this.mousePositionY = this.canvasTop+200;
         this.componentList.push(temp);
     }, 1);
       setTimeout(() => {
+        this.whatComponent = "loginLabelUser";
       temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft+450;
       this.mousePositionY = this.canvasTop+200;
       this.componentList.push(temp);
    }, 1);
       setTimeout(() => {
+        this.whatComponent = "loginInputPass";
         temp = new InputDragComponent(this.canvas);
-        this.mousePositionX = this.canvasLeft+500;
+        this.mousePositionX = this.canvasLeft+530;
         this.mousePositionY = this.canvasTop+250;
         this.componentList.push(temp);
     }, 1);
       setTimeout(() => {
+        this.whatComponent = "loginLabelPass";
       temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft+450;
       this.mousePositionY = this.canvasTop+250;
       this.componentList.push(temp);
     }, 1);
     setTimeout(() => {
+      this.whatComponent = "LoginCheckbox";
       temp = new CheckboxDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft+450;
       this.mousePositionY = this.canvasTop+300;
       this.componentList.push(temp);
     }, 1);
     setTimeout(() => {
+      this.whatComponent = "LoginButton";
       temp = new ButtonDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft+450;
       this.mousePositionY = this.canvasTop+350;

@@ -27,6 +27,7 @@ export class InputDragComponent implements OnInit, IComponent {
   @Input() ycanvas: any;
   @Input() xmouse: any;
   @Input() ymouse: any;
+  @Input() whatComponent2:any;
   mousePositionXV2 = 310;
   mousePositionYV2= 110;
   theX = 0;
@@ -40,7 +41,24 @@ export class InputDragComponent implements OnInit, IComponent {
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
-    this.props.style='width:200px;position:absolute;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    
+    if(this.whatComponent2=="loginInputUser")
+    {
+      this.props.placeholder = "Username";
+      this.props.style='width:200px;position:absolute;left:'
+      +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    }
+    else if(this.whatComponent2=="loginInputPass")
+    {
+      this.props.placeholder = "Password";
+      this.props.style='width:200px;position:absolute;left:'
+      +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    }
+    else
+    {
+      this.props.style='width:200px;position:absolute;left:'
+      +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    }
   }
 
   onDragEnded($event: CdkDragEnd){

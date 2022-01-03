@@ -51,9 +51,9 @@ export class HeaderDragComponent implements OnInit, IComponent {
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
-    if(this.whatComponent2=="login")
+    if(this.whatComponent2=="loginHeader")
     {
-      this.props.value = "gumana ka buset";
+      this.props.value = "Login123";
       this.props.style='color:blue;position:absolute;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
     else
