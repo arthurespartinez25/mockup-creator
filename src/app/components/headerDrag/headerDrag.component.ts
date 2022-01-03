@@ -36,6 +36,7 @@ export class HeaderDragComponent implements OnInit, IComponent {
   @Input() ycanvas: any;
   @Input() xmouse: any;
   @Input() ymouse: any;
+  @Input() whatComponent2:any;
   mousePositionXV2 = 310;
   mousePositionYV2= 110;
   theX = 0;
@@ -45,11 +46,21 @@ export class HeaderDragComponent implements OnInit, IComponent {
   onetimeBool = true;
 
   ngOnInit(): void {
+    console.log(this.whatComponent2);
     this.theX = this.xcanvas;
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
-    this.props.style='color:red;position:absolute;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    if(this.whatComponent2=="login")
+    {
+      this.props.value = "gumana ka buset";
+      this.props.style='color:blue;position:absolute;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    }
+    else
+    {
+      this.props.style='color:red;position:absolute;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    }
+    
   }
 
   onDragEnded($event: CdkDragEnd){

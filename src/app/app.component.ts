@@ -94,6 +94,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   canvasW = 0;
   xCounter = 0;
   jjj=true;
+  whatComponent = "none";
 
  
   ngOnInit(): void {
@@ -167,11 +168,9 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         temp = new ButtonComponent(this.canvas);
     }
     this.xCounter++;
-    console.log(this.xCounter);
     this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
     this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
     this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
-    console.log(this.canvasW+"rawr");
     this.componentList.push(temp);
   }
   //----------------------------------------------------------------------------
@@ -415,8 +414,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         window.URL.revokeObjectURL(url);  
     }, 0); 
   }
-
-  addComponentFB()
+  addComponentLogin()
   {
     
       let temp: IComponent;
@@ -426,6 +424,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
       this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
 
+      this.whatComponent = "login";
       temp = new HeaderDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft+450;
       this.mousePositionY = this.canvasTop+140;
@@ -466,6 +465,23 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.mousePositionY = this.canvasTop+350;
       this.componentList.push(temp);
     }, 1);
+  }
+  addComponentImageLabel()
+  {
+      let temp: IComponent;
+      temp = new ButtonDragComponent(this.canvas);
+      this.xCounter++;
+      this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
+      this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
+      this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
+
+      this.whatComponent = "sampleImage";
+      temp = new ImageDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft+450;
+      this.mousePositionY = this.canvasTop+140;
+      this.componentList.push(temp);
+
+
   }
 
   
