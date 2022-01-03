@@ -106,7 +106,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       case 'nav':
         temp = new NavbarComponent(this.canvas);
         break;
-      case 'link':
+      case 'link':``
         temp = new LinkComponent(this.canvas);
         break;
       case 'paragraph':
@@ -171,7 +171,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
     this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
     this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
-    console.log(this.canvasW+"rawr");
+    //console.log(this.canvasW+"rawr");
     this.componentList.push(temp);
   }
   //----------------------------------------------------------------------------
@@ -404,7 +404,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
   
 
-  
+  /*
   receiveMessage($event: boolean) {
     if ($event == true) {
       //removeElement(component: IComponent): void {
@@ -435,6 +435,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     } else {
       console.log('Nothing to delete');
     }
+    
   }
 
   // deleteComponent(){

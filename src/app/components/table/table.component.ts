@@ -12,13 +12,13 @@ export class TableComponent implements OnInit, IComponent  {
   props: IProperty = {
     key: '',
     id: '',
-    value: '',
+    value: 'TableName',
     class: 'table',
     style: 'position:absolute;left:0px;top:0px;',
     typeObj: 'table',
     type: '',
-    tblRows: 4,
-    tblCols: 4,
+    tblCols:5,
+    tblRows:3
   };
 
   @Output() updateDataEvent= new EventEmitter<any>();
@@ -29,8 +29,8 @@ export class TableComponent implements OnInit, IComponent  {
   mousePositionYV2= 110;
   theX = 0;
   theY = 0;
-  tblRows = 4;
-  tblCols = 4;
+  tblCols = this.props.tblCols;
+  tblRows = this.props.tblRows;
   tblColsArray : any = [];
   tblRowsArray : any = [];
 
@@ -53,36 +53,62 @@ export class TableComponent implements OnInit, IComponent  {
     let date = Date.now();
     this.props.key = date.toString();
     this.props.id = 'table' + date.toString();
-    
-    /*
-    for(let i=0; i<=this.tblRows; i++){
-      for(let j=0; j<=this.tblCols; j++){
-        if (i == 0){
-          if (j == 0){
-          this.tblRowsArray[i][j] = "#";
-          }
-          else{
-            this.tblRowsArray[i][j] = "Head" + (i+1).toString();
-          }
-        }
-        else{
-          this.tblRowsArray[i][j] = "value";
-        }
-      }
-    }
-    console.log(this.tblRowsArray[this.tblRowsArray.length].toString());
-    */
    }
   
-   @Input() get property(): IProperty {
+  @Input() get property(): IProperty {
     return this.props;
   }
 
   set property(value: IProperty) {
     if (value) {
       this.props = value;
+      this.tblCols = value.tblCols;
+      this.tblRows = value.tblRows;
+      this.editTableDimension(this.tblRows, this.tblCols);
+    }
+    //console.log("Repeato Shimashou");
+    //this.editTableDimension();
+  }
+
+  /*
+  set row(row:number){
+    this.props.tblRows = row;
+  }
+  set col(col:number){
+    this.props.tblCols = col;
+  }
+  */
+
+  editTableDimension(row,col){
+    //let col = this.tblCols;
+    //let row = this.tblRows;
+    this.tblRowsArray = [];
+    this.tblColsArray = [];
+    if (!row || !col){
+      console.warn("rows or columns are undefined");
+    }else{
+      for( var i=0; i<row; i++ ) {
+        this.tblRowsArray.push( [] );
+      }
+      for( var i=0; i<col; i++ ) {
+        this.tblColsArray.push(i);
+      }
+      //////////////////////////////////////////////
+  
+      for (var i = 0; i < row; i++)
+      {
+        for (var j = this.tblRowsArray[i].length; j < col; j++)
+        {
+          this.tblRowsArray[i].push("data");
+        }
+        //console.log(this.tblRowsArray[i].toString());
+      }
+      //console.log(this.tblColsArray.toString());}
     }
   }
+
+
+  
 
   get htmlCode(): string {
     let tmpHtmlCode = '<div';

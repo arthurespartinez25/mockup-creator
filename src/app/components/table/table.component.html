@@ -3,48 +3,14 @@
     'position': 'absolute',
     'left': theX + 'px',
     'top': theY + 'px'
-  }"> 
+  }"
+  > <label>{{ props.value }}</label><br>
     <table [class]="props.class">
-         <!--<thead *ngFor="let rows of this.tblRowsArray; let i = index;">
-          <tr>
-            <th> {{ rows }} </th>
-          </tr>           
-       </thead>
-       <tbody>
-          <tr *ngFor="let rows of this.tblRowsArray">
-              
-              <td> {{ rows }} </td>
-          </tr>
-      </tbody>-->
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th *ngFor="let columns of tblColsArray;">
-            {{columns}}
-          </th>
-        </tr>
-      </thead>
-      <tbody >
-        <tr *ngFor="let rows of tblRowsArray;">
-          <th scope="row">1</th>
-          <td *ngFor="let columns of tblColsArray;">
-            {{rows[columns]}}
+        <tr *ngFor="let row of this.tblRowsArray">
+          <td *ngFor="let column of this.tblColsArray" style="padding:10px; border:1px solid black;">
+            {{ row[column] }}
           </td>
-          <td>Cell</td>
-          <td>Cell</td>
         </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Cell</td>
-          <td>Cell</td>
-          <td>Cell</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Cell</td>
-          <td>Cell</td>
-          <td>Cell</td>
-        </tr>
-      </tbody>
     </table>
+    <button (click)="editTableDimension(props.tblRows,props.tblCols)" style="float:right; width: 20px; height: 20px;">*</button>
 </div>

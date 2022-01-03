@@ -257,17 +257,9 @@
         <input
           [disabled]="!this.props.id"
           type="number"
-          [value]="props.content"
-          (keyup)="tblRowsChangeHandler($event)"
+          [value]="this.props.tblRows"
+          (change)="tblRowsChangeHandler($event)"
         />
-        <tr *ngIf="props.name">
-          <th><label>name</label></th>
-          <input
-            type="text"
-            [value]="this.props.name"
-            (keyup)="nameChangeHandler($event)"
-          />
-        </tr>
         <tr>
           
         </tr>
@@ -284,17 +276,9 @@
         <input
           [disabled]="!this.props.id"
           type="number"
-          [value]="props.content"
-          (keyup)="tblColsChangeHandler($event)"
+          [value]="this.props.tblCols"
+          (change)="tblColsChangeHandler($event)"
         />
-        <tr *ngIf="props.name">
-          <th><label>name</label></th>
-          <input
-            type="text"
-            [value]="this.props.name"
-            (keyup)="nameChangeHandler($event)"
-          />
-        </tr>
         <tr>
           
         </tr>
