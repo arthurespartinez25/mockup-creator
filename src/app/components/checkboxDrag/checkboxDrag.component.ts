@@ -27,6 +27,7 @@ export class CheckboxDragComponent implements OnInit, IComponent {
   @Input() ycanvas: any;
   @Input() xmouse: any;
   @Input() ymouse: any;
+  @Input() whatComponent2:any;
   mousePositionXV2 = 310;
   mousePositionYV2= 110;
   theX = 0;
@@ -40,7 +41,17 @@ export class CheckboxDragComponent implements OnInit, IComponent {
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
-    this.props.style='cursor: pointer;position:sticky;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    if(this.whatComponent2=="LoginCheckbox")
+    {
+      this.props.value = "Remember Password";
+      this.props.style='color:green;cursor: pointer;position:sticky;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    
+    }
+    else
+    {
+      this.props.style='cursor:pointer;position:sticky;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    
+    }
   }
 
   onDragEnded($event: CdkDragEnd){
