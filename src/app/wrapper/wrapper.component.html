@@ -71,7 +71,8 @@
   [xcanvas]="xcanvas" 
   [ycanvas]="ycanvas"
   [xmouse]="xmouse" 
-  [ymouse]="ymouse">
+  [ymouse]="ymouse"
+  [whatComponent2]="whatComponent2">
   </app-buttonDrag>
 
   <app-popup [property]="child.props" *ngSwitchCase="'popup'"></app-popup>
@@ -125,6 +126,7 @@
     [ycanvas]="ycanvas"
     [xmouse]="xmouse" 
     [ymouse]="ymouse"
+    [whatComponent2]="whatComponent2"
   ></app-imageDrag>
 
   <app-label [property]="child.props" *ngSwitchCase="'label'"
@@ -141,6 +143,7 @@
     [ycanvas]="ycanvas"
     [xmouse]="xmouse" 
     [ymouse]="ymouse"
+    [whatComponent2]="whatComponent2"
   ></app-labelDrag>
 
   <app-textbox [property]="child.props" 
@@ -212,6 +215,7 @@
     [ycanvas]="ycanvas"
     [xmouse]="xmouse" 
     [ymouse]="ymouse"
+    [whatComponent2]="whatComponent2"
   ></app-checkboxDrag>
 
   <app-dropdown
@@ -272,6 +276,7 @@
     [ycanvas]="ycanvas"
     [xmouse]="xmouse" 
     [ymouse]="ymouse"
+    [whatComponent2]="whatComponent2"
   >
   </app-inputDrag>
 
@@ -291,6 +296,7 @@
   [ycanvas]="ycanvas"
   [xmouse]="xmouse" 
   [ymouse]="ymouse"
+  [whatComponent2]="whatComponent2"
   >
   </app-headerDrag>
 

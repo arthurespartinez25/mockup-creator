@@ -161,6 +161,20 @@
       Image
     </button>
 
+    <button
+      class="palette-item"
+      (click)="addComponentLogin()"
+    >
+      Login
+    </button>
+
+    <button
+      class="palette-item"
+      (click)="addComponentImageLabel()"
+    >
+      Image Label
+    </button>
+
     <!-- <ul class="list-group">
       <li class="list-group-item palette-item" (click)="createButton()">
         Button
@@ -197,6 +211,7 @@
         (mousedown)="mouseGalawX($event)"
         (updateDataEvent2)="passData2($event)"
         (updateDataEventX)="passDataX($event)"
+        [whatComponent]="whatComponent"
       >
       </app-wrapper>
     </div>

@@ -95,6 +95,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   canvasW = 0;
   xCounter = 0;
   jjj=true;
+  whatComponent = "none";
 
  
   ngOnInit(): void {
@@ -168,11 +169,9 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         temp = new ButtonComponent(this.canvas);
     }
     this.xCounter++;
-    console.log(this.xCounter);
     this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
     this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
     this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
-    console.log(this.canvasW+"rawr");
     this.componentList.push(temp);
   }
   //----------------------------------------------------------------------------
@@ -401,20 +400,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.mouseMoveX = 0;
       this.mouseMoveY = 0;
     }
-    // else if(this.mouseMoveX !=0 && this.selected.typeObj=="nav")
-    // {
-    //   // this.jude = this.selected.style;
-    //   // let regexTop = /margin-top:(.+?);/;
-    //   // this.jude = this.jude.replace(regexTop,"");
-    //   // this.selected.style = this.selected.style;
-    //   // //this.mouseMoveX = this.mouseMoveX;
-    //   // //this.mouseMoveY = this.btnCmp.mousePositionYV2;
-    //   // this.selected.style = this.jude +
-    //   // "margin-top:"+this.mouseMoveX+"px;"/*+
-    //   // "position:fixed;"*/;
-    //   // this.mouseMoveX = 0;
-    //   // this.mouseMoveY = 0;
-    // }
   }
   copyMessage(val: string){
     const selBox = document.createElement('textarea');
@@ -442,17 +427,85 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         window.URL.revokeObjectURL(url);  
     }, 0); 
   }
+  addComponentLogin()
+  {
+    
+      let temp: IComponent;
+      temp = new ButtonDragComponent(this.canvas);
+      this.xCounter++;
+      this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
+      this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
+      this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
+
+      this.whatComponent = "loginHeader";
+      temp = new HeaderDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft+450;
+      this.mousePositionY = this.canvasTop+140;
+      this.componentList.push(temp);
+      setTimeout(() => {
+        this.whatComponent = "loginInputUser";
+        temp = new InputDragComponent(this.canvas);
+        this.mousePositionX = this.canvasLeft+530;
+        this.mousePositionY = this.canvasTop+200;
+        this.componentList.push(temp);
+    }, 1);
+      setTimeout(() => {
+        this.whatComponent = "loginLabelUser";
+      temp = new LabelDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft+450;
+      this.mousePositionY = this.canvasTop+200;
+      this.componentList.push(temp);
+   }, 1);
+      setTimeout(() => {
+        this.whatComponent = "loginInputPass";
+        temp = new InputDragComponent(this.canvas);
+        this.mousePositionX = this.canvasLeft+530;
+        this.mousePositionY = this.canvasTop+250;
+        this.componentList.push(temp);
+    }, 1);
+      setTimeout(() => {
+        this.whatComponent = "loginLabelPass";
+      temp = new LabelDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft+450;
+      this.mousePositionY = this.canvasTop+250;
+      this.componentList.push(temp);
+    }, 1);
+    setTimeout(() => {
+      this.whatComponent = "LoginCheckbox";
+      temp = new CheckboxDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft+450;
+      this.mousePositionY = this.canvasTop+300;
+      this.componentList.push(temp);
+    }, 1);
+    setTimeout(() => {
+      this.whatComponent = "LoginButton";
+      temp = new ButtonDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft+450;
+      this.mousePositionY = this.canvasTop+350;
+      this.componentList.push(temp);
+    }, 1);
+  }
+  addComponentImageLabel()
+  {
+      let temp: IComponent;
+      temp = new ButtonDragComponent(this.canvas);
+      this.xCounter++;
+      this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
+      this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
+      this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
+
+      this.whatComponent = "sampleImage";
+      temp = new ImageDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft+450;
+      this.mousePositionY = this.canvasTop+140;
+      this.componentList.push(temp);
+
+
+  }
 
   
   receiveMessage($event: boolean) {
     if ($event == true) {
-      //removeElement(component: IComponent): void {
-      //console.log(componentID);
-      //let temp: IComponent;
-      //temp = new ButtonComponent(this.canvas);
-      //this.temp = component.props
-      //this.componentList.splice(component);
-      //this.componentList.splice(componentID,1);
 
       let componentIndex = this.componentList.indexOf(this.selectedComponent);
       if (componentIndex !== -1) {

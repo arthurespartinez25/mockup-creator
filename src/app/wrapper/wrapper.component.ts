@@ -1,6 +1,7 @@
 import { DragDrop } from '@angular/cdk/drag-drop';
 import { Icu } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { throwError } from 'rxjs';
 import { IComponent } from '../interfaces/icomponent';
 import { IProperty } from '../interfaces/iproperty';
 
@@ -21,6 +22,7 @@ export class WrapperComponent implements OnInit {
   @Input() canvasTop: any;
   @Input() canvasW: any;
   @Input() xCounter: any;
+  @Input() whatComponent:any;
   @Output() updateDataEvent2= new EventEmitter<any>();
   @Output() updateDataEventX= new EventEmitter<any>();
 
@@ -31,6 +33,8 @@ export class WrapperComponent implements OnInit {
   xCounterstrike = 0;
   canvasWW = 0;
   jude=false;
+  whatComponent2 = "";
+
   @Input() get childComp(): IComponent {
     return this.child;
   }
@@ -68,6 +72,7 @@ export class WrapperComponent implements OnInit {
     this.ycanvas = this.canvasTop;
     this.xCounterstrike = this.xCounter;
     this.canvasWW = this.canvasW;
+    this.whatComponent2 = this.whatComponent;
   }
   removeElement(remove:IComponent):void {
 
