@@ -502,34 +502,46 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
       this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
 
-      this.whatComponent = "SearchHeader";
+      this.whatComponent = "searchNavbar";
+      temp = new NavbarDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft+250;
+      this.mousePositionY = this.canvasTop;
+      this.componentList.push(temp);
+
+      setTimeout(() => {
+      this.whatComponent = "searchHeader";
       temp = new HeaderDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft+250;
       this.mousePositionY = this.canvasTop+140;
       this.componentList.push(temp);
+      }, 1);
       setTimeout(() => {
+        this.whatComponent = "carrierInput";
         temp = new InputDragComponent(this.canvas);
         this.mousePositionX = this.canvasLeft+300;
         this.mousePositionY = this.canvasTop+200;
         this.componentList.push(temp);
       }, 1);
       setTimeout(() => {
-      temp = new LabelDragComponent(this.canvas);
-      this.mousePositionX = this.canvasLeft+250;
-      this.mousePositionY = this.canvasTop+200;
-      this.componentList.push(temp);
+        this.whatComponent = "carrierLabel";
+        temp = new LabelDragComponent(this.canvas);
+        this.mousePositionX = this.canvasLeft+250;
+        this.mousePositionY = this.canvasTop+210;
+        this.componentList.push(temp);
       }, 1);
       setTimeout(() => {
+        this.whatComponent = "invoiceInput";
         temp = new InputDragComponent(this.canvas);
         this.mousePositionX = this.canvasLeft+300;
         this.mousePositionY = this.canvasTop+250;
         this.componentList.push(temp);
       }, 1);
       setTimeout(() => {
-      temp = new LabelDragComponent(this.canvas);
-      this.mousePositionX = this.canvasLeft+250;
-      this.mousePositionY = this.canvasTop+250;
-      this.componentList.push(temp);
+        this.whatComponent = "invoiceFromLabel";
+        temp = new LabelDragComponent(this.canvas);
+        this.mousePositionX = this.canvasLeft+165;
+        this.mousePositionY = this.canvasTop+260;
+        this.componentList.push(temp);
       }, 1);
       setTimeout(() => {
         temp = new DatepickerDragComponent(this.canvas);
@@ -538,59 +550,68 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         this.componentList.push(temp);
       }, 1);
       setTimeout(() => {
+        this.whatComponent = "shippingFromLabel";
         temp = new LabelDragComponent(this.canvas);
-        this.mousePositionX = this.canvasLeft+250;
+        this.mousePositionX = this.canvasLeft+172;
         this.mousePositionY = this.canvasTop+310;
         this.componentList.push(temp);
       }, 1);
       setTimeout(() => {
+        this.whatComponent = "deliveryInput";
         temp = new InputDragComponent(this.canvas);
         this.mousePositionX = this.canvasLeft+300;
         this.mousePositionY = this.canvasTop+350;
         this.componentList.push(temp);
       }, 1);
       setTimeout(() => {
+        this.whatComponent = "deliveryNameLabel";
         temp = new LabelDragComponent(this.canvas);
-        this.mousePositionX = this.canvasLeft+250;
-        this.mousePositionY = this.canvasTop+350;
+        this.mousePositionX = this.canvasLeft+205;
+        this.mousePositionY = this.canvasTop+360;
         this.componentList.push(temp);
       }, 1);
       setTimeout(() => {
+        this.whatComponent = "addressInput";
         temp = new InputDragComponent(this.canvas);
         this.mousePositionX = this.canvasLeft+300;
         this.mousePositionY = this.canvasTop+400;
         this.componentList.push(temp);
       }, 1);
       setTimeout(() => {
+        this.whatComponent = "addressLabel";
         temp = new LabelDragComponent(this.canvas);
-        this.mousePositionX = this.canvasLeft+250;
-        this.mousePositionY = this.canvasTop+400;
+        this.mousePositionX = this.canvasLeft+245;
+        this.mousePositionY = this.canvasTop+410;
         this.componentList.push(temp);
       }, 1);
       setTimeout(() => {
+        this.whatComponent = "remarksInput";
         temp = new InputDragComponent(this.canvas);
         this.mousePositionX = this.canvasLeft+300;
         this.mousePositionY = this.canvasTop+450;
         this.componentList.push(temp);
       }, 1);
       setTimeout(() => {
+        this.whatComponent = "remarksLabel";
         temp = new LabelDragComponent(this.canvas);
-        this.mousePositionX = this.canvasLeft+250;
-        this.mousePositionY = this.canvasTop+450;
+        this.mousePositionX = this.canvasLeft+240;
+        this.mousePositionY = this.canvasTop+460;
         this.componentList.push(temp);
       }, 1);
 
       // right side of the form
       setTimeout(() => {
+        this.whatComponent = "invoiceInput";
         temp = new InputDragComponent(this.canvas);
         this.mousePositionX = this.canvasLeft+700;
         this.mousePositionY = this.canvasTop+200;
         this.componentList.push(temp);
       }, 1);
       setTimeout(() => {
+        this.whatComponent = "invoiceToLabel";
         temp = new LabelDragComponent(this.canvas);
-        this.mousePositionX = this.canvasLeft+650;
-        this.mousePositionY = this.canvasTop+200;
+        this.mousePositionX = this.canvasLeft+585;
+        this.mousePositionY = this.canvasTop+210;
         this.componentList.push(temp);
       }, 1);
       setTimeout(() => {
@@ -600,22 +621,25 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         this.componentList.push(temp);
       }, 1);
       setTimeout(() => {
+        this.whatComponent = "shippingToLabel";
         temp = new LabelDragComponent(this.canvas);
-        this.mousePositionX = this.canvasLeft+650;
+        this.mousePositionX = this.canvasLeft+590;
         this.mousePositionY = this.canvasTop+250;
         this.componentList.push(temp);
       }, 1);
 
       //buttons
       setTimeout(() => {
+        this.whatComponent = "SearchButton";
         temp = new ButtonDragComponent(this.canvas);
         this.mousePositionX = this.canvasLeft+900;
         this.mousePositionY = this.canvasTop+500;
         this.componentList.push(temp);
       }, 1);
       setTimeout(() => {
+        this.whatComponent = "ClearButton";
         temp = new ButtonDragComponent(this.canvas);
-        this.mousePositionX = this.canvasLeft+980;
+        this.mousePositionX = this.canvasLeft+965;
         this.mousePositionY = this.canvasTop+500;
         this.componentList.push(temp);
       }, 1);

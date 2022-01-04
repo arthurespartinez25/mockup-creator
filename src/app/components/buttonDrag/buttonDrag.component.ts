@@ -55,6 +55,20 @@ export class ButtonDragComponent implements IComponent {
       +'width: 20%;max-width: 270px;min-width: 220px; overflow-y: auto;background-color: blue;color: red;border-radius: 10px;'
       +'padding: 5px 10px; border: none;font-weight: bolder; font-size: x-large; margin-bottom: 5px;';
     }
+    else if(this.whatComponent2 == "SearchButton")
+    {
+      this.props.value = "Search";
+      this.props.style='position:absolute;left:'+(this.xmouse-this.theX)+'px;top:'+(this.ymouse-this.theY)+'px;'
+      +'background-color: blue;color: white;border-radius: 10px;'
+      +'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
+    }
+    else if(this.whatComponent2 == "ClearButton")
+    {
+      this.props.value = "Clear";
+      this.props.style='position:absolute;left:'+(this.xmouse-this.theX)+'px;top:'+(this.ymouse-this.theY)+'px;'
+      +'background-color: gray;color: white;border-radius: 10px;'
+      +'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
+    }
     else
     {
       this.props.value = "Button";

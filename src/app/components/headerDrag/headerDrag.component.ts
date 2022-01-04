@@ -56,6 +56,11 @@ export class HeaderDragComponent implements OnInit, IComponent {
       this.props.value = "Login123";
       this.props.style='color:blue;position:absolute;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
+    else if(this.whatComponent2=="searchHeader")
+    {
+      this.props.value = "error message to reflect here";
+      this.props.style = 'color:red;position:absolute;font-size: medium;left:' +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    }
     else
     {
       this.props.style='color:red;position:absolute;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';

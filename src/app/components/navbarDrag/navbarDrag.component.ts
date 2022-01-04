@@ -8,7 +8,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
   templateUrl: './navbarDrag.component.html',
   styleUrls: ['./navbarDrag.component.css'],
 })
-export class NavbarDragComponent implements IComponent {
+export class NavbarDragComponent implements OnInit, IComponent {
   canvas: ElementRef<any>;
   props: IProperty = {
     key: '',
@@ -30,6 +30,7 @@ export class NavbarDragComponent implements IComponent {
   @Input() ycanvas: any;
   @Input() xmouse: any;
   @Input() ymouse: any;
+  @Input() whatComponent2:any;
   mousePositionXV2 = 310;
   mousePositionYV2= 110;
   theX = 0;
@@ -41,13 +42,23 @@ export class NavbarDragComponent implements IComponent {
 
   ngOnInit(): void {
     //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
+    console.log(this.whatComponent2);
     this.theX = this.xcanvas;
     this.theY = this.ycanvas;
     this.theCanvasWidth = this.canvasWW;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
-    this.props.style='color: white;padding: 10px;background-color: #12355B;font-size: 20px;position:absolute;left:'
+    if(this.whatComponent2 == "searchNavbar")
+    {
+      this.props.value = "AWS";
+      this.props.style='color: white;padding: 10px;background-color: #12355B;font-size: 20px;position:absolute;left:'
     +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    }
+    else
+    {
+      this.props.style='color: white;padding: 10px;background-color: #12355B;font-size: 20px;position:absolute;left:'
+    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    }
   }
 
   onDragEnded($event: any){

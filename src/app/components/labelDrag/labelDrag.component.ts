@@ -52,6 +52,54 @@ export class LabelDragComponent implements OnInit, IComponent {
       this.props.style='position:absolute;left:'
     +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
+    else if(this.whatComponent2=="carrierLabel")
+    {
+      this.props.value="Carrier";
+      this.props.style='position:absolute;left:'
+    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    }
+    else if(this.whatComponent2=="invoiceFromLabel")
+    {
+      this.props.value="Invoice number from";
+      this.props.style='position:absolute;left:'
+    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    }
+    else if(this.whatComponent2=="invoiceToLabel")
+    {
+      this.props.value="Invoice number to";
+      this.props.style='position:absolute;left:'
+    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    }
+    else if(this.whatComponent2=="shippingFromLabel")
+    {
+      this.props.value="Shipping Date from";
+      this.props.style='position:absolute;left:'
+    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    }
+    else if(this.whatComponent2=="shippingToLabel")
+    {
+      this.props.value="Shipping Date to";
+      this.props.style='position:absolute;left:'
+    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    }
+    else if(this.whatComponent2=="addressLabel")
+    {
+      this.props.value="Address";
+      this.props.style='position:absolute;left:'
+    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    }
+    else if(this.whatComponent2 == "deliveryNameLabel")
+    {
+      this.props.value="Delivery name";
+      this.props.style='position:absolute;left:'
+    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    }
+    else if(this.whatComponent2 == "remarksLabel")
+    {
+      this.props.value="Remarks";
+      this.props.style='position:absolute;left:'
+    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    }
     else
     {
       this.props.style='position:absolute;left:'
