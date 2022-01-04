@@ -17,6 +17,7 @@
   padding: 20px;
   flex-grow: 3;
   background-color: gray;
+  position:static;
 }
 
 #canvas {

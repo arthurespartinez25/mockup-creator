@@ -28,3 +28,24 @@
   border: #16324f solid 1px;
 }
 
+
+.text-menu{
+  position:inherit;
+  display: inline-block;
+}
+.text-menu-dropdown{
+  display:none;
+  position:absolute;
+  max-width: 100px;
+  z-index: 999;
+}
+.text-menu-dropdown button{
+  display: table;
+}
+.text-menu-dropdown button:hover{
+  color: #16324f;
+  background-color:white;
+}
+.text-menu-button:focus + .text-menu-dropdown{
+  display: inline-block;
+}
