@@ -42,7 +42,6 @@ export class NavbarDragComponent implements OnInit, IComponent {
 
   ngOnInit(): void {
     //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
-    console.log(this.whatComponent2);
     this.theX = this.xcanvas;
     this.theY = this.ycanvas;
     this.theCanvasWidth = this.canvasWW;

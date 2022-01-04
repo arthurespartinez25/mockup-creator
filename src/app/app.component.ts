@@ -502,12 +502,43 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
       this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
 
+      //navbar
       this.whatComponent = "searchNavbar";
       temp = new NavbarDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft+250;
       this.mousePositionY = this.canvasTop;
       this.componentList.push(temp);
-
+      
+      setTimeout(() => {
+        this.whatComponent = "userIDLabel";
+        temp = new LabelDragComponent(this.canvas);
+        this.mousePositionX = this.canvasLeft+980;
+        this.mousePositionY = this.canvasTop+10;
+        this.componentList.push(temp);
+        }, 1);
+      setTimeout(() => {
+        this.whatComponent = "usernameLabel";
+        temp = new LabelDragComponent(this.canvas);
+        this.mousePositionX = this.canvasLeft+1036;
+        this.mousePositionY = this.canvasTop+10;
+        this.componentList.push(temp);
+      }, 1);
+      setTimeout(() => {
+        this.whatComponent = "HomeButton";
+        temp = new ButtonDragComponent(this.canvas);
+        this.mousePositionX = this.canvasLeft+1140;
+        this.mousePositionY = this.canvasTop+8;
+        this.componentList.push(temp);
+      }, 1);
+      setTimeout(() => {
+        this.whatComponent = "ProfileButton";
+        temp = new ButtonDragComponent(this.canvas);
+        this.mousePositionX = this.canvasLeft+1210;
+        this.mousePositionY = this.canvasTop+8;
+        this.componentList.push(temp);
+      }, 1);
+      
+      //body
       setTimeout(() => {
       this.whatComponent = "searchHeader";
       temp = new HeaderDragComponent(this.canvas);

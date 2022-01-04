@@ -69,6 +69,20 @@ export class ButtonDragComponent implements IComponent {
       +'background-color: gray;color: white;border-radius: 10px;'
       +'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
     }
+    else if(this.whatComponent2 == "HomeButton")
+    {
+      this.props.value = "Home";
+      this.props.style='position:absolute;left:'+(this.xmouse-this.theX)+'px;top:'+(this.ymouse-this.theY)+'px;'
+      +'background-color: #ADD8E6;color: white;border-radius: 10px;'
+      +'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
+    }
+    else if(this.whatComponent2 == "ProfileButton")
+    {
+      this.props.value = "Profile";
+      this.props.style='position:absolute;left:'+(this.xmouse-this.theX)+'px;top:'+(this.ymouse-this.theY)+'px;'
+      +'background-color: #ADD8E6;color: white;border-radius: 10px;'
+      +'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
+    }
     else
     {
       this.props.value = "Button";

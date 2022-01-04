@@ -100,6 +100,18 @@ export class LabelDragComponent implements OnInit, IComponent {
       this.props.style='position:absolute;left:'
     +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
+    else if(this.whatComponent2 == "userIDLabel")
+    {
+      this.props.value="UserID";
+      this.props.style='color:white;position:absolute;left:'
+    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    }
+    else if(this.whatComponent2 == "usernameLabel")
+    {
+      this.props.value="UserName";
+      this.props.style='color:white;position:absolute;left:'
+    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    }
     else
     {
       this.props.style='position:absolute;left:'
