@@ -50,12 +50,12 @@ export class NavbarDragComponent implements OnInit, IComponent {
     if(this.whatComponent2 == "searchNavbar")
     {
       this.props.value = "AWS";
-      this.props.style='color: white;padding: 10px;background-color: #12355B;font-size: 20px;position:absolute;left:'
+      this.props.style='color: white;padding: 10px;background-color: #12355B;font-size: 20px;left:'
     +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
     else
     {
-      this.props.style='color: white;padding: 10px;background-color: #12355B;font-size: 20px;position:absolute;left:'
+      this.props.style='color: white;padding: 10px;background-color: #12355B;font-size: 20px;left:'
     +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
   }
