@@ -2,6 +2,8 @@ import { CdkDrag, CdkDragEnd, DragDrop } from '@angular/cdk/drag-drop';
 import {
   AfterViewChecked,
   AfterViewInit,
+  ApplicationRef,
+  ChangeDetectorRef,
   Component,
   ComponentRef,
   ElementRef,
@@ -82,8 +84,14 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   @ViewChild('PropertyComponent') property: boolean;
   @ViewChild('canvas') canvas!: ElementRef;
-
-  constructor(private renderer: Renderer2, private drag: DragDrop) {}
+  changeref: ChangeDetectorRef;
+  constructor(
+    private renderer: Renderer2,
+    private drag: DragDrop,
+    changeDetectorRef: ChangeDetectorRef
+  ) {
+    this.changeref = changeDetectorRef;
+  }
   delete: boolean;
 
   canvasLeft = 0;
@@ -91,14 +99,10 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   canvasW = 0;
   xCounter = 0;
 
- 
   ngOnInit(): void {
     /* throw new Error('Method not implemented.'); */
-    
   }
-  ngAfterViewInit(): void {
-    
-  }
+  ngAfterViewInit(): void {}
 
   addComponent(component: string) {
     let temp: IComponent;
@@ -106,7 +110,8 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       case 'nav':
         temp = new NavbarComponent(this.canvas);
         break;
-      case 'link':``
+      case 'link':
+        ``;
         temp = new LinkComponent(this.canvas);
         break;
       case 'paragraph':
@@ -160,11 +165,11 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         temp = new PopupComponent(this.canvas);
         break;
       case 'table':
-        temp = new TableComponent(this.canvas);
+        temp = new TableComponent(this.canvas, this.changeref);
         break;
       default:
         temp = new ButtonComponent(this.canvas);
-        console.log("No Component Added");
+        console.log('No Component Added');
     }
     this.xCounter++;
     console.log(this.xCounter);
@@ -254,11 +259,11 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         default:
           temp = new ButtonComponent(this.canvas);
       }
-    this.xCounter++;
-    console.log(this.xCounter);
-    this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
-    this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
-    this.componentList.push(temp);
+      this.xCounter++;
+      console.log(this.xCounter);
+      this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
+      this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
+      this.componentList.push(temp);
     }
   }
 
@@ -281,9 +286,9 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
     this.componentList.forEach((value) => {
       let regexPosition = /sticky/;
-      
+
       tmpHtmlBody = tmpHtmlBody + value.htmlCode + '\n';
-      tmpHtmlBody = tmpHtmlBody.replace(regexPosition,"absolute");
+      tmpHtmlBody = tmpHtmlBody.replace(regexPosition, 'absolute');
     });
     return tmpHtmlBody;
   }
@@ -315,7 +320,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   mouseMoveX = 0;
   mouseMoveY = 0;
 
-  mouseGalawX($event: any){
+  mouseGalawX($event: any) {
     //const { x, y } = event.;
     //this.mouseMoveX = event.offsetX + event.distanceX;
     //this.mouseMoveY = event.offsetY;
@@ -328,61 +333,63 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     //this.mouseMoveY = $event.source.getFreeDragPosition().y;
   }
 
-  
-  
-  
-  passData2(item: any){
+  passData2(item: any) {
     //console.warn(item);
     this.mouseMoveX = item;
   }
-  passDataX(item: any){
+  passDataX(item: any) {
     //console.warn(item);
     this.mouseMoveY = item;
   }
 
-  ngAfterViewChecked(){
-     
-  }
-  jude = "aw";
+  ngAfterViewChecked() {}
+  jude = 'aw';
   clickHandler(component: IComponent) {
     this.selected = component.props;
     this.selectedComponent = component;
-    if(this.mouseMoveX !=0 && this.mouseMoveY !=0 )
-    {
+    if (this.mouseMoveX != 0 && this.mouseMoveY != 0) {
       this.jude = this.selected.style;
       let regexLeft = /left(.+?);/;
       let regexTop = /top(.+?);/;
       let regexPosition = /position(.+?);/;
-      this.jude = this.jude.replace(regexLeft,"");
-      this.jude = this.jude.replace(regexTop,"");
-      this.jude = this.jude.replace(regexPosition,"");
+      this.jude = this.jude.replace(regexLeft, '');
+      this.jude = this.jude.replace(regexTop, '');
+      this.jude = this.jude.replace(regexPosition, '');
       this.selected.style = this.selected.style;
       //this.mouseMoveX = this.mouseMoveX;
       //this.mouseMoveY = this.btnCmp.mousePositionYV2;
-      this.selected.style = this.jude + 
-      "position:sticky;"+
-      "left:"+this.mouseMoveX+"px;"+
-      "top:"+this.mouseMoveY+"px;"/*+
+      this.selected.style =
+        this.jude +
+        'position:sticky;' +
+        'left:' +
+        this.mouseMoveX +
+        'px;' +
+        'top:' +
+        this.mouseMoveY +
+        'px;' /*+
       "position:fixed;"*/;
       this.mouseMoveX = 0;
       this.mouseMoveY = 0;
-    }
-    else if(this.mouseMoveY !=0 && this.selected.typeObj=="nav")
-    {
+    } else if (this.mouseMoveY != 0 && this.selected.typeObj == 'nav') {
       this.jude = this.selected.style;
       let regexLeft = /left(.+?);/;
       let regexTop = /top(.+?);/;
       let regexPosition = /position(.+?);/;
-      this.jude = this.jude.replace(regexLeft,"");
-      this.jude = this.jude.replace(regexTop,"");
-      this.jude = this.jude.replace(regexPosition,"");
+      this.jude = this.jude.replace(regexLeft, '');
+      this.jude = this.jude.replace(regexTop, '');
+      this.jude = this.jude.replace(regexPosition, '');
       this.selected.style = this.selected.style;
       //this.mouseMoveX = this.mouseMoveX;
       //this.mouseMoveY = this.btnCmp.mousePositionYV2;
-      this.selected.style = this.jude + 
-      "position:sticky;"+
-      "left:"+this.mouseMoveX+"px;"+
-      "top:"+this.mouseMoveY+"px;"/*+
+      this.selected.style =
+        this.jude +
+        'position:sticky;' +
+        'left:' +
+        this.mouseMoveX +
+        'px;' +
+        'top:' +
+        this.mouseMoveY +
+        'px;' /*+
       "position:fixed;"*/;
       this.mouseMoveX = 0;
       this.mouseMoveY = 0;
@@ -402,7 +409,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     //   // this.mouseMoveY = 0;
     // }
   }
-  
 
   /*
   receiveMessage($event: boolean) {

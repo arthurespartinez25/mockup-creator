@@ -17,4 +17,5 @@ export interface IProperty {
   checked?: string;
   tblRows?: number;
   tblCols?: number;
+  updateCallback?: (row, col) => void;
 }

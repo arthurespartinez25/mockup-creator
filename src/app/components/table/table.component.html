@@ -1,16 +1,31 @@
-<div cdkDrag cdkDragBoundary="#canvas" (cdkDragEnded)="onDragEnded($event)" [id]="props.id" [style]="props.style"
-[ngStyle]="{
-    'position': 'absolute',
-    'left': theX + 'px',
-    'top': theY + 'px'
+<div
+  cdkDrag
+  cdkDragBoundary="#canvas"
+  (cdkDragEnded)="onDragEnded($event)"
+  [id]="props.id"
+  [style]="props.style"
+  [ngStyle]="{
+    position: 'absolute',
+    left: theX + 'px',
+    top: theY + 'px'
   }"
-  > <label>{{ props.value }}</label><br>
-    <table [class]="props.class">
-        <tr *ngFor="let row of this.tblRowsArray">
-          <td *ngFor="let column of this.tblColsArray" style="padding:10px; border:1px solid black;">
-            {{ row[column] }}
-          </td>
-        </tr>
-    </table>
-    <button (click)="editTableDimension(props.tblRows,props.tblCols)" style="float:right; width: 20px; height: 20px;">*</button>
+>
+  <label>{{ props.value }}</label
+  ><br />
+  <table [class]="props.class">
+    <tr *ngFor="let row of this.tblRowsArray">
+      <td
+        *ngFor="let column of this.tblColsArray"
+        style="padding: 10px; border: 1px solid black"
+      >
+        {{ row[column] }}
+      </td>
+    </tr>
+  </table>
+  <button
+    (click)="editTableDimension(props.tblRows, props.tblCols)"
+    style="float: right; width: 20px; height: 20px"
+  >
+    *
+  </button>
 </div>

@@ -18,7 +18,7 @@ export class PropertyComponent implements OnInit {
     class: '',
     style: '',
     typeObj: '',
-    type: ''
+    type: '',
   };
 
   @Input() get property(): IProperty {
@@ -75,7 +75,7 @@ export class PropertyComponent implements OnInit {
 
   styleChangeHandler(event: any) {
     let x = event.target.value;
-    
+
     this.props.style = event.target.value;
   }
 
@@ -97,7 +97,7 @@ export class PropertyComponent implements OnInit {
   colsChangeHandler(event: any) {
     this.props.cols = event.target.value;
   }
-  
+
   nameChangeHandler(event: any) {
     this.props.name = event.target.value;
   }
@@ -117,11 +117,18 @@ export class PropertyComponent implements OnInit {
 
   tblRowsChangeHandler(event: any) {
     this.props.tblRows = event.target.value;
-    console.log(this.props.tblRows);
+
+    if (this.props.updateCallback) {
+      const { updateCallback } = this.props;
+      updateCallback(this.props.tblRows, this.props.tblCols);
+    }
   }
   tblColsChangeHandler(event: any) {
     this.props.tblCols = event.target.value;
-    console.log(this.props.tblCols);
+    if (this.props.updateCallback) {
+      const { updateCallback } = this.props;
+      updateCallback(this.props.tblRows, this.props.tblCols);
+    }
   }
   /* END OF CODE FOR TABLE ELEMENT */
 }
