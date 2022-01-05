@@ -18,8 +18,14 @@ export class WrapperComponent implements OnInit {
   @Input() mousePositionX: any;
   @Input() mousePositionY: any;
 
+  wrapperStylesheet = document.styleSheets[0];
+  wrapperStylesheet2 = document.styleSheets[0];
+  
+
   xmouse = 0;
   ymouse = 0;
+
+
 
   @Input() get childComp(): IComponent {
     return this.child;
