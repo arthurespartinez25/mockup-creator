@@ -64,6 +64,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   ref: ComponentRef<any>;
   readonly CSS_URL ='../app/app.component.css';
   refreshCSS = new BehaviorSubject<boolean>(true);
+  cssDocument?:StyleSheet;
 
   selected: IProperty = {
     key: '',
@@ -91,6 +92,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   @ViewChild('PropertyComponent') property: boolean;
   @ViewChild('canvas') canvas!: ElementRef;
+  @ViewChild('cssWrapperDocument') cssWrapperDocument!: CSSStyleSheet;
 
   constructor(
     private renderer: Renderer2, 
@@ -342,10 +344,17 @@ export class AppComponent implements OnInit, AfterViewInit {
       this._styleEnd
     );
   }
-  
+  receiveWrapperStyleSheet(wrapperStylesheet:any){
+    this.cssDocument = wrapperStylesheet.target.value;
+    console.log(this.cssDocument);
+    console.log(wrapperStylesheet.target.value);
+    console.log("Gagana nato");
+  }
+
   cssReceiveMessage(){
     this.style = "";
 
+    console.log(document.styleSheets.item(0));
     let  newCssRuleCount = document.styleSheets[0].cssRules.length;
 
     for(let i=this.cssRuleCount; i < newCssRuleCount; i++){

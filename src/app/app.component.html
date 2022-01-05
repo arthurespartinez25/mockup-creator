@@ -186,6 +186,7 @@
         [mousePositionX]="mousePositionX"
         [mousePositionY]="mousePositionY"
         [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
+        (sendWrapperStyleSheet)="receiveWrapperStyleSheet($event)"
       >
       </app-wrapper>
     </div>

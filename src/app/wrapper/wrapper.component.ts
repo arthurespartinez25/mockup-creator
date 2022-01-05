@@ -3,6 +3,7 @@ import { Icu } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { IComponent } from '../interfaces/icomponent';
 import { IProperty } from '../interfaces/iproperty';
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-wrapper',
@@ -17,6 +18,13 @@ export class WrapperComponent implements OnInit {
 
   @Input() mousePositionX: any;
   @Input() mousePositionY: any;
+  @Input() cssSignal: any;
+
+  @Output() cssWrapper = new EventEmitter<CSSStyleSheet>();
+
+  sendWrapperStyleSheet(wrapperDocument: CSSStyleSheet) {
+    this.cssWrapper.emit(wrapperDocument);
+  }
 
   wrapperStylesheet = document.styleSheets[0];
   wrapperStylesheet2 = document.styleSheets[0];
@@ -26,6 +34,15 @@ export class WrapperComponent implements OnInit {
   ymouse = 0;
 
 
+  @Input() get wrapperCSS(): CSSStyleSheet {
+    return this.wrapperStylesheet;
+  }
+
+  set wrapperCSS(wrapperDocument: CSSStyleSheet) {
+    if (wrapperDocument) {
+    this.sendWrapperStyleSheet(this.wrapperStylesheet);
+    }
+  }
 
   @Input() get childComp(): IComponent {
     return this.child;
@@ -60,6 +77,9 @@ export class WrapperComponent implements OnInit {
     //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
     this.xmouse = this.mousePositionX;
     this.ymouse = this.mousePositionY;
+    this.cssWrapper.emit(this.wrapperStylesheet);
+    console.log("below is the wrapper styleSheet\n");
+    console.log(this.wrapperStylesheet);
   }
   removeElement(remove: IComponent): void {}
 }
