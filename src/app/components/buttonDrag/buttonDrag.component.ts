@@ -48,6 +48,9 @@ export class ButtonDragComponent implements IComponent {
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
+    let browserWidth = window.innerWidth;
+    let widthRes = browserWidth/1280;
+    let browserHeight = window.innerHeight;
     if(this.whatComponent2=="LoginButton")
     {
       this.props.value = "Login";
@@ -72,14 +75,15 @@ export class ButtonDragComponent implements IComponent {
     else if(this.whatComponent2 == "HomeButton")
     {
       this.props.value = "Home";
-      this.props.style='position:absolute;left:'+(this.xmouse-this.theX)+'px;top:'+(this.ymouse-this.theY)+'px;'
+      this.props.style='position:absolute;left:'+((this.xmouse-this.theX)*(widthRes))+'px;top:'+(this.ymouse-this.theY)+'px;'
       +'background-color: #ADD8E6;color: white;border-radius: 10px;'
       +'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
     }
     else if(this.whatComponent2 == "ProfileButton")
     {
+      console.log(browserWidth);
       this.props.value = "Profile";
-      this.props.style='position:absolute;left:'+(this.xmouse-this.theX)+'px;top:'+(this.ymouse-this.theY)+'px;'
+      this.props.style='position:absolute;left:'+((this.xmouse-this.theX)*(widthRes))+'px;top:'+(this.ymouse-this.theY)+'px;'
       +'background-color: #ADD8E6;color: white;border-radius: 10px;'
       +'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
     }

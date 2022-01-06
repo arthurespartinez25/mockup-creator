@@ -54,35 +54,35 @@ export class InputDragComponent implements OnInit, IComponent {
       this.props.style='width:200px;position:absolute;left:'
       +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
-    else if(this.whatComponent2=="carrierInput")
+    else if(this.whatComponent2=="carrierInput") //the 86 from this point are all just for testing
     {
       this.props.placeholder = "xxxxx";
       this.props.style='width:200px;position:absolute;left:'
-      +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      +(this.dagaX-this.theX+86)+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
     else if(this.whatComponent2=="invoiceInput")
     {
       this.props.placeholder = "xxx-xxxx-xxxx";
       this.props.style='width:200px;position:absolute;left:'
-      +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      +(this.dagaX-this.theX+86)+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
     else if(this.whatComponent2=="deliveryInput")
     {
       this.props.placeholder = "Enter delivery name";
       this.props.style='width:200px;position:absolute;left:'
-      +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      +(this.dagaX-this.theX+86)+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
     else if(this.whatComponent2=="addressInput")
     {
       this.props.placeholder = "Enter address";
       this.props.style='width:200px;position:absolute;left:'
-      +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      +(this.dagaX-this.theX+86)+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
     else if(this.whatComponent2=="remarksInput")
     {
       this.props.placeholder = "Enter remarks";
       this.props.style='width:200px;position:absolute;left:'
-      +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      +(this.dagaX-this.theX+86)+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
     else
     {
