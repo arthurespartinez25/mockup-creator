@@ -51,6 +51,8 @@ export class HeaderDragComponent implements OnInit, IComponent {
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
+    let browserWidth = window.innerWidth;
+    let percentage = 0.95+((browserWidth-1280)/browserWidth);
     if(this.whatComponent2=="loginHeader")
     {
       this.props.value = "Login123";
@@ -59,7 +61,7 @@ export class HeaderDragComponent implements OnInit, IComponent {
     else if(this.whatComponent2=="searchHeader")
     {
       this.props.value = "error message to reflect here";
-      this.props.style = 'color:red;position:absolute;font-size: medium;left:' +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      this.props.style = 'color:red;position:absolute;font-size: medium;left:' +((this.dagaX-this.theX)*(percentage))+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
     else
     {

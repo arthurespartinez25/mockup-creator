@@ -42,6 +42,9 @@ export class LabelDragComponent implements OnInit, IComponent {
     this.dagaY = this.ymouse;
     let browserWidth = window.innerWidth;
     let browserHeight = window.innerHeight;
+
+    let percentage = 0.95+((browserWidth-1280)/browserWidth);
+    
     if(this.whatComponent2=="loginLabelUser")
     {
       this.props.value = "Username";
@@ -58,61 +61,61 @@ export class LabelDragComponent implements OnInit, IComponent {
     {
       this.props.value="Carrier";
       this.props.style='position:absolute;left:'
-    +(this.dagaX-this.theX+86)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    +((this.dagaX-this.theX)*(percentage))+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
     else if(this.whatComponent2=="invoiceFromLabel")
     {
       this.props.value="Invoice number from";
       this.props.style='position:absolute;left:'
-    +(this.dagaX-this.theX+86)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    +((this.dagaX-this.theX)*(percentage))+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
     else if(this.whatComponent2=="invoiceToLabel")
     {
       this.props.value="Invoice number to";
       this.props.style='position:absolute;left:'
-    +(this.dagaX-this.theX+86)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    +((this.dagaX-this.theX)*(percentage))+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
     else if(this.whatComponent2=="shippingFromLabel")
     {
       this.props.value="Shipping Date from";
       this.props.style='position:absolute;left:'
-    +(this.dagaX-this.theX+86)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    +((this.dagaX-this.theX)*(percentage))+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
     else if(this.whatComponent2=="shippingToLabel")
     {
       this.props.value="Shipping Date to";
       this.props.style='position:absolute;left:'
-    +(this.dagaX-this.theX+86)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    +((this.dagaX-this.theX)*(percentage))+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
     else if(this.whatComponent2=="addressLabel")
     {
       this.props.value="Address";
       this.props.style='position:absolute;left:'
-    +(this.dagaX-this.theX+86)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    +((this.dagaX-this.theX)*(percentage))+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
     else if(this.whatComponent2 == "deliveryNameLabel")
     {
       this.props.value="Delivery name";
       this.props.style='position:absolute;left:'
-    +(this.dagaX-this.theX+86)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    +((this.dagaX-this.theX)*(percentage))+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
     else if(this.whatComponent2 == "remarksLabel")
     {
       this.props.value="Remarks";
       this.props.style='position:absolute;left:'
-    +(this.dagaX-this.theX+86)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    +((this.dagaX-this.theX)*(percentage))+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
     else if(this.whatComponent2 == "userIDLabel")
     {
       this.props.value="UserID";
       this.props.style='color:white;position:absolute;left:'
-    +((this.dagaX-this.theX)*(browserWidth/1280))+'px;top:'+(this.dagaY-this.theY)+'px;';
+    +((this.dagaX-this.theX)*(percentage))+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
     else if(this.whatComponent2 == "usernameLabel")
     {
       this.props.value="UserName";
       this.props.style='color:white;position:absolute;left:'
-    +((this.dagaX-this.theX)*(browserWidth/1280))+'px;top:'+(this.dagaY-this.theY)+'px;';
+    +((this.dagaX-this.theX)*(percentage))+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
     else
     {

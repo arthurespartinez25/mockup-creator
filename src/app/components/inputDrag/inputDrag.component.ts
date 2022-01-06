@@ -35,12 +35,15 @@ export class InputDragComponent implements OnInit, IComponent {
   dagaX = 0;
   dagaY = 0;
   onetimeBool = true;
+  percentage = 1.25;
 
   ngOnInit(): void {
     this.theX = this.xcanvas;
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
+    let browserWidth = window.innerWidth;
+    let percentage = 0.95+((browserWidth-1280)/browserWidth);
     
     if(this.whatComponent2=="loginInputUser")
     {
@@ -58,31 +61,31 @@ export class InputDragComponent implements OnInit, IComponent {
     {
       this.props.placeholder = "xxxxx";
       this.props.style='width:200px;position:absolute;left:'
-      +(this.dagaX-this.theX+86)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      +((this.dagaX-this.theX)*this.percentage)+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
     else if(this.whatComponent2=="invoiceInput")
     {
       this.props.placeholder = "xxx-xxxx-xxxx";
       this.props.style='width:200px;position:absolute;left:'
-      +(this.dagaX-this.theX+86)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      +((this.dagaX-this.theX)*(percentage))+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
     else if(this.whatComponent2=="deliveryInput")
     {
       this.props.placeholder = "Enter delivery name";
       this.props.style='width:200px;position:absolute;left:'
-      +(this.dagaX-this.theX+86)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      +((this.dagaX-this.theX)*(percentage))+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
     else if(this.whatComponent2=="addressInput")
     {
       this.props.placeholder = "Enter address";
       this.props.style='width:200px;position:absolute;left:'
-      +(this.dagaX-this.theX+86)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      +((this.dagaX-this.theX)*(percentage))+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
     else if(this.whatComponent2=="remarksInput")
     {
       this.props.placeholder = "Enter remarks";
       this.props.style='width:200px;position:absolute;left:'
-      +(this.dagaX-this.theX+86)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      +((this.dagaX-this.theX)*(percentage))+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
     else
     {

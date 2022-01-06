@@ -51,6 +51,13 @@ export class ButtonDragComponent implements IComponent {
     let browserWidth = window.innerWidth;
     let widthRes = browserWidth/1280;
     let browserHeight = window.innerHeight;
+    
+    let percentage = 0.95+((browserWidth-1280)/browserWidth); //or you can manually type percentage
+    console.log(percentage);
+    // let mousepos = this.xmouse-this.theX;
+    // let incpercent = ((1280-mousepos)/1280);
+    // let addleftpos = mousepos*incpercent;
+
     if(this.whatComponent2=="LoginButton")
     {
       this.props.value = "Login";
@@ -61,29 +68,28 @@ export class ButtonDragComponent implements IComponent {
     else if(this.whatComponent2 == "SearchButton")
     {
       this.props.value = "Search";
-      this.props.style='position:absolute;left:'+(this.xmouse-this.theX)+'px;top:'+(this.ymouse-this.theY)+'px;'
+      this.props.style='position:absolute;left:'+((this.xmouse-this.theX)*(percentage))+'px;top:'+(this.ymouse-this.theY)+'px;'
       +'background-color: blue;color: white;border-radius: 10px;'
       +'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
     }
     else if(this.whatComponent2 == "ClearButton")
     {
       this.props.value = "Clear";
-      this.props.style='position:absolute;left:'+(this.xmouse-this.theX)+'px;top:'+(this.ymouse-this.theY)+'px;'
+      this.props.style='position:absolute;left:'+((this.xmouse-this.theX)*(percentage))+'px;top:'+(this.ymouse-this.theY)+'px;'
       +'background-color: gray;color: white;border-radius: 10px;'
       +'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
     }
     else if(this.whatComponent2 == "HomeButton")
     {
       this.props.value = "Home";
-      this.props.style='position:absolute;left:'+((this.xmouse-this.theX)*(widthRes))+'px;top:'+(this.ymouse-this.theY)+'px;'
+      this.props.style='position:absolute;left:'+((this.xmouse-this.theX)*(percentage))+'px;top:'+(this.ymouse-this.theY)+'px;'
       +'background-color: #ADD8E6;color: white;border-radius: 10px;'
       +'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
     }
     else if(this.whatComponent2 == "ProfileButton")
     {
-      console.log(browserWidth);
       this.props.value = "Profile";
-      this.props.style='position:absolute;left:'+((this.xmouse-this.theX)*(widthRes))+'px;top:'+(this.ymouse-this.theY)+'px;'
+      this.props.style='position:absolute;left:'+((this.xmouse-this.theX)*(percentage))+'px;top:'+(this.ymouse-this.theY)+'px;'
       +'background-color: #ADD8E6;color: white;border-radius: 10px;'
       +'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
     }
