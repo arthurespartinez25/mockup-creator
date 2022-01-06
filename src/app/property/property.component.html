@@ -119,6 +119,8 @@
     <tr class="properties-table-row" *ngIf="props.typeObj == 'textbox'">
       <th class="properties-table-header"><label>rows</label></th>
       <td class="properties-table-data">
+        
+        <app-table [show]="show"></app-table>
         <input
           [disabled]="!this.props.id"
           type="number"

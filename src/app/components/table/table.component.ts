@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
 
@@ -17,10 +17,13 @@ export class TableComponent implements OnInit, IComponent  {
     style: 'position:absolute;left:0px;top:0px;',
     typeObj: 'table',
     type: '',
-    tblCols:5,
+    tblCols:7,
     tblRows:3
   };
 
+  x = true;
+  @Input() show: any;
+  show2: boolean;
   @Output() updateDataEvent= new EventEmitter<any>();
   @Output() updateDataEventY= new EventEmitter<any>();
   @Input() xcanvas: any;
@@ -33,11 +36,14 @@ export class TableComponent implements OnInit, IComponent  {
   tblRows = this.props.tblRows;
   tblColsArray : any = [];
   tblRowsArray : any = [];
+  numbers: number[];
 
   ngOnInit(): void {
     //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
     this.theX = this.xcanvas;
     this.theY = this.ycanvas;
+    this.show2 = this.show;
+    console.log(this.show2);
   }
 
   onDragEnded($event: any){
@@ -53,9 +59,13 @@ export class TableComponent implements OnInit, IComponent  {
     let date = Date.now();
     this.props.key = date.toString();
     this.props.id = 'table' + date.toString();
+
+    this.numbers = Array(this.tblCols).fill(0).map((x,i)=>i);
+    console.log(this.show);
    }
   
   @Input() get property(): IProperty {
+    
     return this.props;
   }
 
@@ -69,7 +79,6 @@ export class TableComponent implements OnInit, IComponent  {
     //console.log("Repeato Shimashou");
     //this.editTableDimension();
   }
-
   /*
   set row(row:number){
     this.props.tblRows = row;
@@ -107,15 +116,18 @@ export class TableComponent implements OnInit, IComponent  {
     }
   }
 
-
-  
-
   get htmlCode(): string {
+    var x=0;
     let tmpHtmlCode = '<div';
     tmpHtmlCode += ' id="' + this.props.id + '" style="' + this.props.type +  '">';
     tmpHtmlCode += "\n" + '<table class="' + this.props.class + '">';
 
-    tmpHtmlCode += "\n" + '<thead>';
+    while(x<Number(this.props.tblCols)) {
+      tmpHtmlCode += "\n" + this.props.tblCols;
+      x++;
+    }
+
+    /* tmpHtmlCode += "\n" + '<thead>';
     tmpHtmlCode += "\n" + '<tr>';
     tmpHtmlCode += "\n" + '<th scope="col">#</th>';
     tmpHtmlCode += "\n" + '<th scope="col">Heading 1</th>';
@@ -147,7 +159,7 @@ export class TableComponent implements OnInit, IComponent  {
     tmpHtmlCode += "\n" + '<td>Cell</td>';
     tmpHtmlCode += "\n" + '</tr>';
 
-    tmpHtmlCode += "\n" + '</tbody>';
+    tmpHtmlCode += "\n" + '</tbody>'; */
     tmpHtmlCode += "\n" + '</table>';
     
     tmpHtmlCode +="\n" + ' </div>';

@@ -4,13 +4,6 @@
     'left': theX + 'px',
     'top': theY + 'px'
   }"
-  > <label>{{ props.value }}</label><br>
-    <table [class]="props.class">
-        <tr *ngFor="let row of this.tblRowsArray">
-          <td *ngFor="let column of this.tblColsArray" style="padding:10px; border:1px solid black;">
-            {{ row[column] }}
-          </td>
-        </tr>
-    </table>
-    <button (click)="editTableDimension(props.tblRows,props.tblCols)" style="float:right; width: 20px; height: 20px;">*</button>
+  > {{show2}}
+  <tr *ngFor="let i of [].constructor(props.tblCols)">{{props.tblCols}}</tr>
 </div>

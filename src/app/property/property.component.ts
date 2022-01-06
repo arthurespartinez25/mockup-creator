@@ -21,6 +21,8 @@ export class PropertyComponent implements OnInit {
     type: ''
   };
 
+  show = true;
+
   @Input() get property(): IProperty {
     return this.props;
   }
@@ -115,6 +117,11 @@ export class PropertyComponent implements OnInit {
   }
   /* CODE BELOW IS FOR TABLE ELEMENT */
 
+  reload() {
+    this.show = false;
+    setTimeout(() => this.show = true);
+ }
+
   tblRowsChangeHandler(event: any) {
     this.props.tblRows = event.target.value;
     console.log(this.props.tblRows);
@@ -122,6 +129,7 @@ export class PropertyComponent implements OnInit {
   tblColsChangeHandler(event: any) {
     this.props.tblCols = event.target.value;
     console.log(this.props.tblCols);
+    this.show=false;
   }
   /* END OF CODE FOR TABLE ELEMENT */
 }
