@@ -52,7 +52,7 @@ export class ButtonDragComponent implements IComponent {
     let widthRes = browserWidth/1280;
     let browserHeight = window.innerHeight;
     
-    let percentage = 0.95+((browserWidth-1280)/browserWidth); //or you can manually type percentage
+    let percentage = 0.85+((browserWidth-1280)/browserWidth); //or you can manually type percentage
     console.log(percentage);
     // let mousepos = this.xmouse-this.theX;
     // let incpercent = ((1280-mousepos)/1280);

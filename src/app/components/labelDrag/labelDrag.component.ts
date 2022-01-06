@@ -43,7 +43,7 @@ export class LabelDragComponent implements OnInit, IComponent {
     let browserWidth = window.innerWidth;
     let browserHeight = window.innerHeight;
 
-    let percentage = 0.95+((browserWidth-1280)/browserWidth);
+    let percentage = 0.85+((browserWidth-1280)/browserWidth);
     
     if(this.whatComponent2=="loginLabelUser")
     {

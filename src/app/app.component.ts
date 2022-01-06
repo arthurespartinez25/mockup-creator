@@ -533,7 +533,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       setTimeout(() => {
         this.whatComponent = "ProfileButton";
         temp = new ButtonDragComponent(this.canvas);
-        this.mousePositionX = this.canvasLeft+1210;
+        this.mousePositionX = this.canvasLeft+1200;
         this.mousePositionY = this.canvasTop+8;
         this.componentList.push(temp);
       }, 1);
