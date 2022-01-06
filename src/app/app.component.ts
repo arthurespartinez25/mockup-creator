@@ -46,7 +46,7 @@ import { DatepickerDragComponent } from './components/datepickerDrag/datepickerD
 import { HeaderDragComponent } from './components/headerDrag/headerDrag.component';
 import { InputDragComponent } from './components/inputDrag/inputDrag.component';
 import { LinkDragComponent } from './components/linkDrag/linkDrag.component';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
 
 
@@ -103,6 +103,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     public _location: Location
     ) {}
   delete: boolean;
+  cssBody: SafeStyle;
 
   ngAfterViewInit(): void {
     //throw new Error('Method not implemented.');
@@ -344,23 +345,35 @@ export class AppComponent implements OnInit, AfterViewInit {
       this._styleEnd
     );
   }
+
+  /*************Here Starts CSS Code******************/
+
+  /*
   receiveWrapperStyleSheet(wrapperStylesheet:any){
     this.cssDocument = wrapperStylesheet.target.value;
     console.log(this.cssDocument);
     console.log(wrapperStylesheet.target.value);
     console.log("Gagana nato");
   }
+  */
 
   cssReceiveMessage(){
     this.style = "";
-
     console.log(document.styleSheets.item(0));
     let  newCssRuleCount = document.styleSheets[0].cssRules.length;
+    let cssString:string;
 
     for(let i=this.cssRuleCount; i < newCssRuleCount; i++){
-      this.style += document.styleSheets[0].cssRules[i].cssText.toString();
-      this.style += "\n";
-      //console.log(document.styleSheets[0].cssRules[i].cssText.toString());
+      cssString = document.styleSheets[0].cssRules[i].cssText.toString();
+      //console.log(document.styleSheets[0].cssRules[i].cssText.toString().substring(0,7));
+      if(document.styleSheets[0].cssRules[i].cssText.toString().substring(0,7) == "#canvas"){
+        this.style += cssString.substring(7,cssString.length);
+        //console.log(cssString);
+      }else{
+        this.style += document.styleSheets[0].cssRules[i].cssText.toString();
+        this.style += "\n\n";
+        //console.log(document.styleSheets[0].cssRules[i].cssText.toString());
+      }
     }
   }
 
@@ -370,35 +383,74 @@ export class AppComponent implements OnInit, AfterViewInit {
     let  newCssRuleCount = document.styleSheets[0].cssRules.length;
     //const select = document.querySelector('styleSelectorID');
     //let cssRuleString = document.styleSheets[0].cssRules[this.cssRuleCount].cssText.toString();
+    let cssStringTemp;
     let cssRuleStringTemp: string; 
+    let cssCanvasSelector = cssString.substring(0, cssString.indexOf('{'));;
     let cssRuleStringClassID = cssString.substring(0, cssString.indexOf('{'));
     let ruleFound = 0;
     let ruleNumber;
-    let classNumber;
-    let idNumber;
-      if(cssString[0] == '.'){
-        console.log(cssRuleStringClassID + " is a class selector");
-        classNumber = 1;
-      }else if(cssString[0] == '#'){
-        console.log(cssRuleStringClassID + " is an ID selector");
-        idNumber = 1;
+    let generalRule = false;
+
+    
+    if(cssString[0] == '.'){
+      console.log(cssRuleStringClassID + " is a Class selector");
+    }
+    else if(cssString[0] == '#'){
+      console.log(cssRuleStringClassID + " is an ID selector");
+    }
+    else if((cssString[0] != '#') && (cssString[0] != '.')){
+      generalRule = true;
+      console.log("\""+cssCanvasSelector+"\" is a general Selector;");
+    }
+
+    //console.log("This is the selector: " + cssString.substring(0, cssString.indexOf('{')).toString());
+    if (generalRule == true){
+      switch(cssString.substring(0, cssString.indexOf('{'))){
+        case 'body':{
+          //console.warn("The CSS rule is for the 'body' selector, retype the rule.");
+          //cssStringTemp = "#canvas " + cssString.substring(cssString.indexOf('{')).toString();
+          this.cssBody = this.doms.bypassSecurityTrustStyle(cssString.substring(cssString.indexOf('{')).toString());
+          this.cssBody = 
+            "\"{\'" + 
+            cssString.substring(cssString.indexOf('{')+2,cssString.indexOf(':')) + 
+            "\'" + ":" + "\'" +
+            cssString.substring(cssString.indexOf(':')+1,cssString.indexOf(';')) +
+            "\'}\"";
+          break;
+        }
+        /*
+        case 'button':{
+          console.warn("The CSS rule is for the 'button' selector, retype the rule.");
+          break;
+        }
+        */
+        default:{
+          cssStringTemp = "#canvas " + cssCanvasSelector + cssString.substring(cssString.indexOf('{')).toString();
+          console.log(cssStringTemp);
+          //console.log("Nothing to compare to.");
+          break;
+        }
       }
-    for(let i=this.cssRuleCount; i < newCssRuleCount; i++){
-      cssRuleStringTemp = document.styleSheets[0].cssRules[i].cssText.toString();
-      if(cssRuleStringTemp.substring(0, cssString.indexOf('{')) === (cssRuleStringClassID).toString())
-      {
-        console.log("Class found!");
-        ruleFound = 1;
-        ruleNumber = i;
-      }
-      else if(cssRuleStringTemp.substring(0, cssString.indexOf('{')) === (cssRuleStringClassID).toString())
-      {
-      console.log("ID found!");
-      ruleFound = 1;
-      ruleNumber = i;
+    }else{
+      for(let i=this.cssRuleCount; i < newCssRuleCount; i++){
+        cssRuleStringTemp = document.styleSheets[0].cssRules[i].cssText.toString();
+        if(cssRuleStringTemp.substring(0, cssString.indexOf('{')) === (cssRuleStringClassID).toString())
+        {
+          console.log("Class found!");
+          ruleFound = 1;
+          ruleNumber = i;
+        }
+        else if(cssRuleStringTemp.substring(0, cssString.indexOf('{')) === (cssRuleStringClassID).toString())
+        {
+          console.log("ID found!");
+          ruleFound = 1;
+          ruleNumber = i;
+        }
+        //console.log(cssRuleStringTemp.substring(0, cssString.indexOf('{')).toString());
       }
     }
-    if(ruleFound == 1){
+
+    if(ruleFound == 1 && generalRule == false){
       console.log("this is the ruleNumber: " + ruleNumber);
       document.styleSheets.item(0)?.insertRule("\n" + cssString + "\n", document.styleSheets[0].cssRules.length);
       document.styleSheets.item(0)?.deleteRule(ruleNumber);
@@ -409,10 +461,16 @@ export class AppComponent implements OnInit, AfterViewInit {
         document.styleSheets[0].cssRules[document.styleSheets[0].cssRules.length-1].cssText.toString()
       );
       ruleFound = 0;
-    }else if(ruleFound == 0){
+    }else if(ruleFound == 0 && generalRule == false){
       document.styleSheets.item(0)?.insertRule("\n" + cssString + "\n", document.styleSheets[0].cssRules.length);
       console.log("adding style to: " + document.styleSheets[0].cssRules[this.cssRuleCount].cssText.toString());
     }
+    else if (ruleFound == 0 && generalRule == true){
+      //console.log("The Rule you are trying to edit is a general CSS Rule. Add a Class or ID.");
+      document.styleSheets.item(0)?.insertRule("\n " + cssStringTemp + "\n", document.styleSheets[0].cssRules.length);
+      console.log("adding style to: " + document.styleSheets[0].cssRules[this.cssRuleCount].cssText.toString());
+    }
+
     console.log("this is the starting number: " + this.cssRuleCount);
     console.log(document.styleSheets.item(0));
   }
@@ -426,7 +484,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     let ruleNumber;
     for(let i=this.cssRuleCount; i < newCssRuleCount; i++){
       cssRuleStringTemp = document.styleSheets[0].cssRules[i].cssText.toString();
-      if(cssRuleStringTemp.includes(cssRuleStringClassID)){
+      if(cssRuleStringTemp.includes(cssRuleStringClassID)||cssRuleStringTemp.includes("#canvas "+cssRuleStringClassID)){
         console.log("rule found!");
         ruleFound = 1;
         ruleNumber = i;
@@ -434,9 +492,9 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
     if(ruleFound == 1){
       document.styleSheets.item(0)?.deleteRule(ruleNumber);
-      console.log("rule" + ruleNumber + " deleted");
+      console.log("Rule " + ruleNumber + " deleted");
     }else if(ruleFound == 0){
-      console.log("rule doesn't exist");
+      console.log("Rule doesn't exist");
     }
   }
 
@@ -454,6 +512,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     document.styleSheets.item(0)?.deleteRule(document.styleSheets[0].cssRules.length-1);
   }
   */
+
+  /*************Here Ends CSS Code******************/
 
   receiveMessage($event: boolean) {
     if ($event == true) {

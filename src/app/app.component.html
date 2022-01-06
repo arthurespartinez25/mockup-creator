@@ -175,7 +175,8 @@
       #canvas
       (mouseenter)="domInsideCanvas = true"
       (mouseleave)="domInsideCanvas = false"
-    >
+      [ngStyle]="cssBody"
+    >{{ cssBody }}
       <app-wrapper
         *ngFor="let component of componentList; let i = index"
         class="wrapper"
@@ -186,7 +187,6 @@
         [mousePositionX]="mousePositionX"
         [mousePositionY]="mousePositionY"
         [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
-        (sendWrapperStyleSheet)="receiveWrapperStyleSheet($event)"
       >
       </app-wrapper>
     </div>
