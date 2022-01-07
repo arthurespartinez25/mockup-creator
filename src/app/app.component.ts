@@ -367,7 +367,13 @@ export class AppComponent implements OnInit, AfterViewInit {
       cssString = document.styleSheets[0].cssRules[i].cssText.toString();
       //console.log(document.styleSheets[0].cssRules[i].cssText.toString().substring(0,7));
       if(document.styleSheets[0].cssRules[i].cssText.toString().substring(0,7) == "#canvas"){
+        if(document.styleSheets[0].cssRules[i].cssText.toString().substring(7,9) == " {"){
+        this.style += "body" + cssString.substring(7,cssString.length);
+        this.style += "\n\n";
+      }else{
         this.style += cssString.substring(7,cssString.length);
+        this.style += "\n\n";
+      }
         //console.log(cssString);
       }else{
         this.style += document.styleSheets[0].cssRules[i].cssText.toString();
@@ -407,8 +413,10 @@ export class AppComponent implements OnInit, AfterViewInit {
     if (generalRule == true){
       switch(cssString.substring(0, cssString.indexOf('{'))){
         case 'body':{
-          //console.warn("The CSS rule is for the 'body' selector, retype the rule.");
-          //cssStringTemp = "#canvas " + cssString.substring(cssString.indexOf('{')).toString();
+          console.warn("The CSS rule is for the 'body' selector, retype the rule.");
+          cssStringTemp = "#canvas " + cssString.substring(cssString.indexOf('{')).toString();
+          console.log(cssStringTemp);
+          /*
           this.cssBody = this.doms.bypassSecurityTrustStyle(cssString.substring(cssString.indexOf('{')).toString());
           this.cssBody = 
             "\"{\'" + 
@@ -416,6 +424,7 @@ export class AppComponent implements OnInit, AfterViewInit {
             "\'" + ":" + "\'" +
             cssString.substring(cssString.indexOf(':')+1,cssString.indexOf(';')) +
             "\'}\"";
+          */
           break;
         }
         /*
@@ -484,7 +493,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     let ruleNumber;
     for(let i=this.cssRuleCount; i < newCssRuleCount; i++){
       cssRuleStringTemp = document.styleSheets[0].cssRules[i].cssText.toString();
-      if(cssRuleStringTemp.includes(cssRuleStringClassID)||cssRuleStringTemp.includes("#canvas "+cssRuleStringClassID)){
+      if(cssRuleStringTemp.includes(cssRuleStringClassID) || cssRuleStringTemp.includes("#canvas "+cssRuleStringClassID) || cssRuleStringClassID=="#canvas "){
         console.log("rule found!");
         ruleFound = 1;
         ruleNumber = i;
