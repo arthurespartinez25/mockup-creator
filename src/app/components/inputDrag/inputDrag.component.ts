@@ -43,8 +43,9 @@ export class InputDragComponent implements OnInit, IComponent {
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
     let browserWidth = window.innerWidth;
-    let percentage = 0.95+((browserWidth-1280)/browserWidth);
-    
+    //let percentage = 0.95+((browserWidth-1280)/browserWidth);
+    let percentage = ((this.xmouse-this.theX)/1280)*100
+
     if(this.whatComponent2=="loginInputUser")
     {
       this.props.placeholder = "Username";
@@ -61,31 +62,31 @@ export class InputDragComponent implements OnInit, IComponent {
     {
       this.props.placeholder = "xxxxx";
       this.props.style='width:200px;position:absolute;left:'
-      +((this.dagaX-this.theX)*(percentage))+'px;top:'+(this.dagaY-this.theY)+'px;';
+      +percentage+'%;top:'+(this.dagaY-this.theY)+'px;';
     }
     else if(this.whatComponent2=="invoiceInput")
     {
       this.props.placeholder = "xxx-xxxx-xxxx";
       this.props.style='width:200px;position:absolute;left:'
-      +((this.dagaX-this.theX)*(percentage))+'px;top:'+(this.dagaY-this.theY)+'px;';
+      +percentage+'%;top:'+(this.dagaY-this.theY)+'px;';
     }
     else if(this.whatComponent2=="deliveryInput")
     {
       this.props.placeholder = "Enter delivery name";
       this.props.style='width:200px;position:absolute;left:'
-      +((this.dagaX-this.theX)*(percentage))+'px;top:'+(this.dagaY-this.theY)+'px;';
+      +percentage+'%;top:'+(this.dagaY-this.theY)+'px;';
     }
     else if(this.whatComponent2=="addressInput")
     {
       this.props.placeholder = "Enter address";
       this.props.style='width:200px;position:absolute;left:'
-      +((this.dagaX-this.theX)*(percentage))+'px;top:'+(this.dagaY-this.theY)+'px;';
+      +percentage+'%;top:'+(this.dagaY-this.theY)+'px;';
     }
     else if(this.whatComponent2=="remarksInput")
     {
       this.props.placeholder = "Enter remarks";
       this.props.style='width:200px;position:absolute;left:'
-      +((this.dagaX-this.theX)*(percentage))+'px;top:'+(this.dagaY-this.theY)+'px;';
+      +percentage+'%;top:'+(this.dagaY-this.theY)+'px;';
     }
     else
     {

@@ -6,7 +6,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
 @Component({
   selector: 'app-buttonDrag',
   template: `<button cdkDrag cdkDragBoundary="#canvas"
-  (cdkDragEnded)="onDragEnded($event)" [id]="props.id" [style]="props.style" 
+  (cdkDragEnded)="onDragEnded($event)" [id]="props.id" [style]="props.style"
   [ngStyle]="{
     'position': 'fixed',
     'left': dagaX + 'px',
@@ -51,8 +51,9 @@ export class ButtonDragComponent implements IComponent {
     let browserWidth = window.innerWidth;
     let widthRes = browserWidth/1280;
     let browserHeight = window.innerHeight;
-    
-    let percentage = 0.85+((browserWidth-1280)/browserWidth); //or you can manually type percentage
+
+    //let percentage = 0.85+((browserWidth-1280)/browserWidth); //or you can manually type percentage
+    let percentage = ((this.xmouse-this.theX)/1280)*100
     console.log(percentage);
     // let mousepos = this.xmouse-this.theX;
     // let incpercent = ((1280-mousepos)/1280);
@@ -68,28 +69,28 @@ export class ButtonDragComponent implements IComponent {
     else if(this.whatComponent2 == "SearchButton")
     {
       this.props.value = "Search";
-      this.props.style='position:absolute;left:'+((this.xmouse-this.theX)*(percentage))+'px;top:'+(this.ymouse-this.theY)+'px;'
+      this.props.style='position:absolute;left:'+percentage+'%;top:'+(this.ymouse-this.theY)+'px;'
       +'background-color: blue;color: white;border-radius: 10px;'
       +'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
     }
     else if(this.whatComponent2 == "ClearButton")
     {
       this.props.value = "Clear";
-      this.props.style='position:absolute;left:'+((this.xmouse-this.theX)*(percentage))+'px;top:'+(this.ymouse-this.theY)+'px;'
+      this.props.style='position:absolute;left:'+percentage+'%;top:'+(this.ymouse-this.theY)+'px;'
       +'background-color: gray;color: white;border-radius: 10px;'
       +'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
     }
     else if(this.whatComponent2 == "HomeButton")
     {
       this.props.value = "Home";
-      this.props.style='position:absolute;left:'+((this.xmouse-this.theX)*(percentage))+'px;top:'+(this.ymouse-this.theY)+'px;'
+      this.props.style='position:absolute;left:'+percentage+'%;top:'+(this.ymouse-this.theY)+'px;'
       +'background-color: #ADD8E6;color: white;border-radius: 10px;'
       +'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
     }
     else if(this.whatComponent2 == "ProfileButton")
     {
       this.props.value = "Profile";
-      this.props.style='position:absolute;left:'+((this.xmouse-this.theX)*(percentage))+'px;top:'+(this.ymouse-this.theY)+'px;'
+      this.props.style='position:absolute;left:'+percentage+'%;top:'+(this.ymouse-this.theY)+'px;'
       +'background-color: #ADD8E6;color: white;border-radius: 10px;'
       +'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
     }
@@ -147,5 +148,5 @@ export class ButtonDragComponent implements IComponent {
 
     return tmpHtmlCode;
   }
-  
+
 }

@@ -7,10 +7,10 @@ import { IProperty } from 'src/app/interfaces/iproperty';
   selector: 'app-datepickerDrag',
   //templateUrl: './datepicker.component.html',
   //styleUrls: ['./datepicker.component.css']
-  template: `<input cdkDrag cdkDragBoundary="#canvas" [type]="props.type" [id]="props.id" 
-  [value]="props.value" [class]="props.class" [style]="props.style" 
+  template: `<input cdkDrag cdkDragBoundary="#canvas" [type]="props.type" [id]="props.id"
+  [value]="props.value" [class]="props.class" [style]="props.style"
   (change)="dateValue($event)"
-  (cdkDragEnded)="onDragEnded($event)" 
+  (cdkDragEnded)="onDragEnded($event)"
   [ngStyle]="{
     'position': 'fixed',
     'left': dagaX + 'px',
@@ -49,8 +49,9 @@ export class DatepickerDragComponent implements OnInit,IComponent {
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
     let browserWidth = window.innerWidth;
-    let percentage = 0.95+((browserWidth-1280)/browserWidth);
-    this.props.style='position:absolute;left:'+((this.dagaX-this.theX)*(percentage))+'px;top:'+(this.dagaY-this.theY)+'px;'; //the 86 from this point are all just for testing
+    //let percentage = 0.95+((browserWidth-1280)/browserWidth);
+    let percentage = ((this.xmouse-this.theX)/1280)*100
+    this.props.style='position:absolute;left:'+percentage+'%;top:'+(this.dagaY-this.theY)+'px;'; //the 86 from this point are all just for testing
   }
 
   onDragEnded($event: CdkDragEnd){
@@ -81,7 +82,7 @@ export class DatepickerDragComponent implements OnInit,IComponent {
   dateValue(val: any){
     this.props.value = val.target.value;
   }
-  
+
   get htmlCode(): string {
     let tmpHtmlCode = '<input';
     if (this.props.id.trim().length > 0) {
