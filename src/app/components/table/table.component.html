@@ -13,10 +13,11 @@
   <label>{{ props.value }}</label
   ><br />
   <table [class]="props.class">
-    <tr *ngFor="let row of this.tblRowsArray">
+    <tr *ngFor="let row of this.tblRowsArray; let i = index" >
       <td
         *ngFor="let column of this.tblColsArray"
         style="padding: 10px; border: 1px solid black"
+        (click)="editTableValue(i,column,row[column],props.value)"
       >
         {{ row[column] }}
       </td>

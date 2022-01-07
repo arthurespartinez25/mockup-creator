@@ -49,6 +49,11 @@ export class TableComponent implements OnInit, IComponent {
     console.log(this.tblColsArray.length);
   };
 
+  editTableValue = (row, col, oldvalue:string, newValue:string) => {
+    console.log("This is cell position " + row + "," + col + "\nThis is the previous Value " + oldvalue + "\nThis is the new" + newValue);
+    this.tblRowsArray[row][col] = newValue;
+  }
+
   rerender() {
     this.value = '___temp____';
     console.log('tangina mooooo');
