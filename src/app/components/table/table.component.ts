@@ -40,7 +40,7 @@ export class TableComponent implements OnInit, IComponent {
         //this.tblColsArray.push(i);
         this.props.tblArrayCol.push(i);
       }
-      //////////////////////////////////////////////
+      /////////////////////////////////////////////////////////////////////
 
       for (var i = 0; i < row; i++) {
         for (var j = this.props.tblArrayRow[i].length; j < col; j++) {
@@ -52,9 +52,10 @@ export class TableComponent implements OnInit, IComponent {
       //console.log(this.tblColsArray.toString());}
     }
     //console.log(this.tblColsArray.length);
-    console.log(this.props.tblArrayCol.length);
+    //console.log(this.props.tblArrayCol.length);
   };
 
+  /*
   getCellPosition = (row:number, col:number, oldvalue:string) => {
     this.previousVal = this.props.value;
     if(this.currentRow == row && this.currentCol == col){
@@ -81,6 +82,7 @@ export class TableComponent implements OnInit, IComponent {
     this.currentCol = col;
     this.currentVal = this.previousVal;
   }
+  */
 
   
   editTableValue = (row, col, oldvalue:string, newValue:string) => {
@@ -88,7 +90,6 @@ export class TableComponent implements OnInit, IComponent {
     //this.tblRowsArray[row][col] = newValue;
     this.props.tblArrayRow[row][col] = newValue;
   }
-  
 
   rerender() {
     this.value = '___temp____';
@@ -160,8 +161,8 @@ export class TableComponent implements OnInit, IComponent {
       this.props = value;
       this.tblCols = value.tblCols;
       this.tblRows = value.tblRows;
-      this.props.tblArrayRow = this.tblRowsArray;
-      this.editTableDimension(this.tblRows, this.tblCols);
+      //this.props.tblArrayRow = this.tblRowsArray;
+      this.editTableDimension(this.props.tblRows, this.props.tblCols);
     }
     //console.log("Repeato Shimashou");
     //this.editTableDimension();
