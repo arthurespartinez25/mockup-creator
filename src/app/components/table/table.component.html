@@ -10,15 +10,17 @@
     top: theY + 'px'
   }"
 >
-  <label>{{ props.value }}</label
-  ><br />
+  <br />
   <table [class]="props.class">
-    <tr *ngFor="let row of this.tblRowsArray; let i = index" >
+    <tr *ngFor="let row of this.props.tblArrayRow; let i = index" >
       <td
-        *ngFor="let column of this.tblColsArray"
+        *ngFor="let column of this.props.tblArrayCol"
         style="padding: 10px; border: 1px solid black"
         (click)="editTableValue(i,column,row[column],props.value)"
       >
+      <!--  (click)="getCellPosition(i,column,row[column])"
+      -->
+      <span *ngIf="this.props.tblArrayRow[i][column]==''">{{ props.value }}</span>
         {{ row[column] }}
       </td>
     </tr>

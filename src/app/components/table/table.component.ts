@@ -25,34 +25,70 @@ export class TableComponent implements OnInit, IComponent {
   editTableDimension = (row, col) => {
     //let col = this.tblCols;
     //let row = this.tblRows;
-    this.tblRowsArray = [];
-    this.tblColsArray = [];
+    //this.tblRowsArray = [];
+    //this.tblColsArray = [];
+    this.props.tblArrayRow = [];
+    this.props.tblArrayCol= [];
     if (!row || !col) {
       console.warn('rows or columns are undefined');
     } else {
       for (var i = 0; i < row; i++) {
-        this.tblRowsArray.push([]);
+        //this.tblRowsArray.push([]);
+        this.props.tblArrayRow.push([]);
       }
       for (var i = 0; i < col; i++) {
-        this.tblColsArray.push(i);
+        //this.tblColsArray.push(i);
+        this.props.tblArrayCol.push(i);
       }
       //////////////////////////////////////////////
 
       for (var i = 0; i < row; i++) {
-        for (var j = this.tblRowsArray[i].length; j < col; j++) {
-          this.tblRowsArray[i].push('data' + i + j);
+        for (var j = this.props.tblArrayRow[i].length; j < col; j++) {
+          //this.tblRowsArray[i].push('data' + i + j);
+          this.props.tblArrayRow[i].push('data \"' + i + ':'+ j + '\"');
         }
         //console.log(this.tblRowsArray[i].toString());
       }
       //console.log(this.tblColsArray.toString());}
     }
-    console.log(this.tblColsArray.length);
+    //console.log(this.tblColsArray.length);
+    console.log(this.props.tblArrayCol.length);
   };
 
-  editTableValue = (row, col, oldvalue:string, newValue:string) => {
-    console.log("This is cell position " + row + "," + col + "\nThis is the previous Value " + oldvalue + "\nThis is the new" + newValue);
-    this.tblRowsArray[row][col] = newValue;
+  getCellPosition = (row:number, col:number, oldvalue:string) => {
+    this.previousVal = this.props.value;
+    if(this.currentRow == row && this.currentCol == col){
+      console.log("You selected a the same cell");
+      //this.props.value = oldvalue;
+      this.tblRowsArray[row][col] = "";
+      this.props.tblArrayRow[row][col] = "";
+    }
+    else{
+      console.log(
+        "You selected a different cell"+
+        "\nPrevious Cell Position: "+ this.currentRow + "," + this.currentCol +
+        "\nあたらしい Cell Position: "+ row + col +
+        "\nしりょう: " + oldvalue
+      );
+      //this.props.value = oldvalue;
+      this.tblRowsArray[row][col] = "";
+      this.props.tblArrayRow[row][col] = "";
+    }
+    console.log("This is the data: " + this.previousVal);
+    this.props.tblArrayRow[row][col] = this.props.value;
+    this.tblRowsArray[row][col] = this.previousVal;
+    this.currentRow = row;
+    this.currentCol = col;
+    this.currentVal = this.previousVal;
   }
+
+  
+  editTableValue = (row, col, oldvalue:string, newValue:string) => {
+    console.log("This is cell position " + row + "," + col + "\nThis is the previous Value: " + oldvalue + "\nThis is the new Value: " + newValue);
+    //this.tblRowsArray[row][col] = newValue;
+    this.props.tblArrayRow[row][col] = newValue;
+  }
+  
 
   rerender() {
     this.value = '___temp____';
@@ -64,13 +100,15 @@ export class TableComponent implements OnInit, IComponent {
   props: IProperty = {
     key: '',
     id: '',
-    value: 'TableName',
+    value: '',
     class: 'table',
     style: 'position:absolute;left:0px;top:0px;',
     typeObj: 'table',
     type: '',
     tblCols: 5,
     tblRows: 3,
+    tblArrayCol:[],
+    tblArrayRow:[],
     updateCallback: this.editTableDimension,
   };
 
@@ -86,6 +124,10 @@ export class TableComponent implements OnInit, IComponent {
   tblRows = this.props.tblRows;
   tblColsArray: any = [];
   tblRowsArray: any = [];
+  currentRow: number;
+  currentCol: number;
+  currentVal: string = "";
+  previousVal: string = "";
 
   ngOnInit(): void {
     //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
@@ -118,6 +160,7 @@ export class TableComponent implements OnInit, IComponent {
       this.props = value;
       this.tblCols = value.tblCols;
       this.tblRows = value.tblRows;
+      this.props.tblArrayRow = this.tblRowsArray;
       this.editTableDimension(this.tblRows, this.tblCols);
     }
     //console.log("Repeato Shimashou");
