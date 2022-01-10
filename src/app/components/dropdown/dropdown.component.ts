@@ -65,7 +65,6 @@ export class DropdownComponent implements OnInit,IComponent {
     if (value) {
       this.props = value;
       this.links = value.links;
-      //this.props.tblArrayRow = this.tblRowsArray;
       this.editNumLinks(this.props.links);
     }
   }
