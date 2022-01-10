@@ -38,14 +38,16 @@
     </button>
     
     <!-- text-dropdown-menu start -->
-    <div class="palette-item text-menu" style="padding: 1px; padding-top: 1px;">
+    <div class="palette-item text-menu" id="textOp"
+    #textOp style="padding: 1px; padding-top: 1px;"
+    >
     <button class="text-menu-button palette-item">Text*</button>
-      <div class="text-menu-dropdown">
+      <div class="text-menu-dropdown" >
         <button
           class="palette-item"
           (click)="addComponent('header')"
           cdkDrag
-          (cdkDragEnded)="onDragEnded($event)"
+          (cdkDragEnded)="onDragEndedText($event)"
           (cdkDragEnded)="onDragEndedAddComponent('header')"
         >
           Header
@@ -55,7 +57,7 @@
           class="palette-item"
           (click)="addComponent('paragraph')"
           cdkDrag
-          (cdkDragEnded)="onDragEnded($event)"
+          (cdkDragEnded)="onDragEndedText($event)"
           (cdkDragEnded)="onDragEndedAddComponent('paragraph')"
         >
           Paragraph
@@ -65,7 +67,7 @@
           class="palette-item"
           (click)="addComponent('label')"
           cdkDrag
-          (cdkDragEnded)="onDragEnded($event)"
+          (cdkDragEnded)="onDragEndedText($event)"
           (cdkDragEnded)="onDragEndedAddComponent('label')"
         >
           Label
