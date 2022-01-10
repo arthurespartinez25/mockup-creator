@@ -93,8 +93,8 @@
         <input
           [disabled]="!this.props.id"
           type="number"
-          [value]="props.links"
-          (keyup)="linksChangeHandler($event)"
+          [value]="this.props.links"
+          (change)="linksChangeHandler($event)"
         />
       </td>
     </tr>
