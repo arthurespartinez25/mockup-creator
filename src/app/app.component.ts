@@ -361,8 +361,8 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       //this.mouseMoveY = this.btnCmp.mousePositionYV2;
       this.selected.style = this.jude + 
       "position:sticky;"+
-      "left:"+this.mouseMoveX+"px;"+
-      "top:"+this.mouseMoveY+"px;"/*+
+      "left:"+this.mouseMoveX+"%;"+
+      "top:"+this.mouseMoveY+"%;"/*+
       "position:fixed;"*/;
       this.mouseMoveX = 0;
       this.mouseMoveY = 0;
@@ -382,7 +382,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.selected.style = this.jude + 
       "position:sticky;"+
       "left:"+this.mouseMoveX+"px;"+
-      "top:"+this.mouseMoveY+"px;"/*+
+      "top:"+this.mouseMoveY+"%;"/*+
       "position:fixed;"*/;
       this.mouseMoveX = 0;
       this.mouseMoveY = 0;

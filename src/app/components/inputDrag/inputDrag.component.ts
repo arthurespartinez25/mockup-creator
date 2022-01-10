@@ -44,7 +44,8 @@ export class InputDragComponent implements OnInit, IComponent {
     this.dagaY = this.ymouse;
     let browserWidth = window.innerWidth;
     //let percentage = 0.95+((browserWidth-1280)/browserWidth);
-    let percentage = ((this.xmouse-this.theX)/1280)*100
+    let percentage = ((this.xmouse-this.theX)/1280)*100;
+    let percentageY = ((this.ymouse-this.theY)/720)*100;
 
     if(this.whatComponent2=="loginInputUser")
     {
@@ -62,44 +63,44 @@ export class InputDragComponent implements OnInit, IComponent {
     {
       this.props.placeholder = "xxxxx";
       this.props.style='width:200px;position:absolute;left:'
-      +percentage+'%;top:'+(this.dagaY-this.theY)+'px;';
+      +percentage+'%;top:'+percentageY+'%;';
     }
     else if(this.whatComponent2=="invoiceInput")
     {
       this.props.placeholder = "xxx-xxxx-xxxx";
       this.props.style='width:200px;position:absolute;left:'
-      +percentage+'%;top:'+(this.dagaY-this.theY)+'px;';
+      +percentage+'%;top:'+percentageY+'%';
     }
     else if(this.whatComponent2=="deliveryInput")
     {
       this.props.placeholder = "Enter delivery name";
       this.props.style='width:200px;position:absolute;left:'
-      +percentage+'%;top:'+(this.dagaY-this.theY)+'px;';
+      +percentage+'%;top:'+percentageY+'%';
     }
     else if(this.whatComponent2=="addressInput")
     {
       this.props.placeholder = "Enter address";
       this.props.style='width:200px;position:absolute;left:'
-      +percentage+'%;top:'+(this.dagaY-this.theY)+'px;';
+      +percentage+'%;top:'+percentageY+'%';
     }
     else if(this.whatComponent2=="remarksInput")
     {
       this.props.placeholder = "Enter remarks";
       this.props.style='width:200px;position:absolute;left:'
-      +percentage+'%;top:'+(this.dagaY-this.theY)+'px;';
+      +percentage+'%;top:'+percentageY+'%';
     }
     else
     {
       this.props.style='width:200px;position:absolute;left:'
-      +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      +percentage+'%;top:'+percentageY+'%';
     }
   }
 
   onDragEnded($event: CdkDragEnd){
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
     this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
-    this.updateDataEvent.emit(this.mousePositionXV2 + this.dagaX - this.theX);
-    this.updateDataEventY.emit(this.mousePositionYV2 + this.dagaY - this.theY);
+    this.updateDataEvent.emit(((this.mousePositionXV2 + this.dagaX - this.theX)/1280)*100);
+    this.updateDataEventY.emit(((this.mousePositionYV2 + this.dagaY - this.theY)/720)*100);
   }
 
   constructor(canvas: ElementRef) {
