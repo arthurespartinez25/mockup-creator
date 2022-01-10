@@ -175,19 +175,21 @@
       #canvas
       (mouseenter)="domInsideCanvas = true"
       (mouseleave)="domInsideCanvas = false"
-    >{{ cssBody }}
-      <app-wrapper
-        *ngFor="let component of componentList; let i = index"
-        class="wrapper"
-        (click)="clickHandler(component)"
-        [childComp]="component"
-        [canvasRef]="component.canvas"
-        [componentList]="componentList"
-        [mousePositionX]="mousePositionX"
-        [mousePositionY]="mousePositionY"
-        [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
-      >
-      </app-wrapper>
+    >
+      <div id="canvasBody">
+        <app-wrapper
+          *ngFor="let component of componentList; let i = index"
+          class="wrapper"
+          (click)="clickHandler(component)"
+          [childComp]="component"
+          [canvasRef]="component.canvas"
+          [componentList]="componentList"
+          [mousePositionX]="mousePositionX"
+          [mousePositionY]="mousePositionY"
+          [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
+        >
+        </app-wrapper>
+      </div>
     </div>
   </div>
 

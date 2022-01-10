@@ -104,6 +104,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     ) {}
   delete: boolean;
   cssBody: SafeStyle;
+  canvasBG: string;
 
   ngAfterViewInit(): void {
     //throw new Error('Method not implemented.');
@@ -366,12 +367,12 @@ export class AppComponent implements OnInit, AfterViewInit {
     for(let i=this.cssRuleCount; i < newCssRuleCount; i++){
       cssString = document.styleSheets[0].cssRules[i].cssText.toString();
       //console.log(document.styleSheets[0].cssRules[i].cssText.toString().substring(0,7));
-      if(document.styleSheets[0].cssRules[i].cssText.toString().substring(0,7) == "#canvas"){
-        if(document.styleSheets[0].cssRules[i].cssText.toString().substring(7,9) == " {"){
-        this.style += "body" + cssString.substring(7,cssString.length);
+      if(document.styleSheets[0].cssRules[i].cssText.toString().substring(0,11) == "#canvasBody"){
+        if(document.styleSheets[0].cssRules[i].cssText.toString().substring(11,13) == " {"){
+        this.style += "body" + cssString.substring(11,cssString.length);
         this.style += "\n\n";
       }else{
-        this.style += cssString.substring(7,cssString.length);
+        this.style += cssString.substring(11,cssString.length);
         this.style += "\n\n";
       }
         //console.log(cssString);
@@ -380,6 +381,7 @@ export class AppComponent implements OnInit, AfterViewInit {
         this.style += "\n\n";
         //console.log(document.styleSheets[0].cssRules[i].cssText.toString());
       }
+      //console.log(document.styleSheets[0].cssRules[i].cssText.toString().substring(0,11));
     }
   }
 
@@ -414,7 +416,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       switch(cssString.substring(0, cssString.indexOf('{'))){
         case 'body':{
           console.warn("The CSS rule is for the 'body' selector, retype the rule.");
-          cssStringTemp = "#canvas " + cssString.substring(cssString.indexOf('{')).toString();
+          cssStringTemp = "#canvasBody " + cssString.substring(cssString.indexOf('{')).toString();
           console.log(cssStringTemp);
           /*
           this.cssBody = this.doms.bypassSecurityTrustStyle(cssString.substring(cssString.indexOf('{')).toString());
@@ -434,7 +436,7 @@ export class AppComponent implements OnInit, AfterViewInit {
         }
         */
         default:{
-          cssStringTemp = "#canvas " + cssCanvasSelector + cssString.substring(cssString.indexOf('{')).toString();
+          cssStringTemp = "#canvasBody " + cssCanvasSelector + cssString.substring(cssString.indexOf('{')).toString();
           console.log(cssStringTemp);
           //console.log("Nothing to compare to.");
           break;
@@ -493,7 +495,12 @@ export class AppComponent implements OnInit, AfterViewInit {
     let ruleNumber;
     for(let i=this.cssRuleCount; i < newCssRuleCount; i++){
       cssRuleStringTemp = document.styleSheets[0].cssRules[i].cssText.toString();
-      if(cssRuleStringTemp.includes(cssRuleStringClassID) || cssRuleStringTemp.includes("#canvas "+cssRuleStringClassID) || cssRuleStringClassID=="#canvas "){
+      //console.log(cssRuleStringTemp);
+      if(
+        (cssRuleStringTemp.includes(cssRuleStringClassID)) 
+        || (cssRuleStringTemp.substring(0, cssString.indexOf('{')).includes("#canvasBody "+cssRuleStringClassID)) 
+        || (cssRuleStringClassID == "#canvasBody ")
+      ){
         console.log("rule found!");
         ruleFound = 1;
         ruleNumber = i;
