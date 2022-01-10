@@ -101,6 +101,9 @@ export class PropertyComponent implements OnInit {
   nameChangeHandler(event: any) {
     this.props.name = event.target.value;
   }
+  linksChangeHandler(event: any) {
+    this.props.links = event.target.value;
+  }
   link1ChangeHandler(event: any) {
     this.props.link1 = event.target.value;
   }

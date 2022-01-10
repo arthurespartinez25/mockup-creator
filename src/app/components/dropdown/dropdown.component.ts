@@ -8,7 +8,29 @@ import { IProperty } from 'src/app/interfaces/iproperty';
   styleUrls: ['./dropdown.component.css']
 })
 export class DropdownComponent implements OnInit,IComponent {
+  
   canvas: ElementRef;
+  value = '';
+
+  editNumLinks = (numLink: number | undefined) => {
+    this.props.linksArray = [];
+    if (!numLink) {
+      console.warn('rows or columns are undefined');
+    } else {
+      for (var i = 0; i < numLink; i++) {
+        this.props.linksArray.push([]);
+      }
+
+      for (var i = 0; i < numLink; i++) {
+          
+        this.props.linksArray[i].push('link' + i);
+        
+      }
+      
+    }
+    
+  };
+
   props: IProperty = {
     key: '',
     id: '',
@@ -17,9 +39,8 @@ export class DropdownComponent implements OnInit,IComponent {
     style: '',
     typeObj: 'dropdown',
     type: 'button',
-    link1: 'Link 1',
-    link2: 'Link 2',
-    link3: 'Link 3',
+    links: 3,
+    linksArray:[],
   };
 
   @Output() updateDataEvent= new EventEmitter<any>();
@@ -30,6 +51,8 @@ export class DropdownComponent implements OnInit,IComponent {
   mousePositionYV2= 110;
   theX = 0;
   theY = 0;
+  links = this.props.links;
+  linksArray: any = [];
 
   ngOnInit(): void {
     //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
@@ -59,8 +82,14 @@ export class DropdownComponent implements OnInit,IComponent {
   set property(value: IProperty) {
     if (value) {
       this.props = value;
+      this.links = value.links;
+      //this.props.tblArrayRow = this.tblRowsArray;
+      this.editNumLinks(this.props.links);
     }
   }
+
+  
+
   get htmlCode(): string {
     let tmpHtmlCode = '<div';
     tmpHtmlCode += ' class="dropdown" id="' + this.props.id + '">';

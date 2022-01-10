@@ -8,8 +8,6 @@
     <span class="visually-hidden">Toggle Dropdown</span>
   </button>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">{{ props.link1 }}</a></li>
-    <li><a class="dropdown-item" href="#">{{ props.link2 }}</a></li>
-    <li><a class="dropdown-item" href="#">{{ props.link3 }}</a></li>
+    <li><a class="dropdown-item" href="#" *ngFor="let link of this.props.linksArray; let i = index">{{ link }}</a></li>
   </ul>
 </div>  
