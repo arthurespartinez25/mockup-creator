@@ -12,24 +12,7 @@ export class DropdownComponent implements OnInit,IComponent {
   canvas: ElementRef;
   value = '';
 
-  editNumLinks = (numLink: number | undefined) => {
-    this.props.linksArray = [];
-    if (!numLink) {
-      console.warn('rows or columns are undefined');
-    } else {
-      for (var i = 0; i < numLink; i++) {
-        this.props.linksArray.push([]);
-      }
-
-      for (var i = 0; i < numLink; i++) {
-          
-        this.props.linksArray[i].push('link' + i);
-        
-      }
-      
-    }
-    
-  };
+  
 
   props: IProperty = {
     key: '',
@@ -52,7 +35,6 @@ export class DropdownComponent implements OnInit,IComponent {
   theX = 0;
   theY = 0;
   links = this.props.links;
-  linksArray: any = [];
 
   ngOnInit(): void {
     //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
@@ -88,7 +70,27 @@ export class DropdownComponent implements OnInit,IComponent {
     }
   }
 
-  
+  editNumLinks = (numLink) => {
+    this.props.linksArray = [];
+    if (!numLink) {
+      console.warn('rows or columns are undefined');
+    } else {
+      for (var i = 0; i < numLink; i++) {
+        this.props.linksArray.push([]);
+        console.log("pasok ba?")
+      }
+
+      for (var i = 0; i < numLink; i++) {
+          
+        this.props.linksArray[i].push('link' + i);
+        console.log("oo");
+        
+      }
+      
+    }
+    console.log(this.props.linksArray.length);
+    
+  };
 
   get htmlCode(): string {
     let tmpHtmlCode = '<div';
