@@ -8,6 +8,6 @@
     <span class="visually-hidden">Toggle Dropdown</span>
   </button>
   <ul class="dropdown-menu">
-    <li><a *ngFor="let link of props.linksArray" class="dropdown-item" href="#">{{link}}</a></li>
+    <li><a class="dropdown-item" *ngFor="let link of props.linksArray; let i = index;" (click)="editLinkValue(i, link, props.linkValue)">{{link}}</a></li>
   </ul>
 </div>  

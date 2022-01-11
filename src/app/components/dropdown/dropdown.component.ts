@@ -10,10 +10,6 @@ import { IProperty } from 'src/app/interfaces/iproperty';
 export class DropdownComponent implements OnInit,IComponent {
   
   canvas: ElementRef;
-  value = '';
-
-  
-
   props: IProperty = {
     key: '',
     id: '',
@@ -23,6 +19,7 @@ export class DropdownComponent implements OnInit,IComponent {
     typeObj: 'dropdown',
     type: 'button',
     links: 3,
+    linkValue: 'Sample',
     linksArray:[],
   };
 
@@ -74,21 +71,28 @@ export class DropdownComponent implements OnInit,IComponent {
     if (!numLink) {
       console.warn('rows or columns are undefined');
     } else {
+      
       for (var i = 0; i < numLink; i++) {
-        this.props.linksArray.push([]);
-        console.log("pasok ba?")
-      }
-
-      for (var i = 0; i < numLink; i++) {
-          
-        this.props.linksArray[i].push('link' + i);
-        console.log("oo");
-        
+        if(this.props.linkContent) {
+          console.log("dito pumasok");
+          console.log(this.props.linkContent);
+          this.props.linksArray = this.props.linkContent;
+        }
+        else {
+            this.props.linksArray.push('link' + (i+1));
+            console.log("pasok noh? oo");
+        }
       }
       
     }
-    console.log(this.props.linksArray.length);
-    
+    console.log(this.props.linksArray);
+  };
+
+  editLinkValue = (index, oldvalue: string, newValue: any) => {
+    this.props.linksArray[index] = newValue;
+    this.props.linkContent = this.props.linksArray;
+    console.log(this.props.linkContent);
+    console.log(index, oldvalue, newValue);
   };
 
   get htmlCode(): string {
