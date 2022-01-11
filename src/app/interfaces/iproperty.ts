@@ -16,4 +16,10 @@ export interface IProperty {
   link3?: string;
   checked?: string;
   draggable?: boolean;
+  tblRows?: number;
+  tblCols?: number;
+  tblArrayRow?: any;
+  tblArrayCol?: any;
+  tblContent?: [][];
+  updateCallback?: (row, col) => void;
 }

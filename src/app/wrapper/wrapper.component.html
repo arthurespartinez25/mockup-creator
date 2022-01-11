@@ -52,6 +52,7 @@
     child.props.typeObj ===  'radioDrag' ?xmouse+'px':
     child.props.typeObj === 'inputDrag'?xmouse+'px'
     :xcanvas+'px'
+    ,'width':'1px','height':'1px'
   }">
   <app-button  
   [property]="child.props" 
@@ -257,6 +258,7 @@
   [ymouse]="ymouse"
   [canvasWW]="canvasWW"
     [ngStyle]="{ width: canvasWidth }"
+    [whatComponent2]="whatComponent2"
   ></app-navbarDrag>
 
   <app-input [property]="child.props" 
@@ -336,4 +338,13 @@
     [xmouse]="xmouse" 
     [ymouse]="ymouse"
   ></app-paragraphDrag>
+
+  <app-table
+    [property]="child.props"
+    *ngSwitchCase="'table'"
+    (updateDataEvent)="passData($event)"
+    (updateDataEventY)="passDataY($event)" 
+    [xcanvas]="xcanvas" 
+    [ycanvas]="ycanvas"></app-table>
+
 </div>

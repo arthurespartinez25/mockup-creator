@@ -18,8 +18,7 @@ export class NavbarComponent implements IComponent {
     style: `color: white;
     padding: 10px;
     background-color: #12355B;
-    font-size: 20px;
-    position:absolute;left:0px;top:0px;`,
+    font-size: 20px;left:0px;top:0px;`,
     typeObj: 'nav',
     type: '',
   };

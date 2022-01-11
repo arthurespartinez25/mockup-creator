@@ -50,7 +50,7 @@ export class ImageDragComponent implements OnInit, IComponent {
     else
     {
       this.props.value = "https://mdbootstrap.com/img/new/standard/city/047.jpg";
-      this.props.style='position:absolute;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      this.props.style='max-width: 600px;height: 200px;position:absolute;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
   }
 
@@ -80,8 +80,8 @@ export class ImageDragComponent implements OnInit, IComponent {
   
     get htmlCode(): string {
       let tmpHtmlCode = '<img';
-      tmpHtmlCode += ' class="' + this.props.class + '" id="' + this.props.id + '" type="' +  this.props.type 
-       '" style="' + this.props.style + '" src = " ' + this.props.value + '"> </img>';
+      tmpHtmlCode += ' class="' + this.props.class + '" id="' + this.props.id + '" type="' +  this.props.type + 
+      '" style="' + this.props.style + '" src = " ' + this.props.value + '"> </img>';
       
       return tmpHtmlCode;
     }
