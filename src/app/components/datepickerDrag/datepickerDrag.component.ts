@@ -50,8 +50,9 @@ export class DatepickerDragComponent implements OnInit,IComponent {
     this.dagaY = this.ymouse;
     let browserWidth = window.innerWidth;
     //let percentage = 0.95+((browserWidth-1280)/browserWidth);
-    let percentage = ((this.xmouse-this.theX)/1280)*100
-    this.props.style='position:absolute;left:'+percentage+'%;top:'+(this.dagaY-this.theY)+'px;'; //the 86 from this point are all just for testing
+    let percentage = ((this.xmouse-this.theX)/1280)*100;
+    let percentageY = ((this.ymouse-this.theY)/720)*100;
+    this.props.style='position:absolute;left:'+percentage+'%;top:'+percentageY+'%;'; //the 86 from this point are all just for testing
   }
 
   onDragEnded($event: CdkDragEnd){
