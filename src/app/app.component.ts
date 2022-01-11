@@ -385,6 +385,51 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
   }
 
+  addAllCSSRule(allCSSRule: any){
+    //console.log(allCSSRule.length);
+    let allCSSRuleCount = 0;
+    let stringIndex = 0;
+    let startingIndex = 0;
+    let curlyBraces = 0;
+    let cssString = "";
+
+    while(stringIndex < allCSSRule.length-1){
+      for(let i = stringIndex; i <= allCSSRule.length; i++){
+        //console.log(allCSSRule[i].toString());
+        if(allCSSRule[i] == '{'){
+          curlyBraces++;
+        }
+        if(allCSSRule[i] == '}' && curlyBraces >= 2){
+          curlyBraces--;
+        }
+        else if(allCSSRule[i] == '}' && curlyBraces == 1){
+          curlyBraces--;
+          cssString = ""
+          if(startingIndex == 0){
+            cssString = allCSSRule.substring(startingIndex, i + 1).toString();
+          }
+          else{
+            cssString = allCSSRule.substring(startingIndex+1, i + 1).toString();
+          }
+          //console.log(cssString.toString());
+          this.deleteCSSRule(cssString.toString());
+          this.addCSSRule(cssString.toString());
+          stringIndex = 1 + i;
+          startingIndex = 1 + i;
+          /*
+          console.log(
+            "this is the new starting index: " + startingIndex +
+            "\nand we added the rule\n" + cssString.toString())
+          */
+          allCSSRuleCount++;
+          break;
+        }
+        //console.log(i);
+        //console.log(i + "," + stringIndex);
+        //console.log(allCSSRule.substring(startingIndex, startingIndex + i));
+      }
+    }
+  }
 
   addCSSRule(cssString: string) {
     //console.log(this.style);
