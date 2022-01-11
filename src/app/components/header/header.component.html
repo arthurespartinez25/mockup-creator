@@ -1,1 +1,3 @@
-<h1 cdkDrag cdkDragBoundary="#canvas" [class]="props.class" [id]="props.id" [style]="props.style"> {{ props.value }}</h1>
+<h1 cdkDrag cdkDragBoundary="#canvas" [class]="props.class" [id]="props.id" [style]="props.style" (cdkDragEnded)="onDragEnded($event)"
+
+  > {{ props.value }}</h1>

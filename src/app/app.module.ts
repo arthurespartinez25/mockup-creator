@@ -40,6 +40,7 @@ import { ParagraphComponent } from './components/paragraph/paragraph.component';
 import { ParagraphDragComponent } from './components/paragraphDrag/paragraphDrag.component';
 import { PopupComponent } from './components/popup/popup.component';
 import { PopupDragComponent } from './components/popupDrag/popupDrag.component';
+import { TableComponent } from './components/table/table.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { PopupDragComponent } from './components/popupDrag/popupDrag.component';
     HeaderDragComponent,
     InputDragComponent,
     LinkDragComponent,
+    TableComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule, FormsModule, HttpClientModule],
   providers: [DragDropModule, AppComponent],

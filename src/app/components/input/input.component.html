@@ -1,1 +1,5 @@
-<input [(ngModel)]="textInput" cdkDrag cdkDragBoundary="#canvas" [value]="props.value" [placeholder]="props.placeholder" [class]="props.class" [type]="props.type" [id]="props.id" [style]="props.style">
+<input [(ngModel)]="textInput" cdkDrag cdkDragBoundary="#canvas" [value]="props.value" 
+[placeholder]="props.placeholder" [class]="props.class" 
+[type]="props.type" [id]="props.id" [style]="props.style"
+(cdkDragEnded)="onDragEnded($event)" 
+>

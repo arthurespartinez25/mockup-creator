@@ -1,24 +1,36 @@
-#palette-container {
-  display: flex;
-  flex-direction: column;
+.palette-div {
   height: 100vh;
   max-width: 600px;
-  min-width: 10%;
-  padding: 5px;
+  min-width: 150px;
+  width: 15%;
+}
+
+.palette-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 600px;
+  min-width: 150px;
+  width: 100%;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   overflow-y: auto;
+  background-color: #16324f;
 }
 
 .palette-item {
-  padding: 10px;
   height: fit-content;
   width: 100%;
-  border-radius: 10px;
-  padding: 5px 10px;
+  padding: 10px 10px;
+  color: white;
+  background-color: #16324f;
+  outline: none;
+  border: none;
+  border: #16324f solid 1px;
+}
+
+.palette-item:hover {
   color: #16324f;
   background-color: white;
-  border: solid 1px #16324f;
-  /* 
-  font-weight: lighter; */
+  border: #16324f solid 1px;
 }

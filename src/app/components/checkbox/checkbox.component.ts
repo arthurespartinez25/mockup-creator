@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
 
@@ -15,11 +15,34 @@ export class CheckboxComponent implements OnInit, IComponent {
     id: '',
     value: 'Checkbox',
     class: 'form-check-input',
-    style: 'cursor: pointer;',
+    style: '',
     typeObj: 'checkbox',
     type: 'checkbox',
     checked: 'true',
   };
+
+  @Output() updateDataEvent= new EventEmitter<any>();
+  @Output() updateDataEventY= new EventEmitter<any>();
+  @Input() xcanvas: any;
+  @Input() ycanvas: any;
+  mousePositionXV2 = 310;
+  mousePositionYV2= 110;
+  theX = 0;
+  theY = 0;
+
+  ngOnInit(): void {
+    //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
+    this.theX = this.xcanvas;
+    this.theY = this.ycanvas;
+  }
+
+  onDragEnded($event: any){
+    this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
+    this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
+    
+    this.updateDataEvent.emit(this.mousePositionXV2);
+    this.updateDataEventY.emit(this.mousePositionYV2);
+  }
 
   constructor(canvas: ElementRef) {
     this.canvas = canvas;
@@ -50,14 +73,28 @@ export class CheckboxComponent implements OnInit, IComponent {
   }
 
   get htmlCode(): string {
+    let jude = this.props.style;
+      let regexLeft = /left(.+?);/;
+      let regexTop = /top(.+?);/;
+      let regexPosition = /position(.+?);/;
+      let styleLeft = jude.match(/left(.+?);/g);
+      let styleTop = jude.match(/top(.+?);/g);
+      console.log(styleLeft);
+      console.log(jude);
+
+      //let divStyle = '"style=position:absolute;left:'+this.dagaX+'px;top:'+this.dagaY+'px;"';
+
+      jude = jude.replace(regexLeft,"");
+      jude = jude.replace(regexTop,"");
+      jude = jude.replace(regexPosition,"");
     let tmpHtmlCode = '<div';
-    tmpHtmlCode += ' class="form-check">';
+    tmpHtmlCode += ' class="form-check" id="' + this.props.id + '"style="' + this.props.style +'">';
     
     if (this.props.checked == "true") {
-      tmpHtmlCode +="\n" + ' <input id="'+ this.props.id + ' class="' +  this.props.class + '" type="' +  this.props.type + '" style="' + this.props.style + '" id="flexCheckDefault" checked>';
+      tmpHtmlCode +="\n" + ' <input id="'+ this.props.id + ' class="' +  this.props.class + '" type="' +  this.props.type + '" style="' + jude + '" id="flexCheckDefault" checked>';
     }
     else {
-      tmpHtmlCode +="\n" + ' <input id="'+ this.props.id + ' class="' +  this.props.class + '" type="' +  this.props.type + '" style="' + this.props.style + '" id="flexCheckDefault">';
+      tmpHtmlCode +="\n" + ' <input id="'+ this.props.id + ' class="' +  this.props.class + '" type="' +  this.props.type + '" style="' + jude + '" id="flexCheckDefault">';
     }
     
     
@@ -68,8 +105,6 @@ export class CheckboxComponent implements OnInit, IComponent {
     return tmpHtmlCode;
   }
 
-  ngOnInit(): void {
-  } 
 
   
 

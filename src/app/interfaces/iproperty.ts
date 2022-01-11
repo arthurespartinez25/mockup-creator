@@ -11,5 +11,14 @@ export interface IProperty {
   rows?: number;
   cols?: number;
   name?: string;
+  link1?: string;
+  link2?: string;
+  link3?: string;
   checked?: string;
+  tblRows?: number;
+  tblCols?: number;
+  tblArrayRow?: any;
+  tblArrayCol?: any;
+  tblContent?: [][];
+  updateCallback?: (row, col) => void;
 }

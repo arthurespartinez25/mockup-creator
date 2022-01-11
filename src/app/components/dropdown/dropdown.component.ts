@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
 
@@ -14,10 +14,36 @@ export class DropdownComponent implements OnInit,IComponent {
     id: '',
     value: 'Dropdown',
     class: 'btn btn-secondary',
-    style: '',
+    style: 'position:absolute;left:0px;top:0px;',
     typeObj: 'dropdown',
     type: 'button',
+    link1: 'Link 1',
+    link2: 'Link 2',
+    link3: 'Link 3',
   };
+
+  @Output() updateDataEvent= new EventEmitter<any>();
+  @Output() updateDataEventY= new EventEmitter<any>();
+  @Input() xcanvas: any;
+  @Input() ycanvas: any;
+  mousePositionXV2 = 310;
+  mousePositionYV2= 110;
+  theX = 0;
+  theY = 0;
+
+  ngOnInit(): void {
+    //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
+    this.theX = this.xcanvas;
+    this.theY = this.ycanvas;
+  }
+
+  onDragEnded($event: any){
+    this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
+    this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
+    
+    this.updateDataEvent.emit(this.mousePositionXV2);
+    this.updateDataEventY.emit(this.mousePositionYV2);
+  }
 
   constructor(canvas: ElementRef) { 
     this.canvas = canvas;
@@ -35,23 +61,38 @@ export class DropdownComponent implements OnInit,IComponent {
       this.props = value;
     }
   }
-  
   get htmlCode(): string {
-    let tmpHtmlCode = '<div';
-    tmpHtmlCode += ' class="dropdown" id="' + this.props.id + '">';
-    tmpHtmlCode +="\n" + ' <button class="' +  this.props.class + '" type="' +  this.props.type + '" style="' + this.props.style + '" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> ' + this.props.value + ' </button>';
-    tmpHtmlCode +="\n" + ' <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">';
-    tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">Choice 1</a>';
-    tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">Choice 2</a>';
-    tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">Choice 3</a>';
+    let jude = this.props.style;
+    let regexLeft = /left(.+?);/;
+    let regexTop = /top(.+?);/;
+    let regexPosition = /position(.+?);/;
+    // let styleLeft = jude.match(/left(.+?);/g);
+    // let styleTop = jude.match(/top(.+?);/g);
+    // console.log(styleLeft);
+    // console.log(jude);
+
+    //let divStyle = '"style=position:absolute;left:'+this.dagaX+'px;top:'+this.dagaY+'px;"';
+
+    jude = jude.replace(regexLeft,"");
+    jude = jude.replace(regexTop,"");
+    jude = jude.replace(regexPosition,"");
+    //this.props.style = jude;
+
+    let tmpHtmlCode = '<div class="btn-group"'+ ' style="' + this.props.style +'"';
+    tmpHtmlCode += 'id="' + this.props.id + '">';
+    tmpHtmlCode +="\n" + ' <button class="' +  this.props.class + '" type="' +  this.props.type + '" style="' + jude + '"> ' + this.props.value + ' </button>';
+    tmpHtmlCode +="\n" + ' <button' + ' type="' +  this.props.type + '" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
+    tmpHtmlCode +="\n" + ' <span class="sr-only">Toggle Dropdown</span>';
+    tmpHtmlCode +="\n" + ' </button>';
+    tmpHtmlCode +="\n" + ' <div class="dropdown-menu">';
+    tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.link1 + '</a>';
+    tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.link2 + '</a>';
+    tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.link3 + '</a>';
     tmpHtmlCode +="\n" + ' </div>';
     tmpHtmlCode +="\n" + ' </div>';
     
 
     return tmpHtmlCode;
-  }
-
-  ngOnInit(): void {
-  }
+  } 
 
 }

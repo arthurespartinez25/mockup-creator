@@ -1,1 +1,7 @@
-<h1 cdkDrag cdkDragBoundary="#canvas" [class]="props.class" [id]="props.id" [style]="props.style"> {{ props.value }}</h1>
+<h1 cdkDrag cdkDragBoundary="#canvas" [class]="props.class" [id]="props.id" 
+[style]="props.style" (cdkDragEnded)="onDragEnded($event)" 
+[ngStyle]="{
+    'position': 'fixed',
+    'left': dagaX + 'px',
+    'top': dagaY + 'px'
+  }"> {{ props.value }}</h1>

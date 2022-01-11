@@ -1,9 +1,9 @@
 import { DragDrop } from '@angular/cdk/drag-drop';
 import { Icu } from '@angular/compiler/src/i18n/i18n_ast';
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { throwError } from 'rxjs';
 import { IComponent } from '../interfaces/icomponent';
 import { IProperty } from '../interfaces/iproperty';
-import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-wrapper',
@@ -18,20 +18,22 @@ export class WrapperComponent implements OnInit {
 
   @Input() mousePositionX: any;
   @Input() mousePositionY: any;
-  /*@Input() cssSignal: any;
-  @Output() cssWrapper = new EventEmitter<CSSStyleSheet>();
-
-  sendWrapperStyleSheet(wrapperDocument: CSSStyleSheet) {
-    this.cssWrapper.emit(wrapperDocument);
-  }
-  */
-
-  wrapperStylesheet = document.styleSheets[0];
-  wrapperStylesheet2 = document.styleSheets[0];
-  
+  @Input() canvasLeft: any;
+  @Input() canvasTop: any;
+  @Input() canvasW: any;
+  @Input() xCounter: any;
+  @Input() whatComponent:any;
+  @Output() updateDataEvent2= new EventEmitter<any>();
+  @Output() updateDataEventX= new EventEmitter<any>();
 
   xmouse = 0;
   ymouse = 0;
+  xcanvas = 0;
+  ycanvas = 0;
+  xCounterstrike = 0;
+  canvasWW = 0;
+  jude=false;
+  whatComponent2 = "";
 
 
   /*
@@ -74,14 +76,26 @@ export class WrapperComponent implements OnInit {
   }
 
   constructor(private ref: ElementRef, private drag: DragDrop) {}
-
+  stylish ={};
   ngOnInit(): void {
     //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
     this.xmouse = this.mousePositionX;
     this.ymouse = this.mousePositionY;
-    //this.cssWrapper.emit(this.wrapperStylesheet);
-    //console.log("below is the wrapper styleSheet\n");
-    //console.log(this.wrapperStylesheet);
+    this.xcanvas = this.canvasLeft;
+    this.ycanvas = this.canvasTop;
+    this.xCounterstrike = this.xCounter;
+    this.canvasWW = this.canvasW;
+    this.whatComponent2 = this.whatComponent;
   }
-  removeElement(remove: IComponent): void {}
+  removeElement(remove:IComponent):void {
+
+  }
+  passData(item: any){
+    //console.warn(item);
+    this.updateDataEvent2.emit(item);
+  }
+  passDataY(item: any){
+    //console.warn(item);
+    this.updateDataEventX.emit(item);
+  }
 }
