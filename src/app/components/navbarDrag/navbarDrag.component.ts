@@ -1,4 +1,5 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { CdkDragEnd } from '@angular/cdk/drag-drop';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
 
@@ -7,7 +8,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
   templateUrl: './navbarDrag.component.html',
   styleUrls: ['./navbarDrag.component.css'],
 })
-export class NavbarDragComponent implements IComponent {
+export class NavbarDragComponent implements OnInit, IComponent {
   canvas: ElementRef<any>;
   props: IProperty = {
     key: '',
@@ -21,6 +22,52 @@ export class NavbarDragComponent implements IComponent {
     typeObj: 'navDrag',
     type: '',
   };
+  
+  @Input() canvasWW: any;
+  @Output() updateDataEvent= new EventEmitter<any>();
+  @Output() updateDataEventY= new EventEmitter<any>();
+  @Input() xcanvas: any;
+  @Input() ycanvas: any;
+  @Input() xmouse: any;
+  @Input() ymouse: any;
+  @Input() whatComponent2:any;
+  mousePositionXV2 = 310;
+  mousePositionYV2= 110;
+  theX = 0;
+  theY = 0;
+  dagaX = 0;
+  dagaY = 0;
+  onetimeBool = true;
+  theCanvasWidth = 0;
+
+  ngOnInit(): void {
+    //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
+    this.theX = this.xcanvas;
+    this.theY = this.ycanvas;
+    this.theCanvasWidth = this.canvasWW;
+    this.dagaX = this.xmouse;
+    this.dagaY = this.ymouse;
+    if(this.whatComponent2 == "searchNavbar")
+    {
+      this.props.value = "AWS";
+      this.props.style='color: white;padding: 10px;background-color: #12355B;font-size: 20px;left:'
+    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    }
+    else
+    {
+      this.props.style='color: white;padding: 10px;background-color: #12355B;font-size: 20px;left:'
+    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    }
+  }
+
+  onDragEnded($event: any){
+    this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
+    this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
+    
+    this.updateDataEvent.emit(this.mousePositionXV2 + this.dagaX - this.theX);
+    this.updateDataEventY.emit(this.mousePositionYV2 + this.dagaY - this.theY);
+    console.log(this.theCanvasWidth);
+  }
 
   constructor(canvas: ElementRef) {
     this.canvas = canvas;

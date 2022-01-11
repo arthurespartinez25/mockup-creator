@@ -11,11 +11,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
   [id]="props.id" [value]="props.value" [class]="props.class" [style]="props.style" 
   (change)="dateValue($event)"
   (cdkDragEnded)="onDragEnded($event)"
-  [ngStyle]="{
-    'position': 'absolute',
-    'left': theX + 'px',
-    'top': theY + 'px'
-  }">`
+ >`
 })
 export class DatepickerComponent implements OnInit,IComponent {
   canvas: ElementRef;

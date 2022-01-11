@@ -18,8 +18,7 @@ export class NavbarComponent implements IComponent {
     style: `color: white;
     padding: 10px;
     background-color: #12355B;
-    font-size: 20px;
-    position:absolute;left:0px;top:0px;`,
+    font-size: 20px;left:0px;top:0px;`,
     typeObj: 'nav',
     type: '',
   };
@@ -28,7 +27,7 @@ export class NavbarComponent implements IComponent {
   @Output() updateDataEventY= new EventEmitter<any>();
   @Input() xcanvas: any;
   @Input() ycanvas: any;
-  @Input() canvasW: any;
+  @Input() canvasWW: any;
   mousePositionXV2 = 310;
   mousePositionYV2= 110;
   theX = 0;
@@ -39,7 +38,7 @@ export class NavbarComponent implements IComponent {
     //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
     this.theX = this.xcanvas;
     this.theY = this.ycanvas;
-    this.theCanvasWidth = this.canvasW;
+    this.theCanvasWidth = this.canvasWW;
     
   }
 

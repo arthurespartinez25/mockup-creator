@@ -9,9 +9,223 @@
 
 <!-- Toolbar -->
 <!-- <app-navbar></app-navbar> -->
-<div class="content" role="main" >
+<div class="content" role="main">
   <!-- PALETTE SECTION -->
 
+  <div class="palette-div">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link active"
+          id="elements-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#elements"
+          type="button"
+          role="tab"
+          aria-controls="elements"
+          aria-selected="true"
+        >
+          Elements
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="templates-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#templates"
+          type="button"
+          role="tab"
+          aria-controls="templates"
+          aria-selected="false"
+        >
+          Templates
+        </button>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div
+        class="tab-pane fade show active"
+        id="elements"
+        role="tabpanel"
+        aria-labelledby="elements-tab"
+      >
+        <div
+          class="palette-container"
+          cdkDropListGroup
+          cdkDropList
+          cdkDropListSortingDisabled
+        >
+          <button
+            class="palette-item"
+            (click)="addComponent('nav')"
+            cdkDrag
+            (cdkDragEnded)="onDragEnded($event)"
+            (cdkDragEnded)="onDragEndedAddComponent('nav')"
+          >
+            Navbar
+          </button>
+          <button
+            class="palette-item"
+            (click)="addComponent('link')"
+            cdkDrag
+            (cdkDragEnded)="onDragEnded($event)"
+            (cdkDragEnded)="onDragEndedAddComponent('link')"
+          >
+            Link
+          </button>
+          <button
+            class="palette-item"
+            (click)="addComponent('header')"
+            cdkDrag
+            (cdkDragEnded)="onDragEnded($event)"
+            (cdkDragEnded)="onDragEndedAddComponent('header')"
+          >
+            Header
+          </button>
+          <button
+            class="palette-item"
+            (click)="addComponent('paragraph')"
+            cdkDrag
+            (cdkDragEnded)="onDragEnded($event)"
+            (cdkDragEnded)="onDragEndedAddComponent('paragraph')"
+          >
+            Paragraph
+          </button>
+          <button
+            class="palette-item"
+            (click)="addComponent('label')"
+            cdkDrag
+            (cdkDragEnded)="onDragEnded($event)"
+            (cdkDragEnded)="onDragEndedAddComponent('label')"
+          >
+            Label
+          </button>
+
+          <button
+            class="palette-item"
+            (click)="addComponent('button')"
+            cdkDrag
+            (cdkDragEnded)="onDragEnded($event)"
+            (cdkDragEnded)="onDragEndedAddComponent('button')"
+          >
+            Button
+          </button>
+
+          <button
+            class="palette-item"
+            (click)="addComponent('dropdown')"
+            cdkDrag
+            (cdkDragEnded)="onDragEnded($event)"
+            (cdkDragEnded)="onDragEndedAddComponent('dropdown')"
+          >
+            Dropdown
+          </button>
+          <button
+            class="palette-item"
+            (click)="addComponent('checkbox')"
+            cdkDrag
+            (cdkDragEnded)="onDragEnded($event)"
+            (cdkDragEnded)="onDragEndedAddComponent('checkbox')"
+          >
+            Checkbox
+          </button>
+
+          <button
+            class="palette-item"
+            (click)="addComponent('radio')"
+            cdkDrag
+            (cdkDragEnded)="onDragEnded($event)"
+            (cdkDragEnded)="onDragEndedAddComponent('radio')"
+          >
+            Radio
+          </button>
+          <button
+            class="palette-item"
+            (click)="addComponent('input')"
+            cdkDrag
+            (cdkDragEnded)="onDragEnded($event)"
+            (cdkDragEnded)="onDragEndedAddComponent('input')"
+          >
+            Input Field
+          </button>
+          <button
+            class="palette-item"
+            (click)="addComponent('textbox')"
+            cdkDrag
+            (cdkDragEnded)="onDragEnded($event)"
+            (cdkDragEnded)="onDragEndedAddComponent('textbox')"
+          >
+            Textbox
+          </button>
+          <button
+            class="palette-item"
+            (click)="addComponent('datepicker')"
+            cdkDrag
+            (cdkDragEnded)="onDragEnded($event)"
+            (cdkDragEnded)="onDragEndedAddComponent('datepicker')"
+          >
+            DatePicker
+          </button>
+          <button
+            class="palette-item"
+            (click)="addComponent('modal')"
+            cdkDrag
+            (cdkDragEnded)="onDragEnded($event)"
+            (cdkDragEnded)="onDragEndedAddComponent('modal')"
+          >
+            Modal
+          </button>
+          <button
+            class="palette-item"
+            (click)="addComponent('popup')"
+            cdkDrag
+            (cdkDragEnded)="onDragEnded($event)"
+            (cdkDragEnded)="onDragEndedAddComponent('popup')"
+            [hidden]="true"
+          >
+            Popup
+          </button>
+          <button
+            class="palette-item"
+            (click)="addComponent('img')"
+            cdkDrag
+            (cdkDragEnded)="onDragEnded($event)"
+            (cdkDragEnded)="onDragEndedAddComponent('img')"
+          >
+            Image
+          </button>
+        </div>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="templates"
+        role="tabpanel"
+        aria-labelledby="templates-tab"
+      >
+        <div
+          class="tab-pane fade show active"
+          id="elements"
+          role="tabpanel"
+          aria-labelledby="elements-tab"
+        >
+          <button class="palette-item" (click)="addComponentLogin()">
+            Login
+          </button>
+
+          <button class="palette-item" (click)="addComponentImageLabel()">
+            Image Label
+          </button>
+
+          <button class="palette-item" (click)="addComponentSearchScreen()">
+            Search Screen
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 
   <div
     id="palette-container"
     cdkDropListGroup
@@ -165,14 +379,29 @@
     </button>
     
 
-    <!-- <ul class="list-group">
-      <li class="list-group-item palette-item" (click)="createButton()">
-        Button
-      </li>
-      <li class="list-group-item palette-item">Text Input</li>
-      <li class="list-group-item palette-item">Label</li>
-    </ul> -->
-  </div>
+    <button
+      class="palette-item"
+      (click)="addComponentLogin()"
+    >
+      Login
+    </button>
+
+    <button
+      class="palette-item"
+      (click)="addComponentImageLabel()"
+    >
+      Image Label
+    </button>
+
+    <button
+      class="palette-item"
+      (click)="addComponentSearchScreen()"
+    >
+      Search Screen
+    </button>
+
+    
+  </div> -->
 
   <!-- CANVAS SECTION -->
 
@@ -192,7 +421,7 @@
         [componentList]="componentList"
         [mousePositionX]="mousePositionX"
         [mousePositionY]="mousePositionY"
-        [canvasLeft]="canvasLeft" 
+        [canvasLeft]="canvasLeft"
         [canvasTop]="canvasTop"
         [canvasW]="canvasW"
         [xCounter]="xCounter"
@@ -200,6 +429,7 @@
         (mousedown)="mouseGalawX($event)"
         (updateDataEvent2)="passData2($event)"
         (updateDataEventX)="passDataX($event)"
+        [whatComponent]="whatComponent"
       >
       </app-wrapper>
     </div>
@@ -280,6 +510,10 @@
         role="tabpanel"
         aria-labelledby="code-tab"
       >
+        <button class="btnCopy" (click)="copyMessage(htmlCode)">Copy</button>
+        <button class="btnCopy" (click)="downloadCode(htmlCode)">
+          Download
+        </button>
         <code [innerText]="htmlCode"> </code>
       </div>
     </div>

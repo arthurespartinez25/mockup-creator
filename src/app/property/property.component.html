@@ -37,6 +37,7 @@
         />
       </td>
     </tr>
+<<<<<<< HEAD
 
     <!-- start of Table Cell input -->
     <tr class="properties-table-row" *ngIf="props.typeObj == 'table'">
@@ -53,6 +54,9 @@
     </tr>
 
     <tr class="properties-table-row" *ngIf="props.typeObj == 'input'">
+=======
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'input'||props.typeObj == 'inputDrag'">
+>>>>>>> dev-components
       <th class="properties-table-header"><label>type</label></th>
       <td class="properties-table-data">
         <input
@@ -119,7 +123,7 @@
         />
       </td>
     </tr>
-    <tr class="properties-table-row" *ngIf="props.typeObj == 'textbox'">
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'textbox'||props.typeObj == 'textboxDrag'">
       <th class="properties-table-header"><label>placeholder</label></th>
       <td class="properties-table-data">
 
@@ -131,7 +135,7 @@
         />
       </td>
     </tr>
-    <tr class="properties-table-row" *ngIf="props.typeObj == 'textbox'">
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'textbox'||props.typeObj == 'textboxDrag'">
       <th class="properties-table-header"><label>rows</label></th>
       <td class="properties-table-data">
         <input
@@ -142,7 +146,7 @@
         />
       </td>
     </tr>
-    <tr class="properties-table-row" *ngIf="props.typeObj == 'textbox'">
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'textbox'||props.typeObj == 'textboxDrag'">
       <th class="properties-table-header"><label>columns</label></th>
       <td class="properties-table-data">
         <input
@@ -154,70 +158,7 @@
       </td>
     </tr>
 
-    <tr class="properties-table-row" *ngIf="props.typeObj == 'textboxDrag'">
-      <th class="properties-table-header"><label>placeholder</label></th>
-      <td class="properties-table-data">
-        <input
-          [disabled]="!this.props.id"
-          type="text"
-          [value]="props.placeholder"
-          (keyup)="placeholderChangeHandler($event)"
-        />
-      </td>
-    </tr>
-    <tr class="properties-table-row" *ngIf="props.typeObj == 'textboxDrag'">
-      <th class="properties-table-header"><label>rows</label></th>
-      <td class="properties-table-data">
-        <input
-          [disabled]="!this.props.id"
-          type="number"
-          [value]="props.rows"
-          (keyup)="rowsChangeHandler($event)"
-        />
-      </td>
-    </tr>
-    <tr class="properties-table-row" *ngIf="props.typeObj == 'textboxDrag'">
-      <th class="properties-table-header"><label>columns</label></th>
-      <td class="properties-table-data">
-        <input
-          [disabled]="!this.props.id"
-          type="number"
-          [value]="props.cols"
-          (change)="colsChangeHandler($event)"
-        />
-      </td>
-    </tr>
     
-    <tr *ngIf="props.typeObj == 'textboxDrag'">
-      <th><label>placeholder</label></th>
-      <td>
-        <input
-          type="text"
-          [value]="props.placeholder"
-          (keyup)="placeholderChangeHandler($event)"
-        />
-      </td>
-    </tr>
-    <tr *ngIf="props.typeObj == 'textboxDrag'">
-      <th><label>rows</label></th>
-      <td>
-        <input
-          type="number"
-          [value]="props.rows"
-          (keyup)="rowsChangeHandler($event)"
-        />
-      </td>
-    </tr>
-    <tr *ngIf="props.typeObj == 'textboxDrag'">
-      <th><label>columns</label></th>
-      <td>
-        <input
-          type="number"
-          [value]="props.cols"
-          (keyup)="colsChangeHandler($event)"
-        />
-      </td>
-    </tr>
 
     <tr class="properties-table-row">
       <th class="properties-table-header"><label>style</label></th>
@@ -310,6 +251,7 @@
           (keyup)="nameChangeHandler($event)"
         />
       </td>
+      
     </tr>
 
   </table>

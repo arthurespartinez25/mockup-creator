@@ -1,4 +1,5 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { CdkDragEnd } from '@angular/cdk/drag-drop';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
 
@@ -20,6 +21,47 @@ export class CheckboxDragComponent implements OnInit, IComponent {
     checked: 'true',
   };
 
+  @Output() updateDataEvent= new EventEmitter<any>();
+  @Output() updateDataEventY= new EventEmitter<any>();
+  @Input() xcanvas: any;
+  @Input() ycanvas: any;
+  @Input() xmouse: any;
+  @Input() ymouse: any;
+  @Input() whatComponent2:any;
+  mousePositionXV2 = 310;
+  mousePositionYV2= 110;
+  theX = 0;
+  theY = 0;
+  dagaX = 0;
+  dagaY = 0;
+  onetimeBool = true;
+
+  ngOnInit(): void {
+    this.theX = this.xcanvas;
+    this.theY = this.ycanvas;
+    this.dagaX = this.xmouse;
+    this.dagaY = this.ymouse;
+    if(this.whatComponent2=="LoginCheckbox")
+    {
+      this.props.value = "Remember Password";
+      this.props.style='color:green;cursor: pointer;position:sticky;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    
+    }
+    else
+    {
+      this.props.style='cursor:pointer;position:sticky;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    
+    }
+  }
+
+  onDragEnded($event: CdkDragEnd){
+    this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
+    this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
+    this.updateDataEvent.emit(this.mousePositionXV2 + this.dagaX - this.theX);
+    this.updateDataEventY.emit(this.mousePositionYV2 + this.dagaY - this.theY);
+    console.log(this.mousePositionXV2);
+    console.log(this.mousePositionYV2);
+  }
 
   constructor(canvas: ElementRef) {
     this.canvas = canvas;
@@ -50,13 +92,28 @@ export class CheckboxDragComponent implements OnInit, IComponent {
   }
 
   get htmlCode(): string {
+      let jude = this.props.style;
+      let regexLeft = /left(.+?);/;
+      let regexTop = /top(.+?);/;
+      let regexPosition = /position(.+?);/;
+      // let styleLeft = jude.match(/left(.+?);/g);
+      // let styleTop = jude.match(/top(.+?);/g);
+      // console.log(styleLeft);
+      // console.log(jude);
+
+      //let divStyle = '"style=position:absolute;left:'+this.dagaX+'px;top:'+this.dagaY+'px;"';
+
+      jude = jude.replace(regexLeft,"");
+      jude = jude.replace(regexTop,"");
+      jude = jude.replace(regexPosition,"");
+      //this.props.style = jude;
     let tmpHtmlCode = '<div';
-    tmpHtmlCode += ' class="form-check" id="' + this.props.id + '">';
+    tmpHtmlCode += ' class="form-check" id="' + this.props.id + '"style="' + this.props.style +'">';
     if (this.props.checked == "true") {
-      tmpHtmlCode +="\n" + ' <input id="'+ this.props.id + ' class="' +  this.props.class + '" type="' +  this.props.type + '" style="' + this.props.style + '" id="flexCheckDefault" checked>';
+      tmpHtmlCode +="\n" + ' <input id="'+ this.props.id + ' class="' +  this.props.class + '" type="' +  this.props.type + '" style="' + jude + '" id="flexCheckDefault" checked>';
     }
     else {
-      tmpHtmlCode +="\n" + ' <input id="'+ this.props.id + ' class="' +  this.props.class + '" type="' +  this.props.type + '" style="' + this.props.style + '" id="flexCheckDefault">';
+      tmpHtmlCode +="\n" + ' <input id="'+ this.props.id + ' class="' +  this.props.class + '" type="' +  this.props.type + '" style="' + jude + '" id="flexCheckDefault">';
     }
     tmpHtmlCode +="\n" + ' <label class="form-check-label" for="flexCheckDefault"> ' + this.props.value + ' </label>';
     tmpHtmlCode +="\n" + ' </div>';
@@ -65,7 +122,6 @@ export class CheckboxDragComponent implements OnInit, IComponent {
     return tmpHtmlCode;
   }
 
-  ngOnInit(): void {
-  }
+ 
 
 }
