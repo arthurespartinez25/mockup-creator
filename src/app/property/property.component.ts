@@ -75,7 +75,7 @@ export class PropertyComponent implements OnInit {
 
   styleChangeHandler(event: any) {
     let x = event.target.value;
-    
+
     this.props.style = event.target.value;
   }
 
@@ -97,6 +97,7 @@ export class PropertyComponent implements OnInit {
   colsChangeHandler(event: any) {
     this.props.cols = event.target.value;
   }
+
   nameChangeHandler(event: any) {
     this.props.name = event.target.value;
   }
@@ -112,4 +113,22 @@ export class PropertyComponent implements OnInit {
   checkedChangeHandler(event: any) {
     this.props.checked = event.target.value;
   }
+  /* CODE BELOW IS FOR TABLE ELEMENT */
+
+  tblRowsChangeHandler(event: any) {
+    this.props.tblRows = event.target.value;
+
+    if (this.props.updateCallback) {
+      const { updateCallback } = this.props;
+      updateCallback(this.props.tblRows, this.props.tblCols);
+    }
+  }
+  tblColsChangeHandler(event: any) {
+    this.props.tblCols = event.target.value;
+    if (this.props.updateCallback) {
+      const { updateCallback } = this.props;
+      updateCallback(this.props.tblRows, this.props.tblCols);
+    }
+  }
+  /* END OF CODE FOR TABLE ELEMENT */
 }

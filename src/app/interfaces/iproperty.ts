@@ -15,4 +15,10 @@ export interface IProperty {
   link2?: string;
   link3?: string;
   checked?: string;
+  tblRows?: number;
+  tblCols?: number;
+  tblArrayRow?: any;
+  tblArrayCol?: any;
+  tblContent?: [][];
+  updateCallback?: (row, col) => void;
 }

@@ -1,4 +1,3 @@
-
 <div id="properties">
   <div id="properties-header">
     Component Property
@@ -26,7 +25,7 @@
         />
       </td>
     </tr>
-    <tr class="properties-table-row">
+    <tr class="properties-table-row" *ngIf="props.typeObj != 'table'">
       <th class="properties-table-header"><label>value</label></th>
       <td class="properties-table-data">
         <input
@@ -37,7 +36,26 @@
         />
       </td>
     </tr>
-    <tr class="properties-table-row" *ngIf="props.typeObj == 'input'||props.typeObj == 'inputDrag'">
+
+    <!-- start of Table Cell input -->
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'table'">
+      <th class="properties-table-header"><label>Cell Value</label></th>
+      <td class="properties-table-data">
+        <input
+          [disabled]="!this.props.id"
+          type="text"
+          [value]="props.value"
+          (keyup)="valueChangeHandler($event)"
+        />
+      </td>
+      <!-- end of Table Cell input -->
+    </tr>
+
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'input'"></tr>
+    <tr
+      class="properties-table-row"
+      *ngIf="props.typeObj == 'input' || props.typeObj == 'inputDrag'"
+    >
       <th class="properties-table-header"><label>type</label></th>
       <td class="properties-table-data">
         <input
@@ -60,18 +78,24 @@
       </td>
     </tr>
 
-    <tr class="properties-table-row" *ngIf="props.typeObj == 'dropdown' || props.typeObj == 'dropdownDrag'">
+    <tr
+      class="properties-table-row"
+      *ngIf="props.typeObj == 'dropdown' || props.typeObj == 'dropdownDrag'"
+    >
       <th class="properties-table-header"><label>link 1 value</label></th>
       <td class="properties-table-data">
         <input
-            [disabled]="!this.props.id"
-            type="text"
-            [value]="props.link1"
-            (keyup)="link1ChangeHandler($event)"
-          />
+          [disabled]="!this.props.id"
+          type="text"
+          [value]="props.link1"
+          (keyup)="link1ChangeHandler($event)"
+        />
       </td>
     </tr>
-    <tr class="properties-table-row" *ngIf="props.typeObj == 'checkbox' || props.typeObj == 'checkboxDrag'">
+    <tr
+      class="properties-table-row"
+      *ngIf="props.typeObj == 'checkbox' || props.typeObj == 'checkboxDrag'"
+    >
       <th class="properties-table-header"><label>checked</label></th>
       <td class="properties-table-data">
         <input
@@ -82,7 +106,10 @@
         />
       </td>
     </tr>
-    <tr class="properties-table-row" *ngIf="props.typeObj == 'dropdown' || props.typeObj == 'dropdownDrag'">
+    <tr
+      class="properties-table-row"
+      *ngIf="props.typeObj == 'dropdown' || props.typeObj == 'dropdownDrag'"
+    >
       <th class="properties-table-header"><label>link 2 value</label></th>
       <td class="properties-table-data">
         <input
@@ -93,7 +120,10 @@
         />
       </td>
     </tr>
-    <tr class="properties-table-row" *ngIf="props.typeObj == 'dropdown' || props.typeObj == 'dropdownDrag'">
+    <tr
+      class="properties-table-row"
+      *ngIf="props.typeObj == 'dropdown' || props.typeObj == 'dropdownDrag'"
+    >
       <th class="properties-table-header"><label>link 3 value</label></th>
       <td class="properties-table-data">
         <input
@@ -104,10 +134,12 @@
         />
       </td>
     </tr>
-    <tr class="properties-table-row" *ngIf="props.typeObj == 'textbox'||props.typeObj == 'textboxDrag'">
+    <tr
+      class="properties-table-row"
+      *ngIf="props.typeObj == 'textbox' || props.typeObj == 'textboxDrag'"
+    >
       <th class="properties-table-header"><label>placeholder</label></th>
       <td class="properties-table-data">
-
         <input
           [disabled]="!this.props.id"
           type="text"
@@ -116,7 +148,10 @@
         />
       </td>
     </tr>
-    <tr class="properties-table-row" *ngIf="props.typeObj == 'textbox'||props.typeObj == 'textboxDrag'">
+    <tr
+      class="properties-table-row"
+      *ngIf="props.typeObj == 'textbox' || props.typeObj == 'textboxDrag'"
+    >
       <th class="properties-table-header"><label>rows</label></th>
       <td class="properties-table-data">
         <input
@@ -127,7 +162,10 @@
         />
       </td>
     </tr>
-    <tr class="properties-table-row" *ngIf="props.typeObj == 'textbox'||props.typeObj == 'textboxDrag'">
+    <tr
+      class="properties-table-row"
+      *ngIf="props.typeObj == 'textbox' || props.typeObj == 'textboxDrag'"
+    >
       <th class="properties-table-header"><label>columns</label></th>
       <td class="properties-table-data">
         <input
@@ -138,8 +176,6 @@
         />
       </td>
     </tr>
-
-    
 
     <tr class="properties-table-row">
       <th class="properties-table-header"><label>style</label></th>
@@ -162,7 +198,6 @@
     >
       <th class="properties-table-header"><label>data-bs-content</label></th>
       <td class="properties-table-data">
-
         <input
           [disabled]="!this.props.id"
           type="text"
@@ -177,9 +212,34 @@
             (keyup)="nameChangeHandler($event)"
           />
         </tr>
-        <tr>
-          
-        </tr>
+        <tr></tr>
+      </td>
+    </tr>
+
+    <!-- TABLE -->
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'table'">
+      <th class="properties-table-header"><label>row</label></th>
+      <td class="properties-table-data">
+        <input
+          [disabled]="!this.props.id"
+          type="number"
+          [value]="this.props.tblRows"
+          (change)="tblRowsChangeHandler($event)"
+        />
+        <tr></tr>
+      </td>
+    </tr>
+
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'table'">
+      <th class="properties-table-header"><label>column</label></th>
+      <td class="properties-table-data">
+        <input
+          [disabled]="!this.props.id"
+          type="number"
+          [value]="this.props.tblCols"
+          (change)="tblColsChangeHandler($event)"
+        />
+        <tr></tr>
       </td>
     </tr>
 
@@ -193,9 +253,7 @@
           (keyup)="nameChangeHandler($event)"
         />
       </td>
-      
     </tr>
-
   </table>
 </div>
 
