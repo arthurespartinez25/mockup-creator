@@ -74,9 +74,14 @@ export class DropdownComponent implements OnInit,IComponent {
       
       for (var i = 0; i < numLink; i++) {
         if(this.props.linkContent) {
-          console.log("dito pumasok");
-          console.log(this.props.linkContent);
-          this.props.linksArray = this.props.linkContent;
+          if(this.props.linkContent.length != numLink) {
+            this.props.linksArray.push('link' + (i+1));
+          }
+          else {
+            console.log("dito pumasok");
+            console.log(this.props.linkContent);
+            this.props.linksArray = this.props.linkContent;
+          }
         }
         else {
             this.props.linksArray.push('link' + (i+1));
@@ -100,9 +105,11 @@ export class DropdownComponent implements OnInit,IComponent {
     tmpHtmlCode += ' class="dropdown" id="' + this.props.id + '">';
     tmpHtmlCode +="\n" + ' <button class="' +  this.props.class + '" type="' +  this.props.type + '" style="' + this.props.style + '" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> ' + this.props.value + ' </button>';
     tmpHtmlCode +="\n" + ' <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">';
-    tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.link1 + '</a>';
-    tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.link2 + '</a>';
-    tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.link3 + '</a>';
+
+    for(var i=0; i<this.props.linksArray.length; i++) {
+      tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.linksArray[i] + '</a>';
+    }
+  
     tmpHtmlCode +="\n" + ' </div>';
     tmpHtmlCode +="\n" + ' </div>';
     
