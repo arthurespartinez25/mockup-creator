@@ -28,7 +28,7 @@ export class TableComponent implements OnInit, IComponent {
     //this.tblRowsArray = [];
     //this.tblColsArray = [];
     this.props.tblArrayRow = [];
-    this.props.tblArrayCol= [];
+    this.props.tblArrayCol = [];
     if (!row || !col) {
       console.warn('rows or columns are undefined');
     } else {
@@ -45,10 +45,22 @@ export class TableComponent implements OnInit, IComponent {
       for (var i = 0; i < row; i++) {
         for (var j = this.props.tblArrayRow[i].length; j < col; j++) {
           //this.tblRowsArray[i].push('data' + i + j);
-          this.props.tblArrayRow[i].push('data \"' + i + ':'+ j + '\"');
+          if (this.props.tblContent) {
+            if (
+              i < this.props.tblContent.length &&
+              j < this.props.tblContent[i].length
+            )
+              this.props.tblArrayRow[i].push(this.props.tblContent[i][j]);
+            else this.props.tblArrayRow[i].push('data "' + i + ':' + j + '"');
+          } else {
+            this.props.tblArrayRow[i].push('data "' + i + ':' + j + '"');
+          }
         }
         //console.log(this.tblRowsArray[i].toString());
       }
+
+      this.props.tblContent = this.props.tblArrayRow;
+      console.log(this.props.tblContent);
       //console.log(this.tblColsArray.toString());}
     }
     //console.log(this.tblColsArray.length);
@@ -84,12 +96,22 @@ export class TableComponent implements OnInit, IComponent {
   }
   */
 
-  
-  editTableValue = (row, col, oldvalue:string, newValue:string) => {
-    console.log("This is cell position " + row + "," + col + "\nThis is the previous Value: " + oldvalue + "\nThis is the new Value: " + newValue);
+  editTableValue = (row, col, oldvalue: string, newValue: string) => {
+    console.log(
+      'This is cell position ' +
+        row +
+        ',' +
+        col +
+        '\nThis is the previous Value: ' +
+        oldvalue +
+        '\nThis is the new Value: ' +
+        newValue
+    );
     //this.tblRowsArray[row][col] = newValue;
     this.props.tblArrayRow[row][col] = newValue;
-  }
+    this.props.tblContent = this.props.tblArrayRow;
+    console.log(this.props.tblContent);
+  };
 
   rerender() {
     this.value = '___temp____';
@@ -108,8 +130,8 @@ export class TableComponent implements OnInit, IComponent {
     type: '',
     tblCols: 5,
     tblRows: 3,
-    tblArrayCol:[],
-    tblArrayRow:[],
+    tblArrayCol: [],
+    tblArrayRow: [],
     updateCallback: this.editTableDimension,
   };
 
@@ -127,8 +149,8 @@ export class TableComponent implements OnInit, IComponent {
   tblRowsArray: any = [];
   currentRow: number;
   currentCol: number;
-  currentVal: string = "";
-  previousVal: string = "";
+  currentVal: string = '';
+  previousVal: string = '';
 
   ngOnInit(): void {
     //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);

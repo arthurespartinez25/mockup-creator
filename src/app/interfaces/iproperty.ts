@@ -19,6 +19,7 @@ export interface IProperty {
   tblCols?: number;
   tblArrayRow?: any;
   tblArrayCol?: any;
+  tblContent?: [][];
   links?: number;
   linksArray?: any;
   updateCallback?: (row, col) => void;
