@@ -416,26 +416,28 @@
       (mouseenter)="domInsideCanvas = true"
       (mouseleave)="domInsideCanvas = false"
     >
-      <app-wrapper
-        *ngFor="let component of componentList; let i = index"
-        class="wrapper"
-        (click)="clickHandler(component)"
-        [childComp]="component"
-        [canvasRef]="component.canvas"
-        [componentList]="componentList"
-        [mousePositionX]="mousePositionX"
-        [mousePositionY]="mousePositionY"
-        [canvasLeft]="canvasLeft"
-        [canvasTop]="canvasTop"
-        [canvasW]="canvasW"
-        [xCounter]="xCounter"
-        [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
-        (mousedown)="mouseGalawX($event)"
-        (updateDataEvent2)="passData2($event)"
-        (updateDataEventX)="passDataX($event)"
-        [whatComponent]="whatComponent"
-      >
-      </app-wrapper>
+      <div id="canvasBody">
+        <app-wrapper
+          *ngFor="let component of componentList; let i = index"
+          class="wrapper"
+          (click)="clickHandler(component)"
+          [childComp]="component"
+          [canvasRef]="component.canvas"
+          [componentList]="componentList"
+          [mousePositionX]="mousePositionX"
+          [mousePositionY]="mousePositionY"
+          [canvasLeft]="canvasLeft"
+          [canvasTop]="canvasTop"
+          [canvasW]="canvasW"
+          [xCounter]="xCounter"
+          [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
+          (mousedown)="mouseGalawX($event)"
+          (updateDataEvent2)="passData2($event)"
+          (updateDataEventX)="passDataX($event)"
+          [whatComponent]="whatComponent"
+        >
+        </app-wrapper>
+      </div>
     </div>
   </div>
 

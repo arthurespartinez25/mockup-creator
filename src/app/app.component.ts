@@ -531,10 +531,10 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.componentList.push(temp);
   }
 
-  getCSSStyle(style: string){
+  /*getCSSStyle(style: string){
     return this.doms.bypassSecurityTrustStyle(style);
     this.refreshCSS.next(true);
-  }
+  }*/
 
   refresh(): void{
     this._router.navigateByUrl("/refresh", {skipLocationChange:true}).then(() => {
