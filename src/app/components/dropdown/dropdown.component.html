@@ -1,4 +1,5 @@
-<div class="btn-group" [style]="props.style" [id]="props.id" cdkDrag cdkDragBoundary="#canvas" (cdkDragEnded)="onDragEnded($event)">
+<div class="btn-group" [style]="props.style" [id]="props.id" cdkDrag cdkDragBoundary="#canvas" (cdkDragEnded)="onDragEnded($event)"
+[cdkDragDisabled]="!props.draggable">
   <button [class]="props.class" [type]="props.type">{{ props.value }}</button>
   <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="visually-hidden">Toggle Dropdown</span>

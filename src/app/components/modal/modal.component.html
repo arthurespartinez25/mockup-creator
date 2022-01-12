@@ -24,6 +24,7 @@
 
 <div cdkDrag cdkDragBoundary="#canvas" [id]="props.id" class="always-on-top"
 (cdkDragEnded)="onDragEnded($event)"
+[cdkDragDisabled]="!props.draggable"
 >
   <div class="modal-dialog" >
     <div class="modal-content" [style]="props.style" >

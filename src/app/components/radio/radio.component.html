@@ -1,4 +1,5 @@
-<div class="form-check" cdkDrag cdkDragBoundary="#canvas" (cdkDragEnded)="onDragEnded($event)">
+<div class="form-check" cdkDrag cdkDragBoundary="#canvas" (cdkDragEnded)="onDragEnded($event)"
+[cdkDragDisabled]="!props.draggable">
     <div *ngIf="props.checked=='true'">
        
         <label class= "form-check-label" [style]="props.style" [for]="props.id" [ngStyle]="{

@@ -5,7 +5,8 @@ import { IProperty } from 'src/app/interfaces/iproperty';
 
 @Component({
   selector: 'app-buttonDrag',
-  template: `<button cdkDrag cdkDragBoundary="#canvas"
+  template: `<button cdkDrag cdkDragBoundary="#canvas" 
+  [cdkDragDisabled]="!props.draggable"
   (cdkDragEnded)="onDragEnded($event)" [id]="props.id" [style]="props.style" 
   [ngStyle]="{
     'position': 'fixed',

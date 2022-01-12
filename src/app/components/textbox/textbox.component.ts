@@ -9,6 +9,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
   [placeholder]="props.placeholder" [rows]="props.rows" 
   [cols]="props.cols" [value]="props.value"
   (cdkDragEnded)="onDragEnded($event)"
+  [cdkDragDisabled]="!props.draggable"
   ></textarea>`
 })
 export class TextboxComponent implements IComponent {

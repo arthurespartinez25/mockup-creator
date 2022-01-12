@@ -1,12 +1,9 @@
-<div class="imgResize" 
+<img
+        src= "{{props.value}}"
         cdkDrag cdkDragBoundary="#canvas" 
         [class]="props.class" 
         [id]="props.id" 
         [style]="props.style" 
         (cdkDragEnded)="onDragEnded($event)"
         [cdkDragDisabled]="!props.draggable" >
-    <img
-        src= "{{props.value}}"
-        style="width: 100%; height: 100%;"
-    >     
-</div>
+    

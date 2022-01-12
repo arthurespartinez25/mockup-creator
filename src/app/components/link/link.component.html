@@ -1,4 +1,5 @@
-<div cdkDrag cdkDragBoundary="#canvas" (cdkDragEnded)="onDragEnded($event)" >
+<div cdkDrag cdkDragBoundary="#canvas" (cdkDragEnded)="onDragEnded($event)" 
+[cdkDragDisabled]="!props.draggable">
     <a href="#" [id]="props.id" [style]="props.style" [class]="props.class">
         {{props.value}}
     </a>
