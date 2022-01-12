@@ -8,18 +8,19 @@ import { IProperty } from 'src/app/interfaces/iproperty';
   styleUrls: ['./dropdown.component.css']
 })
 export class DropdownComponent implements OnInit,IComponent {
+  
   canvas: ElementRef;
   props: IProperty = {
     key: '',
     id: '',
     value: 'Dropdown',
     class: 'btn btn-secondary',
-    style: 'position:absolute;left:0px;top:0px;',
+    style: '',
     typeObj: 'dropdown',
     type: 'button',
-    link1: 'Link 1',
-    link2: 'Link 2',
-    link3: 'Link 3',
+    links: 3,
+    linkValue: 'Sample',
+    linksArray:[],
   };
 
   @Output() updateDataEvent= new EventEmitter<any>();
@@ -30,6 +31,7 @@ export class DropdownComponent implements OnInit,IComponent {
   mousePositionYV2= 110;
   theX = 0;
   theY = 0;
+  links = this.props.links;
 
   ngOnInit(): void {
     //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
@@ -59,8 +61,45 @@ export class DropdownComponent implements OnInit,IComponent {
   set property(value: IProperty) {
     if (value) {
       this.props = value;
+      this.links = value.links;
+      this.editNumLinks(this.props.links);
     }
   }
+
+  editNumLinks = (numLink) => {
+    this.props.linksArray = [];
+    if (!numLink) {
+      console.warn('rows or columns are undefined');
+    } else {
+      
+      for (var i = 0; i < numLink; i++) {
+        if(this.props.linkContent) {
+          if(this.props.linkContent.length != numLink) {
+            this.props.linksArray.push('link' + (i+1));
+          }
+          else {
+            console.log("dito pumasok");
+            console.log(this.props.linkContent);
+            this.props.linksArray = this.props.linkContent;
+          }
+        }
+        else {
+            this.props.linksArray.push('link' + (i+1));
+            console.log("pasok noh? oo");
+        }
+      }
+      
+    }
+    console.log(this.props.linksArray);
+  };
+
+  editLinkValue = (index, oldvalue: string, newValue: any) => {
+    this.props.linksArray[index] = newValue;
+    this.props.linkContent = this.props.linksArray;
+    console.log(this.props.linkContent);
+    console.log(index, oldvalue, newValue);
+  };
+
   get htmlCode(): string {
     let jude = this.props.style;
     let regexLeft = /left(.+?);/;
@@ -85,9 +124,9 @@ export class DropdownComponent implements OnInit,IComponent {
     tmpHtmlCode +="\n" + ' <span class="sr-only">Toggle Dropdown</span>';
     tmpHtmlCode +="\n" + ' </button>';
     tmpHtmlCode +="\n" + ' <div class="dropdown-menu">';
-    tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.link1 + '</a>';
-    tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.link2 + '</a>';
-    tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.link3 + '</a>';
+    for(var i=0; i<this.props.linksArray.length; i++) {
+      tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.linksArray[i] + '</a>';
+    }
     tmpHtmlCode +="\n" + ' </div>';
     tmpHtmlCode +="\n" + ' </div>';
     
