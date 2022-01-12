@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { IComponent } from '../interfaces/icomponent';
 import { IProperty } from '../interfaces/iproperty';
 
@@ -20,6 +20,8 @@ export class PropertyComponent implements OnInit {
     typeObj: '',
     type: '',
   };
+  style2 = '';
+  
 
   @Input() get property(): IProperty {
     return this.props;
@@ -49,6 +51,7 @@ export class PropertyComponent implements OnInit {
     this.props = this.property;
     this.componentList = this.compList;
     this.selectedcomp = this.selectedIdx;
+    
   }
 
   deleteComponent() {
@@ -59,7 +62,9 @@ export class PropertyComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.style2 = this.props.style;
+  }
 
   idChangeHandler(event: any) {
     this.props.id = event.target.value;
@@ -75,8 +80,26 @@ export class PropertyComponent implements OnInit {
 
   styleChangeHandler(event: any) {
     let x = event.target.value;
-
-    this.props.style = event.target.value;
+    //this.props.style = event.target.value;
+    
+    let regexPosition = /position(.+?);/;
+    let regexPosition2 = /top(.+?);/;
+    let regexPosition3 = /left(.+?);/;
+    let position = 'position:fixed';
+    let position2 = this.props.style.match(regexPosition2);
+    let position3 = this.props.style.match(regexPosition3);
+    this.props.style = event.target.value+position+position2![0]+position3![0];
+    
+    
+  }
+  @ViewChild('taID') styleText!: ElementRef;
+  styleChangeHandler2(event: any) {
+    let regexPosition = /position(.+?);/;
+    let regexPosition2 = /top(.+?);/;
+    let regexPosition3 = /left(.+?);/;
+    this.style2 = this.style2.replace(regexPosition, '');
+    this.style2 = this.style2.replace(regexPosition2, '');
+    this.style2 = this.style2.replace(regexPosition3, '');
   }
 
   classChangeHandler(event: any) {

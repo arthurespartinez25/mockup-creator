@@ -167,10 +167,12 @@
           [disabled]="!this.props.id"
           name="style"
           id="taID"
-          [value]="props.style"
+          #taID
+          [value]="style2"
           cols="21"
           rows="5"
           (keyup)="styleChangeHandler($event)"
+          (click)="styleChangeHandler2($event)"
         ></textarea>
       </td>
     </tr>
