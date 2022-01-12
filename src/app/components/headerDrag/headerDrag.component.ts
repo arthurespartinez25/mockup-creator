@@ -84,7 +84,7 @@ export class HeaderDragComponent implements OnInit, IComponent {
     this.props.id = 'header' + date.toString();
   }
   get htmlCode(): string {
-    let tmpHtmlCode = '<p';
+    let tmpHtmlCode = '<h1';
     if (this.props.id.trim().length > 0) {
       tmpHtmlCode += ' id="' + this.props.id + '"';
     }
@@ -97,7 +97,7 @@ export class HeaderDragComponent implements OnInit, IComponent {
       tmpHtmlCode += ' style="' + this.props.style + '"';
     }
 
-    tmpHtmlCode += '>' + this.props.value + '</p>';
+    tmpHtmlCode += '>' + this.props.value + '</h1>';
 
     return tmpHtmlCode;
   }

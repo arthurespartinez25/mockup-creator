@@ -5,6 +5,7 @@
 
 /********************** CANVAS CSS ********************/
 
+
 #canvas-container {
   display: flex;
   flex-direction: column;
@@ -26,8 +27,16 @@
   height: 720px;
   min-width: 1280px;
   min-height: 720px;
-  background-color: white;
-  
+  background-color: white;  
+}
+
+
+#canvasBody {
+  display: grid;
+  width: 1280px;
+  height: 720px;
+  min-width: 1280px;
+  min-height: 720px;
 }
 
 .wrapper {
