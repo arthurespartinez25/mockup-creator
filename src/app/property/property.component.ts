@@ -24,12 +24,20 @@ export class PropertyComponent implements OnInit {
   
 
   @Input() get property(): IProperty {
+    
     return this.props;
   }
 
   set property(value: IProperty) {
     if (value) {
       this.props = value;
+      this.style2 = this.props.style;
+      let regexPosition = /position(.+?);/;
+      let regexPosition2 = /top(.+?);/;
+      let regexPosition3 = /left(.+?);/;
+      this.style2 = this.style2.replace(regexPosition, '');
+      this.style2 = this.style2.replace(regexPosition2, '');
+      this.style2 = this.style2.replace(regexPosition3, '');
     }
   }
 
@@ -81,11 +89,11 @@ export class PropertyComponent implements OnInit {
   styleChangeHandler(event: any) {
     let x = event.target.value;
     //this.props.style = event.target.value;
-    
+
     let regexPosition = /position(.+?);/;
     let regexPosition2 = /top(.+?);/;
     let regexPosition3 = /left(.+?);/;
-    let position = 'position:fixed';
+    let position = 'position:sticky;';
     let position2 = this.props.style.match(regexPosition2);
     let position3 = this.props.style.match(regexPosition3);
     this.props.style = event.target.value+position+position2![0]+position3![0];
