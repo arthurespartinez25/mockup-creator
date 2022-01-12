@@ -93,6 +93,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   @ViewChild('PropertyComponent') property: boolean;
   @ViewChild('canvas') canvas!: ElementRef;
+  @ViewChild('textOp') textBtn!: ElementRef;
   changeref: ChangeDetectorRef;
   constructor(
     private renderer: Renderer2,
@@ -209,6 +210,19 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     const { x, y } = event.distance;
     this.mousePositionX = offsetLeft + x;
     this.mousePositionY = offsetTop + y;
+    
+  }
+
+  onDragEndedText(event: CdkDragEnd) {
+    event.source._dragRef.reset();
+    const { offsetLeft, offsetTop } = event.source.element.nativeElement;
+    const { x, y } = event.distance;
+    let canvasLeftX = (this.textBtn.nativeElement as HTMLElement).offsetWidth;
+    let canvasTopY = (this.textBtn.nativeElement as HTMLElement).offsetTop;
+    this.mousePositionX = offsetLeft + x + canvasLeftX;
+    this.mousePositionY = offsetTop + y + canvasTopY;
+    console.log(x);
+    console.log(this.canvasLeft);
   }
 
   onDragEndedAddComponent(component: string) {

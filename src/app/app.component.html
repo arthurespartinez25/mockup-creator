@@ -74,6 +74,47 @@
           >
             Link
           </button>
+          
+          <!-- text-dropdown-menu start -->
+          <div class="palette-item text-menu" id="textOp"
+          #textOp style="padding: 1px; padding-top: 1px;"
+          >
+          <button class="text-menu-button palette-item">Text*</button>
+            <div class="text-menu-dropdown" >
+              <button
+                class="palette-item"
+                (click)="addComponent('header')"
+                cdkDrag
+                (cdkDragEnded)="onDragEndedText($event)"
+                (cdkDragEnded)="onDragEndedAddComponent('header')"
+              >
+                Header
+              </button>
+
+              <button
+                class="palette-item"
+                (click)="addComponent('paragraph')"
+                cdkDrag
+                (cdkDragEnded)="onDragEndedText($event)"
+                (cdkDragEnded)="onDragEndedAddComponent('paragraph')"
+              >
+                Paragraph
+              </button>
+
+              <button
+                class="palette-item"
+                (click)="addComponent('label')"
+                cdkDrag
+                (cdkDragEnded)="onDragEndedText($event)"
+                (cdkDragEnded)="onDragEndedAddComponent('label')"
+              >
+                Label
+              </button>
+            </div>
+          </div>
+          <!-- text-dropdown end -->
+
+          <!--
           <button
             class="palette-item"
             (click)="addComponent('header')"
@@ -101,6 +142,7 @@
           >
             Label
           </button>
+          -->
 
           <button
             class="palette-item"
@@ -254,43 +296,7 @@
       Link
     </button>
     
-    <!-- text-dropdown-menu start -->
-    <div class="palette-item text-menu" style="padding: 1px; padding-top: 1px;">
-    <button class="text-menu-button palette-item">Text*</button>
-      <div class="text-menu-dropdown">
-        <button
-          class="palette-item"
-          (click)="addComponent('header')"
-          cdkDrag
-          (cdkDragEnded)="onDragEnded($event)"
-          (cdkDragEnded)="onDragEndedAddComponent('header')"
-        >
-          Header
-        </button>
-
-        <button
-          class="palette-item"
-          (click)="addComponent('paragraph')"
-          cdkDrag
-          (cdkDragEnded)="onDragEnded($event)"
-          (cdkDragEnded)="onDragEndedAddComponent('paragraph')"
-        >
-          Paragraph
-        </button>
-
-        <button
-          class="palette-item"
-          (click)="addComponent('label')"
-          cdkDrag
-          (cdkDragEnded)="onDragEnded($event)"
-          (cdkDragEnded)="onDragEndedAddComponent('label')"
-        >
-          Label
-        </button>
-      </div>
-    </div>
-    <!-- text-dropdown end -->
-
+    
     <button
       class="palette-item"
       (click)="addComponent('button')"
