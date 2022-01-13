@@ -202,7 +202,7 @@ export class TableComponent implements OnInit, IComponent {
   get htmlCode(): string {
     let tmpHtmlCode = '<div';
     tmpHtmlCode +=
-      ' id="' + this.props.id + '" style="' + this.props.type + '">';
+      ' id="' + this.props.id + '" style="' + this.props.style + '">';
     tmpHtmlCode += '\n' + '<table class="' + this.props.class + '">';
 
     tmpHtmlCode += '\n' + '<thead>';

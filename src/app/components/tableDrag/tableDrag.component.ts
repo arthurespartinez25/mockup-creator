@@ -125,7 +125,7 @@ export class TableDragComponent implements OnInit, IComponent {
     id: '',
     value: '',
     class: 'table',
-    style: 'position:absolute;left:0px;top:0px;',
+    style: '',
     typeObj: 'tableDrag',
     type: '',
     tblCols: 5,
@@ -157,17 +157,19 @@ export class TableDragComponent implements OnInit, IComponent {
   previousVal: string = '';
 
   ngOnInit(): void {
-    //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
     this.theX = this.xcanvas;
     this.theY = this.ycanvas;
+    this.dagaX = this.xmouse;
+    this.dagaY = this.ymouse;
+    this.props.style='position:absolute;left:'+(this.xmouse-this.theX)+'px;top:'+(this.ymouse-this.theY)+'px;';
   }
 
   onDragEnded($event: any) {
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
     this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
 
-    this.updateDataEvent.emit(this.mousePositionXV2);
-    this.updateDataEventY.emit(this.mousePositionYV2);
+    this.updateDataEvent.emit(this.mousePositionXV2 + this.dagaX - this.theX);
+    this.updateDataEventY.emit(this.mousePositionYV2 + this.dagaY - this.theY);
   }
 
   constructor(canvas: ElementRef, changeDetectorRef: ChangeDetectorRef) {
@@ -206,7 +208,7 @@ export class TableDragComponent implements OnInit, IComponent {
   get htmlCode(): string {
     let tmpHtmlCode = '<div';
     tmpHtmlCode +=
-      ' id="' + this.props.id + '" style="' + this.props.type + '">';
+      ' id="' + this.props.id + '" style="' + this.props.style + '">';
     tmpHtmlCode += '\n' + '<table class="' + this.props.class + '">';
 
     tmpHtmlCode += '\n' + '<thead>';
