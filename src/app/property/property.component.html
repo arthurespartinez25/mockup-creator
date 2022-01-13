@@ -202,7 +202,7 @@
     </tr>
 
     <!-- TABLE -->
-    <tr class="properties-table-row" *ngIf="props.typeObj == 'table'">
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'table' || props.typeObj == 'tableDrag'">
       <th class="properties-table-header"><label>row</label></th>
       <td class="properties-table-data">
         <input
@@ -215,7 +215,7 @@
       </td>
     </tr>
 
-    <tr class="properties-table-row" *ngIf="props.typeObj == 'table'">
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'table' || props.typeObj == 'tableDrag'">
       <th class="properties-table-header"><label>column</label></th>
       <td class="properties-table-data">
         <input

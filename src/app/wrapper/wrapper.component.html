@@ -347,4 +347,15 @@
     [xcanvas]="xcanvas" 
     [ycanvas]="ycanvas"></app-table>
 
+  <app-tableDrag
+    [property]="child.props"
+    *ngSwitchCase="'tableDrag'"
+    (updateDataEvent)="passData($event)"
+    (updateDataEventY)="passDataY($event)"
+    [xcanvas]="xcanvas" 
+    [ycanvas]="ycanvas"
+    [xmouse]="xmouse" 
+    [ymouse]="ymouse"
+  ></app-tableDrag>
+
 </div>

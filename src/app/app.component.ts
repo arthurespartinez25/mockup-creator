@@ -46,6 +46,7 @@ import { HeaderDragComponent } from './components/headerDrag/headerDrag.componen
 import { InputDragComponent } from './components/inputDrag/inputDrag.component';
 import { LinkDragComponent } from './components/linkDrag/linkDrag.component';
 import { TableComponent } from './components/table/table.component';
+import { TableDragComponent } from './components/tableDrag/tableDrag.component';
 
 @Component({
   selector: 'app-root',
@@ -264,6 +265,9 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
         case 'link':
           temp = new LinkDragComponent(this.canvas);
+          break;
+        case 'table':
+          temp = new TableDragComponent(this.canvas, this.changeref);
           break;
         default:
           temp = new ButtonComponent(this.canvas);
