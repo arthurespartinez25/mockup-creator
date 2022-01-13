@@ -125,7 +125,7 @@ export class TableComponent implements OnInit, IComponent {
     id: '',
     value: '',
     class: 'table',
-    style: 'position:absolute;left:0px;top:0px;',
+    style: 'position:absolute;left:0px;top:0px;background-color:green;',
     typeObj: 'table',
     type: '',
     tblCols: 5,

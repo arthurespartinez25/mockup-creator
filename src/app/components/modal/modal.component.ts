@@ -32,6 +32,7 @@ export class ModalComponent implements IComponent {
     //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
     this.theX = this.xcanvas;
     this.theY = this.ycanvas;
+    
   }
 
   onDragEnded($event: any){

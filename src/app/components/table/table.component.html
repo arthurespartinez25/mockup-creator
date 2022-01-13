@@ -4,14 +4,10 @@
   (cdkDragEnded)="onDragEnded($event)"
   [id]="props.id"
   [style]="props.style"
-  [ngStyle]="{
-    position: 'absolute',
-    left: theX + 'px',
-    top: theY + 'px'
-  }"
+  
 >
   <br />
-  <table [class]="props.class">
+  <table [class]="props.class" [style]="props.style">
     <tr *ngFor="let row of this.props.tblArrayRow; let i = index" >
       <td
         *ngFor="let column of this.props.tblArrayCol"
