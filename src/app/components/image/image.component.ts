@@ -18,7 +18,6 @@ export class ImageComponent implements OnInit, IComponent {
       style: 'max-width: 600px;height: 200px;position:absolute;left:0px;top:0px;',
       typeObj: 'img',
       type: '',
-      draggable: true,
     };
 
     @Output() updateDataEvent= new EventEmitter<any>();

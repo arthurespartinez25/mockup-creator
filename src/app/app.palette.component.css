@@ -41,6 +41,7 @@
   display: inline-block;
 }
 .text-menu-dropdown{
+  pointer-events: none;
   display:inline-block;
   position:absolute;
   max-width: 100px;
@@ -57,4 +58,5 @@
 .text-menu-button:focus + .text-menu-dropdown{
   display: inline-block;
   opacity: 1;
+  pointer-events:all;
 }

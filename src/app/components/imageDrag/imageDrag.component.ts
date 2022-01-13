@@ -19,7 +19,6 @@ export class ImageDragComponent implements OnInit, IComponent {
       style: '',
       typeObj: 'imgDrag',
       type: '',
-      draggable: true,
     };
 
     @Output() updateDataEvent= new EventEmitter<any>();
