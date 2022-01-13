@@ -407,7 +407,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         'position:sticky;' +
         'left:' +
         this.mouseMoveX +
-        'px;' +
+        '%;' +
         'top:' +
         this.mouseMoveY +
         '%;' /*+

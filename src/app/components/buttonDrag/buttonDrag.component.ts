@@ -48,53 +48,55 @@ export class ButtonDragComponent implements IComponent {
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
+    let percentageX = ((this.xmouse-this.theX)/1280)*100;
+    let percentageY = ((this.ymouse-this.theY)/720)*100;
     if(this.whatComponent2=="LoginButton")
     {
       this.props.value = "Login";
-      this.props.style='position:absolute;left:'+(this.xmouse-this.theX)+'px;top:'+(this.ymouse-this.theY)+'px;'
+      this.props.style='position:absolute;left:'+percentageX+'%;top:'+percentageY+'%;'
       +'width: 20%;max-width: 270px;min-width: 220px; overflow-y: auto;background-color: blue;color: red;border-radius: 10px;'
       +'padding: 5px 10px; border: none;font-weight: bolder; font-size: x-large; margin-bottom: 5px;';
     }
     else if(this.whatComponent2 == "SearchButton")
     {
       this.props.value = "Search";
-      this.props.style='position:absolute;left:'+(this.xmouse-this.theX)+'px;top:'+(this.ymouse-this.theY)+'px;'
+      this.props.style='position:absolute;left:'+percentageX+'%;top:'+percentageY+'%;'
       +'background-color: blue;color: white;border-radius: 10px;'
       +'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
     }
     else if(this.whatComponent2 == "ClearButton")
     {
       this.props.value = "Clear";
-      this.props.style='position:absolute;left:'+(this.xmouse-this.theX)+'px;top:'+(this.ymouse-this.theY)+'px;'
+      this.props.style='position:absolute;left:'+percentageX+'%;top:'+percentageY+'%;'
       +'background-color: gray;color: white;border-radius: 10px;'
       +'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
     }
     else if(this.whatComponent2 == "HomeButton")
     {
       this.props.value = "Home";
-      this.props.style='position:absolute;left:'+(this.xmouse-this.theX)+'px;top:'+(this.ymouse-this.theY)+'px;'
+      this.props.style='position:absolute;left:'+percentageX+'%;top:'+percentageY+'%;'
       +'background-color: #ADD8E6;color: white;border-radius: 10px;'
       +'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
     }
     else if(this.whatComponent2 == "ProfileButton")
     {
       this.props.value = "Profile";
-      this.props.style='position:absolute;left:'+(this.xmouse-this.theX)+'px;top:'+(this.ymouse-this.theY)+'px;'
+      this.props.style='position:absolute;left:'+percentageX+'%;top:'+percentageY+'%;'
       +'background-color: #ADD8E6;color: white;border-radius: 10px;'
       +'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
     }
     else
     {
       this.props.value = "Button";
-      this.props.style='position:absolute;left:'+(this.xmouse-this.theX)+'px;top:'+(this.ymouse-this.theY)+'px;';
+      this.props.style='position:absolute;left:'+percentageX+'%;top:'+percentageY+'%;';
     }
   }
 
   onDragEnded($event: CdkDragEnd){
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
     this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
-    this.updateDataEvent.emit(this.mousePositionXV2 + this.dagaX - this.theX);
-    this.updateDataEventY.emit(this.mousePositionYV2 + this.dagaY - this.theY);
+    this.updateDataEvent.emit(((this.mousePositionXV2 + this.dagaX - this.theX)/1280)*100);
+    this.updateDataEventY.emit(((this.mousePositionYV2 + this.dagaY - this.theY)/720)*100);
   }
 
 
