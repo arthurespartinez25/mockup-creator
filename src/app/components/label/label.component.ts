@@ -37,9 +37,9 @@ export class LabelComponent implements OnInit, IComponent {
   onDragEnded($event: any){
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
     this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
-    
-    this.updateDataEvent.emit(this.mousePositionXV2);
-    this.updateDataEventY.emit(this.mousePositionYV2);
+
+    this.updateDataEvent.emit(((this.mousePositionXV2 - this.theX)/1280)*100);
+    this.updateDataEventY.emit(((this.mousePositionYV2 - this.theY)/720)*100);
   }
 
   constructor(canvas: ElementRef) {
@@ -48,7 +48,7 @@ export class LabelComponent implements OnInit, IComponent {
     this.props.key = date.toString();
     this.props.id = 'label' + date.toString();
    }
-  
+
    @Input() get property(): IProperty {
     return this.props;
   }

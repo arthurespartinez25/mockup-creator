@@ -8,7 +8,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
   template: `<textarea cdkDrag cdkDragBoundary="#canvas" [id]="props.id" [style]="props.style"
    [placeholder]="props.placeholder" [rows]="props.rows"
     [cols]="props.cols"
-    (cdkDragEnded)="onDragEnded($event)" 
+    (cdkDragEnded)="onDragEnded($event)"
     [ngStyle]="{
     'position': 'fixed',
     'left': dagaX + 'px',
@@ -22,7 +22,7 @@ export class TextboxDragComponent implements IComponent {
     id: '',
     value: '',
     class: '',
-    style: '',
+    style: 'resize: none;',
     typeObj: 'textboxDrag',
     type: 'textbox',
     placeholder: 'Type your text here...',
@@ -49,14 +49,16 @@ export class TextboxDragComponent implements IComponent {
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
-    this.props.style='position:absolute;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    let percentageX = ((this.xmouse-this.theX)/1280)*100;
+    let percentageY = ((this.ymouse-this.theY)/720)*100;
+    this.props.style='resize:none;position:absolute;left:'+percentageX+'%;top:'+percentageY+'%;';
   }
 
   onDragEnded($event: CdkDragEnd){
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
     this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
-    this.updateDataEvent.emit(this.mousePositionXV2 + this.dagaX - this.theX);
-    this.updateDataEventY.emit(this.mousePositionYV2 + this.dagaY - this.theY);
+    this.updateDataEvent.emit(((this.mousePositionXV2 + this.dagaX - this.theX)/1280)*100);
+    this.updateDataEventY.emit(((this.mousePositionYV2 + this.dagaY - this.theY)/720)*100);
   }
 
   constructor(canvas: ElementRef) {

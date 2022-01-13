@@ -4,9 +4,9 @@ import { IProperty } from 'src/app/interfaces/iproperty';
 
 @Component({
   selector: 'app-textbox',
-  template: `<textarea cdkDrag cdkDragBoundary="#canvas" 
-  [(ngModel)]="textInput" [id]="props.id" [style]="props.style" 
-  [placeholder]="props.placeholder" [rows]="props.rows" 
+  template: `<textarea cdkDrag cdkDragBoundary="#canvas"
+  [(ngModel)]="textInput" [id]="props.id" [style]="props.style"
+  [placeholder]="props.placeholder" [rows]="props.rows"
   [cols]="props.cols" [value]="props.value"
   (cdkDragEnded)="onDragEnded($event)"
   ></textarea>`
@@ -18,7 +18,7 @@ export class TextboxComponent implements IComponent {
     id: '',
     value: '',
     class: '',
-    style: 'position:absolute;left:0px;top:0px;',
+    style: 'position:absolute;left:0px;top:0px;resize: none;',
     typeObj: 'textbox',
     type: 'textbox',
     placeholder: 'Type your text here...',
@@ -44,9 +44,9 @@ export class TextboxComponent implements IComponent {
   onDragEnded($event: any){
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
     this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
-    
-    this.updateDataEvent.emit(this.mousePositionXV2);
-    this.updateDataEventY.emit(this.mousePositionYV2);
+
+    this.updateDataEvent.emit(((this.mousePositionXV2 - this.theX)/1280)*100);
+    this.updateDataEventY.emit(((this.mousePositionYV2 - this.theY)/720)*100);
   }
 
   constructor(canvas: ElementRef) {

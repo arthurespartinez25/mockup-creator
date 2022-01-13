@@ -40,90 +40,79 @@ export class LabelDragComponent implements OnInit, IComponent {
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
+    let percentageX = ((this.xmouse-this.theX)/1280)*100;
+    let percentageY = ((this.ymouse-this.theY)/720)*100;
     if(this.whatComponent2=="loginLabelUser")
     {
       this.props.value = "Username";
-      this.props.style='position:absolute;left:'
-    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      this.props.style='position:absolute;left:'+percentageX+'%;top:'+percentageY+'%;';
     }
     else if(this.whatComponent2=="loginLabelPass")
     {
       this.props.value = "Password";
-      this.props.style='position:absolute;left:'
-    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      this.props.style='position:absolute;left:'+percentageX+'%;top:'+percentageY+'%;';
     }
     else if(this.whatComponent2=="carrierLabel")
     {
       this.props.value="Carrier";
-      this.props.style='position:absolute;left:'
-    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      this.props.style='position:absolute;left:'+percentageX+'%;top:'+percentageY+'%;';
     }
     else if(this.whatComponent2=="invoiceFromLabel")
     {
       this.props.value="Invoice number from";
-      this.props.style='position:absolute;left:'
-    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      this.props.style='position:absolute;left:'+percentageX+'%;top:'+percentageY+'%;';
     }
     else if(this.whatComponent2=="invoiceToLabel")
     {
       this.props.value="Invoice number to";
-      this.props.style='position:absolute;left:'
-    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      this.props.style='position:absolute;left:'+percentageX+'%;top:'+percentageY+'%;';
     }
     else if(this.whatComponent2=="shippingFromLabel")
     {
       this.props.value="Shipping Date from";
-      this.props.style='position:absolute;left:'
-    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      this.props.style='position:absolute;left:'+percentageX+'%;top:'+percentageY+'%;';
     }
     else if(this.whatComponent2=="shippingToLabel")
     {
       this.props.value="Shipping Date to";
-      this.props.style='position:absolute;left:'
-    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      this.props.style='position:absolute;left:'+percentageX+'%;top:'+percentageY+'%;;';
     }
     else if(this.whatComponent2=="addressLabel")
     {
       this.props.value="Address";
-      this.props.style='position:absolute;left:'
-    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      this.props.style='position:absolute;left:'+percentageX+'%;top:'+percentageY+'%;';
     }
     else if(this.whatComponent2 == "deliveryNameLabel")
     {
       this.props.value="Delivery name";
-      this.props.style='position:absolute;left:'
-    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      this.props.style='position:absolute;left:'+percentageX+'%;top:'+percentageY+'%;';
     }
     else if(this.whatComponent2 == "remarksLabel")
     {
       this.props.value="Remarks";
-      this.props.style='position:absolute;left:'
-    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      this.props.style='position:absolute;left:'+percentageX+'%;top:'+percentageY+'%;';
     }
     else if(this.whatComponent2 == "userIDLabel")
     {
       this.props.value="UserID";
-      this.props.style='color:white;position:absolute;left:'
-    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      this.props.style='color:white;position:absolute;left:'+percentageX+'%;top:'+percentageY+'%;';
     }
     else if(this.whatComponent2 == "usernameLabel")
     {
       this.props.value="UserName";
-      this.props.style='color:white;position:absolute;left:'
-    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      this.props.style='color:white;position:absolute;left:'+percentageX+'%;top:'+percentageY+'%;';
     }
     else
     {
-      this.props.style='position:absolute;left:'
-    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      this.props.style='position:absolute;left:'+percentageX+'%;top:'+percentageY+'%;';
     }
   }
 
   onDragEnded($event: CdkDragEnd){
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
     this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
-    this.updateDataEvent.emit(this.mousePositionXV2 + this.dagaX - this.theX);
-    this.updateDataEventY.emit(this.mousePositionYV2 + this.dagaY - this.theY);
+    this.updateDataEvent.emit(((this.mousePositionXV2 + this.dagaX - this.theX)/1280)*100);
+    this.updateDataEventY.emit(((this.mousePositionYV2 + this.dagaY - this.theY)/720)*100);
   }
 
   constructor(canvas: ElementRef) {
@@ -132,7 +121,7 @@ export class LabelDragComponent implements OnInit, IComponent {
     this.props.key = date.toString();
     this.props.id = 'label' + date.toString();
    }
-  
+
    @Input() get property(): IProperty {
     return this.props;
   }
