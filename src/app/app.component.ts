@@ -381,10 +381,10 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         'position:sticky;' +
         'left:' +
         this.mouseMoveX +
-        'px;' +
+        '%;' +
         'top:' +
         this.mouseMoveY +
-        'px;' /*+
+        '%;' /*+
       "position:fixed;"*/;
       this.mouseMoveX = 0;
       this.mouseMoveY = 0;
@@ -410,7 +410,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         'px;' +
         'top:' +
         this.mouseMoveY +
-        'px;' /*+
+        '%;' /*+
       "position:fixed;"*/;
       this.mouseMoveX = 0;
       this.mouseMoveY = 0;

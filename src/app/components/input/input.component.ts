@@ -39,8 +39,8 @@ export class InputComponent implements OnInit, IComponent {
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
     this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
     
-    this.updateDataEvent.emit(this.mousePositionXV2);
-    this.updateDataEventY.emit(this.mousePositionYV2);
+    this.updateDataEvent.emit((this.mousePositionXV2/1280)*100);
+    this.updateDataEventY.emit((this.mousePositionYV2/720)*100);
   }
 
   constructor(canvas: ElementRef) {
