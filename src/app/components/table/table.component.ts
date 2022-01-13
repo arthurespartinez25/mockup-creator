@@ -125,7 +125,7 @@ export class TableComponent implements OnInit, IComponent {
     id: '',
     value: '',
     class: 'table',
-    style: 'position:absolute;left:0px;top:0px;',
+    style: 'position:absolute;left:0px;top:0px;background-color:green;',
     typeObj: 'table',
     type: '',
     tblCols: 5,
@@ -202,7 +202,7 @@ export class TableComponent implements OnInit, IComponent {
   get htmlCode(): string {
     let tmpHtmlCode = '<div';
     tmpHtmlCode +=
-      ' id="' + this.props.id + '" style="' + this.props.type + '">';
+      ' id="' + this.props.id + '" style="' + this.props.style + '">';
     tmpHtmlCode += '\n' + '<table class="' + this.props.class + '">';
 
     tmpHtmlCode += '\n' + '<thead>';
