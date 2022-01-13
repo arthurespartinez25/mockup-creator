@@ -36,11 +36,11 @@
 }
 
 
-.text-menu{
+.sub-menu{
   position:inherit;
   display: inline-block;
 }
-.text-menu-dropdown{
+.sub-menu-dropdown{
   pointer-events: none;
   display:inline-block;
   position:absolute;
@@ -48,15 +48,16 @@
   opacity: 0;
   z-index: 999;
 }
-.text-menu-dropdown button{
+.sub-menu-dropdown button{
   display: table;
 }
-.text-menu-dropdown button:hover{
+.sub-menu-dropdown button:hover{
+  pointer-events:all;
   color: #16324f;
   background-color:white;
 }
-.text-menu-button:focus + .text-menu-dropdown{
+.sub-menu-button:focus + .sub-menu-dropdown{
+  pointer-events:all;
   display: inline-block;
   opacity: 1;
-  pointer-events:all;
 }
