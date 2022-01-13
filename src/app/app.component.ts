@@ -46,6 +46,7 @@ import { HeaderDragComponent } from './components/headerDrag/headerDrag.componen
 import { InputDragComponent } from './components/inputDrag/inputDrag.component';
 import { LinkDragComponent } from './components/linkDrag/linkDrag.component';
 import { TableComponent } from './components/table/table.component';
+import { TableDragComponent } from './components/tableDrag/tableDrag.component';
 
 @Component({
   selector: 'app-root',
@@ -115,78 +116,80 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   ngAfterViewInit(): void {}
 
   addComponent(component: string) {
-    let temp: IComponent;
-    switch (component) {
-      case 'nav':
-        temp = new NavbarComponent(this.canvas);
-        break;
-      case 'link':
-        ``;
-        temp = new LinkComponent(this.canvas);
-        break;
-      case 'paragraph':
-        temp = new ParagraphComponent(this.canvas);
-        break;
+      let temp: IComponent;
+      switch (component) {
+        case 'nav':
+          temp = new NavbarComponent(this.canvas);
+          break;
+        case 'link':
+          ``;
+          temp = new LinkComponent(this.canvas);
+          break;
+        case 'paragraph':
+          temp = new ParagraphComponent(this.canvas);
+          break;
 
-      case 'button':
-        temp = new ButtonComponent(this.canvas);
-        break;
-      case 'textbox':
-        temp = new TextboxComponent(this.canvas);
-        break;
-      case 'radio':
-        temp = new RadioComponent(this.canvas);
-        break;
+        case 'button':
+          temp = new ButtonComponent(this.canvas);
+          break;
+        case 'textbox':
+          temp = new TextboxComponent(this.canvas);
+          break;
+        case 'radio':
+          temp = new RadioComponent(this.canvas);
+          break;
 
-      case 'checkbox':
-        temp = new CheckboxComponent(this.canvas);
+        case 'checkbox':
+          temp = new CheckboxComponent(this.canvas);
 
-        break;
+          break;
 
-      case 'dropdown':
-        temp = new DropdownComponent(this.canvas);
+        case 'dropdown':
+          temp = new DropdownComponent(this.canvas);
 
-        break;
-      case 'datepicker':
-        temp = new DatepickerComponent(this.canvas);
-        break;
+          break;
+        case 'datepicker':
+          temp = new DatepickerComponent(this.canvas);
+          break;
 
-      case 'modal':
-        temp = new ModalComponent(this.canvas);
-        break;
+        case 'modal':
+          temp = new ModalComponent(this.canvas);
+          break;
 
-      case 'label':
-        temp = new LabelComponent(this.canvas);
+        case 'label':
+          temp = new LabelComponent(this.canvas);
 
-        break;
-      case 'img':
-        temp = new ImageComponent(this.canvas);
-        break;
+          break;
+        case 'img':
+          temp = new ImageComponent(this.canvas);
+          break;
 
-      case 'header':
-        temp = new HeaderComponent(this.canvas);
-        break;
+        case 'header':
+          temp = new HeaderComponent(this.canvas);
+          break;
 
-      case 'input':
-        temp = new InputComponent(this.canvas);
-        break;
-      case 'popup':
-        this._popupCount++;
-        temp = new PopupComponent(this.canvas);
-        break;
-      case 'table':
-        temp = new TableComponent(this.canvas, this.changeref);
-        break;
-      default:
-        temp = new ButtonComponent(this.canvas);
-        console.log('No Component Added');
-    }
-    this.xCounter++;
-    this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
-    this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
-    this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
-    //console.log(this.canvasW+"rawr");
-    this.componentList.push(temp);
+        case 'input':
+          temp = new InputComponent(this.canvas);
+          break;
+        case 'popup':
+          this._popupCount++;
+          temp = new PopupComponent(this.canvas);
+          break;
+        case 'table':
+          temp = new TableComponent(this.canvas, this.changeref);
+          break;
+        default:
+          temp = new ButtonComponent(this.canvas);
+          console.log('No Component Added');
+      
+      }
+      this.xCounter++;
+      this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
+      this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
+      this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
+      //console.log(this.canvasW+"rawr");
+      this.componentList.push(temp);
+    
   }
   //----------------------------------------------------------------------------
 
@@ -264,6 +267,9 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
         case 'link':
           temp = new LinkDragComponent(this.canvas);
+          break;
+        case 'table':
+          temp = new TableDragComponent(this.canvas, this.changeref);
           break;
         default:
           temp = new ButtonComponent(this.canvas);
