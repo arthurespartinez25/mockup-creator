@@ -1,0 +1,28 @@
+<div cdkDrag cdkDragBoundary="#canvas" [class]="props.class" [id]="props.id" 
+[style]="props.style"
+[ngStyle]="{
+  'padding-bottom': '200px',
+  'background-color':'green',
+  'width':'10px',
+  'heigth':'1000px'
+  
+}">
+
+  <iframe [src]="url"
+title="YouTube video player" frameborder="0" 
+allow="autoplay" 
+allowfullscreen
+cdkDrag cdkDragBoundary="#canvas" dnd-droppable-iframe
+
+></iframe>
+
+</div>
+<button md-button (click)="updateSrc()"  id="first" class="top-link"
+[ngStyle]="{
+    'position': 'fixed',
+    'left': 500 + 'px',
+    'top': 500 + 'px'
+  }">First</button>
+
+
+    

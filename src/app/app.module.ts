@@ -25,6 +25,7 @@ import { LinkDragComponent } from './components/linkDrag/linkDrag.component';
 import { ParagraphDragComponent } from './components/paragraphDrag/paragraphDrag.component';
 import { PopupDragComponent } from './components/popupDrag/popupDrag.component';
 import { TableDragComponent } from './components/tableDrag/tableDrag.component';
+import { YoutubeDragComponent } from './components/youtubeDrag/youtubeDrag.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,8 @@ import { TableDragComponent } from './components/tableDrag/tableDrag.component';
     InputDragComponent,
     LinkDragComponent,
     TableDragComponent,
+    YoutubeDragComponent,
+    
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule, FormsModule],
   providers: [DragDropModule, AppComponent],

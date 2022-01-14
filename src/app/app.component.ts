@@ -34,6 +34,8 @@ import { HeaderDragComponent } from './components/headerDrag/headerDrag.componen
 import { InputDragComponent } from './components/inputDrag/inputDrag.component';
 import { LinkDragComponent } from './components/linkDrag/linkDrag.component';
 import { TableDragComponent } from './components/tableDrag/tableDrag.component';
+import { YoutubeDragComponent } from './components/youtubeDrag/youtubeDrag.component';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -84,7 +86,8 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   constructor(
     private renderer: Renderer2,
     private drag: DragDrop,
-    changeDetectorRef: ChangeDetectorRef
+    changeDetectorRef: ChangeDetectorRef,
+    public sanitizer: DomSanitizer
   ) {
     this.changeref = changeDetectorRef;
   }
@@ -167,8 +170,12 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         case 'table':
           temp = new TableDragComponent(this.canvas, this.changeref);
           break;
+        case 'youtube':
+          temp = new YoutubeDragComponent(this.canvas, this.sanitizer);
+          break;
         default:
           temp = new ButtonDragComponent(this.canvas);
+          
       
       }
       this.xCounter++;
@@ -260,6 +267,9 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
           break;
         case 'table':
           temp = new TableDragComponent(this.canvas, this.changeref);
+          break;
+        case 'youtube':
+          temp = new YoutubeDragComponent(this.canvas, this.sanitizer);
           break;
         default:
           temp = new ButtonDragComponent(this.canvas);

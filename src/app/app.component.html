@@ -204,6 +204,15 @@
             >
             Table
           </button>
+          <button 
+          class="palette-item" 
+          (click)="addComponent('youtube')"
+          cdkDrag
+          (cdkDragEnded)="onDragEnded($event)"
+          (cdkDragEnded)="onDragEndedAddComponent('youtube')"
+          >
+          Youtube
+        </button>
         </div>
       </div>
       <div
