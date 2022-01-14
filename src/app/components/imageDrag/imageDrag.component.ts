@@ -41,25 +41,23 @@ export class ImageDragComponent implements OnInit, IComponent {
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
-    let percentageX = ((this.xmouse-this.theX)/1280)*100; 
-    let percentageY = ((this.ymouse-this.theY)/720)*100;
     if(this.whatComponent2=="sampleImage")
     {
       this.props.value = "https://dlcdnrog.asus.com/rog/media/1610273282904.jpg";
-      this.props.style='position:absolute;left:'+percentageX+'%;top:'+percentageY+'%';
+      this.props.style='position:absolute;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
     else
     {
       this.props.value = "https://mdbootstrap.com/img/new/standard/city/047.jpg";
-      this.props.style='max-width: 600px;height: 200px;position:absolute;left:'+percentageX+'%;top:'+percentageY+'%';
+      this.props.style='max-width: 600px;height: 200px;position:absolute;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
     }
   }
 
   onDragEnded($event: CdkDragEnd){
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
     this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
-    this.updateDataEvent.emit(((this.mousePositionXV2 + this.dagaX - this.theX)/1280)*100);
-    this.updateDataEventY.emit(((this.mousePositionYV2 + this.dagaY - this.theY)/720)*100);
+    this.updateDataEvent.emit(this.mousePositionXV2 + this.dagaX - this.theX);
+    this.updateDataEventY.emit(this.mousePositionYV2 + this.dagaY - this.theY);
   }
 
     constructor(canvas: ElementRef) {
