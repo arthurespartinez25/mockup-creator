@@ -13,11 +13,11 @@ import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
 
 @Component({
-  selector: 'app-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.css'],
+  selector: 'app-tableDrag',
+  templateUrl: './tableDrag.component.html',
+  styleUrls: ['./tableDrag.component.css'],
 })
-export class TableComponent implements OnInit, IComponent {
+export class TableDragComponent implements OnInit, IComponent {
   canvas: ElementRef;
   ref: ChangeDetectorRef;
   value = '';
@@ -125,8 +125,8 @@ export class TableComponent implements OnInit, IComponent {
     id: '',
     value: '',
     class: 'table',
-    style: 'position:absolute;left:0px;top:0px;',
-    typeObj: 'table',
+    style: '',
+    typeObj: 'tableDrag',
     type: '',
     tblCols: 5,
     tblRows: 3,
@@ -139,10 +139,14 @@ export class TableComponent implements OnInit, IComponent {
   @Output() updateDataEventY = new EventEmitter<any>();
   @Input() xcanvas: any;
   @Input() ycanvas: any;
+  @Input() xmouse: any;
+  @Input() ymouse: any;
   mousePositionXV2 = 310;
-  mousePositionYV2 = 110;
+  mousePositionYV2= 110;
   theX = 0;
   theY = 0;
+  dagaX = 0;
+  dagaY = 0;
   tblCols = this.props.tblCols;
   tblRows = this.props.tblRows;
   tblColsArray: any = [];
@@ -153,17 +157,19 @@ export class TableComponent implements OnInit, IComponent {
   previousVal: string = '';
 
   ngOnInit(): void {
-    //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
     this.theX = this.xcanvas;
     this.theY = this.ycanvas;
+    this.dagaX = this.xmouse;
+    this.dagaY = this.ymouse;
+    this.props.style='position:absolute;left:'+(this.xmouse-this.theX)+'px;top:'+(this.ymouse-this.theY)+'px;';
   }
 
   onDragEnded($event: any) {
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
     this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
 
-    this.updateDataEvent.emit(this.mousePositionXV2);
-    this.updateDataEventY.emit(this.mousePositionYV2);
+    this.updateDataEvent.emit(this.mousePositionXV2 + this.dagaX - this.theX);
+    this.updateDataEventY.emit(this.mousePositionYV2 + this.dagaY - this.theY);
   }
 
   constructor(canvas: ElementRef, changeDetectorRef: ChangeDetectorRef) {
@@ -202,7 +208,7 @@ export class TableComponent implements OnInit, IComponent {
   get htmlCode(): string {
     let tmpHtmlCode = '<div';
     tmpHtmlCode +=
-      ' id="' + this.props.id + '" style="' + this.props.type + '">';
+      ' id="' + this.props.id + '" style="' + this.props.style + '">';
     tmpHtmlCode += '\n' + '<table class="' + this.props.class + '">';
 
     tmpHtmlCode += '\n' + '<thead>';

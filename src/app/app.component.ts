@@ -15,16 +15,9 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http'
 import { IComponent } from './interfaces/icomponent';
-import { ButtonComponent } from './components/button/button.component';
-import { PopupComponent } from './components/popup/popup.component';
-import { TextboxComponent } from './components/textbox/textbox.component';
+
 import { IProperty } from './interfaces/iproperty';
-import { DatepickerComponent } from './components/datepicker/datepicker.component';
-import { ImageComponent } from './components/image/image.component';
-import { LabelComponent } from './components/label/label.component';
-import { RadioComponent } from './components/radio/radio.component';
-import { CheckboxComponent } from './components/checkbox/checkbox.component';
-import { DropdownComponent } from './components/dropdown/dropdown.component';
+
 import { ButtonDragComponent } from './components/buttonDrag/buttonDrag.component';
 import { LabelDragComponent } from './components/labelDrag/labelDrag.component';
 import { CheckboxDragComponent } from './components/checkboxDrag/checkboxDrag.component';
@@ -34,12 +27,7 @@ import { RadioDragComponent } from './components/radioDrag/radioDrag.component';
 import { TextboxDragComponent } from './components/textboxDrag/textboxDrag.component';
 import { PopupDragComponent } from './components/popupDrag/popupDrag.component';
 
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { ModalComponent } from './components/modal/modal.component';
-import { InputComponent } from './components/input/input.component';
-import { HeaderComponent } from './components/header/header.component';
-import { LinkComponent } from './components/link/link.component';
-import { ParagraphComponent } from './components/paragraph/paragraph.component';
+
 import { FormArray } from '@angular/forms';
 import { ParagraphDragComponent } from './components/paragraphDrag/paragraphDrag.component';
 import { NavbarDragComponent } from './components/navbarDrag/navbarDrag.component';
@@ -51,7 +39,7 @@ import { LinkDragComponent } from './components/linkDrag/linkDrag.component';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
 
-import { TableComponent } from './components/table/table.component';
+import { TableDragComponent } from './components/tableDrag/tableDrag.component';
 
 @Component({
   selector: 'app-root',
@@ -135,78 +123,83 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   ngAfterViewInit(): void {}
 
   addComponent(component: string) {
-    let temp: IComponent;
-    switch (component) {
-      case 'nav':
-        temp = new NavbarComponent(this.canvas);
-        break;
-      case 'link':
-        ``;
-        temp = new LinkComponent(this.canvas);
-        break;
-      case 'paragraph':
-        temp = new ParagraphComponent(this.canvas);
-        break;
+      let temp: IComponent;
+      switch (component) {
+        case 'button':
+          temp = new ButtonDragComponent(this.canvas);
+          break;
+        case 'label':
+          temp = new LabelDragComponent(this.canvas);
+          break;
+        case 'checkbox':
+          temp = new CheckboxDragComponent(this.canvas);
+          break;
 
-      case 'button':
-        temp = new ButtonComponent(this.canvas);
-        break;
-      case 'textbox':
-        temp = new TextboxComponent(this.canvas);
-        break;
-      case 'radio':
-        temp = new RadioComponent(this.canvas);
-        break;
+        case 'dropdown':
+          temp = new DropdownDragComponent(this.canvas);
 
-      case 'checkbox':
-        temp = new CheckboxComponent(this.canvas);
+          break;
 
-        break;
+        case 'img':
+          temp = new ImageDragComponent(this.canvas);
+          break;
 
-      case 'dropdown':
-        temp = new DropdownComponent(this.canvas);
+        case 'radio':
+          temp = new RadioDragComponent(this.canvas);
+          break;
 
-        break;
-      case 'datepicker':
-        temp = new DatepickerComponent(this.canvas);
-        break;
+        case 'textbox':
+          temp = new TextboxDragComponent(this.canvas);
+          break;
 
-      case 'modal':
-        temp = new ModalComponent(this.canvas);
-        break;
+        case 'popup':
+          this._popupCount++;
+          temp = new PopupDragComponent(this.canvas);
+          break;
 
-      case 'label':
-        temp = new LabelComponent(this.canvas);
+        case 'paragraph':
+          temp = new ParagraphDragComponent(this.canvas);
+          break;
 
-        break;
-      case 'img':
-        temp = new ImageComponent(this.canvas);
-        break;
+        case 'nav':
+          temp = new NavbarDragComponent(this.canvas);
+          break;
 
-      case 'header':
-        temp = new HeaderComponent(this.canvas);
-        break;
+        case 'modal':
+          temp = new ModalDragComponent(this.canvas);
+          break;
 
-      case 'input':
-        temp = new InputComponent(this.canvas);
-        break;
-      case 'popup':
-        this._popupCount++;
-        temp = new PopupComponent(this.canvas);
-        break;
-      case 'table':
-        temp = new TableComponent(this.canvas, this.changeref);
-        break;
-      default:
-        temp = new ButtonComponent(this.canvas);
-        console.log('No Component Added');
-    }
-    this.xCounter++;
-    this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
-    this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
-    this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
-    //console.log(this.canvasW+"rawr");
-    this.componentList.push(temp);
+        case 'datepicker':
+          temp = new DatepickerDragComponent(this.canvas);
+          break;
+
+        case 'header':
+          temp = new HeaderDragComponent(this.canvas);
+          break;
+
+        case 'input':
+          temp = new InputDragComponent(this.canvas);
+          break;
+
+        case 'link':
+          temp = new LinkDragComponent(this.canvas);
+          break;
+        case 'table':
+          temp = new TableDragComponent(this.canvas, this.changeref);
+          break;
+        default:
+          temp = new ButtonDragComponent(this.canvas);
+      
+      }
+      this.xCounter++;
+      this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
+      this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
+      this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
+      this.mousePositionX = this.canvasLeft ;
+      this.mousePositionY = this.canvasTop;
+      //console.log(this.canvasW+"rawr");
+      this.componentList.push(temp);
+    
   }
   //----------------------------------------------------------------------------
 
@@ -320,8 +313,11 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         case 'link':
           temp = new LinkDragComponent(this.canvas);
           break;
+        case 'table':
+          temp = new TableDragComponent(this.canvas, this.changeref);
+          break;
         default:
-          temp = new ButtonComponent(this.canvas);
+          temp = new ButtonDragComponent(this.canvas);
       }
       this.xCounter++;
       console.log(this.xCounter);
@@ -440,10 +436,10 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         'position:sticky;' +
         'left:' +
         this.mouseMoveX +
-        'px;' +
+        '%;' +
         'top:' +
         this.mouseMoveY +
-        'px;' /*+
+        '%;' /*+
       "position:fixed;"*/;
       this.mouseMoveX = 0;
       this.mouseMoveY = 0;
@@ -469,7 +465,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         'px;' +
         'top:' +
         this.mouseMoveY +
-        'px;' /*+
+        '%;' /*+
       "position:fixed;"*/;
       this.mouseMoveX = 0;
       this.mouseMoveY = 0;
@@ -555,6 +551,9 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.mousePositionX = this.canvasLeft + 450;
       this.mousePositionY = this.canvasTop + 350;
       this.componentList.push(temp);
+    }, 1);
+    setTimeout(() => {
+      this.whatComponent = '';
     }, 1);
   }
   addComponentImageLabel() {
@@ -782,6 +781,9 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.mousePositionX = this.canvasLeft + 965;
       this.mousePositionY = this.canvasTop + 500;
       this.componentList.push(temp);
+    }, 1);
+    setTimeout(() => {
+      this.whatComponent = '';
     }, 1);
   }
 

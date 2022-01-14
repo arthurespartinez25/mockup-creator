@@ -250,7 +250,13 @@
           >
             Image
           </button>
-          <button class="palette-item" (click)="addComponent('table')">
+          <button 
+            class="palette-item" 
+            (click)="addComponent('table')"
+            cdkDrag
+            (cdkDragEnded)="onDragEnded($event)"
+            (cdkDragEnded)="onDragEndedAddComponent('table')"
+            >
             Table
           </button>
         </div>

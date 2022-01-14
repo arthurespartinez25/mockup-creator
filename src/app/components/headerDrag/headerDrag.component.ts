@@ -51,19 +51,21 @@ export class HeaderDragComponent implements OnInit, IComponent {
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
+    let percentageX = ((this.xmouse-this.theX)/1280)*100; 
+    let percentageY = ((this.ymouse-this.theY)/720)*100;
     if(this.whatComponent2=="loginHeader")
     {
       this.props.value = "Login123";
-      this.props.style='color:blue;position:absolute;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      this.props.style='color:blue;position:absolute;left:'+percentageX+'%;top:'+percentageY+'%;';
     }
     else if(this.whatComponent2=="searchHeader")
     {
       this.props.value = "error message to reflect here";
-      this.props.style = 'color:red;position:absolute;font-size: medium;left:' +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      this.props.style = 'color:red;position:absolute;font-size: medium;left:'+percentageX+'%;top:'+percentageY+'%;';
     }
     else
     {
-      this.props.style='width:300px;color:red;position:absolute;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      this.props.style='width:300px;color:red;position:absolute;left:'+percentageX+'%;top:'+percentageY+'%;';
     }
     
   }
@@ -71,8 +73,8 @@ export class HeaderDragComponent implements OnInit, IComponent {
   onDragEnded($event: CdkDragEnd){
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
     this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
-    this.updateDataEvent.emit(this.mousePositionXV2 + this.dagaX - this.theX);
-    this.updateDataEventY.emit(this.mousePositionYV2 + this.dagaY - this.theY);
+    this.updateDataEvent.emit(((this.mousePositionXV2 + this.dagaX - this.theX)/1280)*100);
+    this.updateDataEventY.emit(((this.mousePositionYV2 + this.dagaY - this.theY)/720)*100);
   }
 
   ngAfterViewInit(){}

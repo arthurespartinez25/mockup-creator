@@ -18,9 +18,9 @@ export class DropdownDragComponent implements OnInit,IComponent {
     style: '',
     typeObj: 'dropdownDrag',
     type: 'button',
-    link1: 'Link 1',
-    link2: 'Link 2',
-    link3: 'Link 3',
+    links: 3,
+    linkValue: 'Sample',
+    linksArray:[],
   };
 
   @Output() updateDataEvent= new EventEmitter<any>();
@@ -36,20 +36,23 @@ export class DropdownDragComponent implements OnInit,IComponent {
   dagaX = 0;
   dagaY = 0;
   onetimeBool = true;
+  links = this.props.links;
 
   ngOnInit(): void {
     this.theX = this.xcanvas;
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
-    this.props.style='position:sticky;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+    let percentageX = ((this.xmouse-this.theX)/1280)*100; 
+    let percentageY = ((this.ymouse-this.theY)/720)*100;
+    this.props.style='position:sticky;left:'+percentageX+'%;top:'+percentageY+'%;';
   }
 
   onDragEnded($event: CdkDragEnd){
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
     this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
-    this.updateDataEvent.emit(this.mousePositionXV2 + this.dagaX - this.theX);
-    this.updateDataEventY.emit(this.mousePositionYV2 + this.dagaY - this.theY);
+    this.updateDataEvent.emit(((this.mousePositionXV2 + this.dagaX - this.theX)/1280)*100);
+    this.updateDataEventY.emit(((this.mousePositionYV2 + this.dagaY - this.theY)/720)*100);
     console.log(this.mousePositionXV2);
     console.log(this.mousePositionYV2);
   }
@@ -68,8 +71,44 @@ export class DropdownDragComponent implements OnInit,IComponent {
   set property(value: IProperty) {
     if (value) {
       this.props = value;
+      this.links = value.links;
+      this.editNumLinks(this.props.links);
     }
   }
+
+  editNumLinks = (numLink) => {
+    this.props.linksArray = [];
+    if (!numLink) {
+      console.warn('rows or columns are undefined');
+    } else {
+      
+      for (var i = 0; i < numLink; i++) {
+        if(this.props.linkContent) {
+          if(this.props.linkContent.length != numLink) {
+            this.props.linksArray.push('link' + (i+1));
+          }
+          else {
+            console.log("dito pumasok");
+            console.log(this.props.linkContent);
+            this.props.linksArray = this.props.linkContent;
+          }
+        }
+        else {
+            this.props.linksArray.push('link' + (i+1));
+            console.log("pasok noh? oo");
+        }
+      }
+      
+    }
+    console.log(this.props.linksArray);
+  };
+
+  editLinkValue = (index, oldvalue: string, newValue: any) => {
+    this.props.linksArray[index] = newValue;
+    this.props.linkContent = this.props.linksArray;
+    console.log(this.props.linkContent);
+    console.log(index, oldvalue, newValue);
+  };
   
   get htmlCode(): string {
     let jude = this.props.style;
@@ -95,9 +134,9 @@ export class DropdownDragComponent implements OnInit,IComponent {
     tmpHtmlCode +="\n" + ' <span class="sr-only">Toggle Dropdown</span>';
     tmpHtmlCode +="\n" + ' </button>';
     tmpHtmlCode +="\n" + ' <div class="dropdown-menu">';
-    tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.link1 + '</a>';
-    tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.link2 + '</a>';
-    tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.link3 + '</a>';
+    for(var i=0; i<this.props.linksArray.length; i++) {
+      tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.linksArray[i] + '</a>';
+    }
     tmpHtmlCode +="\n" + ' </div>';
     tmpHtmlCode +="\n" + ' </div>';
     

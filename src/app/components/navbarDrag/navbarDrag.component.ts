@@ -22,7 +22,7 @@ export class NavbarDragComponent implements OnInit, IComponent {
     typeObj: 'navDrag',
     type: '',
   };
-  
+
   @Input() canvasWW: any;
   @Output() updateDataEvent= new EventEmitter<any>();
   @Output() updateDataEventY= new EventEmitter<any>();
@@ -47,25 +47,26 @@ export class NavbarDragComponent implements OnInit, IComponent {
     this.theCanvasWidth = this.canvasWW;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
+    let percentageX = ((this.xmouse-this.theX)/1280)*100;
+    let percentageY = ((this.ymouse-this.theY)/720)*100;
     if(this.whatComponent2 == "searchNavbar")
     {
       this.props.value = "AWS";
-      this.props.style='color: white;padding: 10px;background-color: #12355B;font-size: 20px;left:'
-    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      this.props.style='width: 100%; color: white;padding: 10px;background-color: #12355B;font-size: 20px;left:'
+    +percentageX+'%;top:'+percentageY+'%;';
     }
     else
     {
-      this.props.style='color: white;padding: 10px;background-color: #12355B;font-size: 20px;left:'
-    +(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      this.props.style='position:absolute;width: 100%; color: white;padding: 10px;background-color: #12355B;font-size: 20px;left:0%;top:'+percentageY+'%;';
     }
   }
 
   onDragEnded($event: any){
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
     this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
-    
-    this.updateDataEvent.emit(this.mousePositionXV2 + this.dagaX - this.theX);
-    this.updateDataEventY.emit(this.mousePositionYV2 + this.dagaY - this.theY);
+
+    this.updateDataEvent.emit(0);
+    this.updateDataEventY.emit(((this.mousePositionYV2 + this.dagaY - this.theY)/720)*100);
     console.log(this.theCanvasWidth);
   }
 
