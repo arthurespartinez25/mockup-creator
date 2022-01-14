@@ -12,16 +12,9 @@ import {
   ViewChild,
 } from '@angular/core';
 import { IComponent } from './interfaces/icomponent';
-import { ButtonComponent } from './components/button/button.component';
-import { PopupComponent } from './components/popup/popup.component';
-import { TextboxComponent } from './components/textbox/textbox.component';
+
 import { IProperty } from './interfaces/iproperty';
-import { DatepickerComponent } from './components/datepicker/datepicker.component';
-import { ImageComponent } from './components/image/image.component';
-import { LabelComponent } from './components/label/label.component';
-import { RadioComponent } from './components/radio/radio.component';
-import { CheckboxComponent } from './components/checkbox/checkbox.component';
-import { DropdownComponent } from './components/dropdown/dropdown.component';
+
 import { ButtonDragComponent } from './components/buttonDrag/buttonDrag.component';
 import { LabelDragComponent } from './components/labelDrag/labelDrag.component';
 import { CheckboxDragComponent } from './components/checkboxDrag/checkboxDrag.component';
@@ -31,12 +24,7 @@ import { RadioDragComponent } from './components/radioDrag/radioDrag.component';
 import { TextboxDragComponent } from './components/textboxDrag/textboxDrag.component';
 import { PopupDragComponent } from './components/popupDrag/popupDrag.component';
 
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { ModalComponent } from './components/modal/modal.component';
-import { InputComponent } from './components/input/input.component';
-import { HeaderComponent } from './components/header/header.component';
-import { LinkComponent } from './components/link/link.component';
-import { ParagraphComponent } from './components/paragraph/paragraph.component';
+
 import { FormArray } from '@angular/forms';
 import { ParagraphDragComponent } from './components/paragraphDrag/paragraphDrag.component';
 import { NavbarDragComponent } from './components/navbarDrag/navbarDrag.component';
@@ -45,7 +33,6 @@ import { DatepickerDragComponent } from './components/datepickerDrag/datepickerD
 import { HeaderDragComponent } from './components/headerDrag/headerDrag.component';
 import { InputDragComponent } from './components/inputDrag/inputDrag.component';
 import { LinkDragComponent } from './components/linkDrag/linkDrag.component';
-import { TableComponent } from './components/table/table.component';
 import { TableDragComponent } from './components/tableDrag/tableDrag.component';
 
 @Component({
@@ -118,75 +105,78 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   addComponent(component: string) {
       let temp: IComponent;
       switch (component) {
-        case 'nav':
-          temp = new NavbarComponent(this.canvas);
-          break;
-        case 'link':
-          ``;
-          temp = new LinkComponent(this.canvas);
-          break;
-        case 'paragraph':
-          temp = new ParagraphComponent(this.canvas);
-          break;
-
         case 'button':
-          temp = new ButtonComponent(this.canvas);
+          temp = new ButtonDragComponent(this.canvas);
           break;
-        case 'textbox':
-          temp = new TextboxComponent(this.canvas);
+        case 'label':
+          temp = new LabelDragComponent(this.canvas);
           break;
-        case 'radio':
-          temp = new RadioComponent(this.canvas);
-          break;
-
         case 'checkbox':
-          temp = new CheckboxComponent(this.canvas);
-
+          temp = new CheckboxDragComponent(this.canvas);
           break;
 
         case 'dropdown':
-          temp = new DropdownComponent(this.canvas);
+          temp = new DropdownDragComponent(this.canvas);
 
           break;
-        case 'datepicker':
-          temp = new DatepickerComponent(this.canvas);
+
+        case 'img':
+          temp = new ImageDragComponent(this.canvas);
+          break;
+
+        case 'radio':
+          temp = new RadioDragComponent(this.canvas);
+          break;
+
+        case 'textbox':
+          temp = new TextboxDragComponent(this.canvas);
+          break;
+
+        case 'popup':
+          this._popupCount++;
+          temp = new PopupDragComponent(this.canvas);
+          break;
+
+        case 'paragraph':
+          temp = new ParagraphDragComponent(this.canvas);
+          break;
+
+        case 'nav':
+          temp = new NavbarDragComponent(this.canvas);
           break;
 
         case 'modal':
-          temp = new ModalComponent(this.canvas);
+          temp = new ModalDragComponent(this.canvas);
           break;
 
-        case 'label':
-          temp = new LabelComponent(this.canvas);
-
-          break;
-        case 'img':
-          temp = new ImageComponent(this.canvas);
+        case 'datepicker':
+          temp = new DatepickerDragComponent(this.canvas);
           break;
 
         case 'header':
-          temp = new HeaderComponent(this.canvas);
+          temp = new HeaderDragComponent(this.canvas);
           break;
 
         case 'input':
-          temp = new InputComponent(this.canvas);
+          temp = new InputDragComponent(this.canvas);
           break;
-        case 'popup':
-          this._popupCount++;
-          temp = new PopupComponent(this.canvas);
+
+        case 'link':
+          temp = new LinkDragComponent(this.canvas);
           break;
         case 'table':
-          temp = new TableComponent(this.canvas, this.changeref);
+          temp = new TableDragComponent(this.canvas, this.changeref);
           break;
         default:
-          temp = new ButtonComponent(this.canvas);
-          console.log('No Component Added');
+          temp = new ButtonDragComponent(this.canvas);
       
       }
       this.xCounter++;
       this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
       this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
       this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
+      this.mousePositionX = this.canvasLeft ;
+      this.mousePositionY = this.canvasTop;
       //console.log(this.canvasW+"rawr");
       this.componentList.push(temp);
     
@@ -272,7 +262,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
           temp = new TableDragComponent(this.canvas, this.changeref);
           break;
         default:
-          temp = new ButtonComponent(this.canvas);
+          temp = new ButtonDragComponent(this.canvas);
       }
       this.xCounter++;
       console.log(this.xCounter);
