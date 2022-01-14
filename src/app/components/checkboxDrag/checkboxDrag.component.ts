@@ -41,24 +41,24 @@ export class CheckboxDragComponent implements OnInit, IComponent {
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
+    let percentageX = ((this.xmouse-this.theX)/1280)*100;
+    let percentageY = ((this.ymouse-this.theY)/720)*100;
     if(this.whatComponent2=="LoginCheckbox")
     {
       this.props.value = "Remember Password";
-      this.props.style='color:green;cursor: pointer;position:sticky;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
-    
+      this.props.style='color:green;cursor: pointer;position:sticky;left:'+percentageX+'%;top:'+percentageY+'%';
     }
     else
     {
-      this.props.style='cursor:pointer;position:sticky;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
-    
+      this.props.style='color:green;cursor: pointer;position:sticky;left:'+percentageX+'%;top:'+percentageY+'%';
     }
   }
 
   onDragEnded($event: CdkDragEnd){
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
     this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
-    this.updateDataEvent.emit(this.mousePositionXV2 + this.dagaX - this.theX);
-    this.updateDataEventY.emit(this.mousePositionYV2 + this.dagaY - this.theY);
+    this.updateDataEvent.emit(((this.mousePositionXV2 + this.dagaX - this.theX)/1280)*100);
+    this.updateDataEventY.emit(((this.mousePositionYV2 + this.dagaY - this.theY)/720)*100);
     console.log(this.mousePositionXV2);
     console.log(this.mousePositionYV2);
   }
