@@ -377,10 +377,10 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         'position:sticky;' +
         'left:' +
         this.mouseMoveX +
-        'px;' +
+        '%;' +
         'top:' +
         this.mouseMoveY +
-        'px;' /*+
+        '%;' /*+
       "position:fixed;"*/;
       this.mouseMoveX = 0;
       this.mouseMoveY = 0;
@@ -406,7 +406,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         'px;' +
         'top:' +
         this.mouseMoveY +
-        'px;' /*+
+        '%;' /*+
       "position:fixed;"*/;
       this.mouseMoveX = 0;
       this.mouseMoveY = 0;
@@ -492,6 +492,9 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.mousePositionX = this.canvasLeft + 450;
       this.mousePositionY = this.canvasTop + 350;
       this.componentList.push(temp);
+    }, 1);
+    setTimeout(() => {
+      this.whatComponent = '';
     }, 1);
   }
   addComponentImageLabel() {
@@ -690,6 +693,9 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.mousePositionX = this.canvasLeft + 965;
       this.mousePositionY = this.canvasTop + 500;
       this.componentList.push(temp);
+    }, 1);
+    setTimeout(() => {
+      this.whatComponent = '';
     }, 1);
   }
 
