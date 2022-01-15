@@ -51,6 +51,7 @@ export class YoutubeDragComponent implements OnInit, IComponent {
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
+    console.log(this.dagaX+"     "+this.dagaY);
     if(this.whatComponent2=="sampleImage")
     {
       this.props.value = "https://dlcdnrog.asus.com/rog/media/1610273282904.jpg";
@@ -58,9 +59,9 @@ export class YoutubeDragComponent implements OnInit, IComponent {
     }
     else
     {
-      this.props.value = 'https://www.youtube.com/embed/DrLYL9F3WV4?autoplay=1';
+      this.props.value = 'https://www.youtube.com/embed/qY7rpWA-D4w?autoplay=1';
       this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value);
-      this.props.style='width:300px;height: 200px;position:absolute;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      this.props.style='position:absolute;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;width:300px;height: 200px;';
     }
   }
 
@@ -84,15 +85,24 @@ export class YoutubeDragComponent implements OnInit, IComponent {
     }
   
     get htmlCode(): string {
-      let tmpHtmlCode = '<img';
+      let tmpHtmlCode = '<iframe';
       tmpHtmlCode += ' class="' + this.props.class + '" id="' + this.props.id + '" type="' +  this.props.type + 
-      '" style="' + this.props.style + '" src = " ' + this.props.value + '"> </img>';
+      '" style="' + this.props.style + '" src = " ' + this.props.value +
+      ' title="YouTube video player" frameborder="0" allow="autoplay"  allowfullscreen dnd-droppable-iframe'+ '"> </iframe>';
       
       return tmpHtmlCode;
     }
 
     updateSrc()
     {
+      
+      let regexPosition = /https(.+?)"/;
+      let link:any = null;
+      link = this.props.value.match(regexPosition);
+      //link = link!.slice(0, -1);
+      link[0] = link[0].slice(0, -1); 
+      this.props.value = link[0];
+      console.log(link);
       this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value);
     }
 
