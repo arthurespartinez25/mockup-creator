@@ -1,6 +1,11 @@
 /********************** IMG CSS ********************/
 
-.img-rounded {
-    max-width: 600px;
-    height: 200px;
-  }
+.example-handle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: red;
+  cursor: move;
+  width: 24px;
+  height: 24px;
+}
