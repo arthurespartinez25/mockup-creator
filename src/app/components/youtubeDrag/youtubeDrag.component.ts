@@ -32,6 +32,7 @@ export class YoutubeDragComponent implements OnInit, IComponent {
     // this.props.value = link[0];
     // this.url = this.sanitizer.bypassSecurityTrustResourceUrl(link[0]);
     // console.log(this.url);
+    console.log("gumagana");
     this.updateSrc();
     document.getElementById('btn')?.click;
   }
@@ -59,6 +60,7 @@ export class YoutubeDragComponent implements OnInit, IComponent {
   theY = 0;
   dagaX = 0;
   dagaY = 0;
+  pops = "dito";
   onetimeBool = true;
   
 
@@ -119,6 +121,7 @@ export class YoutubeDragComponent implements OnInit, IComponent {
        this.props.value = link[0];
        console.log(link);
       this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value);
+      this.pops = this.props.value;
     }
     // updateSrc2(value)
     // {
