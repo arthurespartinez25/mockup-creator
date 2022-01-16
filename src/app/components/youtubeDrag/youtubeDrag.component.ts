@@ -19,7 +19,22 @@ export class YoutubeDragComponent implements OnInit, IComponent {
     this.props.id = 'youtube' + date.toString();
     
    }
+
   canvas: ElementRef;
+  url: SafeResourceUrl;
+
+  updateSrc2 = (rawr) => {
+    // let regexPosition = /https(.+?)"/;
+    // let link:any = null;
+    // link = rawr.match(regexPosition);
+    // //link = link!.slice(0, -1);
+    // link[0] = link[0].slice(0, -1); 
+    // this.props.value = link[0];
+    // this.url = this.sanitizer.bypassSecurityTrustResourceUrl(link[0]);
+    // console.log(this.url);
+    this.updateSrc();
+    document.getElementById('btn')?.click;
+  }
     props: IProperty = {
       key: '',
       id: '',
@@ -28,6 +43,7 @@ export class YoutubeDragComponent implements OnInit, IComponent {
       style: '',
       typeObj: 'youtubeDrag',
       type: '',
+      linkSend: this.updateSrc2,
     };
 
   @Output() updateDataEvent= new EventEmitter<any>();
@@ -44,7 +60,7 @@ export class YoutubeDragComponent implements OnInit, IComponent {
   dagaX = 0;
   dagaY = 0;
   onetimeBool = true;
-  url: SafeResourceUrl;
+  
 
   ngOnInit(): void {
     this.theX = this.xcanvas;
@@ -95,16 +111,28 @@ export class YoutubeDragComponent implements OnInit, IComponent {
 
     updateSrc()
     {
-      
-      let regexPosition = /https(.+?)"/;
-      let link:any = null;
-      link = this.props.value.match(regexPosition);
-      //link = link!.slice(0, -1);
-      link[0] = link[0].slice(0, -1); 
-      this.props.value = link[0];
-      console.log(link);
+       let regexPosition = /https(.+?)"/;
+       let link:any = null;
+       link = this.props.value.match(regexPosition);
+       //link = link!.slice(0, -1);
+       link[0] = link[0].slice(0, -1); 
+       this.props.value = link[0];
+       console.log(link);
       this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value);
     }
+    // updateSrc2(value)
+    // {
+    //   let regexPosition = /https(.+?)"/;
+    //   let link:any = null;
+    //   link = value.match(regexPosition);
+    //   //link = link!.slice(0, -1);
+    //   link[0] = link[0].slice(0, -1); 
+    //   console.log(link[0])
+    //   //this.props.value = link[0];
+    //   console.log(link);
+    //   this.url = this.sanitizer.bypassSecurityTrustResourceUrl(link[0]);
+    // }
+    
 
     
 }

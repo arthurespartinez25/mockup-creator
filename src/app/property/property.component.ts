@@ -80,6 +80,12 @@ export class PropertyComponent implements OnInit {
 
   valueChangeHandler(event: any) {
     this.props.value = event.target.value;
+    if (event.code === "Enter" && this.props.typeObj =="youtubeDrag") {  //checks whether the pressed key is "Enter"
+      if (this.props.linkSend) {
+        const { linkSend } = this.props;
+        linkSend(this.props.value);
+      }
+  }
   }
 
   typeChangeHandler(event: any) {

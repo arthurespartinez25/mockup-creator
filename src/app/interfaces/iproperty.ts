@@ -25,4 +25,5 @@ export interface IProperty {
   linkValue?: string;
   linkContent?: [];
   updateCallback?: (row, col) => void;
+  linkSend?: (link) => void;
 }

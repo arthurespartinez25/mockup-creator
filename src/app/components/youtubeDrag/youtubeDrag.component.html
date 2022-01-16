@@ -12,7 +12,8 @@
     <path d="M0 0h24v24H0z" fill="none"></path>
   </svg>
 </div>
-  <iframe cdkDrag cdkDragBoundary="#canvas" [src]="url"
+  <iframe id="fra"
+  #fra cdkDrag cdkDragBoundary="#canvas" [src]="url"
   [style]="props.style"
 title="YouTube video player" frameborder="0" 
 allow="autoplay" 
@@ -27,12 +28,14 @@ allowfullscreen dnd-droppable-iframe
 
 
 </div> 
-<button md-button (click)="updateSrc()"  id="first" class="top-link"
+ <button id="btn"
+ #btn md-button (click)="updateSrc()"  id="first" class="top-link"
 [ngStyle]="{
     'position': 'fixed',
     'left': 500 + 'px',
     'top': 500 + 'px'
   }">Update</button>
+  {{url}}
 
 
     
