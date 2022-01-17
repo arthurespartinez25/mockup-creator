@@ -19,6 +19,7 @@ export class PropertyComponent implements OnInit {
     style: '',
     typeObj: '',
     type: '',
+    draggable: true,
   };
   style2 = '';
   
@@ -80,6 +81,20 @@ export class PropertyComponent implements OnInit {
 
   valueChangeHandler(event: any) {
     this.props.value = event.target.value;
+    /*let newValue =event.target.value;
+    console.log(newValue);
+    if (newValue.length > 10 ){
+      var chunks = newValue.toString();
+      let textValueArray = chunks.match(/(.|[\r\n]){1,10}/g);
+      console.log(textValueArray);
+      let newTextValue = new Array;
+      for(let i=0; i<textValueArray.length; i++){
+        newTextValue[i] += textValueArray[i].toString() + " \n";
+        //this.props.value += textValue.toString() + "\n";
+        //console.log(newTextValue.toString());
+      };
+      this.props.value = newTextValue.toString();
+    }*/
   }
 
   typeChangeHandler(event: any) {
@@ -141,6 +156,11 @@ export class PropertyComponent implements OnInit {
   checkedChangeHandler(event: any) {
     this.props.checked = event.target.value;
   }
+  enableDragging(event: any) {
+    this.props.draggable = !this.props.draggable;
+    //console.log(this.props.draggable);
+  }
+  
   /* CODE BELOW IS FOR TABLE ELEMENT */
 
   tblRowsChangeHandler(event: any) {

@@ -19,7 +19,6 @@
         <input
           [disabled]="!this.props.id"
           type="text"
-          [id]="props.id"
           [value]="props.id"
           (keyup)="idChangeHandler($event)"
         />
@@ -36,7 +35,18 @@
         />
       </td>
     </tr>
-
+    <tr class="properties-table-row">
+      <th class="properties-table-header"><label>draggable</label></th>
+      <td class="properties-table-data">
+        <input
+          [disabled]="!this.props.id"
+          type="checkbox"
+          [checked]="this.props.draggable"
+          (change)="enableDragging($event)"
+        />
+      </td>
+    </tr>
+    
     <!-- start of Table Cell input -->
     <tr class="properties-table-row" *ngIf="props.typeObj == 'table'">
       <th class="properties-table-header"><label>Cell Value</label></th>

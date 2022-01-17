@@ -1,4 +1,5 @@
-<label cdkDrag cdkDragBoundary="#canvas" [id]="props.id" [style]="props.style" (cdkDragEnded)="onDragEnded($event)" [ngStyle]="{
+<label cdkDrag cdkDragBoundary="#canvas" [id]="props.id" [style]="props.style" (cdkDragEnded)="onDragEnded($event)"
+[cdkDragDisabled]="!props.draggable"  [ngStyle]="{
   'position': 'sticky',
   'left': (dagaX-theX) + 'px',
   'top': (dagaY-theY) + 'px'

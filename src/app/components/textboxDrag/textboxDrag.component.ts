@@ -9,6 +9,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
    [placeholder]="props.placeholder" [rows]="props.rows"
     [cols]="props.cols"
     (cdkDragEnded)="onDragEnded($event)" 
+    [cdkDragDisabled]="!props.draggable"
     [ngStyle]="{
     'position': 'sticky',
     'left': (dagaX-theX) + 'px',

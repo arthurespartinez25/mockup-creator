@@ -9,6 +9,7 @@
 
 <!-- Toolbar -->
 <!-- <app-navbar></app-navbar> -->
+
 <div class="content" role="main">
   <!-- PALETTE SECTION -->
 
@@ -55,7 +56,7 @@
           cdkDropListGroup
           cdkDropList
           cdkDropListSortingDisabled
-        >
+          >
           <button
             class="palette-item"
             (click)="addComponent('nav')"
@@ -72,6 +73,44 @@
           >
             Link
           </button>
+          
+          <!-- text-dropdown-menu start -->
+          <div class="palette-item sub-menu" id="subMenuItem"
+          #subMenuItem style="padding: 0px; padding-top: 0px;"
+          >
+            <button class="sub-menu-button palette-item">Text*</button>
+            <div class="sub-menu-dropdown" >
+              <button
+                class="palette-item"
+                (click)="addComponent('header')"
+                cdkDrag
+                (cdkDragEnded)="onDragEndedAddComponent($event,'header')"
+              >
+                Header
+              </button>
+
+              <button
+                class="palette-item"
+                (click)="addComponent('paragraph')"
+                cdkDrag
+                (cdkDragEnded)="onDragEndedAddComponent($event,'paragraph')"
+              >
+                Paragraph
+              </button>
+
+              <button
+                class="palette-item"
+                (click)="addComponent('label')"
+                cdkDrag
+                (cdkDragEnded)="onDragEndedAddComponent($event,'label')"
+              >
+                Label
+              </button>
+            </div>
+          </div>
+          <!-- text-dropdown end -->
+
+          <!--
           <button
             class="palette-item"
             (click)="addComponent('header')"
@@ -96,70 +135,81 @@
           >
             Label
           </button>
+          -->
+          <!-- input-dropdown-menu start -->
+          <div class="palette-item sub-menu" id="subMenuItem"
+            #subMenuItem style="padding: 0px; padding-top: 0px;"
+            >
+            <button class="sub-menu-button palette-item">Input*</button>
+            <div class="sub-menu-dropdown" >
+              <button
+                class="palette-item"
+                (click)="addComponent('button')"
+                cdkDrag
+                (cdkDragEnded)="onDragEndedAddComponent($event,'button')"
+              >
+                Button
+              </button>
+
+              <button
+                class="palette-item"
+                (click)="addComponent('dropdown')"
+                cdkDrag
+                (cdkDragEnded)="onDragEndedAddComponent($event,'dropdown')"
+              >
+                Dropdown
+              </button>
+              <button
+                class="palette-item"
+                (click)="addComponent('checkbox')"
+                cdkDrag
+                (cdkDragEnded)="onDragEndedAddComponent($event,'checkbox')"
+              >
+                Checkbox
+              </button>
+
+              <button
+                class="palette-item"
+                (click)="addComponent('radio')"
+                cdkDrag
+                (cdkDragEnded)="onDragEndedAddComponent($event,'radio')"
+              >
+                Radio
+              </button>
+              <button
+                class="palette-item"
+                (click)="addComponent('input')"
+                cdkDrag
+                (cdkDragEnded)="onDragEndedAddComponent($event,'input')"
+              >
+                Input Field
+              </button>
+              <button
+                class="palette-item"
+                (click)="addComponent('textbox')"
+                cdkDrag
+                (cdkDragEnded)="onDragEndedAddComponent($event,'textbox')"
+              >
+                Textbox
+              </button>
+              <button
+                class="palette-item"
+                (click)="addComponent('datepicker')"
+                cdkDrag
+                (cdkDragEnded)="onDragEndedAddComponent($event,'datepicker')"
+              >
+                DatePicker
+              </button>
+            </div>
+          </div>
+
+          <!-- input-dropdown-menu end -->
 
           <button
-            class="palette-item"
-            (click)="addComponent('button')"
-            cdkDrag
-            (cdkDragEnded)="onDragEndedAddComponent($event,'button')"
-          >
-            Button
-          </button>
-
-          <button
-            class="palette-item"
-            (click)="addComponent('dropdown')"
-            cdkDrag
-            (cdkDragEnded)="onDragEndedAddComponent($event,'dropdown')"
-          >
-            Dropdown
-          </button>
-          <button
-            class="palette-item"
-            (click)="addComponent('checkbox')"
-            cdkDrag
-            (cdkDragEnded)="onDragEndedAddComponent($event,'checkbox')"
-          >
-            Checkbox
-          </button>
-
-          <button
-            class="palette-item"
-            (click)="addComponent('radio')"
-            cdkDrag
-            (cdkDragEnded)="onDragEndedAddComponent($event,'radio')"
-          >
-            Radio
-          </button>
-          <button
-            class="palette-item"
-            (click)="addComponent('input')"
-            cdkDrag
-            (cdkDragEnded)="onDragEndedAddComponent($event,'input')"
-          >
-            Input Field
-          </button>
-          <button
-            class="palette-item"
-            (click)="addComponent('textbox')"
-            cdkDrag
-            (cdkDragEnded)="onDragEndedAddComponent($event,'textbox')"
-          >
-            Textbox
-          </button>
-          <button
-            class="palette-item"
-            (click)="addComponent('datepicker')"
-            cdkDrag
-            (cdkDragEnded)="onDragEndedAddComponent($event,'datepicker')"
-          >
-            DatePicker
-          </button>
-          <button
-            class="palette-item"
-            (click)="addComponent('modal')"
-            cdkDrag
-            (cdkDragEnded)="onDragEndedAddComponent($event,'modal')"
+          class="palette-item"
+          (click)="addComponent('modal')"
+          cdkDrag
+          (cdkDragEnded)="onDragEndedAddComponent($event,'modal')"
           >
             Modal
           </button>
@@ -218,184 +268,6 @@
     </div>
   </div>
 
-  <!-- 
-  <div
-    id="palette-container"
-    cdkDropListGroup
-    cdkDropList
-    cdkDropListSortingDisabled
-  >
-    <button
-      class="palette-item"
-      (click)="addComponent('nav')"
-      cdkDrag
-      (cdkDragEnded)="onDragEnded($event)"
-      (cdkDragEnded)="onDragEndedAddComponent('nav')"
-    >
-      Navbar
-    </button>
-    <button
-      class="palette-item"
-      (click)="addComponent('link')"
-      cdkDrag
-      (cdkDragEnded)="onDragEnded($event)"
-      (cdkDragEnded)="onDragEndedAddComponent('link')"
-    >
-      Link
-    </button>
-    <button
-      class="palette-item"
-      (click)="addComponent('header')"
-      cdkDrag
-      (cdkDragEnded)="onDragEnded($event)"
-      (cdkDragEnded)="onDragEndedAddComponent('header')"
-    >
-      Header
-    </button>
-    <button
-      class="palette-item"
-      (click)="addComponent('paragraph')"
-      cdkDrag
-      (cdkDragEnded)="onDragEnded($event)"
-      (cdkDragEnded)="onDragEndedAddComponent('paragraph')"
-    >
-      Paragraph
-    </button>
-    <button
-      class="palette-item"
-      (click)="addComponent('label')"
-      cdkDrag
-      (cdkDragEnded)="onDragEnded($event)"
-      (cdkDragEnded)="onDragEndedAddComponent('label')"
-    >
-      Label
-    </button>
-
-    <button
-      class="palette-item"
-      (click)="addComponent('button')"
-      cdkDrag
-      (cdkDragEnded)="onDragEnded($event)"
-      (cdkDragEnded)="onDragEndedAddComponent('button')"
-    >
-      Button
-    </button>
-
-    <button
-      class="palette-item"
-      (click)="addComponent('dropdown')"
-      cdkDrag
-      (cdkDragEnded)="onDragEnded($event)"
-      (cdkDragEnded)="onDragEndedAddComponent('dropdown')"
-    >
-      Dropdown
-    </button>
-    <button
-      class="palette-item"
-      (click)="addComponent('checkbox')"
-      cdkDrag
-      (cdkDragEnded)="onDragEnded($event)"
-      (cdkDragEnded)="onDragEndedAddComponent('checkbox')"
-    >
-      Checkbox
-    </button>
-
-    <button
-      class="palette-item"
-      (click)="addComponent('radio')"
-      cdkDrag
-      (cdkDragEnded)="onDragEnded($event)"
-      (cdkDragEnded)="onDragEndedAddComponent('radio')"
-    >
-      Radio
-    </button>
-    <button
-      class="palette-item"
-      (click)="addComponent('input')"
-      cdkDrag
-      (cdkDragEnded)="onDragEnded($event)"
-      (cdkDragEnded)="onDragEndedAddComponent('input')"
-    >
-      Input Field
-    </button>
-    <button
-      class="palette-item"
-      (click)="addComponent('textbox')"
-      cdkDrag
-      (cdkDragEnded)="onDragEnded($event)"
-      (cdkDragEnded)="onDragEndedAddComponent('textbox')"
-    >
-      Textbox
-    </button>
-    <button
-      class="palette-item"
-      (click)="addComponent('datepicker')"
-      cdkDrag
-      (cdkDragEnded)="onDragEnded($event)"
-      (cdkDragEnded)="onDragEndedAddComponent('datepicker')"
-    >
-      DatePicker
-    </button>
-    <button
-      class="palette-item"
-      (click)="addComponent('modal')"
-      cdkDrag
-      (cdkDragEnded)="onDragEnded($event)"
-      (cdkDragEnded)="onDragEndedAddComponent('modal')"
-    >
-      Modal
-    </button>
-    <button
-      class="palette-item"
-      (click)="addComponent('popup')"
-      cdkDrag
-      (cdkDragEnded)="onDragEnded($event)"
-      (cdkDragEnded)="onDragEndedAddComponent('popup')"
-      [hidden]="true"
-    >
-      Popup
-    </button>
-    <button
-      class="palette-item"
-      (click)="addComponent('img')"
-      cdkDrag
-      (cdkDragEnded)="onDragEnded($event)"
-      (cdkDragEnded)="onDragEndedAddComponent('img')"
-    >
-      Image
-    </button>
-    <button
-      class="palette-item"
-      (click)="addComponent('table')"
-    >
-      Table
-    </button>
-    
-
-    <button
-      class="palette-item"
-      (click)="addComponentLogin()"
-    >
-      Login
-    </button>
-
-    <button
-      class="palette-item"
-      (click)="addComponentImageLabel()"
-    >
-      Image Label
-    </button>
-
-    <button
-      class="palette-item"
-      (click)="addComponentSearchScreen()"
-    >
-      Search Screen
-    </button>
-
-    
-  </div> -->
-
   <!-- CANVAS SECTION -->
 
   <div id="canvas-container">
@@ -405,26 +277,28 @@
       (mouseenter)="domInsideCanvas = true"
       (mouseleave)="domInsideCanvas = false"
     >
-      <app-wrapper
-        *ngFor="let component of componentList; let i = index"
-        class="wrapper"
-        (click)="clickHandler(component)"
-        [childComp]="component"
-        [canvasRef]="component.canvas"
-        [componentList]="componentList"
-        [mousePositionX]="mousePositionX"
-        [mousePositionY]="mousePositionY"
-        [canvasLeft]="canvasLeft"
-        [canvasTop]="canvasTop"
-        [canvasW]="canvasW"
-        [xCounter]="xCounter"
-        [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
-        (mousedown)="mouseGalawX($event)"
-        (updateDataEvent2)="passData2($event)"
-        (updateDataEventX)="passDataX($event)"
-        [whatComponent]="whatComponent"
-      >
-      </app-wrapper>
+      <div id="canvasBody">
+        <app-wrapper
+          *ngFor="let component of componentList; let i = index"
+          class="wrapper"
+          (click)="clickHandler(component)"
+          [childComp]="component"
+          [canvasRef]="component.canvas"
+          [componentList]="componentList"
+          [mousePositionX]="mousePositionX"
+          [mousePositionY]="mousePositionY"
+          [canvasLeft]="canvasLeft"
+          [canvasTop]="canvasTop"
+          [canvasW]="canvasW"
+          [xCounter]="xCounter"
+          [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
+          (mousedown)="mouseGalawX($event)"
+          (updateDataEvent2)="passData2($event)"
+          (updateDataEventX)="passDataX($event)"
+          [whatComponent]="whatComponent"
+        >
+        </app-wrapper>
+      </div>
     </div>
   </div>
 
@@ -495,7 +369,37 @@
         role="tabpanel"
         aria-labelledby="css-tab"
       >
-        <textarea name="css-textarea" id="css-textarea"></textarea>
+        <h3 
+        style="background-color: #2e9c6b; margin: 0" 
+        (click)="addAllCSSRule(cssTextArea.value)"
+        (click)="cssReceiveMessage()">Save CSS</h3>
+        <!--
+        <h3
+        style="background-color: #a83241; margin: 0" 
+        (click)="deleteCSSRule(cssTextArea.value)"
+        (click)="cssReceiveMessage()">Delete CSS Rule</h3>
+        -->
+        <textarea 
+        style="margin: 0; width: 100%;" 
+        cols="30" 
+        rows="5"
+        #cssTextArea
+        name="css-textarea" id="css-textarea"
+        ></textarea>
+        
+      <!-- CSS Code
+        <textarea 
+        style="margin: 0" 
+        cols="30" 
+        rows="5"
+        name="css-textarea" id="css-textarea"
+        [innerHTML]="style"></textarea>
+        <!!-- include this on the textarea above if need be.
+        (keyup)="cssReceiveMessage($event)"
+        (keyup)="refresh()"
+        -->
+        <!--<a routerLink="/refresh">Testing</a> ->->
+      -->
       </div>
       <div
         class="tab-pane fade"
@@ -520,4 +424,6 @@
 <!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
-<router-outlet></router-outlet>
+<!--<router-outlet></router-outlet> -->
+
+

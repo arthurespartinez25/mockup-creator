@@ -35,6 +35,19 @@ export class WrapperComponent implements OnInit {
   jude=false;
   whatComponent2 = "";
 
+
+  /*
+  @Input() get wrapperCSS(): CSSStyleSheet {
+    return this.wrapperStylesheet;
+  }
+
+  set wrapperCSS(wrapperDocument: CSSStyleSheet) {
+    if (wrapperDocument) {
+    this.sendWrapperStyleSheet(this.wrapperStylesheet);
+    }
+  }
+  */
+
   @Input() get childComp(): IComponent {
     return this.child;
   }
