@@ -274,6 +274,8 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
         case 'img':
           temp = new ImageDragComponent(this.canvas);
+          canvasLeftX = 0;
+          canvasTopY = 0;
           break;
 
         case 'radio':
@@ -291,6 +293,8 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         case 'popup':
           this._popupCount++;
           temp = new PopupDragComponent(this.canvas);
+          canvasLeftX = 0;
+          canvasTopY = 0;
           break;
 
         case 'paragraph':
@@ -301,10 +305,14 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
         case 'nav':
           temp = new NavbarDragComponent(this.canvas);
+          canvasLeftX = 0;
+          canvasTopY = 0;
           break;
 
         case 'modal':
           temp = new ModalDragComponent(this.canvas);
+          canvasLeftX = 0;
+          canvasTopY = 0;
           break;
 
         case 'datepicker':
@@ -327,12 +335,18 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
         case 'link':
           temp = new LinkDragComponent(this.canvas);
+          canvasLeftX = 0;
+          canvasTopY = 0;
           break;
         case 'table':
           temp = new TableDragComponent(this.canvas, this.changeref);
+          canvasLeftX = 0;
+          canvasTopY = 0;
           break;
         default:
           temp = new ButtonDragComponent(this.canvas);
+          canvasLeftX = 0;
+          canvasTopY = 0;
       }
       
     this.mousePositionX = offsetLeft + x + canvasLeftX;

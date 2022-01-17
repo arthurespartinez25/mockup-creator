@@ -64,7 +64,7 @@ export class NavbarDragComponent implements OnInit, IComponent {
     }
     else
     {
-      this.props.style='position:absolute;width: 100%; color: white;padding: 10px;background-color: #12355B;font-size: 20px;left:0%;top:'+this.percentageY+'%;';
+      this.props.style='position:absolute;width:'+this.theCanvasWidth+ 'color: white;padding: 10px;background-color: #12355B;font-size: 20px;left:0%;top:'+this.percentageY+'%;';
     }
     }, 1);
     

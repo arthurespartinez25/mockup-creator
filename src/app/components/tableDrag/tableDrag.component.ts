@@ -169,7 +169,7 @@ export class TableDragComponent implements OnInit, IComponent {
   ngAfterViewInit()
   {
     setTimeout(() => {
-      this.props.style='position:absolute;left:'+(this.xmouse-this.theX)+'px;top:'+(this.ymouse-this.theY)+'px;';
+      this.props.style='position:sticky;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
     }, 1);
     
   }
