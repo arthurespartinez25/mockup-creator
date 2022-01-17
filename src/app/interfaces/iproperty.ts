@@ -15,6 +15,7 @@ export interface IProperty {
   link2?: string;
   link3?: string;
   checked?: string;
+  draggable?: boolean;
   tblRows?: number;
   tblCols?: number;
   tblArrayRow?: any;

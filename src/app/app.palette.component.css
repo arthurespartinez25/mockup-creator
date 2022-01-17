@@ -34,3 +34,30 @@
   background-color: white;
   border: #16324f solid 1px;
 }
+
+
+.sub-menu{
+  position:inherit;
+  display: inline-block;
+}
+.sub-menu-dropdown{
+  pointer-events: none;
+  display:inline-block;
+  position:absolute;
+  max-width: 100px;
+  opacity: 0;
+  z-index: 999;
+}
+.sub-menu-dropdown button{
+  display: table;
+}
+.sub-menu-dropdown button:hover{
+  pointer-events:all;
+  color: #16324f;
+  background-color:white;
+}
+.sub-menu-button:focus + .sub-menu-dropdown{
+  pointer-events:all;
+  display: inline-block;
+  opacity: 1;
+}
