@@ -18,6 +18,7 @@ export class LinkDragComponent implements OnInit, IComponent {
     style: 'text-decoration: none;',
     typeObj: 'linkDrag',
     type: '',
+    href: '#',
   };
 
   @Output() updateDataEvent= new EventEmitter<any>();
@@ -70,6 +71,11 @@ export class LinkDragComponent implements OnInit, IComponent {
   
   get htmlCode(): string {
     let tmpHtmlCode = '<a';
+    if(this.props.href != undefined){
+      if(this.props.href?.trim().length > 0){
+      tmpHtmlCode += ' href="' + this.props.href + '"';
+      }
+    }
     if (this.props.id.trim().length > 0) {
       tmpHtmlCode += ' id="' + this.props.id + '"';
     }
