@@ -244,25 +244,31 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     event.source._dragRef.reset();
     const { offsetLeft, offsetTop } = event.source.element.nativeElement;
     const { x, y } = event.distance;
-    let canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement).offsetWidth;
-    let canvasTopY = (this.subMenuItem.nativeElement as HTMLElement).offsetTop;
-    this.mousePositionX = offsetLeft + x + canvasLeftX;
-    this.mousePositionY = offsetTop + y + canvasTopY;
+    let canvasLeftX = 0;
+    let canvasTopY = 0;
     if (this.domInsideCanvas == true) {
       let temp: IComponent;
       switch (component) {
         case 'button':
           temp = new ButtonDragComponent(this.canvas);
+          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement).offsetWidth;
+          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement).offsetTop;
           break;
         case 'label':
           temp = new LabelDragComponent(this.canvas);
+          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement).offsetWidth;
+          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement).offsetTop;
           break;
         case 'checkbox':
           temp = new CheckboxDragComponent(this.canvas);
+          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement).offsetWidth;
+          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement).offsetTop;
           break;
 
         case 'dropdown':
           temp = new DropdownDragComponent(this.canvas);
+          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement).offsetWidth;
+          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement).offsetTop;
 
           break;
 
@@ -272,10 +278,14 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
         case 'radio':
           temp = new RadioDragComponent(this.canvas);
+          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement).offsetWidth;
+          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement).offsetTop;
           break;
 
         case 'textbox':
           temp = new TextboxDragComponent(this.canvas);
+          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement).offsetWidth;
+          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement).offsetTop;
           break;
 
         case 'popup':
@@ -285,6 +295,8 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
         case 'paragraph':
           temp = new ParagraphDragComponent(this.canvas);
+          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement).offsetWidth;
+          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement).offsetTop;
           break;
 
         case 'nav':
@@ -297,14 +309,20 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
         case 'datepicker':
           temp = new DatepickerDragComponent(this.canvas);
+          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement).offsetWidth;
+          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement).offsetTop;
           break;
 
         case 'header':
           temp = new HeaderDragComponent(this.canvas);
+          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement).offsetWidth;
+          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement).offsetTop;
           break;
 
         case 'input':
           temp = new InputDragComponent(this.canvas);
+          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement).offsetWidth;
+          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement).offsetTop;
           break;
 
         case 'link':
@@ -316,6 +334,10 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         default:
           temp = new ButtonDragComponent(this.canvas);
       }
+      
+    this.mousePositionX = offsetLeft + x + canvasLeftX;
+    this.mousePositionY = offsetTop + y + canvasTopY;
+    
       setTimeout(() => {
         this.xCounter++;
         console.log(this.xCounter);
