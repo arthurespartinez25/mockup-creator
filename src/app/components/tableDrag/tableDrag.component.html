@@ -6,11 +6,11 @@
   [id]="props.id"
   [style]="props.style"
   [ngStyle]="{
-    position: 'fixed',
-    left: dagaX + 'px',
-    top: dagaY + 'px',
+    'position': 'sticky',
+    'left': (dagaX-theX) + 'px',
+    'top': (dagaY-theY) + 'px',
     'width': '250px'
-  }"
+  }" 
 >
   <br />
   <table [class]="props.class">

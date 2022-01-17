@@ -36,15 +36,20 @@ export class RadioDragComponent implements OnInit,IComponent {
   dagaX = 0;
   dagaY = 0;
   onetimeBool = true;
+  percentageX = 0;
+  percentageY = 0;
 
   ngOnInit(): void {
     this.theX = this.xcanvas;
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
-    let percentageX = ((this.xmouse-this.theX)/1280)*100; 
-    let percentageY = ((this.ymouse-this.theY)/720)*100;
-    this.props.style='text-decoration: none;position:sticky;left:'+percentageX+'%;top:'+percentageY+'%;';
+    this.percentageX = ((this.xmouse-this.theX)/1280)*100; 
+    this.percentageY = ((this.ymouse-this.theY)/720)*100;
+  }
+  ngAfterChecked()
+  {
+    this.props.style='text-decoration: none;position:sticky;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
   }
 
   onDragEnded($event: CdkDragEnd){

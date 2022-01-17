@@ -1,14 +1,10 @@
-  <img
-      src= "{{props.value}}"
-      cdkDrag cdkDragBoundary="#canvas" 
-      [class]="props.class" 
-      [id]="props.id" 
-      (cdkDragEnded)="onDragEnded($event)" 
-      [cdkDragDisabled]="!props.draggable"
-      [style]="props.style"
-      [ngStyle]="{
-          'position': 'fixed',
-          'left': dagaX + 'px',
-          'top': dagaY + 'px'
-        }"
-  >
+<img cdkDrag cdkDragBoundary="#canvas" [class]="props.class" [id]="props.id" 
+[cdkDragDisabled]="!props.draggable" 
+[style]="props.style" src= "{{props.value}}"
+(cdkDragEnded)="onDragEnded($event)" 
+[ngStyle]="{
+  'position': 'sticky',
+  'left': (dagaX-theX) + 'px',
+  'top': (dagaY-theY) + 'px'
+}" > 
+    

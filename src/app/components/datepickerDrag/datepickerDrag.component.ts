@@ -12,10 +12,10 @@ import { IProperty } from 'src/app/interfaces/iproperty';
   (change)="dateValue($event)"
   (cdkDragEnded)="onDragEnded($event)" 
   [ngStyle]="{
-    'position': 'fixed',
-    'left': dagaX + 'px',
-    'top': dagaY + 'px'
-  }">`
+    'position': 'sticky',
+    'left': (dagaX-theX) + 'px',
+    'top': (dagaY-theY) + 'px'
+  }" >`
 })
 export class DatepickerDragComponent implements OnInit,IComponent {
   canvas: ElementRef;
@@ -42,15 +42,21 @@ export class DatepickerDragComponent implements OnInit,IComponent {
   dagaX = 0;
   dagaY = 0;
   onetimeBool = true;
+  percentageX = 0;
+  percentageY = 0;
 
   ngOnInit(): void {
     this.theX = this.xcanvas;
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
-    let percentage = ((this.xmouse-this.theX)/1280)*100;
-    let percentageY = ((this.ymouse-this.theY)/720)*100
-    this.props.style='position:absolute;left:'+percentage+'%;top:'+percentageY+'%;';
+    this.percentageX = ((this.xmouse-this.theX)/1280)*100; 
+    this.percentageY = ((this.ymouse-this.theY)/720)*100;
+    
+  }
+  ngAfterChecked()
+  {
+    this.props.style='position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
   }
 
   onDragEnded($event: CdkDragEnd){

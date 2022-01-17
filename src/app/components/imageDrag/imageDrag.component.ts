@@ -35,23 +35,28 @@ export class ImageDragComponent implements OnInit, IComponent {
   dagaX = 0;
   dagaY = 0;
   onetimeBool = true;
+  percentageX = 0;
+  percentageY = 0;
 
   ngOnInit(): void {
     this.theX = this.xcanvas;
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
-    let percentageX = ((this.xmouse-this.theX)/1280)*100; 
-    let percentageY = ((this.ymouse-this.theY)/720)*100;
+    this.percentageX = ((this.xmouse-this.theX)/1280)*100; 
+    this.percentageY = ((this.ymouse-this.theY)/720)*100;
+  }
+  ngAfterChecked()
+  {
     if(this.whatComponent2=="sampleImage")
     {
       this.props.value = "https://dlcdnrog.asus.com/rog/media/1610273282904.jpg";
-      this.props.style='position:absolute;left:'+percentageX+'%;top:'+percentageY+'%;';
+      this.props.style='position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
     }
     else
     {
       this.props.value = "https://mdbootstrap.com/img/new/standard/city/047.jpg";
-      this.props.style='max-width: 600px;height: 200px;position:absolute;left:'+percentageX+'%;top:'+percentageY+'%;';
+      this.props.style='max-width: 600px;height: 200px;position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
     }
   }
 

@@ -35,60 +35,65 @@ export class InputDragComponent implements OnInit, IComponent {
   dagaX = 0;
   dagaY = 0;
   onetimeBool = true;
+  percentageX = 0;
+  percentageY = 0;
 
   ngOnInit(): void {
     this.theX = this.xcanvas;
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
-    let percentage = ((this.xmouse-this.theX)/1280)*100;
-    let percentageY = ((this.ymouse-this.theY)/720)*100;
+    this.percentageX = ((this.xmouse-this.theX)/1280)*100; 
+    this.percentageY = ((this.ymouse-this.theY)/720)*100;
+  }
+  ngAfterChecked()
+  {
     if(this.whatComponent2=="loginInputUser")
     {
       this.props.placeholder = "Username";
       this.props.style='width:200px;position:absolute;left:'
-      +percentage+'%;top:'+percentageY+'%;';
+      +this.percentageX+'%;top:'+this.percentageY+'%;';
     }
     else if(this.whatComponent2=="loginInputPass")
     {
       this.props.placeholder = "Password";
       this.props.style='width:200px;position:absolute;left:'
-      +percentage+'%;top:'+percentageY+'%;';
+      +this.percentageX+'%;top:'+this.percentageY+'%;';
     }
     else if(this.whatComponent2=="carrierInput")
     {
       this.props.placeholder = "xxxxx";
       this.props.style='width:200px;position:absolute;left:'
-      +percentage+'%;top:'+percentageY+'%;';
+      +this.percentageX+'%;top:'+this.percentageY+'%;';
     }
     else if(this.whatComponent2=="invoiceInput")
     {
       this.props.placeholder = "xxx-xxxx-xxxx";
       this.props.style='width:200px;position:absolute;left:'
-      +percentage+'%;top:'+percentageY+'%;';
+      +this.percentageX+'%;top:'+this.percentageY+'%;';
     }
     else if(this.whatComponent2=="deliveryInput")
     {
       this.props.placeholder = "Enter delivery name";
       this.props.style='width:200px;position:absolute;left:'
-      +percentage+'%;top:'+percentageY+'%;';
+      +this.percentageX+'%;top:'+this.percentageY+'%;';
     }
     else if(this.whatComponent2=="addressInput")
     {
       this.props.placeholder = "Enter address";
       this.props.style='width:200px;position:absolute;left:'
-      +percentage+'%;top:'+percentageY+'%;';
+      +this.percentageX+'%;top:'+this.percentageY+'%;';
     }
     else if(this.whatComponent2=="remarksInput")
     {
       this.props.placeholder = "Enter remarks";
       this.props.style='width:200px;position:absolute;left:'
-      +percentage+'%;top:'+percentageY+'%;';
+      +this.percentageX+'%;top:'+this.percentageY+'%;';
     }
     else
     {
       this.props.style='width:200px;position:absolute;left:'
-      +percentage+'%;top:'+percentageY+'%;';
+      +this.percentageX+'%;top:'+this.percentageY+'%;';
     }
   }
 

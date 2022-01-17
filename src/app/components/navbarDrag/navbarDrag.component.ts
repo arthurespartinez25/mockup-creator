@@ -39,6 +39,9 @@ export class NavbarDragComponent implements OnInit, IComponent {
   dagaY = 0;
   onetimeBool = true;
   theCanvasWidth = 0;
+  percentageX = 0;
+  percentageY = 0;
+
 
   ngOnInit(): void {
     //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
@@ -47,17 +50,20 @@ export class NavbarDragComponent implements OnInit, IComponent {
     this.theCanvasWidth = this.canvasWW;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
-    let percentageX = ((this.xmouse-this.theX)/1280)*100;
-    let percentageY = ((this.ymouse-this.theY)/720)*100;
+    this.percentageX = ((this.xmouse-this.theX)/1280)*100;
+    this.percentageY = ((this.ymouse-this.theY)/720)*100;
+  }
+  ngAfterChecked()
+  {
     if(this.whatComponent2 == "searchNavbar")
     {
       this.props.value = "AWS";
       this.props.style='width: 100%; color: white;padding: 10px;background-color: #12355B;font-size: 20px;left:'
-    +percentageX+'%;top:'+percentageY+'%;';
+    +this.percentageX+'%;top:'+this.percentageY+'%;';
     }
     else
     {
-      this.props.style='position:absolute;width: 100%; color: white;padding: 10px;background-color: #12355B;font-size: 20px;left:0%;top:'+percentageY+'%;';
+      this.props.style='position:absolute;width: 100%; color: white;padding: 10px;background-color: #12355B;font-size: 20px;left:0%;top:'+this.percentageY+'%;';
     }
   }
 

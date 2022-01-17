@@ -3,9 +3,9 @@
 [cdkDragDisabled]="!props.draggable"
 [ngStyle]="{
     'width':+this.theCanvasWidth+'px',
-    'position': 'fixed',
-    'left': xcanvas + 'px',
-    'top': dagaY + 'px'
+    'position': 'sticky',
+    'left': (xcanvas) + 'px',
+    'top': (dagaY) + 'px'
   }">
   {{ props.value }}
 </nav>

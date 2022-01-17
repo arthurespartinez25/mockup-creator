@@ -44,30 +44,33 @@ export class HeaderDragComponent implements OnInit, IComponent {
   dagaX = 0;
   dagaY = 0;
   onetimeBool = true;
+  percentageX = 0;
+  percentageY = 0;
 
   ngOnInit(): void {
-    console.log(this.whatComponent2);
     this.theX = this.xcanvas;
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
-    let percentageX = ((this.xmouse-this.theX)/1280)*100; 
-    let percentageY = ((this.ymouse-this.theY)/720)*100;
+    this.percentageX = ((this.xmouse-this.theX)/1280)*100; 
+    this.percentageY = ((this.ymouse-this.theY)/720)*100;
+  }
+  ngAfterChecked()
+  {
     if(this.whatComponent2=="loginHeader")
     {
       this.props.value = "Login123";
-      this.props.style='color:blue;position:absolute;left:'+percentageX+'%;top:'+percentageY+'%;';
+      this.props.style='color:blue;position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
     }
     else if(this.whatComponent2=="searchHeader")
     {
       this.props.value = "error message to reflect here";
-      this.props.style = 'color:red;position:absolute;font-size: medium;left:'+percentageX+'%;top:'+percentageY+'%;';
+      this.props.style = 'color:red;position:absolute;font-size: medium;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
     }
     else
     {
-      this.props.style='width:300px;color:red;position:absolute;left:'+percentageX+'%;top:'+percentageY+'%;';
+      this.props.style='width:300px;color:red;position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
     }
-    
   }
 
   onDragEnded($event: CdkDragEnd){

@@ -207,22 +207,13 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   mousePositionY = 110;
   domInsideCanvas = false;
 
-  /*
+   /*
   disableDragging(){
     let componentIndex = this.componentList.indexOf(this.selectedComponent);
     if (componentIndex !== -1) {
       this.selected.draggable = false;
     }
   }*/
-
-  onDragEnded(event: CdkDragEnd) {
-    event.source._dragRef.reset();
-    const { offsetLeft, offsetTop } = event.source.element.nativeElement;
-    const { x, y } = event.distance;
-    this.mousePositionX = offsetLeft + x;
-    this.mousePositionY = offsetTop + y;
-    
-  }
 
   onDragEndedInputMenu(event: CdkDragEnd) {
     event.source._dragRef.reset();
@@ -235,7 +226,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     //console.log(x);
     //console.log(this.canvasLeft);
   }
-
   
   onDragEndedTextMenu(event: CdkDragEnd) {
     event.source._dragRef.reset();
@@ -248,9 +238,13 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     //console.log(x);
     //console.log(this.canvasLeft);
   }
-  
 
-  onDragEndedAddComponent(component: string) {
+  onDragEndedAddComponent(event: CdkDragEnd, component: string) {
+    event.source._dragRef.reset();
+    const { offsetLeft, offsetTop } = event.source.element.nativeElement;
+    const { x, y } = event.distance;
+    this.mousePositionX = offsetLeft + x;
+    this.mousePositionY = offsetTop + y;
     if (this.domInsideCanvas == true) {
       let temp: IComponent;
       switch (component) {
@@ -319,13 +313,15 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         default:
           temp = new ButtonDragComponent(this.canvas);
       }
-      this.xCounter++;
-      console.log(this.xCounter);
-      this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
-      this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
-      this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
-      console.log(this.canvasW + 'rawr');
-      this.componentList.push(temp);
+      setTimeout(() => {
+        this.xCounter++;
+        console.log(this.xCounter);
+        this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
+        this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
+        this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
+        console.log(this.canvasW + 'rawr');
+        this.componentList.push(temp);
+      }, 1);
     }
   }
 
