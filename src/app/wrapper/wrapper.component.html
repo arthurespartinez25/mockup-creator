@@ -55,7 +55,9 @@
     child.props.typeObj ===  'tableDrag' ?xmouse+'px':
     child.props.typeObj === 'inputDrag'?xmouse+'px'
     :xcanvas+'px'
-    ,'width':'1px','height':'1px'
+    ,'height':'1px',
+    'width':
+    child.props.typeObj === 'navDrag'?canvasWW+'px':'1px'
   }">
   
 
