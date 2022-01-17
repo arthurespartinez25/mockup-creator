@@ -23,7 +23,7 @@ td.properties-table-data {
 }
 
 td.properties-table-data input,
-td.properties-table-data textarea {
+td.properties-table-data textarea #updateLink{
   width: 100%;
   margin: 0;
   align-self: center;

@@ -23,19 +23,7 @@ export class YoutubeDragComponent implements OnInit, IComponent {
   canvas: ElementRef;
   url: SafeResourceUrl;
 
-  updateSrc2 = (rawr) => {
-    // let regexPosition = /https(.+?)"/;
-    // let link:any = null;
-    // link = rawr.match(regexPosition);
-    // //link = link!.slice(0, -1);
-    // link[0] = link[0].slice(0, -1); 
-    // this.props.value = link[0];
-    // this.url = this.sanitizer.bypassSecurityTrustResourceUrl(link[0]);
-    // console.log(this.url);
-    console.log("gumagana");
-    this.updateSrc();
-    document.getElementById('btn')?.click;
-  }
+  
     props: IProperty = {
       key: '',
       id: '',
@@ -44,7 +32,7 @@ export class YoutubeDragComponent implements OnInit, IComponent {
       style: '',
       typeObj: 'youtubeDrag',
       type: '',
-      linkSend: this.updateSrc2,
+      url : '',
     };
 
   @Output() updateDataEvent= new EventEmitter<any>();
@@ -78,7 +66,7 @@ export class YoutubeDragComponent implements OnInit, IComponent {
     else
     {
       this.props.value = 'https://www.youtube.com/embed/qY7rpWA-D4w?autoplay=1';
-      this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value);
+      this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value);
       this.props.style='position:absolute;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;width:300px;height: 200px;';
     }
   }
@@ -111,31 +99,4 @@ export class YoutubeDragComponent implements OnInit, IComponent {
       return tmpHtmlCode;
     }
 
-    updateSrc()
-    {
-       let regexPosition = /https(.+?)"/;
-       let link:any = null;
-       link = this.props.value.match(regexPosition);
-       //link = link!.slice(0, -1);
-       link[0] = link[0].slice(0, -1); 
-       this.props.value = link[0];
-       console.log(link);
-      this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value);
-      this.pops = this.props.value;
-    }
-    // updateSrc2(value)
-    // {
-    //   let regexPosition = /https(.+?)"/;
-    //   let link:any = null;
-    //   link = value.match(regexPosition);
-    //   //link = link!.slice(0, -1);
-    //   link[0] = link[0].slice(0, -1); 
-    //   console.log(link[0])
-    //   //this.props.value = link[0];
-    //   console.log(link);
-    //   this.url = this.sanitizer.bypassSecurityTrustResourceUrl(link[0]);
-    // }
-    
-
-    
 }

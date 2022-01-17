@@ -13,7 +13,7 @@
   </svg>
 </div>
   <iframe id="fra"
-  #fra cdkDrag cdkDragBoundary="#canvas" [src]="url"
+  #fra cdkDrag cdkDragBoundary="#canvas" [src]="props.url"
   [style]="props.style"
 title="YouTube video player" frameborder="0" 
 allow="autoplay" 
@@ -28,14 +28,6 @@ allowfullscreen dnd-droppable-iframe
 
 
 </div> 
- <button id="btn"
- #btn md-button (click)="updateSrc()"  id="first" class="top-link"
-[ngStyle]="{
-    'position': 'fixed',
-    'left': 500 + 'px',
-    'top': 500 + 'px'
-  }">Update</button>
-  {{url +"          "+pops}}
 
 
     

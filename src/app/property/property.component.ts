@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { IComponent } from '../interfaces/icomponent';
 import { IProperty } from '../interfaces/iproperty';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-property',
@@ -19,6 +20,7 @@ export class PropertyComponent implements OnInit {
     style: '',
     typeObj: '',
     type: '',
+    url : '',
   };
   style2 = '';
   
@@ -55,7 +57,7 @@ export class PropertyComponent implements OnInit {
     this.selectedcomp = value;
   }
 
-  constructor() {
+  constructor(public sanitizer:DomSanitizer) {
     this.props = this.property;
     this.componentList = this.compList;
     this.selectedcomp = this.selectedIdx;
@@ -80,12 +82,6 @@ export class PropertyComponent implements OnInit {
 
   valueChangeHandler(event: any) {
     this.props.value = event.target.value;
-    if (event.code === "Enter" && this.props.typeObj =="youtubeDrag") {  //checks whether the pressed key is "Enter"
-      if (this.props.linkSend) {
-        const { linkSend } = this.props;
-        linkSend(this.props.value);
-      }
-  }
   }
 
   typeChangeHandler(event: any) {
@@ -163,6 +159,29 @@ export class PropertyComponent implements OnInit {
       const { updateCallback } = this.props;
       updateCallback(this.props.tblRows, this.props.tblCols);
     }
+  }
+  updateLink()
+  {
+    console.log("gumagana");
+       let regexPosition = /https(.+?)"/;
+       let link:any = null;
+       let dummyLink = this.props.value;
+       if(dummyLink.charAt(dummyLink.length - 1) == ">")
+       {
+        link = this.props.value.match(regexPosition);
+        link[0] = link[0].slice(0, -1); 
+        this.props.value = link[0];
+        this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value);
+      }
+      else if(dummyLink[0]?.charAt(dummyLink[0].length - 1) == '"')
+      {
+        this.props.value = this.props.value.slice(0, -1); 
+        this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value);
+      }
+     else
+      {
+        this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value);
+       }  
   }
   /* END OF CODE FOR TABLE ELEMENT */
 }
