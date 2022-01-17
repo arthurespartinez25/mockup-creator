@@ -35,6 +35,7 @@ export class DatepickerDragComponent implements OnInit,IComponent {
   @Input() ycanvas: any;
   @Input() xmouse: any;
   @Input() ymouse: any;
+  @Input() whatComponent2:any;
   mousePositionXV2 = 310;
   mousePositionYV2= 110;
   theX = 0;
@@ -50,8 +51,9 @@ export class DatepickerDragComponent implements OnInit,IComponent {
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
-    this.percentageX = ((this.xmouse-this.theX)/1280)*100; 
-    this.percentageY = ((this.ymouse-this.theY)/720)*100;
+    let percentage = ((this.xmouse-this.theX)/1280)*100;
+    let percentageY = ((this.ymouse-this.theY)/720)*100;
+    this.props.style='position:absolute;left:'+percentage+'%;top:'+percentageY+'%;';
     
   }
   ngAfterViewInIt()
