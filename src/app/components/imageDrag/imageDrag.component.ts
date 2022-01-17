@@ -46,9 +46,10 @@ export class ImageDragComponent implements OnInit, IComponent {
     this.percentageX = ((this.xmouse-this.theX)/1280)*100; 
     this.percentageY = ((this.ymouse-this.theY)/720)*100;
   }
-  ngAfterChecked()
+  ngAfterViewInit()
   {
-    if(this.whatComponent2=="sampleImage")
+    setTimeout(() => {
+      if(this.whatComponent2=="sampleImage")
     {
       this.props.value = "https://dlcdnrog.asus.com/rog/media/1610273282904.jpg";
       this.props.style='position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
@@ -58,6 +59,8 @@ export class ImageDragComponent implements OnInit, IComponent {
       this.props.value = "https://mdbootstrap.com/img/new/standard/city/047.jpg";
       this.props.style='max-width: 600px;height: 200px;position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
     }
+    }, 10);
+    
   }
 
   onDragEnded($event: CdkDragEnd){

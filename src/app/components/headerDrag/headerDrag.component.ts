@@ -55,9 +55,11 @@ export class HeaderDragComponent implements OnInit, IComponent {
     this.percentageX = ((this.xmouse-this.theX)/1280)*100; 
     this.percentageY = ((this.ymouse-this.theY)/720)*100;
   }
-  ngAfterChecked()
+  ngAfterViewInit()
   {
-    if(this.whatComponent2=="loginHeader")
+    
+    setTimeout(() => {
+      if(this.whatComponent2=="loginHeader")
     {
       this.props.value = "Login123";
       this.props.style='color:blue;position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
@@ -71,6 +73,7 @@ export class HeaderDragComponent implements OnInit, IComponent {
     {
       this.props.style='width:300px;color:red;position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
     }
+    }, 10);
   }
 
   onDragEnded($event: CdkDragEnd){
@@ -80,7 +83,7 @@ export class HeaderDragComponent implements OnInit, IComponent {
     this.updateDataEventY.emit(((this.mousePositionYV2 + this.dagaY - this.theY)/720)*100);
   }
 
-  ngAfterViewInit(){}
+  
 
   constructor(canvas: ElementRef) { 
     this.canvas = canvas;

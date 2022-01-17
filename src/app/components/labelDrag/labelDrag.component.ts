@@ -44,10 +44,12 @@ export class LabelDragComponent implements OnInit, IComponent {
     this.dagaY = this.ymouse;
     this.percentageX = ((this.xmouse-this.theX)/1280)*100; 
     this.percentageY = ((this.ymouse-this.theY)/720)*100;
+    
   }
-  ngAfterChecked()
+  ngAfterViewInit()
   {
-    if(this.whatComponent2=="loginLabelUser")
+    setTimeout(() => {
+      if(this.whatComponent2=="loginLabelUser")
     {
       this.props.value = "Username";
       this.props.style='position:absolute;left:'
@@ -69,7 +71,7 @@ export class LabelDragComponent implements OnInit, IComponent {
     {
       this.props.value="Invoice number from";
       this.props.style='position:absolute;left:'
-    +this.percentageX+'%;top:'+this.percentageY+'%;';
+    +this.percentageX+'%;top:'+this.percentageY+'%;width:500px';
     }
     else if(this.whatComponent2=="invoiceToLabel")
     {
@@ -124,6 +126,8 @@ export class LabelDragComponent implements OnInit, IComponent {
       this.props.style='position:absolute;left:'
     +this.percentageX+'%;top:'+this.percentageY+'%;';
     }
+    }, 100);
+    
   }
 
   onDragEnded($event: CdkDragEnd){

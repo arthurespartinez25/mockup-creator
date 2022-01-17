@@ -46,9 +46,10 @@ export class InputDragComponent implements OnInit, IComponent {
     this.percentageX = ((this.xmouse-this.theX)/1280)*100; 
     this.percentageY = ((this.ymouse-this.theY)/720)*100;
   }
-  ngAfterChecked()
+  ngAfterViewInit()
   {
-    if(this.whatComponent2=="loginInputUser")
+    setTimeout(() => {
+      if(this.whatComponent2=="loginInputUser")
     {
       this.props.placeholder = "Username";
       this.props.style='width:200px;position:absolute;left:'
@@ -95,6 +96,8 @@ export class InputDragComponent implements OnInit, IComponent {
       this.props.style='width:200px;position:absolute;left:'
       +this.percentageX+'%;top:'+this.percentageY+'%;';
     }
+    }, 10);
+    
   }
 
   onDragEnded($event: CdkDragEnd){

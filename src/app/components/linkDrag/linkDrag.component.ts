@@ -44,9 +44,12 @@ export class LinkDragComponent implements OnInit, IComponent {
     this.percentageX = ((this.xmouse-this.theX)/1280)*100; 
     this.percentageY = ((this.ymouse-this.theY)/720)*100;
   }
-  ngAfterChecked()
+  ngAfterViewInit()
   {
-    this.props.style='text-decoration: none;position:sticky;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
+    setTimeout(() => {
+      this.props.style='text-decoration: none;position:sticky;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
+    }, 1);
+    
   }
 
   onDragEnded($event: CdkDragEnd){

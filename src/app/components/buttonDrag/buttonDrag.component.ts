@@ -55,9 +55,10 @@ export class ButtonDragComponent implements IComponent {
     
   }
 
-  ngAfterChecked()
+  ngAfterViewInit()
   {
-    if(this.whatComponent2=="LoginButton")
+    setTimeout(() => {
+      if(this.whatComponent2=="LoginButton")
     {
       this.props.value = "Login";
       this.props.style='position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;'
@@ -97,6 +98,8 @@ export class ButtonDragComponent implements IComponent {
       this.props.value = "Button";
       this.props.style='position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;'
     }
+    }, 10);
+    
   }
 
   onDragEnded($event: CdkDragEnd){

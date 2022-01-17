@@ -166,9 +166,12 @@ export class TableDragComponent implements OnInit, IComponent {
     this.percentageX = ((this.xmouse-this.theX)/1280)*100; 
     this.percentageY = ((this.ymouse-this.theY)/720)*100;
   }
-  ngAfterChecked()
+  ngAfterViewInit()
   {
-    this.props.style='position:absolute;left:'+(this.xmouse-this.theX)+'px;top:'+(this.ymouse-this.theY)+'px;';
+    setTimeout(() => {
+      this.props.style='position:absolute;left:'+(this.xmouse-this.theX)+'px;top:'+(this.ymouse-this.theY)+'px;';
+    }, 1);
+    
   }
 
   onDragEnded($event: any) {

@@ -53,9 +53,10 @@ export class NavbarDragComponent implements OnInit, IComponent {
     this.percentageX = ((this.xmouse-this.theX)/1280)*100;
     this.percentageY = ((this.ymouse-this.theY)/720)*100;
   }
-  ngAfterChecked()
+  ngAfterViewInit()
   {
-    if(this.whatComponent2 == "searchNavbar")
+    setTimeout(() => {
+      if(this.whatComponent2 == "searchNavbar")
     {
       this.props.value = "AWS";
       this.props.style='width: 100%; color: white;padding: 10px;background-color: #12355B;font-size: 20px;left:'
@@ -65,6 +66,8 @@ export class NavbarDragComponent implements OnInit, IComponent {
     {
       this.props.style='position:absolute;width: 100%; color: white;padding: 10px;background-color: #12355B;font-size: 20px;left:0%;top:'+this.percentageY+'%;';
     }
+    }, 1);
+    
   }
 
   onDragEnded($event: any){

@@ -49,9 +49,12 @@ export class DropdownDragComponent implements OnInit,IComponent {
     this.percentageY = ((this.ymouse-this.theY)/720)*100;
     
   }
-  ngAfterChecked()
+  ngAfterViewInIt()
   {
-    this.props.style='position:sticky;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
+    setTimeout(() => {
+      this.props.style='position:sticky;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
+    }, 10);
+    
   }
 
   onDragEnded($event: CdkDragEnd){
