@@ -56,12 +56,12 @@
           cdkDropListGroup
           cdkDropList
           cdkDropListSortingDisabled
-          >
+        >
           <button
             class="palette-item"
             (click)="addComponent('nav')"
             cdkDrag
-            (cdkDragEnded)="onDragEndedAddComponent($event,'nav')"
+            (cdkDragEnded)="onDragEndedAddComponent($event, 'nav')"
           >
             Navbar
           </button>
@@ -69,22 +69,25 @@
             class="palette-item"
             (click)="addComponent('link')"
             cdkDrag
-            (cdkDragEnded)="onDragEndedAddComponent($event,'link')"
+            (cdkDragEnded)="onDragEndedAddComponent($event, 'link')"
           >
             Link
           </button>
-          
+
           <!-- text-dropdown-menu start -->
-          <div class="palette-item sub-menu" id="subMenuItem"
-          #subMenuItem style="padding: 0px; padding-top: 0px;"
+          <div
+            class="palette-item sub-menu"
+            id="subMenuItem"
+            #subMenuItem
+            style="padding: 0px; padding-top: 0px"
           >
             <button class="sub-menu-button palette-item">Text*</button>
-            <div class="sub-menu-dropdown" >
+            <div class="sub-menu-dropdown">
               <button
                 class="palette-item"
                 (click)="addComponent('header')"
                 cdkDrag
-                (cdkDragEnded)="onDragEndedAddComponent($event,'header')"
+                (cdkDragEnded)="onDragEndedAddComponent($event, 'header')"
               >
                 Header
               </button>
@@ -93,7 +96,7 @@
                 class="palette-item"
                 (click)="addComponent('paragraph')"
                 cdkDrag
-                (cdkDragEnded)="onDragEndedAddComponent($event,'paragraph')"
+                (cdkDragEnded)="onDragEndedAddComponent($event, 'paragraph')"
               >
                 Paragraph
               </button>
@@ -102,7 +105,7 @@
                 class="palette-item"
                 (click)="addComponent('label')"
                 cdkDrag
-                (cdkDragEnded)="onDragEndedAddComponent($event,'label')"
+                (cdkDragEnded)="onDragEndedAddComponent($event, 'label')"
               >
                 Label
               </button>
@@ -137,16 +140,19 @@
           </button>
           -->
           <!-- input-dropdown-menu start -->
-          <div class="palette-item sub-menu" id="subMenuItem"
-            #subMenuItem style="padding: 0px; padding-top: 0px;"
-            >
+          <div
+            class="palette-item sub-menu"
+            id="subMenuItem"
+            #subMenuItem
+            style="padding: 0px; padding-top: 0px"
+          >
             <button class="sub-menu-button palette-item">Input*</button>
-            <div class="sub-menu-dropdown" >
+            <div class="sub-menu-dropdown">
               <button
                 class="palette-item"
                 (click)="addComponent('button')"
                 cdkDrag
-                (cdkDragEnded)="onDragEndedAddComponent($event,'button')"
+                (cdkDragEnded)="onDragEndedAddComponent($event, 'button')"
               >
                 Button
               </button>
@@ -155,7 +161,7 @@
                 class="palette-item"
                 (click)="addComponent('dropdown')"
                 cdkDrag
-                (cdkDragEnded)="onDragEndedAddComponent($event,'dropdown')"
+                (cdkDragEnded)="onDragEndedAddComponent($event, 'dropdown')"
               >
                 Dropdown
               </button>
@@ -163,7 +169,7 @@
                 class="palette-item"
                 (click)="addComponent('checkbox')"
                 cdkDrag
-                (cdkDragEnded)="onDragEndedAddComponent($event,'checkbox')"
+                (cdkDragEnded)="onDragEndedAddComponent($event, 'checkbox')"
               >
                 Checkbox
               </button>
@@ -172,7 +178,7 @@
                 class="palette-item"
                 (click)="addComponent('radio')"
                 cdkDrag
-                (cdkDragEnded)="onDragEndedAddComponent($event,'radio')"
+                (cdkDragEnded)="onDragEndedAddComponent($event, 'radio')"
               >
                 Radio
               </button>
@@ -180,7 +186,7 @@
                 class="palette-item"
                 (click)="addComponent('input')"
                 cdkDrag
-                (cdkDragEnded)="onDragEndedAddComponent($event,'input')"
+                (cdkDragEnded)="onDragEndedAddComponent($event, 'input')"
               >
                 Input Field
               </button>
@@ -188,7 +194,7 @@
                 class="palette-item"
                 (click)="addComponent('textbox')"
                 cdkDrag
-                (cdkDragEnded)="onDragEndedAddComponent($event,'textbox')"
+                (cdkDragEnded)="onDragEndedAddComponent($event, 'textbox')"
               >
                 Textbox
               </button>
@@ -196,7 +202,7 @@
                 class="palette-item"
                 (click)="addComponent('datepicker')"
                 cdkDrag
-                (cdkDragEnded)="onDragEndedAddComponent($event,'datepicker')"
+                (cdkDragEnded)="onDragEndedAddComponent($event, 'datepicker')"
               >
                 DatePicker
               </button>
@@ -206,10 +212,10 @@
           <!-- input-dropdown-menu end -->
 
           <button
-          class="palette-item"
-          (click)="addComponent('modal')"
-          cdkDrag
-          (cdkDragEnded)="onDragEndedAddComponent($event,'modal')"
+            class="palette-item"
+            (click)="addComponent('modal')"
+            cdkDrag
+            (cdkDragEnded)="onDragEndedAddComponent($event, 'modal')"
           >
             Modal
           </button>
@@ -217,7 +223,7 @@
             class="palette-item"
             (click)="addComponent('popup')"
             cdkDrag
-            (cdkDragEnded)="onDragEndedAddComponent($event,'popup')"
+            (cdkDragEnded)="onDragEndedAddComponent($event, 'popup')"
             [hidden]="true"
           >
             Popup
@@ -226,16 +232,16 @@
             class="palette-item"
             (click)="addComponent('img')"
             cdkDrag
-            (cdkDragEnded)="onDragEndedAddComponent($event,'img')"
+            (cdkDragEnded)="onDragEndedAddComponent($event, 'img')"
           >
             Image
           </button>
-          <button 
-            class="palette-item" 
+          <button
+            class="palette-item"
             (click)="addComponent('table')"
             cdkDrag
-            (cdkDragEnded)="onDragEndedAddComponent($event,'table')"
-            >
+            (cdkDragEnded)="onDragEndedAddComponent($event, 'table')"
+          >
             Table
           </button>
         </div>
@@ -252,6 +258,9 @@
           role="tabpanel"
           aria-labelledby="elements-tab"
         >
+          <button class="palette-item" (click)="addComponentHomePage()">
+            Home Page
+          </button>
           <button class="palette-item" (click)="addComponentLogin()">
             Login
           </button>
@@ -369,25 +378,29 @@
         role="tabpanel"
         aria-labelledby="css-tab"
       >
-        <h3 
-        style="background-color: #2e9c6b; margin: 0" 
-        (click)="addAllCSSRule(cssTextArea.value)"
-        (click)="cssReceiveMessage()">Save CSS</h3>
+        <h3
+          style="background-color: #2e9c6b; margin: 0"
+          (click)="addAllCSSRule(cssTextArea.value)"
+          (click)="cssReceiveMessage()"
+        >
+          Save CSS
+        </h3>
         <!--
         <h3
         style="background-color: #a83241; margin: 0" 
         (click)="deleteCSSRule(cssTextArea.value)"
         (click)="cssReceiveMessage()">Delete CSS Rule</h3>
         -->
-        <textarea 
-        style="margin: 0; width: 100%;" 
-        cols="30" 
-        rows="5"
-        #cssTextArea
-        name="css-textarea" id="css-textarea"
+        <textarea
+          style="margin: 0; width: 100%"
+          cols="30"
+          rows="5"
+          #cssTextArea
+          name="css-textarea"
+          id="css-textarea"
         ></textarea>
-        
-      <!-- CSS Code
+
+        <!-- CSS Code
         <textarea 
         style="margin: 0" 
         cols="30" 
@@ -399,8 +412,7 @@
         (keyup)="refresh()"
         -->
         <!--<a routerLink="/refresh">Testing</a> ->->
-      -->
-      </div>
+      --></div>
       <div
         class="tab-pane fade"
         id="code"
@@ -425,5 +437,3 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 <!--<router-outlet></router-outlet> -->
-
-

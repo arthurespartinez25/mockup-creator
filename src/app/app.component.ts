@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http'
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { IComponent } from './interfaces/icomponent';
 
 import { IProperty } from './interfaces/iproperty';
@@ -26,7 +26,6 @@ import { ImageDragComponent } from './components/imageDrag/imageDrag.component';
 import { RadioDragComponent } from './components/radioDrag/radioDrag.component';
 import { TextboxDragComponent } from './components/textboxDrag/textboxDrag.component';
 import { PopupDragComponent } from './components/popupDrag/popupDrag.component';
-
 
 import { FormArray } from '@angular/forms';
 import { ParagraphDragComponent } from './components/paragraphDrag/paragraphDrag.component';
@@ -46,16 +45,15 @@ import { TableDragComponent } from './components/tableDrag/tableDrag.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css', './app.palette.component.css'],
 })
-
 export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   title = 'mockup-creator';
   index: number;
   componentList: IComponent[] = [];
   selectedComponent: IComponent;
   ref: ComponentRef<any>;
-  readonly CSS_URL ='../app/app.component.css';
+  readonly CSS_URL = '../app/app.component.css';
   refreshCSS = new BehaviorSubject<boolean>(true);
-  cssDocument?:StyleSheet;
+  cssDocument?: StyleSheet;
 
   selected: IProperty = {
     key: '',
@@ -100,7 +98,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     private renderer: Renderer2,
     private drag: DragDrop,
     changeDetectorRef: ChangeDetectorRef,
-    private http:HttpClient,
+    private http: HttpClient,
     public _router: Router,
     public _location: Location
   ) {
@@ -123,83 +121,81 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   ngAfterViewInit(): void {}
 
   addComponent(component: string) {
-      let temp: IComponent;
-      switch (component) {
-        case 'button':
-          temp = new ButtonDragComponent(this.canvas);
-          break;
-        case 'label':
-          temp = new LabelDragComponent(this.canvas);
-          break;
-        case 'checkbox':
-          temp = new CheckboxDragComponent(this.canvas);
-          break;
+    let temp: IComponent;
+    switch (component) {
+      case 'button':
+        temp = new ButtonDragComponent(this.canvas);
+        break;
+      case 'label':
+        temp = new LabelDragComponent(this.canvas);
+        break;
+      case 'checkbox':
+        temp = new CheckboxDragComponent(this.canvas);
+        break;
 
-        case 'dropdown':
-          temp = new DropdownDragComponent(this.canvas);
+      case 'dropdown':
+        temp = new DropdownDragComponent(this.canvas);
 
-          break;
+        break;
 
-        case 'img':
-          temp = new ImageDragComponent(this.canvas);
-          break;
+      case 'img':
+        temp = new ImageDragComponent(this.canvas);
+        break;
 
-        case 'radio':
-          temp = new RadioDragComponent(this.canvas);
-          break;
+      case 'radio':
+        temp = new RadioDragComponent(this.canvas);
+        break;
 
-        case 'textbox':
-          temp = new TextboxDragComponent(this.canvas);
-          break;
+      case 'textbox':
+        temp = new TextboxDragComponent(this.canvas);
+        break;
 
-        case 'popup':
-          this._popupCount++;
-          temp = new PopupDragComponent(this.canvas);
-          break;
+      case 'popup':
+        this._popupCount++;
+        temp = new PopupDragComponent(this.canvas);
+        break;
 
-        case 'paragraph':
-          temp = new ParagraphDragComponent(this.canvas);
-          break;
+      case 'paragraph':
+        temp = new ParagraphDragComponent(this.canvas);
+        break;
 
-        case 'nav':
-          temp = new NavbarDragComponent(this.canvas);
-          break;
+      case 'nav':
+        temp = new NavbarDragComponent(this.canvas);
+        break;
 
-        case 'modal':
-          temp = new ModalDragComponent(this.canvas);
-          break;
+      case 'modal':
+        temp = new ModalDragComponent(this.canvas);
+        break;
 
-        case 'datepicker':
-          temp = new DatepickerDragComponent(this.canvas);
-          break;
+      case 'datepicker':
+        temp = new DatepickerDragComponent(this.canvas);
+        break;
 
-        case 'header':
-          temp = new HeaderDragComponent(this.canvas);
-          break;
+      case 'header':
+        temp = new HeaderDragComponent(this.canvas);
+        break;
 
-        case 'input':
-          temp = new InputDragComponent(this.canvas);
-          break;
+      case 'input':
+        temp = new InputDragComponent(this.canvas);
+        break;
 
-        case 'link':
-          temp = new LinkDragComponent(this.canvas);
-          break;
-        case 'table':
-          temp = new TableDragComponent(this.canvas, this.changeref);
-          break;
-        default:
-          temp = new ButtonDragComponent(this.canvas);
-      
-      }
-      this.xCounter++;
-      this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
-      this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
-      this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
-      this.mousePositionX = this.canvasLeft ;
-      this.mousePositionY = this.canvasTop;
-      //console.log(this.canvasW+"rawr");
-      this.componentList.push(temp);
-    
+      case 'link':
+        temp = new LinkDragComponent(this.canvas);
+        break;
+      case 'table':
+        temp = new TableDragComponent(this.canvas, this.changeref);
+        break;
+      default:
+        temp = new ButtonDragComponent(this.canvas);
+    }
+    this.xCounter++;
+    this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
+    this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
+    this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
+    this.mousePositionX = this.canvasLeft;
+    this.mousePositionY = this.canvasTop;
+    //console.log(this.canvasW+"rawr");
+    this.componentList.push(temp);
   }
   //----------------------------------------------------------------------------
 
@@ -207,7 +203,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   mousePositionY = 110;
   domInsideCanvas = false;
 
-   /*
+  /*
   disableDragging(){
     let componentIndex = this.componentList.indexOf(this.selectedComponent);
     if (componentIndex !== -1) {
@@ -251,24 +247,32 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       switch (component) {
         case 'button':
           temp = new ButtonDragComponent(this.canvas);
-          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement).offsetWidth;
-          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement).offsetTop;
+          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement)
+            .offsetWidth;
+          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement)
+            .offsetTop;
           break;
         case 'label':
           temp = new LabelDragComponent(this.canvas);
-          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement).offsetWidth;
-          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement).offsetTop;
+          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement)
+            .offsetWidth;
+          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement)
+            .offsetTop;
           break;
         case 'checkbox':
           temp = new CheckboxDragComponent(this.canvas);
-          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement).offsetWidth;
-          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement).offsetTop;
+          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement)
+            .offsetWidth;
+          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement)
+            .offsetTop;
           break;
 
         case 'dropdown':
           temp = new DropdownDragComponent(this.canvas);
-          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement).offsetWidth;
-          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement).offsetTop;
+          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement)
+            .offsetWidth;
+          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement)
+            .offsetTop;
 
           break;
 
@@ -280,14 +284,18 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
         case 'radio':
           temp = new RadioDragComponent(this.canvas);
-          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement).offsetWidth;
-          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement).offsetTop;
+          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement)
+            .offsetWidth;
+          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement)
+            .offsetTop;
           break;
 
         case 'textbox':
           temp = new TextboxDragComponent(this.canvas);
-          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement).offsetWidth;
-          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement).offsetTop;
+          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement)
+            .offsetWidth;
+          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement)
+            .offsetTop;
           break;
 
         case 'popup':
@@ -299,8 +307,10 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
         case 'paragraph':
           temp = new ParagraphDragComponent(this.canvas);
-          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement).offsetWidth;
-          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement).offsetTop;
+          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement)
+            .offsetWidth;
+          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement)
+            .offsetTop;
           break;
 
         case 'nav':
@@ -317,20 +327,26 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
         case 'datepicker':
           temp = new DatepickerDragComponent(this.canvas);
-          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement).offsetWidth;
-          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement).offsetTop;
+          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement)
+            .offsetWidth;
+          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement)
+            .offsetTop;
           break;
 
         case 'header':
           temp = new HeaderDragComponent(this.canvas);
-          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement).offsetWidth;
-          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement).offsetTop;
+          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement)
+            .offsetWidth;
+          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement)
+            .offsetTop;
           break;
 
         case 'input':
           temp = new InputDragComponent(this.canvas);
-          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement).offsetWidth;
-          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement).offsetTop;
+          canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement)
+            .offsetWidth;
+          canvasTopY = (this.subMenuItem.nativeElement as HTMLElement)
+            .offsetTop;
           break;
 
         case 'link':
@@ -348,10 +364,10 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
           canvasLeftX = 0;
           canvasTopY = 0;
       }
-      
-    this.mousePositionX = offsetLeft + x + canvasLeftX;
-    this.mousePositionY = offsetTop + y + canvasTopY;
-    
+
+      this.mousePositionX = offsetLeft + x + canvasLeftX;
+      this.mousePositionY = offsetTop + y + canvasTopY;
+
       setTimeout(() => {
         this.xCounter++;
         console.log(this.xCounter);
@@ -450,7 +466,9 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.mouseMoveY = item;
   }
 
-  ngAfterViewChecked() {this.changeref.detectChanges();}
+  ngAfterViewChecked() {
+    this.changeref.detectChanges();
+  }
   jude = 'aw';
   clickHandler(component: IComponent) {
     this.selected = component.props;
@@ -611,28 +629,220 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.refreshCSS.next(true);
   }*/
 
-  refresh(): void{
-    this._router.navigateByUrl("/refresh", {skipLocationChange:true}).then(() => {
-      //console.log([decodeURI(this._location.path())]);
-      this._router.navigate([decodeURI(this._location.path())]);
-    });
+  refresh(): void {
+    this._router
+      .navigateByUrl('/refresh', { skipLocationChange: true })
+      .then(() => {
+        //console.log([decodeURI(this._location.path())]);
+        this._router.navigate([decodeURI(this._location.path())]);
+      });
   }
 
-  cssString(){
-    console.log(
-      this._styleStart +
-      '\n' +
-      this.style +
-      '\n' +
-      this._styleEnd
-    );
-    return(
-      this._styleStart +
-      '\n' +
-      this.style +
-      '\n' +
-      this._styleEnd
-    );
+  cssString() {
+    console.log(this._styleStart + '\n' + this.style + '\n' + this._styleEnd);
+    return this._styleStart + '\n' + this.style + '\n' + this._styleEnd;
+  }
+
+  addComponentHomePage() {
+    let temp: IComponent;
+    this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
+    this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
+    this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
+
+    this.whatComponent = 'HPNav1';
+    temp = new NavbarDragComponent(this.canvas);
+    this.mousePositionX = this.canvasLeft + 250;
+    this.mousePositionY = this.canvasTop + 40;
+
+    this.componentList.push(temp);
+
+    setTimeout(() => {
+      this.whatComponent = 'HPNav2';
+      temp = new NavbarDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft;
+      this.mousePositionY = this.canvasTop;
+
+      this.componentList.push(temp);
+    }, 100);
+
+    setTimeout(() => {
+      this.whatComponent = 'HPP8';
+      temp = new ParagraphDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft + 1050;
+      this.mousePositionY = this.canvasTop;
+
+      this.componentList.push(temp);
+    }, 100);
+
+    setTimeout(() => {
+      this.whatComponent = 'HPLink7';
+      temp = new LinkDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft + 980;
+      this.mousePositionY = this.canvasTop + 60;
+      this.componentList.push(temp);
+    }, 100);
+
+    setTimeout(() => {
+      this.whatComponent = 'HPLink8';
+      temp = new LinkDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft + 1080;
+      this.mousePositionY = this.canvasTop + 60;
+      this.componentList.push(temp);
+    }, 100);
+
+    setTimeout(() => {
+      this.whatComponent = 'HPLink9';
+      temp = new LinkDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft + 1210;
+      this.mousePositionY = this.canvasTop + 60;
+      this.componentList.push(temp);
+    }, 100);
+
+    setTimeout(() => {
+      this.whatComponent = 'HPLabel1';
+      temp = new LabelDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft + 20;
+      this.mousePositionY = this.canvasTop + 65;
+      this.componentList.push(temp);
+    }, 100);
+
+    setTimeout(() => {
+      this.whatComponent = 'HPLink1';
+      temp = new LinkDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft + 20;
+      this.mousePositionY = this.canvasTop + 100;
+      this.componentList.push(temp);
+    }, 100);
+    setTimeout(() => {
+      this.whatComponent = 'HPLink2';
+      temp = new LinkDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft + 120;
+      this.mousePositionY = this.canvasTop + 100;
+      this.componentList.push(temp);
+    }, 100);
+    setTimeout(() => {
+      this.whatComponent = 'HPLink3';
+      temp = new LinkDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft + 200;
+      this.mousePositionY = this.canvasTop + 100;
+      this.componentList.push(temp);
+    }, 100);
+    setTimeout(() => {
+      this.whatComponent = 'HPNav3';
+      temp = new NavbarDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft;
+      this.mousePositionY = this.canvasTop + 140;
+      this.componentList.push(temp);
+    }, 100);
+
+    setTimeout(() => {
+      this.whatComponent = 'HPLabel2';
+      temp = new LabelDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft + 600;
+      this.mousePositionY = this.canvasTop + 160;
+      this.componentList.push(temp);
+    }, 100);
+
+    setTimeout(() => {
+      this.whatComponent = 'HPLabel3';
+      temp = new LabelDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft + 540;
+      this.mousePositionY = this.canvasTop + 200;
+      this.componentList.push(temp);
+    }, 100);
+    setTimeout(() => {
+      this.whatComponent = 'HPLink4';
+      temp = new LinkDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft + 430;
+      this.mousePositionY = this.canvasTop + 240;
+      this.componentList.push(temp);
+    }, 100);
+    setTimeout(() => {
+      this.whatComponent = 'HPLink5';
+      temp = new LinkDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft + 560;
+      this.mousePositionY = this.canvasTop + 240;
+      this.componentList.push(temp);
+    }, 100);
+    setTimeout(() => {
+      this.whatComponent = 'HPLink6';
+      temp = new LinkDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft + 690;
+      this.mousePositionY = this.canvasTop + 240;
+      this.componentList.push(temp);
+    }, 100);
+
+    setTimeout(() => {
+      this.whatComponent = 'HPImage2';
+      temp = new ImageDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft + 330;
+      this.mousePositionY = this.canvasTop + 300;
+      this.componentList.push(temp);
+    }, 100);
+    setTimeout(() => {
+      this.whatComponent = 'HPImage3';
+      temp = new ImageDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft + 645;
+      this.mousePositionY = this.canvasTop + 300;
+      this.componentList.push(temp);
+    }, 100);
+    setTimeout(() => {
+      this.whatComponent = 'HPImage1';
+      temp = new ImageDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft + 15;
+      this.mousePositionY = this.canvasTop + 300;
+      this.componentList.push(temp);
+    }, 100);
+    /* setTimeout(() => {
+      this.whatComponent = 'HPImage4';
+      temp = new ImageDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft + 960;
+      this.mousePositionY = this.canvasTop + 300;
+      this.componentList.push(temp);
+    }, 100); */
+
+    setTimeout(() => {
+      this.whatComponent = 'HPP2';
+      temp = new ParagraphDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft + 960;
+      this.mousePositionY = this.canvasTop + 300;
+      this.componentList.push(temp);
+    }, 100);
+    setTimeout(() => {
+      this.whatComponent = 'HPP3';
+      temp = new ParagraphDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft + 960;
+      this.mousePositionY = this.canvasTop + 400;
+      this.componentList.push(temp);
+    }, 100);
+    setTimeout(() => {
+      this.whatComponent = 'HPP4';
+      temp = new ParagraphDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft + 960;
+      this.mousePositionY = this.canvasTop + 500;
+      this.componentList.push(temp);
+    }, 100);
+    setTimeout(() => {
+      this.whatComponent = 'HPP5';
+      temp = new ParagraphDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft + 960;
+      this.mousePositionY = this.canvasTop + 350;
+      this.componentList.push(temp);
+    }, 100);
+    setTimeout(() => {
+      this.whatComponent = 'HPP6';
+      temp = new ParagraphDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft + 960;
+      this.mousePositionY = this.canvasTop + 450;
+      this.componentList.push(temp);
+    }, 100);
+    setTimeout(() => {
+      this.whatComponent = 'HPP7';
+      temp = new ParagraphDragComponent(this.canvas);
+      this.mousePositionX = this.canvasLeft + 960;
+      this.mousePositionY = this.canvasTop + 550;
+      this.componentList.push(temp);
+    }, 100);
   }
 
   addComponentSearchScreen() {
@@ -833,77 +1043,88 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
   */
 
-  cssReceiveMessage(){
-    this.style = "";
+  cssReceiveMessage() {
+    this.style = '';
     console.log(document.styleSheets.item(0));
-    let  newCssRuleCount = document.styleSheets[0].cssRules.length;
-    let cssString:string;
+    let newCssRuleCount = document.styleSheets[0].cssRules.length;
+    let cssString: string;
 
-    for(let i=this.cssRuleCount; i < newCssRuleCount; i++){
+    for (let i = this.cssRuleCount; i < newCssRuleCount; i++) {
       cssString = document.styleSheets[0].cssRules[i].cssText.toString();
       //console.log(document.styleSheets[0].cssRules[i].cssText.toString().substring(0,7));
-      if(document.styleSheets[0].cssRules[i].cssText.toString().substring(0,11) == "#canvasBody"){
-        if(document.styleSheets[0].cssRules[i].cssText.toString().substring(11,13) == " {"){
-        this.style += "body" + cssString.substring(11,cssString.length);
-        this.style += "\n";
-      }else{
-        this.style += cssString.substring(11,cssString.length);
-        this.style += "\n";
-      }
+      if (
+        document.styleSheets[0].cssRules[i].cssText
+          .toString()
+          .substring(0, 11) == '#canvasBody'
+      ) {
+        if (
+          document.styleSheets[0].cssRules[i].cssText
+            .toString()
+            .substring(11, 13) == ' {'
+        ) {
+          this.style += 'body' + cssString.substring(11, cssString.length);
+          this.style += '\n';
+        } else {
+          this.style += cssString.substring(11, cssString.length);
+          this.style += '\n';
+        }
         //console.log(cssString);
-      }else{
+      } else {
         this.style += document.styleSheets[0].cssRules[i].cssText.toString();
-        this.style += "\n";
+        this.style += '\n';
         //console.log(document.styleSheets[0].cssRules[i].cssText.toString());
       }
       //console.log(document.styleSheets[0].cssRules[i].cssText.toString().substring(0,11));
     }
   }
 
-  addAllCSSRule(allCSSRule: any){
+  addAllCSSRule(allCSSRule: any) {
     //console.log(allCSSRule.length);
     let allCSSRuleCount = 0;
     let stringIndex = 0;
     let startingIndex = 0;
     let curlyBraces = 0;
-    let cssString = "";
-    let newCSSRule = "";
+    let cssString = '';
+    let newCSSRule = '';
     let newCSSRuleCount = document.styleSheets[0].cssRules.length;
-    
-    while(document.styleSheets[0].cssRules.length != this.cssRuleCount){
-      let numberOfRules = document.styleSheets[0].cssRules.length - this.cssRuleCount;
+
+    while (document.styleSheets[0].cssRules.length != this.cssRuleCount) {
+      let numberOfRules =
+        document.styleSheets[0].cssRules.length - this.cssRuleCount;
       //let cssRuleStringTemp = document.styleSheets[0].cssRules[newCSSRuleCount-1].cssText.toString();
       //console.log("deleting: " + cssRuleStringTemp);
-      console.log("this is the start of RuleCount: " + this.cssRuleCount);
-      console.log("this is the current RuleCount: " + (document.styleSheets[0].cssRules.length-1));
-      console.log("this is the new RuleCount: " + numberOfRules);
-      document.styleSheets.item(0)?.deleteRule(document.styleSheets[0].cssRules.length-1);
+      console.log('this is the start of RuleCount: ' + this.cssRuleCount);
+      console.log(
+        'this is the current RuleCount: ' +
+          (document.styleSheets[0].cssRules.length - 1)
+      );
+      console.log('this is the new RuleCount: ' + numberOfRules);
+      document.styleSheets
+        .item(0)
+        ?.deleteRule(document.styleSheets[0].cssRules.length - 1);
     }
-    
-    
-    for(let i = 0; i < allCSSRule.length; i++){
-      if(allCSSRule[i] != " " && allCSSRule[i] != "\n"){
+
+    for (let i = 0; i < allCSSRule.length; i++) {
+      if (allCSSRule[i] != ' ' && allCSSRule[i] != '\n') {
         newCSSRule += allCSSRule[i];
         //console.log(newCSSRule);
-      }
-      else{
-        console.log("White space detected at: " + i);
+      } else {
+        console.log('White space detected at: ' + i);
       }
     }
     console.log(newCSSRule.toString());
 
-    while(stringIndex < newCSSRule.length-1){
-      for(let i = stringIndex; i <= newCSSRule.length-1; i++){
+    while (stringIndex < newCSSRule.length - 1) {
+      for (let i = stringIndex; i <= newCSSRule.length - 1; i++) {
         //console.log(allCSSRule[i].toString());
-        if(newCSSRule[i] == '{'){
+        if (newCSSRule[i] == '{') {
           curlyBraces++;
         }
-        if(newCSSRule[i] == '}' && curlyBraces >= 2){
+        if (newCSSRule[i] == '}' && curlyBraces >= 2) {
           curlyBraces--;
-        }
-        else if(newCSSRule[i] == '}' && curlyBraces == 1){
+        } else if (newCSSRule[i] == '}' && curlyBraces == 1) {
           curlyBraces--;
-          cssString = ""
+          cssString = '';
           cssString = newCSSRule.substring(startingIndex, i + 1).toString();
 
           //console.log(cssString.toString());
@@ -928,35 +1149,34 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   addCSSRule(cssString: string) {
     //console.log(this.style);
-    let  newCssRuleCount = document.styleSheets[0].cssRules.length;
+    let newCssRuleCount = document.styleSheets[0].cssRules.length;
     //const select = document.querySelector('styleSelectorID');
     //let cssRuleString = document.styleSheets[0].cssRules[this.cssRuleCount].cssText.toString();
     let cssStringTemp;
-    let cssRuleStringTemp: string; 
-    let cssCanvasSelector = cssString.substring(0, cssString.indexOf('{'));;
+    let cssRuleStringTemp: string;
+    let cssCanvasSelector = cssString.substring(0, cssString.indexOf('{'));
     let cssRuleStringClassID = cssString.substring(0, cssString.indexOf('{'));
     let ruleFound = 0;
     let ruleNumber;
     let generalRule = false;
 
-    
-    if(cssString[0] == '.'){
-      console.log(cssRuleStringClassID + " is a Class selector");
-    }
-    else if(cssString[0] == '#'){
-      console.log(cssRuleStringClassID + " is an ID selector");
-    }
-    else if((cssString[0] != '#') && (cssString[0] != '.')){
+    if (cssString[0] == '.') {
+      console.log(cssRuleStringClassID + ' is a Class selector');
+    } else if (cssString[0] == '#') {
+      console.log(cssRuleStringClassID + ' is an ID selector');
+    } else if (cssString[0] != '#' && cssString[0] != '.') {
       generalRule = true;
-      console.log("\""+cssCanvasSelector+"\" is a general Selector;");
+      console.log('"' + cssCanvasSelector + '" is a general Selector;');
     }
 
     //console.log("This is the selector: " + cssString.substring(0, cssString.indexOf('{')).toString());
-    if (generalRule == true){
-      switch(cssString.substring(0, cssString.indexOf('{'))){
-        case 'body':{
+    if (generalRule == true) {
+      switch (cssString.substring(0, cssString.indexOf('{'))) {
+        case 'body': {
           //console.warn("The CSS rule is for the 'body' selector, retype the rule.");
-          cssStringTemp = "#canvasBody " + cssString.substring(cssString.indexOf('{')).toString();
+          cssStringTemp =
+            '#canvasBody ' +
+            cssString.substring(cssString.indexOf('{')).toString();
           //console.log(cssStringTemp);
           /*
           this.cssBody = this.doms.bypassSecurityTrustStyle(cssString.substring(cssString.indexOf('{')).toString());
@@ -975,25 +1195,32 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
           break;
         }
         */
-        default:{
-          cssStringTemp = "#canvasBody " + cssCanvasSelector + cssString.substring(cssString.indexOf('{')).toString();
+        default: {
+          cssStringTemp =
+            '#canvasBody ' +
+            cssCanvasSelector +
+            cssString.substring(cssString.indexOf('{')).toString();
           //console.log(cssStringTemp);
           //console.log("Nothing to compare to.");
           break;
         }
       }
-    }else{
-      for(let i=this.cssRuleCount; i < newCssRuleCount; i++){
-        cssRuleStringTemp = document.styleSheets[0].cssRules[i].cssText.toString();
-        if(cssRuleStringTemp.substring(0, cssString.indexOf('{')) === (cssRuleStringClassID).toString())
-        {
-          console.log("Class found!");
+    } else {
+      for (let i = this.cssRuleCount; i < newCssRuleCount; i++) {
+        cssRuleStringTemp =
+          document.styleSheets[0].cssRules[i].cssText.toString();
+        if (
+          cssRuleStringTemp.substring(0, cssString.indexOf('{')) ===
+          cssRuleStringClassID.toString()
+        ) {
+          console.log('Class found!');
           ruleFound = 1;
           ruleNumber = i;
-        }
-        else if(cssRuleStringTemp.substring(0, cssString.indexOf('{')) === (cssRuleStringClassID).toString())
-        {
-          console.log("ID found!");
+        } else if (
+          cssRuleStringTemp.substring(0, cssString.indexOf('{')) ===
+          cssRuleStringClassID.toString()
+        ) {
+          console.log('ID found!');
           ruleFound = 1;
           ruleNumber = i;
         }
@@ -1001,9 +1228,14 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       }
     }
 
-    if(ruleFound == 1 && generalRule == false){
-      console.log("this is the ruleNumber: " + ruleNumber);
-      document.styleSheets.item(0)?.insertRule("\n" + cssString + "\n", document.styleSheets[0].cssRules.length);
+    if (ruleFound == 1 && generalRule == false) {
+      console.log('this is the ruleNumber: ' + ruleNumber);
+      document.styleSheets
+        .item(0)
+        ?.insertRule(
+          '\n' + cssString + '\n',
+          document.styleSheets[0].cssRules.length
+        );
       document.styleSheets.item(0)?.deleteRule(ruleNumber);
       /*
       console.log(
@@ -1014,44 +1246,55 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       );
       */
       ruleFound = 0;
-    }else if(ruleFound == 0 && generalRule == false){
-      document.styleSheets.item(0)?.insertRule("\n" + cssString + "\n", document.styleSheets[0].cssRules.length);
+    } else if (ruleFound == 0 && generalRule == false) {
+      document.styleSheets
+        .item(0)
+        ?.insertRule(
+          '\n' + cssString + '\n',
+          document.styleSheets[0].cssRules.length
+        );
       //console.log("adding style to: " + document.styleSheets[0].cssRules[this.cssRuleCount].cssText.toString());
-    }
-    else if (ruleFound == 0 && generalRule == true){
+    } else if (ruleFound == 0 && generalRule == true) {
       //console.log("The Rule you are trying to edit is a general CSS Rule. Add a Class or ID.");
-      document.styleSheets.item(0)?.insertRule("\n " + cssStringTemp + "\n", document.styleSheets[0].cssRules.length);
+      document.styleSheets
+        .item(0)
+        ?.insertRule(
+          '\n ' + cssStringTemp + '\n',
+          document.styleSheets[0].cssRules.length
+        );
       //console.log("adding style to: " + document.styleSheets[0].cssRules[this.cssRuleCount].cssText.toString());
     }
 
-    console.log("this is the starting number: " + this.cssRuleCount);
+    console.log('this is the starting number: ' + this.cssRuleCount);
     console.log(document.styleSheets.item(0));
   }
 
-
   deleteCSSRule(cssString: string) {
-    let  newCssRuleCount = document.styleSheets[0].cssRules.length;
-    let cssRuleStringTemp: string; 
+    let newCssRuleCount = document.styleSheets[0].cssRules.length;
+    let cssRuleStringTemp: string;
     let cssRuleStringClassID = cssString.substring(0, cssString.indexOf('{'));
     let ruleFound = 0;
     let ruleNumber;
-    for(let i=this.cssRuleCount; i < newCssRuleCount; i++){
-      cssRuleStringTemp = document.styleSheets[0].cssRules[i].cssText.toString();
+    for (let i = this.cssRuleCount; i < newCssRuleCount; i++) {
+      cssRuleStringTemp =
+        document.styleSheets[0].cssRules[i].cssText.toString();
       //console.log(cssRuleStringTemp);
-      if(
-        (cssRuleStringTemp.includes(cssRuleStringClassID)) 
-        || (cssRuleStringTemp.substring(0, cssString.indexOf('{')).includes("#canvasBody "+cssRuleStringClassID)) 
-        || (cssRuleStringClassID == "#canvasBody ")
-      ){
-        console.log("rule found!");
+      if (
+        cssRuleStringTemp.includes(cssRuleStringClassID) ||
+        cssRuleStringTemp
+          .substring(0, cssString.indexOf('{'))
+          .includes('#canvasBody ' + cssRuleStringClassID) ||
+        cssRuleStringClassID == '#canvasBody '
+      ) {
+        console.log('rule found!');
         ruleFound = 1;
         ruleNumber = i;
       }
     }
-    if(ruleFound == 1){
+    if (ruleFound == 1) {
       document.styleSheets.item(0)?.deleteRule(ruleNumber);
-      console.log("Rule " + ruleNumber + " deleted");
-    }else if(ruleFound == 0){
+      console.log('Rule ' + ruleNumber + ' deleted');
+    } else if (ruleFound == 0) {
       console.log("Rule doesn't exist");
     }
   }
@@ -1098,4 +1341,3 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 function readCSSFile(arg0: string) {
   throw new Error('Function not implemented.');
 }
-

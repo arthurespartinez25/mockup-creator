@@ -1,12 +1,19 @@
 import { CdkDragEnd } from '@angular/cdk/drag-drop';
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
 
 @Component({
   selector: 'app-headerDrag',
   templateUrl: './headerDrag.component.html',
-  styleUrls: ['./headerDrag.component.css']
+  styleUrls: ['./headerDrag.component.css'],
 })
 export class HeaderDragComponent implements OnInit, IComponent {
   canvas: ElementRef;
@@ -30,15 +37,15 @@ export class HeaderDragComponent implements OnInit, IComponent {
     }
   }
 
-  @Output() updateDataEvent= new EventEmitter<any>();
-  @Output() updateDataEventY= new EventEmitter<any>();
+  @Output() updateDataEvent = new EventEmitter<any>();
+  @Output() updateDataEventY = new EventEmitter<any>();
   @Input() xcanvas: any;
   @Input() ycanvas: any;
   @Input() xmouse: any;
   @Input() ymouse: any;
-  @Input() whatComponent2:any;
+  @Input() whatComponent2: any;
   mousePositionXV2 = 310;
-  mousePositionYV2= 110;
+  mousePositionYV2 = 110;
   theX = 0;
   theY = 0;
   dagaX = 0;
@@ -52,35 +59,46 @@ export class HeaderDragComponent implements OnInit, IComponent {
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
-    this.percentageX = ((this.xmouse-this.theX)/1280)*100; 
-    this.percentageY = ((this.ymouse-this.theY)/720)*100;
-    if(this.whatComponent2=="loginHeader")
-    {
-      this.props.value = "Login123";
-      this.props.style='color:blue;position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
-    }
-    else if(this.whatComponent2=="searchHeader")
-    {
-      this.props.value = "error message to reflect here";
-      this.props.style = 'color:red;position:absolute;font-size: medium;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
-    }
-    else
-    {
-      this.props.style='width:300px;color:red;position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
+    this.percentageX = ((this.xmouse - this.theX) / 1280) * 100;
+    this.percentageY = ((this.ymouse - this.theY) / 720) * 100;
+    if (this.whatComponent2 == 'loginHeader') {
+      this.props.value = 'Welcome!';
+      this.props.style =
+        'text-transform:uppercase;color:black;position:absolute;left:' +
+        this.percentageX +
+        '%;top:' +
+        this.percentageY +
+        '%;';
+    } else if (this.whatComponent2 == 'searchHeader') {
+      this.props.value = 'error message to reflect here';
+      this.props.style =
+        'color:red;position:absolute;font-size: medium;left:' +
+        this.percentageX +
+        '%;top:' +
+        this.percentageY +
+        '%;';
+    } else {
+      this.props.style =
+        'width:300px;color:red;position:absolute;left:' +
+        this.percentageX +
+        '%;top:' +
+        this.percentageY +
+        '%;';
     }
   }
-  
 
-  onDragEnded($event: CdkDragEnd){
+  onDragEnded($event: CdkDragEnd) {
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
     this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
-    this.updateDataEvent.emit(((this.mousePositionXV2 + this.dagaX - this.theX)/1280)*100);
-    this.updateDataEventY.emit(((this.mousePositionYV2 + this.dagaY - this.theY)/720)*100);
+    this.updateDataEvent.emit(
+      ((this.mousePositionXV2 + this.dagaX - this.theX) / 1280) * 100
+    );
+    this.updateDataEventY.emit(
+      ((this.mousePositionYV2 + this.dagaY - this.theY) / 720) * 100
+    );
   }
 
-  
-
-  constructor(canvas: ElementRef) { 
+  constructor(canvas: ElementRef) {
     this.canvas = canvas;
     let date = Date.now();
     this.props.key = date.toString();
@@ -104,6 +122,4 @@ export class HeaderDragComponent implements OnInit, IComponent {
 
     return tmpHtmlCode;
   }
-
- 
 }
