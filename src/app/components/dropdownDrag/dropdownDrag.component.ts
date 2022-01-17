@@ -143,9 +143,11 @@ export class DropdownDragComponent implements OnInit,IComponent {
     tmpHtmlCode +="\n" + ' <span class="sr-only">Toggle Dropdown</span>';
     tmpHtmlCode +="\n" + ' </button>';
     tmpHtmlCode +="\n" + ' <div class="dropdown-menu">';
-    for(var i=0; i<this.props.linksArray.length; i++) {
-      tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.linksArray[i] + '</a>';
-    }
+    setTimeout(() => {
+      for(var i=0; i<this.props.linksArray.length; i++) {
+        tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.linksArray[i] + '</a>';
+      }
+    }, 1000);
     tmpHtmlCode +="\n" + ' </div>';
     tmpHtmlCode +="\n" + ' </div>';
     
