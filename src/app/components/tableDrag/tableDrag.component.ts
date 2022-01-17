@@ -155,12 +155,19 @@ export class TableDragComponent implements OnInit, IComponent {
   currentCol: number;
   currentVal: string = '';
   previousVal: string = '';
+  percentageX = 0;
+  percentageY = 0;
 
   ngOnInit(): void {
     this.theX = this.xcanvas;
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
+    this.percentageX = ((this.xmouse-this.theX)/1280)*100; 
+    this.percentageY = ((this.ymouse-this.theY)/720)*100;
+  }
+  ngAfterChecked()
+  {
     this.props.style='position:absolute;left:'+(this.xmouse-this.theX)+'px;top:'+(this.ymouse-this.theY)+'px;';
   }
 

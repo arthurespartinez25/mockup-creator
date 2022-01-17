@@ -1,9 +1,9 @@
 <nav cdkDrag cdkDragBoundary="#canvas" class="custom-nav" [id]="props.id" [style]="props.style"
 (cdkDragEnded)="onDragEnded($event)" [ngStyle]="{
     'width':+this.theCanvasWidth+'px',
-    'position': 'fixed',
-    'left': xcanvas + 'px',
-    'top': dagaY + 'px'
+    'position': 'sticky',
+    'left': (xcanvas) + 'px',
+    'top': (dagaY) + 'px'
   }">
   {{ props.value }}
 </nav>

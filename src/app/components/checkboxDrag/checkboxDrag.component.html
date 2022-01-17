@@ -1,8 +1,8 @@
 <div cdkDrag cdkDragBoundary="#canvas" (cdkDragEnded)="onDragEnded($event)" [ngStyle]="{
-    'position': 'fixed',
-    'left': dagaX + 'px',
-    'top': dagaY + 'px'
-  }">
+    'position': 'sticky',
+    'left': (dagaX-theX) + 'px',
+    'top': (dagaY-theY) + 'px'
+  }" >
     <div *ngIf="props.checked=='true'; else unchecked" class="form-check" >
         <input [id]="props.id" [class]="props.class" [type]="props.type" (change)="isChecked($event)" checked>
         <label class="form-check-label" [for]="props.id" [style]="props.style">

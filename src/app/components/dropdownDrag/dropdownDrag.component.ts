@@ -37,15 +37,21 @@ export class DropdownDragComponent implements OnInit,IComponent {
   dagaY = 0;
   onetimeBool = true;
   links = this.props.links;
+  percentageX = 0;
+  percentageY = 0;
 
   ngOnInit(): void {
     this.theX = this.xcanvas;
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
-    let percentageX = ((this.xmouse-this.theX)/1280)*100; 
-    let percentageY = ((this.ymouse-this.theY)/720)*100;
-    this.props.style='position:sticky;left:'+percentageX+'%;top:'+percentageY+'%;';
+    this.percentageX = ((this.xmouse-this.theX)/1280)*100; 
+    this.percentageY = ((this.ymouse-this.theY)/720)*100;
+    
+  }
+  ngAfterChecked()
+  {
+    this.props.style='position:sticky;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
   }
 
   onDragEnded($event: CdkDragEnd){

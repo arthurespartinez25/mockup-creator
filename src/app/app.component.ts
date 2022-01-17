@@ -187,15 +187,12 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   mousePositionY = 110;
   domInsideCanvas = false;
 
-  onDragEnded(event: CdkDragEnd) {
+  onDragEndedAddComponent(event: CdkDragEnd, component: string) {
     event.source._dragRef.reset();
     const { offsetLeft, offsetTop } = event.source.element.nativeElement;
     const { x, y } = event.distance;
     this.mousePositionX = offsetLeft + x;
     this.mousePositionY = offsetTop + y;
-  }
-
-  onDragEndedAddComponent(component: string) {
     if (this.domInsideCanvas == true) {
       let temp: IComponent;
       switch (component) {
@@ -264,13 +261,15 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         default:
           temp = new ButtonDragComponent(this.canvas);
       }
-      this.xCounter++;
-      console.log(this.xCounter);
-      this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
-      this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
-      this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
-      console.log(this.canvasW + 'rawr');
-      this.componentList.push(temp);
+      setTimeout(() => {
+        this.xCounter++;
+        console.log(this.xCounter);
+        this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
+        this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
+        this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
+        console.log(this.canvasW + 'rawr');
+        this.componentList.push(temp);
+      }, 1);
     }
   }
 
