@@ -138,16 +138,9 @@ export class DropdownDragComponent implements OnInit,IComponent {
     tmpHtmlCode +="\n" + ' </button>';
     tmpHtmlCode +="\n" + ' <div class="dropdown-menu">';
     
-<<<<<<< Updated upstream
     for(var i=0; i<this.props.linksArray.length; i++) {
       tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.linksArray[i] + '</a>';
     }
-=======
-      for(var i=0; i<this.props.linksArray.length; i++) {
-        tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.linksArray[i] + '</a>';
-      }
-    
->>>>>>> Stashed changes
     tmpHtmlCode +="\n" + ' </div>';
     tmpHtmlCode +="\n" + ' </div>';
     
