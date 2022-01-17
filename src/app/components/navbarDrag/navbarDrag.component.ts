@@ -1,5 +1,12 @@
 import { CdkDragEnd } from '@angular/cdk/drag-drop';
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
 
@@ -24,15 +31,15 @@ export class NavbarDragComponent implements OnInit, IComponent {
   };
 
   @Input() canvasWW: any;
-  @Output() updateDataEvent= new EventEmitter<any>();
-  @Output() updateDataEventY= new EventEmitter<any>();
+  @Output() updateDataEvent = new EventEmitter<any>();
+  @Output() updateDataEventY = new EventEmitter<any>();
   @Input() xcanvas: any;
   @Input() ycanvas: any;
   @Input() xmouse: any;
   @Input() ymouse: any;
-  @Input() whatComponent2:any;
+  @Input() whatComponent2: any;
   mousePositionXV2 = 310;
-  mousePositionYV2= 110;
+  mousePositionYV2 = 110;
   theX = 0;
   theY = 0;
   dagaX = 0;
@@ -42,7 +49,6 @@ export class NavbarDragComponent implements OnInit, IComponent {
   percentageX = 0;
   percentageY = 0;
 
-
   ngOnInit(): void {
     //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
     this.theX = this.xcanvas;
@@ -50,27 +56,63 @@ export class NavbarDragComponent implements OnInit, IComponent {
     this.theCanvasWidth = this.canvasWW;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
-    this.percentageX = ((this.xmouse-this.theX)/1280)*100;
-    this.percentageY = ((this.ymouse-this.theY)/720)*100;
-    if(this.whatComponent2 == "searchNavbar")
-    {
-      this.props.value = "AWS";
-      this.props.style='width: 100%; color: white;padding: 10px;background-color: #12355B;font-size: 20px;left:'
-    +this.percentageX+'%;top:'+this.percentageY+'%;';
-    }
-    else
-    {
-      this.props.style='position:absolute;width:'+this.theCanvasWidth+ 'color: white;padding: 10px;background-color: #12355B;font-size: 20px;left:0%;top:'+this.percentageY+'%;';
+    this.percentageX = ((this.xmouse - this.theX) / 1280) * 100;
+    this.percentageY = ((this.ymouse - this.theY) / 720) * 100;
+    if (this.whatComponent2 == 'searchNavbar') {
+      this.props.value = 'AWS';
+      this.props.style =
+        'width: 100%; color: white;padding: 10px;background-color: #12355B;font-size: 20px;left:' +
+        this.percentageX +
+        '%;top:' +
+        this.percentageY +
+        '%;';
+    } else if (this.whatComponent2 == 'HPNav1') {
+      this.props.style = `width: 100%; 
+      height: 100px;
+      color: white;
+      padding: 10px;
+      background-color: #000;
+      font-size: 20px;
+      border-bottom: 1px solid  white;
+      position:absolute;top:5.555555555555555%;left:0px;`;
+      this.props.value = '';
+    } else if (this.whatComponent2 == 'HPNav2') {
+      this.props.style = `width: 100%; 
+      color: white;
+      padding: 10px;
+      background-color: #000;
+      font-size: 10px;
+      border-bottom: 1px dotted  white;
+      position:absolute;top:-0.06944444444444445%;left:0px;`;
+      this.props.value = `50% OFF  OUR A LA CARTE MENU IN FEBRUARY!`;
+    } else if (this.whatComponent2 == 'HPNav3') {
+      this.props.style = `width: 100%; 
+      height: 140px;
+      color: white;
+      padding: 10px;
+      background-color: #000;
+      font-size: 20px;
+      border-bottom: 1px solid  white;
+      position:absolute;left:0px;top:18.88888888888889%;`;
+      this.props.value = ``;
+    } else {
+      this.props.style =
+        'position:absolute;width:' +
+        this.theCanvasWidth +
+        'color: white;padding: 10px;background-color: #12355B;font-size: 20px;left:0%;top:' +
+        this.percentageY +
+        '%;';
     }
   }
-  
 
-  onDragEnded($event: any){
+  onDragEnded($event: any) {
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
     this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
 
     this.updateDataEvent.emit(0);
-    this.updateDataEventY.emit(((this.mousePositionYV2 + this.dagaY - this.theY)/720)*100);
+    this.updateDataEventY.emit(
+      ((this.mousePositionYV2 + this.dagaY - this.theY) / 720) * 100
+    );
     console.log(this.theCanvasWidth);
   }
 

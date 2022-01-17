@@ -1,22 +1,34 @@
 import { CdkDragEnd } from '@angular/cdk/drag-drop';
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
 
 @Component({
   selector: 'app-buttonDrag',
-  template: `<button cdkDrag cdkDragBoundary="#canvas" 
-  [cdkDragDisabled]="!props.draggable"
-  (cdkDragEnded)="onDragEnded($event)" [id]="props.id" [style]="props.style" 
-  [ngStyle]="{
-    'position': 'sticky',
-    'left': (dagaX) + 'px',
-    'top': (dagaY) + 'px'
-  }" [type]="props.type">
+  template: `<button
+    cdkDrag
+    cdkDragBoundary="#canvas"
+    [cdkDragDisabled]="!props.draggable"
+    (cdkDragEnded)="onDragEnded($event)"
+    [id]="props.id"
+    [style]="props.style"
+    [ngStyle]="{
+      position: 'sticky',
+      left: dagaX + 'px',
+      top: dagaY + 'px'
+    }"
+    [type]="props.type"
+  >
     {{ props.value }}
   </button>`,
 })
-
 export class ButtonDragComponent implements IComponent {
   canvas: ElementRef;
   props: IProperty = {
@@ -29,15 +41,15 @@ export class ButtonDragComponent implements IComponent {
     type: 'button',
   };
 
-  @Output() updateDataEvent= new EventEmitter<any>();
-  @Output() updateDataEventY= new EventEmitter<any>();
+  @Output() updateDataEvent = new EventEmitter<any>();
+  @Output() updateDataEventY = new EventEmitter<any>();
   @Input() xcanvas: any;
   @Input() ycanvas: any;
   @Input() xmouse: any;
   @Input() ymouse: any;
-  @Input() whatComponent2:any;
+  @Input() whatComponent2: any;
   mousePositionXV2 = 310;
-  mousePositionYV2= 110;
+  mousePositionYV2 = 110;
   theX = 0;
   theY = 0;
   dagaX = 0;
@@ -51,59 +63,79 @@ export class ButtonDragComponent implements IComponent {
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
-    this.percentageX = ((this.xmouse-this.theX)/1280)*100;
-    this.percentageY = ((this.ymouse-this.theY)/720)*100;
-    if(this.whatComponent2=="LoginButton")
-    {
-      this.props.value = "Login";
-      this.props.style='position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;'
-      +'width: 20%;max-width: 270px;min-width: 220px; overflow-y: auto;background-color: blue;color: red;border-radius: 10px;'
-      +'padding: 5px 10px; border: none;font-weight: bolder; font-size: x-large; margin-bottom: 5px;';
-    }
-    else if(this.whatComponent2 == "SearchButton")
-    {
-      this.props.value = "Search";
-      this.props.style='position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;'
-      +'background-color: blue;color: white;border-radius: 10px;'
-      +'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
-    }
-    else if(this.whatComponent2 == "ClearButton")
-    {
-      this.props.value = "Clear";
-      this.props.style='position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;'
-      +'background-color: gray;color: white;border-radius: 10px;'
-      +'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
-    }
-    else if(this.whatComponent2 == "HomeButton")
-    {
-      this.props.value = "Home";
-      this.props.style='position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;'
-      +'background-color: #ADD8E6;color: white;border-radius: 10px;'
-      +'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
-    }
-    else if(this.whatComponent2 == "ProfileButton")
-    {
-      this.props.value = "Profile";
-      this.props.style='position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;'
-      +'background-color: #ADD8E6;color: white;border-radius: 10px;'
-      +'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
-    }
-    else
-    {
-      this.props.value = "Button";
-      this.props.style='position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;'
+    this.percentageX = ((this.xmouse - this.theX) / 1280) * 100;
+    this.percentageY = ((this.ymouse - this.theY) / 720) * 100;
+    if (this.whatComponent2 == 'LoginButton') {
+      this.props.value = 'Login';
+      this.props.style =
+        'position:absolute;left:' +
+        this.percentageX +
+        '%;top:' +
+        this.percentageY +
+        '%;' +
+        'width: 20%;max-width: 270px;min-width: 220px; overflow-y: auto;background-color: white;color: black;border-radius: 10px;' +
+        'padding: 10px 10px; border: none;font-weight: bolder; font-size: x-large; margin-bottom: 5px;border: solid 1px black; text-transform: uppercase;';
+    } else if (this.whatComponent2 == 'SearchButton') {
+      this.props.value = 'Search';
+      this.props.style =
+        'position:absolute;left:' +
+        this.percentageX +
+        '%;top:' +
+        this.percentageY +
+        '%;' +
+        'background-color: blue;color: white;border-radius: 10px;' +
+        'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
+    } else if (this.whatComponent2 == 'ClearButton') {
+      this.props.value = 'Clear';
+      this.props.style =
+        'position:absolute;left:' +
+        this.percentageX +
+        '%;top:' +
+        this.percentageY +
+        '%;' +
+        'background-color: gray;color: white;border-radius: 10px;' +
+        'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
+    } else if (this.whatComponent2 == 'HomeButton') {
+      this.props.value = 'Home';
+      this.props.style =
+        'position:absolute;left:' +
+        this.percentageX +
+        '%;top:' +
+        this.percentageY +
+        '%;' +
+        'background-color: #ADD8E6;color: white;border-radius: 10px;' +
+        'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
+    } else if (this.whatComponent2 == 'ProfileButton') {
+      this.props.value = 'Profile';
+      this.props.style =
+        'position:absolute;left:' +
+        this.percentageX +
+        '%;top:' +
+        this.percentageY +
+        '%;' +
+        'background-color: #ADD8E6;color: white;border-radius: 10px;' +
+        'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
+    } else {
+      this.props.value = 'Button';
+      this.props.style =
+        'position:absolute;left:' +
+        this.percentageX +
+        '%;top:' +
+        this.percentageY +
+        '%;';
     }
   }
 
-  
-
-  onDragEnded($event: CdkDragEnd){
+  onDragEnded($event: CdkDragEnd) {
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
     this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
-    this.updateDataEvent.emit(((this.mousePositionXV2 + this.dagaX - this.theX)/1280)*100);
-    this.updateDataEventY.emit(((this.mousePositionYV2 + this.dagaY - this.theY)/720)*100);
+    this.updateDataEvent.emit(
+      ((this.mousePositionXV2 + this.dagaX - this.theX) / 1280) * 100
+    );
+    this.updateDataEventY.emit(
+      ((this.mousePositionYV2 + this.dagaY - this.theY) / 720) * 100
+    );
   }
-
 
   constructor(canvas: ElementRef) {
     this.canvas = canvas;
@@ -144,5 +176,4 @@ export class ButtonDragComponent implements IComponent {
 
     return tmpHtmlCode;
   }
-  
 }

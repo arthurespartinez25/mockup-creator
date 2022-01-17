@@ -1,14 +1,21 @@
 import { CdkDragEnd } from '@angular/cdk/drag-drop';
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
 
 @Component({
   selector: 'app-dropdownDrag',
   templateUrl: './dropdownDrag.component.html',
-  styleUrls: ['./dropdownDrag.component.css']
+  styleUrls: ['./dropdownDrag.component.css'],
 })
-export class DropdownDragComponent implements OnInit,IComponent {
+export class DropdownDragComponent implements OnInit, IComponent {
   canvas: ElementRef;
   props: IProperty = {
     key: '',
@@ -20,17 +27,18 @@ export class DropdownDragComponent implements OnInit,IComponent {
     type: 'button',
     links: 3,
     linkValue: 'Sample',
-    linksArray:[],
+    linksArray: [],
   };
 
-  @Output() updateDataEvent= new EventEmitter<any>();
-  @Output() updateDataEventY= new EventEmitter<any>();
+  @Output() updateDataEvent = new EventEmitter<any>();
+  @Output() updateDataEventY = new EventEmitter<any>();
   @Input() xcanvas: any;
   @Input() ycanvas: any;
   @Input() xmouse: any;
   @Input() ymouse: any;
+  @Input() whatComponent2: string;
   mousePositionXV2 = 310;
-  mousePositionYV2= 110;
+  mousePositionYV2 = 110;
   theX = 0;
   theY = 0;
   dagaX = 0;
@@ -45,22 +53,37 @@ export class DropdownDragComponent implements OnInit,IComponent {
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
-    this.percentageX = ((this.xmouse-this.theX)/1280)*100; 
-    this.percentageY = ((this.ymouse-this.theY)/720)*100;
-    this.props.style='position:sticky;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
-  }
-  
+    this.percentageX = ((this.xmouse - this.theX) / 1280) * 100;
+    this.percentageY = ((this.ymouse - this.theY) / 720) * 100;
+    switch (this.whatComponent2) {
+      case 'HPDropdown1':
+        break;
 
-  onDragEnded($event: CdkDragEnd){
+      default:
+        this.props.style =
+          'position:sticky;left:' +
+          this.percentageX +
+          '%;top:' +
+          this.percentageY +
+          '%;';
+        break;
+    }
+  }
+
+  onDragEnded($event: CdkDragEnd) {
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
     this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
-    this.updateDataEvent.emit(((this.mousePositionXV2 + this.dagaX - this.theX)/1280)*100);
-    this.updateDataEventY.emit(((this.mousePositionYV2 + this.dagaY - this.theY)/720)*100);
+    this.updateDataEvent.emit(
+      ((this.mousePositionXV2 + this.dagaX - this.theX) / 1280) * 100
+    );
+    this.updateDataEventY.emit(
+      ((this.mousePositionYV2 + this.dagaY - this.theY) / 720) * 100
+    );
     console.log(this.mousePositionXV2);
     console.log(this.mousePositionYV2);
   }
 
-  constructor(canvas: ElementRef) { 
+  constructor(canvas: ElementRef) {
     this.canvas = canvas;
     let date = Date.now();
     this.props.key = date.toString();
@@ -84,24 +107,20 @@ export class DropdownDragComponent implements OnInit,IComponent {
     if (!numLink) {
       console.warn('rows or columns are undefined');
     } else {
-      
       for (var i = 0; i < numLink; i++) {
-        if(this.props.linkContent) {
-          if(this.props.linkContent.length != numLink) {
-            this.props.linksArray.push('link' + (i+1));
-          }
-          else {
-            console.log("dito pumasok");
+        if (this.props.linkContent) {
+          if (this.props.linkContent.length != numLink) {
+            this.props.linksArray.push('link' + (i + 1));
+          } else {
+            console.log('dito pumasok');
             console.log(this.props.linkContent);
             this.props.linksArray = this.props.linkContent;
           }
-        }
-        else {
-            this.props.linksArray.push('link' + (i+1));
-            console.log("pasok noh? oo");
+        } else {
+          this.props.linksArray.push('link' + (i + 1));
+          console.log('pasok noh? oo');
         }
       }
-      
     }
     console.log(this.props.linksArray);
   };
@@ -112,7 +131,7 @@ export class DropdownDragComponent implements OnInit,IComponent {
     console.log(this.props.linkContent);
     console.log(index, oldvalue, newValue);
   };
-  
+
   get htmlCode(): string {
     let jude = this.props.style;
     let regexLeft = /left(.+?);/;
@@ -125,29 +144,45 @@ export class DropdownDragComponent implements OnInit,IComponent {
 
     //let divStyle = '"style=position:absolute;left:'+this.dagaX+'px;top:'+this.dagaY+'px;"';
 
-    jude = jude.replace(regexLeft,"");
-    jude = jude.replace(regexTop,"");
-    jude = jude.replace(regexPosition,"");
+    jude = jude.replace(regexLeft, '');
+    jude = jude.replace(regexTop, '');
+    jude = jude.replace(regexPosition, '');
     //this.props.style = jude;
 
-    let tmpHtmlCode = '<div class="btn-group"'+ ' style="' + this.props.style +'"';
+    let tmpHtmlCode =
+      '<div class="btn-group"' + ' style="' + this.props.style + '"';
     tmpHtmlCode += 'id="' + this.props.id + '">';
-    tmpHtmlCode +="\n" + ' <button class="' +  this.props.class + '" type="' +  this.props.type + '" style="' + jude + '"> ' + this.props.value + ' </button>';
-    tmpHtmlCode +="\n" + ' <button' + ' type="' +  this.props.type + '" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
-    tmpHtmlCode +="\n" + ' <span class="sr-only">Toggle Dropdown</span>';
-    tmpHtmlCode +="\n" + ' </button>';
-    tmpHtmlCode +="\n" + ' <div class="dropdown-menu">';
-    
-    for(var i=0; i<this.props.linksArray.length; i++) {
-      tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.linksArray[i] + '</a>';
+    tmpHtmlCode +=
+      '\n' +
+      ' <button class="' +
+      this.props.class +
+      '" type="' +
+      this.props.type +
+      '" style="' +
+      jude +
+      '"> ' +
+      this.props.value +
+      ' </button>';
+    tmpHtmlCode +=
+      '\n' +
+      ' <button' +
+      ' type="' +
+      this.props.type +
+      '" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
+    tmpHtmlCode += '\n' + ' <span class="sr-only">Toggle Dropdown</span>';
+    tmpHtmlCode += '\n' + ' </button>';
+    tmpHtmlCode += '\n' + ' <div class="dropdown-menu">';
+
+    for (var i = 0; i < this.props.linksArray.length; i++) {
+      tmpHtmlCode +=
+        '\n' +
+        ' <a class="dropdown-item" href="#">' +
+        this.props.linksArray[i] +
+        '</a>';
     }
-    tmpHtmlCode +="\n" + ' </div>';
-    tmpHtmlCode +="\n" + ' </div>';
-    
+    tmpHtmlCode += '\n' + ' </div>';
+    tmpHtmlCode += '\n' + ' </div>';
 
     return tmpHtmlCode;
   }
-
- 
-
 }
