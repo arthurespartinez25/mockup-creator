@@ -141,6 +141,9 @@ export class PropertyComponent implements OnInit {
   checkedChangeHandler(event: any) {
     this.props.checked = event.target.value;
   }
+  hrefChangeHandler(event: any){
+    this.props.href = event.target.value;
+  }
   /* CODE BELOW IS FOR TABLE ELEMENT */
 
   tblRowsChangeHandler(event: any) {
