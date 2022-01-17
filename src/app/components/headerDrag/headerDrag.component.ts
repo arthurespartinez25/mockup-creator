@@ -54,12 +54,7 @@ export class HeaderDragComponent implements OnInit, IComponent {
     this.dagaY = this.ymouse;
     this.percentageX = ((this.xmouse-this.theX)/1280)*100; 
     this.percentageY = ((this.ymouse-this.theY)/720)*100;
-  }
-  ngAfterViewInit()
-  {
-    
-    setTimeout(() => {
-      if(this.whatComponent2=="loginHeader")
+    if(this.whatComponent2=="loginHeader")
     {
       this.props.value = "Login123";
       this.props.style='color:blue;position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
@@ -73,8 +68,8 @@ export class HeaderDragComponent implements OnInit, IComponent {
     {
       this.props.style='width:300px;color:red;position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
     }
-    }, 10);
   }
+  
 
   onDragEnded($event: CdkDragEnd){
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;

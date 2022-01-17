@@ -47,15 +47,9 @@ export class DropdownDragComponent implements OnInit,IComponent {
     this.dagaY = this.ymouse;
     this.percentageX = ((this.xmouse-this.theX)/1280)*100; 
     this.percentageY = ((this.ymouse-this.theY)/720)*100;
-    
+    this.props.style='position:sticky;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
   }
-  ngAfterViewInIt()
-  {
-    setTimeout(() => {
-      this.props.style='position:sticky;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
-    }, 10);
-    
-  }
+  
 
   onDragEnded($event: CdkDragEnd){
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
@@ -144,9 +138,16 @@ export class DropdownDragComponent implements OnInit,IComponent {
     tmpHtmlCode +="\n" + ' </button>';
     tmpHtmlCode +="\n" + ' <div class="dropdown-menu">';
     
+<<<<<<< Updated upstream
     for(var i=0; i<this.props.linksArray.length; i++) {
       tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.linksArray[i] + '</a>';
     }
+=======
+      for(var i=0; i<this.props.linksArray.length; i++) {
+        tmpHtmlCode +="\n" + ' <a class="dropdown-item" href="#">' + this.props.linksArray[i] + '</a>';
+      }
+    
+>>>>>>> Stashed changes
     tmpHtmlCode +="\n" + ' </div>';
     tmpHtmlCode +="\n" + ' </div>';
     

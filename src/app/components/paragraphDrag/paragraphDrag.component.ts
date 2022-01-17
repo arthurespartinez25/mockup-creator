@@ -43,14 +43,10 @@ export class ParagraphDragComponent implements OnInit, IComponent {
     this.dagaY = this.ymouse;
     this.percentageX = ((this.xmouse-this.theX)/1280)*100; 
     this.percentageY = ((this.ymouse-this.theY)/720)*100;
-  }
-  ngAfterViewInit()
-  {
-    setTimeout(() => {
-      this.props.style='color:red;position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
-    }, 1);
+    this.props.style='color:red;position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
     
   }
+  
 
   onDragEnded($event: CdkDragEnd){
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;

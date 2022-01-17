@@ -45,11 +45,7 @@ export class LabelDragComponent implements OnInit, IComponent {
     this.percentageX = ((this.xmouse-this.theX)/1280)*100; 
     this.percentageY = ((this.ymouse-this.theY)/720)*100;
     
-  }
-  ngAfterViewInit()
-  {
-    setTimeout(() => {
-      if(this.whatComponent2=="loginLabelUser")
+    if(this.whatComponent2=="loginLabelUser")
     {
       this.props.value = "Username";
       this.props.style='position:absolute;left:'
@@ -126,9 +122,8 @@ export class LabelDragComponent implements OnInit, IComponent {
       this.props.style='position:absolute;left:'
     +this.percentageX+'%;top:'+this.percentageY+'%;';
     }
-    }, 100);
-    
   }
+  
 
   onDragEnded($event: CdkDragEnd){
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;

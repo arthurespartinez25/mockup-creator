@@ -10,8 +10,8 @@ import { IProperty } from 'src/app/interfaces/iproperty';
   (cdkDragEnded)="onDragEnded($event)" [id]="props.id" [style]="props.style" 
   [ngStyle]="{
     'position': 'sticky',
-    'left': (dagaX-theX) + 'px',
-    'top': (dagaY-theY) + 'px'
+    'left': (dagaX) + 'px',
+    'top': (dagaY) + 'px'
   }" [type]="props.type">
     {{ props.value }}
   </button>`,
@@ -53,13 +53,7 @@ export class ButtonDragComponent implements IComponent {
     this.dagaY = this.ymouse;
     this.percentageX = ((this.xmouse-this.theX)/1280)*100;
     this.percentageY = ((this.ymouse-this.theY)/720)*100;
-    
-  }
-
-  ngAfterViewInit()
-  {
-    setTimeout(() => {
-      if(this.whatComponent2=="LoginButton")
+    if(this.whatComponent2=="LoginButton")
     {
       this.props.value = "Login";
       this.props.style='position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;'
@@ -99,9 +93,9 @@ export class ButtonDragComponent implements IComponent {
       this.props.value = "Button";
       this.props.style='position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;'
     }
-    }, 10);
-    
   }
+
+  
 
   onDragEnded($event: CdkDragEnd){
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;

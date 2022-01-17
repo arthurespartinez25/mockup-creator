@@ -165,14 +165,9 @@ export class TableDragComponent implements OnInit, IComponent {
     this.dagaY = this.ymouse;
     this.percentageX = ((this.xmouse-this.theX)/1280)*100; 
     this.percentageY = ((this.ymouse-this.theY)/720)*100;
+    this.props.style='position:sticky;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
   }
-  ngAfterViewInit()
-  {
-    setTimeout(() => {
-      this.props.style='position:sticky;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
-    }, 1);
-    
-  }
+ 
 
   onDragEnded($event: any) {
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;

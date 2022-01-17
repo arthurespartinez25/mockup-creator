@@ -45,11 +45,7 @@ export class CheckboxDragComponent implements OnInit, IComponent {
     this.dagaY = this.ymouse;
     this.percentageX = ((this.xmouse-this.theX)/1280)*100; 
     this.percentageY = ((this.ymouse-this.theY)/720)*100;
-  }
-  ngAfterViewInIt()
-  {
-    setTimeout(() => {
-      if(this.whatComponent2=="LoginCheckbox")
+    if(this.whatComponent2=="LoginCheckbox")
     {
       this.props.value = "Remember Password";
       this.props.style='color:green;cursor: pointer;position:sticky;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
@@ -59,9 +55,8 @@ export class CheckboxDragComponent implements OnInit, IComponent {
     {
       this.props.style='cursor:pointer;position:sticky;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
     }
-    }, 10);
-    
   }
+  
 
 
   onDragEnded($event: CdkDragEnd){

@@ -450,7 +450,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.mouseMoveY = item;
   }
 
-  ngAfterViewChecked() {}
+  ngAfterViewChecked() {this.changeref.detectChanges();}
   jude = 'aw';
   clickHandler(component: IComponent) {
     this.selected = component.props;
