@@ -7,12 +7,12 @@ import { IProperty } from 'src/app/interfaces/iproperty';
   selector: 'app-datepickerDrag',
   //templateUrl: './datepicker.component.html',
   //styleUrls: ['./datepicker.component.css']
-  template: `<input cdkDrag cdkDragBoundary="#canvas" [type]="props.type" [id]="props.id" 
-  [value]="props.value" [class]="props.class" [style]="props.style" 
+  template: `<input cdkDrag cdkDragBoundary="#canvas" [type]="props.type" [id]="props.id"
+  [value]="props.value" [class]="props.class" [style]="props.style"
   (change)="dateValue($event)"
-  (cdkDragEnded)="onDragEnded($event)" 
+  (cdkDragEnded)="onDragEnded($event)"
   [ngStyle]="{
-    'position': 'fixed',
+    'position': 'sticky',
     'left': dagaX + 'px',
     'top': dagaY + 'px'
   }">`
@@ -81,7 +81,7 @@ export class DatepickerDragComponent implements OnInit,IComponent {
   dateValue(val: any){
     this.props.value = val.target.value;
   }
-  
+
   get htmlCode(): string {
     let tmpHtmlCode = '<input';
     if (this.props.id.trim().length > 0) {

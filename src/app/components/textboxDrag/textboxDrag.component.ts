@@ -8,9 +8,9 @@ import { IProperty } from 'src/app/interfaces/iproperty';
   template: `<textarea cdkDrag cdkDragBoundary="#canvas" [id]="props.id" [style]="props.style"
    [placeholder]="props.placeholder" [rows]="props.rows"
     [cols]="props.cols"
-    (cdkDragEnded)="onDragEnded($event)" 
+    (cdkDragEnded)="onDragEnded($event)"
     [ngStyle]="{
-    'position': 'fixed',
+    'position': 'sticky',
     'left': dagaX + 'px',
     'top': dagaY + 'px'
   }">{{props.value}}</textarea>`

@@ -169,7 +169,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
           break;
         default:
           temp = new ButtonDragComponent(this.canvas);
-      
+
       }
       this.xCounter++;
       this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
@@ -179,7 +179,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.mousePositionY = this.canvasTop;
       //console.log(this.canvasW+"rawr");
       this.componentList.push(temp);
-    
+
   }
   //----------------------------------------------------------------------------
 
@@ -356,7 +356,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.mouseMoveY = item;
   }
 
-  ngAfterViewChecked() {}
+  ngAfterViewChecked() {this.changeref.detectChanges();}
   jude = 'aw';
   clickHandler(component: IComponent) {
     this.selected = component.props;
@@ -723,7 +723,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     } else {
       console.log('Nothing to delete');
     }
-    
+
   }
 
   // deleteComponent(){

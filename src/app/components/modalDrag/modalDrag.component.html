@@ -1,7 +1,7 @@
 <div cdkDrag cdkDragBoundary="#canvas" [id]="props.id" class="always-on-top"
-(cdkDragEnded)="onDragEnded($event)" 
+(cdkDragEnded)="onDragEnded($event)"
 [ngStyle]="{
-    'position': 'fixed',
+    'position': 'sticky',
     'left': dagaX + 'px',
     'top': dagaY + 'px'
   }">

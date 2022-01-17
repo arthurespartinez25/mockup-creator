@@ -1,6 +1,6 @@
-<div class="btn-group" [id]="props.id" cdkDrag cdkDragBoundary="#canvas" (cdkDragEnded)="onDragEnded($event)" 
+<div class="btn-group" [id]="props.id" cdkDrag cdkDragBoundary="#canvas" (cdkDragEnded)="onDragEnded($event)"
 [ngStyle]="{
-    'position': 'fixed',
+    'position': 'sticky',
     'left': dagaX + 'px',
     'top': dagaY + 'px',
     'width': '100px'
@@ -14,4 +14,4 @@
   <ul class="dropdown-menu">
     <li><a class="dropdown-item" *ngFor="let link of props.linksArray; let i = index;" (click)="editLinkValue(i, link, props.linkValue)">{{link}}</a></li>
   </ul>
-</div> 
+</div>
