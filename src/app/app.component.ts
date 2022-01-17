@@ -92,8 +92,8 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   @ViewChild('PropertyComponent') property: boolean;
   @ViewChild('canvas') canvas!: ElementRef;
-  @ViewChild('textOp') textBtn!: ElementRef;
-  @ViewChild('inputOp') inputBtn!: ElementRef;
+  //@ViewChild('textOp') textBtn!: ElementRef;
+  @ViewChild('subMenuItem') subMenuItem!: ElementRef;
 
   changeref: ChangeDetectorRef;
   constructor(
@@ -213,8 +213,8 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     if (componentIndex !== -1) {
       this.selected.draggable = false;
     }
-  }*/
-
+  }
+  
   onDragEndedInputMenu(event: CdkDragEnd) {
     event.source._dragRef.reset();
     const { offsetLeft, offsetTop } = event.source.element.nativeElement;
@@ -238,13 +238,16 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     //console.log(x);
     //console.log(this.canvasLeft);
   }
+  */
 
   onDragEndedAddComponent(event: CdkDragEnd, component: string) {
     event.source._dragRef.reset();
     const { offsetLeft, offsetTop } = event.source.element.nativeElement;
     const { x, y } = event.distance;
-    this.mousePositionX = offsetLeft + x;
-    this.mousePositionY = offsetTop + y;
+    let canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement).offsetWidth;
+    let canvasTopY = (this.subMenuItem.nativeElement as HTMLElement).offsetTop;
+    this.mousePositionX = offsetLeft + x + canvasLeftX;
+    this.mousePositionY = offsetTop + y + canvasTopY;
     if (this.domInsideCanvas == true) {
       let temp: IComponent;
       switch (component) {
