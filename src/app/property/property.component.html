@@ -227,8 +227,9 @@
         <tr></tr>
       </td>
     </tr>
+    <!-- End of Table-->
 
-    <tr class="properties-table-row" *ngIf="props.name">
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'radio' || props.typeObj == 'radioDrag'">
       <th class="properties-table-header"><label>name</label></th>
       <td class="properties-table-data">
         <input
@@ -240,7 +241,7 @@
       </td>
     </tr>
     
-    <tr class="properties-table-row" *ngIf="props.href">
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'link' || props.typeObj == 'linkDrag'">
       <th class="properties-table-header"><label>href</label></th>
       <td class="properties-table-data">
         <input
