@@ -20,7 +20,6 @@ export class PropertyComponent implements OnInit {
     style: '',
     typeObj: '',
     type: '',
-    url : '',
   };
   style2 = '';
   
@@ -162,7 +161,6 @@ export class PropertyComponent implements OnInit {
   }
   updateLink()
   {
-    console.log("gumagana");
        let regexPosition = /https(.+?)"/;
        let link:any = null;
        let dummyLink = this.props.value;

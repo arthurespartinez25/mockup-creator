@@ -37,13 +37,17 @@
       </td>
     </tr>
     <tr class="properties-table-row" *ngIf="props.typeObj == 'youtubeDrag'">
+      <th class="properties-table-header"><label>Update</label></th>
+      <td class="properties-table-data">
       <button
       *ngIf="props.typeObj == 'youtubeDrag'"
         id="updateLink"
         (click)="updateLink()"
+        class="updateLink"
       >
-        Update
-  </button>
+        Update Link
+      </button>
+    </td>
     </tr>
 
     <!-- start of Table Cell input -->
