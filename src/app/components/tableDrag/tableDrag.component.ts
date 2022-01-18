@@ -172,9 +172,14 @@ export class TableDragComponent implements OnInit, IComponent {
   onDragEnded($event: any) {
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
     this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
-
-    this.updateDataEvent.emit(this.mousePositionXV2 + this.dagaX - this.theX);
-    this.updateDataEventY.emit(this.mousePositionYV2 + this.dagaY - this.theY);
+    this.updateDataEvent.emit(
+      ((this.mousePositionXV2 + this.dagaX - this.theX) / 1280) * 100
+    );
+    this.updateDataEventY.emit(
+      ((this.mousePositionYV2 + this.dagaY - this.theY) / 720) * 100
+    );
+    console.log(this.mousePositionXV2);
+    console.log(this.mousePositionYV2);
   }
 
   constructor(canvas: ElementRef, changeDetectorRef: ChangeDetectorRef) {
