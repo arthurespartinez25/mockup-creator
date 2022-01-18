@@ -248,8 +248,7 @@
           class="palette-item" 
           (click)="addComponent('youtube')"
           cdkDrag
-          (cdkDragEnded)="onDragEnded($event)"
-          (cdkDragEnded)="onDragEndedAddComponent('youtube')"
+          (cdkDragEnded)="onDragEndedAddComponent($event,'youtube')"
           >
           Iframe
         </button>
