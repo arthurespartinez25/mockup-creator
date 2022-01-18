@@ -12,6 +12,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
 
 @Component({
   selector: 'app-buttonDrag',
+  styleUrls: ['./buttonDrag.component.css'],  
   template: `<button
     cdkDrag
     cdkDragBoundary="#canvas"
