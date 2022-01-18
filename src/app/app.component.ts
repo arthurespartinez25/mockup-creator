@@ -39,6 +39,7 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
 
 import { TableDragComponent } from './components/tableDrag/tableDrag.component';
+import { YoutubeDragComponent } from './components/youtubeDrag/youtubeDrag.component';
 
 @Component({
   selector: 'app-root',
@@ -100,7 +101,8 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     changeDetectorRef: ChangeDetectorRef,
     private http: HttpClient,
     public _router: Router,
-    public _location: Location
+    public _location: Location,
+    public sanitizer: DomSanitizer
   ) {
     this.changeref = changeDetectorRef;
   }
@@ -184,6 +186,9 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         break;
       case 'table':
         temp = new TableDragComponent(this.canvas, this.changeref);
+        break;
+      case 'youtube':
+        temp = new YoutubeDragComponent(this.canvas, this.sanitizer);
         break;
       default:
         temp = new ButtonDragComponent(this.canvas);
@@ -356,6 +361,11 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
           break;
         case 'table':
           temp = new TableDragComponent(this.canvas, this.changeref);
+          canvasLeftX = 0;
+          canvasTopY = 0;
+          break;
+        case 'youtube':
+          temp = new YoutubeDragComponent(this.canvas, this.sanitizer);
           canvasLeftX = 0;
           canvasTopY = 0;
           break;

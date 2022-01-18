@@ -31,6 +31,8 @@
         ? 'absolute'
         : child.props.typeObj === 'tableDrag'
         ? 'absolute'
+        : child.props.typeObj === 'youtubeDrag'
+        ? 'absolute'
         : child.props.typeObj === 'navDrag'
         ? 'absolute'
         : 'absolute',
@@ -63,6 +65,8 @@
         ? ymouse + 'px'
         : child.props.typeObj === 'tableDrag'
         ? ymouse + 'px'
+        : child.props.typeObj === 'youtubeDrag'
+        ? ymouse + 'px'
         : child.props.typeObj === 'navDrag'
         ? ymouse + 'px'
         : ycanvas + 'px',
@@ -92,6 +96,8 @@
         : child.props.typeObj === 'radioDrag'
         ? xmouse + 'px'
         : child.props.typeObj === 'tableDrag'
+        ? xmouse + 'px'
+        : child.props.typeObj === 'youtubeDrag'
         ? xmouse + 'px'
         : child.props.typeObj === 'inputDrag'
         ? xmouse + 'px'
@@ -293,4 +299,16 @@
     [xmouse]="xmouse"
     [ymouse]="ymouse"
   ></app-tableDrag>
+
+  <app-youtubeDrag
+    [property]="child.props"
+    *ngSwitchCase="'youtubeDrag'"
+    (updateDataEvent)="passData($event)"
+    (updateDataEventY)="passDataY($event)"
+    [xcanvas]="xcanvas" 
+    [ycanvas]="ycanvas"
+    [xmouse]="xmouse" 
+    [ymouse]="ymouse"
+  ></app-youtubeDrag>
+
 </div>

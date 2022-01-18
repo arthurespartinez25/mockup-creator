@@ -244,6 +244,15 @@
           >
             Table
           </button>
+          <button 
+          class="palette-item" 
+          (click)="addComponent('youtube')"
+          cdkDrag
+          (cdkDragEnded)="onDragEnded($event)"
+          (cdkDragEnded)="onDragEndedAddComponent('youtube')"
+          >
+          Iframe
+        </button>
         </div>
       </div>
       <div
