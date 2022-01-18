@@ -143,6 +143,10 @@ export class PropertyComponent implements OnInit {
   colsChangeHandler(event: any) {
     this.props.cols = event.target.value;
   }
+  
+  hrefChangeHandler(event: any){
+    this.props.href = event.target.value;
+  }
 
   nameChangeHandler(event: any) {
     this.props.name = event.target.value;
