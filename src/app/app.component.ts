@@ -843,6 +843,9 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.mousePositionY = this.canvasTop + 550;
       this.componentList.push(temp);
     }, 100);
+    setTimeout(() => {
+      this.whatComponent = '';
+    }, 100);
   }
 
   addComponentSearchScreen() {
