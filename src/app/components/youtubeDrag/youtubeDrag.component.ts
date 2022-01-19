@@ -33,6 +33,7 @@ export class YoutubeDragComponent implements OnInit, IComponent {
       typeObj: 'youtubeDrag',
       type: '',
       url : '',
+      selected : false,
     };
 
   @Output() updateDataEvent= new EventEmitter<any>();

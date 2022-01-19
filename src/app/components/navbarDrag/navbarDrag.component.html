@@ -5,7 +5,10 @@
     'width':+this.theCanvasWidth+'px',
     'position': 'sticky',
     'left': (xcanvas) + 'px',
-    'top': (dagaY) + 'px'
+    'top': (dagaY) + 'px',
+    'border-color' : props.selected == true ? 'red': (props.selected == false ? 'none': null),
+    'border-style' : props.selected == true ? 'solid': (props.selected == false ? 'none': null),
+    'border-width' : props.selected == true ? '1px': (props.selected == false ? '0px': null)
   }">
   {{ props.value }}
 </nav>

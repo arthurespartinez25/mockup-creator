@@ -19,6 +19,7 @@ export class InputDragComponent implements OnInit, IComponent {
     style: 'width:200px;',
     typeObj: 'inputDrag',
     type: 'text',
+    selected : false,
   };
 
   @Output() updateDataEvent= new EventEmitter<any>();

@@ -133,6 +133,7 @@ export class TableDragComponent implements OnInit, IComponent {
     tblArrayCol: [],
     tblArrayRow: [],
     updateCallback: this.editTableDimension,
+    selected : false,
   };
 
   @Output() updateDataEvent = new EventEmitter<any>();

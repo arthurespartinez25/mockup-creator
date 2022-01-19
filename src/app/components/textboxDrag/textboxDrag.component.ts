@@ -29,7 +29,8 @@ export class TextboxDragComponent implements IComponent {
     type: 'textbox',
     placeholder: 'Type your text here...',
     rows: 3,
-    cols: 20
+    cols: 20,
+    selected : false,
   };
 
   @Output() updateDataEvent= new EventEmitter<any>();

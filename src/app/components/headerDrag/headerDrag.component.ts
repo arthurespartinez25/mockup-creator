@@ -25,6 +25,7 @@ export class HeaderDragComponent implements OnInit, IComponent {
     style: '',
     typeObj: 'headerDrag',
     type: '',
+    selected : false,
   };
 
   @Input() get property(): IProperty {

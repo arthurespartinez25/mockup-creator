@@ -117,6 +117,7 @@
     [xmouse]="xmouse"
     [ymouse]="ymouse"
     [whatComponent2]="whatComponent2"
+      
   >
   </app-buttonDrag>
 
@@ -151,6 +152,9 @@
     [xmouse]="xmouse"
     [ymouse]="ymouse"
     [whatComponent2]="whatComponent2"
+    [style.border-color]="child.props.selected === true ? 'red': (child.props.selected === false ? 'none': null)"
+    [style.border-style]="child.props.selected === true ? 'solid': (child.props.selected === false ? 'none': null)"
+    [style.border-width]="child.props.selected === true ? '2px': (child.props.selected === false ? '0px': null)"
   ></app-imageDrag>
 
   <app-labelDrag

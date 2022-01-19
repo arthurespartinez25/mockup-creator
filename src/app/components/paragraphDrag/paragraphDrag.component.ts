@@ -25,6 +25,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
     style: 'color: red;',
     typeObj: 'paragraphDrag',
     type: '',
+    selected : false,
   };
 
   @Output() updateDataEvent = new EventEmitter<any>();

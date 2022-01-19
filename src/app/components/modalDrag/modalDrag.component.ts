@@ -18,6 +18,7 @@ export class ModalDragComponent implements IComponent {
     style: '',
     typeObj: 'modalDrag',
     type: '',
+    selected : false,
   };
 
   @Output() updateDataEvent= new EventEmitter<any>();

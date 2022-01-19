@@ -25,6 +25,7 @@ export class LinkDragComponent implements OnInit, IComponent {
     style: 'text-decoration: none;',
     typeObj: 'linkDrag',
     type: '',
+    selected : false,
   };
 
   @Output() updateDataEvent = new EventEmitter<any>();
