@@ -71,6 +71,12 @@ export class PropertyComponent implements OnInit {
       this.props = this.defaultProps;
     }
   }
+  @ViewChild('taID') styleBox: ElementRef;
+  clearComponent() {
+        this.componentList.length = 0;
+        this.props = this.defaultProps;
+        this.styleBox.nativeElement.value = "";
+  }
 
   ngOnInit(): void {
     this.style2 = this.props.style;
