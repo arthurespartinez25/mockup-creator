@@ -651,7 +651,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
     this.whatComponent = 'HPNav1';
     temp = new NavbarDragComponent(this.canvas);
-    this.mousePositionX = this.canvasLeft + 250;
+    this.mousePositionX = this.canvasLeft;
     this.mousePositionY = this.canvasTop + 40;
 
     this.componentList.push(temp);
