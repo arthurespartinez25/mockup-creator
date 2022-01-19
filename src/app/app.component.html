@@ -334,6 +334,7 @@
           role="tab"
           aria-controls="properties"
           aria-selected="true"
+          
         >
           Properties
         </button>
@@ -378,6 +379,8 @@
           [property]="selected"
           [selectedIdx]="selectedComponent"
           [compList]="componentList"
+          (addAllCSSRule) = "addAllCSSRule($event)"
+          (clearCss) = "clearCss()"
         ></app-property>
       </div>
       <div

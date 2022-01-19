@@ -1313,6 +1313,11 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       console.log("Rule doesn't exist");
     }
   }
+  @ViewChild('cssTextArea') styleBox: ElementRef;
+  clearCss()
+  {
+    this.styleBox.nativeElement.value = "";
+  }
 
   /*************Here Ends CSS Code******************/
 
