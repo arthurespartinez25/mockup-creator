@@ -58,6 +58,12 @@ export class NavbarDragComponent implements OnInit, IComponent {
     this.dagaY = this.ymouse;
     this.percentageX = ((this.xmouse - this.theX) / 1280) * 100;
     this.percentageY = ((this.ymouse - this.theY) / 720) * 100;
+    if (this.percentageX < 0){
+      this.percentageX = 0;
+    }
+    if (this.percentageY < 0){
+      this.percentageY = 0;
+    }
     if (this.whatComponent2 == 'searchNavbar') {
       this.props.value = 'AWS';
       this.props.style =
@@ -74,7 +80,7 @@ export class NavbarDragComponent implements OnInit, IComponent {
       background-color: #000;
       font-size: 20px;
       border-bottom: 1px solid  white;
-      position:absolute;top:5.555555555555555%;left:0px;`;
+      position:absolute;left:`+this.percentageX+`%;top:`+this.percentageY+`%;`;
       this.props.value = '';
     } else if (this.whatComponent2 == 'HPNav2') {
       this.props.style = `width: 100%; 
@@ -83,7 +89,7 @@ export class NavbarDragComponent implements OnInit, IComponent {
       background-color: #000;
       font-size: 10px;
       border-bottom: 1px dotted  white;
-      position:absolute;top:-0.06944444444444445%;left:0px;`;
+      position:absolute;left:`+this.percentageX+`%;top:`+this.percentageY+`%;`;
       this.props.value = `50% OFF  OUR A LA CARTE MENU IN FEBRUARY!`;
     } else if (this.whatComponent2 == 'HPNav3') {
       this.props.style = `width: 100%; 
@@ -93,7 +99,7 @@ export class NavbarDragComponent implements OnInit, IComponent {
       background-color: #000;
       font-size: 20px;
       border-bottom: 1px solid  white;
-      position:absolute;left:0px;top:18.88888888888889%;`;
+      position:absolute;left:`+this.percentageX+`%;top:`+this.percentageY+`%;`;
       this.props.value = ``;
     } else {
       this.props.style =
