@@ -25,6 +25,8 @@ export class PropertyComponent implements OnInit {
   style2 = '';
   @Output() addAllCSSRule = new EventEmitter<string>();
   @Output() clearCss = new EventEmitter<string>();
+  @Output() cssReceiveMessage = new EventEmitter<string>();
+  
   
 
   @Input() get property(): IProperty {
@@ -80,6 +82,7 @@ export class PropertyComponent implements OnInit {
         this.styleBox.nativeElement.value = "";
         this.addAllCSSRule.next("");
         this.clearCss.next("");
+        this.cssReceiveMessage.next("");
   }
 
   ngOnInit(): void {

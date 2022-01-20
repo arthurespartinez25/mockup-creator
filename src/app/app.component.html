@@ -380,6 +380,7 @@
           [selectedIdx]="selectedComponent"
           [compList]="componentList"
           (addAllCSSRule) = "addAllCSSRule($event)"
+          (cssReceiveMessage)="cssReceiveMessage()"
           (clearCss) = "clearCss()"
         ></app-property>
       </div>
