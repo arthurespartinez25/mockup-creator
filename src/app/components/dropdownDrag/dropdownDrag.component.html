@@ -6,9 +6,11 @@
   'top': (dagaY-theY) + 'px',
   'width': '100px'
 }" (click)="editNumLinks(this.props.links)">
-
-  <button [class]="props.class" [type]="props.type" [style]="props.style" data-toggle="dropdown">
-    {{props.value}}
+  <button [class]="props.class" [type]="props.type" [style]="props.style">{{ props.value }}</button>
+  <button (click)="editNumLinks(this.props.links)" type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" [ngStyle]="{
+    'float': 'right'
+  }">
+    <span class="visually-hidden">Toggle Dropdown</span>
   </button>
   <ul class="dropdown-menu">
     <li><a class="dropdown-item" *ngFor="let link of props.linksArray; let i = index;" (click)="editLinkValue(i, link, props.linkValue)">{{link}}</a></li>
