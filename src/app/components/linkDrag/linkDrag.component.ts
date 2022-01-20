@@ -21,7 +21,7 @@ export class LinkDragComponent implements OnInit, IComponent {
     key: '',
     id: '',
     value: 'Link',
-    class: 'link-primary',
+    class: '',
     style: 'text-decoration: none;',
     typeObj: 'linkDrag',
     type: '',
