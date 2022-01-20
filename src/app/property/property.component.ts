@@ -1,6 +1,7 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { IComponent } from '../interfaces/icomponent';
 import { IProperty } from '../interfaces/iproperty';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-property',
@@ -22,6 +23,8 @@ export class PropertyComponent implements OnInit {
     draggable: true,
   };
   style2 = '';
+  @Output() addAllCSSRule = new EventEmitter<string>();
+  @Output() clearCss = new EventEmitter<string>();
   
 
   @Input() get property(): IProperty {
@@ -56,7 +59,7 @@ export class PropertyComponent implements OnInit {
     this.selectedcomp = value;
   }
 
-  constructor() {
+  constructor(public sanitizer:DomSanitizer) {
     this.props = this.property;
     this.componentList = this.compList;
     this.selectedcomp = this.selectedIdx;
@@ -69,6 +72,14 @@ export class PropertyComponent implements OnInit {
       this.componentList.splice(componentIndex, 1);
       this.props = this.defaultProps;
     }
+  }
+  @ViewChild('taID') styleBox: ElementRef;
+  clearComponent() {
+        this.componentList.length = 0;
+        this.props = this.defaultProps;
+        this.styleBox.nativeElement.value = "";
+        this.addAllCSSRule.next("");
+        this.clearCss.next("");
   }
 
   ngOnInit(): void {
@@ -181,6 +192,28 @@ export class PropertyComponent implements OnInit {
       const { updateCallback } = this.props;
       updateCallback(this.props.tblRows, this.props.tblCols);
     }
+  }
+  updateLink()
+  {
+       let regexPosition = /https(.+?)"/;
+       let link:any = null;
+       let dummyLink = this.props.value;
+       if(dummyLink.charAt(dummyLink.length - 1) == ">")
+       {
+        link = this.props.value.match(regexPosition);
+        link[0] = link[0].slice(0, -1); 
+        this.props.value = link[0];
+        this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value);
+      }
+      else if(dummyLink[0]?.charAt(dummyLink[0].length - 1) == '"')
+      {
+        this.props.value = this.props.value.slice(0, -1); 
+        this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value);
+      }
+     else
+      {
+        this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value);
+       }  
   }
   /* END OF CODE FOR TABLE ELEMENT */
 }

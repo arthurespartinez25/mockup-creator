@@ -47,6 +47,20 @@
       </td>
     </tr>
     
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'youtubeDrag'">
+      <th class="properties-table-header"><label>Update</label></th>
+      <td class="properties-table-data">
+      <button
+      *ngIf="props.typeObj == 'youtubeDrag'"
+        id="updateLink"
+        (click)="updateLink()"
+        class="updateLink"
+      >
+        Update Link
+      </button>
+    </td>
+    </tr>
+
     <!-- start of Table Cell input -->
     <tr class="properties-table-row" *ngIf="props.typeObj == 'table'">
       <th class="properties-table-header"><label>Cell Value</label></th>
@@ -250,6 +264,7 @@
       </td>
     </tr>
 
+
     <tr class="properties-table-row" *ngIf="props.typeObj == 'link' || props.typeObj == 'linkDrag'">
       <th class="properties-table-header"><label>href</label></th>
       <td class="properties-table-data">
@@ -264,6 +279,16 @@
     
   </table>
 </div>
+
+<button
+      id="clearScreen"
+      #clearScreen
+      (click)="clearComponent()"
+    >
+      Clear
+</button>
+
+
 
 <!--
 <button (click)="removeElement($event)" type="button" class="btn btn-danger delete" title="Delete Element">
@@ -286,10 +311,14 @@
 
   .delete {
     max-height: 50px;
-    max-width: 60px;
+    
     position: absolute;
     bottom: 26%;
     right: 34%;
     z-index: 9999;
+  }
+  #updateLink
+  {
+    
   }
 </style>

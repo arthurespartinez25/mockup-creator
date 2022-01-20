@@ -1,7 +1,8 @@
+import { SafeResourceUrl } from '@angular/platform-browser';
 export interface IProperty {
   key: string;
   id: string;
-  value: string;
+  value: any;
   class: string;
   style: string;
   typeObj: string;
@@ -27,4 +28,5 @@ export interface IProperty {
   linkValue?: string;
   linkContent?: [];
   updateCallback?: (row, col) => void;
+  url?: SafeResourceUrl;
 }
