@@ -124,7 +124,7 @@ export class TableDragComponent implements OnInit, IComponent {
     key: '',
     id: '',
     value: '',
-    class: 'table',
+    class: '',
     style: '',
     typeObj: 'tableDrag',
     type: '',
