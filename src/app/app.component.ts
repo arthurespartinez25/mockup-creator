@@ -552,13 +552,18 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     let a = document.createElement('a'),
       url = URL.createObjectURL(file);
     a.href = url;
-    a.download = 'index';
+    a.download = 'index.html';
     document.body.appendChild(a);
     a.click();
     setTimeout(function () {
       document.body.removeChild(a);
       window.URL.revokeObjectURL(url);
     }, 0);
+  }
+  buildCode(val: string) {
+    let file = new Blob([val], { type: 'text/html' });
+    const fileURL = URL.createObjectURL(file);
+    window.open(fileURL, 'index.html');
   }
   addComponentLogin() {
     let temp: IComponent;
@@ -1307,6 +1312,11 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     } else if (ruleFound == 0) {
       console.log("Rule doesn't exist");
     }
+  }
+  @ViewChild('cssTextArea') styleBox: ElementRef;
+  clearCss()
+  {
+    this.styleBox.nativeElement.value = "";
   }
 
   /*************Here Ends CSS Code******************/

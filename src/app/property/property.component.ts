@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { IComponent } from '../interfaces/icomponent';
 import { IProperty } from '../interfaces/iproperty';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -23,6 +23,10 @@ export class PropertyComponent implements OnInit {
     draggable: true,
   };
   style2 = '';
+  @Output() addAllCSSRule = new EventEmitter<string>();
+  @Output() clearCss = new EventEmitter<string>();
+  @Output() cssReceiveMessage = new EventEmitter<string>();
+  
   
 
   @Input() get property(): IProperty {
@@ -70,6 +74,15 @@ export class PropertyComponent implements OnInit {
       this.componentList.splice(componentIndex, 1);
       this.props = this.defaultProps;
     }
+  }
+  @ViewChild('taID') styleBox: ElementRef;
+  clearComponent() {
+        this.componentList.length = 0;
+        this.props = this.defaultProps;
+        this.styleBox.nativeElement.value = "";
+        this.addAllCSSRule.next("");
+        this.clearCss.next("");
+        this.cssReceiveMessage.next("");
   }
 
   ngOnInit(): void {

@@ -121,3 +121,15 @@ td.properties-table-data textarea:focus {
 #properties-table {
   width: 100%;
 }
+
+#clearScreen{
+  position: relative;
+  width: 100%;
+  overflow-y: auto;
+  background-color: red;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  font-weight: bolder;
+  font-size: x-large;
+}
