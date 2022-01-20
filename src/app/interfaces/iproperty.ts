@@ -12,6 +12,7 @@ export interface IProperty {
   rows?: number;
   cols?: number;
   name?: string;
+  href?:string;
   link1?: string;
   link2?: string;
   link3?: string;
