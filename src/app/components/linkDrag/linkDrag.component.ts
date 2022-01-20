@@ -25,6 +25,7 @@ export class LinkDragComponent implements OnInit, IComponent {
     style: 'text-decoration: none;',
     typeObj: 'linkDrag',
     type: '',
+    href: '#',
   };
 
   @Output() updateDataEvent = new EventEmitter<any>();
@@ -57,7 +58,8 @@ export class LinkDragComponent implements OnInit, IComponent {
         font-family: Georgia,  serif;
         font-size: 15px;
         text-decoration: none;
-        letter-spacing: 0.1em;`;
+        letter-spacing: 0.1em;
+        position: sticky; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
         this.props.value = `Branches`;
         break;
       case 'HPLink2':
@@ -65,7 +67,8 @@ export class LinkDragComponent implements OnInit, IComponent {
         font-family: Georgia,  serif;
         font-size: 15px;
         text-decoration: none;
-        letter-spacing: 0.1em;`;
+        letter-spacing: 0.1em;
+        position: sticky; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
         this.props.value = `Events`;
         break;
       case 'HPLink3':
@@ -73,7 +76,8 @@ export class LinkDragComponent implements OnInit, IComponent {
         font-family: Georgia,  serif;
         font-size: 15px;
         text-decoration: none;
-        letter-spacing: 0.1em;`;
+        letter-spacing: 0.1em;
+        position: sticky; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
         this.props.value = `Contact`;
         break;
       case 'HPLink4':
@@ -81,7 +85,8 @@ export class LinkDragComponent implements OnInit, IComponent {
         font-family: Georgia,  serif;
         font-size: 12px;
         letter-spacing: 0.1em;
-        text-decoration: none;`;
+        text-decoration: none;
+        position: sticky; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
         this.props.value = `THEMED MENU`;
         break;
       case 'HPLink5':
@@ -89,7 +94,8 @@ export class LinkDragComponent implements OnInit, IComponent {
         font-family: Georgia,  serif;
         font-size: 12px;
         letter-spacing: 0.1em;
-        text-decoration: none;`;
+        text-decoration: none;
+        position: sticky; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
         this.props.value = `Dec. 31 - Feb. 20`;
         break;
       case 'HPLink6':
@@ -97,28 +103,32 @@ export class LinkDragComponent implements OnInit, IComponent {
         font-family: Georgia,  serif;
         font-size: 12px;
         letter-spacing: 0.1em;
-        text-decoration: none;`;
+        text-decoration: none;
+        position: sticky; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
         this.props.value = `TIME LIMITED KAARAGE`;
         break;
       case 'HPLink7':
         this.props.style = `color: white;
         font-family: Georgia,  serif;
         font-size: 15px;
-        text-decoration: none;`;
+        text-decoration: none;
+        position: sticky; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
         this.props.value = `Our Story`;
         break;
       case 'HPLink8':
         this.props.style = `color: white;
         font-family: Georgia,  serif;
         font-size: 15px;
-        text-decoration: none;`;
+        text-decoration: none;
+        position: sticky; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
         this.props.value = `Opportunities`;
         break;
       case 'HPLink9':
         this.props.style = `color: white;
         font-family: Georgia,  serif;
         font-size: 15px;
-        text-decoration: none;`;
+        text-decoration: none;
+        position: sticky; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
         this.props.value = `Careers`;
         break;
 
@@ -163,6 +173,12 @@ export class LinkDragComponent implements OnInit, IComponent {
 
   get htmlCode(): string {
     let tmpHtmlCode = '<a';
+    if(this.props.href != undefined){
+      if(this.props.href?.trim().length > 0){
+      tmpHtmlCode += ' href="' + this.props.href + '"';
+      }
+    }
+
     if (this.props.id.trim().length > 0) {
       tmpHtmlCode += ' id="' + this.props.id + '"';
     }
