@@ -21,7 +21,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
     key: '',
     id: '',
     value: 'Paragraph',
-    class: 'lead',
+    class: '',
     style: 'color: red;',
     typeObj: 'paragraphDrag',
     type: '',

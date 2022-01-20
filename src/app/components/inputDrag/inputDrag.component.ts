@@ -15,7 +15,7 @@ export class InputDragComponent implements OnInit, IComponent {
     id: '',
     value: '',
     placeholder: 'Input field',
-    class: 'form-control',
+    class: '',
     style: 'width:200px;',
     typeObj: 'inputDrag',
     type: 'text',

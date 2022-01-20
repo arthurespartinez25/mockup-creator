@@ -21,7 +21,7 @@ export class DropdownDragComponent implements OnInit, IComponent {
     key: '',
     id: '',
     value: 'Dropdown',
-    class: 'btn btn-secondary',
+    class: 'btn btn-secondary dropdown-toggle',
     style: '',
     typeObj: 'dropdownDrag',
     type: 'button',

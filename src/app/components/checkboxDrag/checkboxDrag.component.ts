@@ -14,7 +14,7 @@ export class CheckboxDragComponent implements OnInit, IComponent {
     key: '',
     id: '',
     value: 'Checkbox',
-    class: 'form-check-input',
+    class: '',
     style: 'cursor: pointer;',
     typeObj: 'checkboxDrag',
     type: 'checkbox',
@@ -113,14 +113,14 @@ export class CheckboxDragComponent implements OnInit, IComponent {
       jude = jude.replace(regexPosition,"");
       //this.props.style = jude;
     let tmpHtmlCode = '<div';
-    tmpHtmlCode += ' class="form-check" id="' + this.props.id + '"style="' + this.props.style +'">';
+    tmpHtmlCode += ' style="' + this.props.style +'">';
     if (this.props.checked == "true") {
-      tmpHtmlCode +="\n" + ' <input id="'+ this.props.id + ' class="' +  this.props.class + '" type="' +  this.props.type + '" style="' + jude + '" id="flexCheckDefault" checked>';
+      tmpHtmlCode +="\n" + ' <input id="'+ this.props.id + '" class="' +  this.props.class + '" type="' +  this.props.type + '">';
     }
     else {
-      tmpHtmlCode +="\n" + ' <input id="'+ this.props.id + ' class="' +  this.props.class + '" type="' +  this.props.type + '" style="' + jude + '" id="flexCheckDefault">';
+      tmpHtmlCode +="\n" + ' <input id="'+ this.props.id + '" class="' +  this.props.class + '" type="' +  this.props.type + '">';
     }
-    tmpHtmlCode +="\n" + ' <label class="form-check-label" for="flexCheckDefault"> ' + this.props.value + ' </label>';
+    tmpHtmlCode +="\n" + ' <label for="'+ this.props.id +'" style="'+ jude +'"> ' + this.props.value + ' </label>';
     tmpHtmlCode +="\n" + ' </div>';
     
 
