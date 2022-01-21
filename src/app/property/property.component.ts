@@ -73,6 +73,8 @@ export class PropertyComponent implements OnInit {
     if (componentIndex !== -1) {
       this.componentList.splice(componentIndex, 1);
       this.props = this.defaultProps;
+      this.styleBox.nativeElement.value = "";
+      this.props.draggable = false;
     }
   }
   @ViewChild('taID') styleBox: ElementRef;
@@ -83,6 +85,7 @@ export class PropertyComponent implements OnInit {
         this.addAllCSSRule.next("");
         this.clearCss.next("");
         this.cssReceiveMessage.next("");
+        this.props.draggable = false;
   }
 
   ngOnInit(): void {
