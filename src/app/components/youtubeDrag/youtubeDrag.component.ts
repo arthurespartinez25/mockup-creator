@@ -50,6 +50,8 @@ export class YoutubeDragComponent implements OnInit, IComponent {
   dagaY = 0;
   pops = "dito";
   onetimeBool = true;
+  percentageX = 0;
+  percentageY = 0;
   
 
   ngOnInit(): void {
@@ -58,24 +60,26 @@ export class YoutubeDragComponent implements OnInit, IComponent {
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
     console.log(this.dagaX+"     "+this.dagaY);
+    this.percentageX = ((this.xmouse - this.theX) / 1280) * 100;
+    this.percentageY = ((this.ymouse - this.theY) / 720) * 100;
     if(this.whatComponent2=="sampleImage")
     {
       this.props.value = "https://dlcdnrog.asus.com/rog/media/1610273282904.jpg";
-      this.props.style='position:absolute;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
+      this.props.style='position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
     }
     else
     {
-      this.props.value = 'https://www.youtube.com/embed/qY7rpWA-D4w?autoplay=1';
+      this.props.value = 'https://www.youtube.com/embed/YGZLvKAFeYI?autoplay=1';
       this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value);
-      this.props.style='position:absolute;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;width:300px;height: 200px;';
+      this.props.style='position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;width:300px;height: 200px;';
     }
   }
 
   onDragEnded($event: CdkDragEnd){
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
     this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
-    this.updateDataEvent.emit(this.mousePositionXV2 + this.dagaX - this.theX);
-    this.updateDataEventY.emit(this.mousePositionYV2 + this.dagaY - this.theY);
+    this.updateDataEvent.emit(((this.mousePositionXV2 + this.dagaX - this.theX)/1280)*100);
+    this.updateDataEventY.emit(((this.mousePositionYV2 + this.dagaY - this.theY)/720)*100);
   }
 
     
@@ -94,7 +98,7 @@ export class YoutubeDragComponent implements OnInit, IComponent {
       let tmpHtmlCode = '<iframe';
       tmpHtmlCode += ' class="' + this.props.class + '" id="' + this.props.id + '" type="' +  this.props.type + 
       '" style="' + this.props.style + '" src="' + this.props.value +'"'+
-      ' title="YouTube video player" frameborder="0" allow="autoplay"  allowfullscreen dnd-droppable-iframe'+ '> </iframe>';
+      ' title="YouTube video player" frameborder="0" allow="autoplay "  allowfullscreen dnd-droppable-iframe></iframe>';
       
       return tmpHtmlCode;
     }
