@@ -8,7 +8,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
   template: `<textarea cdkDrag cdkDragBoundary="#canvas" [id]="props.id" [style]="props.style"
    [placeholder]="props.placeholder" [rows]="props.rows"
     [cols]="props.cols"
-    (cdkDragEnded)="onDragEnded($event)" 
+    (cdkDragEnded)="onDragEnded($event)"
     [cdkDragDisabled]="!props.draggable"
     [ngStyle]="{
     'position': 'sticky',
@@ -52,16 +52,16 @@ export class TextboxDragComponent implements IComponent {
     this.theY = this.ycanvas;
     this.dagaX = this.xmouse;
     this.dagaY = this.ymouse;
-    this.percentageX = ((this.xmouse-this.theX)/1280)*100; 
+    this.percentageX = ((this.xmouse-this.theX)/1280)*100;
     this.percentageY = ((this.ymouse-this.theY)/720)*100;
     this.props.style='resize:none;position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
   }
   ngAfterViewInit()
   {
     setTimeout(() => {
-      
+
     }, 1);
-    
+
   }
 
   onDragEnded($event: CdkDragEnd){
@@ -104,6 +104,14 @@ export class TextboxDragComponent implements IComponent {
 
     if (this.props.placeholder != undefined) {
       tmpHtmlCode += ' placeholder="' + this.props.placeholder + '"';
+    }
+
+    if (this.props.rows != undefined){
+      tmpHtmlCode += ' rows="' + this.props.rows + '"';
+    }
+
+    if (this.props.cols != undefined){
+      tmpHtmlCode += ' cols="' + this.props.cols + '"';
     }
 
     tmpHtmlCode += '>' + this.props.value + '</textarea>';
