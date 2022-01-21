@@ -38,12 +38,15 @@ export class PropertyComponent implements OnInit {
     if (value) {
       this.props = value;
       this.style2 = this.props.style;
-      let regexPosition = /position(.+?);/;
+      setTimeout(() => {
+        let regexPosition = /position(.+?);/;
       let regexPosition2 = /top(.+?);/;
       let regexPosition3 = /left(.+?);/;
       this.style2 = this.style2.replace(regexPosition, '');
       this.style2 = this.style2.replace(regexPosition2, '');
       this.style2 = this.style2.replace(regexPosition3, '');
+      }, 1);
+      
     }
   }
 
