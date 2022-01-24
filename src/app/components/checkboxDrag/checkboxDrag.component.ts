@@ -115,7 +115,7 @@ export class CheckboxDragComponent implements OnInit, IComponent {
     let tmpHtmlCode = '<div';
     tmpHtmlCode += ' style="' + this.props.style +'">';
     if (this.props.checked == "true") {
-      tmpHtmlCode +="\n" + ' <input id="'+ this.props.id + '" class="' +  this.props.class + '" type="' +  this.props.type + '">';
+      tmpHtmlCode +="\n" + ' <input id="'+ this.props.id + '" class="' +  this.props.class + '" type="' +  this.props.type + '" checked>';
     }
     else {
       tmpHtmlCode +="\n" + ' <input id="'+ this.props.id + '" class="' +  this.props.class + '" type="' +  this.props.type + '">';
