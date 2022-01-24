@@ -21,6 +21,8 @@ export class RadioDragComponent implements OnInit,IComponent {
     type: 'radio',
     name: 'defaultName',
     checked: 'false',
+    draggable: true,
+    selected : false,
   };
 
   @Output() updateDataEvent= new EventEmitter<any>();
