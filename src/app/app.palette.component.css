@@ -57,7 +57,7 @@
   background-color:white;
 }
 .sub-menu-button:focus + .sub-menu-dropdown{
-  pointer-events:all;
+  pointer-events:auto;
   display: inline-block;
   opacity: 1;
 }
