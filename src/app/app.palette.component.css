@@ -51,7 +51,6 @@
 }
 .sub-menu-dropdown button{
   display: table;
-  position: fixed;
 }
 .sub-menu-dropdown button:hover{
   pointer-events:all;
