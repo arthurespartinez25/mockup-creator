@@ -21,7 +21,7 @@ export class DropdownDragComponent implements OnInit, IComponent {
     key: '',
     id: '',
     value: 'Dropdown',
-    class: 'btn btn-secondary',
+    class: 'btn btn-secondary dropdown-toggle',
     style: '',
     typeObj: 'dropdownDrag',
     type: 'button',
@@ -123,6 +123,10 @@ export class DropdownDragComponent implements OnInit, IComponent {
       }
     }
     console.log(this.props.linksArray);
+  };
+
+  buttonClicked = () => { 
+    console.log("pasok sa click");
   };
 
   editLinkValue = (index, oldvalue: string, newValue: any) => {
