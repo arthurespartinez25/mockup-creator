@@ -79,7 +79,7 @@ export class HeaderDragComponent implements OnInit, IComponent {
         '%;';
     } else {
       this.props.style =
-        'width:300px;color:red;position:absolute;left:' +
+        'color:red;position:absolute;left:' +
         this.percentageX +
         '%;top:' +
         this.percentageY +
