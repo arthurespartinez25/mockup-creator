@@ -21,7 +21,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
     key: '',
     id: '',
     value: 'Paragraph',
-    class: 'lead',
+    class: '',
     style: 'color: red;',
     typeObj: 'paragraphDrag',
     type: '',
@@ -56,9 +56,11 @@ export class ParagraphDragComponent implements OnInit, IComponent {
 
     switch (this.whatComponent2) {
       case 'HPP1':
-        this.props.style = `width:200px;
-        color: white;
-        font-size: 10px;position:absolute;left:84%;top:1.0416666666666665%;`;
+        this.props.style = 'width:200px;color: white;font-size: 10px;position:absolute;left:' +
+        this.percentageX +
+        '%;top:' +
+        this.percentageY
+        +'%;';
         this.props.value = `All customers are required to use face masks and be fully vaccinated.`;
         break;
       case 'HPP2':
@@ -67,7 +69,12 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         width: 240px;
         font-size: 15px;
         letter-spacing: 0.1em;
-        text-decoration: none;`;
+        text-decoration: none;`
+        +'position:absolute;left:' +
+        this.percentageX +
+        '%;top:' +
+        this.percentageY
+        +'%;';
         this.props.value = `Monday to Friday:`;
         break;
       case 'HPP3':
@@ -76,7 +83,12 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         width: 240px;
         font-size: 15px;
         letter-spacing: 0.1em;
-        text-decoration: none;`;
+        text-decoration: none;`
+        +'position:absolute;left:' +
+        this.percentageX +
+        '%;top:' +
+        this.percentageY
+        +'%;';
         this.props.value = `Saturday to Sunday:`;
         break;
       case 'HPP4':
@@ -85,7 +97,12 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         width: 240px;
         font-size: 15px;
         letter-spacing: 0.1em;
-        text-decoration: none;`;
+        text-decoration: none;`
+        +'position:absolute;left:' +
+        this.percentageX +
+        '%;top:' +
+        this.percentageY
+        +'%;';
         this.props.value = `For Reservations:`;
         break;
       case 'HPP5':
@@ -94,7 +111,12 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         width: 240px;
         font-size: 20px;
         letter-spacing: 0.1em;
-        text-decoration: none;`;
+        text-decoration: none;`
+        +'position:absolute;left:' +
+        this.percentageX +
+        '%;top:' +
+        this.percentageY
+        +'%;';
         this.props.value = `12:00pm - 10:00pm`;
         break;
       case 'HPP6':
@@ -103,7 +125,12 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         width: 240px;
         font-size: 20px;
         letter-spacing: 0.1em;
-        text-decoration: none;`;
+        text-decoration: none;`
+        +'position:absolute;left:' +
+        this.percentageX +
+        '%;top:' +
+        this.percentageY
+        +'%;';
         this.props.value = `2:00pm to 12:00am`;
         break;
       case 'HPP7':
@@ -112,13 +139,23 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         width: 240px;
         font-size: 20px;
         letter-spacing: 0.1em;
-        text-decoration: none;`;
+        text-decoration: none;`
+        +'position:absolute;left:' +
+        this.percentageX +
+        '%;top:' +
+        this.percentageY
+        +'%;';
         this.props.value = `341-987-69`;
         break;
       case 'HPP8':
         this.props.style = `width:200px;
         color: white;
-        font-size: 10px;`;
+        font-size: 10px;`
+        +'position:absolute;left:' +
+        this.percentageX +
+        '%;top:' +
+        this.percentageY
+        +'%;';
         this.props.value = `All customers are required to use face masks and be fully vaccinated.`;
         break;
 

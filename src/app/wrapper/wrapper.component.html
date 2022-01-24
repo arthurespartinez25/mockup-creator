@@ -102,7 +102,7 @@
         : child.props.typeObj === 'inputDrag'
         ? xmouse + 'px'
         : xcanvas + 'px',
-    height: '1px',
+    height: '1px','background-color':'red',
     width: child.props.typeObj === 'navDrag' ? canvasWW + 'px' : 'fit-content'
   }"
 >
@@ -117,7 +117,14 @@
     [xmouse]="xmouse"
     [ymouse]="ymouse"
     [whatComponent2]="whatComponent2"
-      
+    [ngStyle]="{
+      'height': '1px',
+      'width':'1px',
+      'position': 'absolute',
+      'top':'0px',
+      'left':'0px'
+    }"
+    
   >
   </app-buttonDrag>
 
@@ -140,6 +147,13 @@
     [ycanvas]="ycanvas"
     [xmouse]="xmouse"
     [ymouse]="ymouse"
+    [ngStyle]="{
+      'height': '1px',
+      'width':'1px',
+      'position': 'absolute',
+      'top':'0px',
+      'left':'0px'
+    }"
   ></app-datepickerDrag>
 
   <app-imageDrag
@@ -152,6 +166,13 @@
     [xmouse]="xmouse"
     [ymouse]="ymouse"
     [whatComponent2]="whatComponent2"
+    [ngStyle]="{
+      'height': '1px',
+      'width':'1px',
+      'position': 'absolute',
+      'top':'0px',
+      'left':'0px'
+    }"
   ></app-imageDrag>
 
   <app-labelDrag
@@ -164,6 +185,13 @@
     [xmouse]="xmouse"
     [ymouse]="ymouse"
     [whatComponent2]="whatComponent2"
+    [ngStyle]="{
+      'height': '1px',
+      'width':'1px',
+      'position': 'absolute',
+      'top':'0px',
+      'left':'0px'
+    }"
   ></app-labelDrag>
 
   <app-textboxDrag
@@ -175,6 +203,13 @@
     [ycanvas]="ycanvas"
     [xmouse]="xmouse"
     [ymouse]="ymouse"
+    [ngStyle]="{
+      'height': '1px',
+      'width':'1px',
+      'position': 'absolute',
+      'top':'0px',
+      'left':'0px'
+    }"
   ></app-textboxDrag>
 
   <app-radioDrag
@@ -187,6 +222,13 @@
     [ycanvas]="ycanvas"
     [xmouse]="xmouse"
     [ymouse]="ymouse"
+    [ngStyle]="{
+      'height': '1px',
+      'width':'1px',
+      'position': 'absolute',
+      'top':'0px',
+      'left':'0px'
+    }"
   ></app-radioDrag>
 
   <app-modalDrag
@@ -198,6 +240,13 @@
     [ycanvas]="ycanvas"
     [xmouse]="xmouse"
     [ymouse]="ymouse"
+    [ngStyle]="{
+      'height': '1px',
+      'width':'1px',
+      'position': 'absolute',
+      'top':'0px',
+      'left':'0px'
+    }"
   ></app-modalDrag>
 
   <app-checkboxDrag
@@ -210,6 +259,13 @@
     [xmouse]="xmouse"
     [ymouse]="ymouse"
     [whatComponent2]="whatComponent2"
+    [ngStyle]="{
+      'height': '1px',
+      'width':'1px',
+      'position': 'absolute',
+      'top':'0px',
+      'left':'0px'
+    }"
   ></app-checkboxDrag>
 
   <app-dropdownDrag
@@ -222,6 +278,13 @@
     [xmouse]="xmouse"
     [ymouse]="ymouse"
     [whatComponent2]="whatComponent2"
+    [ngStyle]="{
+      'height': '1px',
+      'width':'1px',
+      'position': 'absolute',
+      'top':'0px',
+      'left':'0px'
+    }"
   >
   </app-dropdownDrag>
 
@@ -237,6 +300,13 @@
     [canvasWW]="canvasWW"
     [ngStyle]="{ width: canvasWidth }"
     [whatComponent2]="whatComponent2"
+    [ngStyle]="{
+      'height': '1px',
+      'width':'1px',
+      'position': 'absolute',
+      'top':'0px',
+      'left':'0px'
+    }"
   ></app-navbarDrag>
 
   <app-inputDrag
@@ -249,6 +319,13 @@
     [xmouse]="xmouse"
     [ymouse]="ymouse"
     [whatComponent2]="whatComponent2"
+    [ngStyle]="{
+      'height': '1px',
+      'width':'1px',
+      'position': 'absolute',
+      'top':'0px',
+      'left':'0px'
+    }"
   >
   </app-inputDrag>
 
@@ -262,6 +339,13 @@
     [xmouse]="xmouse"
     [ymouse]="ymouse"
     [whatComponent2]="whatComponent2"
+    [ngStyle]="{
+      'height': '1px',
+      'width':'1px',
+      'position': 'absolute',
+      'top':'0px',
+      'left':'0px'
+    }"
   >
   </app-headerDrag>
 
@@ -275,6 +359,13 @@
     [xmouse]="xmouse"
     [ymouse]="ymouse"
     [whatComponent2]="whatComponent2"
+    [ngStyle]="{
+      'height': '1px',
+      'width':'1px',
+      'position': 'absolute',
+      'top':'0px',
+      'left':'0px'
+    }"
   >
   </app-linkDrag>
 
@@ -288,6 +379,13 @@
     [xmouse]="xmouse"
     [ymouse]="ymouse"
     [whatComponent2]="whatComponent2"
+    [ngStyle]="{
+      'height': '1px',
+      'width':'1px',
+      'position': 'absolute',
+      'top':'0px',
+      'left':'0px'
+    }"
   ></app-paragraphDrag>
 
   <app-tableDrag
@@ -299,6 +397,13 @@
     [ycanvas]="ycanvas"
     [xmouse]="xmouse"
     [ymouse]="ymouse"
+    [ngStyle]="{
+      'height': '1px',
+      'width':'1px',
+      'position': 'absolute',
+      'top':'0px',
+      'left':'0px'
+    }"
   ></app-tableDrag>
 
   <app-youtubeDrag
@@ -310,6 +415,13 @@
     [ycanvas]="ycanvas"
     [xmouse]="xmouse" 
     [ymouse]="ymouse"
+    [ngStyle]="{
+      'height': '1px',
+      'width':'1px',
+      'position': 'absolute',
+      'top':'0px',
+      'left':'0px'
+    }"
   ></app-youtubeDrag>
 
 </div>

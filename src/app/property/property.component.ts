@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { IComponent } from '../interfaces/icomponent';
 import { IProperty } from '../interfaces/iproperty';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -24,6 +24,10 @@ export class PropertyComponent implements OnInit {
     selected: false,
   };
   style2 = '';
+  @Output() addAllCSSRule = new EventEmitter<string>();
+  @Output() clearCss = new EventEmitter<string>();
+  @Output() cssReceiveMessage = new EventEmitter<string>();
+  
   
 
   @Input() get property(): IProperty {
@@ -35,12 +39,15 @@ export class PropertyComponent implements OnInit {
     if (value) {
       this.props = value;
       this.style2 = this.props.style;
-      let regexPosition = /position(.+?);/;
+      setTimeout(() => {
+        let regexPosition = /position(.+?);/;
       let regexPosition2 = /top(.+?);/;
       let regexPosition3 = /left(.+?);/;
       this.style2 = this.style2.replace(regexPosition, '');
       this.style2 = this.style2.replace(regexPosition2, '');
       this.style2 = this.style2.replace(regexPosition3, '');
+      }, 1);
+      
     }
   }
 
@@ -70,6 +77,8 @@ export class PropertyComponent implements OnInit {
     if (componentIndex !== -1) {
       this.componentList.splice(componentIndex, 1);
       this.props = this.defaultProps;
+      this.styleBox.nativeElement.value = "";
+      this.props.draggable = false;
     }
   }
   @ViewChild('taID') styleBox: ElementRef;
@@ -77,6 +86,10 @@ export class PropertyComponent implements OnInit {
         this.componentList.length = 0;
         this.props = this.defaultProps;
         this.styleBox.nativeElement.value = "";
+        this.addAllCSSRule.next("");
+        this.clearCss.next("");
+        this.cssReceiveMessage.next("");
+        this.props.draggable = false;
   }
 
   ngOnInit(): void {
@@ -150,6 +163,10 @@ export class PropertyComponent implements OnInit {
 
   colsChangeHandler(event: any) {
     this.props.cols = event.target.value;
+  }
+  
+  hrefChangeHandler(event: any){
+    this.props.href = event.target.value;
   }
 
   nameChangeHandler(event: any) {

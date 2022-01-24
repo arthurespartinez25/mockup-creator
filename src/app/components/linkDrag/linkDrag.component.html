@@ -8,7 +8,7 @@
   'border-style' : props.selected == true ? 'solid': (props.selected == false ? 'none': null),
   'border-width' : props.selected == true ? '1px': (props.selected == false ? '0px': null)
 }" >
-    <a href="#" [id]="props.id" [style]="props.style" [class]="props.class"
+    <a [href]="props.href" [id]="props.id" [style]="props.style" [class]="props.class"
     >
         {{props.value}}
     </a>

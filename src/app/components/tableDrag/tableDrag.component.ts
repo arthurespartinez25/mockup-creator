@@ -124,7 +124,7 @@ export class TableDragComponent implements OnInit, IComponent {
     key: '',
     id: '',
     value: '',
-    class: 'table',
+    class: '',
     style: '',
     typeObj: 'tableDrag',
     type: '',
@@ -174,9 +174,14 @@ export class TableDragComponent implements OnInit, IComponent {
   onDragEnded($event: any) {
     this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
     this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
-
-    this.updateDataEvent.emit(this.mousePositionXV2 + this.dagaX - this.theX);
-    this.updateDataEventY.emit(this.mousePositionYV2 + this.dagaY - this.theY);
+    this.updateDataEvent.emit(
+      ((this.mousePositionXV2 + this.dagaX - this.theX) / 1280) * 100
+    );
+    this.updateDataEventY.emit(
+      ((this.mousePositionYV2 + this.dagaY - this.theY) / 720) * 100
+    );
+    console.log(this.mousePositionXV2);
+    console.log(this.mousePositionYV2);
   }
 
   constructor(canvas: ElementRef, changeDetectorRef: ChangeDetectorRef) {
@@ -213,47 +218,37 @@ export class TableDragComponent implements OnInit, IComponent {
   */
 
   get htmlCode(): string {
-    let tmpHtmlCode = '<div';
-    tmpHtmlCode +=
-      ' id="' + this.props.id + '" style="' + this.props.style + '">';
-    tmpHtmlCode += '\n' + '<table class="' + this.props.class + '">';
+    let jude = this.props.style;
+    let regexLeft = /left(.+?);/;
+    let regexTop = /top(.+?);/;
+    let regexPosition = /position(.+?);/;
+    // let styleLeft = jude.match(/left(.+?);/g);
+    // let styleTop = jude.match(/top(.+?);/g);
+    // console.log(styleLeft);
+    // console.log(jude);
 
-    tmpHtmlCode += '\n' + '<thead>';
-    tmpHtmlCode += '\n' + '<tr>';
-    tmpHtmlCode += '\n' + '<th scope="col">#</th>';
-    tmpHtmlCode += '\n' + '<th scope="col">Heading 1</th>';
-    tmpHtmlCode += '\n' + '<th scope="col">Heading 2</th>';
-    tmpHtmlCode += '\n' + '<th scope="col">Heading 3</th>';
-    tmpHtmlCode += '\n' + '</tr>';
-    tmpHtmlCode += '\n' + '</thead>';
+    //let divStyle = '"style=position:absolute;left:'+this.dagaX+'px;top:'+this.dagaY+'px;"';
 
-    tmpHtmlCode += '\n' + '<tbody>';
+    jude = jude.replace(regexLeft, '');
+    jude = jude.replace(regexTop, '');
+    jude = jude.replace(regexPosition, '');
+    //this.props.style = jude;
 
-    tmpHtmlCode += '\n' + '<tr>';
-    tmpHtmlCode += '\n' + '<th scope="row">1</th>';
-    tmpHtmlCode += '\n' + '<td>Cell</td>';
-    tmpHtmlCode += '\n' + '<td>Cell</td>';
-    tmpHtmlCode += '\n' + '<td>Cell</td>';
-    tmpHtmlCode += '\n' + '</tr>';
-
-    tmpHtmlCode += '\n' + '<tr>';
-    tmpHtmlCode += '\n' + '<th scope="row">2</th>';
-    tmpHtmlCode += '\n' + '<td>Cell</td>';
-    tmpHtmlCode += '\n' + '<td>Cell</td>';
-    tmpHtmlCode += '\n' + '<td>Cell</td>';
-    tmpHtmlCode += '\n' + '</tr>';
-
-    tmpHtmlCode += '\n' + '<tr>';
-    tmpHtmlCode += '\n' + '<th scope="row">3</th>';
-    tmpHtmlCode += '\n' + '<td>Cell</td>';
-    tmpHtmlCode += '\n' + '<td>Cell</td>';
-    tmpHtmlCode += '\n' + '<td>Cell</td>';
-    tmpHtmlCode += '\n' + '</tr>';
-
-    tmpHtmlCode += '\n' + '</tbody>';
-    tmpHtmlCode += '\n' + '</table>';
-
-    tmpHtmlCode += '\n' + ' </div>';
+    let tmpHtmlCode =
+      '<div class="btn-group"' + ' style="' + this.props.style + '"';
+    tmpHtmlCode += 'id="' + this.props.id + '">';
+    tmpHtmlCode += '\n' + '<table class='+ this.props.class +'>'
+    for(var i=0; i<this.props.tblArrayRow.length; i++) {
+      
+      tmpHtmlCode += '\n' + ' <tr>';
+      for(var j=0; j<this.props.tblArrayCol.length; j++) {
+        tmpHtmlCode += '\n' + ' <td style="padding: 10px; border: 1px solid black">'+ this.props.tblArrayRow[i][j] +'</td>';
+        /* console.log(this.props.tblArrayRow[i][j]); */
+      }
+      tmpHtmlCode += '\n' + ' </tr>';
+    }
+    tmpHtmlCode += '\n' + ' </table>';
+    tmpHtmlCode += '</div>'
 
     return tmpHtmlCode;
   }

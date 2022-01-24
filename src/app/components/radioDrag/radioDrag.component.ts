@@ -15,7 +15,7 @@ export class RadioDragComponent implements OnInit,IComponent {
     key: '',
     id: '',
     value: 'RadioButton',
-    class: 'form-check-input',
+    class: '',
     style: '',
     typeObj: 'radioDrag',
     type: 'radio',

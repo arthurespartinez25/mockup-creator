@@ -158,7 +158,7 @@ export class LabelDragComponent implements OnInit, IComponent {
     } else if (this.whatComponent2 == 'HPLabel2') {
       this.props.value = `Event Highlight`;
       this.props.style = `color: white;
-      font-family: "Times New Roman", Times, serif;
+      font-family: Times New Roman, Times, serif;
       font-style: italic;
       font-size: 15px;
       width: 600px;position:absolute;left:47.34375%;top:21.666666666666668%;`;
@@ -166,7 +166,7 @@ export class LabelDragComponent implements OnInit, IComponent {
       this.props.value = `冬の不思議`;
       this.props.style = `color: white;
       font-size: 40px;
-      width: 600px;position:absolute;top:27.500000000000004%;left:43.046875%;`;
+      width: 600px;position:absolute;top:24.500000000000004%;left:43.046875%;`;
     } else {
       this.props.style =
         'position:absolute;left:' +

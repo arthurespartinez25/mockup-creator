@@ -21,7 +21,7 @@ export class HeaderDragComponent implements OnInit, IComponent {
     key: '',
     id: '',
     value: 'Text Here',
-    class: 'h1',
+    class: '',
     style: '',
     typeObj: 'headerDrag',
     type: '',
