@@ -29,4 +29,5 @@ export interface IProperty {
   linkContent?: [];
   updateCallback?: (row, col) => void;
   url?: SafeResourceUrl;
+  selected: boolean;
 }

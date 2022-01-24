@@ -6,6 +6,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
 
 @Component({
   selector: 'app-popupDrag',
+  styleUrls: ['./popupDrag.component.css'],
   template: `<button cdkDrag cdkDragBoundary="#canvas" [cdkDragDisabled]="!props.draggable" [id]="props.id" [style]="props.style" [type]="props.type">
   {{ props.value }}
   </button>`
@@ -21,7 +22,9 @@ export class PopupDragComponent implements IComponent {
     style: '',
     typeObj: 'popupDrag',
     type: 'button',
-    content: "Popup text here..."
+    content: "Popup text here...",
+    draggable: true,
+    selected : false,
   };
 
   constructor(canvas: ElementRef) {
