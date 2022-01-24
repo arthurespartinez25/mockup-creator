@@ -43,6 +43,7 @@ export class ButtonDragComponent implements IComponent {
     style: '',
     typeObj: 'buttonDrag',
     type: 'button',
+    draggable: true,
     selected : false,
   };
 

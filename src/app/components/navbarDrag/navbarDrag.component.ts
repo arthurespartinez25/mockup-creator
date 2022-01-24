@@ -28,6 +28,7 @@ export class NavbarDragComponent implements OnInit, IComponent {
     font-size: 20px;`,
     typeObj: 'navDrag',
     type: '',
+    draggable: true,
     selected : false,
   };
 

@@ -30,6 +30,7 @@ export class TextboxDragComponent implements IComponent {
     placeholder: 'Type your text here...',
     rows: 3,
     cols: 20,
+    draggable: true,
     selected : false,
   };
 

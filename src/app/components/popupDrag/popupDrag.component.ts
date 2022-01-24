@@ -23,6 +23,7 @@ export class PopupDragComponent implements IComponent {
     typeObj: 'popupDrag',
     type: 'button',
     content: "Popup text here...",
+    draggable: true,
     selected : false,
   };
 

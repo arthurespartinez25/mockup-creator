@@ -47,9 +47,11 @@
   max-width: 100px;
   opacity: 0;
   z-index: 999;
+
 }
 .sub-menu-dropdown button{
   display: table;
+  position: fixed;
 }
 .sub-menu-dropdown button:hover{
   pointer-events:all;

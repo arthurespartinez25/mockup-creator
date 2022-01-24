@@ -30,6 +30,7 @@ export class DatepickerDragComponent implements OnInit,IComponent {
     style: '',
     typeObj: 'datepickerDrag',
     type: 'date',
+    draggable: true,
     selected : false,
   };
 

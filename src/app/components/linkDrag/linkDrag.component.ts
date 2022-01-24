@@ -25,6 +25,7 @@ export class LinkDragComponent implements OnInit, IComponent {
     style: 'text-decoration: none;',
     typeObj: 'linkDrag',
     type: '',
+    draggable: true,
     selected : false,
   };
 

@@ -25,6 +25,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
     style: 'color: red;',
     typeObj: 'paragraphDrag',
     type: '',
+    draggable: true,
     selected : false,
   };
 

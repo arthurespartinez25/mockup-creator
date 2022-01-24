@@ -18,6 +18,7 @@ export class ModalDragComponent implements IComponent {
     style: '',
     typeObj: 'modalDrag',
     type: '',
+    draggable: true,
     selected : false,
   };
 

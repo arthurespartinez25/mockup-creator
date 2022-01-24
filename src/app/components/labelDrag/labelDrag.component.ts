@@ -25,6 +25,7 @@ export class LabelDragComponent implements OnInit, IComponent {
     style: '',
     typeObj: 'labelDrag',
     type: '',
+    draggable: true,
     selected : false,
   };
 

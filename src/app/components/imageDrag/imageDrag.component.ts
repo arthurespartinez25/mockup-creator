@@ -25,6 +25,7 @@ export class ImageDragComponent implements OnInit, IComponent {
     style: '',
     typeObj: 'imgDrag',
     type: '',
+    draggable: true,
     selected : false,
   };
 
