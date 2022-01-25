@@ -28,6 +28,8 @@ export class DropdownDragComponent implements OnInit, IComponent {
     links: 3,
     linkValue: 'Sample',
     linksArray: [],
+    draggable: true,
+    selected : false,
   };
 
   @Output() updateDataEvent = new EventEmitter<any>();

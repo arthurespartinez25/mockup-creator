@@ -9,3 +9,7 @@
 .text:hover {
     background:rgba(173, 173, 173, 0.2);
 }
+p:hover{
+    background-color: rgba(100, 100, 100, 0.2);
+    opacity: 0.7;
+}

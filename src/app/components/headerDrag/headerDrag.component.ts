@@ -25,6 +25,8 @@ export class HeaderDragComponent implements OnInit, IComponent {
     style: '',
     typeObj: 'headerDrag',
     type: '',
+    draggable: true,
+    selected : false,
   };
 
   @Input() get property(): IProperty {
@@ -79,7 +81,7 @@ export class HeaderDragComponent implements OnInit, IComponent {
         '%;';
     } else {
       this.props.style =
-        'width:300px;color:red;position:absolute;left:' +
+        'width:300px;font-size:2.0rem;color:red;position:absolute;left:' +
         this.percentageX +
         '%;top:' +
         this.percentageY +
