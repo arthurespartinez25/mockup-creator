@@ -21,32 +21,17 @@ export class WrapperComponent implements OnInit {
   @Input() canvasLeft: any;
   @Input() canvasTop: any;
   @Input() canvasW: any;
-  @Input() xCounter: any;
   @Input() whatComponent:any;
   @Output() updateDataEvent2= new EventEmitter<any>();
   @Output() updateDataEventX= new EventEmitter<any>();
 
-  xmouse = 0;
-  ymouse = 0;
-  xcanvas = 0;
-  ycanvas = 0;
-  xCounterstrike = 0;
-  canvasWW = 0;
-  jude=false;
+  mousePositionX2 = 0;
+  mousePositionY2 = 0;
+  canvasPositionX = 0;
+  canvasPositionY = 0;
+  canvasWidth2 = 0;
   whatComponent2 = "";
 
-
-  /*
-  @Input() get wrapperCSS(): CSSStyleSheet {
-    return this.wrapperStylesheet;
-  }
-
-  set wrapperCSS(wrapperDocument: CSSStyleSheet) {
-    if (wrapperDocument) {
-    this.sendWrapperStyleSheet(this.wrapperStylesheet);
-    }
-  }
-  */
 
   @Input() get childComp(): IComponent {
     return this.child;
@@ -78,24 +63,20 @@ export class WrapperComponent implements OnInit {
   constructor(private ref: ElementRef, private drag: DragDrop) {}
   stylish ={};
   ngOnInit(): void {
-    //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
-    this.xmouse = this.mousePositionX;
-    this.ymouse = this.mousePositionY;
-    this.xcanvas = this.canvasLeft;
-    this.ycanvas = this.canvasTop;
-    this.xCounterstrike = this.xCounter;
-    this.canvasWW = this.canvasW;
+    this.mousePositionX2 = this.mousePositionX;
+    this.mousePositionY2 = this.mousePositionY;
+    this.canvasPositionX = this.canvasLeft;
+    this.canvasPositionY = this.canvasTop;
+    this.canvasWidth2 = this.canvasW;
     this.whatComponent2 = this.whatComponent;
   }
   removeElement(remove:IComponent):void {
 
   }
   passData(item: any){
-    //console.warn(item);
     this.updateDataEvent2.emit(item);
   }
   passDataY(item: any){
-    //console.warn(item);
     this.updateDataEventX.emit(item);
   }
 }

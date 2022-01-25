@@ -113,32 +113,6 @@
           </div>
           <!-- text-dropdown end -->
 
-          <!--
-          <button
-            class="palette-item"
-            (click)="addComponent('header')"
-            cdkDrag
-            (cdkDragEnded)="onDragEndedAddComponent($event,'header')"
-          >
-            Header
-          </button>
-          <button
-            class="palette-item"
-            (click)="addComponent('paragraph')"
-            cdkDrag
-            (cdkDragEnded)="onDragEndedAddComponent($event,'paragraph')"
-          >
-            Paragraph
-          </button>
-          <button
-            class="palette-item"
-            (click)="addComponent('label')"
-            cdkDrag
-            (cdkDragEnded)="onDragEndedAddComponent($event,'label')"
-          >
-            Label
-          </button>
-          -->
           <!-- input-dropdown-menu start -->
           <div
             class="palette-item sub-menu"
@@ -307,9 +281,7 @@
           [canvasLeft]="canvasLeft"
           [canvasTop]="canvasTop"
           [canvasW]="canvasW"
-          [xCounter]="xCounter"
           [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
-          (mousedown)="mouseGalawX($event)"
           (updateDataEvent2)="passData2($event)"
           (updateDataEventX)="passDataX($event)"
           [whatComponent]="whatComponent"
@@ -322,7 +294,6 @@
   <!-- CODE SECTION -->
 
   <div id="code-container">
-    <!-- <button (click) = "deleteComponent()" >Delete Component</button> -->
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
         <button
@@ -397,12 +368,7 @@
         >
           Save CSS
         </h3>
-        <!--
-        <h3
-        style="background-color: #a83241; margin: 0" 
-        (click)="deleteCSSRule(cssTextArea.value)"
-        (click)="cssReceiveMessage()">Delete CSS Rule</h3>
-        -->
+
         <textarea
           style="margin: 0; width: 100%"
           cols="30"
@@ -412,19 +378,7 @@
           id="css-textarea"
         ></textarea>
 
-        <!-- CSS Code
-        <textarea 
-        style="margin: 0" 
-        cols="30" 
-        rows="5"
-        name="css-textarea" id="css-textarea"
-        [innerHTML]="style"></textarea>
-        <!!-- include this on the textarea above if need be.
-        (keyup)="cssReceiveMessage($event)"
-        (keyup)="refresh()"
-        -->
-        <!--<a routerLink="/refresh">Testing</a> ->->
-      --></div>
+        </div>
       <div
         class="tab-pane fade"
         id="code"
