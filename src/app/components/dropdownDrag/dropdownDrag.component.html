@@ -1,21 +1,17 @@
-<div class="btn-group" [id]="props.id" cdkDrag cdkDragBoundary="#canvas" (cdkDragEnded)="onDragEnded($event)" 
+<div class="dropdown" cdkDrag cdkDragBoundary="#canvas" (cdkDragEnded)="onDragEnded($event)" 
 [cdkDragDisabled]="!props.draggable"
 [ngStyle]="{
   'position': 'sticky',
   'left': (dagaX-theX) + 'px',
   'top': (dagaY-theY) + 'px',
-  'width': '100px',
   'border-color' : props.selected == true ? 'red': (props.selected == false ? 'none': null),
   'border-style' : props.selected == true ? 'solid': (props.selected == false ? 'none': null),
   'border-width' : props.selected == true ? '1px': (props.selected == false ? '0px': null)
-}" (click)="editNumLinks(this.props.links)">
-  <button [class]="props.class" [type]="props.type" [style]="props.style">{{ props.value }}</button>
-  <button (click)="editNumLinks(this.props.links)" type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" [ngStyle]="{
-    'float': 'right'
-  }">
-    <span class="visually-hidden">Toggle Dropdown</span>
+}" >
+  <button [class]="props.class" type="button" [id]="props.id" [style]="props.style" (click)="editNumLinks(this.props.links)" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    {{ props.value }}
   </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" *ngFor="let link of props.linksArray; let i = index;" (click)="editLinkValue(i, link, props.linkValue)">{{link}}</a></li>
-  </ul>
+  <div class="dropdown-menu" aria-labelledby="props.id">
+    <a class="dropdown-item" *ngFor="let link of props.linksArray; let i = index;" (click)="editLinkValue(i, link, props.linkValue)">{{link}}</a>
+  </div>
 </div> 

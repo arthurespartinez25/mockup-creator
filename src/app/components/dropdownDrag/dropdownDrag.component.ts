@@ -21,7 +21,7 @@ export class DropdownDragComponent implements OnInit, IComponent {
     key: '',
     id: '',
     value: 'Dropdown',
-    class: 'btn btn-secondary',
+    class: 'btn btn-secondary dropdown-toggle',
     style: '',
     typeObj: 'dropdownDrag',
     type: 'button',
@@ -127,6 +127,10 @@ export class DropdownDragComponent implements OnInit, IComponent {
     console.log(this.props.linksArray);
   };
 
+  buttonClicked = () => { 
+    console.log("pasok sa click");
+  };
+
   editLinkValue = (index, oldvalue: string, newValue: any) => {
     this.props.linksArray[index] = newValue;
     this.props.linkContent = this.props.linksArray;
@@ -154,26 +158,8 @@ export class DropdownDragComponent implements OnInit, IComponent {
     let tmpHtmlCode =
       '<div class="btn-group"' + ' style="' + this.props.style + '"';
     tmpHtmlCode += 'id="' + this.props.id + '">';
-    tmpHtmlCode +=
-      '\n' +
-      ' <button class="' +
-      this.props.class +
-      '" type="' +
-      this.props.type +
-      '" style="' +
-      jude +
-      '"> ' +
-      this.props.value +
-      ' </button>';
-    tmpHtmlCode +=
-      '\n' +
-      ' <button' +
-      ' type="' +
-      this.props.type +
-      '" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
-    tmpHtmlCode += '\n' + ' <span class="sr-only">Toggle Dropdown</span>';
-    tmpHtmlCode += '\n' + ' </button>';
-    tmpHtmlCode += '\n' + ' <div class="dropdown-menu">';
+    tmpHtmlCode += '\n' + ' <button class="' + this.props.class +'" type="' + this.props.type +'" style="' + jude + '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> ' + this.props.value + ' </button>';
+    tmpHtmlCode += '\n' + ' <div class="dropdown-menu" aria-labelledby="'+ this.props.id +'">';
 
     for (var i = 0; i < this.props.linksArray.length; i++) {
       tmpHtmlCode +=
