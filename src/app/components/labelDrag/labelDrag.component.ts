@@ -169,7 +169,7 @@ export class LabelDragComponent implements OnInit, IComponent {
       width: 600px;position:absolute;top:24.500000000000004%;left:43.046875%;`;
     } else {
       this.props.style =
-        'position:absolute;left:' +
+        'font-size:1rem;position:absolute;left:' +
         this.percentageX +
         '%;top:' +
         this.percentageY +

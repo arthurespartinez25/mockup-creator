@@ -161,7 +161,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
 
       default:
         this.props.style =
-          'color:red;position:absolute;left:' +
+          'font-size:1rem;color:red;position:absolute;left:' +
           this.percentageX +
           '%;top:' +
           this.percentageY +
