@@ -90,6 +90,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @ViewChild('canvas') canvas!: ElementRef;
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
+  @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
 
   changeref: ChangeDetectorRef;
   constructor(
@@ -231,6 +232,11 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
           this.canvasLeftX = 0;
           this.canvasTopY = 0;
         }
+        else if(component == 'header'||component == 'paragraph'||component == 'label')
+        {
+          this.canvasLeftX = (this.subMenuItem2.nativeElement as HTMLElement).offsetWidth;
+          this.canvasTopY = (this.subMenuItem2.nativeElement as HTMLElement).offsetTop;
+        }
         this.mousePositionX = this.offsetLeft + this.xDistance + this.canvasLeftX;
         this.mousePositionY = this.offsetTop + this.yDistance + this.canvasTopY;
       }
@@ -313,7 +319,13 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.changeref.detectChanges();
   }
   styleHolder = 'aw';
-
+  isDisabled = true;
+  timerDisable()
+  {
+    setTimeout(() => {
+      this.isDisabled = true;
+    }, 100);
+  }
   clickHandler(component: IComponent) {
     this.selected = component.props;
     this.selectedComponent = component;
