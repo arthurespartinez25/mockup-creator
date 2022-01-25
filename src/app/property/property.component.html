@@ -137,7 +137,7 @@
           [disabled]="!this.props.id"
           type="text"
           [value]="props.linkValue"
-          (keyup)="linkValueChangeHandler($event)"
+          (change)="linkValueChangeHandler($event)"
         />
       </td>
     </tr>

@@ -26,7 +26,7 @@ export class DropdownDragComponent implements OnInit, IComponent {
     typeObj: 'dropdownDrag',
     type: 'button',
     links: 3,
-    linkValue: 'Sample',
+    linkValue: ['link1', 'link2', 'link3'],
     linksArray: [],
     draggable: true,
     selected : false,
@@ -47,6 +47,7 @@ export class DropdownDragComponent implements OnInit, IComponent {
   dagaY = 0;
   onetimeBool = true;
   links = this.props.links;
+  linkValue = this.props.linkValue;
   percentageX = 0;
   percentageY = 0;
 
@@ -101,16 +102,19 @@ export class DropdownDragComponent implements OnInit, IComponent {
       this.props = value;
       this.links = value.links;
       this.editNumLinks(this.props.links);
+      this.linkValue = value.linkValue;
     }
   }
 
   editNumLinks = (numLink) => {
     this.props.linksArray = [];
+    var temp;
     if (!numLink) {
       console.warn('rows or columns are undefined');
     } else {
+      
       for (var i = 0; i < numLink; i++) {
-        if (this.props.linkContent) {
+        /* if (this.props.linkContent) {
           if (this.props.linkContent.length != numLink) {
             this.props.linksArray.push('link' + (i + 1));
           } else {
@@ -121,8 +125,16 @@ export class DropdownDragComponent implements OnInit, IComponent {
         } else {
           this.props.linksArray.push('link' + (i + 1));
           console.log('pasok noh? oo');
-        }
+        } */
       }
+      
+    }
+    if(typeof(this.props.linkValue) == 'string') {
+      console.log("pasok sa typeof string");
+      this.props.linksArray  = this.props.linkValue.split(',');
+    } else {
+      console.log("pasok sa else");
+      this.props.linksArray = this.props.linkValue;
     }
     console.log(this.props.linksArray);
   };

@@ -12,6 +12,6 @@
     {{ props.value }}
   </button>
   <div class="dropdown-menu" aria-labelledby="props.id">
-    <a class="dropdown-item" *ngFor="let link of props.linksArray; let i = index;" (click)="editLinkValue(i, link, props.linkValue)">{{link}}</a>
+    <a class="dropdown-item" *ngFor="let link of props.linksArray; let i = index;">{{link}}</a>
   </div>
 </div> 
