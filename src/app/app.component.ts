@@ -66,6 +66,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     type: '',
     draggable: false,
     selected : false,
+    hidden: false,
   };
 
   public cssRuleCount = document.styleSheets[0].cssRules.length;
@@ -1187,6 +1188,29 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   /*************Here Ends CSS Code******************/
 
+
+  /**************The code below is for component list functions *************************/
+  
+  deleteComponent(value:any){
+    let componentIndex = this.componentList.indexOf(value);
+    if(componentIndex !== -1){
+      this.componentList.splice(componentIndex,1);
+    }
+  }
+
+  hideComponent(value:any){
+    let componentIndex = this.componentList.indexOf(value);
+      this.componentList[componentIndex].props.hidden = !this.componentList[componentIndex].props.hidden;
+    console.log(componentIndex);
+    console.log(value);
+    console.log(this.componentList[componentIndex].props.hidden);
+  }
+
+  /**************The code below is for component list functions *************************/
+
+
+
+  
   /*
   receiveMessage($event: boolean) {
     if ($event == true) {

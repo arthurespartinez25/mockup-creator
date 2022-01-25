@@ -45,6 +45,7 @@ export class ButtonDragComponent implements IComponent {
     type: 'button',
     draggable: true,
     selected : false,
+    hidden:false,
   };
 
   @Output() updateDataEvent = new EventEmitter<any>();

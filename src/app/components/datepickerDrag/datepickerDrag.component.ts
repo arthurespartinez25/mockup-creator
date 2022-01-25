@@ -32,6 +32,7 @@ export class DatepickerDragComponent implements OnInit,IComponent {
     type: 'date',
     draggable: true,
     selected : false,
+    hidden: false,
   };
 
   @Output() updateDataEvent= new EventEmitter<any>();

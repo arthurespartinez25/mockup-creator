@@ -21,6 +21,7 @@ export class CheckboxDragComponent implements OnInit, IComponent {
     checked: 'true',
     draggable: true,
     selected : false,
+    hidden: false,
   };
 
   @Output() updateDataEvent= new EventEmitter<any>();

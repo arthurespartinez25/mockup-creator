@@ -27,6 +27,7 @@ export class LabelDragComponent implements OnInit, IComponent {
     type: '',
     draggable: true,
     selected : false,
+    hidden: false,
   };
 
   @Output() updateDataEvent = new EventEmitter<any>();

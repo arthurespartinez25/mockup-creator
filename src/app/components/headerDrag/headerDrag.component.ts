@@ -27,6 +27,7 @@ export class HeaderDragComponent implements OnInit, IComponent {
     type: '',
     draggable: true,
     selected : false,
+    hidden: false,
   };
 
   @Input() get property(): IProperty {

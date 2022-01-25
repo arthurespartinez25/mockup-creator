@@ -21,6 +21,7 @@ export class InputDragComponent implements OnInit, IComponent {
     type: 'text',
     draggable: true,
     selected : false,
+    hidden: false,
   };
 
   @Output() updateDataEvent= new EventEmitter<any>();

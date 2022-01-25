@@ -32,6 +32,7 @@ export class TextboxDragComponent implements IComponent {
     cols: 20,
     draggable: true,
     selected : false,
+    hidden: false,
   };
 
   @Output() updateDataEvent= new EventEmitter<any>();

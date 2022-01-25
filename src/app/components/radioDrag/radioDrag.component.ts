@@ -23,6 +23,7 @@ export class RadioDragComponent implements OnInit,IComponent {
     checked: 'false',
     draggable: true,
     selected : false,
+    hidden: false,
   };
 
   @Output() updateDataEvent= new EventEmitter<any>();

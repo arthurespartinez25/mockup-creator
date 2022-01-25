@@ -24,18 +24,19 @@ export class YoutubeDragComponent implements OnInit, IComponent {
   url: SafeResourceUrl;
 
   
-    props: IProperty = {
-      key: '',
-      id: '',
-      value: 'https://www.youtube.com/embed/DrLYL9F3WV4?autoplay=1',
-      class: '',
-      style: '',
-      typeObj: 'youtubeDrag',
-      type: '',
-      url : '',
-      draggable: true,
-      selected : false,
-    };
+  props: IProperty = {
+    key: '',
+    id: '',
+    value: 'https://www.youtube.com/embed/DrLYL9F3WV4?autoplay=1',
+    class: '',
+    style: '',
+    typeObj: 'youtubeDrag',
+    type: '',
+    url : '',
+    draggable: true,
+    selected : false,
+    hidden: false,
+  };
 
   @Output() updateDataEvent= new EventEmitter<any>();
   @Output() updateDataEventY= new EventEmitter<any>();
