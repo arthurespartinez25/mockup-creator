@@ -225,7 +225,7 @@
     }"
   ></app-radioDrag>
 
-  <!-- <app-modalDrag
+  <app-modalDrag
     [property]="child.props"
     *ngSwitchCase="'modalDrag'"
     (updateDataEvent)="passData($event)"
@@ -234,13 +234,14 @@
     [canvasPositionY]="canvasPositionY"
     [mousePositionX2]="mousePositionX2"
     [mousePositionY2]="mousePositionY2"
+    [whatComponent2]="whatComponent2"
     [ngStyle]="{
       'height': '1px',
       'position': 'fixed',
       'top':mousePositionY2,
       'left':mousePositionX2
     }"
-  ></app-modalDrag> -->
+  ></app-modalDrag>
 
   <app-checkboxDrag
     [property]="child.props"
