@@ -1200,10 +1200,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   hideComponent(value:any){
     let componentIndex = this.componentList.indexOf(value);
-      this.componentList[componentIndex].props.hidden = !this.componentList[componentIndex].props.hidden;
-    console.log(componentIndex);
-    console.log(value);
-    console.log(this.componentList[componentIndex].props.hidden);
+    this.componentList[componentIndex].props.hidden = !this.componentList[componentIndex].props.hidden;
   }
 
   /**************The code below is for component list functions *************************/

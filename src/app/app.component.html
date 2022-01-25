@@ -287,6 +287,10 @@
       <div class="component-list"
         *ngFor="let component of componentList; let i = index"
         [ngSwitch]="this.componentList[i].props.typeObj"
+        [ngStyle]="{
+          'background-color' : this.componentList[i].props.selected == true ? 'white': (this.componentList[i].props.selected == false ? '  #16324f': null),
+          'color' : this.componentList[i].props.selected == true ? '#16324f': (this.componentList[i].props.selected == false ? 'white': null)
+        }"
       >
         <div class="component-items"
         *ngSwitchCase="'buttonDrag'"
