@@ -5,8 +5,8 @@
   'left': (dagaX-theX) + 'px',
   'top': (dagaY-theY) + 'px',
   'width': '100px'
-}" (click)="editNumLinks(this.props.links)">
-  <button [class]="props.class" type="button" [id]="props.id" [style]="props.style" (click)="buttonClicked()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+}" >
+  <button [class]="props.class" type="button" [id]="props.id" [style]="props.style" (click)="editNumLinks(this.props.links)" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     {{ props.value }}
   </button>
   <div class="dropdown-menu" aria-labelledby="props.id">
