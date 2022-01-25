@@ -2,9 +2,9 @@
 (cdkDragEnded)="onDragEnded($event)" 
 [cdkDragDisabled]="!props.draggable"
 [ngStyle]="{
-    'position': 'fixed',
-    'left': dagaX + 'px',
-    'top': dagaY + 'px',
+  position: 'sticky',
+  left: mousePositionLeft + 'px',
+  top: mousePositionTop + 'px',
     'border-color' : props.selected == true ? 'red': (props.selected == false ? 'none': null),
     'border-style' : props.selected == true ? 'solid': (props.selected == false ? 'none': null),
     'border-width' : props.selected == true ? '1px': (props.selected == false ? '0px': null)

@@ -32,34 +32,33 @@ export class NavbarDragComponent implements OnInit, IComponent {
     selected : false,
   };
 
-  @Input() canvasWW: any;
+  @Input() canvasWidth2: any;
   @Output() updateDataEvent = new EventEmitter<any>();
   @Output() updateDataEventY = new EventEmitter<any>();
-  @Input() xcanvas: any;
-  @Input() ycanvas: any;
-  @Input() xmouse: any;
-  @Input() ymouse: any;
+  @Input() canvasPositionX: any;
+  @Input() canvasPositionY: any;
+  @Input() mousePositionX2: any;
+  @Input() mousePositionY2: any;
   @Input() whatComponent2: any;
-  mousePositionXV2 = 310;
-  mousePositionYV2 = 110;
-  theX = 0;
-  theY = 0;
-  dagaX = 0;
-  dagaY = 0;
-  onetimeBool = true;
-  theCanvasWidth = 0;
+  mousePositionDropX = 310;
+  mousePositionDropY = 110;
+  canvasPositionLeft = 0;
+  canvasPositionTop = 0;
+  mousePositionLeft = 0;
+  mousePositionTop = 0;
   percentageX = 0;
   percentageY = 0;
+  theCanvasWidth = 0;
 
   ngOnInit(): void {
     //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
-    this.theX = this.xcanvas;
-    this.theY = this.ycanvas;
-    this.theCanvasWidth = this.canvasWW;
-    this.dagaX = this.xmouse;
-    this.dagaY = this.ymouse;
-    this.percentageX = ((this.xmouse - this.theX) / 1280) * 100;
-    this.percentageY = ((this.ymouse - this.theY) / 720) * 100;
+    this.theCanvasWidth = this.canvasWidth2;
+    this.canvasPositionLeft = this.canvasPositionX;
+    this.canvasPositionTop = this.canvasPositionY;
+    this.mousePositionLeft = this.mousePositionX2;
+    this.mousePositionTop = this.mousePositionY2;
+    this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
+    this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
     if (this.percentageX < 0){
       this.percentageX = 0;
     }
@@ -105,21 +104,19 @@ export class NavbarDragComponent implements OnInit, IComponent {
       this.props.value = ``;
     } else {
       this.props.style =
-        'position:absolute;width:' +
-        this.theCanvasWidth +
-        'color: white;padding: 10px;background-color: #12355B;font-size: 20px;left:0%;top:' +
+        'position:absolute;width:100%;color: white;padding: 10px;background-color: #12355B;font-size: 20px;left:0%;top:' +
         this.percentageY +
         '%;';
     }
   }
 
   onDragEnded($event: any) {
-    this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
-    this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
+    this.mousePositionDropX = $event.source.getFreeDragPosition().x;
+    this.mousePositionDropY = $event.source.getFreeDragPosition().y;
 
     this.updateDataEvent.emit(0);
     this.updateDataEventY.emit(
-      ((this.mousePositionYV2 + this.dagaY - this.theY) / 720) * 100
+      ((this.mousePositionDropY + this.mousePositionTop - this.canvasPositionTop) / 720) * 100
     );
     console.log(this.theCanvasWidth);
   }

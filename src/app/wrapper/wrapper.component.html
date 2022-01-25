@@ -38,72 +38,72 @@
         : 'absolute',
     top:
       child.props.typeObj === 'headerDrag'
-        ? ymouse + 'px'
+        ? mousePositionY2 + 'px'
         : child.props.typeObj === 'buttonDrag'
-        ? ymouse + 'px'
+        ? mousePositionY2 + 'px'
         : child.props.typeObj === 'inputDrag'
-        ? ymouse + 'px'
+        ? mousePositionY2 + 'px'
         : child.props.typeObj === 'textboxDrag'
-        ? ymouse + 'px'
+        ? mousePositionY2 + 'px'
         : child.props.typeObj === 'datepickerDrag'
-        ? ymouse + 'px'
+        ? mousePositionY2 + 'px'
         : child.props.typeObj === 'modalDrag'
-        ? ymouse + 'px'
+        ? mousePositionY2 + 'px'
         : child.props.typeObj === 'linkDrag'
-        ? ymouse + 'px'
+        ? mousePositionY2 + 'px'
         : child.props.typeObj === 'imgDrag'
-        ? ymouse + 'px'
+        ? mousePositionY2 + 'px'
         : child.props.typeObj === 'paragraphDrag'
-        ? ymouse + 'px'
+        ? mousePositionY2 + 'px'
         : child.props.typeObj === 'labelDrag'
-        ? ymouse + 'px'
+        ? mousePositionY2 + 'px'
         : child.props.typeObj === 'dropdownDrag'
-        ? ymouse + 'px'
+        ? mousePositionY2 + 'px'
         : child.props.typeObj === 'checkboxDrag'
-        ? ymouse + 'px'
+        ? mousePositionY2 + 'px'
         : child.props.typeObj === 'radioDrag'
-        ? ymouse + 'px'
+        ? mousePositionY2 + 'px'
         : child.props.typeObj === 'tableDrag'
-        ? ymouse + 'px'
+        ? mousePositionY2 + 'px'
         : child.props.typeObj === 'youtubeDrag'
-        ? ymouse + 'px'
+        ? mousePositionY2 + 'px'
         : child.props.typeObj === 'navDrag'
-        ? ymouse + 'px'
-        : ycanvas + 'px',
+        ? mousePositionY2 + 'px'
+        : canvasPositionY + 'px',
     left:
       child.props.typeObj === 'buttonDrag'
-        ? xmouse + 'px'
+        ? mousePositionX2 + 'px'
         : child.props.typeObj === 'headerDrag'
-        ? xmouse + 'px'
+        ? mousePositionX2 + 'px'
         : child.props.typeObj === 'textboxDrag'
-        ? xmouse + 'px'
+        ? mousePositionX2 + 'px'
         : child.props.typeObj === 'datepickerDrag'
-        ? xmouse + 'px'
+        ? mousePositionX2 + 'px'
         : child.props.typeObj === 'modalDrag'
-        ? xmouse + 'px'
+        ? mousePositionX2 + 'px'
         : child.props.typeObj === 'linkDrag'
-        ? xmouse + 'px'
+        ? mousePositionX2 + 'px'
         : child.props.typeObj === 'imgDrag'
-        ? xmouse + 'px'
+        ? mousePositionX2 + 'px'
         : child.props.typeObj === 'paragraphDrag'
-        ? xmouse + 'px'
+        ? mousePositionX2 + 'px'
         : child.props.typeObj === 'labelDrag'
-        ? xmouse + 'px'
+        ? mousePositionX2 + 'px'
         : child.props.typeObj === 'dropdownDrag'
-        ? xmouse + 'px'
+        ? mousePositionX2 + 'px'
         : child.props.typeObj === 'checkboxDrag'
-        ? xmouse + 'px'
+        ? mousePositionX2 + 'px'
         : child.props.typeObj === 'radioDrag'
-        ? xmouse + 'px'
+        ? mousePositionX2 + 'px'
         : child.props.typeObj === 'tableDrag'
-        ? xmouse + 'px'
+        ? mousePositionX2 + 'px'
         : child.props.typeObj === 'youtubeDrag'
-        ? xmouse + 'px'
+        ? mousePositionX2 + 'px'
         : child.props.typeObj === 'inputDrag'
-        ? xmouse + 'px'
-        : xcanvas + 'px',
-    height: '1px','background-color':'red',
-    width: child.props.typeObj === 'navDrag' ? canvasWW + 'px' : 'fit-content'
+        ? mousePositionX2 + 'px'
+        : canvasPositionX + 'px',
+    height: '1px',
+    width: child.props.typeObj === 'navDrag' ? canvasWidth2 + 'px' : 'fit-content'
   }"
 >
   <app-buttonDrag
@@ -112,17 +112,16 @@
     *ngSwitchCase="'buttonDrag'"
     (updateDataEvent)="passData($event)"
     (updateDataEventY)="passDataY($event)"
-    [xcanvas]="xcanvas"
-    [ycanvas]="ycanvas"
-    [xmouse]="xmouse"
-    [ymouse]="ymouse"
+    [canvasPositionX]="canvasPositionX"
+    [canvasPositionY]="canvasPositionY"
+    [mousePositionX2]="mousePositionX2"
+    [mousePositionY2]="mousePositionY2"
     [whatComponent2]="whatComponent2"
     [ngStyle]="{
       'height': '1px',
-      'width':'1px',
-      'position': 'absolute',
-      'top':'0px',
-      'left':'0px'
+      'position': 'fixed',
+      'top':mousePositionY2,
+      'left':mousePositionX2
     }"
     
   >
@@ -133,8 +132,8 @@
     *ngSwitchCase="'popupDrag'"
     [ngStyle]="{
       position: 'absolute',
-      left: xmouse + 'px',
-      top: ymouse + 'px'
+      left: mousePositionX + 'px',
+      top: mousePositionY2+ 'px'
     }"
   ></app-popupDrag>
 
@@ -143,16 +142,15 @@
     *ngSwitchCase="'datepickerDrag'"
     (updateDataEvent)="passData($event)"
     (updateDataEventY)="passDataY($event)"
-    [xcanvas]="xcanvas"
-    [ycanvas]="ycanvas"
-    [xmouse]="xmouse"
-    [ymouse]="ymouse"
+    [canvasPositionX]="canvasPositionX"
+    [canvasPositionY]="canvasPositionY"
+    [mousePositionX2]="mousePositionX2"
+    [mousePositionY2]="mousePositionY2"
     [ngStyle]="{
       'height': '1px',
-      'width':'1px',
-      'position': 'absolute',
-      'top':'0px',
-      'left':'0px'
+      'position': 'fixed',
+      'top':mousePositionY2,
+      'left':mousePositionX2
     }"
   ></app-datepickerDrag>
 
@@ -161,17 +159,16 @@
     *ngSwitchCase="'imgDrag'"
     (updateDataEvent)="passData($event)"
     (updateDataEventY)="passDataY($event)"
-    [xcanvas]="xcanvas"
-    [ycanvas]="ycanvas"
-    [xmouse]="xmouse"
-    [ymouse]="ymouse"
+    [canvasPositionX]="canvasPositionX"
+    [canvasPositionY]="canvasPositionY"
+    [mousePositionX2]="mousePositionX2"
+    [mousePositionY2]="mousePositionY2"
     [whatComponent2]="whatComponent2"
     [ngStyle]="{
       'height': '1px',
-      'width':'1px',
-      'position': 'absolute',
-      'top':'0px',
-      'left':'0px'
+      'position': 'fixed',
+      'top':mousePositionY2,
+      'left':mousePositionX2
     }"
   ></app-imageDrag>
 
@@ -180,17 +177,16 @@
     *ngSwitchCase="'labelDrag'"
     (updateDataEvent)="passData($event)"
     (updateDataEventY)="passDataY($event)"
-    [xcanvas]="xcanvas"
-    [ycanvas]="ycanvas"
-    [xmouse]="xmouse"
-    [ymouse]="ymouse"
+    [canvasPositionX]="canvasPositionX"
+    [canvasPositionY]="canvasPositionY"
+    [mousePositionX2]="mousePositionX2"
+    [mousePositionY2]="mousePositionY2"
     [whatComponent2]="whatComponent2"
     [ngStyle]="{
       'height': '1px',
-      'width':'1px',
-      'position': 'absolute',
-      'top':'0px',
-      'left':'0px'
+      'position': 'fixed',
+      'top':mousePositionY2,
+      'left':mousePositionX2
     }"
   ></app-labelDrag>
 
@@ -199,16 +195,15 @@
     *ngSwitchCase="'textboxDrag'"
     (updateDataEvent)="passData($event)"
     (updateDataEventY)="passDataY($event)"
-    [xcanvas]="xcanvas"
-    [ycanvas]="ycanvas"
-    [xmouse]="xmouse"
-    [ymouse]="ymouse"
+    [canvasPositionX]="canvasPositionX"
+    [canvasPositionY]="canvasPositionY"
+    [mousePositionX2]="mousePositionX2"
+    [mousePositionY2]="mousePositionY2"
     [ngStyle]="{
       'height': '1px',
-      'width':'1px',
-      'position': 'absolute',
-      'top':'0px',
-      'left':'0px'
+      'position': 'fixed',
+      'top':mousePositionY2,
+      'left':mousePositionX2
     }"
   ></app-textboxDrag>
 
@@ -218,16 +213,15 @@
     *ngSwitchCase="'radioDrag'"
     (updateDataEvent)="passData($event)"
     (updateDataEventY)="passDataY($event)"
-    [xcanvas]="xcanvas"
-    [ycanvas]="ycanvas"
-    [xmouse]="xmouse"
-    [ymouse]="ymouse"
+    [canvasPositionX]="canvasPositionX"
+    [canvasPositionY]="canvasPositionY"
+    [mousePositionX2]="mousePositionX2"
+    [mousePositionY2]="mousePositionY2"
     [ngStyle]="{
       'height': '1px',
-      'width':'1px',
-      'position': 'absolute',
-      'top':'0px',
-      'left':'0px'
+      'position': 'fixed',
+      'top':mousePositionY2,
+      'left':mousePositionX2
     }"
   ></app-radioDrag>
 
@@ -236,16 +230,16 @@
     *ngSwitchCase="'modalDrag'"
     (updateDataEvent)="passData($event)"
     (updateDataEventY)="passDataY($event)"
-    [xcanvas]="xcanvas"
-    [ycanvas]="ycanvas"
-    [xmouse]="xmouse"
-    [ymouse]="ymouse"
+    [canvasPositionX]="canvasPositionX"
+    [canvasPositionY]="canvasPositionY"
+    [mousePositionX2]="mousePositionX2"
+    [mousePositionY2]="mousePositionY2"
+    [whatComponent2]="whatComponent2"
     [ngStyle]="{
       'height': '1px',
-      'width':'1px',
-      'position': 'absolute',
-      'top':'0px',
-      'left':'0px'
+      'position': 'fixed',
+      'top':mousePositionY2,
+      'left':mousePositionX2
     }"
   ></app-modalDrag>
 
@@ -254,17 +248,16 @@
     *ngSwitchCase="'checkboxDrag'"
     (updateDataEvent)="passData($event)"
     (updateDataEventY)="passDataY($event)"
-    [xcanvas]="xcanvas"
-    [ycanvas]="ycanvas"
-    [xmouse]="xmouse"
-    [ymouse]="ymouse"
+    [canvasPositionX]="canvasPositionX"
+    [canvasPositionY]="canvasPositionY"
+    [mousePositionX2]="mousePositionX2"
+    [mousePositionY2]="mousePositionY2"
     [whatComponent2]="whatComponent2"
     [ngStyle]="{
       'height': '1px',
-      'width':'1px',
-      'position': 'absolute',
-      'top':'0px',
-      'left':'0px'
+      'position': 'fixed',
+      'top':mousePositionY2,
+      'left':mousePositionX2
     }"
   ></app-checkboxDrag>
 
@@ -273,17 +266,16 @@
     *ngSwitchCase="'dropdownDrag'"
     (updateDataEvent)="passData($event)"
     (updateDataEventY)="passDataY($event)"
-    [xcanvas]="xcanvas"
-    [ycanvas]="ycanvas"
-    [xmouse]="xmouse"
-    [ymouse]="ymouse"
+    [canvasPositionX]="canvasPositionX"
+    [canvasPositionY]="canvasPositionY"
+    [mousePositionX2]="mousePositionX2"
+    [mousePositionY2]="mousePositionY2"
     [whatComponent2]="whatComponent2"
     [ngStyle]="{
       'height': '1px',
-      'width':'1px',
-      'position': 'absolute',
-      'top':'0px',
-      'left':'0px'
+      'position': 'fixed',
+      'top':mousePositionY2,
+      'left':mousePositionX2
     }"
   >
   </app-dropdownDrag>
@@ -293,11 +285,11 @@
     *ngSwitchCase="'navDrag'"
     (updateDataEvent)="passData($event)"
     (updateDataEventY)="passDataY($event)"
-    [xcanvas]="xcanvas"
-    [ycanvas]="ycanvas"
-    [xmouse]="xmouse"
-    [ymouse]="ymouse"
-    [canvasWW]="canvasWW"
+    [canvasPositionX]="canvasPositionX"
+    [canvasPositionY]="canvasPositionY"
+    [mousePositionX2]="mousePositionX2"
+    [mousePositionY2]="mousePositionY2"
+    [canvasWidth2]="canvasWidth2"
     [ngStyle]="{ width: canvasWidth }"
     [whatComponent2]="whatComponent2"
     [ngStyle]="{
@@ -314,17 +306,16 @@
     *ngSwitchCase="'inputDrag'"
     (updateDataEvent)="passData($event)"
     (updateDataEventY)="passDataY($event)"
-    [xcanvas]="xcanvas"
-    [ycanvas]="ycanvas"
-    [xmouse]="xmouse"
-    [ymouse]="ymouse"
+    [canvasPositionX]="canvasPositionX"
+    [canvasPositionY]="canvasPositionY"
+    [mousePositionX2]="mousePositionX2"
+    [mousePositionY2]="mousePositionY2"
     [whatComponent2]="whatComponent2"
     [ngStyle]="{
       'height': '1px',
-      'width':'1px',
-      'position': 'absolute',
-      'top':'0px',
-      'left':'0px'
+      'position': 'fixed',
+      'top':mousePositionY2,
+      'left':mousePositionX2
     }"
   >
   </app-inputDrag>
@@ -334,17 +325,16 @@
     *ngSwitchCase="'headerDrag'"
     (updateDataEvent)="passData($event)"
     (updateDataEventY)="passDataY($event)"
-    [xcanvas]="xcanvas"
-    [ycanvas]="ycanvas"
-    [xmouse]="xmouse"
-    [ymouse]="ymouse"
+    [canvasPositionX]="canvasPositionX"
+    [canvasPositionY]="canvasPositionY"
+    [mousePositionX2]="mousePositionX2"
+    [mousePositionY2]="mousePositionY2"
     [whatComponent2]="whatComponent2"
     [ngStyle]="{
       'height': '1px',
-      'width':'1px',
-      'position': 'absolute',
-      'top':'0px',
-      'left':'0px'
+      'position': 'fixed',
+      'top':mousePositionY2,
+      'left':mousePositionX2
     }"
   >
   </app-headerDrag>
@@ -354,17 +344,16 @@
     *ngSwitchCase="'linkDrag'"
     (updateDataEvent)="passData($event)"
     (updateDataEventY)="passDataY($event)"
-    [xcanvas]="xcanvas"
-    [ycanvas]="ycanvas"
-    [xmouse]="xmouse"
-    [ymouse]="ymouse"
+    [canvasPositionX]="canvasPositionX"
+    [canvasPositionY]="canvasPositionY"
+    [mousePositionX2]="mousePositionX2"
+    [mousePositionY2]="mousePositionY2"
     [whatComponent2]="whatComponent2"
     [ngStyle]="{
       'height': '1px',
-      'width':'1px',
-      'position': 'absolute',
-      'top':'0px',
-      'left':'0px'
+      'position': 'fixed',
+      'top':mousePositionY2,
+      'left':mousePositionX2
     }"
   >
   </app-linkDrag>
@@ -374,17 +363,16 @@
     *ngSwitchCase="'paragraphDrag'"
     (updateDataEvent)="passData($event)"
     (updateDataEventY)="passDataY($event)"
-    [xcanvas]="xcanvas"
-    [ycanvas]="ycanvas"
-    [xmouse]="xmouse"
-    [ymouse]="ymouse"
+    [canvasPositionX]="canvasPositionX"
+    [canvasPositionY]="canvasPositionY"
+    [mousePositionX2]="mousePositionX2"
+    [mousePositionY2]="mousePositionY2"
     [whatComponent2]="whatComponent2"
     [ngStyle]="{
       'height': '1px',
-      'width':'1px',
-      'position': 'absolute',
-      'top':'0px',
-      'left':'0px'
+      'position': 'fixed',
+      'top':mousePositionY2,
+      'left':mousePositionX2
     }"
   ></app-paragraphDrag>
 
@@ -393,16 +381,15 @@
     *ngSwitchCase="'tableDrag'"
     (updateDataEvent)="passData($event)"
     (updateDataEventY)="passDataY($event)"
-    [xcanvas]="xcanvas"
-    [ycanvas]="ycanvas"
-    [xmouse]="xmouse"
-    [ymouse]="ymouse"
+    [canvasPositionX]="canvasPositionX"
+    [canvasPositionY]="canvasPositionY"
+    [mousePositionX2]="mousePositionX2"
+    [mousePositionY2]="mousePositionY2"
     [ngStyle]="{
       'height': '1px',
-      'width':'1px',
-      'position': 'absolute',
-      'top':'0px',
-      'left':'0px'
+      'position': 'fixed',
+      'top':mousePositionY2,
+      'left':mousePositionX2
     }"
   ></app-tableDrag>
 
@@ -411,16 +398,15 @@
     *ngSwitchCase="'youtubeDrag'"
     (updateDataEvent)="passData($event)"
     (updateDataEventY)="passDataY($event)"
-    [xcanvas]="xcanvas" 
-    [ycanvas]="ycanvas"
-    [xmouse]="xmouse" 
-    [ymouse]="ymouse"
+    [canvasPositionX]="canvasPositionX"
+    [canvasPositionY]="canvasPositionY"
+    [mousePositionX2]="mousePositionX2"
+    [mousePositionY2]="mousePositionY2"
     [ngStyle]="{
       'height': '1px',
-      'width':'1px',
-      'position': 'absolute',
-      'top':'0px',
-      'left':'0px'
+      'position': 'fixed',
+      'top':mousePositionY2,
+      'left':mousePositionX2
     }"
   ></app-youtubeDrag>
 
