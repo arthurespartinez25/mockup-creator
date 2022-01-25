@@ -12,6 +12,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
 
 @Component({
   selector: 'app-buttonDrag',
+  styleUrls: ['./buttonDrag.component.css'],  
   template: `<button
     cdkDrag
     cdkDragBoundary="#canvas"
@@ -22,7 +23,10 @@ import { IProperty } from 'src/app/interfaces/iproperty';
     [ngStyle]="{
       position: 'sticky',
       left: dagaX + 'px',
-      top: dagaY + 'px'
+      top: dagaY + 'px',
+      'border-color' : props.selected == true ? 'red': (props.selected == false ? 'none': null),
+      'border-style' : props.selected == true ? 'solid': (props.selected == false ? 'none': null),
+      'border-width' : props.selected == true ? '1px': (props.selected == false ? '0px': null)
     }"
     [type]="props.type"
   >
@@ -39,6 +43,8 @@ export class ButtonDragComponent implements IComponent {
     style: '',
     typeObj: 'buttonDrag',
     type: 'button',
+    draggable: true,
+    selected : false,
   };
 
   @Output() updateDataEvent = new EventEmitter<any>();

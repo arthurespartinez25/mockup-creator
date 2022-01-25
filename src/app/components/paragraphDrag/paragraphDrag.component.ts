@@ -25,6 +25,8 @@ export class ParagraphDragComponent implements OnInit, IComponent {
     style: 'color: red;',
     typeObj: 'paragraphDrag',
     type: '',
+    draggable: true,
+    selected : false,
   };
 
   @Output() updateDataEvent = new EventEmitter<any>();
@@ -159,7 +161,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
 
       default:
         this.props.style =
-          'color:red;position:absolute;left:' +
+          'font-size:1rem;color:red;position:absolute;left:' +
           this.percentageX +
           '%;top:' +
           this.percentageY +

@@ -5,6 +5,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
 
 @Component({
   selector: 'app-textboxDrag',
+  styleUrls: ['./textboxDrag.component.css'],
   template: `<textarea cdkDrag cdkDragBoundary="#canvas" [id]="props.id" [style]="props.style"
    [placeholder]="props.placeholder" [rows]="props.rows"
     [cols]="props.cols"
@@ -28,7 +29,9 @@ export class TextboxDragComponent implements IComponent {
     type: 'textbox',
     placeholder: 'Type your text here...',
     rows: 3,
-    cols: 20
+    cols: 20,
+    draggable: true,
+    selected : false,
   };
 
   @Output() updateDataEvent= new EventEmitter<any>();

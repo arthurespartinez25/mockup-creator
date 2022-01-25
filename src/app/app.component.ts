@@ -65,6 +65,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     typeObj: '',
     type: '',
     draggable: false,
+    selected : false,
   };
 
   public cssRuleCount = document.styleSheets[0].cssRules.length;
@@ -325,9 +326,11 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.changeref.detectChanges();
   }
   jude = 'aw';
+
   clickHandler(component: IComponent) {
     this.selected = component.props;
     this.selectedComponent = component;
+    this.selectedComp(this.selectedComponent);
     if (this.mouseMoveX != 0 && this.mouseMoveY != 0) {
       this.jude = this.selected.style;
       let regexLeft = /left(.+?);/;
@@ -379,6 +382,21 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.mouseMoveY = 0;
     }
   }
+
+  selectedComp(value: any){
+    let componentIndex = this.componentList.indexOf(value);
+      if (componentIndex !== -1) {
+        for(let i = 0; i < this.componentList.length; i++){
+          //console.log(this.componentList[i].props.selected);
+          this.componentList[i].props.selected = false;
+        }
+        this.componentList[componentIndex].props.selected = true;
+        //$event = false;
+      } else {
+        console.log('Nothing to highlight');
+      }
+  }
+
   copyMessage(val: string) {
     const selBox = document.createElement('textarea');
     selBox.style.position = 'fixed';

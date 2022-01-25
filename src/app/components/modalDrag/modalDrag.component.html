@@ -4,7 +4,10 @@
 [ngStyle]="{
     'position': 'fixed',
     'left': dagaX + 'px',
-    'top': dagaY + 'px'
+    'top': dagaY + 'px',
+    'border-color' : props.selected == true ? 'red': (props.selected == false ? 'none': null),
+    'border-style' : props.selected == true ? 'solid': (props.selected == false ? 'none': null),
+    'border-width' : props.selected == true ? '1px': (props.selected == false ? '0px': null)
   }">
   <div class="modal-dialog">
     <div class="modal-content" [style]="props.style">
