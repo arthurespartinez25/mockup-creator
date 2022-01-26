@@ -57,6 +57,7 @@ export class DatepickerDragComponent implements OnInit,IComponent {
     this.mousePositionTop = this.mousePositionY2;
     this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
     this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
+    this.props.style='position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
   }
   
 
