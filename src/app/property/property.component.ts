@@ -22,6 +22,8 @@ export class PropertyComponent implements OnInit {
     type: '',
     draggable: true,
     selected: false,
+    mouseDragPositionX:0,
+    mouseDragPositionY:0,
   };
   style2 = '';
   @Output() addAllCSSRule = new EventEmitter<string>();

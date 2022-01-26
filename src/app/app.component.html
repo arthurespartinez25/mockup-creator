@@ -287,6 +287,8 @@
           *ngFor="let component of componentList; let i = index"
           class="wrapper"
           (click)="clickHandler(component)"
+          cdkDrag
+          (cdkDragEnded)="onDragEnd(component)"
           [childComp]="component"
           [canvasRef]="component.canvas"
           [componentList]="componentList"
@@ -296,8 +298,6 @@
           [canvasTop]="canvasTop"
           [canvasW]="canvasW"
           [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
-          (updateDataEvent2)="passData2($event)"
-          (updateDataEventX)="passDataX($event)"
           [whatComponent]="whatComponent"
         >
         </app-wrapper>
