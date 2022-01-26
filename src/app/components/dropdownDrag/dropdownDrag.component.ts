@@ -144,20 +144,14 @@ export class DropdownDragComponent implements OnInit, IComponent {
     //this.props.style = jude;
 
     let tmpHtmlCode =
-      '<div class="btn-group"' + ' style="' + this.props.style + '"';
-    tmpHtmlCode += 'id="' + this.props.id + '">';
-    tmpHtmlCode += '\n' + ' <button class="' + this.props.class +'" type="' + this.props.type +'" style="' + jude + '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> ' + this.props.value + ' </button>';
-    tmpHtmlCode += '\n' + ' <div class="dropdown-menu" aria-labelledby="'+ this.props.id +'">';
+      '<select class="' + this.props.class + '" id="' + this.props.id + '" style="' + this.props.style + '">';
 
-    for (var i = 0; i < this.props.linksArray.length; i++) {
-      tmpHtmlCode +=
-        '\n' +
-        ' <a class="dropdown-item" href="#">' +
-        this.props.linksArray[i] +
-        '</a>';
-    }
-    tmpHtmlCode += '\n' + ' </div>';
-    tmpHtmlCode += '\n' + ' </div>';
+        for (var i = 0; i < this.props.linksArray.length; i++) {
+          tmpHtmlCode += '\n' + '<option value="' + this.props.linksArray[i] + '">'
+          tmpHtmlCode += '\n' + this.props.linksArray[i];
+          tmpHtmlCode += '\n' + '</option>';
+        }
+      tmpHtmlCode += '\n' + '</select>';
 
     return tmpHtmlCode;
   }
