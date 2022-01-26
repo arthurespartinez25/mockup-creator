@@ -1,9 +1,9 @@
 <div cdkDrag [cdkDragDisabled]="!props.draggable" cdkDragBoundary="#canvas" (cdkDragEnded)="onDragEnded($event)"  [class]="props.class" [id]="props.id" 
 
 [ngStyle]="{
-  'position': 'fixed',
-  'left': dagaX + 'px',
-  'top': dagaY + 'px',
+  position: 'fixed',
+  left: mousePositionLeft + 'px',
+  top: mousePositionTop + 'px',
   'width':'20px'
 }">
 <div class="example-handle" cdkDragHandle 
@@ -21,8 +21,8 @@ allow="autoplay"
 allowfullscreen dnd-droppable-iframe
 [ngStyle]="{
   'position': 'sticky',
-  'left': (dagaX-theX) + 'px',
-  'top': (dagaY-theY) + 'px',
+  'left': (mousePositionLeft-canvasPositionLeft) + 'px',
+  'top': (mousePositionTop-canvasPositionTop) + 'px',
   'border-color' : props.selected == true ? 'red': (props.selected == false ? 'none': null),
   'border-style' : props.selected == true ? 'solid': (props.selected == false ? 'none': null),
   'border-width' : props.selected == true ? '1px': (props.selected == false ? '0px': null)

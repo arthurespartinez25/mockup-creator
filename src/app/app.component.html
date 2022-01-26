@@ -77,17 +77,20 @@
           <!-- text-dropdown-menu start -->
           <div
             class="palette-item sub-menu"
-            id="subMenuItem"
-            #subMenuItem
+            id="subMenuItem2"
+            #subMenuItem2
             style="padding: 0px; padding-top: 0px"
           >
-            <button class="sub-menu-button palette-item">Text*</button>
+            <button class="sub-menu-button palette-item"
+            (focus)="isDisabled = false"
+            (focusout)="timerDisable()">Text*</button>
             <div class="sub-menu-dropdown">
               <button
                 class="palette-item"
                 (click)="addComponent('header')"
                 cdkDrag
                 (cdkDragEnded)="onDragEndedAddComponent($event, 'header')"
+                [disabled]="isDisabled"
               >
                 Header
               </button>
@@ -97,6 +100,7 @@
                 (click)="addComponent('paragraph')"
                 cdkDrag
                 (cdkDragEnded)="onDragEndedAddComponent($event, 'paragraph')"
+                [disabled]="isDisabled"
               >
                 Paragraph
               </button>
@@ -106,6 +110,7 @@
                 (click)="addComponent('label')"
                 cdkDrag
                 (cdkDragEnded)="onDragEndedAddComponent($event, 'label')"
+                [disabled]="isDisabled"
               >
                 Label
               </button>
@@ -113,32 +118,6 @@
           </div>
           <!-- text-dropdown end -->
 
-          <!--
-          <button
-            class="palette-item"
-            (click)="addComponent('header')"
-            cdkDrag
-            (cdkDragEnded)="onDragEndedAddComponent($event,'header')"
-          >
-            Header
-          </button>
-          <button
-            class="palette-item"
-            (click)="addComponent('paragraph')"
-            cdkDrag
-            (cdkDragEnded)="onDragEndedAddComponent($event,'paragraph')"
-          >
-            Paragraph
-          </button>
-          <button
-            class="palette-item"
-            (click)="addComponent('label')"
-            cdkDrag
-            (cdkDragEnded)="onDragEndedAddComponent($event,'label')"
-          >
-            Label
-          </button>
-          -->
           <!-- input-dropdown-menu start -->
           <div
             class="palette-item sub-menu"
@@ -146,13 +125,15 @@
             #subMenuItem
             style="padding: 0px; padding-top: 0px"
           >
-            <button class="sub-menu-button palette-item">Input*</button>
+            <button class="sub-menu-button palette-item" (focus)="isDisabled = false"
+            (focusout)="timerDisable()">Input*</button>
             <div class="sub-menu-dropdown">
               <button
                 class="palette-item"
                 (click)="addComponent('button')"
                 cdkDrag
                 (cdkDragEnded)="onDragEndedAddComponent($event, 'button')"
+                [disabled]="isDisabled"
               >
                 Button
               </button>
@@ -162,6 +143,7 @@
                 (click)="addComponent('dropdown')"
                 cdkDrag
                 (cdkDragEnded)="onDragEndedAddComponent($event, 'dropdown')"
+                [disabled]="isDisabled"
               >
                 Dropdown
               </button>
@@ -170,6 +152,7 @@
                 (click)="addComponent('checkbox')"
                 cdkDrag
                 (cdkDragEnded)="onDragEndedAddComponent($event, 'checkbox')"
+                [disabled]="isDisabled"
               >
                 Checkbox
               </button>
@@ -179,6 +162,7 @@
                 (click)="addComponent('radio')"
                 cdkDrag
                 (cdkDragEnded)="onDragEndedAddComponent($event, 'radio')"
+                [disabled]="isDisabled"
               >
                 Radio
               </button>
@@ -187,6 +171,7 @@
                 (click)="addComponent('input')"
                 cdkDrag
                 (cdkDragEnded)="onDragEndedAddComponent($event, 'input')"
+                [disabled]="isDisabled"
               >
                 Input Field
               </button>
@@ -195,6 +180,7 @@
                 (click)="addComponent('textbox')"
                 cdkDrag
                 (cdkDragEnded)="onDragEndedAddComponent($event, 'textbox')"
+                [disabled]="isDisabled"
               >
                 Textbox
               </button>
@@ -203,6 +189,7 @@
                 (click)="addComponent('datepicker')"
                 cdkDrag
                 (cdkDragEnded)="onDragEndedAddComponent($event, 'datepicker')"
+                [disabled]="isDisabled"
               >
                 DatePicker
               </button>
@@ -290,6 +277,7 @@
   <div id="canvas-container">
     <div
       id="canvas"
+      class="solid-lines"
       #canvas
       (mouseenter)="domInsideCanvas = true"
       (mouseleave)="domInsideCanvas = false"
@@ -307,9 +295,7 @@
           [canvasLeft]="canvasLeft"
           [canvasTop]="canvasTop"
           [canvasW]="canvasW"
-          [xCounter]="xCounter"
           [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
-          (mousedown)="mouseGalawX($event)"
           (updateDataEvent2)="passData2($event)"
           (updateDataEventX)="passDataX($event)"
           [whatComponent]="whatComponent"
@@ -322,7 +308,6 @@
   <!-- CODE SECTION -->
 
   <div id="code-container">
-    <!-- <button (click) = "deleteComponent()" >Delete Component</button> -->
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
         <button
@@ -397,12 +382,7 @@
         >
           Save CSS
         </h3>
-        <!--
-        <h3
-        style="background-color: #a83241; margin: 0" 
-        (click)="deleteCSSRule(cssTextArea.value)"
-        (click)="cssReceiveMessage()">Delete CSS Rule</h3>
-        -->
+
         <textarea
           style="margin: 0; width: 100%"
           cols="30"
@@ -412,19 +392,7 @@
           id="css-textarea"
         ></textarea>
 
-        <!-- CSS Code
-        <textarea 
-        style="margin: 0" 
-        cols="30" 
-        rows="5"
-        name="css-textarea" id="css-textarea"
-        [innerHTML]="style"></textarea>
-        <!!-- include this on the textarea above if need be.
-        (keyup)="cssReceiveMessage($event)"
-        (keyup)="refresh()"
-        -->
-        <!--<a routerLink="/refresh">Testing</a> ->->
-      --></div>
+        </div>
       <div
         class="tab-pane fade"
         id="code"
