@@ -107,15 +107,12 @@ export class DropdownDragComponent implements OnInit, IComponent {
     var temp;
     
     if(typeof(this.props.linkValue) == 'string') {
-      console.log("pasok sa typeof string");
       this.props.linksArray  = this.props.linkValue.split(',');
     } else {
-      console.log("pasok sa else");
       this.props.linksArray = this.props.linkValue;
     }
     
     this.props.value = this.selectedOption;
-    console.log(this.props.linksArray);
   };
 
 
