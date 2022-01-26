@@ -20,12 +20,11 @@ export class DropdownDragComponent implements OnInit, IComponent {
   props: IProperty = {
     key: '',
     id: '',
-    value: 'Dropdown',
-    class: 'btn btn-secondary dropdown-toggle',
+    value: '',
+    class: '',
     style: '',
     typeObj: 'dropdownDrag',
-    type: 'button',
-    links: 3,
+    type: '',
     linkValue: ['link1', 'link2', 'link3'],
     linksArray: [],
     draggable: true,
@@ -47,8 +46,8 @@ export class DropdownDragComponent implements OnInit, IComponent {
   mousePositionTop = 0;
   percentageX = 0;
   percentageY = 0;
-  links = this.props.links;
   linkValue = this.props.linkValue;
+  selectedOption: string;
 
   ngOnInit(): void {
     this.canvasPositionLeft = this.canvasPositionX;
@@ -88,6 +87,7 @@ export class DropdownDragComponent implements OnInit, IComponent {
     let date = Date.now();
     this.props.key = date.toString();
     this.props.id = 'dropdown' + date.toString();
+    this.selectedOption = this.linkValue[0];
   }
 
   @Input() get property(): IProperty {
@@ -97,35 +97,15 @@ export class DropdownDragComponent implements OnInit, IComponent {
   set property(value: IProperty) {
     if (value) {
       this.props = value;
-      this.links = value.links;
-      this.editNumLinks(this.props.links);
+      this.editNumLinks();
       this.linkValue = value.linkValue;
     }
   }
 
-  editNumLinks = (numLink) => {
+  editNumLinks = () => {
     this.props.linksArray = [];
     var temp;
-    if (!numLink) {
-      console.warn('rows or columns are undefined');
-    } else {
-      
-      for (var i = 0; i < numLink; i++) {
-        /* if (this.props.linkContent) {
-          if (this.props.linkContent.length != numLink) {
-            this.props.linksArray.push('link' + (i + 1));
-          } else {
-            console.log('dito pumasok');
-            console.log(this.props.linkContent);
-            this.props.linksArray = this.props.linkContent;
-          }
-        } else {
-          this.props.linksArray.push('link' + (i + 1));
-          console.log('pasok noh? oo');
-        } */
-      }
-      
-    }
+    
     if(typeof(this.props.linkValue) == 'string') {
       console.log("pasok sa typeof string");
       this.props.linksArray  = this.props.linkValue.split(',');
@@ -133,12 +113,11 @@ export class DropdownDragComponent implements OnInit, IComponent {
       console.log("pasok sa else");
       this.props.linksArray = this.props.linkValue;
     }
+    
+    this.props.value = this.selectedOption;
     console.log(this.props.linksArray);
   };
 
-  buttonClicked = () => { 
-    console.log("pasok sa click");
-  };
 
   editLinkValue = (index, oldvalue: string, newValue: any) => {
     this.props.linksArray[index] = newValue;
