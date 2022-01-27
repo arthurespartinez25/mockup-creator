@@ -13,7 +13,3 @@
   max-width: 600px;
   height: 200px;
 }
-img:hover{
-  background-color: rgba(100, 100, 100, 0.2);
-  opacity: 0.7;
-}
