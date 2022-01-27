@@ -20,8 +20,8 @@ export class ImageDragComponent implements OnInit, IComponent {
   props: IProperty = {
     key: '',
     id: '',
-    value: 'https://mdbootstrap.com/img/new/standard/city/047.jpg',
-    class: 'img-rounded',
+    value: '',
+    class: '',
     style: '',
     typeObj: 'imgDrag',
     type: '',
@@ -111,10 +111,9 @@ export class ImageDragComponent implements OnInit, IComponent {
         break;
 
       default:
-        this.props.value =
-          'https://mdbootstrap.com/img/new/standard/city/047.jpg';
+        this.props.value = ' ';
         this.props.style =
-          'max-width: 600px;height: 200px;position:absolute;left:' +
+          'position:absolute;left:' +
           this.percentageX +
           '%;top:' +
           this.percentageY +
