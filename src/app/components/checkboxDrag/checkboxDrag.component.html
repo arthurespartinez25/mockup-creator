@@ -7,7 +7,7 @@
     'border-style' : props.selected == true ? 'solid': (props.selected == false ? 'none': null),
     'border-width' : props.selected == true ? '1px': (props.selected == false ? '0px': null)
   }" >
-    <div *ngIf="props.checked=='true' || props.checked=='TRUE'; else unchecked">
+    <div *ngIf="props.checked=='true'; else unchecked">
         <input [id]="props.id" [class]="props.class" [type]="props.type" (change)="isChecked($event)" checked>
         <label [for]="props.id" [style]="props.style" [ngStyle]="{
             'padding-left': '5px'
@@ -16,7 +16,7 @@
         </label>
     </div>
     <ng-template #unchecked>
-        <div *ngIf="props.checked=='false' || props.checked=='FALSE'; else anyData">
+        <div *ngIf="props.checked=='false'; else anyData">
             <input [id]="props.id" [class]="props.class" [type]="props.type" (change)="isChecked($event)">
             <label [for]="props.id" [style]="props.style" [ngStyle]="{
                 'padding-left': '5px'
