@@ -138,7 +138,6 @@ export class ButtonDragComponent implements IComponent {
     this.props.mouseDragPositionY =
     (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
     * 100;
-    // console.log(this.props.mouseDragPositionX);
   }
 
   constructor(canvas: ElementRef) {
