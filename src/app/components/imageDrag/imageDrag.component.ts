@@ -111,7 +111,6 @@ export class ImageDragComponent implements OnInit, IComponent {
         break;
 
       default:
-        this.props.value = ' ';
         this.props.style =
           'position:absolute;left:' +
           this.percentageX +
