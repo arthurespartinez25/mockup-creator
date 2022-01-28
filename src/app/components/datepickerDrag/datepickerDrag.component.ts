@@ -59,6 +59,11 @@ export class DatepickerDragComponent implements OnInit,IComponent {
     this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
     this.props.mouseDragPositionX = this.percentageX;
     this.props.mouseDragPositionY = this.percentageY;
+    let today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    this.props.value = yyyy + '-' + mm + '-' + dd;
   }
   
 
