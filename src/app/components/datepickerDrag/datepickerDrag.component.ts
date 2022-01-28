@@ -32,6 +32,7 @@ export class DatepickerDragComponent implements OnInit,IComponent {
     type: 'date',
     draggable: true,
     selected : false,
+    hidden: false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
   };

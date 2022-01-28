@@ -29,6 +29,7 @@ export class DropdownDragComponent implements OnInit, IComponent {
     linksArray: [],
     draggable: true,
     selected : false,
+    hidden: false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
   };

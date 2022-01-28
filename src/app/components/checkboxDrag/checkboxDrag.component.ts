@@ -21,6 +21,7 @@ export class CheckboxDragComponent implements OnInit, IComponent {
     checked: 'true',
     draggable: true,
     selected : false,
+    hidden: false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
   };
