@@ -24,61 +24,64 @@ export class YoutubeDragComponent implements OnInit, IComponent {
   url: SafeResourceUrl;
 
   
-  props: IProperty = {
-    key: '',
-    id: '',
-    value: 'https://www.youtube.com/embed/DrLYL9F3WV4?autoplay=1',
-    class: '',
-    style: '',
-    typeObj: 'youtubeDrag',
-    type: '',
-    url : '',
-    draggable: true,
-    selected : false,
-    hidden: false,
-  };
+    props: IProperty = {
+      key: '',
+      id: '',
+      value: 'https://www.youtube.com/embed/DrLYL9F3WV4?autoplay=1',
+      class: '',
+      style: '',
+      typeObj: 'youtubeDrag',
+      type: '',
+      url : '',
+      draggable: true,
+      selected : false,
+      hidden: false,
+      mouseDragPositionX:0,
+      mouseDragPositionY:0,
+    };
 
-  @Output() updateDataEvent= new EventEmitter<any>();
-  @Output() updateDataEventY= new EventEmitter<any>();
-  @Input() xcanvas: any;
-  @Input() ycanvas: any;
-  @Input() xmouse: any;
-  @Input() ymouse: any;
-  @Input() whatComponent2:any;
-  mousePositionXV2 = 310;
-  mousePositionYV2= 110;
-  theX = 0;
-  theY = 0;
-  dagaX = 0;
-  dagaY = 0;
-  pops = "dito";
-  onetimeBool = true;
+    @Input() canvasPositionX: any;
+    @Input() canvasPositionY: any;
+    @Input() mousePositionX2: any;
+    @Input() mousePositionY2: any;
+    @Input() whatComponent2: any;
+    mousePositionDropX = 310;
+    mousePositionDropY = 110;
+    canvasPositionLeft = 0;
+    canvasPositionTop = 0;
+    mousePositionLeft = 0;
+    mousePositionTop = 0;
+    percentageX = 0;
+    percentageY = 0;
   
 
-  ngOnInit(): void {
-    this.theX = this.xcanvas;
-    this.theY = this.ycanvas;
-    this.dagaX = this.xmouse;
-    this.dagaY = this.ymouse;
-    console.log(this.dagaX+"     "+this.dagaY);
-    if(this.whatComponent2=="sampleImage")
-    {
-      this.props.value = "https://dlcdnrog.asus.com/rog/media/1610273282904.jpg";
-      this.props.style='position:absolute;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;';
-    }
-    else
-    {
+    ngOnInit(): void {
+      this.canvasPositionLeft = this.canvasPositionX;
+      this.canvasPositionTop = this.canvasPositionY;
+      this.mousePositionLeft = this.mousePositionX2;
+      this.mousePositionTop = this.mousePositionY2;
+      this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
+      this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
+      this.props.mouseDragPositionX = this.percentageX;
+      this.props.mouseDragPositionY = this.percentageY;
       this.props.value = 'https://www.youtube.com/embed/qY7rpWA-D4w?autoplay=1';
       this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value);
-      this.props.style='position:absolute;left:'+(this.dagaX-this.theX)+'px;top:'+(this.dagaY-this.theY)+'px;width:300px;height: 200px;';
-    }
+      this.props.style =
+        'position:absolute;left:' +
+        this.percentageX +
+        '%;top:' +
+        this.percentageY +
+        '%;';
+    
   }
 
-  onDragEnded($event: CdkDragEnd){
-    this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
-    this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
-    this.updateDataEvent.emit(this.mousePositionXV2 + this.dagaX - this.theX);
-    this.updateDataEventY.emit(this.mousePositionYV2 + this.dagaY - this.theY);
+  onDragEnded($event: CdkDragEnd) {
+    this.props.mouseDragPositionX =
+    (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
+    * 100;
+    this.props.mouseDragPositionY =
+    (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
+    * 100;
   }
 
     

@@ -25,10 +25,13 @@ export interface IProperty {
   tblContent?: [][];
   links?: number;
   linksArray?: any;
-  linkValue?: string;
+  linkValue?: any;
   linkContent?: [];
   updateCallback?: (row, col) => void;
   url?: SafeResourceUrl;
   selected: boolean;
   hidden?: boolean;
+  mouseDragPositionX?: any;
+  mouseDragPositionY?: any;
+  dummystyle?:any;
 }

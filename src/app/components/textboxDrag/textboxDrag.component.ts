@@ -12,9 +12,9 @@ import { IProperty } from 'src/app/interfaces/iproperty';
     (cdkDragEnded)="onDragEnded($event)" 
     [cdkDragDisabled]="!props.draggable"
     [ngStyle]="{
-    'position': 'sticky',
-    'left': (dagaX-theX) + 'px',
-    'top': (dagaY-theY) + 'px'
+      position: 'sticky',
+      left: mousePositionLeft + 'px',
+      top: mousePositionTop + 'px'
   }" >{{props.value}}</textarea>`
 })
 export class TextboxDragComponent implements IComponent {
@@ -33,31 +33,32 @@ export class TextboxDragComponent implements IComponent {
     draggable: true,
     selected : false,
     hidden: false,
+  mouseDragPositionX:0,
+    mouseDragPositionY:0,
   };
 
-  @Output() updateDataEvent= new EventEmitter<any>();
-  @Output() updateDataEventY= new EventEmitter<any>();
-  @Input() xcanvas: any;
-  @Input() ycanvas: any;
-  @Input() xmouse: any;
-  @Input() ymouse: any;
-  mousePositionXV2 = 310;
-  mousePositionYV2= 110;
-  theX = 0;
-  theY = 0;
-  dagaX = 0;
-  dagaY = 0;
-  onetimeBool = true;
+  @Input() canvasPositionX: any;
+  @Input() canvasPositionY: any;
+  @Input() mousePositionX2: any;
+  @Input() mousePositionY2: any;
+  @Input() whatComponent2: any;
+  canvasPositionLeft = 0;
+  canvasPositionTop = 0;
+  mousePositionLeft = 0;
+  mousePositionTop = 0;
   percentageX = 0;
   percentageY = 0;
 
+
   ngOnInit(): void {
-    this.theX = this.xcanvas;
-    this.theY = this.ycanvas;
-    this.dagaX = this.xmouse;
-    this.dagaY = this.ymouse;
-    this.percentageX = ((this.xmouse-this.theX)/1280)*100; 
-    this.percentageY = ((this.ymouse-this.theY)/720)*100;
+    this.canvasPositionLeft = this.canvasPositionX;
+    this.canvasPositionTop = this.canvasPositionY;
+    this.mousePositionLeft = this.mousePositionX2;
+    this.mousePositionTop = this.mousePositionY2;
+    this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
+    this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
+    this.props.mouseDragPositionX = this.percentageX;
+    this.props.mouseDragPositionY = this.percentageY;
     this.props.style='resize:none;position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
   }
   ngAfterViewInit()
@@ -68,11 +69,13 @@ export class TextboxDragComponent implements IComponent {
     
   }
 
-  onDragEnded($event: CdkDragEnd){
-    this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
-    this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
-    this.updateDataEvent.emit(((this.mousePositionXV2 + this.dagaX - this.theX)/1280)*100);
-    this.updateDataEventY.emit(((this.mousePositionYV2 + this.dagaY - this.theY)/720)*100);
+  onDragEnded($event: CdkDragEnd) {
+    this.props.mouseDragPositionX =
+    (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
+    * 100;
+    this.props.mouseDragPositionY =
+    (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
+    * 100;
   }
 
   constructor(canvas: ElementRef) {

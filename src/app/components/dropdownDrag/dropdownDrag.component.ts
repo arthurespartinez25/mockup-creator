@@ -20,44 +20,43 @@ export class DropdownDragComponent implements OnInit, IComponent {
   props: IProperty = {
     key: '',
     id: '',
-    value: 'Dropdown',
-    class: 'btn btn-secondary',
+    value: '',
+    class: '',
     style: '',
     typeObj: 'dropdownDrag',
-    type: 'button',
-    links: 3,
-    linkValue: 'Sample',
+    type: '',
+    linkValue: ['link1', 'link2', 'link3'],
     linksArray: [],
     draggable: true,
     selected : false,
     hidden: false,
+    mouseDragPositionX:0,
+    mouseDragPositionY:0,
   };
 
-  @Output() updateDataEvent = new EventEmitter<any>();
-  @Output() updateDataEventY = new EventEmitter<any>();
-  @Input() xcanvas: any;
-  @Input() ycanvas: any;
-  @Input() xmouse: any;
-  @Input() ymouse: any;
-  @Input() whatComponent2: string;
-  mousePositionXV2 = 310;
-  mousePositionYV2 = 110;
-  theX = 0;
-  theY = 0;
-  dagaX = 0;
-  dagaY = 0;
-  onetimeBool = true;
-  links = this.props.links;
+  @Input() canvasPositionX: any;
+  @Input() canvasPositionY: any;
+  @Input() mousePositionX2: any;
+  @Input() mousePositionY2: any;
+  @Input() whatComponent2: any;
+  canvasPositionLeft = 0;
+  canvasPositionTop = 0;
+  mousePositionLeft = 0;
+  mousePositionTop = 0;
   percentageX = 0;
   percentageY = 0;
+  linkValue = this.props.linkValue;
+  selectedOption: string;
 
   ngOnInit(): void {
-    this.theX = this.xcanvas;
-    this.theY = this.ycanvas;
-    this.dagaX = this.xmouse;
-    this.dagaY = this.ymouse;
-    this.percentageX = ((this.xmouse - this.theX) / 1280) * 100;
-    this.percentageY = ((this.ymouse - this.theY) / 720) * 100;
+    this.canvasPositionLeft = this.canvasPositionX;
+    this.canvasPositionTop = this.canvasPositionY;
+    this.mousePositionLeft = this.mousePositionX2;
+    this.mousePositionTop = this.mousePositionY2;
+    this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
+    this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
+    this.props.mouseDragPositionX = this.percentageX;
+    this.props.mouseDragPositionY = this.percentageY;
     switch (this.whatComponent2) {
       case 'HPDropdown1':
         break;
@@ -74,16 +73,12 @@ export class DropdownDragComponent implements OnInit, IComponent {
   }
 
   onDragEnded($event: CdkDragEnd) {
-    this.mousePositionXV2 = $event.source.getFreeDragPosition().x;
-    this.mousePositionYV2 = $event.source.getFreeDragPosition().y;
-    this.updateDataEvent.emit(
-      ((this.mousePositionXV2 + this.dagaX - this.theX) / 1280) * 100
-    );
-    this.updateDataEventY.emit(
-      ((this.mousePositionYV2 + this.dagaY - this.theY) / 720) * 100
-    );
-    console.log(this.mousePositionXV2);
-    console.log(this.mousePositionYV2);
+    this.props.mouseDragPositionX =
+    (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
+    * 100;
+    this.props.mouseDragPositionY =
+    (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
+    * 100;
   }
 
   constructor(canvas: ElementRef) {
@@ -91,6 +86,7 @@ export class DropdownDragComponent implements OnInit, IComponent {
     let date = Date.now();
     this.props.key = date.toString();
     this.props.id = 'dropdown' + date.toString();
+    this.selectedOption = this.linkValue[0];
   }
 
   @Input() get property(): IProperty {
@@ -100,33 +96,24 @@ export class DropdownDragComponent implements OnInit, IComponent {
   set property(value: IProperty) {
     if (value) {
       this.props = value;
-      this.links = value.links;
-      this.editNumLinks(this.props.links);
+      this.editNumLinks();
+      this.linkValue = value.linkValue;
     }
   }
 
-  editNumLinks = (numLink) => {
+  editNumLinks = () => {
     this.props.linksArray = [];
-    if (!numLink) {
-      console.warn('rows or columns are undefined');
+    var temp;
+    
+    if(typeof(this.props.linkValue) == 'string') {
+      this.props.linksArray  = this.props.linkValue.split(',');
     } else {
-      for (var i = 0; i < numLink; i++) {
-        if (this.props.linkContent) {
-          if (this.props.linkContent.length != numLink) {
-            this.props.linksArray.push('link' + (i + 1));
-          } else {
-            console.log('dito pumasok');
-            console.log(this.props.linkContent);
-            this.props.linksArray = this.props.linkContent;
-          }
-        } else {
-          this.props.linksArray.push('link' + (i + 1));
-          console.log('pasok noh? oo');
-        }
-      }
+      this.props.linksArray = this.props.linkValue;
     }
-    console.log(this.props.linksArray);
+    
+    this.props.value = this.selectedOption;
   };
+
 
   editLinkValue = (index, oldvalue: string, newValue: any) => {
     this.props.linksArray[index] = newValue;
@@ -153,38 +140,14 @@ export class DropdownDragComponent implements OnInit, IComponent {
     //this.props.style = jude;
 
     let tmpHtmlCode =
-      '<div class="btn-group"' + ' style="' + this.props.style + '"';
-    tmpHtmlCode += 'id="' + this.props.id + '">';
-    tmpHtmlCode +=
-      '\n' +
-      ' <button class="' +
-      this.props.class +
-      '" type="' +
-      this.props.type +
-      '" style="' +
-      jude +
-      '"> ' +
-      this.props.value +
-      ' </button>';
-    tmpHtmlCode +=
-      '\n' +
-      ' <button' +
-      ' type="' +
-      this.props.type +
-      '" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
-    tmpHtmlCode += '\n' + ' <span class="sr-only">Toggle Dropdown</span>';
-    tmpHtmlCode += '\n' + ' </button>';
-    tmpHtmlCode += '\n' + ' <div class="dropdown-menu">';
+      '<select class="' + this.props.class + '" id="' + this.props.id + '" style="' + this.props.style + '">';
 
-    for (var i = 0; i < this.props.linksArray.length; i++) {
-      tmpHtmlCode +=
-        '\n' +
-        ' <a class="dropdown-item" href="#">' +
-        this.props.linksArray[i] +
-        '</a>';
-    }
-    tmpHtmlCode += '\n' + ' </div>';
-    tmpHtmlCode += '\n' + ' </div>';
+        for (var i = 0; i < this.props.linksArray.length; i++) {
+          tmpHtmlCode += '\n' + '<option value="' + this.props.linksArray[i] + '">'
+          tmpHtmlCode += '\n' + this.props.linksArray[i];
+          tmpHtmlCode += '\n' + '</option>';
+        }
+      tmpHtmlCode += '\n' + '</select>';
 
     return tmpHtmlCode;
   }

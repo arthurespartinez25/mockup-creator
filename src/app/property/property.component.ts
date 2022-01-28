@@ -22,6 +22,8 @@ export class PropertyComponent implements OnInit {
     type: '',
     draggable: true,
     selected: false,
+    mouseDragPositionX:0,
+    mouseDragPositionY:0,
   };
   style2 = '';
   @Output() addAllCSSRule = new EventEmitter<string>();
@@ -102,20 +104,6 @@ export class PropertyComponent implements OnInit {
 
   valueChangeHandler(event: any) {
     this.props.value = event.target.value;
-    /*let newValue =event.target.value;
-    console.log(newValue);
-    if (newValue.length > 10 ){
-      var chunks = newValue.toString();
-      let textValueArray = chunks.match(/(.|[\r\n]){1,10}/g);
-      console.log(textValueArray);
-      let newTextValue = new Array;
-      for(let i=0; i<textValueArray.length; i++){
-        newTextValue[i] += textValueArray[i].toString() + " \n";
-        //this.props.value += textValue.toString() + "\n";
-        //console.log(newTextValue.toString());
-      };
-      this.props.value = newTextValue.toString();
-    }*/
   }
 
   typeChangeHandler(event: any) {
@@ -124,8 +112,6 @@ export class PropertyComponent implements OnInit {
 
   styleChangeHandler(event: any) {
     let x = event.target.value;
-    //this.props.style = event.target.value;
-
     let regexPosition = /position(.+?);/;
     let regexPosition2 = /top(.+?);/;
     let regexPosition3 = /left(.+?);/;
@@ -133,7 +119,6 @@ export class PropertyComponent implements OnInit {
     let position2 = this.props.style.match(regexPosition2);
     let position3 = this.props.style.match(regexPosition3);
     this.props.style = event.target.value+position+position2![0]+position3![0];
-    
     
   }
   @ViewChild('taID') styleText!: ElementRef;
@@ -172,9 +157,6 @@ export class PropertyComponent implements OnInit {
   nameChangeHandler(event: any) {
     this.props.name = event.target.value;
   }
-  linksChangeHandler(event: any) {
-    this.props.links = event.target.value;
-  }
   linkValueChangeHandler(event: any) {
     this.props.linkValue = event.target.value;
   }
@@ -183,7 +165,6 @@ export class PropertyComponent implements OnInit {
   }
   enableDragging(event: any) {
     this.props.draggable = !this.props.draggable;
-    //console.log(this.props.draggable);
   }
   
   /* CODE BELOW IS FOR TABLE ELEMENT */
