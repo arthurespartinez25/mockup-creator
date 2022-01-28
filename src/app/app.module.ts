@@ -27,6 +27,7 @@ import { ParagraphDragComponent } from './components/paragraphDrag/paragraphDrag
 import { PopupDragComponent } from './components/popupDrag/popupDrag.component';
 import { TableDragComponent } from './components/tableDrag/tableDrag.component';
 import { YoutubeDragComponent } from './components/youtubeDrag/youtubeDrag.component';
+import { DatePipe } from '@angular/common'
 
 @NgModule({
   declarations: [
@@ -53,7 +54,7 @@ import { YoutubeDragComponent } from './components/youtubeDrag/youtubeDrag.compo
     
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule, FormsModule, HttpClientModule],
-  providers: [DragDropModule, AppComponent],
+  providers: [DragDropModule, AppComponent, DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

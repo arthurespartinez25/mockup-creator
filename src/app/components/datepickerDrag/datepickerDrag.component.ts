@@ -2,6 +2,8 @@ import { CdkDragEnd } from '@angular/cdk/drag-drop';
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
+import {formatDate} from '@angular/common';
+import { DatePipe } from '@angular/common'
 
 @Component({
   selector: 'app-datepickerDrag',
@@ -34,6 +36,7 @@ export class DatepickerDragComponent implements OnInit,IComponent {
     selected : false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
+    dummyDate:0,
   };
 
   @Input() canvasPositionX: any;
@@ -62,7 +65,8 @@ export class DatepickerDragComponent implements OnInit,IComponent {
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
-    this.props.value = yyyy + '-' + mm + '-' + dd;
+    let date = mm + '-' + dd + '-' + yyyy;
+    this.props.value = this.datepipe.transform(date, 'yyyy-MM-dd');
   }
   
 
@@ -75,7 +79,7 @@ export class DatepickerDragComponent implements OnInit,IComponent {
     * 100;
   }
 
-  constructor(canvas: ElementRef) {
+  constructor(canvas: ElementRef, public datepipe: DatePipe) {
     this.canvas = canvas;
     let date = Date.now();
     this.props.key = date.toString();
@@ -95,6 +99,7 @@ export class DatepickerDragComponent implements OnInit,IComponent {
 
   dateValue(val: any){
     this.props.value = val.target.value;
+    this.props.dummyDate = this.datepipe.transform(val.target.value, 'MM/dd/YYYY');
   }
   
   get htmlCode(): string {

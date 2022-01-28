@@ -36,6 +36,7 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
 import { TableDragComponent } from './components/tableDrag/tableDrag.component';
 import { YoutubeDragComponent } from './components/youtubeDrag/youtubeDrag.component';
+import { DatePipe } from '@angular/common'
 
 @Component({
   selector: 'app-root',
@@ -102,7 +103,8 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     private http: HttpClient,
     public _router: Router,
     public _location: Location,
-    public sanitizer: DomSanitizer
+    public sanitizer: DomSanitizer,
+    public datepipe: DatePipe
   ) {
     this.changeref = changeDetectorRef;
   }
@@ -179,7 +181,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         break;
 
       case 'datepicker':
-        temp = new DatepickerDragComponent(this.canvas);
+        temp = new DatepickerDragComponent(this.canvas, this.datepipe);
         break;
 
       case 'header':
@@ -781,7 +783,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.componentList.push(temp);
     }, 100);
     setTimeout(() => {
-      temp = new DatepickerDragComponent(this.canvas);
+      temp = new DatepickerDragComponent(this.canvas, this.datepipe);
       this.mousePositionX = this.canvasLeft + 320;
       this.mousePositionY = this.canvasTop + 310;
       this.componentList.push(temp);
@@ -852,7 +854,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.componentList.push(temp);
     }, 100);
     setTimeout(() => {
-      temp = new DatepickerDragComponent(this.canvas);
+      temp = new DatepickerDragComponent(this.canvas, this.datepipe);
       this.mousePositionX = this.canvasLeft + 720;
       this.mousePositionY = this.canvasTop + 250;
       this.componentList.push(temp);

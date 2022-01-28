@@ -24,13 +24,24 @@
         />
       </td>
     </tr>
-    <tr class="properties-table-row" *ngIf="props.typeObj != 'table'">
+    <tr class="properties-table-row" *ngIf="props.typeObj != 'table' && props.typeObj != 'datepickerDrag'">
       <th class="properties-table-header"><label>value</label></th>
       <td class="properties-table-data">
         <input
           [disabled]="!this.props.id"
           type="text"
           [value]="props.value"
+          (keyup)="valueChangeHandler($event)"
+        />
+      </td>
+    </tr>
+     <tr class="properties-table-row" *ngIf="props.typeObj == 'datepickerDrag'">
+      <th class="properties-table-header"><label>value</label></th>
+      <td class="properties-table-data">
+        <input
+          [disabled]="!this.props.id"
+          type="text"
+          [value]="props.dummyDate"
           (keyup)="valueChangeHandler($event)"
         />
       </td>
