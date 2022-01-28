@@ -283,9 +283,16 @@
         </div>
       </div>
     </div>
-    <div> Component List
+
+    <!---------Component List code starts here------->
+    <div
+    cdkDropListGroup
+    cdkDropList
+    (cdkDropListDropped)="drop($event)"
+    > Component List
       <div class="component-list"
-        *ngFor="let component of componentList; let i = index"
+        *ngFor="let component of componentList; let i = index;"
+        cdkDrag
         [ngSwitch]="this.componentList[i].props.typeObj"
         [ngStyle]="{
           'background-color' : this.componentList[i].props.selected == true ? 'white': (this.componentList[i].props.selected == false ? '  #16324f': null),
@@ -296,7 +303,7 @@
         *ngSwitchCase="'buttonDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          Button {{i+1}}
+          {{i+1}} Button
           <button class="component-button-remove"
           (click)="deleteComponent(this.componentList[i])"
           ></button>
@@ -308,7 +315,7 @@
         *ngSwitchCase="'checkboxDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          Checkbox {{i+1}}
+          {{i+1}} Checkbox
           <button class="component-button-remove"
           (click)="deleteComponent(this.componentList[i])"
           ></button>
@@ -320,7 +327,7 @@
         *ngSwitchCase="'datepickerDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          Datepicker {{i+1}}
+          {{i+1}} Datepicker
           <button class="component-button-remove"
           (click)="deleteComponent(this.componentList[i])"
           ></button>
@@ -332,7 +339,7 @@
         *ngSwitchCase="'dropdownDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          Dropdown {{i+1}}
+          {{i+1}} Dropdown
           <button class="component-button-remove"
           (click)="deleteComponent(this.componentList[i])"
           ></button>
@@ -344,7 +351,7 @@
         *ngSwitchCase="'headerDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          Header {{i+1}}
+          {{i+1}} Header
           <button class="component-button-remove"
           (click)="deleteComponent(this.componentList[i])"
           ></button>
@@ -356,7 +363,7 @@
         *ngSwitchCase="'imgDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          Image {{i+1}}
+          {{i+1}} Image
           <button class="component-button-remove"
           (click)="deleteComponent(this.componentList[i])"
           ></button>
@@ -368,7 +375,7 @@
         *ngSwitchCase="'inputDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          Input Field {{i+1}}
+          {{i+1}} Input Field
           <button class="component-button-remove"
           (click)="deleteComponent(this.componentList[i])"
           ></button>
@@ -380,7 +387,7 @@
         *ngSwitchCase="'labelDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          Label {{i+1}}
+          {{i+1}} Label
           <button class="component-button-remove"
           (click)="deleteComponent(this.componentList[i])"
           ></button>
@@ -392,7 +399,7 @@
         *ngSwitchCase="'linkDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          Link {{i+1}}
+          {{i+1}} Link
           <button class="component-button-remove"
           (click)="deleteComponent(this.componentList[i])"
           ></button>
@@ -404,7 +411,7 @@
         *ngSwitchCase="'modalDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          Modal {{i+1}}
+          {{i+1}} Modal
           <button class="component-button-remove"
           (click)="deleteComponent(this.componentList[i])"
           ></button>
@@ -416,7 +423,7 @@
         *ngSwitchCase="'navDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          Navigation Bar {{i+1}}
+          {{i+1}} Navigation Bar
           <button class="component-button-remove"
           (click)="deleteComponent(this.componentList[i])"
           ></button>
@@ -428,7 +435,7 @@
         *ngSwitchCase="'paragraphDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          Paragraph {{i+1}}
+          {{i+1}} Paragraph
           <button class="component-button-remove"
           (click)="deleteComponent(this.componentList[i])"
           ></button>
@@ -440,7 +447,7 @@
         *ngSwitchCase="'radioDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          Radio {{i+1}}
+          {{i+1}} Radio
           <button class="component-button-remove"
           (click)="deleteComponent(this.componentList[i])"
           ></button>
@@ -452,7 +459,7 @@
         *ngSwitchCase="'tableDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          Table {{i+1}}
+          {{i+1}} Table
           <button class="component-button-remove"
           (click)="deleteComponent(this.componentList[i])"
           ></button>
@@ -464,7 +471,7 @@
         *ngSwitchCase="'textboxDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          Textbox {{i+1}}
+          {{i+1}} Textbox
           <button class="component-button-remove"
           (click)="deleteComponent(this.componentList[i])"
           ></button>
@@ -476,7 +483,7 @@
         *ngSwitchCase="'youtubeDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          iFrame {{i+1}}
+          {{i+1}} iFrame
           <button class="component-button-remove"
           (click)="deleteComponent(this.componentList[i])"
           ></button>
@@ -486,7 +493,9 @@
         </div>
       </div>
     </div>
+    <!---------Component List code ends here------->
   </div>
+  
 
   <!-- CANVAS SECTION -->
 

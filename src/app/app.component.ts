@@ -1,4 +1,4 @@
-import { CdkDrag, CdkDragEnd, DragDrop } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragEnd, DragDrop, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {
   AfterViewChecked,
   AfterViewInit,
@@ -50,6 +50,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   title = 'mockup-creator';
   index: number;
   componentList: IComponent[] = [];
+  numberOfComponents: any = [];
   selectedComponent: IComponent;
   ref: ComponentRef<any>;
   readonly CSS_URL = '../app/app.component.css';
@@ -133,6 +134,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   offsetTop:any  = 0;
   xDis: any = 0;
   yDis: any = 0;
+  noOfButton: number = 0;
 
   addComponent(component: string) {
     let temp: IComponent;
@@ -1201,6 +1203,24 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   hideComponent(value:any){
     let componentIndex = this.componentList.indexOf(value);
     this.componentList[componentIndex].props.hidden = !this.componentList[componentIndex].props.hidden;
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.componentList, event.previousIndex, event.currentIndex);
+    //console.log("This is the previous index " + event.previousContainer);
+    //console.log("This is the new index " + event.currentIndex);
+  }
+
+  addToNoOfComponent(value:IComponent){
+    let componentIndex = this.componentList.indexOf(value);
+    let checkbox,datepicker,dropdown,header,image,input,label,link,modal,navbar,paragraph,radio,table,textbox,youtube = 0;
+    switch(this.componentList[componentIndex].props.typeObj){
+      case 'buttonDrag': {
+        this.noOfButton++;
+        this.numberOfComponents.push([value],["Button"+this.noOfButton]);
+      }
+    }
+    
   }
 
   /**************The code below is for component list functions *************************/
