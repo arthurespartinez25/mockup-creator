@@ -29,17 +29,15 @@ export class DropdownDragComponent implements OnInit, IComponent {
     linksArray: [],
     draggable: true,
     selected : false,
+    mouseDragPositionX:0,
+    mouseDragPositionY:0,
   };
 
-  @Output() updateDataEvent = new EventEmitter<any>();
-  @Output() updateDataEventY = new EventEmitter<any>();
   @Input() canvasPositionX: any;
   @Input() canvasPositionY: any;
   @Input() mousePositionX2: any;
   @Input() mousePositionY2: any;
   @Input() whatComponent2: any;
-  mousePositionDropX = 310;
-  mousePositionDropY = 110;
   canvasPositionLeft = 0;
   canvasPositionTop = 0;
   mousePositionLeft = 0;
@@ -56,6 +54,8 @@ export class DropdownDragComponent implements OnInit, IComponent {
     this.mousePositionTop = this.mousePositionY2;
     this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
     this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
+    this.props.mouseDragPositionX = this.percentageX;
+    this.props.mouseDragPositionY = this.percentageY;
     switch (this.whatComponent2) {
       case 'HPDropdown1':
         break;
@@ -72,14 +72,12 @@ export class DropdownDragComponent implements OnInit, IComponent {
   }
 
   onDragEnded($event: CdkDragEnd) {
-    this.mousePositionDropX = $event.source.getFreeDragPosition().x;
-    this.mousePositionDropY = $event.source.getFreeDragPosition().y;
-    this.updateDataEvent.emit(
-      ((this.mousePositionDropX + this.mousePositionLeft - this.canvasPositionLeft) / 1280) * 100
-    );
-    this.updateDataEventY.emit(
-      ((this.mousePositionDropY + this.mousePositionTop - this.canvasPositionTop) / 720) * 100
-    );
+    this.props.mouseDragPositionX =
+    (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
+    * 100;
+    this.props.mouseDragPositionY =
+    (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
+    * 100;
   }
 
   constructor(canvas: ElementRef) {

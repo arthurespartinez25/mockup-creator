@@ -35,10 +35,10 @@ export class YoutubeDragComponent implements OnInit, IComponent {
       url : '',
       draggable: true,
       selected : false,
+      mouseDragPositionX:0,
+      mouseDragPositionY:0,
     };
 
-    @Output() updateDataEvent = new EventEmitter<any>();
-    @Output() updateDataEventY = new EventEmitter<any>();
     @Input() canvasPositionX: any;
     @Input() canvasPositionY: any;
     @Input() mousePositionX2: any;
@@ -61,7 +61,8 @@ export class YoutubeDragComponent implements OnInit, IComponent {
       this.mousePositionTop = this.mousePositionY2;
       this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
       this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
-    
+      this.props.mouseDragPositionX = this.percentageX;
+      this.props.mouseDragPositionY = this.percentageY;
       this.props.value = 'https://www.youtube.com/embed/qY7rpWA-D4w?autoplay=1';
       this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value);
       this.props.style =
@@ -74,14 +75,12 @@ export class YoutubeDragComponent implements OnInit, IComponent {
   }
 
   onDragEnded($event: CdkDragEnd) {
-    this.mousePositionDropX = $event.source.getFreeDragPosition().x;
-    this.mousePositionDropY = $event.source.getFreeDragPosition().y;
-    this.updateDataEvent.emit(
-      ((this.mousePositionDropX + this.mousePositionLeft - this.canvasPositionLeft) / 1280) * 100
-    );
-    this.updateDataEventY.emit(
-      ((this.mousePositionDropY + this.mousePositionTop - this.canvasPositionTop) / 720) * 100
-    );
+    this.props.mouseDragPositionX =
+    (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
+    * 100;
+    this.props.mouseDragPositionY =
+    (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
+    * 100;
   }
 
     
