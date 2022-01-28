@@ -285,7 +285,7 @@
       <div id="canvasBody">
         <app-wrapper
           *ngFor="let component of componentList; let i = index"
-          class="wrapper"
+          class="wrapper componentHover"
           (click)="clickHandler(component)"
           cdkDrag
           (cdkDragEnded)="onDragEnd(component)"
