@@ -24,7 +24,7 @@
         />
       </td>
     </tr>
-    <tr class="properties-table-row" *ngIf="props.typeObj != 'table'">
+    <tr class="properties-table-row" *ngIf="props.typeObj != 'table' && props.typeObj != 'dropdownDrag'">
       <th class="properties-table-header"><label>value</label></th>
       <td class="properties-table-data">
         <input
@@ -103,7 +103,7 @@
     </tr>
 
     
-    <tr
+    <!--<tr
       class="properties-table-row"
       *ngIf="props.typeObj == 'checkbox' || props.typeObj == 'checkboxDrag'"
     >
@@ -116,7 +116,7 @@
           (keyup)="checkedChangeHandler($event)"
         />
       </td>
-    </tr>
+    </tr> -->
 
     <tr class="properties-table-row" *ngIf="props.typeObj == 'dropdown' || props.typeObj == 'dropdownDrag'">
       <th class="properties-table-header"><label>Option Values</label></th>
@@ -132,7 +132,7 @@
     </tr>
     <tr
       class="properties-table-row"
-      *ngIf="props.typeObj == 'textbox' || props.typeObj == 'textboxDrag'"
+      *ngIf="props.typeObj == 'textbox' || props.typeObj == 'textboxDrag' || props.typeObj == 'inputDrag'"
     >
       <th class="properties-table-header"><label>placeholder</label></th>
       <td class="properties-table-data">
