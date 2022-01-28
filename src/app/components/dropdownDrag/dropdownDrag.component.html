@@ -8,7 +8,7 @@
     position: 'sticky',
     left: mousePositionLeft + 'px',
     top: mousePositionTop + 'px',
-    width: '100px',
+    width: 'auto',
     'border-color':
       props.selected == true ? 'red' : props.selected == false ? 'none' : null,
     'border-style':
@@ -21,24 +21,7 @@
       props.selected == true ? '1px' : props.selected == false ? '0px' : null
   }"
 >
-  <button
-    [class]="props.class"
-    type="button"
-    [id]="props.id"
-    [style]="props.style"
-    (click)="editNumLinks(this.props.links)"
-    data-bs-toggle="dropdown"
-    aria-haspopup="true"
-    aria-expanded="false"
-  >
-    {{ props.value }}
-  </button>
-  <div class="dropdown-menu" aria-labelledby="props.id">
-    <a
-      class="dropdown-item"
-      *ngFor="let link of props.linksArray; let i = index"
-      (click)="editLinkValue(i, link, props.linkValue)"
-      >{{ link }}</a
-    >
-  </div>
+  <select [class]="props.class" [id]="props.id" [style]="props.style" (click)="editNumLinks()" [(ngModel)]="selectedOption">
+    <option *ngFor="let option of props.linksArray; let i = index;" value="{{option}}">{{option}}</option>
+  </select>
 </div>

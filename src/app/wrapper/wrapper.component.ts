@@ -22,8 +22,6 @@ export class WrapperComponent implements OnInit {
   @Input() canvasTop: any;
   @Input() canvasW: any;
   @Input() whatComponent:any;
-  @Output() updateDataEvent2= new EventEmitter<any>();
-  @Output() updateDataEventX= new EventEmitter<any>();
 
   mousePositionX2 = 0;
   mousePositionY2 = 0;
@@ -72,11 +70,5 @@ export class WrapperComponent implements OnInit {
   }
   removeElement(remove:IComponent):void {
 
-  }
-  passData(item: any){
-    this.updateDataEvent2.emit(item);
-  }
-  passDataY(item: any){
-    this.updateDataEventX.emit(item);
   }
 }
