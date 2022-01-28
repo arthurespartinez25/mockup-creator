@@ -7,7 +7,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
   selector: 'app-datepickerDrag',
   //templateUrl: './datepicker.component.html',
   styleUrls: ['./datepickerDrag.component.css'],
-  template: `<input cdkDrag cdkDragBoundary="#canvas" [type]="props.type" [id]="props.id" 
+  template: `<input cdkDrag cdkDragBoundary="#canvas" [type]="props.type" [id]="props.id" format="dd-mm-yyyy"
   [value]="props.value" [class]="props.class" [style]="props.style" 
   (change)="dateValue($event)"
   (cdkDragEnded)="onDragEnded($event)" 
@@ -25,7 +25,7 @@ export class DatepickerDragComponent implements OnInit,IComponent {
   props: IProperty = {
     key: '',
     id: '',
-    value: '2021-12-25',
+    value: '',
     class: '',
     style: '',
     typeObj: 'datepickerDrag',
@@ -57,6 +57,8 @@ export class DatepickerDragComponent implements OnInit,IComponent {
     this.mousePositionTop = this.mousePositionY2;
     this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
     this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
+    this.props.style='position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;'; //sets the position
+    this.props.value = new Date().toISOString().substring(0,10);  //sets default value of date to current date
   }
   
 
@@ -88,9 +90,15 @@ export class DatepickerDragComponent implements OnInit,IComponent {
       this.props = value;
     }
   }
-
+  
   dateValue(val: any){
-    this.props.value = val.target.value;
+    // let regexp = /\//;
+     let newdate:string =val.target.value;
+    // val.target.value.replace(regexp,"-");
+    // val.target.value.replace("\/","-");
+    // console.log(val.target.value);
+    // this.props.value = val.target.value;
+    this.props.value = newdate.split('/').reverse().join('-');
   }
   
   get htmlCode(): string {
