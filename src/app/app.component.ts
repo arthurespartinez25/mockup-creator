@@ -1,4 +1,4 @@
-import { CdkDrag, CdkDragEnd, DragDrop } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragEnd, DragDrop, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {
   AfterViewChecked,
   AfterViewInit,
@@ -36,6 +36,7 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
 import { TableDragComponent } from './components/tableDrag/tableDrag.component';
 import { YoutubeDragComponent } from './components/youtubeDrag/youtubeDrag.component';
+import { AppLoginComponent } from './app-login/app-login.component';
 
 @Component({
   selector: 'app-root',
@@ -46,6 +47,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   title = 'mockup-creator';
   index: number;
   componentList: IComponent[] = [];
+  numberOfComponents: any = [];
   selectedComponent: IComponent;
   ref: ComponentRef<any>;
   readonly CSS_URL = '../app/app.component.css';
@@ -62,6 +64,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     type: '',
     draggable: false,
     selected : false,
+    hidden: false,
     mouseDragPositionX: 0,
     mouseDragPositionY: 0,
   };
@@ -109,6 +112,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   delete: boolean;
   cssBody: SafeStyle;
   canvasBG: string;
+  inSession:boolean;
   canvasLeft = 0;
   canvasTop = 0;
   canvasW = 0;
@@ -126,8 +130,18 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   domInsideCanvas = false;
   offsetLeft: any = 0;
   offsetTop:any  = 0;
+  xDis: any = 0;
+  yDis: any = 0;
+  noOfButton: number = 0;
   xDistance: any = 0;
   yDistance: any = 0;
+
+  
+  loggedIn(value: any) {
+    //this.inSession = value;
+    console.log("eto value natin lods: " +value);
+  }
+
 
   addComponent(component: string) {
     let temp: IComponent;
@@ -1094,6 +1108,79 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
 
   /*************Here Ends CSS Code******************/
+
+
+  /**************The code below is for component list functions *************************/
+  
+  deleteComponent(value:any){
+    let componentIndex = this.componentList.indexOf(value);
+    if(componentIndex !== -1){
+      this.componentList.splice(componentIndex,1);
+    }
+  }
+
+  hideComponent(value:any){
+    let componentIndex = this.componentList.indexOf(value);
+    this.componentList[componentIndex].props.hidden = !this.componentList[componentIndex].props.hidden;
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.componentList, event.previousIndex, event.currentIndex);
+    //console.log("This is the previous index " + event.previousContainer);
+    //console.log("This is the new index " + event.currentIndex);
+  }
+
+  addToNoOfComponent(value:IComponent){
+    let componentIndex = this.componentList.indexOf(value);
+    let checkbox,datepicker,dropdown,header,image,input,label,link,modal,navbar,paragraph,radio,table,textbox,youtube = 0;
+    switch(this.componentList[componentIndex].props.typeObj){
+      case 'buttonDrag': {
+        this.noOfButton++;
+        this.numberOfComponents.push([value],["Button"+this.noOfButton]);
+      }
+    }
+    
+  }
+
+  /**************The code below is for component list functions *************************/
+
+
+
+  
+  /*
+  receiveMessage($event: boolean) {
+    if ($event == true) {
+
+      let componentIndex = this.componentList.indexOf(this.selectedComponent);
+      if (componentIndex !== -1) {
+        this.componentList.splice(componentIndex, 1);
+        this.selected.id = '';
+        this.selected.type = '';
+        this.selected.key = '';
+        this.selected.value = '';
+        this.selected.class = '';
+        this.selected.style = '';
+        this.selected.typeObj = '';
+        this.selected.placeholder = '';
+        this.selected.rows = -1;
+        this.selected.cols = -1;
+        this.selected.name = '';
+        this.selected.draggable = false;
+        console.log('Deleted');
+        $event = false;
+      }
+    } else {
+      console.log('Nothing to delete');
+    }
+    
+  }
+
+  // deleteComponent(){
+  //   let componentIndex = this.componentList.indexOf(this.selectedComponent);
+  //   if(componentIndex !== -1){
+  //     this.componentList.splice(componentIndex,1);
+  //   }
+  // }
 
   /****************** OLD CODE STARTS HERE **********************/
 }

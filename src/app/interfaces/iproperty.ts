@@ -18,6 +18,7 @@ export interface IProperty {
   link3?: string;
   checked?: string;
   draggable?: boolean;
+  hidden?: boolean;
   tblRows?: number;
   tblCols?: number;
   tblArrayRow?: any;
