@@ -30,4 +30,8 @@ export interface IProperty {
   updateCallback?: (row, col) => void;
   url?: SafeResourceUrl;
   selected: boolean;
+  hidden?: boolean;
+  mouseDragPositionX?: any;
+  mouseDragPositionY?: any;
+  dummystyle?:any;
 }

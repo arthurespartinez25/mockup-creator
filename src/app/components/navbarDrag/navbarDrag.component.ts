@@ -30,18 +30,17 @@ export class NavbarDragComponent implements OnInit, IComponent {
     type: '',
     draggable: true,
     selected : false,
+    hidden: false,
+    mouseDragPositionX:0,
+    mouseDragPositionY:0,
   };
 
   @Input() canvasWidth2: any;
-  @Output() updateDataEvent = new EventEmitter<any>();
-  @Output() updateDataEventY = new EventEmitter<any>();
   @Input() canvasPositionX: any;
   @Input() canvasPositionY: any;
   @Input() mousePositionX2: any;
   @Input() mousePositionY2: any;
   @Input() whatComponent2: any;
-  mousePositionDropX = 310;
-  mousePositionDropY = 110;
   canvasPositionLeft = 0;
   canvasPositionTop = 0;
   mousePositionLeft = 0;
@@ -59,6 +58,8 @@ export class NavbarDragComponent implements OnInit, IComponent {
     this.mousePositionTop = this.mousePositionY2;
     this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
     this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
+    this.props.mouseDragPositionX = this.percentageX;
+    this.props.mouseDragPositionY = this.percentageY;
     if (this.percentageX < 0){
       this.percentageX = 0;
     }
@@ -110,15 +111,11 @@ export class NavbarDragComponent implements OnInit, IComponent {
     }
   }
 
-  onDragEnded($event: any) {
-    this.mousePositionDropX = $event.source.getFreeDragPosition().x;
-    this.mousePositionDropY = $event.source.getFreeDragPosition().y;
-
-    this.updateDataEvent.emit(0);
-    this.updateDataEventY.emit(
-      ((this.mousePositionDropY + this.mousePositionTop - this.canvasPositionTop) / 720) * 100
-    );
-    console.log(this.theCanvasWidth);
+  onDragEnded($event: CdkDragEnd) {
+    this.props.mouseDragPositionX = 0;
+    this.props.mouseDragPositionY =
+    (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
+    * 100;
   }
 
   constructor(canvas: ElementRef) {

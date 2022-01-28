@@ -1,4 +1,4 @@
-import { CdkDrag, CdkDragEnd, DragDrop } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragEnd, DragDrop, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {
   AfterViewChecked,
   AfterViewInit,
@@ -46,6 +46,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   title = 'mockup-creator';
   index: number;
   componentList: IComponent[] = [];
+  numberOfComponents: any = [];
   selectedComponent: IComponent;
   ref: ComponentRef<any>;
   readonly CSS_URL = '../app/app.component.css';
@@ -62,6 +63,9 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     type: '',
     draggable: false,
     selected : false,
+    hidden: false,
+    mouseDragPositionX: 0,
+    mouseDragPositionY: 0,
   };
 
   public cssRuleCount = document.styleSheets[0].cssRules.length;
@@ -124,6 +128,9 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   domInsideCanvas = false;
   offsetLeft: any = 0;
   offsetTop:any  = 0;
+  xDis: any = 0;
+  yDis: any = 0;
+  noOfButton: number = 0;
   xDistance: any = 0;
   yDistance: any = 0;
 
@@ -305,15 +312,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this._styleEnd
     );
   }
-  mouseMoveX = 0;
-  mouseMoveY = 0;
-
-  passData2(item: any) {
-    this.mouseMoveX = item;
-  }
-  passDataX(item: any) {
-    this.mouseMoveY = item;
-  }
 
   ngAfterViewChecked() {
     this.changeref.detectChanges();
@@ -330,7 +328,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.selected = component.props;
     this.selectedComponent = component;
     this.selectedComp(this.selectedComponent);
-    if (this.mouseMoveX != 0 && this.mouseMoveY != 0) {
+    if (this.selected.typeObj != 'nav' || 'navDrag') {
       this.styleHolder = this.selected.style;
       let regexLeft = /left(.+?);/;
       let regexTop = /top(.+?);/;
@@ -342,15 +340,15 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         this.styleHolder +
         'position:sticky;' +
         'left:' +
-        this.mouseMoveX +
+        this.selected.mouseDragPositionX +
         '%;' +
         'top:' +
-        this.mouseMoveY +
+        this.selected.mouseDragPositionY +
         '%;';
-      this.mouseMoveX = 0;
-      this.mouseMoveY = 0;
+      //  this.selected.mouseDragPositionX = 0;
+      //  this.selected.mouseDragPositionY = 0;
     } else if (
-      this.mouseMoveY != 0 &&
+      this.selected.mouseDragPositionY != 0 &&
       (this.selected.typeObj == 'nav' || 'navDrag')
     ) {
       this.styleHolder = this.selected.style;
@@ -365,14 +363,18 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         this.styleHolder +
         'position:sticky;' +
         'left:' +
-        this.mouseMoveX +
+        this.selected.mouseDragPositionX +
         'px;' +
         'top:' +
-        this.mouseMoveY +
+        this.selected.mouseDragPositionY +
         '%;';
-      this.mouseMoveX = 0;
-      this.mouseMoveY = 0;
+       this.selected.mouseDragPositionX = 0;
+       this.selected.mouseDragPositionY = 0;
     }
+  }
+  onDragEnd(component: IComponent)
+  {
+    console.log(component);
   }
 
   selectedComp(value: any){
@@ -1097,6 +1099,79 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
 
   /*************Here Ends CSS Code******************/
+
+
+  /**************The code below is for component list functions *************************/
+  
+  deleteComponent(value:any){
+    let componentIndex = this.componentList.indexOf(value);
+    if(componentIndex !== -1){
+      this.componentList.splice(componentIndex,1);
+    }
+  }
+
+  hideComponent(value:any){
+    let componentIndex = this.componentList.indexOf(value);
+    this.componentList[componentIndex].props.hidden = !this.componentList[componentIndex].props.hidden;
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.componentList, event.previousIndex, event.currentIndex);
+    //console.log("This is the previous index " + event.previousContainer);
+    //console.log("This is the new index " + event.currentIndex);
+  }
+
+  addToNoOfComponent(value:IComponent){
+    let componentIndex = this.componentList.indexOf(value);
+    let checkbox,datepicker,dropdown,header,image,input,label,link,modal,navbar,paragraph,radio,table,textbox,youtube = 0;
+    switch(this.componentList[componentIndex].props.typeObj){
+      case 'buttonDrag': {
+        this.noOfButton++;
+        this.numberOfComponents.push([value],["Button"+this.noOfButton]);
+      }
+    }
+    
+  }
+
+  /**************The code below is for component list functions *************************/
+
+
+
+  
+  /*
+  receiveMessage($event: boolean) {
+    if ($event == true) {
+
+      let componentIndex = this.componentList.indexOf(this.selectedComponent);
+      if (componentIndex !== -1) {
+        this.componentList.splice(componentIndex, 1);
+        this.selected.id = '';
+        this.selected.type = '';
+        this.selected.key = '';
+        this.selected.value = '';
+        this.selected.class = '';
+        this.selected.style = '';
+        this.selected.typeObj = '';
+        this.selected.placeholder = '';
+        this.selected.rows = -1;
+        this.selected.cols = -1;
+        this.selected.name = '';
+        this.selected.draggable = false;
+        console.log('Deleted');
+        $event = false;
+      }
+    } else {
+      console.log('Nothing to delete');
+    }
+    
+  }
+
+  // deleteComponent(){
+  //   let componentIndex = this.componentList.indexOf(this.selectedComponent);
+  //   if(componentIndex !== -1){
+  //     this.componentList.splice(componentIndex,1);
+  //   }
+  // }
 
   /****************** OLD CODE STARTS HERE **********************/
 }

@@ -22,6 +22,8 @@ export class PropertyComponent implements OnInit {
     type: '',
     draggable: true,
     selected: false,
+    mouseDragPositionX:0,
+    mouseDragPositionY:0,
   };
   style2 = '';
   @Output() addAllCSSRule = new EventEmitter<string>();
@@ -187,6 +189,7 @@ export class PropertyComponent implements OnInit {
        let regexPosition = /https(.+?)"/;
        let link:any = null;
        let dummyLink = this.props.value;
+       var p = /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
        if(dummyLink.charAt(dummyLink.length - 1) == ">")
        {
         link = this.props.value.match(regexPosition);
@@ -199,10 +202,14 @@ export class PropertyComponent implements OnInit {
         this.props.value = this.props.value.slice(0, -1); 
         this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value);
       }
-     else
+     else if(this.props.value.match(p))
       {
         this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value);
        }  
+    else
+      {
+        this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl('https://ps.w.org/all-404-redirect-to-homepage/assets/icon-128x128.png?rev=1515215');
+      }
   }
   /* END OF CODE FOR TABLE ELEMENT */
 }
