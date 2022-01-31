@@ -37,6 +37,7 @@ import { BehaviorSubject } from 'rxjs';
 import { TableDragComponent } from './components/tableDrag/tableDrag.component';
 import { YoutubeDragComponent } from './components/youtubeDrag/youtubeDrag.component';
 import { DatePipe } from '@angular/common'
+import { PropertyComponent } from './property/property.component';
 
 @Component({
   selector: 'app-root',
@@ -94,6 +95,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
+  @ViewChild(PropertyComponent) propertyCmp:PropertyComponent;
 
   changeref: ChangeDetectorRef;
   constructor(
@@ -420,6 +422,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     window.open(fileURL, 'index.html');
   }
   addComponentLogin() {
+    this.propertyCmp.clearComponent();
     let temp: IComponent;
     temp = new ButtonDragComponent(this.canvas);
     this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
@@ -478,6 +481,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     }, 1);
   }
   addComponentImageLabel() {
+    this.propertyCmp.clearComponent();
     let temp: IComponent;
     temp = new ButtonDragComponent(this.canvas);
     this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
@@ -506,6 +510,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
 
   addComponentHomePage() {
+    this.propertyCmp.clearComponent();
     let temp: IComponent;
     this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
     this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
@@ -706,6 +711,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   addComponentSearchScreen() {
     //Jan 3, 2021 - 1:20pm
     //left side of the form
+    this.propertyCmp.clearComponent();
     let temp: IComponent;
     temp = new ButtonDragComponent(this.canvas);
     this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
