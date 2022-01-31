@@ -13,7 +13,7 @@ export class AppRegisterComponent implements OnInit {
   }
   register(username, password, cpassword, email, firstName, lastName) {
     if(password != cpassword){
-      alert("mali ang password mo wag ka na mag register tanga");
+      alert("Passwords do not match");
       return;
     }
   }
