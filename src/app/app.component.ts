@@ -1,4 +1,10 @@
-import { CdkDrag, CdkDragEnd, DragDrop, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import {
+  CdkDrag,
+  CdkDragEnd,
+  DragDrop,
+  CdkDragDrop,
+  moveItemInArray,
+} from '@angular/cdk/drag-drop';
 import {
   AfterViewChecked,
   AfterViewInit,
@@ -62,7 +68,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     typeObj: '',
     type: '',
     draggable: false,
-    selected : false,
+    selected: false,
     hidden: false,
     mouseDragPositionX: 0,
     mouseDragPositionY: 0,
@@ -116,9 +122,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   canvasW = 0;
   whatComponent = 'none';
 
-  ngOnInit(): void {
-    /* throw new Error('Method not implemented.'); */
-  }
+  ngOnInit(): void {}
   ngAfterViewInit(): void {}
 
   canvasLeftX = 0;
@@ -127,7 +131,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   mousePositionY = 110;
   domInsideCanvas = false;
   offsetLeft: any = 0;
-  offsetTop:any  = 0;
+  offsetTop: any = 0;
   xDis: any = 0;
   yDis: any = 0;
   noOfButton: number = 0;
@@ -136,7 +140,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   addComponent(component: string) {
     let temp: IComponent;
-    
+
     switch (component) {
       case 'button':
         temp = new ButtonDragComponent(this.canvas);
@@ -213,41 +217,53 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
     this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
     this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
-    if (this.domInsideCanvas == false) 
-      {
-        this.mousePositionX = this.canvasLeft;
-        this.mousePositionY = this.canvasTop;
-      }
+    if (this.domInsideCanvas == false) {
+      this.mousePositionX = this.canvasLeft;
+      this.mousePositionY = this.canvasTop;
+    }
     this.componentList.push(temp);
   }
   //----------------------------------------------------------------------------
   onDragEndedAddComponent(event: CdkDragEnd, component: string) {
     event.source._dragRef.reset();
-    if (this.domInsideCanvas == true) 
-      {
-    this.offsetLeft = event.source.element.nativeElement.offsetLeft;
-    this.offsetTop = event.source.element.nativeElement.offsetTop;
-    this.xDistance = event.distance.x;
-    this.yDistance  = event.distance.y;
-    this.canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement).offsetWidth;
-    this.canvasTopY = (this.subMenuItem.nativeElement as HTMLElement).offsetTop;
-    console.log(this.canvasLeftX);
-    console.log(this.canvasTopY);
-       if(component == 'img'||component == 'nav'||component == 'link'||
-        component == 'table'||component == 'youtube')
-        {
-          this.canvasLeftX = 0;
-          this.canvasTopY = 0;
-        }
-        else if(component == 'header'||component == 'paragraph'||component == 'label')
-        {
-          this.canvasLeftX = (this.subMenuItem2.nativeElement as HTMLElement).offsetWidth;
-          this.canvasTopY = (this.subMenuItem2.nativeElement as HTMLElement).offsetTop;
-        }
-        this.mousePositionX = this.offsetLeft + this.xDistance + this.canvasLeftX;
-        this.mousePositionY = this.offsetTop + this.yDistance + this.canvasTopY;
+    if (this.domInsideCanvas == true) {
+      this.offsetLeft = event.source.element.nativeElement.offsetLeft;
+      this.offsetTop = event.source.element.nativeElement.offsetTop;
+      this.xDistance = event.distance.x;
+      this.yDistance = event.distance.y;
+      this.canvasLeftX = (
+        this.subMenuItem.nativeElement as HTMLElement
+      ).offsetWidth;
+      this.canvasTopY = (
+        this.subMenuItem.nativeElement as HTMLElement
+      ).offsetTop;
+      console.log(this.canvasLeftX);
+      console.log(this.canvasTopY);
+      if (
+        component == 'img' ||
+        component == 'nav' ||
+        component == 'link' ||
+        component == 'table' ||
+        component == 'youtube'
+      ) {
+        this.canvasLeftX = 0;
+        this.canvasTopY = 0;
+      } else if (
+        component == 'header' ||
+        component == 'paragraph' ||
+        component == 'label'
+      ) {
+        this.canvasLeftX = (
+          this.subMenuItem2.nativeElement as HTMLElement
+        ).offsetWidth;
+        this.canvasTopY = (
+          this.subMenuItem2.nativeElement as HTMLElement
+        ).offsetTop;
       }
-      this.addComponent(component);
+      this.mousePositionX = this.offsetLeft + this.xDistance + this.canvasLeftX;
+      this.mousePositionY = this.offsetTop + this.yDistance + this.canvasTopY;
+    }
+    this.addComponent(component);
   }
 
   //----------------------------------------------------------------------------
@@ -318,8 +334,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
   styleHolder = 'aw';
   isDisabled = true;
-  timerDisable()
-  {
+  timerDisable() {
     setTimeout(() => {
       this.isDisabled = true;
     }, 100);
@@ -368,25 +383,24 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         'top:' +
         this.selected.mouseDragPositionY +
         '%;';
-       this.selected.mouseDragPositionX = 0;
-       this.selected.mouseDragPositionY = 0;
+      this.selected.mouseDragPositionX = 0;
+      this.selected.mouseDragPositionY = 0;
     }
   }
-  onDragEnd(component: IComponent)
-  {
+  onDragEnd(component: IComponent) {
     console.log(component);
   }
 
-  selectedComp(value: any){
+  selectedComp(value: any) {
     let componentIndex = this.componentList.indexOf(value);
-      if (componentIndex !== -1) {
-        for(let i = 0; i < this.componentList.length; i++){
-          this.componentList[i].props.selected = false;
-        }
-        this.componentList[componentIndex].props.selected = true;
-      } else {
-        console.log('Nothing to highlight');
+    if (componentIndex !== -1) {
+      for (let i = 0; i < this.componentList.length; i++) {
+        this.componentList[i].props.selected = false;
       }
+      this.componentList[componentIndex].props.selected = true;
+    } else {
+      console.log('Nothing to highlight');
+    }
   }
 
   copyMessage(val: string) {
@@ -491,7 +505,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.mousePositionY = this.canvasTop + 140;
     this.componentList.push(temp);
   }
-
 
   refresh(): void {
     this._router
@@ -994,8 +1007,8 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       generalRule = true;
       console.log('"' + cssCanvasSelector + '" is a general Selector;');
     }
-      
-      if (generalRule == true) {
+
+    if (generalRule == true) {
       switch (cssString.substring(0, cssString.indexOf('{'))) {
         case 'body': {
           cssStringTemp =
@@ -1093,51 +1106,64 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     }
   }
   @ViewChild('cssTextArea') styleBox: ElementRef;
-  clearCss()
-  {
-    this.styleBox.nativeElement.value = "";
+  clearCss() {
+    this.styleBox.nativeElement.value = '';
   }
 
   /*************Here Ends CSS Code******************/
 
-
   /**************The code below is for component list functions *************************/
-  
-  deleteComponent(value:any){
+
+  deleteComponent(value: any) {
     let componentIndex = this.componentList.indexOf(value);
-    if(componentIndex !== -1){
-      this.componentList.splice(componentIndex,1);
+    if (componentIndex !== -1) {
+      this.componentList.splice(componentIndex, 1);
     }
   }
 
-  hideComponent(value:any){
+  hideComponent(value: any) {
     let componentIndex = this.componentList.indexOf(value);
-    this.componentList[componentIndex].props.hidden = !this.componentList[componentIndex].props.hidden;
+    this.componentList[componentIndex].props.hidden =
+      !this.componentList[componentIndex].props.hidden;
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.componentList, event.previousIndex, event.currentIndex);
+    moveItemInArray(
+      this.componentList,
+      event.previousIndex,
+      event.currentIndex
+    );
     //console.log("This is the previous index " + event.previousContainer);
     //console.log("This is the new index " + event.currentIndex);
   }
 
-  addToNoOfComponent(value:IComponent){
+  addToNoOfComponent(value: IComponent) {
     let componentIndex = this.componentList.indexOf(value);
-    let checkbox,datepicker,dropdown,header,image,input,label,link,modal,navbar,paragraph,radio,table,textbox,youtube = 0;
-    switch(this.componentList[componentIndex].props.typeObj){
+    let checkbox,
+      datepicker,
+      dropdown,
+      header,
+      image,
+      input,
+      label,
+      link,
+      modal,
+      navbar,
+      paragraph,
+      radio,
+      table,
+      textbox,
+      youtube = 0;
+    switch (this.componentList[componentIndex].props.typeObj) {
       case 'buttonDrag': {
         this.noOfButton++;
-        this.numberOfComponents.push([value],["Button"+this.noOfButton]);
+        this.numberOfComponents.push([value], ['Button' + this.noOfButton]);
       }
     }
-    
   }
 
   /**************The code below is for component list functions *************************/
 
-
-
-  
   /*
   receiveMessage($event: boolean) {
     if ($event == true) {
