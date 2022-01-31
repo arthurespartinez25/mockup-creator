@@ -21,6 +21,7 @@ export class CheckboxDragComponent implements OnInit, IComponent {
     checked: 'true',
     draggable: true,
     selected : false,
+    hidden: false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
   };
@@ -36,6 +37,7 @@ export class CheckboxDragComponent implements OnInit, IComponent {
   mousePositionTop = 0;
   percentageX = 0;
   percentageY = 0;
+  checked = this.props.checked;
 
 
   ngOnInit(): void {
@@ -80,21 +82,26 @@ export class CheckboxDragComponent implements OnInit, IComponent {
    @Input() get property(): IProperty {
     return this.props;
   }
+  
 
   set property(value: IProperty) {
     if (value) {
       this.props = value;
+      this.checked = value.checked;
     }
   }
+
+  chkLowerCase = (str) => {
+    console.log(str);
+  }
+  
 
   isChecked(event) {
     if ( event.target.checked ) {
       this.props.checked = "true";
-      console.log(this.props.checked);
     }
     else {
       this.props.checked = "false";
-      console.log(this.props.checked);
     }
   }
 
