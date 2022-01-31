@@ -12,7 +12,7 @@ const routes: Routes = [
     component: AppLoginComponent
   },
   {
-    path: "refresh",
+    path: "canvas",
     component: AppComponent
   }
 ];
