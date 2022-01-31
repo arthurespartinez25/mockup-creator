@@ -67,6 +67,7 @@ export class DatepickerDragComponent implements OnInit,IComponent {
     var yyyy = today.getFullYear();
     let date = mm + '-' + dd + '-' + yyyy;
     this.props.value = this.datepipe.transform(date, 'yyyy-MM-dd');
+    this.props.style='position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
   }
   
 
