@@ -632,5 +632,4 @@
 
 <!--<router-outlet></router-outlet> -->
 
-<router-outlet *ngIf="!this.inSession">
-</router-outlet>
+<app-app-login *ngIf="!this.inSession" (loginSession)="loggedIn($event)"></app-app-login>

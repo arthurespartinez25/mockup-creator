@@ -53,6 +53,18 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   readonly CSS_URL = '../app/app.component.css';
   refreshCSS = new BehaviorSubject<boolean>(true);
   cssDocument?: StyleSheet;
+  eto: string;
+  inSession:boolean;
+
+  onNotified($event) {
+    this.eto = $event;
+  }
+  loggedIn($event) {
+    //this.inSession = value;
+    this.inSession = $event;
+    this._router.navigateByUrl('/canvas');
+    console.log(this.inSession);
+  }
 
   selected: IProperty = {
     key: '',
@@ -105,14 +117,13 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     private http: HttpClient,
     public _router: Router,
     public _location: Location,
-    public sanitizer: DomSanitizer
+    public sanitizer: DomSanitizer,
   ) {
     this.changeref = changeDetectorRef;
   }
   delete: boolean;
   cssBody: SafeStyle;
   canvasBG: string;
-  inSession:boolean;
   canvasLeft = 0;
   canvasTop = 0;
   canvasW = 0;
@@ -137,10 +148,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   yDistance: any = 0;
 
   
-  loggedIn(value: any) {
-    //this.inSession = value;
-    console.log("eto value natin lods: " +value);
-  }
+  
 
 
   addComponent(component: string) {

@@ -10,15 +10,16 @@ import { Output, EventEmitter } from '@angular/core';
 export class AppLoginComponent implements OnInit {
   loginUsername:string;
   loginPassword:string;
-  public inSession:boolean;
+  inSession:boolean;
+  message="tanga";
   
-  @Output() loggingSession = new EventEmitter<any>();
+  @Output() notify: EventEmitter<string> = new EventEmitter<string>();
+  @Output() loginSession: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() { }
 
-  loggingIn(value: any) {
-    this.loggingSession.emit(value);
-    console.log("umabot ako dito, eto value ko:" + value);
+  onClicked() {
+    this.notify.emit(this.message);
   }
 
   ngOnInit(): void {
@@ -30,7 +31,8 @@ export class AppLoginComponent implements OnInit {
     this.loginPassword = 'sample';
     if(uname==this.loginUsername&&pword==this.loginPassword){
       this.inSession = true;
-      this.loggingIn(this.inSession);
+      this.loginSession.emit(this.inSession)
+      console.log(this.inSession);
       console.log("Correct Username and Password");
     }
     else{
