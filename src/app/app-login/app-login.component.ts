@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-app-login',
@@ -10,27 +12,39 @@ import { Output, EventEmitter } from '@angular/core';
 export class AppLoginComponent implements OnInit {
   loginUsername:string;
   loginPassword:string;
-  public inSession:boolean;
+  sessionID:string;
   
-  @Output() loggingSession = new EventEmitter<any>();
+  @Output() loggingSession:EventEmitter<any> = new EventEmitter<any>();
 
-  constructor() { }
+  constructor(
+    private loginCookie:CookieService,
+    public _router: Router) { }
 
-  loggingIn(value: any) {
+  setLoginCookies(uname:string,pword:string){
+    this.loginCookie.set("username",this.loginUsername);
+    this.loginCookie.set("password",this.loginPassword);
+    this.loginCookie.set("sessionID",this.sessionID);
+    console.log(uname + " and " + pword);
+  }
+
+  loggingIn(value: string) {
     this.loggingSession.emit(value);
     console.log("umabot ako dito, eto value ko:" + value);
   }
 
   ngOnInit(): void {
-    this.inSession = false;
   }
 
   login(uname:string, pword: string){
     this.loginUsername = 'sample';
     this.loginPassword = 'sample';
     if(uname==this.loginUsername&&pword==this.loginPassword){
-      this.inSession = true;
-      this.loggingIn(this.inSession);
+      this.sessionID = "12345";
+      this.setLoginCookies(uname,pword);
+      this.loggingIn(this.sessionID);
+      window.location.reload();
+      this._router.navigateByUrl("/canvas");
+
       console.log("Correct Username and Password");
     }
     else{

@@ -9,7 +9,7 @@
 
 <!-- Toolbar -->
 <!-- <app-navbar></app-navbar> -->
-<div *ngIf="this.inSession" class="content" role="main" (loggingSession)="loggedIn($event)">
+<div *ngIf="this.inSession" class="content" role="main">
   <!-- PALETTE SECTION -->
 
   <div class="palette-div">
@@ -142,7 +142,7 @@
                 (click)="addComponent('dropdown')"
                 cdkDrag
                 (cdkDragEnded)="onDragEndedAddComponent($event, 'dropdown')"
-                [disabled]="isDisabled"
+                [disabled]="isDisabled"ms
               >
                 Dropdown
               </button>
@@ -630,7 +630,5 @@
 <!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
-<!--<router-outlet></router-outlet> -->
-
-<router-outlet *ngIf="!this.inSession">
-</router-outlet>
+<router-outlet *ngIf="!inSession"></router-outlet>
+<!-- <app-app-login></app-app-login> -->

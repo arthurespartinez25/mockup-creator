@@ -37,6 +37,7 @@ import { BehaviorSubject } from 'rxjs';
 import { TableDragComponent } from './components/tableDrag/tableDrag.component';
 import { YoutubeDragComponent } from './components/youtubeDrag/youtubeDrag.component';
 import { AppLoginComponent } from './app-login/app-login.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-root',
@@ -99,6 +100,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   changeref: ChangeDetectorRef;
   constructor(
+    private loginCookie:CookieService,
     private renderer: Renderer2,
     private drag: DragDrop,
     changeDetectorRef: ChangeDetectorRef,
@@ -112,11 +114,12 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   delete: boolean;
   cssBody: SafeStyle;
   canvasBG: string;
-  inSession:boolean;
   canvasLeft = 0;
   canvasTop = 0;
   canvasW = 0;
   whatComponent = 'none';
+  sessionID = this.loginCookie.get("sessionID");
+  inSession: boolean = this.sessionID == "12345";
 
   ngOnInit(): void {
     /* throw new Error('Method not implemented.'); */
@@ -137,9 +140,8 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   yDistance: any = 0;
 
   
-  loggedIn(value: any) {
-    //this.inSession = value;
-    console.log("eto value natin lods: " +value);
+  loggedIn() {
+    console.log("eto value natin lods: " + this.sessionID);
   }
 
 
