@@ -35,6 +35,7 @@ export class YoutubeDragComponent implements OnInit, IComponent {
       url : '',
       draggable: true,
       selected : false,
+      hidden: false,
       mouseDragPositionX:0,
       mouseDragPositionY:0,
     };
@@ -63,14 +64,14 @@ export class YoutubeDragComponent implements OnInit, IComponent {
       this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
       this.props.mouseDragPositionX = this.percentageX;
       this.props.mouseDragPositionY = this.percentageY;
-      this.props.value = 'https://www.youtube.com/embed/qY7rpWA-D4w?autoplay=1';
+      this.props.value = 'https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/2018136/original/youtube-embed.png?1353018191';
       this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value);
       this.props.style =
         'position:absolute;left:' +
         this.percentageX +
         '%;top:' +
         this.percentageY +
-        '%;';
+        '%;height:316px;width:686px;';
     
   }
 

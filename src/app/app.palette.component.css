@@ -1,7 +1,7 @@
 .palette-div {
   height: 100vh;
   max-width: 600px;
-  min-width: 150px;
+  min-width: 160px;
   width: 15%;
 }
 
@@ -61,4 +61,39 @@
   pointer-events:auto;
   display: inline-block;
   opacity: 1;
+}
+
+.component-list{
+  height: 30px;
+  width: 100%;
+  color: white;
+  background-color: #16324f;
+  outline: none;
+  border: white solid .5px;
+  text-align: left;
+}
+
+.component-items{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 3px;
+  margin-left: 3px;
+}
+
+.component-button-hide{
+  display: block;
+  float: right;
+  min-height: 20px;
+  min-width: 20px;
+  background-color: #67717a;
+  border: #16324f solid 2px;
+}
+
+.component-button-remove{
+  display: block;
+  float: right;
+  min-height: 20px;
+  min-width: 20px;
+  background-color: rgb(214, 87, 87);
+  border: #16324f solid 2px;
 }

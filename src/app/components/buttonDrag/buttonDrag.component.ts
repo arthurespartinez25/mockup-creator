@@ -45,6 +45,7 @@ export class ButtonDragComponent implements IComponent {
     type: 'button',
     draggable: true,
     selected : false,
+    hidden:false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
   };

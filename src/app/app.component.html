@@ -12,7 +12,7 @@
 <div *ngIf="this.inSession" class="content" role="main">
   <!-- PALETTE SECTION -->
 
-  <div class="palette-div">
+  <div class="palette-div" style="overflow: auto;">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
         <button
@@ -496,7 +496,7 @@
       <div id="canvasBody">
         <app-wrapper
           *ngFor="let component of componentList; let i = index"
-          class="wrapper"
+          class="wrapper componentHover"
           (click)="clickHandler(component)"
           cdkDrag
           (cdkDragEnded)="onDragEnd(component)"

@@ -21,6 +21,7 @@ export class InputDragComponent implements OnInit, IComponent {
     type: 'text',
     draggable: true,
     selected : false,
+    hidden: false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
   };

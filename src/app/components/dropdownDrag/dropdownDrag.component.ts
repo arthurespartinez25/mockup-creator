@@ -29,6 +29,7 @@ export class DropdownDragComponent implements OnInit, IComponent {
     linksArray: [],
     draggable: true,
     selected : false,
+    hidden: false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
   };
@@ -142,9 +143,17 @@ export class DropdownDragComponent implements OnInit, IComponent {
       '<select class="' + this.props.class + '" id="' + this.props.id + '" style="' + this.props.style + '">';
 
         for (var i = 0; i < this.props.linksArray.length; i++) {
-          tmpHtmlCode += '\n' + '<option value="' + this.props.linksArray[i] + '">'
-          tmpHtmlCode += '\n' + this.props.linksArray[i];
-          tmpHtmlCode += '\n' + '</option>';
+          if(this.props.linksArray[i] == this.props.value) {
+            tmpHtmlCode += '\n' + '<option value="' + this.props.linksArray[i] + '" selected>'
+            tmpHtmlCode += '\n' + this.props.linksArray[i];
+            tmpHtmlCode += '\n' + '</option>';
+          }
+          else{
+            tmpHtmlCode += '\n' + '<option value="' + this.props.linksArray[i] + '">'
+            tmpHtmlCode += '\n' + this.props.linksArray[i];
+            tmpHtmlCode += '\n' + '</option>';
+          }
+          
         }
       tmpHtmlCode += '\n' + '</select>';
 
