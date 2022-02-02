@@ -1,5 +1,7 @@
 "use strict";
 
+var Users = require('./server/routes/users');
+const dboperations = require('./server/routes/dboperations');
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -18,3 +20,8 @@ app.listen(PORT, () => {
 });
 
 app.use(router);
+
+
+dboperations.getUsers().then(result => {
+  console.log(result);
+})
