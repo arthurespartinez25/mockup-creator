@@ -17,5 +17,7 @@ export class AppRegisterComponent implements OnInit {
       return;
     }
   }
-  login(){}
+  login(){
+    
+  }
 }

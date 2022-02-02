@@ -53,7 +53,7 @@ export class AppLoginComponent implements OnInit {
   }
 
   register(){
-    
+    this._router.navigateByUrl("/register");
   }
 
 }

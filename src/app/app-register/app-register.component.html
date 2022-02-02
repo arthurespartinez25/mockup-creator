@@ -18,6 +18,6 @@
         <br>
         <br>
         <button (click)="register(username.value, password.value, cpassword.value, email.value, firstName.value, lastName.value)">Register     </button>
-        <button (click)="login()">Back to Log-in</button>
+        <button (click)="login()" [routerLink]="['/login']">Back to Log-in</button>
     </div>
 </div>
