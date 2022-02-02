@@ -52,4 +52,8 @@ export class AppLoginComponent implements OnInit {
     }
   }
 
+  register(){
+    
+  }
+
 }
