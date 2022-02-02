@@ -1,23 +1,35 @@
+<nav id="navbar">
+    
+</nav>
+
 <div class="center">
     <div>
         <p>
-            Register Page
+            Registration Page
         </p>
         <br>
-        <input id="username" placeholder="Username" type="text" #username>
+        
+        <label>User Name:</label> <br>
+            <input id="username" placeholder="Username" type="text" #username>
         <br>
-        <input id="password" placeholder="Password" type="string" #password>
+        <label for="password">Password: </label><br>
+            <input type="password" placeholder="Password" id="password" name="password" #password>
         <br>
-        <input id="password" placeholder="Confirm password" type="string" #cpassword>
+        <label for="password">Confirm Password: </label><br>
+            <input type="password" placeholder="Confirm Password" id="password" name="password" #cpassword>
         <br>
-        <input id="password" placeholder="Email" type="string" #email>
+        <label>E-mail Address:</label> <br>
+            <input id="password" placeholder="Email" type="string" #email>
         <br>
-        <input id="password" placeholder="First Name" type="string" #firstName>
+        <label>First Name:</label> <br>
+            <input id="password" placeholder="First Name" type="string" #firstName>
         <br>
-        <input id="password" placeholder="Last Name" type="string" #lastName>
+        <label>Last Name:</label> <br>
+            <input id="password" placeholder="Last Name" type="string" #lastName>
         <br>
         <br>
-        <button (click)="register(username.value, password.value, cpassword.value, email.value, firstName.value, lastName.value)">Register     </button>
+    
+        <button (click)="register(username.value, password.value, cpassword.value, email.value, firstName.value, lastName.value)">Register</button>
         <button (click)="login()" [routerLink]="['/login']">Back to Log-in</button>
     </div>
 </div>
