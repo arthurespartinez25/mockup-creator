@@ -1,14 +1,16 @@
 const config = {
-    user : 'dbo',
-    password : 'dbo',
+    user : 'user',
+    password : 'user',
     server : 'localhost',
     database : 'testUsers',
+    type: "default",
     options : {
         trustedconnection : true,
+        trustServerCertificate: true,
         enableArithAort : true,
         instancename : 'SQLEXPRESS'
     },
-    port : process.env.PORT || 8000
+    port : 1433
 }
 
 module.exports = config;

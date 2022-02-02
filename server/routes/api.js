@@ -1,7 +1,12 @@
 const router = require("express").Router();
 
+var Users = require('./users');
+const dboperations = require('./dboperations');
 
 router.post("/login", (req, res) => {
+  dboperations.getUsers().then(result => {
+    console.log("Here's johnny " + result);
+  })
   return res.status(200).json({ message: "call to login" });
 });
 

@@ -4,7 +4,7 @@ const sql = require('mssql');
 async function getUsers(){
     try{
         let pool = await sql.connect(config);
-        let users = await pool.request().query("SELECT * from testUsers");
+        let users = await pool.request().query("SELECT * from Users");
         return users.recordsets;
     }
     catch (error) {
