@@ -10,7 +10,7 @@ import { DatePipe } from '@angular/common'
   //templateUrl: './datepicker.component.html',
   styleUrls: ['./datepickerDrag.component.css'],
   template: `<input cdkDrag cdkDragBoundary="#canvas" [type]="props.type" [id]="props.id" 
-  [value]="props.value" [class]="props.class" [style]="props.style" 
+  [value]="props.value" [class]="props.class" [style]="props.style" [class]="props.class"
   (change)="dateValue($event)"
   (cdkDragEnded)="onDragEnded($event)" 
   [ngStyle]="{
