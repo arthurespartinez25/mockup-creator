@@ -42,7 +42,7 @@ export class AppLoginComponent implements OnInit {
       this.sessionID = "12345";
       this.setLoginCookies(uname,pword);
       this.loggingIn(this.sessionID);
-      window.location.reload();
+      
       this._router.navigateByUrl("/canvas");
 
       console.log("Correct Username and Password");
@@ -50,6 +50,10 @@ export class AppLoginComponent implements OnInit {
     else{
       console.log("Wrong Username and Password");
     }
+  }
+
+  register(){
+    this._router.navigateByUrl("/register");
   }
 
 }

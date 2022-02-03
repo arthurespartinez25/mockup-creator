@@ -127,7 +127,12 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   sessionID = this.loginCookie.get("sessionID");
   inSession: boolean = this.sessionID == "12345";
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    console.log(this.inSession);
+    if(this.inSession) {
+      this._router.navigateByUrl("/canvas");
+    }
+  }
   ngAfterViewInit(): void {}
 
   canvasLeftX = 0;
@@ -146,6 +151,13 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   
   loggedIn() {
     console.log("eto value natin lods: " + this.sessionID);
+  }
+  logout() {
+    this.loginCookie.deleteAll();
+    this._router.navigate(['/']);
+    setTimeout(() => {
+      window.location.reload();
+    }, 100);
   }
 
 
