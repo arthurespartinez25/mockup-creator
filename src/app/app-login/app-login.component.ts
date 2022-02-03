@@ -13,6 +13,8 @@ export class AppLoginComponent implements OnInit {
   loginUsername:string;
   loginPassword:string;
   sessionID:string;
+  isEmpty:boolean;
+  doesNotExist:boolean;
   
   @Output() loggingSession:EventEmitter<any> = new EventEmitter<any>();
 
@@ -47,8 +49,13 @@ export class AppLoginComponent implements OnInit {
 
       console.log("Correct Username and Password");
     }
+    else if(uname==""||pword==""){
+      this.doesNotExist=false;
+      this.isEmpty=true;
+    }
     else{
-      console.log("Wrong Username and Password");
+      this.isEmpty=false;
+      this.doesNotExist=true;
     }
   }
 

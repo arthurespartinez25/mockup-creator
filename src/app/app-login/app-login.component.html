@@ -1,15 +1,27 @@
-<div class="center">
-    <div>
-        <p>
+<div class="wrapper">
+    <div id="content">
+        <div class="login-header">
             Login
-        </p>
-        <br>
-        <input id="username" placeholder="username" type="text" #uname>
-        <br>
-        <input id="password" placeholder="password" type="string" #pword>
-        <br>
-        <br>
-        <button (click)="login(uname.value, pword.value)">Log-in</button>
-        <button (click)="register()">Register</button>
+        </div>
+        <div class="form-content">
+            <input id="username" placeholder="Username" type="text" #uname required>
+            <input id="password" placeholder="Password" type="string" #pword required>
+            <br>
+            <br>
+            <div *ngIf="isEmpty" role="alert"> 
+                <strong>Empty Input Fields</strong>
+            </div>
+            <div *ngIf="doesNotExist" role="alert"> 
+                <strong>Wrong credentials</strong>
+            </div>
+            <button id="loginButton" (click)="login(uname.value, pword.value)">Log-in</button>
+            <br>
+            <br>
+            
+            <hr>
+            <a (click)="register()" class="dnthave">Don’t have an account? Sign up</a>
+            
+        </div>
+        
     </div>
 </div>

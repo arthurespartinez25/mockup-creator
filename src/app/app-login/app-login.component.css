@@ -1,8 +1,116 @@
-.center{
-    height: 100%;
+.wrapper{
+    min-height: 100%;
     width: 100%;
     display: flex;
     flex-direction:column;
     justify-content: center;
     align-items: center;
 }
+
+#content {
+    width:400px;
+    max-width: 100%;
+    height:420px;
+    border-radius:20px;
+    background-color: #E7E9EB;
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    text-align:center;
+}
+.login-header {
+    
+    border-radius:20px;
+    background-color:#071E22;
+    padding:20px;
+    font-family: 'Source Sans Pro', sans-serif;
+    text-align:center;
+    text-transform: uppercase;
+    color:white;
+    font-size:20px;
+    font-weight:bold;
+}
+.form-content {
+    padding-top:50px;
+}
+
+/* INPUTS */
+#username {
+    width:80%;
+    padding:10px;
+    border-radius:8px;
+    border:1px solid #ccc;
+}
+#password {
+    margin-top:20px;
+    width:80%;
+    padding:10px;
+    border-radius:8px;
+    border:1px solid #ccc;
+}
+/**/
+/* BUTTONS */
+button {
+    margin-top: 30px;
+    padding:10px;
+    width:100px;
+    border-radius:10px;
+    background-color: #071E22;
+    color:white;
+    cursor:pointer;
+    border:none;
+}
+
+#loginButton:hover {
+    background-color: #16324F;
+    transition: all .4s ease;
+    -webkit-transition: all .4s ease;
+}
+a{
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #356daa;
+    text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+  cursor:pointer;
+}
+strong {
+    color:red;
+}
+
+  
+.form-item{
+    position: relative;
+    margin-bottom: 15px
+  }
+  .form-item input{
+    display: block;
+    width: 400px;
+    height: 40px;
+    border: solid 1px #ccc;
+    transition: all .3s ease;
+    padding: 0 15px
+  }
+  .form-item input:focus{
+    border-color: blue
+  }
+  .form-item label{
+    position: absolute;
+    cursor: text;
+    z-index: 2;
+    top: 13px;
+    left: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    background: transparent;
+    padding: 0 10px;
+    color: #999;
+    transition: all .3s ease
+  }
+  .form-item input:focus + label,
+  .form-item input:valid + label{
+    font-size: 11px;
+    top: -5px
+  }
+  .form-item input:focus + label{
+    color: blue
+  }
