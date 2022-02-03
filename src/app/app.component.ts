@@ -305,10 +305,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this._styleStart +
       '\n' +
       this.style +
-<<<<<<< Updated upstream
-      '\n' +
-      'html { zoom: 110%; }'+
-=======
       // '@media (min-width: 800px) and  (max-width: 899px) { html { zoom: 75%; } }'+
       // '@media (min-width: 900px) and  (max-width: 999px) { html { zoom: 80%; } }'+
       // '@media (min-width: 1000px) and  (max-width: 1099px) { html { zoom: 85%; } }'+
@@ -324,7 +320,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       // '@media (min-width: 2000px) and  (max-width: 2099px) { html { zoom: 120%; } }'+
       '@media (min-width: 1366px) and  (max-width: 1919px) { html { zoom: 100%; } }'+
       '@media (min-width: 1920px)  { html { zoom: 150%; } }'+
->>>>>>> Stashed changes
       '\n' +
       this._styleEnd
     );
