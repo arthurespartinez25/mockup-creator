@@ -305,8 +305,26 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this._styleStart +
       '\n' +
       this.style +
+<<<<<<< Updated upstream
       '\n' +
       'html { zoom: 110%; }'+
+=======
+      // '@media (min-width: 800px) and  (max-width: 899px) { html { zoom: 75%; } }'+
+      // '@media (min-width: 900px) and  (max-width: 999px) { html { zoom: 80%; } }'+
+      // '@media (min-width: 1000px) and  (max-width: 1099px) { html { zoom: 85%; } }'+
+      // '@media (min-width: 1100px) and  (max-width: 1199px) { html { zoom: 90%; } }'+
+      // '@media (min-width: 1200px) and  (max-width: 1299px) { html { zoom: 95%; } }'+
+      // '@media (min-width: 1301px) and  (max-width: 1399px) { html { zoom: 100%; } }'+
+      // '@media (min-width: 1400px) and  (max-width: 1499px) { html { zoom: 105%; } }'+
+      // '@media (min-width: 1500px) and  (max-width: 1599px) { html { zoom: 110%; } }'+
+      // '@media (min-width: 1600px) and  (max-width: 1699px) { html { zoom: 110%; } }'+
+      // '@media (min-width: 1700px) and  (max-width: 1799px) { html { zoom: 115%; } }'+
+      // '@media (min-width: 1800px) and  (max-width: 1899px) { html { zoom: 115%; } }'+
+      // '@media (min-width: 1900px) and  (max-width: 1999px) { html { zoom: 120%; } }'+
+      // '@media (min-width: 2000px) and  (max-width: 2099px) { html { zoom: 120%; } }'+
+      '@media (min-width: 1366px) and  (max-width: 1919px) { html { zoom: 100%; } }'+
+      '@media (min-width: 1920px)  { html { zoom: 150%; } }'+
+>>>>>>> Stashed changes
       '\n' +
       this._styleEnd
     );
