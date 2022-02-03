@@ -1,6 +1,6 @@
 const config = {
-    user : 'user',
-    password : 'user',
+    user : 'mockuser',
+    password : 'Awsol12#',
     server : 'localhost',
     database : 'testUsers',
     type: "default",
