@@ -20,7 +20,7 @@ export class ImageDragComponent implements OnInit, IComponent {
   props: IProperty = {
     key: '',
     id: '',
-    value: '',
+    value: 'https://media.istockphoto.com/vectors/stamprsimp2red-vector-id1096052566?k=20&m=1096052566&s=612x612&w=0&h=CPU7LLHBwJm2OKoXCLxqKDzGaR0Xa1WGTQoryfdWQ3g=',
     class: '',
     style: '',
     typeObj: 'imgDrag',
@@ -114,7 +114,7 @@ export class ImageDragComponent implements OnInit, IComponent {
 
       default:
         this.props.style =
-          'position:absolute;left:' +
+          'height:100px;width:100px;position:absolute;left:' +
           this.percentageX +
           '%;top:' +
           this.percentageY +

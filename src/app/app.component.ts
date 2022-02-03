@@ -310,6 +310,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this._styleStart +
       '\n' +
       this.style +
+      'html { zoom: 105%; }'+
       '\n' +
       this._styleEnd
     );
