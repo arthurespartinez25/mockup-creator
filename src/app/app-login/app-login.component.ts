@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { UsersService } from '../service/users.service';
 
 @Component({
   selector: 'app-app-login',
@@ -24,8 +23,7 @@ export class AppLoginComponent implements OnInit {
 
   constructor(
     private loginCookie:CookieService,
-    public _router: Router,
-    private user:UsersService) { 
+    public _router: Router,) { 
       
     }
 
@@ -42,14 +40,11 @@ export class AppLoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user.getData().subscribe((data)=> {
-      console.warn("get api data", data);
-      this.users = data;
-    })
+    
   }
 
   login(uname:string, pword: string){
-    for (var i=0; i < this.users.length; i++) {
+    /* for (var i=0; i < this.users.length; i++) {
       if (this.users[i].id == uname && this.users[i].userId == pword){
         this.loginUsername = this.users[i].id;
         this.loginPassword = this.users[i].userId;
@@ -59,7 +54,9 @@ export class AppLoginComponent implements OnInit {
       else{
         console.log("wala po");
       }
-    }
+    } */
+    this.loginUsername = "sample";
+    this.loginPassword = "sample";
     if(uname==this.loginUsername&&pword==this.loginPassword){
       this.sessionID = "12345";
       this.setLoginCookies(uname,pword);
@@ -78,10 +75,6 @@ export class AppLoginComponent implements OnInit {
       this.isEmpty=false;
       this.doesNotExist=true;
     }
-  }
-  getCredentials() {
-    let uname = this.loginUsername;
-    return uname;
   }
 
   register(){

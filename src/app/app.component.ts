@@ -39,6 +39,8 @@ import { YoutubeDragComponent } from './components/youtubeDrag/youtubeDrag.compo
 import { AppLoginComponent } from './app-login/app-login.component';
 import { CookieService } from 'ngx-cookie-service';
 
+import { UsersService } from './service/users.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -54,6 +56,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   readonly CSS_URL = '../app/app.component.css';
   refreshCSS = new BehaviorSubject<boolean>(true);
   cssDocument?: StyleSheet;
+  users: any;
 
   selected: IProperty = {
     key: '',
@@ -107,7 +110,8 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     private http: HttpClient,
     public _router: Router,
     public _location: Location,
-    public sanitizer: DomSanitizer
+    public sanitizer: DomSanitizer,
+    private user:UsersService
   ) {
     this.changeref = changeDetectorRef;
   }
@@ -125,6 +129,11 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     console.log(this.inSession);
     if(this.inSession) {
       this._router.navigateByUrl("/canvas");
+      //api call
+      this.user.getData().subscribe((data)=> {
+      console.warn("get api data", data);
+      this.users = data;
+    })
     }
   }
   ngAfterViewInit(): void {}
