@@ -322,7 +322,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       '@media (min-width: 1025px) and  (max-width: 1299px) { html { zoom: 100%; } }'+
       '@media (min-width: 1301px) and  (max-width: 1500px) { html { zoom: 100%; } }'+
       '@media (min-width: 1501px) and  (max-width: 1900px) { html { zoom: 135%; } }'+
-      '@media (min-width: 1919px) and (max-width: 2000px) { html { zoom: 100%; } }'+
+      '@media (min-width: 1919px) and (max-width: 2000px) { html { zoom: 150%; } }'+
       '\n' +
       this._styleEnd
     );
