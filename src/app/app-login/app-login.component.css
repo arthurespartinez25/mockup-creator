@@ -46,6 +46,10 @@
     border-radius:8px;
     border:1px solid #ccc;
 }
+input:focus{
+  background-color:#F1F1F1;
+}
+
 /**/
 /* BUTTONS */
 button {
@@ -76,41 +80,3 @@ a:hover {
 strong {
     color:red;
 }
-
-  
-.form-item{
-    position: relative;
-    margin-bottom: 15px
-  }
-  .form-item input{
-    display: block;
-    width: 400px;
-    height: 40px;
-    border: solid 1px #ccc;
-    transition: all .3s ease;
-    padding: 0 15px
-  }
-  .form-item input:focus{
-    border-color: blue
-  }
-  .form-item label{
-    position: absolute;
-    cursor: text;
-    z-index: 2;
-    top: 13px;
-    left: 10px;
-    font-size: 12px;
-    font-weight: bold;
-    background: transparent;
-    padding: 0 10px;
-    color: #999;
-    transition: all .3s ease
-  }
-  .form-item input:focus + label,
-  .form-item input:valid + label{
-    font-size: 11px;
-    top: -5px
-  }
-  .form-item input:focus + label{
-    color: blue
-  }
