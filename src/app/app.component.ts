@@ -318,10 +318,11 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       // '@media (min-width: 1800px) and  (max-width: 1899px) { html { zoom: 115%; } }'+
       // '@media (min-width: 1900px) and  (max-width: 1999px) { html { zoom: 120%; } }'+
       // '@media (min-width: 2000px) and  (max-width: 2099px) { html { zoom: 120%; } }'+
-      '@media (min-width: 100px) and  (max-width: 1024px) { html { zoom: 80%; } }'+
-      '@media (min-width: 1025px) and  (max-width: 1299px) { html { zoom: 95%; } }'+
-      '@media (min-width: 1301px) and  (max-width: 1919px) { html { zoom: 100%; } }'+
-      '@media (min-width: 1920px)  { html { zoom: 150%; } }'+
+      '@media (min-width: 100px) and  (max-width: 1024px) { html { zoom: 100%; } }'+
+      '@media (min-width: 1025px) and  (max-width: 1299px) { html { zoom: 100%; } }'+
+      '@media (min-width: 1301px) and  (max-width: 1500px) { html { zoom: 100%; } }'+
+      '@media (min-width: 1501px) and  (max-width: 1900px) { html { zoom: 135%; } }'+
+      '@media (min-width: 1919px) and (max-width: 2000px) { html { zoom: 100%; } }'+
       '\n' +
       this._styleEnd
     );
