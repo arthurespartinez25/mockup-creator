@@ -20,7 +20,9 @@
             
             <hr>
             <a (click)="register()" class="dnthave">Don’t have an account? Sign up</a>
-            
+            <p *ngFor='let user of users'>
+                {{user.title}}
+             </p>
         </div>
         
     </div>

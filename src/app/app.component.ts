@@ -97,7 +97,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
-
+  
   changeref: ChangeDetectorRef;
   constructor(
     private loginCookie:CookieService,
@@ -141,10 +141,14 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   noOfButton: number = 0;
   xDistance: any = 0;
   yDistance: any = 0;
+  theUsername = "";
 
   
-  loggedIn() {
-    console.log("eto value natin lods: " + this.sessionID);
+  loggedIn($event) {
+    /* console.log("eto value natin lods: " + this.sessionID); */
+    this.theUsername = $event;
+    console.log(this.theUsername as string);
+    console.log("nakapagpasa na po");
   }
   logout() {
     this.loginCookie.deleteAll();
