@@ -80,7 +80,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>';
   private _styleBody4 =
     '<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>';
-  private _htmlStart = '<!doctype html>\n<html lang="en">\n<meta charset="utf-8">';
+  private _htmlStart = '<!doctype html>\n<html lang="en">';
   private _htmlEnd = '</html>';
   private _bootstrapLink =
     '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">';
@@ -319,6 +319,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       // '@media (min-width: 1900px) and  (max-width: 1999px) { html { zoom: 120%; } }'+
       // '@media (min-width: 2000px) and  (max-width: 2099px) { html { zoom: 120%; } }'+
       '@media (min-width: 100px) and  (max-width: 1024px) { html { zoom: 80%; } }'+
+      '@media (min-width: 1025px) and  (max-width: 1299px) { html { zoom: 90%; } }'+
       '@media (min-width: 1301px) and  (max-width: 1919px) { html { zoom: 100%; } }'+
       '@media (min-width: 1920px)  { html { zoom: 150%; } }'+
       '\n' +
