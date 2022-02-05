@@ -9,7 +9,12 @@ export class UsersService {
   constructor(private http:HttpClient) { }
 
   getData() {
-    let url="https://jsonplaceholder.typicode.com/posts";
+    let url="http://localhost:8000";
     return this.http.get(url);
+  }
+
+  postData(datas:any) {
+    let url="http://localhost:8000/register";
+    return this.http.post(url, datas);
   }
 }

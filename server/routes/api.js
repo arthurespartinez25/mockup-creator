@@ -10,7 +10,12 @@ const dboperations = require('./dboperations');
 
 /****************************/
 
-
+router.route('').get((request, response)=> {
+  dboperations.getUsers().then(result => {
+     // console.log(result);
+     response.json(result[0])
+  })
+})
 router.post("/login", (req, res) => {
   dboperations.getUsers().then(result => {
     console.log("PersonID: " + result[0][0].PersonID);

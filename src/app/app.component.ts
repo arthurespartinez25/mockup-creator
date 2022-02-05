@@ -136,10 +136,10 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     if(this.inSession) {
       this._router.navigateByUrl("/canvas");
       //api call
-      this.user.getData().subscribe((data)=> {
-      console.warn("get api data", data);
-      this.users = data;
-    })
+      /* this.user.getData().subscribe((data)=> {
+        console.warn("get api data", data);
+        this.users = data;
+      }) */
     }
   }
   ngAfterViewInit(): void {}
