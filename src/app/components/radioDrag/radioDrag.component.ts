@@ -45,22 +45,20 @@ export class RadioDragComponent implements OnInit,IComponent {
     this.canvasPositionTop = this.canvasPositionY;
     this.mousePositionLeft = this.mousePositionX2;
     this.mousePositionTop = this.mousePositionY2;
-    this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
-    this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
+    this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft));
+    this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop));
     this.props.mouseDragPositionX = this.percentageX;
     this.props.mouseDragPositionY = this.percentageY;
-    this.props.style='text-decoration: none;position:sticky;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
+    this.props.style='text-decoration: none;position:sticky;left:'+this.percentageX+'px;top:'+this.percentageY+'px;';
    
   }
   
 
   onDragEnded($event: CdkDragEnd) {
     this.props.mouseDragPositionX =
-    (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
-    * 100;
+    (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft));
     this.props.mouseDragPositionY =
-    (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
-    * 100;
+    (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop));
   }
 
   constructor(canvas: ElementRef) {

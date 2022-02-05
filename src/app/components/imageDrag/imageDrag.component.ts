@@ -49,8 +49,8 @@ export class ImageDragComponent implements OnInit, IComponent {
     this.canvasPositionTop = this.canvasPositionY;
     this.mousePositionLeft = this.mousePositionX2;
     this.mousePositionTop = this.mousePositionY2;
-    this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
-    this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
+    this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft));
+    this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop));
     this.props.mouseDragPositionX = this.percentageX;
     this.props.mouseDragPositionY = this.percentageY;
 
@@ -72,9 +72,9 @@ export class ImageDragComponent implements OnInit, IComponent {
         border-radius: 5%;`
         +'position:absolute;left:' +
         this.percentageX +
-        '%;top:' +
+        'px;top:' +
         this.percentageY
-        +'%;';
+        +'px;';
         this.props.value = /* `https://images-cdn.9gag.com/photo/arVBvwX_700b.jpg` */ `https://media.discordapp.net/attachments/699657972611153982/932194877024907284/gourmet-burger.png`;
         break;
       case 'HPImage2':
@@ -83,9 +83,9 @@ export class ImageDragComponent implements OnInit, IComponent {
         border-radius: 5%;`
         +'position:absolute;left:' +
         this.percentageX +
-        '%;top:' +
+        'px;top:' +
         this.percentageY
-        +'%;';
+        +'px;';
         this.props.value = /* `https://i.pinimg.com/474x/50/8e/4e/508e4e9d7380526dff7e7346f9c5d013.jpg` */ `https://st4.depositphotos.com/8522652/i/600/depositphotos_281396182-stock-photo-karaage-japanese-fried-chicken-with.jpg`;
         break;
       case 'HPImage3':
@@ -94,9 +94,9 @@ export class ImageDragComponent implements OnInit, IComponent {
         border-radius: 5%;`
         +'position:absolute;left:' +
         this.percentageX +
-        '%;top:' +
+        'px;top:' +
         this.percentageY
-        +'%;';
+        +'px;';
         this.props.value = /* `https://external-preview.redd.it/mWEhfBkJ-YMbQAQs5oIYJDWA8IpEXa8DjGO6gk1APNQ.jpg?width=640&crop=smart&auto=webp&s=acb8ce5ac8a5fe870af5a1613b34fb6607e996a2` */ `https://cdn.shopify.com/s/files/1/0353/5621/articles/JAPANESERECIPES6343.jpg?v=1612904909`;
         break;
       case 'HPImage4':
@@ -105,9 +105,9 @@ export class ImageDragComponent implements OnInit, IComponent {
         border-radius: 5%;`
         +'position:absolute;left:' +
         this.percentageX +
-        '%;top:' +
+        'px;top:' +
         this.percentageY
-        +'%;';
+        +'px;';
         this.props.value = `https://www.cookingclassy.com/wp-content/uploads/2019/07/steak-marinade-12-768x1152.jpg`;
         break;
 
@@ -117,20 +117,18 @@ export class ImageDragComponent implements OnInit, IComponent {
         this.props.style =
           'max-width: 600px;height: 200px;position:absolute;left:' +
           this.percentageX +
-          '%;top:' +
+          'px;top:' +
           this.percentageY +
-          '%;';
+          'px;';
         break;
     }
   }
 
   onDragEnded($event: CdkDragEnd) {
     this.props.mouseDragPositionX =
-    (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
-    * 100;
+    (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft));
     this.props.mouseDragPositionY =
-    (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
-    * 100;
+    (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop));
   }
 
   constructor(canvas: ElementRef) {

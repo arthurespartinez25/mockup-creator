@@ -59,8 +59,8 @@ export class YoutubeDragComponent implements OnInit, IComponent {
       this.canvasPositionTop = this.canvasPositionY;
       this.mousePositionLeft = this.mousePositionX2;
       this.mousePositionTop = this.mousePositionY2;
-      this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
-      this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
+      this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft));
+      this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop));
       this.props.mouseDragPositionX = this.percentageX;
       this.props.mouseDragPositionY = this.percentageY;
       this.props.value = 'https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/2018136/original/youtube-embed.png?1353018191';
@@ -68,19 +68,17 @@ export class YoutubeDragComponent implements OnInit, IComponent {
       this.props.style =
         'position:absolute;left:' +
         this.percentageX +
-        '%;top:' +
+        'px;top:' +
         this.percentageY +
-        '%;height:316px;width:686px;';
+        'px;height:316px;width:686px;';
     
   }
 
   onDragEnded($event: CdkDragEnd) {
     this.props.mouseDragPositionX =
-    (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
-    * 100;
+    (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft));
     this.props.mouseDragPositionY =
-    (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
-    * 100;
+    (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop));
   }
 
     

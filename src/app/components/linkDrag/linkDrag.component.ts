@@ -50,8 +50,8 @@ export class LinkDragComponent implements OnInit, IComponent {
     this.canvasPositionTop = this.canvasPositionY;
     this.mousePositionLeft = this.mousePositionX2;
     this.mousePositionTop = this.mousePositionY2;
-    this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
-    this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
+    this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft));
+    this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop));
     this.props.mouseDragPositionX = this.percentageX;
     this.props.mouseDragPositionY = this.percentageY;
     switch (this.whatComponent2) {
@@ -61,7 +61,7 @@ export class LinkDragComponent implements OnInit, IComponent {
         font-size: 15px;
         text-decoration: none;
         letter-spacing: 0.1em;
-        position: sticky; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
+        position: sticky; left:`+this.percentageX+`px; top:`+this.percentageY+`px;`;
         this.props.value = `Branches`;
         break;
       case 'HPLink2':
@@ -70,7 +70,7 @@ export class LinkDragComponent implements OnInit, IComponent {
         font-size: 15px;
         text-decoration: none;
         letter-spacing: 0.1em;
-        position: sticky; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
+        position: sticky; left:`+this.percentageX+`px; top:`+this.percentageY+`px;`;
         this.props.value = `Events`;
         break;
       case 'HPLink3':
@@ -79,7 +79,7 @@ export class LinkDragComponent implements OnInit, IComponent {
         font-size: 15px;
         text-decoration: none;
         letter-spacing: 0.1em;
-        position: sticky; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
+        position: sticky; left:`+this.percentageX+`px; top:`+this.percentageY+`px;`;
         this.props.value = `Contact`;
         break;
       case 'HPLink4':
@@ -88,7 +88,7 @@ export class LinkDragComponent implements OnInit, IComponent {
         font-size: 12px;
         letter-spacing: 0.1em;
         text-decoration: none;
-        position: sticky; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
+        position: sticky; left:`+this.percentageX+`px; top:`+this.percentageY+`px;`;
         this.props.value = `THEMED MENU`;
         break;
       case 'HPLink5':
@@ -97,7 +97,7 @@ export class LinkDragComponent implements OnInit, IComponent {
         font-size: 12px;
         letter-spacing: 0.1em;
         text-decoration: none;
-        position: sticky; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
+        position: sticky; left:`+this.percentageX+`px; top:`+this.percentageY+`px;`;
         this.props.value = `Dec. 31 - Feb. 20`;
         break;
       case 'HPLink6':
@@ -106,7 +106,7 @@ export class LinkDragComponent implements OnInit, IComponent {
         font-size: 12px;
         letter-spacing: 0.1em;
         text-decoration: none;
-        position: sticky; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
+        position: sticky; left:`+this.percentageX+`px; top:`+this.percentageY+`px;`;
         this.props.value = `TIME LIMITED KAARAGE`;
         break;
       case 'HPLink7':
@@ -114,7 +114,7 @@ export class LinkDragComponent implements OnInit, IComponent {
         font-family: Georgia,  serif;
         font-size: 15px;
         text-decoration: none;
-        position: sticky; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
+        position: sticky; left:`+this.percentageX+`px; top:`+this.percentageY+`px;`;
         this.props.value = `Our Story`;
         break;
       case 'HPLink8':
@@ -122,7 +122,7 @@ export class LinkDragComponent implements OnInit, IComponent {
         font-family: Georgia,  serif;
         font-size: 15px;
         text-decoration: none;
-        position: sticky; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
+        position: sticky; left:`+this.percentageX+`px; top:`+this.percentageY+`px;`;
         this.props.value = `Opportunities`;
         break;
       case 'HPLink9':
@@ -130,7 +130,7 @@ export class LinkDragComponent implements OnInit, IComponent {
         font-family: Georgia,  serif;
         font-size: 15px;
         text-decoration: none;
-        position: sticky; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
+        position: sticky; left:`+this.percentageX+`px; top:`+this.percentageY+`px;`;
         this.props.value = `Careers`;
         break;
 
@@ -138,20 +138,18 @@ export class LinkDragComponent implements OnInit, IComponent {
         this.props.style =
           'text-decoration: none;position:sticky;left:' +
           this.percentageX +
-          '%;top:' +
+          'px;top:' +
           this.percentageY +
-          '%;';
+          'px;';
         break;
     }
   }
 
   onDragEnded($event: CdkDragEnd) {
     this.props.mouseDragPositionX =
-    (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
-    * 100;
+    (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft));
     this.props.mouseDragPositionY =
-    (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
-    * 100;
+    (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop));
   }
 
   constructor(canvas: ElementRef) {

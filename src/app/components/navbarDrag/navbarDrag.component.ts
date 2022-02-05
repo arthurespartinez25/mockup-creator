@@ -55,8 +55,8 @@ export class NavbarDragComponent implements OnInit, IComponent {
     this.canvasPositionTop = this.canvasPositionY;
     this.mousePositionLeft = this.mousePositionX2;
     this.mousePositionTop = this.mousePositionY2;
-    this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
-    this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
+    this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft));
+    this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop));
     this.props.mouseDragPositionX = this.percentageX;
     this.props.mouseDragPositionY = this.percentageY;
     if (this.percentageX < 0){
@@ -70,9 +70,9 @@ export class NavbarDragComponent implements OnInit, IComponent {
       this.props.style =
         'width: 100%; color: white;padding: 10px;background-color: #12355B;font-size: 20px;left:' +
         this.percentageX +
-        '%;top:' +
+        'px;top:' +
         this.percentageY +
-        '%;';
+        'px;';
     } else if (this.whatComponent2 == 'HPNav1') {
       this.props.style = `width: 100%; 
       height: 100px;
@@ -81,7 +81,7 @@ export class NavbarDragComponent implements OnInit, IComponent {
       background-color: #000;
       font-size: 20px;
       border-bottom: 1px solid  white;
-      position:absolute;left:`+this.percentageX+`%;top:`+this.percentageY+`%;`;
+      position:absolute;left:`+this.percentageX+`px;top:`+this.percentageY+`px;`;
       this.props.value = '';
     } else if (this.whatComponent2 == 'HPNav2') {
       this.props.style = `width: 100%; 
@@ -91,7 +91,7 @@ export class NavbarDragComponent implements OnInit, IComponent {
       font-size: 10px;
       border-bottom: 1px dotted  white;
       height:50px;
-      position:absolute;left:`+this.percentageX+`%;top:`+this.percentageY+`%;`;
+      position:absolute;left:`+this.percentageX+`px;top:`+this.percentageY+`px;`;
       this.props.value = `50% OFF  OUR A LA CARTE MENU IN FEBRUARY!`;
     } else if (this.whatComponent2 == 'HPNav3') {
       this.props.style = `width: 100%; 
@@ -101,21 +101,20 @@ export class NavbarDragComponent implements OnInit, IComponent {
       background-color: #000;
       font-size: 20px;
       border-bottom: 1px solid  white;
-      position:absolute;left:`+this.percentageX+`%;top:`+this.percentageY+`%;`;
+      position:absolute;left:`+this.percentageX+`px;top:`+this.percentageY+`px;`;
       this.props.value = ``;
     } else {
       this.props.style =
-        'position:absolute;width:100%;color: white;padding: 10px;background-color: #12355B;font-size: 20px;left:0%;top:' +
+        'position:absolute;width:100%;color: white;padding: 10px;background-color: #12355B;font-size: 20px;left:0px;top:' +
         this.percentageY +
-        '%;';
+        'px;';
     }
   }
 
   onDragEnded($event: CdkDragEnd) {
     this.props.mouseDragPositionX = 0;
     this.props.mouseDragPositionY =
-    (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
-    * 100;
+    (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop));
   }
 
   constructor(canvas: ElementRef) {

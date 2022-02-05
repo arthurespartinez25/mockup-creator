@@ -58,41 +58,39 @@ export class HeaderDragComponent implements OnInit, IComponent {
     this.canvasPositionTop = this.canvasPositionY;
     this.mousePositionLeft = this.mousePositionX2;
     this.mousePositionTop = this.mousePositionY2;
-    this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
-    this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
+    this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft));
+    this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop));
     if (this.whatComponent2 == 'loginHeader') {
       this.props.value = 'Welcome!';
       this.props.style =
         'text-transform:uppercase;color:black;position:absolute;left:' +
         this.percentageX +
-        '%;top:' +
+        'px;top:' +
         this.percentageY +
-        '%;';
+        'px;';
     } else if (this.whatComponent2 == 'searchHeader') {
       this.props.value = 'error message to reflect here';
       this.props.style =
         'color:red;position:absolute;font-size: medium;left:' +
         this.percentageX +
-        '%;top:' +
+        'px;top:' +
         this.percentageY +
-        '%;';
+        'px;';
     } else {
       this.props.style =
         'color:red;position:absolute;left:' +
         this.percentageX +
-        '%;top:' +
+        'px;top:' +
         this.percentageY +
-        '%;';
+        'px;';
     }
   }
 
   onDragEnded($event: CdkDragEnd) {
     this.props.mouseDragPositionX =
-    (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
-    * 100;
+    (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft));
     this.props.mouseDragPositionY =
-    (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
-    * 100;
+    (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop));
   }
 
   constructor(canvas: ElementRef) {

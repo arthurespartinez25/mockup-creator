@@ -49,8 +49,8 @@ export class ParagraphDragComponent implements OnInit, IComponent {
     this.canvasPositionTop = this.canvasPositionY;
     this.mousePositionLeft = this.mousePositionX2;
     this.mousePositionTop = this.mousePositionY2;
-    this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
-    this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
+    this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft));
+    this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop));
     this.props.mouseDragPositionX = this.percentageX;
     this.props.mouseDragPositionY = this.percentageY;
 
@@ -58,9 +58,9 @@ export class ParagraphDragComponent implements OnInit, IComponent {
       case 'HPP1':
         this.props.style = 'width:200px;color: white;font-size: 10px;position:absolute;left:' +
         this.percentageX +
-        '%;top:' +
+        'px;top:' +
         this.percentageY
-        +'%;';
+        +'px;';
         this.props.value = `All customers are required to use face masks and be fully vaccinated.`;
         break;
       case 'HPP2':
@@ -72,9 +72,9 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         text-decoration: none;`
         +'position:absolute;left:' +
         this.percentageX +
-        '%;top:' +
+        'px;top:' +
         this.percentageY
-        +'%;';
+        +'px;';
         this.props.value = `Monday to Friday:`;
         break;
       case 'HPP3':
@@ -86,9 +86,9 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         text-decoration: none;`
         +'position:absolute;left:' +
         this.percentageX +
-        '%;top:' +
+        'px;top:' +
         this.percentageY
-        +'%;';
+        +'px;';
         this.props.value = `Saturday to Sunday:`;
         break;
       case 'HPP4':
@@ -100,9 +100,9 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         text-decoration: none;`
         +'position:absolute;left:' +
         this.percentageX +
-        '%;top:' +
+        'px;top:' +
         this.percentageY
-        +'%;';
+        +'px;';
         this.props.value = `For Reservations:`;
         break;
       case 'HPP5':
@@ -114,9 +114,9 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         text-decoration: none;`
         +'position:absolute;left:' +
         this.percentageX +
-        '%;top:' +
+        'px;top:' +
         this.percentageY
-        +'%;';
+        +'px;';
         this.props.value = `12:00pm - 10:00pm`;
         break;
       case 'HPP6':
@@ -128,9 +128,9 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         text-decoration: none;`
         +'position:absolute;left:' +
         this.percentageX +
-        '%;top:' +
+        'px;top:' +
         this.percentageY
-        +'%;';
+        +'px;';
         this.props.value = `2:00pm to 12:00am`;
         break;
       case 'HPP7':
@@ -142,9 +142,9 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         text-decoration: none;`
         +'position:absolute;left:' +
         this.percentageX +
-        '%;top:' +
+        'px;top:' +
         this.percentageY
-        +'%;';
+        +'px;';
         this.props.value = `341-987-69`;
         break;
       case 'HPP8':
@@ -153,9 +153,9 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         font-size: 10px;`
         +'position:absolute;left:' +
         this.percentageX +
-        '%;top:' +
+        'px;top:' +
         this.percentageY
-        +'%;';
+        +'px;';
         this.props.value = `All customers are required to use face masks and be fully vaccinated.`;
         break;
 
@@ -163,20 +163,18 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         this.props.style =
           'font-size:1rem;color:red;position:absolute;left:' +
           this.percentageX +
-          '%;top:' +
+          'px;top:' +
           this.percentageY +
-          '%;';
+          'px;';
         break;
     }
   }
 
   onDragEnded($event: CdkDragEnd) {
     this.props.mouseDragPositionX =
-    (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
-    * 100;
+    (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft));
     this.props.mouseDragPositionY =
-    (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
-    * 100;
+    (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop));
   }
 
   constructor(canvas: ElementRef) {

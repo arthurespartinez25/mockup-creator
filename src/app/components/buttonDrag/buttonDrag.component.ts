@@ -66,8 +66,8 @@ export class ButtonDragComponent implements IComponent {
     this.canvasPositionTop = this.canvasPositionY;
     this.mousePositionLeft = this.mousePositionX2;
     this.mousePositionTop = this.mousePositionY2;
-    this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
-    this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
+    this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft));
+    this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop));
     this.props.mouseDragPositionX = this.percentageX;
     this.props.mouseDragPositionY = this.percentageY;
     if (this.whatComponent2 == 'LoginButton') {
@@ -75,9 +75,9 @@ export class ButtonDragComponent implements IComponent {
       this.props.style =
         'position:absolute;left:' +
         this.percentageX +
-        '%;top:' +
+        'px;top:' +
         this.percentageY +
-        '%;' +
+        'px;' +
         'width: 20%;max-width: 270px;min-width: 220px; overflow-y: auto;background-color: white;color: black;border-radius: 10px;' +
         'padding: 10px 10px; border: none;font-weight: bolder; font-size: x-large; margin-bottom: 5px;border: solid 1px black; text-transform: uppercase;';
     } else if (this.whatComponent2 == 'SearchButton') {
@@ -85,9 +85,9 @@ export class ButtonDragComponent implements IComponent {
       this.props.style =
         'position:absolute;left:' +
         this.percentageX +
-        '%;top:' +
+        'px;top:' +
         this.percentageY +
-        '%;' +
+        'px;' +
         'background-color: blue;color: white;border-radius: 10px;' +
         'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
     } else if (this.whatComponent2 == 'ClearButton') {
@@ -95,9 +95,9 @@ export class ButtonDragComponent implements IComponent {
       this.props.style =
         'position:absolute;left:' +
         this.percentageX +
-        '%;top:' +
+        'px;top:' +
         this.percentageY +
-        '%;' +
+        'px;' +
         'background-color: gray;color: white;border-radius: 10px;' +
         'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
     } else if (this.whatComponent2 == 'HomeButton') {
@@ -105,9 +105,9 @@ export class ButtonDragComponent implements IComponent {
       this.props.style =
         'position:absolute;left:' +
         this.percentageX +
-        '%;top:' +
+        'px;top:' +
         this.percentageY +
-        '%;' +
+        'px;' +
         'background-color: #ADD8E6;color: white;border-radius: 10px;' +
         'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
     } else if (this.whatComponent2 == 'ProfileButton') {
@@ -115,9 +115,9 @@ export class ButtonDragComponent implements IComponent {
       this.props.style =
         'position:absolute;left:' +
         this.percentageX +
-        '%;top:' +
+        'px;top:' +
         this.percentageY +
-        '%;' +
+        'px;' +
         'background-color: #ADD8E6;color: white;border-radius: 10px;' +
         'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
     } else {
@@ -125,19 +125,17 @@ export class ButtonDragComponent implements IComponent {
       this.props.style =
         'position:absolute;left:' +
         this.percentageX +
-        '%;top:' +
+        'px;top:' +
         this.percentageY +
-        '%;';
+        'px;';
     }
   }
 
   onDragEnded($event: CdkDragEnd) {
     this.props.mouseDragPositionX =
-    (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
-    * 100;
+    (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft));
     this.props.mouseDragPositionY =
-    (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
-    * 100;
+    (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop));
   }
 
   constructor(canvas: ElementRef) {
