@@ -2,7 +2,7 @@ const config = {
     user : 'mockuser',
     password : 'Awsol12#',
     server : 'localhost',
-    database : 'testUsers',
+    database : 'mockupdb',
     type: "default",
     options : {
         trustedconnection : true,
