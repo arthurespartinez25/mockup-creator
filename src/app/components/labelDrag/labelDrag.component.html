@@ -1,3 +1,7 @@
+<div [ngStyle]="{
+  height: '720px',
+  width: '1280px'
+}">
 <label cdkDrag cdkDragBoundary="#canvas" [id]="props.id" [style]="props.style" (cdkDragEnded)="onDragEnded($event)"
 [cdkDragDisabled]="!props.draggable" 
 [ngStyle]="{
@@ -10,3 +14,4 @@
 }" >
     {{ props.value }}
 </label>
+</div>

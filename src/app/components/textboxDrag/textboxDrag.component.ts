@@ -6,7 +6,11 @@ import { IProperty } from 'src/app/interfaces/iproperty';
 @Component({
   selector: 'app-textboxDrag',
   styleUrls: ['./textboxDrag.component.css'],
-  template: `<textarea cdkDrag cdkDragBoundary="#canvas" [id]="props.id" [style]="props.style"
+  template: `<div [ngStyle]="{
+    height: '720px',
+    width: '1280px'
+  }">
+  <textarea cdkDrag cdkDragBoundary="#canvas" [id]="props.id" [style]="props.style"
    [placeholder]="props.placeholder" [rows]="props.rows"
     [cols]="props.cols"
     (cdkDragEnded)="onDragEnded($event)"
@@ -15,7 +19,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
       position: 'sticky',
       left: mousePositionLeft + 'px',
       top: mousePositionTop + 'px'
-  }" >{{props.value}}</textarea>`
+  }" >{{props.value}}</textarea></div>`
 })
 export class TextboxDragComponent implements IComponent {
   canvas: ElementRef;

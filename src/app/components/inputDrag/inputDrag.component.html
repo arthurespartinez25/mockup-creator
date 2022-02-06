@@ -1,3 +1,7 @@
+<div [ngStyle]="{
+  height: '720px',
+  width: '1280px'
+}">
 <input [(ngModel)]="textInput" cdkDrag cdkDragBoundary="#canvas" 
 [cdkDragDisabled]="!props.draggable"
 [value]="props.value" [placeholder]="props.placeholder" [class]="props.class" 
@@ -10,3 +14,4 @@
   'border-style' : props.selected == true ? 'solid': (props.selected == false ? 'none': null),
   'border-width' : props.selected == true ? '1px': (props.selected == false ? '0px': null)
 }" >
+</div>

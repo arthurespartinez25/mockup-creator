@@ -287,8 +287,6 @@
           *ngFor="let component of componentList; let i = index"
           class="wrapper"
           (click)="clickHandler(component)"
-          cdkDrag
-          (cdkDragEnded)="onDragEnd(component)"
           [childComp]="component"
           [canvasRef]="component.canvas"
           [componentList]="componentList"

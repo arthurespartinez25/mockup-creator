@@ -60,7 +60,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         this.percentageX +
         '%;top:' +
         this.percentageY
-        +'%;';
+        +'%;width:fit-content;';
         this.props.value = `All customers are required to use face masks and be fully vaccinated.`;
         break;
       case 'HPP2':
@@ -74,7 +74,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         this.percentageX +
         '%;top:' +
         this.percentageY
-        +'%;';
+        +'%;width:fit-content;';
         this.props.value = `Monday to Friday:`;
         break;
       case 'HPP3':
@@ -88,7 +88,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         this.percentageX +
         '%;top:' +
         this.percentageY
-        +'%;';
+        +'%;width:fit-content;';
         this.props.value = `Saturday to Sunday:`;
         break;
       case 'HPP4':
@@ -102,7 +102,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         this.percentageX +
         '%;top:' +
         this.percentageY
-        +'%;';
+        +'%;width:fit-content;';
         this.props.value = `For Reservations:`;
         break;
       case 'HPP5':
@@ -116,7 +116,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         this.percentageX +
         '%;top:' +
         this.percentageY
-        +'%;';
+        +'%;width:fit-content;';
         this.props.value = `12:00pm - 10:00pm`;
         break;
       case 'HPP6':
@@ -130,7 +130,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         this.percentageX +
         '%;top:' +
         this.percentageY
-        +'%;';
+        +'%;width:fit-content;';
         this.props.value = `2:00pm to 12:00am`;
         break;
       case 'HPP7':
@@ -144,7 +144,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         this.percentageX +
         '%;top:' +
         this.percentageY
-        +'%;';
+        +'%;width:fit-content;';
         this.props.value = `341-987-69`;
         break;
       case 'HPP8':
@@ -155,7 +155,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         this.percentageX +
         '%;top:' +
         this.percentageY
-        +'%;';
+        +'%;width:fit-content;';
         this.props.value = `All customers are required to use face masks and be fully vaccinated.`;
         break;
 
@@ -165,7 +165,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
           this.percentageX +
           '%;top:' +
           this.percentageY +
-          '%;';
+          '%;width:fit-content;';
         break;
     }
   }

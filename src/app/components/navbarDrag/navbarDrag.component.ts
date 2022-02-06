@@ -112,7 +112,8 @@ export class NavbarDragComponent implements OnInit, IComponent {
   }
 
   onDragEnded($event: CdkDragEnd) {
-    this.props.mouseDragPositionX = 0;
+    this.props.mouseDragPositionX = (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
+    * 100;
     this.props.mouseDragPositionY =
     (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
     * 100;

@@ -1,3 +1,7 @@
+<div [ngStyle]="{
+  height: '720px',
+  width: '1280px'
+}">
 <img cdkDrag cdkDragBoundary="#canvas" [class]="props.class" [id]="props.id" 
 [cdkDragDisabled]="!props.draggable" 
 [style]="props.style" src= "{{props.value}}"
@@ -10,4 +14,5 @@
   'border-style' : props.selected == true ? 'solid': (props.selected == false ? 'none': null),
   'border-width' : props.selected == true ? '1px': (props.selected == false ? '0px': null)
 }" > 
+</div>
     

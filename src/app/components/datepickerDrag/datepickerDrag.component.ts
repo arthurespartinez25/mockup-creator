@@ -9,7 +9,11 @@ import { DatePipe } from '@angular/common'
   selector: 'app-datepickerDrag',
   //templateUrl: './datepicker.component.html',
   styleUrls: ['./datepickerDrag.component.css'],
-  template: `<input cdkDrag cdkDragBoundary="#canvas" [type]="props.type" [id]="props.id" 
+  template: `<div [ngStyle]="{
+    height: '720px',
+    width: '1280px'
+  }">
+  <input cdkDrag cdkDragBoundary="#canvas" [type]="props.type" [id]="props.id" 
   [value]="props.value" [class]="props.class" [style]="props.style" 
   (change)="dateValue($event)"
   (cdkDragEnded)="onDragEnded($event)" 
@@ -20,7 +24,7 @@ import { DatePipe } from '@angular/common'
     'border-color' : props.selected == true ? 'red': (props.selected == false ? 'none': null),
     'border-style' : props.selected == true ? 'solid': (props.selected == false ? 'none': null),
     'border-width' : props.selected == true ? '1px': (props.selected == false ? '0px': null)
-  }" >`
+  }" ></div>`
 })
 export class DatepickerDragComponent implements OnInit,IComponent {
   canvas: ElementRef;

@@ -136,7 +136,7 @@ export class PropertyComponent implements OnInit {
     let regexPosition = /position(.+?);/;
     let regexPosition2 = /top(.+?);/;
     let regexPosition3 = /left(.+?);/;
-    let position = 'position:sticky;';
+    let position = 'position:static;';
     let position2 = this.props.style.match(regexPosition2);
     let position3 = this.props.style.match(regexPosition3);
     this.props.style = event.target.value+position+position2![0]+position3![0];
