@@ -38,7 +38,6 @@ export class AppLoginComponent implements OnInit {
 
   loggingIn(value: string) {
     this.loggingSession.emit(value);
-    console.log("umabot ako dito, eto value ko:" + value);
   }
 
   ngOnInit() {

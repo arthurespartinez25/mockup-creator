@@ -12,11 +12,37 @@ export class AppRegisterComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  users: any;
+  userExists: boolean;
+
   register(userid, username, password, cpassword, email, firstName, lastName) {
+    
+
     if(password != cpassword){
       alert("Passwords do not match");
       return;
     }
+
+    this.service.getData().subscribe((data)=> {
+      console.warn("get api data", data);
+      this.users = data;
+    })
+    for (var i=0; i < this.users.length; i++) {
+      if (this.users[i].UserID == userid){
+        alert("UserID already Exist");
+        return;
+      }
+      if (this.users[i].UserName == username){
+        alert("Username already taken");
+        return;
+      }
+      if (this.users[i].Email == email){
+        alert("Email already registered");
+        return;
+      }
+    }
+
     var val = { 
       userID:userid,
       username:username,

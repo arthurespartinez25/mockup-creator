@@ -35,10 +35,17 @@ router.post("/register", (req, res) => {
   //console.log(req.body);
   //console.log(`${userID}, ${username}, ${password}, ${fname}, ${lname}, ${email}`);
   const add = dboperations.insertUser(userID, username, password, fname, lname, email); 
-  console.log(add); // Promise { <pending> }
+  //console.log(add); // Promise { <pending> }
   add.then(function(result) {
     //console.log(result) // "Some User token"
-    return res.status(200).json({ message: "This is the add result: " + result });
+    try{
+      console.log(result);
+      return res.status(200).json({ Message: "This is the add result: " + result });
+    }
+    catch(error){
+      console.log(error);
+      return res.status(500).json({ Error: error });
+    }
   });
   /* if (add === error){
     console.log(error);
