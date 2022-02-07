@@ -82,7 +82,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>';
   private _styleBody4 =
     '<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>';
-  private _htmlStart = '<!doctype html>\n<html lang="en">';
+  private _htmlStart = '<!doctype html>\n<html lang="en">\n<meta charset="utf-8">';
   private _htmlEnd = '</html>';
   private _bootstrapLink =
     '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">';
@@ -310,6 +310,31 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this._styleStart +
       '\n' +
       this.style +
+      // '@media (min-width: 800px) and  (max-width: 899px) { html { zoom: 75%; } }'+
+      // '@media (min-width: 900px) and  (max-width: 999px) { html { zoom: 80%; } }'+
+      // '@media (min-width: 1000px) and  (max-width: 1099px) { html { zoom: 85%; } }'+
+      // '@media (min-width: 1100px) and  (max-width: 1199px) { html { zoom: 90%; } }'+
+      // '@media (min-width: 1200px) and  (max-width: 1299px) { html { zoom: 95%; } }'+
+      // '@media (min-width: 1301px) and  (max-width: 1399px) { html { zoom: 100%; } }'+
+      // '@media (min-width: 1400px) and  (max-width: 1499px) { html { zoom: 105%; } }'+
+      // '@media (min-width: 1500px) and  (max-width: 1599px) { html { zoom: 110%; } }'+
+      // '@media (min-width: 1600px) and  (max-width: 1699px) { html { zoom: 110%; } }'+
+      // '@media (min-width: 1700px) and  (max-width: 1799px) { html { zoom: 115%; } }'+
+      // '@media (min-width: 1800px) and  (max-width: 1899px) { html { zoom: 115%; } }'+
+      // '@media (min-width: 1900px) and  (max-width: 1999px) { html { zoom: 120%; } }'+
+      // '@media (min-width: 2000px) and  (max-width: 2099px) { html { zoom: 120%; } }'+
+      //////'@media (min-width: 100px) and  (max-width: 900px) { html { zoom: 10%; } }'+
+      // '@media (min-width: 901px) and  (max-width: 1150px) { html { zoom: 82%; } }'+
+      // '@media (min-width: 1151px) and  (max-width: 1500px) { html { zoom: 100%; } }'+
+      // '@media (min-width: 1501px) and  (max-width: 1900px) { html { zoom: 135%; } }'+
+      // '@media (min-width: 1919px) and (max-width: 2000px) { html { zoom: 150%; } }'+
+      '@media (min-width: 901px) and  (max-width: 1000px) { html { zoom: 82%; } }'+
+      '@media (min-width: 1001px) and  (max-width: 1150px) { html { zoom: 87%; } }'+
+      '@media (min-width: 1151px) and  (max-width: 1300px) { html { zoom: 95%; } }'+
+      '@media (min-width: 1301px) and  (max-width: 1500px) { html { zoom: 95%; } }'+
+      '@media (min-width: 1501px) and  (max-width: 1900px) { html { zoom: 135%; } }'+
+      '@media (min-width: 1919px) and (max-width: 2000px) { html { zoom: 150%; } }'+
+      // `html{height:2000px;width:2000px;}`+
       '\n' +
       this._styleEnd
     );

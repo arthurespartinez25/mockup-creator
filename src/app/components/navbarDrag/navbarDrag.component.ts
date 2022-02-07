@@ -91,6 +91,7 @@ export class NavbarDragComponent implements OnInit, IComponent {
       background-color: #000;
       font-size: 10px;
       border-bottom: 1px dotted  white;
+      height:50px;
       position:absolute;left:`+this.percentageX+`%;top:`+this.percentageY+`%;`;
       this.props.value = `50% OFF  OUR A LA CARTE MENU IN FEBRUARY!`;
     } else if (this.whatComponent2 == 'HPNav3') {
