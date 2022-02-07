@@ -10,7 +10,7 @@ import { DatePipe } from '@angular/common'
   //templateUrl: './datepicker.component.html',
   styleUrls: ['./datepickerDrag.component.css'],
   template: `<input cdkDrag cdkDragBoundary="#canvas" [type]="props.type" [id]="props.id" 
-  [value]="props.value" [class]="props.class" [style]="props.style" 
+  [value]="props.value" [class]="props.class" [style]="props.style" [class]="props.class"
   (change)="dateValue($event)"
   (cdkDragEnded)="onDragEnded($event)" 
   [ngStyle]="{
@@ -68,6 +68,7 @@ export class DatepickerDragComponent implements OnInit,IComponent {
     var yyyy = today.getFullYear();
     let date = mm + '-' + dd + '-' + yyyy;
     this.props.value = this.datepipe.transform(date, 'yyyy-MM-dd');
+    this.props.style='position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
   }
   
 
