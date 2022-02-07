@@ -31,10 +31,10 @@ router.post("/login", (req, res) => {
 
 router.post("/register", (req, res) => {
 
-  const {userID, username, password, fname, lname, email} = req.body;
+  const {username, password, fname, lname, email} = req.body;
   //console.log(req.body);
   //console.log(`${userID}, ${username}, ${password}, ${fname}, ${lname}, ${email}`);
-  const add = dboperations.insertUser(userID, username, password, fname, lname, email); 
+  const add = dboperations.insertUser(username, password, fname, lname, email); 
   //console.log(add); // Promise { <pending> }
   add.then(function(result) {
     //console.log(result) // "Some User token"

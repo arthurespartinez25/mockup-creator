@@ -13,19 +13,17 @@ async function getUsers(){
     }
 }
 
-async function insertUser(userID, username, password, fname, lname, email){
+async function insertUser(username, password, fname, lname, email){
     try{
         let pool = await sql.connect(config);
         let addQuery = await pool.request().query(
             `INSERT INTO Users (
-                UserID, 
                 UserName, 
                 Password, 
                 FirstName, 
                 LastName, 
                 Email
             ) VALUES (
-                ${userID},
                 '${username}',
                 '${password}',
                 '${fname}',
