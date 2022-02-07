@@ -319,8 +319,14 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       // '@media (min-width: 1900px) and  (max-width: 1999px) { html { zoom: 120%; } }'+
       // '@media (min-width: 2000px) and  (max-width: 2099px) { html { zoom: 120%; } }'+
       //////'@media (min-width: 100px) and  (max-width: 900px) { html { zoom: 10%; } }'+
-      '@media (min-width: 901px) and  (max-width: 1150px) { html { zoom: 82%; } }'+
-      '@media (min-width: 1151px) and  (max-width: 1500px) { html { zoom: 100%; } }'+
+      // '@media (min-width: 901px) and  (max-width: 1150px) { html { zoom: 82%; } }'+
+      // '@media (min-width: 1151px) and  (max-width: 1500px) { html { zoom: 100%; } }'+
+      // '@media (min-width: 1501px) and  (max-width: 1900px) { html { zoom: 135%; } }'+
+      // '@media (min-width: 1919px) and (max-width: 2000px) { html { zoom: 150%; } }'+
+      '@media (min-width: 901px) and  (max-width: 1000px) { html { zoom: 82%; } }'+
+      '@media (min-width: 1001px) and  (max-width: 1150px) { html { zoom: 87%; } }'+
+      '@media (min-width: 1151px) and  (max-width: 1300px) { html { zoom: 95%; } }'+
+      '@media (min-width: 1301px) and  (max-width: 1500px) { html { zoom: 95%; } }'+
       '@media (min-width: 1501px) and  (max-width: 1900px) { html { zoom: 135%; } }'+
       '@media (min-width: 1919px) and (max-width: 2000px) { html { zoom: 150%; } }'+
       // `html{height:2000px;width:2000px;}`+
