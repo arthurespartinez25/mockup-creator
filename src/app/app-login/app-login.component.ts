@@ -33,7 +33,7 @@ export class AppLoginComponent implements OnInit {
     this.loginCookie.set("username",this.loginUsername);
     this.loginCookie.set("password",this.loginPassword);
     this.loginCookie.set("sessionID",this.sessionID);
-    console.log(uname + " and " + pword);
+    
   }
 
   loggingIn(value: string) {
@@ -42,7 +42,7 @@ export class AppLoginComponent implements OnInit {
 
   ngOnInit() {
     this.user.getData().subscribe((data)=> {
-      console.warn("get api data", data);
+      
       this.users = data;
     })
   }
@@ -55,7 +55,7 @@ export class AppLoginComponent implements OnInit {
         break;
       }
       else{
-        console.log("wala po");
+        
       }
     }
     if(uname==this.loginUsername&&pword==this.loginPassword){
@@ -66,7 +66,7 @@ export class AppLoginComponent implements OnInit {
       
       this._router.navigateByUrl("/canvas");
 
-      console.log("Correct Username and Password");
+      
     }
     else if(uname==""||pword==""){
       this.doesNotExist=false;

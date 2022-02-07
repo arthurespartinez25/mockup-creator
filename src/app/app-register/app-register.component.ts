@@ -27,7 +27,7 @@ export class AppRegisterComponent implements OnInit {
     }
 
     this.service.getData().subscribe((data)=> {
-      console.warn("get api data", data);
+      
       this.users = data;
 
       for (var i=0; i < this.users.length; i++) {
