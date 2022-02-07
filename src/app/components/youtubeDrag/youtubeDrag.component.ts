@@ -35,6 +35,7 @@ export class YoutubeDragComponent implements OnInit, IComponent {
       url : '',
       draggable: true,
       selected : false,
+      hidden: false,
       mouseDragPositionX:0,
       mouseDragPositionY:0,
     };
