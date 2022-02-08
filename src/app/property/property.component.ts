@@ -25,7 +25,7 @@ export class PropertyComponent implements OnInit {
     selected: false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
-    dummyDate:'',
+    dummyDate:''
   };
   style2 = '';
   @Output() addAllCSSRule = new EventEmitter<string>();
@@ -151,6 +151,11 @@ export class PropertyComponent implements OnInit {
     this.style2 = this.style2.replace(regexPosition2, '');
     this.style2 = this.style2.replace(regexPosition3, '');
   }
+  changeLink(event: any)
+  {
+    this.props.value = event.target.value;
+    this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value)
+  }
 
   classChangeHandler(event: any) {
     this.props.class = event.target.value;
@@ -231,6 +236,7 @@ export class PropertyComponent implements OnInit {
       {
         this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl('https://ps.w.org/all-404-redirect-to-homepage/assets/icon-128x128.png?rev=1515215');
       }
+      console.log(this.props.url)
   }
   /* END OF CODE FOR TABLE ELEMENT */
 }

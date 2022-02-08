@@ -34,6 +34,8 @@
         ? 'absolute'
         : child.props.typeObj === 'youtubeDrag'
         ? 'absolute'
+        : child.props.typeObj === 'videoDrag'
+        ? 'absolute'
         : child.props.typeObj === 'navDrag'
         ? 'absolute'
         : 'absolute',
@@ -68,6 +70,8 @@
         ? mousePositionY2 + 'px'
         : child.props.typeObj === 'youtubeDrag'
         ? mousePositionY2 + 'px'
+        : child.props.typeObj === 'videoDrag'
+        ? mousePositionY2 + 'px'
         : child.props.typeObj === 'navDrag'
         ? mousePositionY2 + 'px'
         : canvasPositionY + 'px',
@@ -99,6 +103,8 @@
         : child.props.typeObj === 'tableDrag'
         ? mousePositionX2 + 'px'
         : child.props.typeObj === 'youtubeDrag'
+        ? mousePositionX2 + 'px'
+        : child.props.typeObj === 'videoDrag'
         ? mousePositionX2 + 'px'
         : child.props.typeObj === 'inputDrag'
         ? mousePositionX2 + 'px'
@@ -378,5 +384,20 @@
       'left':mousePositionX2
     }"
   ></app-youtubeDrag>
+
+  <app-videoDrag
+    [property]="child.props"
+    *ngSwitchCase="'videoDrag'"
+    [canvasPositionX]="canvasPositionX"
+    [canvasPositionY]="canvasPositionY"
+    [mousePositionX2]="mousePositionX2"
+    [mousePositionY2]="mousePositionY2"
+    [ngStyle]="{
+      'height': '1px',
+      'position': 'fixed',
+      'top':mousePositionY2,
+      'left':mousePositionX2
+    }"
+  ></app-videoDrag>
 
 </div>

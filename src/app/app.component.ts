@@ -37,6 +37,7 @@ import { BehaviorSubject } from 'rxjs';
 import { TableDragComponent } from './components/tableDrag/tableDrag.component';
 import { YoutubeDragComponent } from './components/youtubeDrag/youtubeDrag.component';
 import { DatePipe } from '@angular/common'
+import { VideoDragComponent } from './components/videoDrag/videoDrag.component';
 
 @Component({
   selector: 'app-root',
@@ -208,6 +209,10 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       case 'youtube':
         temp = new YoutubeDragComponent(this.canvas, this.sanitizer);
         break;
+      
+      case 'video':
+        temp = new VideoDragComponent(this.canvas, this.sanitizer);
+        break;
 
       default:
         temp = new ButtonDragComponent(this.canvas);
@@ -236,7 +241,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     console.log(this.canvasLeftX);
     console.log(this.canvasTopY);
        if(component == 'img'||component == 'nav'||component == 'link'||
-        component == 'table'||component == 'youtube')
+        component == 'table'||component == 'youtube' ||component == 'video')
         {
           this.canvasLeftX = 0;
           this.canvasTopY = 0;

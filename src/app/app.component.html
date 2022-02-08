@@ -248,6 +248,14 @@
           >
             Iframe
           </button>
+          <button
+            class="palette-item"
+            (click)="addComponent('video')"
+            cdkDrag
+            (cdkDragEnded)="onDragEndedAddComponent($event, 'video')"
+          >
+            Video
+          </button>
         </div>
       </div>
       <div
@@ -534,6 +542,21 @@
           (click)="clickHandler(this.componentList[i])"
         >
           {{ i + 1 }} iFrame
+          <button
+            class="component-button-remove"
+            (click)="deleteComponent(this.componentList[i])"
+          ></button>
+          <button
+            class="component-button-hide"
+            (click)="hideComponent(this.componentList[i])"
+          ></button>
+        </div>
+        <div
+          class="component-items"
+          *ngSwitchCase="'videoDrag'"
+          (click)="clickHandler(this.componentList[i])"
+        >
+          {{ i + 1 }} Video
           <button
             class="component-button-remove"
             (click)="deleteComponent(this.componentList[i])"
