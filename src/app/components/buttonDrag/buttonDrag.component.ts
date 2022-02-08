@@ -19,6 +19,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
     [cdkDragDisabled]="!props.draggable"
     (cdkDragEnded)="onDragEnded($event)"
     [id]="props.id"
+    [class]="props.class"
     [style]="props.style"
     [ngStyle]="{
       position: 'sticky',

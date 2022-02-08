@@ -29,6 +29,7 @@ import { TableDragComponent } from './components/tableDrag/tableDrag.component';
 import { YoutubeDragComponent } from './components/youtubeDrag/youtubeDrag.component';
 import { AppLoginComponent } from './app-login/app-login.component';
 import { AppRegisterComponent } from './app-register/app-register.component';
+import { DatePipe } from '@angular/common'
 
 @NgModule({
   declarations: [
@@ -57,7 +58,7 @@ import { AppRegisterComponent } from './app-register/app-register.component';
     
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule, FormsModule, HttpClientModule],
-  providers: [DragDropModule, AppComponent],
+  providers: [DragDropModule, AppComponent, DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

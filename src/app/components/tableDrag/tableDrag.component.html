@@ -3,6 +3,7 @@
   cdkDragBoundary="#canvas"
   (cdkDragEnded)="onDragEnded($event)"
   [cdkDragDisabled]="!props.draggable"
+  [class]="props.class"
   [id]="props.id"
   [style]="props.style"
   [ngStyle]="{

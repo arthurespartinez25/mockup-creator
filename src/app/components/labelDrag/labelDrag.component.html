@@ -1,5 +1,5 @@
 <label cdkDrag cdkDragBoundary="#canvas" [id]="props.id" [style]="props.style" (cdkDragEnded)="onDragEnded($event)"
-[cdkDragDisabled]="!props.draggable" 
+[cdkDragDisabled]="!props.draggable" [class]="props.class"
 [ngStyle]="{
   position: 'sticky',
   left: mousePositionLeft + 'px',

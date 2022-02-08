@@ -2,6 +2,7 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild }
 import { IComponent } from '../interfaces/icomponent';
 import { IProperty } from '../interfaces/iproperty';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { DatePipe } from '@angular/common'
 
 @Component({
   selector: 'app-property',
@@ -24,6 +25,7 @@ export class PropertyComponent implements OnInit {
     selected: false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
+    dummyDate:'',
   };
   style2 = '';
   @Output() addAllCSSRule = new EventEmitter<string>();
@@ -48,6 +50,11 @@ export class PropertyComponent implements OnInit {
       this.style2 = this.style2.replace(regexPosition, '');
       this.style2 = this.style2.replace(regexPosition2, '');
       this.style2 = this.style2.replace(regexPosition3, '');
+      if(this.props.typeObj == 'datepickerDrag')
+        {
+        this.props.dummyDate = this.datepipe.transform(this.props.value, 'MM/dd/YYYY');
+        this.props.value = this.props.dummyDate.transform(this.props.value, 'YYYY/MM/dd');
+         }
       }, 1);
       
     }
@@ -67,7 +74,7 @@ export class PropertyComponent implements OnInit {
     this.selectedcomp = value;
   }
 
-  constructor(public sanitizer:DomSanitizer) {
+  constructor(public sanitizer:DomSanitizer, public datepipe: DatePipe) {
     this.props = this.property;
     this.componentList = this.compList;
     this.selectedcomp = this.selectedIdx;
@@ -103,7 +110,21 @@ export class PropertyComponent implements OnInit {
   }
 
   valueChangeHandler(event: any) {
-    this.props.value = event.target.value;
+    
+    if(this.props.typeObj == 'datepickerDrag')
+    {
+      setTimeout(() => {
+        this.props.value = this.datepipe.transform(event.target.value, 'yyyy-MM-dd');
+        // this.props.dummyDate = this.datepipe.transform(event.target.value, 'yyyy-MM-dd');
+        this.props.dummyDate = this.datepipe.transform(this.props.value, 'MM/dd/YYYY');
+        
+      }, 3000);
+    }
+    else
+    {
+      this.props.value = event.target.value;
+    }
+   
   }
 
   typeChangeHandler(event: any) {
