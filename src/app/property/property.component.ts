@@ -151,12 +151,6 @@ export class PropertyComponent implements OnInit {
     this.style2 = this.style2.replace(regexPosition2, '');
     this.style2 = this.style2.replace(regexPosition3, '');
   }
-  changeLink(event: any)
-  {
-    this.props.value = event.target.value;
-    this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value)
-  }
-
   classChangeHandler(event: any) {
     this.props.class = event.target.value;
   }
@@ -238,5 +232,13 @@ export class PropertyComponent implements OnInit {
       }
       console.log(this.props.url)
   }
+  
+  changeLink()
+  {
+    this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value);
+    const getID = <HTMLVideoElement> document.getElementById(this.props.id);
+    getID.load();
+  }
+
   /* END OF CODE FOR TABLE ELEMENT */
 }

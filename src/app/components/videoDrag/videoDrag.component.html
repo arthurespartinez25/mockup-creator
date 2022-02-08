@@ -1,4 +1,4 @@
-<div cdkDrag [cdkDragDisabled]="!props.draggable" cdkDragBoundary="#canvas" (cdkDragEnded)="onDragEnded($event)"  [class]="props.class" [id]="props.id" 
+<div cdkDrag [cdkDragDisabled]="!props.draggable" cdkDragBoundary="#canvas" (cdkDragEnded)="onDragEnded($event)"  [class]="props.class"
 
 [ngStyle]="{
   position: 'fixed',
@@ -6,30 +6,21 @@
   top: mousePositionTop + 'px',
   'width':'20px'
 }">
-<!-- <div class="example-handle" cdkDragHandle 
->
-  <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
-    <path d="M0 0h24v24H0z" fill="none"></path>
-  </svg>
-</div> -->
-  <video id="fra"
-  #fra cdkDrag cdkDragBoundary="#canvas" [src]="props.url"
-  [style]="props.style"
-title="YouTube video player" frameborder="0" 
-allow="autoplay" 
+<video [id]="props.id" 
+#fra cdkDrag cdkDragBoundary="#canvas"
+[style]="props.style"
+frameborder="0" 
 allowfullscreen dnd-droppable-iframe
 [ngStyle]="{
-  'position': 'sticky',
-  'left': (mousePositionLeft-canvasPositionLeft) + 'px',
-  'top': (mousePositionTop-canvasPositionTop) + 'px',
-  'border-color' : props.selected == true ? 'red': (props.selected == false ? 'none': null),
-  'border-style' : props.selected == true ? 'solid': (props.selected == false ? 'none': null),
-  'border-width' : props.selected == true ? '1px': (props.selected == false ? '0px': null)
-}"
-
-controls></video>
+'position': 'sticky',
+'left': (mousePositionLeft-canvasPositionLeft) + 'px',
+'top': (mousePositionTop-canvasPositionTop) + 'px',
+'border-color' : props.selected == true ? 'red': (props.selected == false ? 'none': null),
+'border-style' : props.selected == true ? 'solid': (props.selected == false ? 'none': null),
+'border-width' : props.selected == true ? '1px': (props.selected == false ? '0px': null)
+}" poster="https://i.ytimg.com/vi/7QSnNfMSkLg/hqdefault.jpg" controls>
+    <source [src]="props.url" type="video/mp4">
+    <source [src]="props.url" type="video/ogg">
+    <source [src]="props.url" type="video/webm">
+</video>
 </div> 
-
-
-    
