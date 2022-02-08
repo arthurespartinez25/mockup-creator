@@ -64,7 +64,7 @@ export class VideoDragComponent implements OnInit, IComponent {
        this.props.mouseDragPositionX = this.percentageX;
        this.props.mouseDragPositionY = this.percentageY;
        this.props.value = '';
-       this.props.url = '#';       
+       this.props.url = '';       
        this.props.style = '';
        //this.props.url = 'https://i.ytimg.com/vi/7QSnNfMSkLg/hqdefault.jpg';
        //this.props.type = 'initial';
