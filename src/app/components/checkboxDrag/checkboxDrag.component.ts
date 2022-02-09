@@ -106,21 +106,13 @@ export class CheckboxDragComponent implements OnInit, IComponent {
   }
 
   get htmlCode(): string {
-      let jude = this.props.style;
+      let dummyStyle = this.props.style;
       let regexLeft = /left(.+?);/;
       let regexTop = /top(.+?);/;
       let regexPosition = /position(.+?);/;
-      // let styleLeft = jude.match(/left(.+?);/g);
-      // let styleTop = jude.match(/top(.+?);/g);
-      // console.log(styleLeft);
-      // console.log(jude);
-
-      //let divStyle = '"style=position:absolute;left:'+this.dagaX+'px;top:'+this.dagaY+'px;"';
-
-      jude = jude.replace(regexLeft,"");
-      jude = jude.replace(regexTop,"");
-      jude = jude.replace(regexPosition,"");
-      //this.props.style = jude;
+      dummyStyle = dummyStyle.replace(regexLeft,"");
+      dummyStyle = dummyStyle.replace(regexTop,"");
+      dummyStyle = dummyStyle.replace(regexPosition,"");
     let tmpHtmlCode = '<div';
     tmpHtmlCode += ' style="' + this.props.style +'">';
     if (this.props.checked == "true") {
@@ -129,7 +121,7 @@ export class CheckboxDragComponent implements OnInit, IComponent {
     else {
       tmpHtmlCode +="\n" + ' <input id="'+ this.props.id + '" class="' +  this.props.class + '" type="' +  this.props.type + '">';
     }
-    tmpHtmlCode +="\n" + ' <label for="'+ this.props.id +'" style="'+ jude +'"> ' + this.props.value + ' </label>';
+    tmpHtmlCode +="\n" + ' <label for="'+ this.props.id +'" style="'+ dummyStyle +'"> ' + this.props.value + ' </label>';
     tmpHtmlCode +="\n" + ' </div>';
     
 
