@@ -96,10 +96,10 @@ export class VideoDragComponent implements OnInit, IComponent {
        }
      }
    
-     get htmlCode(): string {
+     get htmlCode(): string {      
       let tmpHtmlCode = '<video';
       tmpHtmlCode += ' class="' + this.props.class + '" id="' + this.props.id + '" type="' +  this.props.type + 
-      '" style="' + this.props.style + '" src="' + this.props.value+ '></video>';
+      '" style="' + this.props.style + '" src="' + this.props.value + '" controls></video>';
        return tmpHtmlCode;
      }
 
