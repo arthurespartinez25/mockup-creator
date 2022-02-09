@@ -1,4 +1,4 @@
-<div cdkDrag [cdkDragDisabled]="!props.draggable" cdkDragBoundary="#canvas" (cdkDragEnded)="onDragEnded($event)"  [class]="props.class"
+<div cdkDrag [cdkDragDisabled]="!props.draggable" cdkDragBoundary="#canvas" [class]="props.class"
 
 [ngStyle]="{
   position: 'fixed',
@@ -14,6 +14,7 @@
   </svg>
 </div> -->
 <video [id]="props.id" 
+(cdkDragEnded)="onDragEnded($event)"
 #fra cdkDrag cdkDragBoundary="#canvas"
 [style]="props.style"
 frameborder="0" 

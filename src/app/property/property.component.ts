@@ -123,7 +123,6 @@ export class PropertyComponent implements OnInit {
     else
     {
       this.props.value = event.target.value;
-      console.log(this.props.value);
     }
    
   }
@@ -234,9 +233,8 @@ export class PropertyComponent implements OnInit {
       console.log(this.props.url)
   }
   
-  changeLink()
-  {
-    this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value);
+  changeLink() {
+      this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value);
   }
 
   /* END OF CODE FOR TABLE ELEMENT */

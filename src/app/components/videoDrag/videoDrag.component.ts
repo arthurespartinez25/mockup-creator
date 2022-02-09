@@ -63,16 +63,15 @@ export class VideoDragComponent implements OnInit, IComponent {
        this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
        this.props.mouseDragPositionX = this.percentageX;
        this.props.mouseDragPositionY = this.percentageY;
-       this.props.value = 'https://www.w3schools.com/html/movie.mp4';
-       this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value);;       
-       this.props.style = '';
+       this.props.value = '';
+       this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value);      
        this.props.type = 'video/mp4';
-      //  this.props.style =
-      //    'position:absolute;left:' +
-      //    this.percentageX +
-      //    '%;top:' +
-      //    this.percentageY +
-      //    '%;height:316px;width:686px;';
+       this.props.style =
+        'position:absolute;left:' +
+        this.percentageX +
+        '%;top:' +
+        this.percentageY +
+        '%;';
      
    }
  
@@ -100,7 +99,7 @@ export class VideoDragComponent implements OnInit, IComponent {
      get htmlCode(): string {
       let tmpHtmlCode = '<video';
       tmpHtmlCode += ' class="' + this.props.class + '" id="' + this.props.id + '" type="' +  this.props.type + 
-      '" style="' + this.props.style + '" src="' + this.props.url+ '></video>';
+      '" style="' + this.props.style + '" src="' + this.props.value+ '></video>';
        return tmpHtmlCode;
      }
 
