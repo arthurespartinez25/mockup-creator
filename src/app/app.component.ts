@@ -125,6 +125,27 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
   ngAfterViewInit(): void {}
 
+  //////////////////////////////////////////////////////////////////////////////
+  //   THIS PROJECT WAS STARTED BY BATO BOYS AND CEBU TEAM  
+  //                          JUPAO  
+  //                          JUDE   
+  //                          MARK   
+  //                          MIKMIK 
+  //                          PHIL   
+  //                          RAVEN  
+  //                          MERYL  
+  //                          VJ     
+  //                          JAMES  
+  //////////////////////////////////////////////////////////////////////////////
+  //                          .-"-.    
+  //                         /|6 6|\
+  //                        {/(_0_)\}
+  //                         _/ ^ \_
+  //                        (/ /^\ \)-'
+  //                         ""' '""
+
+
+
   canvasLeftX = 0;
   canvasTopY = 0;
   mousePositionX = 110;
@@ -312,31 +333,13 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this._styleStart +
       '\n' +
       this.style +
-      // '@media (min-width: 800px) and  (max-width: 899px) { html { zoom: 75%; } }'+
-      // '@media (min-width: 900px) and  (max-width: 999px) { html { zoom: 80%; } }'+
-      // '@media (min-width: 1000px) and  (max-width: 1099px) { html { zoom: 85%; } }'+
-      // '@media (min-width: 1100px) and  (max-width: 1199px) { html { zoom: 90%; } }'+
-      // '@media (min-width: 1200px) and  (max-width: 1299px) { html { zoom: 95%; } }'+
-      // '@media (min-width: 1301px) and  (max-width: 1399px) { html { zoom: 100%; } }'+
-      // '@media (min-width: 1400px) and  (max-width: 1499px) { html { zoom: 105%; } }'+
-      // '@media (min-width: 1500px) and  (max-width: 1599px) { html { zoom: 110%; } }'+
-      // '@media (min-width: 1600px) and  (max-width: 1699px) { html { zoom: 110%; } }'+
-      // '@media (min-width: 1700px) and  (max-width: 1799px) { html { zoom: 115%; } }'+
-      // '@media (min-width: 1800px) and  (max-width: 1899px) { html { zoom: 115%; } }'+
-      // '@media (min-width: 1900px) and  (max-width: 1999px) { html { zoom: 120%; } }'+
-      // '@media (min-width: 2000px) and  (max-width: 2099px) { html { zoom: 120%; } }'+
-      //////'@media (min-width: 100px) and  (max-width: 900px) { html { zoom: 10%; } }'+
-      // '@media (min-width: 901px) and  (max-width: 1150px) { html { zoom: 82%; } }'+
-      // '@media (min-width: 1151px) and  (max-width: 1500px) { html { zoom: 100%; } }'+
-      // '@media (min-width: 1501px) and  (max-width: 1900px) { html { zoom: 135%; } }'+
-      // '@media (min-width: 1919px) and (max-width: 2000px) { html { zoom: 150%; } }'+
+      
       '@media (min-width: 901px) and  (max-width: 1000px) { html { zoom: 82%; } }'+
       '@media (min-width: 1001px) and  (max-width: 1150px) { html { zoom: 87%; } }'+
       '@media (min-width: 1151px) and  (max-width: 1300px) { html { zoom: 95%; } }'+
       '@media (min-width: 1301px) and  (max-width: 1500px) { html { zoom: 95%; } }'+
       '@media (min-width: 1501px) and  (max-width: 1900px) { html { zoom: 135%; } }'+
       '@media (min-width: 1919px) and (max-width: 2000px) { html { zoom: 150%; } }'+
-      // `html{height:2000px;width:2000px;}`+
       '\n' +
       this._styleEnd
     );

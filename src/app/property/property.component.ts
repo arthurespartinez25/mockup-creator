@@ -115,7 +115,6 @@ export class PropertyComponent implements OnInit {
     {
       setTimeout(() => {
         this.props.value = this.datepipe.transform(event.target.value, 'yyyy-MM-dd');
-        // this.props.dummyDate = this.datepipe.transform(event.target.value, 'yyyy-MM-dd');
         this.props.dummyDate = this.datepipe.transform(this.props.value, 'MM/dd/YYYY');
         
       }, 3000);

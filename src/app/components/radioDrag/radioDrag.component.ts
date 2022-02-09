@@ -110,21 +110,14 @@ export class RadioDragComponent implements OnInit,IComponent {
 
 
   get htmlCode(): string {
-    let jude = this.props.style;
+    let dummyStyle = this.props.style;
       let regexLeft = /left(.+?);/;
       let regexTop = /top(.+?);/;
       let regexPosition = /position(.+?);/;
-      // let styleLeft = jude.match(/left(.+?);/g);
-      // let styleTop = jude.match(/top(.+?);/g);
-      // console.log(styleLeft);
-      // console.log(jude);
 
-      //let divStyle = '"style=position:absolute;left:'+this.dagaX+'px;top:'+this.dagaY+'px;"';
-
-      jude = jude.replace(regexLeft,"");
-      jude = jude.replace(regexTop,"");
-      jude = jude.replace(regexPosition,"");
-      //this.props.style = jude;
+      dummyStyle = dummyStyle.replace(regexLeft,"");
+      dummyStyle = dummyStyle.replace(regexTop,"");
+      dummyStyle = dummyStyle.replace(regexPosition,"");
 
     let tmpHtmlCode = '<div class="form-check"'+ ' style="' + this.props.style +'"> \n <input';
    
@@ -147,7 +140,7 @@ export class RadioDragComponent implements OnInit,IComponent {
     }
 
     if (this.props.style.trim().length > 0) {
-      tmpHtmlCode += ' style="' + jude + '"';
+      tmpHtmlCode += ' style="' + dummyStyle + '"';
     }
 
     if (this.props.checked == "true"){

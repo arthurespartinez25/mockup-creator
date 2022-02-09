@@ -214,21 +214,14 @@ export class TableDragComponent implements OnInit, IComponent {
   */
 
   get htmlCode(): string {
-    let jude = this.props.style;
+    let dummyStyle = this.props.style;
     let regexLeft = /left(.+?);/;
     let regexTop = /top(.+?);/;
     let regexPosition = /position(.+?);/;
-    // let styleLeft = jude.match(/left(.+?);/g);
-    // let styleTop = jude.match(/top(.+?);/g);
-    // console.log(styleLeft);
-    // console.log(jude);
 
-    //let divStyle = '"style=position:absolute;left:'+this.dagaX+'px;top:'+this.dagaY+'px;"';
-
-    jude = jude.replace(regexLeft, '');
-    jude = jude.replace(regexTop, '');
-    jude = jude.replace(regexPosition, '');
-    //this.props.style = jude;
+    dummyStyle = dummyStyle.replace(regexLeft, '');
+    dummyStyle = dummyStyle.replace(regexTop, '');
+    dummyStyle = dummyStyle.replace(regexPosition, '');
 
     let tmpHtmlCode =
       '<div class="btn-group"' + ' style="' + this.props.style + '"';
@@ -239,7 +232,6 @@ export class TableDragComponent implements OnInit, IComponent {
       tmpHtmlCode += '\n' + ' <tr>';
       for(var j=0; j<this.props.tblArrayCol.length; j++) {
         tmpHtmlCode += '\n' + ' <td style="padding: 10px; border: 1px solid black">'+ this.props.tblArrayRow[i][j] +'</td>';
-        /* console.log(this.props.tblArrayRow[i][j]); */
       }
       tmpHtmlCode += '\n' + ' </tr>';
     }
