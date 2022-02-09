@@ -27,6 +27,6 @@ allowfullscreen dnd-droppable-iframe
 'border-color' : props.selected == true ? 'red': (props.selected == false ? 'none': null),
 'border-style' : props.selected == true ? 'solid': (props.selected == false ? 'none': null),
 'border-width' : props.selected == true ? '1px': (props.selected == false ? '0px': null)
-}" poster="https://i.ytimg.com/vi/7QSnNfMSkLg/hqdefault.jpg" controls >
+}" [poster]="props.poster" controls >
 </video>
 </div> 

@@ -72,7 +72,7 @@ export class VideoDragComponent implements OnInit, IComponent {
         '%;top:' +
         this.percentageY +
         '%;';
-     
+      this.props.poster = this.sanitizer.bypassSecurityTrustResourceUrl('https://i.ytimg.com/vi/7QSnNfMSkLg/hqdefault.jpg');
    }
  
    onDragEnded($event: CdkDragEnd) {
