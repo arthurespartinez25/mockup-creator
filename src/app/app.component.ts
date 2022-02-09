@@ -211,7 +211,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         break;
       
       case 'video':
-        temp = new VideoDragComponent(this.canvas);
+        temp = new VideoDragComponent(this.canvas, this.sanitizer);
         break;
 
       default:

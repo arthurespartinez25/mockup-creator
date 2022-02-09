@@ -123,6 +123,7 @@ export class PropertyComponent implements OnInit {
     else
     {
       this.props.value = event.target.value;
+      console.log(this.props.value);
     }
    
   }
@@ -236,8 +237,6 @@ export class PropertyComponent implements OnInit {
   changeLink()
   {
     this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value);
-    const getID = <HTMLVideoElement> document.getElementById(this.props.id);
-    getID.load();
   }
 
   /* END OF CODE FOR TABLE ELEMENT */

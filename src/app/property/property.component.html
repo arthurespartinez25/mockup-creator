@@ -27,11 +27,17 @@
     <tr class="properties-table-row" *ngIf="props.typeObj != 'table' && props.typeObj != 'dropdownDrag' && props.typeObj != 'datepickerDrag'">
       <th class="properties-table-header"><label>value</label></th>
       <td class="properties-table-data">
-        <input
+        <input *ngIf="props.typeObj != 'videoDrag'"
           [disabled]="!this.props.id"
           type="text"
           [value]="props.value"
           (keyup)="valueChangeHandler($event)"
+        />
+        <input *ngIf="props.typeObj == 'videoDrag'"
+          [disabled]="!this.props.id"
+          type="text"
+          [value]="props.value"
+          (change)="valueChangeHandler($event)"
         />
       </td>
     </tr>
@@ -79,18 +85,6 @@
       </button>
     </td>
     </tr>
-
-    <!--<tr class="properties-table-row" *ngIf="props.typeObj == 'videoDrag'">
-      <th class="properties-table-header"><label>Update Link</label></th>
-      <td class="properties-table-data">
-      <input
-        [value]="this.props.value"
-        [disabled]="!this.props.id"
-        type="text"
-        (change)="changeLink($event)"  
-      />
-    </td>
-    </tr> -->
 
     <!-- start of Table Cell input -->
     <tr class="properties-table-row" *ngIf="props.typeObj == 'table'">
