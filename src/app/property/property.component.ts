@@ -246,7 +246,7 @@ export class PropertyComponent implements OnInit {
   }
 
   checkLink(toEvaluate:string) {
-    var res = toEvaluate.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+    var res = toEvaluate.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)\.(mp4|webm|ogv)$/g);
     return (res != null);
   }
   
