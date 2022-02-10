@@ -9,8 +9,7 @@
 
 <!-- Toolbar -->
 <!-- <app-navbar></app-navbar> -->
-
-<div class="content" role="main">
+<div *ngIf="this.inSession" class="content" role="main">
   <!-- PALETTE SECTION -->
 
   <div class="palette-div">
@@ -143,7 +142,7 @@
                 (click)="addComponent('dropdown')"
                 cdkDrag
                 (cdkDragEnded)="onDragEndedAddComponent($event, 'dropdown')"
-                [disabled]="isDisabled"
+                [disabled]="isDisabled"ms
               >
                 Dropdown
               </button>
@@ -198,14 +197,14 @@
 
           <!-- input-dropdown-menu end -->
 
-          <button
+          <!-- <button
             class="palette-item"
             (click)="addComponent('modal')"
             cdkDrag
             (cdkDragEnded)="onDragEndedAddComponent($event, 'modal')"
           >
             Modal
-          </button>
+          </button> -->
           <button
             class="palette-item"
             (click)="addComponent('popup')"
@@ -257,18 +256,25 @@
             Home Page
           </button>
           <button class="palette-item" (click)="addComponentLogin()">
-            Login
+            Login Page
           </button>
 
-          <button class="palette-item" (click)="addComponentImageLabel()">
+          <!-- <button class="palette-item" (click)="addComponentImageLabel()">
             Image Label
-          </button>
+          </button> -->
 
           <button class="palette-item" (click)="addComponentSearchScreen()">
-            Search Screen
+            Search Screen Page
           </button>
         </div>
       </div>
+      <button 
+      class="palette-item" 
+      (click)="logout()"
+      style="background-color: maroon;"
+      >
+      Logout
+    </button>
     </div>
   </div>
 
@@ -417,4 +423,5 @@
 <!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
-<!--<router-outlet></router-outlet> -->
+<router-outlet *ngIf="!inSession"></router-outlet>
+<!-- <app-app-login></app-app-login> -->

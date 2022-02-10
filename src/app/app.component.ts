@@ -1,4 +1,10 @@
-import { CdkDrag, CdkDragEnd, DragDrop, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import {
+  CdkDrag,
+  CdkDragEnd,
+  DragDrop,
+  CdkDragDrop,
+  moveItemInArray,
+} from '@angular/cdk/drag-drop';
 import {
   AfterViewChecked,
   AfterViewInit,
@@ -36,6 +42,9 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
 import { TableDragComponent } from './components/tableDrag/tableDrag.component';
 import { YoutubeDragComponent } from './components/youtubeDrag/youtubeDrag.component';
+import { AppLoginComponent } from './app-login/app-login.component';
+import { CookieService } from 'ngx-cookie-service';
+import { UsersService } from './service/users.service';
 import { DatePipe } from '@angular/common'
 import { PropertyComponent } from './property/property.component';
 
@@ -54,6 +63,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   readonly CSS_URL = '../app/app.component.css';
   refreshCSS = new BehaviorSubject<boolean>(true);
   cssDocument?: StyleSheet;
+  users: any;
 
   selected: IProperty = {
     key: '',
@@ -98,9 +108,9 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
   @ViewChild(PropertyComponent) propertyCmp:PropertyComponent;
-
   changeref: ChangeDetectorRef;
   constructor(
+    private loginCookie:CookieService,
     private renderer: Renderer2,
     private drag: DragDrop,
     changeDetectorRef: ChangeDetectorRef,
@@ -108,7 +118,8 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     public _router: Router,
     public _location: Location,
     public sanitizer: DomSanitizer,
-    public datepipe: DatePipe
+    private user:UsersService,
+    public datepipe: DatePipe,
   ) {
     this.changeref = changeDetectorRef;
   }
@@ -119,9 +130,19 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   canvasTop = 0;
   canvasW = 0;
   whatComponent = 'none';
+  sessionID = this.loginCookie.get("sessionID");
+  inSession: boolean = this.sessionID == "12345";
 
-  ngOnInit(): void {
-    /* throw new Error('Method not implemented.'); */
+  ngOnInit() {
+    console.log(this.inSession);
+    if(this.inSession) {
+      this._router.navigateByUrl("/canvas");
+      //api call
+      /* this.user.getData().subscribe((data)=> {
+        console.warn("get api data", data);
+        this.users = data;
+      }) */
+    }
   }
   ngAfterViewInit(): void {}
 
@@ -158,10 +179,27 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   noOfButton: number = 0;
   xDistance: any = 0;
   yDistance: any = 0;
+  theUsername = "";
+
+  
+  loggedIn($event) {
+    /* console.log("eto value natin lods: " + this.sessionID); */
+    this.theUsername = $event;
+    console.log(this.theUsername as string);
+    console.log("nakapagpasa na po");
+  }
+  logout() {
+    this.loginCookie.deleteAll();
+    this._router.navigate(['/']);
+    setTimeout(() => {
+      window.location.reload();
+    }, 100);
+  }
+
 
   addComponent(component: string) {
     let temp: IComponent;
-    
+
     switch (component) {
       case 'button':
         temp = new ButtonDragComponent(this.canvas);
@@ -238,41 +276,53 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
     this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
     this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
-    if (this.domInsideCanvas == false) 
-      {
-        this.mousePositionX = this.canvasLeft;
-        this.mousePositionY = this.canvasTop;
-      }
+    if (this.domInsideCanvas == false) {
+      this.mousePositionX = this.canvasLeft;
+      this.mousePositionY = this.canvasTop;
+    }
     this.componentList.push(temp);
   }
   //----------------------------------------------------------------------------
   onDragEndedAddComponent(event: CdkDragEnd, component: string) {
     event.source._dragRef.reset();
-    if (this.domInsideCanvas == true) 
-      {
-    this.offsetLeft = event.source.element.nativeElement.offsetLeft;
-    this.offsetTop = event.source.element.nativeElement.offsetTop;
-    this.xDistance = event.distance.x;
-    this.yDistance  = event.distance.y;
-    this.canvasLeftX = (this.subMenuItem.nativeElement as HTMLElement).offsetWidth;
-    this.canvasTopY = (this.subMenuItem.nativeElement as HTMLElement).offsetTop;
-    console.log(this.canvasLeftX);
-    console.log(this.canvasTopY);
-       if(component == 'img'||component == 'nav'||component == 'link'||
-        component == 'table'||component == 'youtube')
-        {
-          this.canvasLeftX = 0;
-          this.canvasTopY = 0;
-        }
-        else if(component == 'header'||component == 'paragraph'||component == 'label')
-        {
-          this.canvasLeftX = (this.subMenuItem2.nativeElement as HTMLElement).offsetWidth;
-          this.canvasTopY = (this.subMenuItem2.nativeElement as HTMLElement).offsetTop;
-        }
-        this.mousePositionX = this.offsetLeft + this.xDistance + this.canvasLeftX;
-        this.mousePositionY = this.offsetTop + this.yDistance + this.canvasTopY;
+    if (this.domInsideCanvas == true) {
+      this.offsetLeft = event.source.element.nativeElement.offsetLeft;
+      this.offsetTop = event.source.element.nativeElement.offsetTop;
+      this.xDistance = event.distance.x;
+      this.yDistance = event.distance.y;
+      this.canvasLeftX = (
+        this.subMenuItem.nativeElement as HTMLElement
+      ).offsetWidth;
+      this.canvasTopY = (
+        this.subMenuItem.nativeElement as HTMLElement
+      ).offsetTop;
+      console.log(this.canvasLeftX);
+      console.log(this.canvasTopY);
+      if (
+        component == 'img' ||
+        component == 'nav' ||
+        component == 'link' ||
+        component == 'table' ||
+        component == 'youtube'
+      ) {
+        this.canvasLeftX = 0;
+        this.canvasTopY = 0;
+      } else if (
+        component == 'header' ||
+        component == 'paragraph' ||
+        component == 'label'
+      ) {
+        this.canvasLeftX = (
+          this.subMenuItem2.nativeElement as HTMLElement
+        ).offsetWidth;
+        this.canvasTopY = (
+          this.subMenuItem2.nativeElement as HTMLElement
+        ).offsetTop;
       }
-      this.addComponent(component);
+      this.mousePositionX = this.offsetLeft + this.xDistance + this.canvasLeftX;
+      this.mousePositionY = this.offsetTop + this.yDistance + this.canvasTopY;
+    }
+    this.addComponent(component);
   }
 
   //----------------------------------------------------------------------------
@@ -350,8 +400,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
   styleHolder = 'aw';
   isDisabled = true;
-  timerDisable()
-  {
+  timerDisable() {
     setTimeout(() => {
       this.isDisabled = true;
     }, 100);
@@ -400,25 +449,24 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         'top:' +
         this.selected.mouseDragPositionY +
         '%;';
-       this.selected.mouseDragPositionX = 0;
-       this.selected.mouseDragPositionY = 0;
+      this.selected.mouseDragPositionX = 0;
+      this.selected.mouseDragPositionY = 0;
     }
   }
-  onDragEnd(component: IComponent)
-  {
+  onDragEnd(component: IComponent) {
     console.log(component);
   }
 
-  selectedComp(value: any){
+  selectedComp(value: any) {
     let componentIndex = this.componentList.indexOf(value);
-      if (componentIndex !== -1) {
-        for(let i = 0; i < this.componentList.length; i++){
-          this.componentList[i].props.selected = false;
-        }
-        this.componentList[componentIndex].props.selected = true;
-      } else {
-        console.log('Nothing to highlight');
+    if (componentIndex !== -1) {
+      for (let i = 0; i < this.componentList.length; i++) {
+        this.componentList[i].props.selected = false;
       }
+      this.componentList[componentIndex].props.selected = true;
+    } else {
+      console.log('Nothing to highlight');
+    }
   }
 
   copyMessage(val: string) {
@@ -525,7 +573,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.mousePositionY = this.canvasTop + 140;
     this.componentList.push(temp);
   }
-
 
   refresh(): void {
     this._router
@@ -928,32 +975,51 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   /*************Here Starts CSS Code******************/
 
+  /*
+  cssReceiveMessage()
+    gets the cssRules from stylesheets and adds it to this.style.
+
+  addAllCSSRule()
+    gets the string from the CSS input field and processes it on a suitable format.
+    deletes/clears previously created cssRule by using deleteCSSRule function 
+    and adds the new processed string one by one by the use of addCSSRule function
+
+  addCSSRule()
+    adds a cssRule to the web-app document.styleSheet
+  
+  deleteCSSRule()
+    deletes cssRules with the same index as the given parameter
+  
+  */
+
+
   cssReceiveMessage() {
     this.style = '';
     console.log(document.styleSheets.item(0));
-    let newCssRuleCount = document.styleSheets[0].cssRules.length;
+    let newCssRuleCount = document.styleSheets[0].cssRules.length; //gets the total CSSRule inside the stylesheet
     let cssString: string;
 
-    for (let i = this.cssRuleCount; i < newCssRuleCount; i++) {
-      cssString = document.styleSheets[0].cssRules[i].cssText.toString();
+    for (let i = this.cssRuleCount; i < newCssRuleCount; i++) { //compares web-app default cssRule count with the added cssRules
+      cssString = document.styleSheets[0].cssRules[i].cssText.toString();  
       if (
         document.styleSheets[0].cssRules[i].cssText
           .toString()
-          .substring(0, 11) == '#canvasBody'
+          .substring(0, 11) == '#canvasBody' //compares existing cssRules string if the selector is equals to "#canvasBody"
       ) {
         if (
           document.styleSheets[0].cssRules[i].cssText
             .toString()
-            .substring(11, 13) == ' {'
+            .substring(11, 13) == ' {' //executes the code below if string has no other selector after "#canvasBody"
         ) {
-          this.style += 'body' + cssString.substring(11, cssString.length);
-          this.style += '\n';
-        } else {
-          this.style += cssString.substring(11, cssString.length);
-          this.style += '\n';
-        }
-      } else {
-        this.style += document.styleSheets[0].cssRules[i].cssText.toString();
+            this.style += 'body' + cssString.substring(11, cssString.length); //adds body selector to style
+            this.style += '\n';
+          } else {
+            this.style += cssString.substring(11, cssString.length);
+            this.style += '\n';
+          }
+      } 
+      else {
+        this.style += document.styleSheets[0].cssRules[i].cssText.toString(); //adds regular selector to style
         this.style += '\n';
       }
     }
@@ -970,39 +1036,44 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
     while (document.styleSheets[0].cssRules.length != this.cssRuleCount) {
       let numberOfRules =
-        document.styleSheets[0].cssRules.length - this.cssRuleCount;
+      document.styleSheets[0].cssRules.length - this.cssRuleCount;
+      //you can uncomment code below if you want to log and test the data
+      /* 
       console.log('this is the start of RuleCount: ' + this.cssRuleCount);
       console.log(
         'this is the current RuleCount: ' +
           (document.styleSheets[0].cssRules.length - 1)
       );
       console.log('this is the new RuleCount: ' + numberOfRules);
-      document.styleSheets
-        .item(0)
-        ?.deleteRule(document.styleSheets[0].cssRules.length - 1);
+      */
+      document.styleSheets.item(0)?.deleteRule(document.styleSheets[0].cssRules.length - 1); // deletes all the added CSS Rules
     }
 
     for (let i = 0; i < allCSSRule.length; i++) {
-      if (allCSSRule[i] != ' ' && allCSSRule[i] != '\n') {
-        newCSSRule += allCSSRule[i];
+      if (allCSSRule[i] != ' ' && allCSSRule[i] != '\n') { //checks if there are whitespaces
+        newCSSRule += allCSSRule[i]; // adds each character that is not a whitespace
       } else {
-        console.log('White space detected at: ' + i);
+        //console.log('White space detected at: ' + i); 
+        continue; //ignores white spaces
       }
     }
-    console.log(newCSSRule.toString());
+    //console.log(newCSSRule.toString());
 
     while (stringIndex < newCSSRule.length - 1) {
-      for (let i = stringIndex; i <= newCSSRule.length - 1; i++) {
-        if (newCSSRule[i] == '{') {
-          curlyBraces++;
+      for (let i = stringIndex; i <= newCSSRule.length - 1; i++) { // adds the body of the string after the selector
+        if (newCSSRule[i] == '{') { 
+          //checks if a { exists inside the cssRule body so it will not immediately terminate if the loop encountered a }
+          curlyBraces++; //adds 1 to number of { existing inside the body
         }
-        if (newCSSRule[i] == '}' && curlyBraces >= 2) {
+        if (newCSSRule[i] == '}' && curlyBraces >= 2) { //checks if there are existing { then substracts 1 from curlyBraces
           curlyBraces--;
-        } else if (newCSSRule[i] == '}' && curlyBraces == 1) {
+        } else if (newCSSRule[i] == '}' && curlyBraces == 1) { 
+          //if there are only one existing '{' and '}' is encountered the string is added as a cssRule using addCSSRule
           curlyBraces--;
           cssString = '';
           cssString = newCSSRule.substring(startingIndex, i + 1).toString();
           this.addCSSRule(cssString.toString());
+          //passes the string as a parameter then adds a value to total CSS Rule count 
           stringIndex = 1 + i;
           startingIndex = 1 + i;
           allCSSRuleCount++;
@@ -1022,29 +1093,31 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     let ruleNumber;
     let generalRule = false;
 
-    if (cssString[0] == '.') {
+    if (cssString[0] == '.') { 
+      //checks if the string is a class
       console.log(cssRuleStringClassID + ' is a Class selector');
-    } else if (cssString[0] == '#') {
+    } else if (cssString[0] == '#') {  
+      //checks if the string is a ID
       console.log(cssRuleStringClassID + ' is an ID selector');
     } else if (cssString[0] != '#' && cssString[0] != '.') {
       generalRule = true;
+      //checks if the string is a general selector
       console.log('"' + cssCanvasSelector + '" is a general Selector;');
     }
-      
-      if (generalRule == true) {
+
+    if (generalRule == true) {
       switch (cssString.substring(0, cssString.indexOf('{'))) {
         case 'body': {
           cssStringTemp =
             '#canvasBody ' +
-            cssString.substring(cssString.indexOf('{')).toString();
+            cssString.substring(cssString.indexOf('{')).toString();  //adds the cssRule as #canvasBody instead of body selector
           break;
         }
-
         default: {
           cssStringTemp =
             '#canvasBody ' +
             cssCanvasSelector +
-            cssString.substring(cssString.indexOf('{')).toString();
+            cssString.substring(cssString.indexOf('{')).toString();  //adds the cssRule as #canvasBody plus the added selector
           break;
         }
       }
@@ -1056,51 +1129,54 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
           cssRuleStringTemp.substring(0, cssString.indexOf('{')) ===
           cssRuleStringClassID.toString()
         ) {
-          console.log('Class found!');
+          //console.log('Class found!');
           ruleFound = 1;
           ruleNumber = i;
         } else if (
           cssRuleStringTemp.substring(0, cssString.indexOf('{')) ===
           cssRuleStringClassID.toString()
         ) {
-          console.log('ID found!');
+          //console.log('ID found!');
           ruleFound = 1;
           ruleNumber = i;
         }
       }
     }
 
-    if (ruleFound == 1 && generalRule == false) {
-      console.log('this is the ruleNumber: ' + ruleNumber);
+    //checks if the css rule already exists
+    if (ruleFound == 1 && generalRule == false) { //if selector exists deletes it and adds a new one
+      //console.log('this is the ruleNumber: ' + ruleNumber);
       document.styleSheets
         .item(0)
         ?.insertRule(
           '\n' + cssString + '\n',
           document.styleSheets[0].cssRules.length
-        );
-      document.styleSheets.item(0)?.deleteRule(ruleNumber);
+        ); //adds the cssRules
+      document.styleSheets.item(0)?.deleteRule(ruleNumber); //deletes existing rule with the same selector
       ruleFound = 0;
-    } else if (ruleFound == 0 && generalRule == false) {
+    } else if (ruleFound == 0 && generalRule == false) { //if selector does exists and is not a general css selector 
       document.styleSheets
         .item(0)
         ?.insertRule(
           '\n' + cssString + '\n',
           document.styleSheets[0].cssRules.length
-        );
-    } else if (ruleFound == 0 && generalRule == true) {
+        ); //adds the cssRules
+    } else if (ruleFound == 0 && generalRule == true) { //if selector does exists and is a general css selector
       document.styleSheets
         .item(0)
         ?.insertRule(
           '\n ' + cssStringTemp + '\n',
           document.styleSheets[0].cssRules.length
-        );
+        ); //adds the cssRules
     }
 
-    console.log('this is the starting number: ' + this.cssRuleCount);
-    console.log(document.styleSheets.item(0));
+    //console.log('this is the starting number: ' + this.cssRuleCount);
+    //console.log(document.styleSheets.item(0));
   }
 
-  deleteCSSRule(cssString: string) {
+  //the comment below are for deleting a cssRule by one
+  /* 
+  deleteCSSRule(cssString: string) { //deletes the CSS rule
     let newCssRuleCount = document.styleSheets[0].cssRules.length;
     let cssRuleStringTemp: string;
     let cssRuleStringClassID = cssString.substring(0, cssString.indexOf('{'));
@@ -1129,85 +1205,66 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     }
   }
   @ViewChild('cssTextArea') styleBox: ElementRef;
-  clearCss()
-  {
-    this.styleBox.nativeElement.value = "";
-  }
+  clearCss() {
+    this.styleBox.nativeElement.value = '';
+  } 
+  */
 
   /*************Here Ends CSS Code******************/
 
+  /*************The code below is for component list functions**********************/
 
-  /**************The code below is for component list functions *************************/
-  
-  deleteComponent(value:any){
-    let componentIndex = this.componentList.indexOf(value);
-    if(componentIndex !== -1){
-      this.componentList.splice(componentIndex,1);
+  deleteComponent(value: any) {
+    let componentIndex = this.componentList.indexOf(value); //gets the index of the selected component inside the canvas
+    if (componentIndex !== -1) {
+      this.componentList.splice(componentIndex, 1); //removes the component from the canvas
     }
   }
 
-  hideComponent(value:any){
-    let componentIndex = this.componentList.indexOf(value);
-    this.componentList[componentIndex].props.hidden = !this.componentList[componentIndex].props.hidden;
+  hideComponent(value: any) {
+    let componentIndex = this.componentList.indexOf(value); //gets the index of the selected component inside the canvas
+    this.componentList[componentIndex].props.hidden =
+      !this.componentList[componentIndex].props.hidden; //removes visibility of a component from the canvas 
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.componentList, event.previousIndex, event.currentIndex);
+    moveItemInArray(
+      this.componentList,
+      event.previousIndex,
+      event.currentIndex
+    );
     //console.log("This is the previous index " + event.previousContainer);
     //console.log("This is the new index " + event.currentIndex);
   }
 
-  addToNoOfComponent(value:IComponent){
+  //code below is for counting how many component of the same type are in the componentList
+  addToNoOfComponent(value: IComponent) {
     let componentIndex = this.componentList.indexOf(value);
-    let checkbox,datepicker,dropdown,header,image,input,label,link,modal,navbar,paragraph,radio,table,textbox,youtube = 0;
-    switch(this.componentList[componentIndex].props.typeObj){
+    let checkbox,
+      datepicker,
+      dropdown,
+      header,
+      image,
+      input,
+      label,
+      link,
+      modal,
+      navbar,
+      paragraph,
+      radio,
+      table,
+      textbox,
+      youtube = 0; // create a variable for each type of component
+    switch (this.componentList[componentIndex].props.typeObj) {
       case 'buttonDrag': {
         this.noOfButton++;
-        this.numberOfComponents.push([value],["Button"+this.noOfButton]);
+        this.numberOfComponents.push([value], ['Button' + this.noOfButton]);
       }
     }
-    
   }
 
-  /**************The code below is for component list functions *************************/
+  /**************End of code for component list functions *************************/
 
-
-
-  
-  /*
-  receiveMessage($event: boolean) {
-    if ($event == true) {
-
-      let componentIndex = this.componentList.indexOf(this.selectedComponent);
-      if (componentIndex !== -1) {
-        this.componentList.splice(componentIndex, 1);
-        this.selected.id = '';
-        this.selected.type = '';
-        this.selected.key = '';
-        this.selected.value = '';
-        this.selected.class = '';
-        this.selected.style = '';
-        this.selected.typeObj = '';
-        this.selected.placeholder = '';
-        this.selected.rows = -1;
-        this.selected.cols = -1;
-        this.selected.name = '';
-        this.selected.draggable = false;
-        console.log('Deleted');
-        $event = false;
-      }
-    } else {
-      console.log('Nothing to delete');
-    }
-    
-  }
-
-  // deleteComponent(){
-  //   let componentIndex = this.componentList.indexOf(this.selectedComponent);
-  //   if(componentIndex !== -1){
-  //     this.componentList.splice(componentIndex,1);
-  //   }
-  // }
 
   /****************** OLD CODE STARTS HERE **********************/
 }

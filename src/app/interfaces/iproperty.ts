@@ -18,6 +18,7 @@ export interface IProperty {
   link3?: string;
   checked?: string;
   draggable?: boolean;
+  hidden?: boolean;
   tblRows?: number;
   tblCols?: number;
   tblArrayRow?: any;
@@ -30,7 +31,6 @@ export interface IProperty {
   updateCallback?: (row, col) => void;
   url?: SafeResourceUrl;
   selected: boolean;
-  hidden?: boolean;
   mouseDragPositionX?: any;
   mouseDragPositionY?: any;
   dummystyle?:any;
