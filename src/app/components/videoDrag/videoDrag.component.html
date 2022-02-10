@@ -1,4 +1,4 @@
-<div cdkDrag [cdkDragDisabled]="!props.draggable" cdkDragBoundary="#canvas" [class]="props.class"
+<div cdkDrag [cdkDragDisabled]="!props.draggable" cdkDragBoundary="#canvas"
 
 [ngStyle]="{
   position: 'fixed',
@@ -20,6 +20,7 @@
 frameborder="0" 
 allowfullscreen dnd-droppable-iframe
 [src]="props.url"
+[class]="props.class"
 [ngStyle]="{
 'position': 'sticky',
 'left': (mousePositionLeft-canvasPositionLeft) + 'px',
