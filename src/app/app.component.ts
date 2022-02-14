@@ -1175,7 +1175,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
 
   //the comment below are for deleting a cssRule by one
-  /* 
+  
   deleteCSSRule(cssString: string) { //deletes the CSS rule
     let newCssRuleCount = document.styleSheets[0].cssRules.length;
     let cssRuleStringTemp: string;
@@ -1208,7 +1208,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   clearCss() {
     this.styleBox.nativeElement.value = '';
   } 
-  */
+  
 
   /*************Here Ends CSS Code******************/
 

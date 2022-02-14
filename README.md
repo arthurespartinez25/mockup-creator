@@ -83,11 +83,11 @@ Elements:
 ## Setting Up the Database
 
 The following are the steps to set-up the database:
-
-1.Create “mockupdb” Database
+1. Install MS SQL
+2.On SQL Query, create “mockupdb” Database
      	CREATE DATABASE mockupdb;
 
-2.Create LOGIN using “mockuser” as username and “Awsol12#”  as PASSWORD 
+3.Create LOGIN using “mockuser” as username and “Awsol12#”  as PASSWORD 
 
     USE master;
     GO
@@ -101,7 +101,7 @@ The following are the steps to set-up the database:
   	EXEC sp_addrolemember N'db_owner', N'mockuser';
     GO
     
-3.Create “Users” TABLE with the following columns
+4.Create “Users” TABLE with the following columns
         CREATE TABLE Users (
     	UserID int IDENTITY(1,1) PRIMARY KEY,
     	UserName varchar(255) NOT NULL UNIQUE,
@@ -110,7 +110,7 @@ The following are the steps to set-up the database:
    	LastName varchar(255) NOT NULL,
    	Email varchar(255) NOT NULL UNIQUE,
     );
-4.Insert a record in Users table 
+5.Insert a record in Users table 
 	INSERT INTO Users(UserName, Password, FirstName, LastName, Email) VALUES (
     
     'mmiller0001',
@@ -119,7 +119,19 @@ The following are the steps to set-up the database:
     'Miller',
     'mike.miller2021@gmail.com'
     );
- 	        
+6. Set security property of Server to "SQL Server and Windows Authentication mode". Restart your server.
+7.  Try to login your server with the credentials created.
+    - Set Authentication to "SQL Server Authenticaton"
+    - Input username "mockuser" and password "Awsol12#"
+8. On your windows, search for "SQL Server 2019 Configuration Manager"
+9. Expand SQL Server Network Configuration and click "Protocols for SQL Express"
+10. Enable TCP/IP
+11. Right click on TCP/IP and click Properties.
+12. Go to IP Addresses, SET IPALL TCP PORT to 1433
+13. On your windows, search for "Services" then restart SQL Server(SQLEXPRESS)
+14. Connect your server by running node server.js, then login your Users data on your angular app.
+    - Username: "mmiller0001"
+    - Password: "password"
 ## Known bugs
 
 ## Areas of Improvement
