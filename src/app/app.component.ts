@@ -288,6 +288,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.mousePositionY = this.canvasTop;
     }
     this.componentList.push(temp);
+    
   }
   //----------------------------------------------------------------------------
   onDragEndedAddComponent(event: CdkDragEnd, component: string) {

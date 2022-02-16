@@ -2,7 +2,7 @@ import { CdkDragDrop, CdkDragEnd, DragDrop, moveItemInArray } from '@angular/cdk
 import { Location } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ComponentRef, ElementRef, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ComponentRef, ElementRef, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
@@ -37,7 +37,6 @@ import { UsersService } from 'src/app/service/users.service';
 export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked {
   title = 'mockup-creator';
   index: number;
-  componentList: IComponent[] = [];
   numberOfComponents: any = [];
   selectedComponent: IComponent;
   ref: ComponentRef<any>;
@@ -89,6 +88,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
   @ViewChild(PropertyComponent) propertyCmp:PropertyComponent;
+  @Input() componentList : IComponent[] = [];
   changeref: ChangeDetectorRef;
   constructor(
     private loginCookie:CookieService,
@@ -158,134 +158,6 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     setTimeout(() => {
       window.location.reload();
     }, 100);
-  }
-
-  addComponent(component: string) {
-    let temp: IComponent;
-
-    switch (component) {
-      case 'button':
-        temp = new ButtonDragComponent(this.canvas);
-        break;
-
-      case 'label':
-        temp = new LabelDragComponent(this.canvas);
-        break;
-
-      case 'checkbox':
-        temp = new CheckboxDragComponent(this.canvas);
-        break;
-
-      case 'dropdown':
-        temp = new DropdownDragComponent(this.canvas);
-        break;
-
-      case 'img':
-        temp = new ImageDragComponent(this.canvas);
-        break;
-
-      case 'radio':
-        temp = new RadioDragComponent(this.canvas);
-        break;
-
-      case 'textbox':
-        temp = new TextboxDragComponent(this.canvas);
-        break;
-
-      case 'popup':
-        this._popupCount++;
-        temp = new PopupDragComponent(this.canvas);
-        break;
-
-      case 'paragraph':
-        temp = new ParagraphDragComponent(this.canvas);
-        break;
-
-      case 'nav':
-        temp = new NavbarDragComponent(this.canvas);
-        break;
-
-      case 'modal':
-        temp = new ModalDragComponent(this.canvas);
-        break;
-
-      case 'datepicker':
-        temp = new DatepickerDragComponent(this.canvas, this.datepipe);
-        break;
-
-      case 'header':
-        temp = new HeaderDragComponent(this.canvas);
-        break;
-
-      case 'input':
-        temp = new InputDragComponent(this.canvas);
-        break;
-
-      case 'link':
-        temp = new LinkDragComponent(this.canvas);
-        break;
-
-      case 'table':
-        temp = new TableDragComponent(this.canvas, this.changeref);
-        break;
-
-      case 'youtube':
-        temp = new YoutubeDragComponent(this.canvas, this.sanitizer);
-        break;
-
-      default:
-        temp = new ButtonDragComponent(this.canvas);
-    }
-    this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
-    this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
-    this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
-    if (this.domInsideCanvas == false) {
-      this.mousePositionX = this.canvasLeft;
-      this.mousePositionY = this.canvasTop;
-    }
-    this.componentList.push(temp);
-  }
-  //----------------------------------------------------------------------------
-  onDragEndedAddComponent(event: CdkDragEnd, component: string) {
-    event.source._dragRef.reset();
-    if (this.domInsideCanvas == true) {
-      this.offsetLeft = event.source.element.nativeElement.offsetLeft;
-      this.offsetTop = event.source.element.nativeElement.offsetTop;
-      this.xDistance = event.distance.x;
-      this.yDistance = event.distance.y;
-      this.canvasLeftX = (
-        this.subMenuItem.nativeElement as HTMLElement
-      ).offsetWidth;
-      this.canvasTopY = (
-        this.subMenuItem.nativeElement as HTMLElement
-      ).offsetTop;
-      console.log(this.canvasLeftX);
-      console.log(this.canvasTopY);
-      if (
-        component == 'img' ||
-        component == 'nav' ||
-        component == 'link' ||
-        component == 'table' ||
-        component == 'youtube'
-      ) {
-        this.canvasLeftX = 0;
-        this.canvasTopY = 0;
-      } else if (
-        component == 'header' ||
-        component == 'paragraph' ||
-        component == 'label'
-      ) {
-        this.canvasLeftX = (
-          this.subMenuItem2.nativeElement as HTMLElement
-        ).offsetWidth;
-        this.canvasTopY = (
-          this.subMenuItem2.nativeElement as HTMLElement
-        ).offsetTop;
-      }
-      this.mousePositionX = this.offsetLeft + this.xDistance + this.canvasLeftX;
-      this.mousePositionY = this.offsetTop + this.yDistance + this.canvasTopY;
-    }
-    this.addComponent(component);
   }
 
   //----------------------------------------------------------------------------
