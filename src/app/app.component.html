@@ -308,7 +308,15 @@
       </div>
     </div>
   </div> -->
-  <app-canvas [componentList]="componentList"></app-canvas>
+  <app-canvas 
+    [componentList]="componentList"
+    [mousePositionX]="mousePositionX"
+    [mousePositionY]="mousePositionY"
+    [canvasLeft]="canvasLeft"
+    [canvasTop]="canvasTop"
+    [canvasW]="canvasW"
+    [whatComponent]="whatComponent"
+    ></app-canvas>
   <!-- CODE SECTION -->
 
   <div id="code-container">

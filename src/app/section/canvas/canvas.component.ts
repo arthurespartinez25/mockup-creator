@@ -88,7 +88,15 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
   @ViewChild(PropertyComponent) propertyCmp:PropertyComponent;
+
   @Input() componentList : IComponent[] = [];
+  @Input() mousePositionX: any;
+  @Input() mousePositionY: any;
+  @Input() canvasLeft: any;
+  @Input() canvasTop: any;
+  @Input() canvasW: any;
+  @Input() whatComponent:any;
+
   changeref: ChangeDetectorRef;
   constructor(
     private loginCookie:CookieService,
@@ -107,11 +115,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   delete: boolean;
   cssBody: SafeStyle;
   canvasBG: string;
-  canvasLeft = 0;
-  canvasTop = 0;
-  canvasW = 0;
   canvasPass = this.canvas;
-  whatComponent = 'none';
   sessionID = this.loginCookie.get("sessionID");
   inSession: boolean = this.sessionID == "12345";
 
@@ -130,8 +134,6 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
 
   canvasLeftX = 0;
   canvasTopY = 0;
-  mousePositionX = 110;
-  mousePositionY = 110;
   domInsideCanvas = false;
   offsetLeft: any = 0;
   offsetTop:any  = 0;
