@@ -139,7 +139,7 @@ Database Set-up and creation of new log in.
 5.On the left side of your MS SQL screen under "Object Explorer", right click on your server name and click "Properties". Click "Security" and set security property of Server to "SQL Server and Windows Authentication mode" then click "OK". Right click on your server name again and click "Restart".
 6.Click the Plugin icon to login your server with the credentials created.
     - Set Authentication to "SQL Server Authenticaton"
-    - Input username "mockuser" and password "Awsol12#"
+    - Input Login "mockuser" and Password "Awsol12#"
     - Click "Connect"
 
 Connection to Server
