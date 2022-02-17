@@ -80,14 +80,27 @@ Elements:
 
 `Iframe`: An Iframe is a component that can be embedded inside the canvas and is often used to insert content.
 
-## Setting Up the Database
+## Installation and Setting Up the Database
 
-The following are the steps to set-up the database:
-1. Install MS SQL
-2.On SQL Query, create “mockupdb” Database
+The following are the steps to installation and setting-up the database:
+
+Installation of Microsoft SQL 2019 on Windows10: 
+1.Download MS SQL 2019 Express edition on this website https://www.microsoft.com/en-in/sql-server/sql-server-downloads
+2.Run the downloaded app, select "Basic" installation type.
+3.Click "Accept" then "Install".
+4.Once done, click "Connect Now" to check if MSSQL is installed correctly. If the version is visible on CMD, then it's installed correctly.
+4.Click "Install SSMS" and you will be redirected to their website.
+5.On their website, click "Download SQL Server Management Studio (SSMS)"
+6.Run the downloaded SSMS then click "Install"
+7.Once Setup is completed, click "Close"
+8.Open Microsoft SQL Server Management Studio on your computer. Select "Windows Authentication" on Authentication then click "Connect".
+
+Database Set-up and creation of new log in.
+1.Click "New Query". Create “mockupdb” Database by running the command below, then click "Execute":
+
      	CREATE DATABASE mockupdb;
 
-3.Create LOGIN using “mockuser” as username and “Awsol12#”  as PASSWORD 
+2.On your "New Query" again, create LOGIN using “mockuser” as username and “Awsol12#”  as PASSWORD by running the command velow. Then click "Execute".
 
     USE master;
     GO
@@ -101,7 +114,8 @@ The following are the steps to set-up the database:
   	EXEC sp_addrolemember N'db_owner', N'mockuser';
     GO
     
-4.Create “Users” TABLE with the following columns
+3.On your "New Query" again, create “Users” TABLE by running the command below. Then click "Execute".
+
         CREATE TABLE Users (
     	UserID int IDENTITY(1,1) PRIMARY KEY,
     	UserName varchar(255) NOT NULL UNIQUE,
@@ -110,7 +124,9 @@ The following are the steps to set-up the database:
    	LastName varchar(255) NOT NULL,
    	Email varchar(255) NOT NULL UNIQUE,
     );
-5.Insert a record in Users table 
+
+4.On your "New Query", insert a record in Users table by running the command below, then click "Execute".
+
 	INSERT INTO Users(UserName, Password, FirstName, LastName, Email) VALUES (
     
     'mmiller0001',
@@ -119,17 +135,21 @@ The following are the steps to set-up the database:
     'Miller',
     'mike.miller2021@gmail.com'
     );
-6. Set security property of Server to "SQL Server and Windows Authentication mode". Restart your server.
-7.  Try to login your server with the credentials created.
+
+5.On the left side of your MS SQL screen under "Object Explorer", right click on your server name and click "Properties". Click "Security" and set security property of Server to "SQL Server and Windows Authentication mode" then click "OK". Right click on your server name again and click "Restart".
+6.Click the Plugin icon to login your server with the credentials created.
     - Set Authentication to "SQL Server Authenticaton"
     - Input username "mockuser" and password "Awsol12#"
-8. On your windows, search for "SQL Server 2019 Configuration Manager"
-9. Expand SQL Server Network Configuration and click "Protocols for SQL Express"
-10. Enable TCP/IP
-11. Right click on TCP/IP and click Properties.
-12. Go to IP Addresses, SET IPALL TCP PORT to 1433
-13. On your windows, search for "Services" then restart SQL Server(SQLEXPRESS)
-14. Connect your server by running node server.js, then login your Users data on your angular app.
+    - Click "Connect"
+
+Connection to Server
+1.On your windows search bar, search for "SQL Server 2019 Configuration Manager".
+2.Expand "SQL Server Network Configuration" and click "Protocols for SQL Express"
+3.Right click on TCP/IP and click Enable.
+4.Right click on TCP/IP again and click Properties.
+5.Go to IP Addresses.On the bottom part, set IPAll TCP PORT to 1433.
+6.On your windows search bar again, search for "Services" then right click on SQL Server(SQLEXPRESS) and click Restart.
+7.Run the angular app (ng serve) and its server(node server.js), then login your Users data on your angular app.
     - Username: "mmiller0001"
     - Password: "password"
 ## Known bugs
@@ -152,3 +172,11 @@ This Mockup Creation Tool is developed by the following trainees with the help o
     - Meryll Avanceña (Meryll)
     - VJ Marlo Concha (VJ)
     - James Wilmer Lim (James)
+
+    B35B Manila Trainees:
+    - Stephen Caña (Stip)
+    - Arthur Espartinez (Art)
+    - Jesu Romas Nuevarez (Jes)
+    
+    B35B Cebu Trainee:
+    - Jesu Jomari Lacastesantos (Jay)
