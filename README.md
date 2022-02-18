@@ -87,30 +87,33 @@ The following are the steps to installation and setting-up the database:
 Installation of Microsoft SQL 2019 on Windows10: 
 
 1.Download MS SQL 2019 Express edition on this website https://www.microsoft.com/en-in/sql-server/sql-server-downloads
-
+![Step1!](images/sqlInstallation/Step1.png)
 2.Run the downloaded app, select "Basic" installation type.
-
+![Step2!](images/sqlInstallation/Step2.png)
 3.Click "Accept" then "Install".
-
+![Step3.0!](images/sqlInstallation/Step3.0.png)
+![Step3.1!](images/sqlInstallation/Step3.1.png)
 4.Once done, click "Connect Now" to check if MSSQL is installed correctly. If the version is visible on CMD, then it's installed correctly. Then close the CMD.
-
+![Step4.0!](images/sqlInstallation/Step4.0.png)
+![Step4.1!](images/sqlInstallation/Step4.1.png)
 5.Click "Install SSMS" and you will be redirected to their website.
-
+![Step5.0!](images/sqlInstallation/Step5.0.png)
 6.On their website, click "Download SQL Server Management Studio (SSMS)"
-
+![Step6.0!](images/sqlInstallation/Step6.0.png)
 7.Run the downloaded SSMS then click "Install"
-
+![Step7.0!](images/sqlInstallation/Step7.0.png)
 8.Once Setup is completed, click "Close" and close all open tabs.
-
+![Step8.0!](images/sqlInstallation/Step8.0.png)
 9.Open Microsoft SQL Server Management Studio on your computer. Select "Windows Authentication" on Authentication then click "Connect".
-
+![Step9.0!](images/sqlInstallation/Step9.0.png)
 
 Database Set-up and creation of new log in.
 
 1.Click "New Query". Create “mockupdb” Database by running the command below, then click "Execute":
 
      	CREATE DATABASE mockupdb;
-
+![Step1.0!](images/databaseSetUp/Step1.0.png)
+![Step1.1!](images/databaseSetUp/Step1.1.png)
 2.On your Query, delete the previous command then create LOGIN using “mockuser” as username and “Awsol12#”  as PASSWORD by running the command below. Then click "Execute".
 
     USE master;
@@ -124,7 +127,7 @@ Database Set-up and creation of new log in.
   	GO
   	EXEC sp_addrolemember N'db_owner', N'mockuser';
     GO
-    
+![Step2.0!](images/databaseSetUp/Step2.0.png)
 3.On your Query again, delete the previous command then create “Users” TABLE by running the command below. Then click "Execute".
 
         CREATE TABLE Users (
@@ -135,7 +138,7 @@ Database Set-up and creation of new log in.
    	LastName varchar(255) NOT NULL,
    	Email varchar(255) NOT NULL UNIQUE,
     );
-
+![Step3.0!](images/databaseSetUp/Step3.0.png)
 4.On your Query again, delete the previous command then insert a record in Users table by running the command below, and click "Execute".
 
 	INSERT INTO Users(UserName, Password, FirstName, LastName, Email) VALUES (
@@ -146,49 +149,56 @@ Database Set-up and creation of new log in.
     'Miller',
     'mike.miller2021@gmail.com'
     );
-
+![Step4.0!](images/databaseSetUp/Step4.0.png)
 5.Close your Query tab and click "Yes" to save the changes.
-
+![Step5.0!](images/databaseSetUp/Step5.0.png)
 6.On the left side of your MS SQL screen under "Object Explorer", right click on your server name and click "Properties". Click "Security" and set security property of Server to "SQL Server and Windows Authentication mode" then click "OK". Right click on your server name again and click "Restart". Then click "Yes".
-
+![Step6.0!](images/databaseSetUp/Step6.0.png)
 7.Once restarting is done, click the Plugin icon to login your server with the credentials created.
 
     - Set Authentication to "SQL Server Authenticaton"
     - Input Login "mockuser" and Password "Awsol12#"
     - Click "Connect"
-
+![Step7.0!](images/databaseSetUp/Step7.0.png)
 Connection to Server
 
 1.On your windows search bar, search for "SQL Server 2019 Configuration Manager". Click "Open".
-
+![Step1!](images/connectionToServer/Step1.png)
 2.Expand "SQL Server Network Configuration" and click "Protocols for SQL Express"
-
+![Step2!](images/connectionToServer/Step2.png)
 3.Right click on TCP/IP and click Enable.
-
+![Step3!](images/connectionToServer/Step3.png)
 4.Right click on TCP/IP again and click Properties.
-
+![Step4!](images/connectionToServer/Step4.png)
 5.Go to IP Addresses.On the bottom part, set IPAll TCP PORT to 1433. Click "Apply" then "OK". 
-
+![Step5.0!](images/connectionToServer/Step5.0.png)
+![Step5.1!](images/connectionToServer/Step5.1.png)
+![Step5.2!](images/connectionToServer/Step5.2.png)
 6.Click "OK" to close TCP/IP Properties then close "SQL Server 2019 Configuration Manager".
-
+![Step6!](images/connectionToServer/Step6.png)
 7.On your windows search bar again, search for "Services" then click "Open" 
-
+![Step7!](images/connectionToServer/Step7.png)
 8.Right click on SQL Server(SQLEXPRESS) and click Restart. Once done, close the Services tab.
-
+![Step8!](images/connectionToServer/Step8.png)
 9.On dev-components branch, open the project on Visual Studio Code.
+![Step9.0!](images/connectionToServer/Step9.0.png)
+![Step9.1!](images/connectionToServer/Step9.1.png)
+10.On your VS Code, click "Terminal" then "New Terminal" 
+![Step10!](images/connectionToServer/Step10.png)
+11.On your terminal, run "npm install" to install the dependencies.
+![Step11!](images/connectionToServer/Step11.png)
+12.Once installation is done, run "ng serve" on your terminal. Once compiled succesfully, open your browser and go to http://localhost:4200/ to open your app. 
+![Step12.0!](images/connectionToServer/Step12.0.png)
+![Step12.1!](images/connectionToServer/Step12.1.png)
+13.Go back to your VS Code and open another terminal.
 
-10.On your VS Code, open a terminal then run "npm install" to install the dependencies.
-
-11.Once installation is done, run "ng serve" on your terminal. Once compiled succesfully, open your browser and go to http://localhost:4200/ to open your app. 
-
-12.Go back to your VS Code and open another terminal.
-
-13.On new terminal run "node server.js" to run the server.
-
-14.On your browser, login your Users data on your angular app.
+14.On new terminal run "node server.js" to run the server.
+![Step14!](images/connectionToServer/Step14.png)
+15.On your browser, login your Users data on your angular app.
 
     - Username: "mmiller0001"
     - Password: "password"
+![Step15!](images/connectionToServer/Step15.png)
 ## Known bugs
 
 ## Areas of Improvement
