@@ -92,17 +92,17 @@ Installation of Microsoft SQL 2019 on Windows10:
 
 3.Click "Accept" then "Install".
 
-4.Once done, click "Connect Now" to check if MSSQL is installed correctly. If the version is visible on CMD, then it's installed correctly.
+4.Once done, click "Connect Now" to check if MSSQL is installed correctly. If the version is visible on CMD, then it's installed correctly. Then close the CMD.
 
-4.Click "Install SSMS" and you will be redirected to their website.
+5.Click "Install SSMS" and you will be redirected to their website.
 
-5.On their website, click "Download SQL Server Management Studio (SSMS)"
+6.On their website, click "Download SQL Server Management Studio (SSMS)"
 
-6.Run the downloaded SSMS then click "Install"
+7.Run the downloaded SSMS then click "Install"
 
-7.Once Setup is completed, click "Close"
+8.Once Setup is completed, click "Close" and close all open tabs.
 
-8.Open Microsoft SQL Server Management Studio on your computer. Select "Windows Authentication" on Authentication then click "Connect".
+9.Open Microsoft SQL Server Management Studio on your computer. Select "Windows Authentication" on Authentication then click "Connect".
 
 
 Database Set-up and creation of new log in.
@@ -111,7 +111,7 @@ Database Set-up and creation of new log in.
 
      	CREATE DATABASE mockupdb;
 
-2.On your "New Query" again, create LOGIN using “mockuser” as username and “Awsol12#”  as PASSWORD by running the command velow. Then click "Execute".
+2.On your Query, delete the previous command then create LOGIN using “mockuser” as username and “Awsol12#”  as PASSWORD by running the command below. Then click "Execute".
 
     USE master;
     GO
@@ -125,7 +125,7 @@ Database Set-up and creation of new log in.
   	EXEC sp_addrolemember N'db_owner', N'mockuser';
     GO
     
-3.On your "New Query" again, create “Users” TABLE by running the command below. Then click "Execute".
+3.On your Query again, delete the previous command then create “Users” TABLE by running the command below. Then click "Execute".
 
         CREATE TABLE Users (
     	UserID int IDENTITY(1,1) PRIMARY KEY,
@@ -136,7 +136,7 @@ Database Set-up and creation of new log in.
    	Email varchar(255) NOT NULL UNIQUE,
     );
 
-4.On your "New Query", insert a record in Users table by running the command below, then click "Execute".
+4.On your Query again, delete the previous command then insert a record in Users table by running the command below, and click "Execute".
 
 	INSERT INTO Users(UserName, Password, FirstName, LastName, Email) VALUES (
     
@@ -147,9 +147,11 @@ Database Set-up and creation of new log in.
     'mike.miller2021@gmail.com'
     );
 
-5.On the left side of your MS SQL screen under "Object Explorer", right click on your server name and click "Properties". Click "Security" and set security property of Server to "SQL Server and Windows Authentication mode" then click "OK". Right click on your server name again and click "Restart".
+5.Close your Query tab and click "Yes" to save the changes.
 
-6.Click the Plugin icon to login your server with the credentials created.
+6.On the left side of your MS SQL screen under "Object Explorer", right click on your server name and click "Properties". Click "Security" and set security property of Server to "SQL Server and Windows Authentication mode" then click "OK". Right click on your server name again and click "Restart". Then click "Yes".
+
+7.Once restarting is done, click the Plugin icon to login your server with the credentials created.
 
     - Set Authentication to "SQL Server Authenticaton"
     - Input Login "mockuser" and Password "Awsol12#"
@@ -157,7 +159,7 @@ Database Set-up and creation of new log in.
 
 Connection to Server
 
-1.On your windows search bar, search for "SQL Server 2019 Configuration Manager".
+1.On your windows search bar, search for "SQL Server 2019 Configuration Manager". Click "Open".
 
 2.Expand "SQL Server Network Configuration" and click "Protocols for SQL Express"
 
@@ -165,11 +167,25 @@ Connection to Server
 
 4.Right click on TCP/IP again and click Properties.
 
-5.Go to IP Addresses.On the bottom part, set IPAll TCP PORT to 1433.
+5.Go to IP Addresses.On the bottom part, set IPAll TCP PORT to 1433. Click "Apply" then "OK". 
 
-6.On your windows search bar again, search for "Services" then right click on SQL Server(SQLEXPRESS) and click Restart.
+6.Click "OK" to close TCP/IP Properties then close "SQL Server 2019 Configuration Manager".
 
-7.Run the angular app (ng serve) and its server(node server.js), then login your Users data on your angular app.
+7.On your windows search bar again, search for "Services" then click "Open" 
+
+8.Right click on SQL Server(SQLEXPRESS) and click Restart. Once done, close the Services tab.
+
+9.On dev-components branch, open the project on Visual Studio Code.
+
+10.On your VS Code, open a terminal then run "npm install" to install the dependencies.
+
+11.Once installation is done, run "ng serve" on your terminal. Once compiled succesfully, open your browser and go to http://localhost:4200/ to open your app. 
+
+12.Go back to your VS Code and open another terminal.
+
+13.On new terminal run "node server.js" to run the server.
+
+14.On your browser, login your Users data on your angular app.
 
     - Username: "mmiller0001"
     - Password: "password"
