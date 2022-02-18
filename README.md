@@ -85,17 +85,28 @@ Elements:
 The following are the steps to installation and setting-up the database:
 
 Installation of Microsoft SQL 2019 on Windows10: 
+
 1.Download MS SQL 2019 Express edition on this website https://www.microsoft.com/en-in/sql-server/sql-server-downloads
+
 2.Run the downloaded app, select "Basic" installation type.
+
 3.Click "Accept" then "Install".
+
 4.Once done, click "Connect Now" to check if MSSQL is installed correctly. If the version is visible on CMD, then it's installed correctly.
+
 4.Click "Install SSMS" and you will be redirected to their website.
+
 5.On their website, click "Download SQL Server Management Studio (SSMS)"
+
 6.Run the downloaded SSMS then click "Install"
+
 7.Once Setup is completed, click "Close"
+
 8.Open Microsoft SQL Server Management Studio on your computer. Select "Windows Authentication" on Authentication then click "Connect".
 
+
 Database Set-up and creation of new log in.
+
 1.Click "New Query". Create “mockupdb” Database by running the command below, then click "Execute":
 
      	CREATE DATABASE mockupdb;
@@ -137,19 +148,29 @@ Database Set-up and creation of new log in.
     );
 
 5.On the left side of your MS SQL screen under "Object Explorer", right click on your server name and click "Properties". Click "Security" and set security property of Server to "SQL Server and Windows Authentication mode" then click "OK". Right click on your server name again and click "Restart".
+
 6.Click the Plugin icon to login your server with the credentials created.
+
     - Set Authentication to "SQL Server Authenticaton"
     - Input Login "mockuser" and Password "Awsol12#"
     - Click "Connect"
 
 Connection to Server
+
 1.On your windows search bar, search for "SQL Server 2019 Configuration Manager".
+
 2.Expand "SQL Server Network Configuration" and click "Protocols for SQL Express"
+
 3.Right click on TCP/IP and click Enable.
+
 4.Right click on TCP/IP again and click Properties.
+
 5.Go to IP Addresses.On the bottom part, set IPAll TCP PORT to 1433.
+
 6.On your windows search bar again, search for "Services" then right click on SQL Server(SQLEXPRESS) and click Restart.
+
 7.Run the angular app (ng serve) and its server(node server.js), then login your Users data on your angular app.
+
     - Username: "mmiller0001"
     - Password: "password"
 ## Known bugs
