@@ -84,7 +84,7 @@ Elements:
 
 The following are the steps to installation and setting-up the database:
 
-Installation of Microsoft SQL 2019 on Windows10: 
+###### Installation of Microsoft SQL 2019 on Windows10: 
 
 1.Download MS SQL 2019 Express edition on this website https://www.microsoft.com/en-in/sql-server/sql-server-downloads
 ![Step1!](images/sqlInstallation/Step1.png)
@@ -107,7 +107,7 @@ Installation of Microsoft SQL 2019 on Windows10:
 9.Open Microsoft SQL Server Management Studio on your computer. Select "Windows Authentication" on Authentication then click "Connect".
 ![Step9.0!](images/sqlInstallation/Step9.0.png)
 
-Database Set-up and creation of new log in.
+###### Database Set-up and creation of new log in.
 
 1.Click "New Query". Create “mockupdb” Database by running the command below, then click "Execute":
 
@@ -154,13 +154,18 @@ Database Set-up and creation of new log in.
 ![Step5.0!](images/databaseSetUp/Step5.0.png)
 6.On the left side of your MS SQL screen under "Object Explorer", right click on your server name and click "Properties". Click "Security" and set security property of Server to "SQL Server and Windows Authentication mode" then click "OK". Right click on your server name again and click "Restart". Then click "Yes".
 ![Step6.0!](images/databaseSetUp/Step6.0.png)
+![Step6.1!](images/databaseSetUp/Step6.1.png)
+![Step6.2!](images/databaseSetUp/Step6.2.png)
+![Step6.3!](images/databaseSetUp/Step6.3.png)
 7.Once restarting is done, click the Plugin icon to login your server with the credentials created.
 
     - Set Authentication to "SQL Server Authenticaton"
     - Input Login "mockuser" and Password "Awsol12#"
     - Click "Connect"
 ![Step7.0!](images/databaseSetUp/Step7.0.png)
-Connection to Server
+![Step7.1!](images/databaseSetUp/Step7.1.png)
+
+###### Connection to Server
 
 1.On your windows search bar, search for "SQL Server 2019 Configuration Manager". Click "Open".
 ![Step1!](images/connectionToServer/Step1.png)
@@ -182,7 +187,6 @@ Connection to Server
 ![Step8!](images/connectionToServer/Step8.png)
 9.On dev-components branch, open the project on Visual Studio Code.
 ![Step9.0!](images/connectionToServer/Step9.0.png)
-![Step9.1!](images/connectionToServer/Step9.1.png)
 10.On your VS Code, click "Terminal" then "New Terminal" 
 ![Step10!](images/connectionToServer/Step10.png)
 11.On your terminal, run "npm install" to install the dependencies.
