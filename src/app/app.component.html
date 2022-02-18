@@ -11,7 +11,16 @@
 <!-- <app-navbar></app-navbar> -->
 <div *ngIf="this.inSession" class="content" role="main">
   <!-- PALETTE SECTION -->
-  <app-pallete></app-pallete>
+    <app-pallete
+    [canvas] = "passCanvas"
+    (updateComponentListEvent)="updateComponentList($event)"
+    (updateCanvasLeftEvent)="updateCanvasLeft($event)"
+    (updateCanvasTopEvent)="updateCanvasTop($event)"
+    (updateCanvasWEvent)="updateCanvasW($event)"
+    (updateMousePosX)="updateMousePositionX($event)"
+    (updateMousePosY)="updateMousePositionY($event)"
+    ></app-pallete>
+  
   
   <!-- CANVAS SECTION -->
 

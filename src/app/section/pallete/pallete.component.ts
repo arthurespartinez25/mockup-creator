@@ -14,8 +14,10 @@ import {
   Component,
   ComponentRef,
   ElementRef,
+  EventEmitter,
   Input,
   OnInit,
+  Output,
   QueryList,
   Renderer2,
   ViewChild,
@@ -107,11 +109,17 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
     '<script>\nvar popoverTriggerList = [].slice.call(document.querySelectorAll(\'[data-bs-toggle="popover"]\'))\nvar popoverList = popoverTriggerList.map(function (popoverTriggerEl) {\nreturn new bootstrap.Popover(popoverTriggerEl)\n})\n</script>';
 
   @ViewChild('PropertyComponent') property: boolean;
-  @ViewChild('canvas') canvas!:ElementRef;
+  @Input() canvas: ElementRef;
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
   @ViewChild(PropertyComponent) propertyCmp:PropertyComponent;
+  @Output() updateComponentListEvent = new EventEmitter<IComponent>();
+  @Output() updateCanvasLeftEvent = new EventEmitter<number>();
+  @Output() updateCanvasTopEvent = new EventEmitter<number>();
+  @Output() updateCanvasWEvent = new EventEmitter<number>();
+  @Output() updateMousePosX = new EventEmitter<number>();
+  @Output() updateMousePosY = new EventEmitter<number>();
   changeref: ChangeDetectorRef;
   constructor(
     private loginCookie:CookieService,
@@ -148,8 +156,9 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       }) */
     }
   }
-  ngAfterViewInit(): void {}
-
+  ngAfterViewInit(): void {
+    console.log(this.canvas);
+  }
   //////////////////////////////////////////////////////////////////////////////
   //   THIS PROJECT WAS STARTED BY BATO BOYS AND CEBU TEAM  
   //                          JUPAO  
@@ -200,6 +209,9 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
     }, 100);
   }
 
+  returnComponentList() {
+    return this.componentList;
+  }
 
   addComponent(component: string) {
     let temp: IComponent;
@@ -277,20 +289,21 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       default:
         temp = new ButtonDragComponent(this.canvas);
     }
-    console.log(component)
-    console.log(temp)
-    // console.log(this.componentList.push(temp))
-    console.log(this.canvas)
-    console.log(this.componentList)
+    console.log(this.canvas);
     this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
-    console.log("Hey")
     this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
-    this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
+    this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;    
+    this.updateCanvasLeftEvent.emit(this.canvasLeft);
+    this.updateCanvasTopEvent.emit(this.canvasTop);
+    this.updateCanvasWEvent.emit(this.canvasW);
     if (this.domInsideCanvas == false) {
       this.mousePositionX = this.canvasLeft;
       this.mousePositionY = this.canvasTop;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
     }
     this.componentList.push(temp);
+    this.updateComponentListEvent.emit(temp);
   }
   //----------------------------------------------------------------------------
   onDragEndedAddComponent(event: CdkDragEnd, component: string) {

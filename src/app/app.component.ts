@@ -47,6 +47,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { UsersService } from './service/users.service';
 import { DatePipe } from '@angular/common'
 import { PropertyComponent } from './property/property.component';
+import { PalleteComponent } from './section/pallete/pallete.component';
 
 @Component({
   selector: 'app-root',
@@ -103,7 +104,8 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     '<script>\nvar popoverTriggerList = [].slice.call(document.querySelectorAll(\'[data-bs-toggle="popover"]\'))\nvar popoverList = popoverTriggerList.map(function (popoverTriggerEl) {\nreturn new bootstrap.Popover(popoverTriggerEl)\n})\n</script>';
 
   @ViewChild('PropertyComponent') property: boolean;
-  @ViewChild('canvas') canvas!: ElementRef;
+  @ViewChild('canvas', { read: ElementRef }) canvas!: ElementRef;
+  @ViewChild(PalleteComponent) palette: PalleteComponent;
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
@@ -125,6 +127,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
   delete: boolean;
   cssBody: SafeStyle;
+  passCanvas: ElementRef;
   canvasBG: string;
   canvasLeft = 0;
   canvasTop = 0;
@@ -144,7 +147,34 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       }) */
     }
   }
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {    
+    this.passCanvas = this.canvas;
+    //this.componentList = this.palette.returnComponentList();
+  }
+
+  updateComponentList(components: IComponent) {
+    this.componentList.push(components);
+  }
+  
+  updateCanvasLeft(value: number) {
+    this.canvasLeft = value;
+  }
+
+  updateCanvasTop(value: number) {
+    this.canvasTop = value;
+  }
+
+  updateCanvasW(value: number) {
+    this.canvasW = value;
+  }
+
+  updateMousePositionX(value: number) {
+    this.mousePositionX = value;
+  }
+
+  updateMousePositionY(value: number) {
+    this.mousePositionY = value;
+  }
 
   //////////////////////////////////////////////////////////////////////////////
   //   THIS PROJECT WAS STARTED BY BATO BOYS AND CEBU TEAM  
@@ -195,140 +225,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       window.location.reload();
     }, 100);
   }
-
-
-  addComponent(component: string) {
-    let temp: IComponent;
-
-    switch (component) {
-      case 'button':
-        temp = new ButtonDragComponent(this.canvas);
-        break;
-
-      case 'label':
-        temp = new LabelDragComponent(this.canvas);
-        break;
-
-      case 'checkbox':
-        temp = new CheckboxDragComponent(this.canvas);
-        break;
-
-      case 'dropdown':
-        temp = new DropdownDragComponent(this.canvas);
-        break;
-
-      case 'img':
-        temp = new ImageDragComponent(this.canvas);
-        break;
-
-      case 'radio':
-        temp = new RadioDragComponent(this.canvas);
-        break;
-
-      case 'textbox':
-        temp = new TextboxDragComponent(this.canvas);
-        break;
-
-      case 'popup':
-        this._popupCount++;
-        temp = new PopupDragComponent(this.canvas);
-        break;
-
-      case 'paragraph':
-        temp = new ParagraphDragComponent(this.canvas);
-        break;
-
-      case 'nav':
-        temp = new NavbarDragComponent(this.canvas);
-        break;
-
-      case 'modal':
-        temp = new ModalDragComponent(this.canvas);
-        break;
-
-      case 'datepicker':
-        temp = new DatepickerDragComponent(this.canvas, this.datepipe);
-        break;
-
-      case 'header':
-        temp = new HeaderDragComponent(this.canvas);
-        break;
-
-      case 'input':
-        temp = new InputDragComponent(this.canvas);
-        break;
-
-      case 'link':
-        temp = new LinkDragComponent(this.canvas);
-        break;
-
-      case 'table':
-        temp = new TableDragComponent(this.canvas, this.changeref);
-        break;
-
-      case 'youtube':
-        temp = new YoutubeDragComponent(this.canvas, this.sanitizer);
-        break;
-
-      default:
-        temp = new ButtonDragComponent(this.canvas);
-    }
-    this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
-    this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
-    this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
-    if (this.domInsideCanvas == false) {
-      this.mousePositionX = this.canvasLeft;
-      this.mousePositionY = this.canvasTop;
-    }
-    this.componentList.push(temp);
-  }
-  passCanvas() {
-    return this.canvas;
-  }
-  //----------------------------------------------------------------------------
-  onDragEndedAddComponent(event: CdkDragEnd, component: string) {
-    event.source._dragRef.reset();
-    if (this.domInsideCanvas == true) {
-      this.offsetLeft = event.source.element.nativeElement.offsetLeft;
-      this.offsetTop = event.source.element.nativeElement.offsetTop;
-      this.xDistance = event.distance.x;
-      this.yDistance = event.distance.y;
-      this.canvasLeftX = (
-        this.subMenuItem.nativeElement as HTMLElement
-      ).offsetWidth;
-      this.canvasTopY = (
-        this.subMenuItem.nativeElement as HTMLElement
-      ).offsetTop;
-      console.log(this.canvasLeftX);
-      console.log(this.canvasTopY);
-      if (
-        component == 'img' ||
-        component == 'nav' ||
-        component == 'link' ||
-        component == 'table' ||
-        component == 'youtube'
-      ) {
-        this.canvasLeftX = 0;
-        this.canvasTopY = 0;
-      } else if (
-        component == 'header' ||
-        component == 'paragraph' ||
-        component == 'label'
-      ) {
-        this.canvasLeftX = (
-          this.subMenuItem2.nativeElement as HTMLElement
-        ).offsetWidth;
-        this.canvasTopY = (
-          this.subMenuItem2.nativeElement as HTMLElement
-        ).offsetTop;
-      }
-      this.mousePositionX = this.offsetLeft + this.xDistance + this.canvasLeftX;
-      this.mousePositionY = this.offsetTop + this.yDistance + this.canvasTopY;
-    }
-    this.addComponent(component);
-    
-  }
-
   //----------------------------------------------------------------------------
 
   get dragDisabled(): boolean {
