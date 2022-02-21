@@ -13,6 +13,7 @@ import {
   Component,
   ComponentRef,
   ElementRef,
+  Input,
   OnInit,
   Renderer2,
   ViewChild,
@@ -109,7 +110,8 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
-  @ViewChild(PropertyComponent) propertyCmp:PropertyComponent;
+  //@ViewChild(PropertyComponent) propertyCmp:PropertyComponent;
+  
   changeref: ChangeDetectorRef;
   constructor(
     private loginCookie:CookieService,
@@ -128,6 +130,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   delete: boolean;
   cssBody: SafeStyle;
   passCanvas: ElementRef;
+  propertyCmp : PropertyComponent;
   canvasBG: string;
   canvasLeft = 0;
   canvasTop = 0;
@@ -174,6 +177,10 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   updateMousePositionY(value: number) {
     this.mousePositionY = value;
+  }
+
+  updatePropertyComponent(value: PropertyComponent) {
+    this.propertyCmp = value;
   }
 
   //////////////////////////////////////////////////////////////////////////////
