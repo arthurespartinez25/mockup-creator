@@ -660,7 +660,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
     this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
     this.updateCanvasTopEvent.emit(this.canvasTop);
     this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
-    this.updateCanvasWEvent.emit(this.canvasTop);
+    this.updateCanvasWEvent.emit(this.canvasW);
   
     this.whatComponent = 'HPNav1';
     this.updateWhatComponentEvent.emit(this.whatComponent);
