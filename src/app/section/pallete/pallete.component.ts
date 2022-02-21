@@ -110,10 +110,12 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
 
   @ViewChild('PropertyComponent') property: boolean;
   @Input() canvas: ElementRef;
+  @Input() propertyCmp: PropertyComponent;
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
-  @ViewChild(PropertyComponent) propertyCmp:PropertyComponent;
+  //@ViewChild(PropertyComponent) propertyCmp:PropertyComponent;
+
   @Output() updateComponentListEvent = new EventEmitter<IComponent>();
   @Output() updateCanvasLeftEvent = new EventEmitter<number>();
   @Output() updateCanvasTopEvent = new EventEmitter<number>();
@@ -303,7 +305,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosY.emit(this.mousePositionY);
     }
     this.componentList.push(temp);
-    this.updateComponentListEvent.emit(temp);
+    this.updateComponentListEvent.emit(temp);;
   }
   //----------------------------------------------------------------------------
   onDragEndedAddComponent(event: CdkDragEnd, component: string) {
@@ -528,55 +530,79 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
     let temp: IComponent;
     temp = new ButtonDragComponent(this.canvas);
     this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
+    this.updateCanvasLeftEvent.emit(this.canvasLeft);
     this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
+    this.updateCanvasTopEvent.emit(this.canvasTop);
     this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
+    this.updateCanvasWEvent.emit(this.canvasW);
 
     this.whatComponent = 'loginHeader';
     temp = new HeaderDragComponent(this.canvas);
     this.mousePositionX = this.canvasLeft + 450;
+    this.updateMousePosX.emit(this.mousePositionX);
     this.mousePositionY = this.canvasTop + 140;
+    this.updateMousePosY.emit(this.mousePositionY);
     this.componentList.push(temp);
+    this.updateComponentListEvent.emit(temp);;
     setTimeout(() => {
       this.whatComponent = 'loginInputUser';
       temp = new InputDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 530;
-      this.mousePositionY = this.canvasTop + 200;
+      this.mousePositionY = this.canvasTop + 200;      
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 1);
     setTimeout(() => {
       this.whatComponent = 'loginLabelUser';
       temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 450;
-      this.mousePositionY = this.canvasTop + 200;
+      this.mousePositionY = this.canvasTop + 200;      
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 1);
     setTimeout(() => {
       this.whatComponent = 'loginInputPass';
       temp = new InputDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 530;
       this.mousePositionY = this.canvasTop + 250;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 1);
     setTimeout(() => {
       this.whatComponent = 'loginLabelPass';
       temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 450;
       this.mousePositionY = this.canvasTop + 250;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 1);
     setTimeout(() => {
       this.whatComponent = 'LoginCheckbox';
       temp = new CheckboxDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 450;
       this.mousePositionY = this.canvasTop + 300;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 1);
     setTimeout(() => {
       this.whatComponent = 'LoginButton';
       temp = new ButtonDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 450;
       this.mousePositionY = this.canvasTop + 350;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 1);
     setTimeout(() => {
       this.whatComponent = '';
@@ -587,14 +613,20 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
     let temp: IComponent;
     temp = new ButtonDragComponent(this.canvas);
     this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
+    this.updateCanvasLeftEvent.emit(this.canvasLeft);
     this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
+    this.updateCanvasTopEvent.emit(this.canvasTop);
     this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
+    this.updateCanvasWEvent.emit(this.canvasW);
 
     this.whatComponent = 'sampleImage';
     temp = new ImageDragComponent(this.canvas);
     this.mousePositionX = this.canvasLeft + 450;
-    this.mousePositionY = this.canvasTop + 140;
+    this.mousePositionY = this.canvasTop + 140;    
+    this.updateMousePosX.emit(this.mousePositionX);
+    this.updateMousePosY.emit(this.mousePositionY);
     this.componentList.push(temp);
+    this.updateComponentListEvent.emit(temp);;
   }
 
   refresh(): void {
@@ -614,23 +646,32 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
     this.propertyCmp.clearComponent();
     let temp: IComponent;
     this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
+    this.updateCanvasLeftEvent.emit(this.canvasLeft);
     this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
+    this.updateCanvasTopEvent.emit(this.canvasTop);
     this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
-
+    this.updateCanvasWEvent.emit(this.canvasTop);
+  
     this.whatComponent = 'HPNav1';
     temp = new NavbarDragComponent(this.canvas);
     this.mousePositionX = this.canvasLeft;
     this.mousePositionY = this.canvasTop + 40;
+    this.updateMousePosX.emit(this.mousePositionX);
+    this.updateMousePosY.emit(this.mousePositionY);
 
     this.componentList.push(temp);
+    this.updateComponentListEvent.emit(temp);;
 
     setTimeout(() => {
       this.whatComponent = 'HPNav2';
       temp = new NavbarDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft;
       this.mousePositionY = this.canvasTop;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
 
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
 
     setTimeout(() => {
@@ -638,8 +679,11 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       temp = new ParagraphDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 1050;
       this.mousePositionY = this.canvasTop;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
 
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
 
     setTimeout(() => {
@@ -647,7 +691,10 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       temp = new LinkDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 980;
       this.mousePositionY = this.canvasTop + 60;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
 
     setTimeout(() => {
@@ -655,7 +702,10 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       temp = new LinkDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 1080;
       this.mousePositionY = this.canvasTop + 60;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
 
     setTimeout(() => {
@@ -663,7 +713,10 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       temp = new LinkDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 1210;
       this.mousePositionY = this.canvasTop + 60;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
 
     setTimeout(() => {
@@ -671,7 +724,10 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 20;
       this.mousePositionY = this.canvasTop + 65;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
 
     setTimeout(() => {
@@ -679,28 +735,40 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       temp = new LinkDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 20;
       this.mousePositionY = this.canvasTop + 100;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPLink2';
       temp = new LinkDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 120;
       this.mousePositionY = this.canvasTop + 100;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPLink3';
       temp = new LinkDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 200;
       this.mousePositionY = this.canvasTop + 100;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPNav3';
       temp = new NavbarDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft;
       this.mousePositionY = this.canvasTop + 140;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
 
     setTimeout(() => {
@@ -708,7 +776,10 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 600;
       this.mousePositionY = this.canvasTop + 160;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
 
     setTimeout(() => {
@@ -716,28 +787,40 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 540;
       this.mousePositionY = this.canvasTop + 200;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPLink4';
       temp = new LinkDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 430;
       this.mousePositionY = this.canvasTop + 240;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPLink5';
       temp = new LinkDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 560;
       this.mousePositionY = this.canvasTop + 240;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPLink6';
       temp = new LinkDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 690;
       this.mousePositionY = this.canvasTop + 240;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
 
     setTimeout(() => {
@@ -745,21 +828,30 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       temp = new ImageDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 330;
       this.mousePositionY = this.canvasTop + 300;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPImage3';
       temp = new ImageDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 645;
       this.mousePositionY = this.canvasTop + 300;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPImage1';
       temp = new ImageDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 15;
       this.mousePositionY = this.canvasTop + 300;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
 
     setTimeout(() => {
@@ -767,42 +859,60 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       temp = new ParagraphDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 960;
       this.mousePositionY = this.canvasTop + 300;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPP3';
       temp = new ParagraphDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 960;
       this.mousePositionY = this.canvasTop + 400;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPP4';
       temp = new ParagraphDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 960;
       this.mousePositionY = this.canvasTop + 500;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPP5';
       temp = new ParagraphDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 960;
       this.mousePositionY = this.canvasTop + 350;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPP6';
       temp = new ParagraphDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 960;
       this.mousePositionY = this.canvasTop + 450;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPP7';
       temp = new ParagraphDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 960;
       this.mousePositionY = this.canvasTop + 550;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = '';
@@ -816,43 +926,61 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
     let temp: IComponent;
     temp = new ButtonDragComponent(this.canvas);
     this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
+    this.updateCanvasLeftEvent.emit(this.canvasLeft);
     this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
+    this.updateCanvasTopEvent.emit(this.canvasTop);
     this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
+    this.updateCanvasWEvent.emit(this.canvasW);
 
     //navbar
     this.whatComponent = 'searchNavbar';
     temp = new NavbarDragComponent(this.canvas);
     this.mousePositionX = this.canvasLeft + 250;
     this.mousePositionY = this.canvasTop;
+    this.updateMousePosX.emit(this.mousePositionX);
+    this.updateMousePosY.emit(this.mousePositionY);
     this.componentList.push(temp);
+    this.updateComponentListEvent.emit(temp);;
 
     setTimeout(() => {
       this.whatComponent = 'userIDLabel';
       temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 980;
       this.mousePositionY = this.canvasTop + 10;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'usernameLabel';
       temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 1036;
       this.mousePositionY = this.canvasTop + 10;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HomeButton';
       temp = new ButtonDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 1140;
       this.mousePositionY = this.canvasTop + 8;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'ProfileButton';
       temp = new ButtonDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 1210;
       this.mousePositionY = this.canvasTop + 8;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
 
     //body
@@ -861,90 +989,129 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       temp = new HeaderDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 250;
       this.mousePositionY = this.canvasTop + 140;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'carrierInput';
       temp = new InputDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 320;
       this.mousePositionY = this.canvasTop + 200;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'carrierLabel';
       temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 240;
       this.mousePositionY = this.canvasTop + 210;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'invoiceInput';
       temp = new InputDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 320;
       this.mousePositionY = this.canvasTop + 250;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'invoiceFromLabel';
       temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 155;
       this.mousePositionY = this.canvasTop + 260;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       temp = new DatepickerDragComponent(this.canvas, this.datepipe);
       this.mousePositionX = this.canvasLeft + 320;
       this.mousePositionY = this.canvasTop + 310;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'shippingFromLabel';
       temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 162;
       this.mousePositionY = this.canvasTop + 310;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'deliveryInput';
       temp = new InputDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 320;
       this.mousePositionY = this.canvasTop + 350;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'deliveryNameLabel';
       temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 195;
       this.mousePositionY = this.canvasTop + 360;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'addressInput';
       temp = new InputDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 320;
       this.mousePositionY = this.canvasTop + 400;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'addressLabel';
       temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 235;
       this.mousePositionY = this.canvasTop + 410;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'remarksInput';
       temp = new InputDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 320;
       this.mousePositionY = this.canvasTop + 450;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'remarksLabel';
       temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 230;
       this.mousePositionY = this.canvasTop + 460;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
 
     // right side of the form
@@ -953,27 +1120,39 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       temp = new InputDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 720;
       this.mousePositionY = this.canvasTop + 200;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'invoiceToLabel';
       temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 575;
       this.mousePositionY = this.canvasTop + 210;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       temp = new DatepickerDragComponent(this.canvas, this.datepipe);
       this.mousePositionX = this.canvasLeft + 720;
       this.mousePositionY = this.canvasTop + 250;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'shippingToLabel';
       temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 580;
       this.mousePositionY = this.canvasTop + 250;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
 
     //buttons
@@ -982,14 +1161,20 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       temp = new ButtonDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 900;
       this.mousePositionY = this.canvasTop + 500;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'ClearButton';
       temp = new ButtonDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 965;
       this.mousePositionY = this.canvasTop + 500;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = '';

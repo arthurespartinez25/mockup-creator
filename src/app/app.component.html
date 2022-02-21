@@ -13,6 +13,7 @@
   <!-- PALETTE SECTION -->
     <app-pallete
     [canvas] = "passCanvas"
+    [propertyCmp] = "propertyCmp"
     (updateComponentListEvent)="updateComponentList($event)"
     (updateCanvasLeftEvent)="updateCanvasLeft($event)"
     (updateCanvasTopEvent)="updateCanvasTop($event)"
