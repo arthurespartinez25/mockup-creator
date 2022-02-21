@@ -421,6 +421,55 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   onDragEnd(component: IComponent) {
     console.log(component);
   }
+  clickHandler(component: IComponent) {
+    console.log(component.props);
+    this.selected = component.props;
+    this.selectedComponent = component;
+    this.selectedComp(this.selectedComponent);
+    if (this.selected.typeObj != 'nav' || 'navDrag') {
+      this.styleHolder = this.selected.style;
+      let regexLeft = /left(.+?);/;
+      let regexTop = /top(.+?);/;
+      let regexPosition = /position(.+?);/;
+      this.styleHolder = this.styleHolder.replace(regexLeft, '');
+      this.styleHolder = this.styleHolder.replace(regexTop, '');
+      this.styleHolder = this.styleHolder.replace(regexPosition, '');
+      this.selected.style =
+        this.styleHolder +
+        'position:sticky;' +
+        'left:' +
+        this.selected.mouseDragPositionX +
+        '%;' +
+        'top:' +
+        this.selected.mouseDragPositionY +
+        '%;';
+      //  this.selected.mouseDragPositionX = 0;
+      //  this.selected.mouseDragPositionY = 0;
+    } else if (
+      this.selected.mouseDragPositionY != 0 &&
+      (this.selected.typeObj == 'nav' || 'navDrag')
+    ) {
+      this.styleHolder = this.selected.style;
+      let regexLeft = /left(.+?);/;
+      let regexTop = /top(.+?);/;
+      let regexPosition = /position(.+?);/;
+      this.styleHolder = this.styleHolder.replace(regexLeft, '');
+      this.styleHolder = this.styleHolder.replace(regexTop, '');
+      this.styleHolder = this.styleHolder.replace(regexPosition, '');
+      this.selected.style = this.selected.style;
+      this.selected.style =
+        this.styleHolder +
+        'position:sticky;' +
+        'left:' +
+        this.selected.mouseDragPositionX +
+        'px;' +
+        'top:' +
+        this.selected.mouseDragPositionY +
+        '%;';
+      this.selected.mouseDragPositionX = 0;
+      this.selected.mouseDragPositionY = 0;
+    }
+  }
 
   selectedComp(value: any) {
     let componentIndex = this.componentList.indexOf(value);

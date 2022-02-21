@@ -276,6 +276,214 @@
       Logout
     </button>
     </div>
+    <div
+    cdkDropListGroup
+    cdkDropList
+    (cdkDropListDropped)="drop($event)"
+    > Component List
+      <div class="component-list"
+        *ngFor="let component of componentList; let i = index;"
+        cdkDrag
+        [ngSwitch]="this.componentList[i].props.typeObj"
+        [ngStyle]="{
+          'background-color' : this.componentList[i].props.selected == true ? 'white': (this.componentList[i].props.selected == false ? '  #16324f': null),
+          'color' : this.componentList[i].props.selected == true ? '#16324f': (this.componentList[i].props.selected == false ? 'white': null)
+        }"
+      >
+        <div class="component-items"
+        *ngSwitchCase="'buttonDrag'"
+        (click)="clickHandler(this.componentList[i])"
+        >
+          {{i+1}} Button
+          <button class="component-button-remove"
+          (click)="deleteComponent(this.componentList[i])"
+          ></button>
+          <button class="component-button-hide"
+          (click)="hideComponent(this.componentList[i])"
+          ></button>
+        </div>
+        <div class="component-items"
+        *ngSwitchCase="'checkboxDrag'"
+        (click)="clickHandler(this.componentList[i])"
+        >
+          {{i+1}} Checkbox
+          <button class="component-button-remove"
+          (click)="deleteComponent(this.componentList[i])"
+          ></button>
+          <button class="component-button-hide"
+          (click)="hideComponent(this.componentList[i])"
+          ></button>
+        </div>
+        <div class="component-items"
+        *ngSwitchCase="'datepickerDrag'"
+        (click)="clickHandler(this.componentList[i])"
+        >
+          {{i+1}} Datepicker
+          <button class="component-button-remove"
+          (click)="deleteComponent(this.componentList[i])"
+          ></button>
+          <button class="component-button-hide"
+          (click)="hideComponent(this.componentList[i])"
+          ></button>
+        </div>
+        <div class="component-items"
+        *ngSwitchCase="'dropdownDrag'"
+        (click)="clickHandler(this.componentList[i])"
+        >
+          {{i+1}} Dropdown
+          <button class="component-button-remove"
+          (click)="deleteComponent(this.componentList[i])"
+          ></button>
+          <button class="component-button-hide"
+          (click)="hideComponent(this.componentList[i])"
+          ></button>
+        </div>
+        <div class="component-items"
+        *ngSwitchCase="'headerDrag'"
+        (click)="clickHandler(this.componentList[i])"
+        >
+          {{i+1}} Header
+          <button class="component-button-remove"
+          (click)="deleteComponent(this.componentList[i])"
+          ></button>
+          <button class="component-button-hide"
+          (click)="hideComponent(this.componentList[i])"
+          ></button>
+        </div>
+        <div class="component-items"
+        *ngSwitchCase="'imgDrag'"
+        (click)="clickHandler(this.componentList[i])"
+        >
+          {{i+1}} Image
+          <button class="component-button-remove"
+          (click)="deleteComponent(this.componentList[i])"
+          ></button>
+          <button class="component-button-hide"
+          (click)="hideComponent(this.componentList[i])"
+          ></button>
+        </div>
+        <div class="component-items"
+        *ngSwitchCase="'inputDrag'"
+        (click)="clickHandler(this.componentList[i])"
+        >
+          {{i+1}} Input Field
+          <button class="component-button-remove"
+          (click)="deleteComponent(this.componentList[i])"
+          ></button>
+          <button class="component-button-hide"
+          (click)="hideComponent(this.componentList[i])"
+          ></button>
+        </div>
+        <div class="component-items"
+        *ngSwitchCase="'labelDrag'"
+        (click)="clickHandler(this.componentList[i])"
+        >
+          {{i+1}} Label
+          <button class="component-button-remove"
+          (click)="deleteComponent(this.componentList[i])"
+          ></button>
+          <button class="component-button-hide"
+          (click)="hideComponent(this.componentList[i])"
+          ></button>
+        </div>
+        <div class="component-items"
+        *ngSwitchCase="'linkDrag'"
+        (click)="clickHandler(this.componentList[i])"
+        >
+          {{i+1}} Link
+          <button class="component-button-remove"
+          (click)="deleteComponent(this.componentList[i])"
+          ></button>
+          <button class="component-button-hide"
+          (click)="hideComponent(this.componentList[i])"
+          ></button>
+        </div>
+        <div class="component-items"
+        *ngSwitchCase="'modalDrag'"
+        (click)="clickHandler(this.componentList[i])"
+        >
+          {{i+1}} Modal
+          <button class="component-button-remove"
+          (click)="deleteComponent(this.componentList[i])"
+          ></button>
+          <button class="component-button-hide"
+          (click)="hideComponent(this.componentList[i])"
+          ></button>
+        </div>
+        <div class="component-items"
+        *ngSwitchCase="'navDrag'"
+        (click)="clickHandler(this.componentList[i])"
+        >
+          {{i+1}} Navigation Bar
+          <button class="component-button-remove"
+          (click)="deleteComponent(this.componentList[i])"
+          ></button>
+          <button class="component-button-hide"
+          (click)="hideComponent(this.componentList[i])"
+          ></button>
+        </div>
+        <div class="component-items"
+        *ngSwitchCase="'paragraphDrag'"
+        (click)="clickHandler(this.componentList[i])"
+        >
+          {{i+1}} Paragraph
+          <button class="component-button-remove"
+          (click)="deleteComponent(this.componentList[i])"
+          ></button>
+          <button class="component-button-hide"
+          (click)="hideComponent(this.componentList[i])"
+          ></button>
+        </div>
+        <div class="component-items"
+        *ngSwitchCase="'radioDrag'"
+        (click)="clickHandler(this.componentList[i])"
+        >
+          {{i+1}} Radio
+          <button class="component-button-remove"
+          (click)="deleteComponent(this.componentList[i])"
+          ></button>
+          <button class="component-button-hide"
+          (click)="hideComponent(this.componentList[i])"
+          ></button>
+        </div>
+        <div class="component-items"
+        *ngSwitchCase="'tableDrag'"
+        (click)="clickHandler(this.componentList[i])"
+        >
+          {{i+1}} Table
+          <button class="component-button-remove"
+          (click)="deleteComponent(this.componentList[i])"
+          ></button>
+          <button class="component-button-hide"
+          (click)="hideComponent(this.componentList[i])"
+          ></button>
+        </div>
+        <div class="component-items"
+        *ngSwitchCase="'textboxDrag'"
+        (click)="clickHandler(this.componentList[i])"
+        >
+          {{i+1}} Textbox
+          <button class="component-button-remove"
+          (click)="deleteComponent(this.componentList[i])"
+          ></button>
+          <button class="component-button-hide"
+          (click)="hideComponent(this.componentList[i])"
+          ></button>
+        </div>
+        <div class="component-items"
+        *ngSwitchCase="'youtubeDrag'"
+        (click)="clickHandler(this.componentList[i])"
+        >
+          {{i+1}} iFrame
+          <button class="component-button-remove"
+          (click)="deleteComponent(this.componentList[i])"
+          ></button>
+          <button class="component-button-hide"
+          (click)="hideComponent(this.componentList[i])"
+          ></button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- CANVAS SECTION -->
