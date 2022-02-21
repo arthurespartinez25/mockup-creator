@@ -3,6 +3,7 @@ import { IComponent } from '../interfaces/icomponent';
 import { IProperty } from '../interfaces/iproperty';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { DatePipe } from '@angular/common'
+import { CodeComponent } from '../section/code/code.component';
 
 @Component({
   selector: 'app-property',
@@ -31,7 +32,6 @@ export class PropertyComponent implements OnInit {
   @Output() addAllCSSRule = new EventEmitter<string>();
   @Output() clearCss = new EventEmitter<string>();
   @Output() cssReceiveMessage = new EventEmitter<string>();
-  
   
 
   @Input() get property(): IProperty {

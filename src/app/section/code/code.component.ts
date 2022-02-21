@@ -1,3 +1,4 @@
+import { AppComponent } from './../../app.component';
 import {
   CdkDrag,
   CdkDragEnd,
@@ -13,48 +14,52 @@ import {
   Component,
   ComponentRef,
   ElementRef,
+  EventEmitter,
   OnInit,
+  QueryList,
   Renderer2,
   ViewChild,
+  ViewChildren,
+  Input,
+  Output
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { IComponent } from './interfaces/icomponent';
-import { IProperty } from './interfaces/iproperty';
-import { ButtonDragComponent } from './components/buttonDrag/buttonDrag.component';
-import { LabelDragComponent } from './components/labelDrag/labelDrag.component';
-import { CheckboxDragComponent } from './components/checkboxDrag/checkboxDrag.component';
-import { DropdownDragComponent } from './components/dropdownDrag/dropdownDrag.component';
-import { ImageDragComponent } from './components/imageDrag/imageDrag.component';
-import { RadioDragComponent } from './components/radioDrag/radioDrag.component';
-import { TextboxDragComponent } from './components/textboxDrag/textboxDrag.component';
-import { PopupDragComponent } from './components/popupDrag/popupDrag.component';
+import { IComponent } from 'src/app/interfaces/icomponent';
+import { IProperty } from 'src/app/interfaces/iproperty';
+import { ButtonDragComponent } from 'src/app/components/buttonDrag/buttonDrag.component';
+import { LabelDragComponent } from 'src/app/components/labelDrag/labelDrag.component';
+import { CheckboxDragComponent } from 'src/app/components/checkboxDrag/checkboxDrag.component';
+import { DropdownDragComponent } from 'src/app/components/dropdownDrag/dropdownDrag.component';
+import { ImageDragComponent } from 'src/app/components/imageDrag/imageDrag.component';
+import { RadioDragComponent } from 'src/app/components/radioDrag/radioDrag.component';
+import { TextboxDragComponent } from 'src/app/components/textboxDrag/textboxDrag.component';
+import { PopupDragComponent } from 'src/app/components/popupDrag/popupDrag.component';
 import { FormArray } from '@angular/forms';
-import { ParagraphDragComponent } from './components/paragraphDrag/paragraphDrag.component';
-import { NavbarDragComponent } from './components/navbarDrag/navbarDrag.component';
-import { ModalDragComponent } from './components/modalDrag/modalDrag.component';
-import { DatepickerDragComponent } from './components/datepickerDrag/datepickerDrag.component';
-import { HeaderDragComponent } from './components/headerDrag/headerDrag.component';
-import { InputDragComponent } from './components/inputDrag/inputDrag.component';
-import { LinkDragComponent } from './components/linkDrag/linkDrag.component';
+import { ParagraphDragComponent } from 'src/app/components/paragraphDrag/paragraphDrag.component';
+import { NavbarDragComponent } from 'src/app/components/navbarDrag/navbarDrag.component';
+import { ModalDragComponent } from 'src/app/components/modalDrag/modalDrag.component';
+import { DatepickerDragComponent } from 'src/app/components/datepickerDrag/datepickerDrag.component';
+import { HeaderDragComponent } from 'src/app/components/headerDrag/headerDrag.component';
+import { InputDragComponent } from 'src/app/components/inputDrag/inputDrag.component';
+import { LinkDragComponent } from 'src/app/components/linkDrag/linkDrag.component';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
-import { TableDragComponent } from './components/tableDrag/tableDrag.component';
-import { YoutubeDragComponent } from './components/youtubeDrag/youtubeDrag.component';
-import { AppLoginComponent } from './app-login/app-login.component';
+import { TableDragComponent } from 'src/app/components/tableDrag/tableDrag.component';
+import { YoutubeDragComponent } from 'src/app/components/youtubeDrag/youtubeDrag.component';
+import { AppLoginComponent } from 'src/app/app-login/app-login.component';
 import { CookieService } from 'ngx-cookie-service';
-import { UsersService } from './service/users.service';
+import { UsersService } from 'src/app/service/users.service';
 import { DatePipe } from '@angular/common'
-import { PropertyComponent } from './property/property.component';
-import { CodeComponent } from './section/code/code.component';
+import { PropertyComponent } from 'src/app/property/property.component';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css', './app.palette.component.css'],
+  selector: 'app-code',
+  templateUrl: './code.component.html',
+  styleUrls: ['./code.component.css']
 })
-export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
+export class CodeComponent implements OnInit, AfterViewInit, AfterViewChecked {
   title = 'mockup-creator';
   index: number;
   componentList: IComponent[] = [];
@@ -104,12 +109,17 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     '<script>\nvar popoverTriggerList = [].slice.call(document.querySelectorAll(\'[data-bs-toggle="popover"]\'))\nvar popoverList = popoverTriggerList.map(function (popoverTriggerEl) {\nreturn new bootstrap.Popover(popoverTriggerEl)\n})\n</script>';
 
   @ViewChild('PropertyComponent') property: boolean;
-  @ViewChild('canvas') canvas!: ElementRef;
-  @ViewChild(CodeComponent) code: CodeComponent;
+  @Input() canvas: ElementRef;
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
   @ViewChild(PropertyComponent) propertyCmp:PropertyComponent;
+  @Output() updateComponentListEvent = new EventEmitter<IComponent>();
+  @Output() updateCanvasLeftEvent = new EventEmitter<number>();
+  @Output() updateCanvasTopEvent = new EventEmitter<number>();
+  @Output() updateCanvasWEvent = new EventEmitter<number>();
+  @Output() updateMousePosX = new EventEmitter<number>();
+  @Output() updateMousePosY = new EventEmitter<number>();
   changeref: ChangeDetectorRef;
   constructor(
     private loginCookie:CookieService,
@@ -127,7 +137,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
   delete: boolean;
   cssBody: SafeStyle;
-  passCanvas: ElementRef;
   canvasBG: string;
   canvasLeft = 0;
   canvasTop = 0;
@@ -147,35 +156,9 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       }) */
     }
   }
-  ngAfterViewInit(): void {    
-    this.passCanvas = this.canvas;
-    this.componentList = this.code.returnComponentList();
+  ngAfterViewInit(): void {
+    console.log(this.canvas);
   }
-
-  updateComponentList(components: IComponent) {
-    this.componentList.push(components);
-  }
-  
-  updateCanvasLeft(value: number) {
-    this.canvasLeft = value;
-  }
-
-  updateCanvasTop(value: number) {
-    this.canvasTop = value;
-  }
-
-  updateCanvasW(value: number) {
-    this.canvasW = value;
-  }
-
-  updateMousePositionX(value: number) {
-    this.mousePositionX = value;
-  }
-
-  updateMousePositionY(value: number) {
-    this.mousePositionY = value;
-  }
-
   //////////////////////////////////////////////////////////////////////////////
   //   THIS PROJECT WAS STARTED BY BATO BOYS AND CEBU TEAM  
   //                          JUPAO  
@@ -210,8 +193,8 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   xDistance: any = 0;
   yDistance: any = 0;
   theUsername = "";
-
   
+
   loggedIn($event) {
     /* console.log("eto value natin lods: " + this.sessionID); */
     this.theUsername = $event;
@@ -226,6 +209,9 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     }, 100);
   }
 
+  returnComponentList() {
+    return this.componentList;
+  }
 
   addComponent(component: string) {
     let temp: IComponent;
@@ -303,15 +289,22 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       default:
         temp = new ButtonDragComponent(this.canvas);
     }
-    this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
-    this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
-    this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
-    if (this.domInsideCanvas == false) {
-      this.mousePositionX = this.canvasLeft;
-      this.mousePositionY = this.canvasTop;
-    }
-    this.componentList.push(temp);
+  console.log(this.canvas);
+  this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
+  this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
+  this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;    
+  this.updateCanvasLeftEvent.emit(this.canvasLeft);
+  this.updateCanvasTopEvent.emit(this.canvasTop);
+  this.updateCanvasWEvent.emit(this.canvasW);
+  if (this.domInsideCanvas == false) {
+    this.mousePositionX = this.canvasLeft;
+    this.mousePositionY = this.canvasTop;
+    this.updateMousePosX.emit(this.mousePositionX);
+    this.updateMousePosY.emit(this.mousePositionY);
   }
+  this.componentList.push(temp);
+  this.updateComponentListEvent.emit(temp);
+}
   //----------------------------------------------------------------------------
   onDragEndedAddComponent(event: CdkDragEnd, component: string) {
     event.source._dragRef.reset();
@@ -439,7 +432,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.selected = component.props;
     this.selectedComponent = component;
     this.selectedComp(this.selectedComponent);
-    console.log(this.selectedComponent)
     if (this.selected.typeObj != 'nav' || 'navDrag') {
       this.styleHolder = this.selected.style;
       let regexLeft = /left(.+?);/;

@@ -29,7 +29,8 @@ import { TableDragComponent } from './components/tableDrag/tableDrag.component';
 import { YoutubeDragComponent } from './components/youtubeDrag/youtubeDrag.component';
 import { AppLoginComponent } from './app-login/app-login.component';
 import { AppRegisterComponent } from './app-register/app-register.component';
-import { DatePipe } from '@angular/common'
+import { DatePipe } from '@angular/common';
+import { CodeComponent } from './section/code/code.component'
 
 @NgModule({
   declarations: [
@@ -55,7 +56,7 @@ import { DatePipe } from '@angular/common'
     YoutubeDragComponent,
     AppLoginComponent,
     AppRegisterComponent,
-    
+    CodeComponent
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule, FormsModule, HttpClientModule],
   providers: [DragDropModule, AppComponent, DatePipe],
