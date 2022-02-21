@@ -176,6 +176,10 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.mousePositionY = value;
   }
 
+  updateWhatComponent(value: string) {
+    this.whatComponent = value;
+  }
+
   //////////////////////////////////////////////////////////////////////////////
   //   THIS PROJECT WAS STARTED BY BATO BOYS AND CEBU TEAM  
   //                          JUPAO  
