@@ -416,14 +416,11 @@
   </div>-->
   <app-code
   [canvas] = "passCanvas"
-  (updateComponentListEvent)="updateComponentList($event)"
-  (updateCanvasLeftEvent)="updateCanvasLeft($event)"
-  (updateCanvasTopEvent)="updateCanvasTop($event)"
-  (updateCanvasWEvent)="updateCanvasW($event)"
-  (updateMousePosX)="updateMousePositionX($event)"
-  (updateMousePosY)="updateMousePositionY($event)"
+  [selected] = "selected"
+  [selectedComponent] = "selectedComponent"
+  [componentList] = "componentList"
   >
-</app-code>
+  </app-code>
 </div>
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->

@@ -149,7 +149,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
   ngAfterViewInit(): void {    
     this.passCanvas = this.canvas;
-    this.componentList = this.code.returnComponentList();
+    //this.componentList = this.code.returnComponentList();
   }
 
   updateComponentList(components: IComponent) {
@@ -483,6 +483,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.selected.mouseDragPositionX = 0;
       this.selected.mouseDragPositionY = 0;
     }
+    console.log(this.selected);
   }
   onDragEnd(component: IComponent) {
     console.log(component);
