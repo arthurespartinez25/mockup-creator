@@ -1,25 +1,25 @@
 import { AppComponent } from './../../app.component';
 import {
-  CdkDrag,
-  CdkDragEnd,
+  //CdkDrag,
+ // CdkDragEnd,
   DragDrop,
-  CdkDragDrop,
-  moveItemInArray,
+ // CdkDragDrop,
+ // moveItemInArray,
 } from '@angular/cdk/drag-drop';
 import {
   AfterViewChecked,
   AfterViewInit,
-  ApplicationRef,
+ // ApplicationRef,
   ChangeDetectorRef,
   Component,
   ComponentRef,
   ElementRef,
-  EventEmitter,
+ // EventEmitter,
   OnInit,
-  QueryList,
+ // QueryList,
   Renderer2,
   ViewChild,
-  ViewChildren,
+  //ViewChildren,
   Input,
   Output
 } from '@angular/core';
@@ -78,8 +78,8 @@ export class CodeComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @Input() selectedComponent: IComponent;
   @Input() componentList: IComponent[];
   //@ViewChild('textOp') textBtn!: ElementRef;
-  @ViewChild('subMenuItem') subMenuItem!: ElementRef;
-  @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
+ // @ViewChild('subMenuItem') subMenuItem!: ElementRef;
+  //@ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
   @ViewChild(PropertyComponent) propertyCmp:PropertyComponent;
   changeref: ChangeDetectorRef;
   constructor(
@@ -141,34 +141,34 @@ export class CodeComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
 
 
-  canvasLeftX = 0;
-  canvasTopY = 0;
-  mousePositionX = 110;
-  mousePositionY = 110;
-  domInsideCanvas = false;
-  offsetLeft: any = 0;
-  offsetTop:any  = 0;
-  xDis: any = 0;
-  yDis: any = 0;
-  noOfButton: number = 0;
-  xDistance: any = 0;
-  yDistance: any = 0;
-  theUsername = "";
+  // canvasLeftX = 0;
+  // canvasTopY = 0;
+  // mousePositionX = 110;
+  // mousePositionY = 110;
+  // domInsideCanvas = false;
+  // offsetLeft: any = 0;
+  // offsetTop:any  = 0;
+  // xDis: any = 0;
+  // yDis: any = 0;
+  // noOfButton: number = 0;
+  // xDistance: any = 0;
+  // yDistance: any = 0;
+  // theUsername = "";
   
 
-  loggedIn($event) {
-    /* console.log("eto value natin lods: " + this.sessionID); */
-    this.theUsername = $event;
-    console.log(this.theUsername as string);
-    console.log("nakapagpasa na po");
-  }
-  logout() {
-    this.loginCookie.deleteAll();
-    this._router.navigate(['/']);
-    setTimeout(() => {
-      window.location.reload();
-    }, 100);
-  }
+  // loggedIn($event) {
+  //   /* console.log("eto value natin lods: " + this.sessionID); */
+  //   this.theUsername = $event;
+  //   console.log(this.theUsername as string);
+  //   console.log("nakapagpasa na po");
+  // }
+  // logout() {
+  //   this.loginCookie.deleteAll();
+  //   this._router.navigate(['/']);
+  //   setTimeout(() => {
+  //     window.location.reload();
+  //   }, 100);
+  // }
   //----------------------------------------------------------------------------
   //----------------------------------------------------------------------------
 
@@ -551,54 +551,54 @@ export class CodeComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   /*************The code below is for component list functions**********************/
 
-  deleteComponent(value: any) {
-    let componentIndex = this.componentList.indexOf(value); //gets the index of the selected component inside the canvas
-    if (componentIndex !== -1) {
-      this.componentList.splice(componentIndex, 1); //removes the component from the canvas
-    }
-  }
+  // deleteComponent(value: any) {
+  //   let componentIndex = this.componentList.indexOf(value); //gets the index of the selected component inside the canvas
+  //   if (componentIndex !== -1) {
+  //     this.componentList.splice(componentIndex, 1); //removes the component from the canvas
+  //   }
+  // }
 
-  hideComponent(value: any) {
-    let componentIndex = this.componentList.indexOf(value); //gets the index of the selected component inside the canvas
-    this.componentList[componentIndex].props.hidden =
-      !this.componentList[componentIndex].props.hidden; //removes visibility of a component from the canvas 
-  }
+  // hideComponent(value: any) {
+  //   let componentIndex = this.componentList.indexOf(value); //gets the index of the selected component inside the canvas
+  //   this.componentList[componentIndex].props.hidden =
+  //     !this.componentList[componentIndex].props.hidden; //removes visibility of a component from the canvas 
+  // }
 
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(
-      this.componentList,
-      event.previousIndex,
-      event.currentIndex
-    );
-    //console.log("This is the previous index " + event.previousContainer);
-    //console.log("This is the new index " + event.currentIndex);
-  }
+  // drop(event: CdkDragDrop<string[]>) {
+  //   moveItemInArray(
+  //     this.componentList,
+  //     event.previousIndex,
+  //     event.currentIndex
+  //   );
+  //   //console.log("This is the previous index " + event.previousContainer);
+  //   //console.log("This is the new index " + event.currentIndex);
+  // }
 
-  //code below is for counting how many component of the same type are in the componentList
-  addToNoOfComponent(value: IComponent) {
-    let componentIndex = this.componentList.indexOf(value);
-    let checkbox,
-      datepicker,
-      dropdown,
-      header,
-      image,
-      input,
-      label,
-      link,
-      modal,
-      navbar,
-      paragraph,
-      radio,
-      table,
-      textbox,
-      youtube = 0; // create a variable for each type of component
-    switch (this.componentList[componentIndex].props.typeObj) {
-      case 'buttonDrag': {
-        this.noOfButton++;
-        this.numberOfComponents.push([value], ['Button' + this.noOfButton]);
-      }
-    }
-  }
+  // //code below is for counting how many component of the same type are in the componentList
+  // addToNoOfComponent(value: IComponent) {
+  //   let componentIndex = this.componentList.indexOf(value);
+  //   let checkbox,
+  //     datepicker,
+  //     dropdown,
+  //     header,
+  //     image,
+  //     input,
+  //     label,
+  //     link,
+  //     modal,
+  //     navbar,
+  //     paragraph,
+  //     radio,
+  //     table,
+  //     textbox,
+  //     youtube = 0; // create a variable for each type of component
+  //   switch (this.componentList[componentIndex].props.typeObj) {
+  //     case 'buttonDrag': {
+  //       this.noOfButton++;
+  //       this.numberOfComponents.push([value], ['Button' + this.noOfButton]);
+  //     }
+  //   }
+  // }
 
   /**************End of code for component list functions *************************/
 
