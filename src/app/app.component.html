@@ -65,7 +65,7 @@
     (updateSelectedEvent)="updateSelected($event)"
     ></app-canvas>
   <!-- CODE SECTION -->
-
+<!--
   <div id="code-container">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
@@ -168,7 +168,15 @@
         <code [innerText]="htmlCode"> </code>
       </div>
     </div>
-  </div>
+  </div>-->
+  <app-code
+  [canvas] = "passCanvas"
+  [selected] = "selected"
+  [selectedComponent] = "selectedComponent"
+  [componentList] = "componentList"
+  (updatePropertyComponentEvent) = "updatePropertyComponent($event)"
+  >
+  </app-code>
 </div>
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->

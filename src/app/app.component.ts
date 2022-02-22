@@ -13,6 +13,7 @@ import {
   Component,
   ComponentRef,
   ElementRef,
+  Input,
   OnInit,
   Renderer2,
   ViewChild,
@@ -49,6 +50,7 @@ import { DatePipe } from '@angular/common'
 import { PropertyComponent } from './property/property.component';
 import { CanvasComponent } from './section/canvas/canvas.component';
 import { PalleteComponent } from './section/pallete/pallete.component';
+import { CodeComponent } from './section/code/code.component';
 
 @Component({
   selector: 'app-root',
@@ -107,11 +109,13 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @ViewChild('PropertyComponent') property: boolean;
   @ViewChild(CanvasComponent) canvas!: CanvasComponent;
   //@ViewChild('canvas') canvas!: ElementRef;
-  @ViewChild(PalleteComponent) palette: PalleteComponent;
+  @ViewChild(PalleteComponent) palette: PalleteComponent;  
+  @ViewChild(CodeComponent) code: CodeComponent;
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
-  @ViewChild(PropertyComponent) propertyCmp:PropertyComponent;
+  //@ViewChild(PropertyComponent) propertyCmp:PropertyComponent;
+  
   changeref: ChangeDetectorRef;
   constructor(
     private loginCookie:CookieService,
@@ -131,6 +135,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   cssBody: SafeStyle;
   canvasDirective: any;
   passCanvas: ElementRef;
+  propertyCmp : PropertyComponent;
   canvasBG: string;
   canvasLeft = 0;
   canvasTop = 0;
@@ -182,6 +187,10 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   updateWhatComponent(value: string) {
     this.whatComponent = value;
+  }
+  
+  updatePropertyComponent(value: PropertyComponent) {
+    this.propertyCmp = value;
   }
 
   //////////////////////////////////////////////////////////////////////////////
@@ -370,6 +379,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.selected.mouseDragPositionX = 0;
       this.selected.mouseDragPositionY = 0;
     }
+    console.log(this.selected);
   }
 
   selectedComp(value: any) {
