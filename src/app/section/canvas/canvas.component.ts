@@ -73,6 +73,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   @ViewChild(PropertyComponent) propertyCmp:PropertyComponent;
 
   @Output() updateSelectedEvent = new EventEmitter<IProperty>();
+  @Output() updateSelectedComponentEvent = new EventEmitter<IComponent>();
 
   @Input() componentList : IComponent[] = [];
   @Input() mousePositionX: any;
@@ -163,6 +164,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     console.log(component.props);
     this.selected = component.props;
     this.selectedComponent = component;
+    this.updateSelectedComponentEvent.emit(this.selectedComponent);
     this.selectedComp(this.selectedComponent);
     if (this.selected.typeObj != 'nav' || 'navDrag') {
       this.styleHolder = this.selected.style;

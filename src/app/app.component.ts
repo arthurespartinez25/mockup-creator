@@ -242,11 +242,15 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       window.location.reload();
     }, 100);
   }
+
   updateSelected(value: IProperty) {
     this.selected = value;
     console.log(this.selected);
   }
 
+  updateSelectedComponent(value: IComponent) {
+    this.selectedComponent = value;
+  }
   //----------------------------------------------------------------------------
 
   get dragDisabled(): boolean {
@@ -329,69 +333,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
   onDragEnd(component: IComponent) {
     console.log(component);
-  }
-  clickHandler(component: IComponent) {
-    console.log(component.props);
-    this.selected = component.props;
-    this.selectedComponent = component;
-    this.selectedComp(this.selectedComponent);
-    console.log(this.selectedComponent)
-    if (this.selected.typeObj != 'nav' || 'navDrag') {
-      this.styleHolder = this.selected.style;
-      let regexLeft = /left(.+?);/;
-      let regexTop = /top(.+?);/;
-      let regexPosition = /position(.+?);/;
-      this.styleHolder = this.styleHolder.replace(regexLeft, '');
-      this.styleHolder = this.styleHolder.replace(regexTop, '');
-      this.styleHolder = this.styleHolder.replace(regexPosition, '');
-      this.selected.style =
-        this.styleHolder +
-        'position:sticky;' +
-        'left:' +
-        this.selected.mouseDragPositionX +
-        '%;' +
-        'top:' +
-        this.selected.mouseDragPositionY +
-        '%;';
-      //  this.selected.mouseDragPositionX = 0;
-      //  this.selected.mouseDragPositionY = 0;
-    } else if (
-      this.selected.mouseDragPositionY != 0 &&
-      (this.selected.typeObj == 'nav' || 'navDrag')
-    ) {
-      this.styleHolder = this.selected.style;
-      let regexLeft = /left(.+?);/;
-      let regexTop = /top(.+?);/;
-      let regexPosition = /position(.+?);/;
-      this.styleHolder = this.styleHolder.replace(regexLeft, '');
-      this.styleHolder = this.styleHolder.replace(regexTop, '');
-      this.styleHolder = this.styleHolder.replace(regexPosition, '');
-      this.selected.style = this.selected.style;
-      this.selected.style =
-        this.styleHolder +
-        'position:sticky;' +
-        'left:' +
-        this.selected.mouseDragPositionX +
-        'px;' +
-        'top:' +
-        this.selected.mouseDragPositionY +
-        '%;';
-      this.selected.mouseDragPositionX = 0;
-      this.selected.mouseDragPositionY = 0;
-    }
-    console.log(this.selected);
-  }
-
-  selectedComp(value: any) {
-    let componentIndex = this.componentList.indexOf(value);
-    if (componentIndex !== -1) {
-      for (let i = 0; i < this.componentList.length; i++) {
-        this.componentList[i].props.selected = false;
-      }
-      this.componentList[componentIndex].props.selected = true;
-    } else {
-      console.log('Nothing to highlight');
-    }
   }
 
   copyMessage(val: string) {

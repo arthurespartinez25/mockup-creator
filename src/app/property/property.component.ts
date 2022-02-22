@@ -83,6 +83,7 @@ export class PropertyComponent implements OnInit {
 
   deleteComponent() {
     let componentIndex = this.componentList.indexOf(this.selectedcomp);
+    console.log(this.selectedcomp);
     if (componentIndex !== -1) {
       this.componentList.splice(componentIndex, 1);
       this.props = this.defaultProps;
