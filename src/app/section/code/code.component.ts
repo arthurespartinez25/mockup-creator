@@ -81,6 +81,8 @@ export class CodeComponent implements OnInit, AfterViewInit, AfterViewChecked {
  // @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   //@ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
   @ViewChild(PropertyComponent) propertyCmp:PropertyComponent;
+
+  @Output() updatePropertyComponentEvent = new EventEmitter<PropertyComponent>();
   changeref: ChangeDetectorRef;
   constructor(
     private loginCookie:CookieService,
@@ -119,6 +121,7 @@ export class CodeComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
   ngAfterViewInit(): void {
     console.log(this.canvas);
+    this.updatePropertyComponentEvent.emit(this.propertyCmp);
   }
   //////////////////////////////////////////////////////////////////////////////
   //   THIS PROJECT WAS STARTED BY BATO BOYS AND CEBU TEAM  
