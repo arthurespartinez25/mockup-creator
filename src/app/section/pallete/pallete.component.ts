@@ -1,3 +1,4 @@
+import { AppComponent } from './../../app.component';
 import {
   CdkDrag,
   CdkDragEnd,
@@ -13,49 +14,52 @@ import {
   Component,
   ComponentRef,
   ElementRef,
+  EventEmitter,
+  Input,
   OnInit,
+  Output,
+  QueryList,
   Renderer2,
   ViewChild,
+  ViewChildren
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { IComponent } from './interfaces/icomponent';
-import { IProperty } from './interfaces/iproperty';
-import { ButtonDragComponent } from './components/buttonDrag/buttonDrag.component';
-import { LabelDragComponent } from './components/labelDrag/labelDrag.component';
-import { CheckboxDragComponent } from './components/checkboxDrag/checkboxDrag.component';
-import { DropdownDragComponent } from './components/dropdownDrag/dropdownDrag.component';
-import { ImageDragComponent } from './components/imageDrag/imageDrag.component';
-import { RadioDragComponent } from './components/radioDrag/radioDrag.component';
-import { TextboxDragComponent } from './components/textboxDrag/textboxDrag.component';
-import { PopupDragComponent } from './components/popupDrag/popupDrag.component';
+import { IComponent } from './../../interfaces/icomponent';
+import { IProperty } from './../../interfaces/iproperty';
+import { ButtonDragComponent } from './../../components/buttonDrag/buttonDrag.component';
+import { LabelDragComponent } from './../../components/labelDrag/labelDrag.component';
+import { CheckboxDragComponent } from './../../components/checkboxDrag/checkboxDrag.component';
+import { DropdownDragComponent } from './../../components/dropdownDrag/dropdownDrag.component';
+import { ImageDragComponent } from './../../components/imageDrag/imageDrag.component';
+import { RadioDragComponent } from './../../components/radioDrag/radioDrag.component';
+import { TextboxDragComponent } from './../../components/textboxDrag/textboxDrag.component';
+import { PopupDragComponent } from './../../components/popupDrag/popupDrag.component';
 import { FormArray } from '@angular/forms';
-import { ParagraphDragComponent } from './components/paragraphDrag/paragraphDrag.component';
-import { NavbarDragComponent } from './components/navbarDrag/navbarDrag.component';
-import { ModalDragComponent } from './components/modalDrag/modalDrag.component';
-import { DatepickerDragComponent } from './components/datepickerDrag/datepickerDrag.component';
-import { HeaderDragComponent } from './components/headerDrag/headerDrag.component';
-import { InputDragComponent } from './components/inputDrag/inputDrag.component';
-import { LinkDragComponent } from './components/linkDrag/linkDrag.component';
+import { ParagraphDragComponent } from './../../components/paragraphDrag/paragraphDrag.component';
+import { NavbarDragComponent } from './../../components/navbarDrag/navbarDrag.component';
+import { ModalDragComponent } from './../../components/modalDrag/modalDrag.component';
+import { DatepickerDragComponent } from './../../components/datepickerDrag/datepickerDrag.component';
+import { HeaderDragComponent } from './../../components/headerDrag/headerDrag.component';
+import { InputDragComponent } from './../../components/inputDrag/inputDrag.component';
+import { LinkDragComponent } from './../../components/linkDrag/linkDrag.component';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
-import { TableDragComponent } from './components/tableDrag/tableDrag.component';
-import { YoutubeDragComponent } from './components/youtubeDrag/youtubeDrag.component';
-import { AppLoginComponent } from './app-login/app-login.component';
+import { TableDragComponent } from './../../components/tableDrag/tableDrag.component';
+import { YoutubeDragComponent } from './../../components/youtubeDrag/youtubeDrag.component';
+import { AppLoginComponent } from './../../app-login/app-login.component';
 import { CookieService } from 'ngx-cookie-service';
-import { UsersService } from './service/users.service';
+import { UsersService } from './../../service/users.service';
 import { DatePipe } from '@angular/common'
-import { PropertyComponent } from './property/property.component';
-import { CanvasComponent } from './section/canvas/canvas.component';
-import { PalleteComponent } from './section/pallete/pallete.component';
+import { PropertyComponent } from './../../property/property.component';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css', './app.palette.component.css'],
+  selector: 'app-pallete',
+  templateUrl: './pallete.component.html',
+  styleUrls: ['./pallete.component.css']
 })
-export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
+export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked {
   title = 'mockup-creator';
   index: number;
   componentList: IComponent[] = [];
@@ -105,13 +109,20 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     '<script>\nvar popoverTriggerList = [].slice.call(document.querySelectorAll(\'[data-bs-toggle="popover"]\'))\nvar popoverList = popoverTriggerList.map(function (popoverTriggerEl) {\nreturn new bootstrap.Popover(popoverTriggerEl)\n})\n</script>';
 
   @ViewChild('PropertyComponent') property: boolean;
-  @ViewChild(CanvasComponent) canvas!: CanvasComponent;
-  //@ViewChild('canvas') canvas!: ElementRef;
-  @ViewChild(PalleteComponent) palette: PalleteComponent;
+  @Input() canvas: ElementRef;
+  @Input() propertyCmp: PropertyComponent;
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
-  @ViewChild(PropertyComponent) propertyCmp:PropertyComponent;
+  //@ViewChild(PropertyComponent) propertyCmp:PropertyComponent;
+
+  @Output() updateComponentListEvent = new EventEmitter<IComponent>();
+  @Output() updateCanvasLeftEvent = new EventEmitter<number>();
+  @Output() updateCanvasTopEvent = new EventEmitter<number>();
+  @Output() updateCanvasWEvent = new EventEmitter<number>();
+  @Output() updateMousePosX = new EventEmitter<number>();
+  @Output() updateMousePosY = new EventEmitter<number>();
+  @Output() updateWhatComponentEvent = new EventEmitter<string>();
   changeref: ChangeDetectorRef;
   constructor(
     private loginCookie:CookieService,
@@ -129,8 +140,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
   delete: boolean;
   cssBody: SafeStyle;
-  canvasDirective: any;
-  passCanvas: ElementRef;
   canvasBG: string;
   canvasLeft = 0;
   canvasTop = 0;
@@ -150,40 +159,9 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       }) */
     }
   }
-  ngAfterViewInit(): void {     
-    this.canvasDirective = this.canvas.passCanvas();    
-    this.passCanvas = this.canvasDirective;   
-    //this.componentList = this.palette.returnComponentList();
+  ngAfterViewInit(): void {
+    console.log(this.canvas);
   }
-
-  updateComponentList(components: IComponent) {
-    this.componentList.push(components);
-  }
-  
-  updateCanvasLeft(value: number) {
-    this.canvasLeft = value;
-  }
-
-  updateCanvasTop(value: number) {
-    this.canvasTop = value;
-  }
-
-  updateCanvasW(value: number) {
-    this.canvasW = value;
-  }
-
-  updateMousePositionX(value: number) {
-    this.mousePositionX = value;
-  }
-
-  updateMousePositionY(value: number) {
-    this.mousePositionY = value;
-  }
-
-  updateWhatComponent(value: string) {
-    this.whatComponent = value;
-  }
-
   //////////////////////////////////////////////////////////////////////////////
   //   THIS PROJECT WAS STARTED BY BATO BOYS AND CEBU TEAM  
   //                          JUPAO  
@@ -233,9 +211,144 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       window.location.reload();
     }, 100);
   }
-  updateSelected(value: IProperty) {
-    this.selected = value;
-    console.log(this.selected);
+
+  returnComponentList() {
+    return this.componentList;
+  }
+
+  addComponent(component: string) {
+    let temp: IComponent;
+
+    switch (component) {
+      case 'button':
+        temp = new ButtonDragComponent(this.canvas);
+        break;
+
+      case 'label':
+        temp = new LabelDragComponent(this.canvas);
+        break;
+
+      case 'checkbox':
+        temp = new CheckboxDragComponent(this.canvas);
+        break;
+
+      case 'dropdown':
+        temp = new DropdownDragComponent(this.canvas);
+        break;
+
+      case 'img':
+        temp = new ImageDragComponent(this.canvas);
+        break;
+
+      case 'radio':
+        temp = new RadioDragComponent(this.canvas);
+        break;
+
+      case 'textbox':
+        temp = new TextboxDragComponent(this.canvas);
+        break;
+
+      case 'popup':
+        this._popupCount++;
+        temp = new PopupDragComponent(this.canvas);
+        break;
+
+      case 'paragraph':
+        temp = new ParagraphDragComponent(this.canvas);
+        break;
+
+      case 'nav':
+        temp = new NavbarDragComponent(this.canvas);
+        break;
+
+      case 'modal':
+        temp = new ModalDragComponent(this.canvas);
+        break;
+
+      case 'datepicker':
+        temp = new DatepickerDragComponent(this.canvas, this.datepipe);
+        break;
+
+      case 'header':
+        temp = new HeaderDragComponent(this.canvas);
+        break;
+
+      case 'input':
+        temp = new InputDragComponent(this.canvas);
+        break;
+
+      case 'link':
+        temp = new LinkDragComponent(this.canvas);
+        break;
+
+      case 'table':
+        temp = new TableDragComponent(this.canvas, this.changeref);
+        break;
+
+      case 'youtube':
+        temp = new YoutubeDragComponent(this.canvas, this.sanitizer);
+        break;
+
+      default:
+        temp = new ButtonDragComponent(this.canvas);
+    }
+    console.log(this.canvas);
+    this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
+    this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
+    this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;    
+    this.updateCanvasLeftEvent.emit(this.canvasLeft);
+    this.updateCanvasTopEvent.emit(this.canvasTop);
+    this.updateCanvasWEvent.emit(this.canvasW);
+    if (this.domInsideCanvas == false) {
+      this.mousePositionX = this.canvasLeft;
+      this.mousePositionY = this.canvasTop;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
+    }
+    this.componentList.push(temp);
+    this.updateComponentListEvent.emit(temp);;
+  }
+  //----------------------------------------------------------------------------
+  onDragEndedAddComponent(event: CdkDragEnd, component: string) {
+    event.source._dragRef.reset();
+    if (this.domInsideCanvas == true) {
+      this.offsetLeft = event.source.element.nativeElement.offsetLeft;
+      this.offsetTop = event.source.element.nativeElement.offsetTop;
+      this.xDistance = event.distance.x;
+      this.yDistance = event.distance.y;
+      this.canvasLeftX = (
+        this.subMenuItem.nativeElement as HTMLElement
+      ).offsetWidth;
+      this.canvasTopY = (
+        this.subMenuItem.nativeElement as HTMLElement
+      ).offsetTop;
+      console.log(this.canvasLeftX);
+      console.log(this.canvasTopY);
+      if (
+        component == 'img' ||
+        component == 'nav' ||
+        component == 'link' ||
+        component == 'table' ||
+        component == 'youtube'
+      ) {
+        this.canvasLeftX = 0;
+        this.canvasTopY = 0;
+      } else if (
+        component == 'header' ||
+        component == 'paragraph' ||
+        component == 'label'
+      ) {
+        this.canvasLeftX = (
+          this.subMenuItem2.nativeElement as HTMLElement
+        ).offsetWidth;
+        this.canvasTopY = (
+          this.subMenuItem2.nativeElement as HTMLElement
+        ).offsetTop;
+      }
+      this.mousePositionX = this.offsetLeft + this.xDistance + this.canvasLeftX;
+      this.mousePositionY = this.offsetTop + this.yDistance + this.canvasTopY;
+    }
+    this.addComponent(component);
   }
 
   //----------------------------------------------------------------------------
@@ -318,15 +431,10 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.isDisabled = true;
     }, 100);
   }
-  onDragEnd(component: IComponent) {
-    console.log(component);
-  }
   clickHandler(component: IComponent) {
-    console.log(component.props);
     this.selected = component.props;
     this.selectedComponent = component;
     this.selectedComp(this.selectedComponent);
-    console.log(this.selectedComponent)
     if (this.selected.typeObj != 'nav' || 'navDrag') {
       this.styleHolder = this.selected.style;
       let regexLeft = /left(.+?);/;
@@ -370,6 +478,9 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.selected.mouseDragPositionX = 0;
       this.selected.mouseDragPositionY = 0;
     }
+  }
+  onDragEnd(component: IComponent) {
+    console.log(component);
   }
 
   selectedComp(value: any) {
@@ -418,75 +529,114 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   addComponentLogin() {
     this.propertyCmp.clearComponent();
     let temp: IComponent;
-    temp = new ButtonDragComponent(this.canvasDirective);
-    this.canvasLeft = (this.canvasDirective.nativeElement as HTMLElement).offsetLeft;
-    this.canvasTop = (this.canvasDirective.nativeElement as HTMLElement).offsetTop;
-    this.canvasW = (this.canvasDirective.nativeElement as HTMLElement).offsetWidth;
+    temp = new ButtonDragComponent(this.canvas);
+    this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
+    this.updateCanvasLeftEvent.emit(this.canvasLeft);
+    this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
+    this.updateCanvasTopEvent.emit(this.canvasTop);
+    this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
+    this.updateCanvasWEvent.emit(this.canvasW);
 
     this.whatComponent = 'loginHeader';
-    temp = new HeaderDragComponent(this.canvasDirective);
+    this.updateWhatComponentEvent.emit(this.whatComponent);
+    temp = new HeaderDragComponent(this.canvas);
     this.mousePositionX = this.canvasLeft + 450;
+    this.updateMousePosX.emit(this.mousePositionX);
     this.mousePositionY = this.canvasTop + 140;
+    this.updateMousePosY.emit(this.mousePositionY);
     this.componentList.push(temp);
+    this.updateComponentListEvent.emit(temp);;
     setTimeout(() => {
-      this.whatComponent = 'loginInputUser';
-      temp = new InputDragComponent(this.canvasDirective);
+      this.whatComponent = 'loginInputUser';      
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new InputDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 530;
-      this.mousePositionY = this.canvasTop + 200;
+      this.mousePositionY = this.canvasTop + 200;      
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 1);
     setTimeout(() => {
       this.whatComponent = 'loginLabelUser';
-      temp = new LabelDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 450;
-      this.mousePositionY = this.canvasTop + 200;
+      this.mousePositionY = this.canvasTop + 200;      
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 1);
     setTimeout(() => {
       this.whatComponent = 'loginInputPass';
-      temp = new InputDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new InputDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 530;
       this.mousePositionY = this.canvasTop + 250;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 1);
     setTimeout(() => {
       this.whatComponent = 'loginLabelPass';
-      temp = new LabelDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 450;
       this.mousePositionY = this.canvasTop + 250;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 1);
     setTimeout(() => {
       this.whatComponent = 'LoginCheckbox';
-      temp = new CheckboxDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new CheckboxDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 450;
       this.mousePositionY = this.canvasTop + 300;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 1);
     setTimeout(() => {
       this.whatComponent = 'LoginButton';
-      temp = new ButtonDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new ButtonDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 450;
       this.mousePositionY = this.canvasTop + 350;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 1);
     setTimeout(() => {
       this.whatComponent = '';
+      this.updateWhatComponentEvent.emit(this.whatComponent);
     }, 1);
   }
   addComponentImageLabel() {
     this.propertyCmp.clearComponent();
     let temp: IComponent;
-    temp = new ButtonDragComponent(this.canvasDirective);
-    this.canvasLeft = (this.canvasDirective.nativeElement as HTMLElement).offsetLeft;
-    this.canvasTop = (this.canvasDirective.nativeElement as HTMLElement).offsetTop;
-    this.canvasW = (this.canvasDirective.nativeElement as HTMLElement).offsetWidth;
+    temp = new ButtonDragComponent(this.canvas);
+    this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
+    this.updateCanvasLeftEvent.emit(this.canvasLeft);
+    this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
+    this.updateCanvasTopEvent.emit(this.canvasTop);
+    this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
+    this.updateCanvasWEvent.emit(this.canvasW);
 
     this.whatComponent = 'sampleImage';
-    temp = new ImageDragComponent(this.canvasDirective);
+    this.updateWhatComponentEvent.emit(this.whatComponent);
+    temp = new ImageDragComponent(this.canvas);
     this.mousePositionX = this.canvasLeft + 450;
-    this.mousePositionY = this.canvasTop + 140;
+    this.mousePositionY = this.canvasTop + 140;    
+    this.updateMousePosX.emit(this.mousePositionX);
+    this.updateMousePosY.emit(this.mousePositionY);
     this.componentList.push(temp);
+    this.updateComponentListEvent.emit(temp);;
   }
 
   refresh(): void {
@@ -505,199 +655,303 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   addComponentHomePage() {
     this.propertyCmp.clearComponent();
     let temp: IComponent;
-    this.canvasLeft = (this.canvasDirective.nativeElement as HTMLElement).offsetLeft;
-    this.canvasTop = (this.canvasDirective.nativeElement as HTMLElement).offsetTop;
-    this.canvasW = (this.canvasDirective.nativeElement as HTMLElement).offsetWidth;
-
+    this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
+    this.updateCanvasLeftEvent.emit(this.canvasLeft);
+    this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
+    this.updateCanvasTopEvent.emit(this.canvasTop);
+    this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
+    this.updateCanvasWEvent.emit(this.canvasW);
+  
     this.whatComponent = 'HPNav1';
-    temp = new NavbarDragComponent(this.canvasDirective);
+    this.updateWhatComponentEvent.emit(this.whatComponent);
+    temp = new NavbarDragComponent(this.canvas);
     this.mousePositionX = this.canvasLeft;
     this.mousePositionY = this.canvasTop + 40;
+    this.updateMousePosX.emit(this.mousePositionX);
+    this.updateMousePosY.emit(this.mousePositionY);
 
     this.componentList.push(temp);
+    this.updateComponentListEvent.emit(temp);;
 
     setTimeout(() => {
       this.whatComponent = 'HPNav2';
-      temp = new NavbarDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new NavbarDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft;
       this.mousePositionY = this.canvasTop;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
 
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
 
     setTimeout(() => {
       this.whatComponent = 'HPP8';
-      temp = new ParagraphDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new ParagraphDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 1050;
       this.mousePositionY = this.canvasTop;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
 
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
 
     setTimeout(() => {
       this.whatComponent = 'HPLink7';
-      temp = new LinkDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new LinkDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 980;
       this.mousePositionY = this.canvasTop + 60;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
 
     setTimeout(() => {
       this.whatComponent = 'HPLink8';
-      temp = new LinkDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new LinkDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 1080;
       this.mousePositionY = this.canvasTop + 60;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
 
     setTimeout(() => {
       this.whatComponent = 'HPLink9';
-      temp = new LinkDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new LinkDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 1210;
       this.mousePositionY = this.canvasTop + 60;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
 
     setTimeout(() => {
       this.whatComponent = 'HPLabel1';
-      temp = new LabelDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 20;
       this.mousePositionY = this.canvasTop + 65;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
 
     setTimeout(() => {
       this.whatComponent = 'HPLink1';
-      temp = new LinkDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new LinkDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 20;
       this.mousePositionY = this.canvasTop + 100;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPLink2';
-      temp = new LinkDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new LinkDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 120;
       this.mousePositionY = this.canvasTop + 100;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPLink3';
-      temp = new LinkDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new LinkDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 200;
       this.mousePositionY = this.canvasTop + 100;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPNav3';
-      temp = new NavbarDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new NavbarDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft;
       this.mousePositionY = this.canvasTop + 140;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
 
     setTimeout(() => {
       this.whatComponent = 'HPLabel2';
-      temp = new LabelDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 600;
       this.mousePositionY = this.canvasTop + 160;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
 
     setTimeout(() => {
       this.whatComponent = 'HPLabel3';
-      temp = new LabelDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 540;
       this.mousePositionY = this.canvasTop + 200;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPLink4';
-      temp = new LinkDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new LinkDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 430;
       this.mousePositionY = this.canvasTop + 240;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPLink5';
-      temp = new LinkDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new LinkDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 560;
       this.mousePositionY = this.canvasTop + 240;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPLink6';
-      temp = new LinkDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new LinkDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 690;
       this.mousePositionY = this.canvasTop + 240;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
 
     setTimeout(() => {
       this.whatComponent = 'HPImage2';
-      temp = new ImageDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new ImageDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 330;
       this.mousePositionY = this.canvasTop + 300;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPImage3';
-      temp = new ImageDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new ImageDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 645;
       this.mousePositionY = this.canvasTop + 300;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPImage1';
-      temp = new ImageDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new ImageDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 15;
       this.mousePositionY = this.canvasTop + 300;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
 
     setTimeout(() => {
       this.whatComponent = 'HPP2';
-      temp = new ParagraphDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new ParagraphDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 960;
       this.mousePositionY = this.canvasTop + 300;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPP3';
-      temp = new ParagraphDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new ParagraphDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 960;
       this.mousePositionY = this.canvasTop + 400;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPP4';
-      temp = new ParagraphDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new ParagraphDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 960;
       this.mousePositionY = this.canvasTop + 500;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPP5';
-      temp = new ParagraphDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new ParagraphDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 960;
       this.mousePositionY = this.canvasTop + 350;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPP6';
-      temp = new ParagraphDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new ParagraphDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 960;
       this.mousePositionY = this.canvasTop + 450;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPP7';
-      temp = new ParagraphDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new ParagraphDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 960;
       this.mousePositionY = this.canvasTop + 550;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = '';
+      this.updateWhatComponentEvent.emit(this.whatComponent);
     }, 100);
   }
 
@@ -706,185 +960,283 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     //left side of the form
     this.propertyCmp.clearComponent();
     let temp: IComponent;
-    temp = new ButtonDragComponent(this.canvasDirective);
-    this.canvasLeft = (this.canvasDirective.nativeElement as HTMLElement).offsetLeft;
-    this.canvasTop = (this.canvasDirective.nativeElement as HTMLElement).offsetTop;
-    this.canvasW = (this.canvasDirective.nativeElement as HTMLElement).offsetWidth;
+    temp = new ButtonDragComponent(this.canvas);
+    this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
+    this.updateCanvasLeftEvent.emit(this.canvasLeft);
+    this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
+    this.updateCanvasTopEvent.emit(this.canvasTop);
+    this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;
+    this.updateCanvasWEvent.emit(this.canvasW);
 
     //navbar
     this.whatComponent = 'searchNavbar';
-    temp = new NavbarDragComponent(this.canvasDirective);
+    this.updateWhatComponentEvent.emit(this.whatComponent);
+    temp = new NavbarDragComponent(this.canvas);
     this.mousePositionX = this.canvasLeft + 250;
     this.mousePositionY = this.canvasTop;
+    this.updateMousePosX.emit(this.mousePositionX);
+    this.updateMousePosY.emit(this.mousePositionY);
     this.componentList.push(temp);
+    this.updateComponentListEvent.emit(temp);;
 
     setTimeout(() => {
       this.whatComponent = 'userIDLabel';
-      temp = new LabelDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 980;
       this.mousePositionY = this.canvasTop + 10;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'usernameLabel';
-      temp = new LabelDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 1036;
       this.mousePositionY = this.canvasTop + 10;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HomeButton';
-      temp = new ButtonDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new ButtonDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 1140;
       this.mousePositionY = this.canvasTop + 8;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'ProfileButton';
-      temp = new ButtonDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new ButtonDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 1210;
       this.mousePositionY = this.canvasTop + 8;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
 
     //body
     setTimeout(() => {
       this.whatComponent = 'searchHeader';
-      temp = new HeaderDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new HeaderDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 250;
       this.mousePositionY = this.canvasTop + 140;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'carrierInput';
-      temp = new InputDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new InputDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 320;
       this.mousePositionY = this.canvasTop + 200;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'carrierLabel';
-      temp = new LabelDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 240;
       this.mousePositionY = this.canvasTop + 210;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'invoiceInput';
-      temp = new InputDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new InputDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 320;
       this.mousePositionY = this.canvasTop + 250;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'invoiceFromLabel';
-      temp = new LabelDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 155;
       this.mousePositionY = this.canvasTop + 260;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
-      temp = new DatepickerDragComponent(this.canvasDirective, this.datepipe);
+      temp = new DatepickerDragComponent(this.canvas, this.datepipe);
       this.mousePositionX = this.canvasLeft + 320;
       this.mousePositionY = this.canvasTop + 310;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'shippingFromLabel';
-      temp = new LabelDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 162;
       this.mousePositionY = this.canvasTop + 310;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'deliveryInput';
-      temp = new InputDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new InputDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 320;
       this.mousePositionY = this.canvasTop + 350;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'deliveryNameLabel';
-      temp = new LabelDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 195;
       this.mousePositionY = this.canvasTop + 360;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'addressInput';
-      temp = new InputDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new InputDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 320;
       this.mousePositionY = this.canvasTop + 400;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'addressLabel';
-      temp = new LabelDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 235;
       this.mousePositionY = this.canvasTop + 410;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'remarksInput';
-      temp = new InputDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new InputDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 320;
       this.mousePositionY = this.canvasTop + 450;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'remarksLabel';
-      temp = new LabelDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 230;
       this.mousePositionY = this.canvasTop + 460;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
 
     // right side of the form
     setTimeout(() => {
       this.whatComponent = 'invoiceInput';
-      temp = new InputDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new InputDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 720;
       this.mousePositionY = this.canvasTop + 200;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'invoiceToLabel';
-      temp = new LabelDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 575;
       this.mousePositionY = this.canvasTop + 210;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
-      temp = new DatepickerDragComponent(this.canvasDirective, this.datepipe);
+      temp = new DatepickerDragComponent(this.canvas, this.datepipe);
       this.mousePositionX = this.canvasLeft + 720;
       this.mousePositionY = this.canvasTop + 250;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'shippingToLabel';
-      temp = new LabelDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new LabelDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 580;
       this.mousePositionY = this.canvasTop + 250;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
 
     //buttons
     setTimeout(() => {
       this.whatComponent = 'SearchButton';
-      temp = new ButtonDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new ButtonDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 900;
       this.mousePositionY = this.canvasTop + 500;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'ClearButton';
-      temp = new ButtonDragComponent(this.canvasDirective);
+      this.updateWhatComponentEvent.emit(this.whatComponent);
+      temp = new ButtonDragComponent(this.canvas);
       this.mousePositionX = this.canvasLeft + 965;
       this.mousePositionY = this.canvasTop + 500;
+      this.updateMousePosX.emit(this.mousePositionX);
+      this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
+      this.updateComponentListEvent.emit(temp);;
     }, 100);
     setTimeout(() => {
       this.whatComponent = '';
+      this.updateWhatComponentEvent.emit(this.whatComponent);
     }, 100);
   }
 
@@ -1090,7 +1442,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
 
   //the comment below are for deleting a cssRule by one
-
+  
   deleteCSSRule(cssString: string) { //deletes the CSS rule
     let newCssRuleCount = document.styleSheets[0].cssRules.length;
     let cssRuleStringTemp: string;
@@ -1123,6 +1475,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   clearCss() {
     this.styleBox.nativeElement.value = '';
   } 
+  
 
   /*************Here Ends CSS Code******************/
 
@@ -1185,3 +1538,4 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 function readCSSFile(arg0: string) {
   throw new Error('Function not implemented.');
 }
+

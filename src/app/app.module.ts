@@ -31,6 +31,7 @@ import { AppLoginComponent } from './app-login/app-login.component';
 import { AppRegisterComponent } from './app-register/app-register.component';
 import { DatePipe } from '@angular/common';
 import { CanvasComponent } from './section/canvas/canvas.component';
+import { PalleteComponent } from './section/pallete/pallete.component'
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { CanvasComponent } from './section/canvas/canvas.component';
     AppLoginComponent,
     AppRegisterComponent,
     CanvasComponent,
+    PalleteComponent,
     
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule, FormsModule, HttpClientModule],
