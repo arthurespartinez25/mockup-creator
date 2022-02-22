@@ -1,8 +1,8 @@
 .palette-div {
   height: 100vh;
   max-width: 600px;
-  min-width: 160px;
-  width: 15%;
+  min-width: 200px;
+  width: 30%;
 }
 
 .palette-container {
@@ -35,52 +35,50 @@
   border: #16324f solid 1px;
 }
 
-
-.sub-menu{
-  position:inherit;
+.sub-menu {
+  position: inherit;
   display: inline-block;
 }
-.sub-menu-dropdown{
+.sub-menu-dropdown {
   pointer-events: none;
-  display:inline-block;
-  position:absolute;
+  display: inline-block;
+  position: absolute;
   max-width: 100px;
   opacity: 0;
   z-index: 999;
-
 }
-.sub-menu-dropdown button{
+.sub-menu-dropdown button {
   display: table;
 }
-.sub-menu-dropdown button:hover{
-  pointer-events:all;
+.sub-menu-dropdown button:hover {
+  pointer-events: all;
   color: #16324f;
-  background-color:white;
+  background-color: white;
 }
-.sub-menu-button:focus + .sub-menu-dropdown{
-  pointer-events:auto;
+.sub-menu-button:focus + .sub-menu-dropdown {
+  pointer-events: auto;
   display: inline-block;
   opacity: 1;
 }
 
-.component-list{
+.component-list {
   height: 30px;
   width: 100%;
   color: white;
   background-color: #16324f;
   outline: none;
-  border: white solid .5px;
+  border: white solid 0.5px;
   text-align: left;
 }
 
-.component-items{
+.component-items {
   margin-top: 5px;
   margin-bottom: 5px;
   margin-right: 3px;
   margin-left: 3px;
 }
 
-.component-button-hide{
+.component-button-hide {
   display: block;
   float: right;
   min-height: 20px;
@@ -89,7 +87,7 @@
   border: #16324f solid 2px;
 }
 
-.component-button-remove{
+.component-button-remove {
   display: block;
   float: right;
   min-height: 20px;
