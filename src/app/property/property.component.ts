@@ -32,7 +32,8 @@ export class PropertyComponent implements OnInit {
   @Output() addAllCSSRule = new EventEmitter<string>();
   @Output() clearCss = new EventEmitter<string>();
   @Output() cssReceiveMessage = new EventEmitter<string>();
-  
+  @Output() clearComponentListEvent = new EventEmitter<number>();
+  @Output() updateComponentListEvent = new EventEmitter<IComponent[]>();
 
   @Input() get property(): IProperty {
     
@@ -78,18 +79,17 @@ export class PropertyComponent implements OnInit {
     this.props = this.property;
     this.componentList = this.compList;
     this.selectedcomp = this.selectedIdx;
-    
   }
 
   deleteComponent() {
     let componentIndex = this.componentList.indexOf(this.selectedcomp);
-    console.log(this.selectedcomp);
     if (componentIndex !== -1) {
       this.componentList.splice(componentIndex, 1);
       this.props = this.defaultProps;
       this.styleBox.nativeElement.value = "";
       this.props.draggable = false;
     }
+    this.updateComponentListEvent.emit(this.componentList);
   }
   @ViewChild('taID') styleBox: ElementRef;
   clearComponent() {
@@ -99,7 +99,8 @@ export class PropertyComponent implements OnInit {
         this.addAllCSSRule.next("");
         this.clearCss.next("");
         this.cssReceiveMessage.next("");
-        this.props.draggable = false;
+        this.props.draggable = false;        
+        this.clearComponentListEvent.next(0);
   }
 
   ngOnInit(): void {

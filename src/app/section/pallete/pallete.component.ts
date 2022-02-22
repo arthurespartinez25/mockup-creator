@@ -212,6 +212,14 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
     }, 100);
   }
 
+  clearComponentList() {
+    this.componentList.length = 0;
+  }
+
+  updateComponentListDel(value : IComponent[]) {
+    this.componentList = value;
+  }
+
   returnComponentList() {
     return this.componentList;
   }
@@ -305,8 +313,8 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
     }
-    this.componentList.push(temp);
-    this.updateComponentListEvent.emit(temp);;
+    //this.componentList.push(temp);
+    this.updateComponentListEvent.emit(temp);
   }
   //----------------------------------------------------------------------------
   onDragEndedAddComponent(event: CdkDragEnd, component: string) {
@@ -545,7 +553,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
     this.mousePositionY = this.canvasTop + 140;
     this.updateMousePosY.emit(this.mousePositionY);
     this.componentList.push(temp);
-    this.updateComponentListEvent.emit(temp);;
+    this.updateComponentListEvent.emit(temp);
     setTimeout(() => {
       this.whatComponent = 'loginInputUser';      
       this.updateWhatComponentEvent.emit(this.whatComponent);
@@ -555,7 +563,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 1);
     setTimeout(() => {
       this.whatComponent = 'loginLabelUser';
@@ -566,7 +574,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 1);
     setTimeout(() => {
       this.whatComponent = 'loginInputPass';
@@ -577,7 +585,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 1);
     setTimeout(() => {
       this.whatComponent = 'loginLabelPass';
@@ -588,7 +596,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 1);
     setTimeout(() => {
       this.whatComponent = 'LoginCheckbox';
@@ -599,7 +607,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 1);
     setTimeout(() => {
       this.whatComponent = 'LoginButton';
@@ -610,7 +618,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 1);
     setTimeout(() => {
       this.whatComponent = '';
@@ -636,7 +644,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
     this.updateMousePosX.emit(this.mousePositionX);
     this.updateMousePosY.emit(this.mousePositionY);
     this.componentList.push(temp);
-    this.updateComponentListEvent.emit(temp);;
+    this.updateComponentListEvent.emit(temp);
   }
 
   refresh(): void {
@@ -671,7 +679,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
     this.updateMousePosY.emit(this.mousePositionY);
 
     this.componentList.push(temp);
-    this.updateComponentListEvent.emit(temp);;
+    this.updateComponentListEvent.emit(temp);
 
     setTimeout(() => {
       this.whatComponent = 'HPNav2';
@@ -683,7 +691,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosY.emit(this.mousePositionY);
 
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
 
     setTimeout(() => {
@@ -696,7 +704,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosY.emit(this.mousePositionY);
 
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
 
     setTimeout(() => {
@@ -708,7 +716,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
 
     setTimeout(() => {
@@ -720,7 +728,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
 
     setTimeout(() => {
@@ -732,7 +740,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
 
     setTimeout(() => {
@@ -744,7 +752,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
 
     setTimeout(() => {
@@ -756,7 +764,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPLink2';
@@ -767,7 +775,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPLink3';
@@ -778,7 +786,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPNav3';
@@ -789,7 +797,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
 
     setTimeout(() => {
@@ -801,7 +809,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
 
     setTimeout(() => {
@@ -813,7 +821,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPLink4';
@@ -824,7 +832,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPLink5';
@@ -835,7 +843,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPLink6';
@@ -846,7 +854,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
 
     setTimeout(() => {
@@ -858,7 +866,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPImage3';
@@ -869,7 +877,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPImage1';
@@ -880,7 +888,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
 
     setTimeout(() => {
@@ -892,7 +900,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPP3';
@@ -903,7 +911,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPP4';
@@ -914,7 +922,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPP5';
@@ -925,7 +933,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPP6';
@@ -936,7 +944,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HPP7';
@@ -947,7 +955,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = '';
@@ -977,7 +985,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
     this.updateMousePosX.emit(this.mousePositionX);
     this.updateMousePosY.emit(this.mousePositionY);
     this.componentList.push(temp);
-    this.updateComponentListEvent.emit(temp);;
+    this.updateComponentListEvent.emit(temp);
 
     setTimeout(() => {
       this.whatComponent = 'userIDLabel';
@@ -988,7 +996,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'usernameLabel';
@@ -999,7 +1007,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'HomeButton';
@@ -1010,7 +1018,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'ProfileButton';
@@ -1021,7 +1029,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
 
     //body
@@ -1034,7 +1042,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'carrierInput';
@@ -1045,7 +1053,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'carrierLabel';
@@ -1056,7 +1064,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'invoiceInput';
@@ -1067,7 +1075,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'invoiceFromLabel';
@@ -1078,7 +1086,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       temp = new DatepickerDragComponent(this.canvas, this.datepipe);
@@ -1087,7 +1095,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'shippingFromLabel';
@@ -1098,7 +1106,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'deliveryInput';
@@ -1109,7 +1117,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'deliveryNameLabel';
@@ -1120,7 +1128,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'addressInput';
@@ -1131,7 +1139,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'addressLabel';
@@ -1142,7 +1150,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'remarksInput';
@@ -1153,7 +1161,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'remarksLabel';
@@ -1164,7 +1172,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
 
     // right side of the form
@@ -1177,7 +1185,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'invoiceToLabel';
@@ -1188,7 +1196,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       temp = new DatepickerDragComponent(this.canvas, this.datepipe);
@@ -1197,7 +1205,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'shippingToLabel';
@@ -1208,7 +1216,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
 
     //buttons
@@ -1221,7 +1229,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = 'ClearButton';
@@ -1232,7 +1240,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
       this.componentList.push(temp);
-      this.updateComponentListEvent.emit(temp);;
+      this.updateComponentListEvent.emit(temp);
     }, 100);
     setTimeout(() => {
       this.whatComponent = '';

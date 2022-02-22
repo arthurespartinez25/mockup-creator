@@ -83,6 +83,9 @@ export class CodeComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @ViewChild(PropertyComponent) propertyCmp:PropertyComponent;
 
   @Output() updatePropertyComponentEvent = new EventEmitter<PropertyComponent>();
+  @Output() clearComponentListEvent = new EventEmitter<number>();
+  @Output() updateComponentListEvent = new EventEmitter<IComponent[]>();
+
   changeref: ChangeDetectorRef;
   constructor(
     private loginCookie:CookieService,
@@ -173,6 +176,13 @@ export class CodeComponent implements OnInit, AfterViewInit, AfterViewChecked {
     }, 100);
   }
   //----------------------------------------------------------------------------
+  clearComponentList() {
+    this.clearComponentListEvent.next(0);
+  }
+
+  updateComponentList(value: IComponent[]) {
+    this.updateComponentListEvent.emit(value);
+  }
   //----------------------------------------------------------------------------
 
   get dragDisabled(): boolean {
@@ -255,18 +265,6 @@ export class CodeComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
   onDragEnd(component: IComponent) {
     console.log(component);
-  }
-
-  selectedComp(value: any) {
-    let componentIndex = this.componentList.indexOf(value);
-    if (componentIndex !== -1) {
-      for (let i = 0; i < this.componentList.length; i++) {
-        this.componentList[i].props.selected = false;
-      }
-      this.componentList[componentIndex].props.selected = true;
-    } else {
-      console.log('Nothing to highlight');
-    }
   }
 
   copyMessage(val: string) {
