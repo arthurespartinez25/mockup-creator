@@ -155,6 +155,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   updateComponentList(components: IComponent) {
     console.log(components);
     this.componentList.push(components);
+    this.palette.updateComponentListDel(this.componentList); //updates the componentList in the pallete
   }
   
   updateCanvasLeft(value: number) {
