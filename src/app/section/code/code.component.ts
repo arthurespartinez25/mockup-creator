@@ -1,37 +1,23 @@
-import { AppComponent } from './../../app.component';
-import {
-  CdkDrag,
-  CdkDragEnd,
-  DragDrop,
-  CdkDragDrop,
-  moveItemInArray,
-} from '@angular/cdk/drag-drop';
 import {
   AfterViewChecked,
   AfterViewInit,
-  ApplicationRef,
   ChangeDetectorRef,
   Component,
   ComponentRef,
   ElementRef,
   EventEmitter,
   OnInit,
-  QueryList,
-  Renderer2,
   ViewChild,
-  ViewChildren,
   Input,
   Output
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
-import { UsersService } from 'src/app/service/users.service';
 import { DatePipe } from '@angular/common'
 import { PropertyComponent } from 'src/app/property/property.component';
 
@@ -89,14 +75,10 @@ export class CodeComponent implements OnInit, AfterViewInit, AfterViewChecked {
   changeref: ChangeDetectorRef;
   constructor(
     private loginCookie:CookieService,
-    private renderer: Renderer2,
-    private drag: DragDrop,
     changeDetectorRef: ChangeDetectorRef,
-    private http: HttpClient,
     public _router: Router,
     public _location: Location,
     public sanitizer: DomSanitizer,
-    private user:UsersService,
     public datepipe: DatePipe,
   ) {
     this.changeref = changeDetectorRef;
@@ -161,20 +143,6 @@ export class CodeComponent implements OnInit, AfterViewInit, AfterViewChecked {
   yDistance: any = 0;
   theUsername = "";
   
-
-  loggedIn($event) {
-    /* console.log("eto value natin lods: " + this.sessionID); */
-    this.theUsername = $event;
-    console.log(this.theUsername as string);
-    console.log("nakapagpasa na po");
-  }
-  logout() {
-    this.loginCookie.deleteAll();
-    this._router.navigate(['/']);
-    setTimeout(() => {
-      window.location.reload();
-    }, 100);
-  }
   //----------------------------------------------------------------------------
   clearComponentList() {
     this.clearComponentListEvent.next(0);
@@ -258,14 +226,6 @@ export class CodeComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
   styleHolder = 'aw';
   isDisabled = true;
-  timerDisable() {
-    setTimeout(() => {
-      this.isDisabled = true;
-    }, 100);
-  }
-  onDragEnd(component: IComponent) {
-    console.log(component);
-  }
 
   copyMessage(val: string) {
     const selBox = document.createElement('textarea');
@@ -549,59 +509,6 @@ export class CodeComponent implements OnInit, AfterViewInit, AfterViewChecked {
   
 
   /*************Here Ends CSS Code******************/
-
-  /*************The code below is for component list functions**********************/
-
-  deleteComponent(value: any) {
-    let componentIndex = this.componentList.indexOf(value); //gets the index of the selected component inside the canvas
-    if (componentIndex !== -1) {
-      this.componentList.splice(componentIndex, 1); //removes the component from the canvas
-    }
-  }
-
-  hideComponent(value: any) {
-    let componentIndex = this.componentList.indexOf(value); //gets the index of the selected component inside the canvas
-    this.componentList[componentIndex].props.hidden =
-      !this.componentList[componentIndex].props.hidden; //removes visibility of a component from the canvas 
-  }
-
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(
-      this.componentList,
-      event.previousIndex,
-      event.currentIndex
-    );
-    //console.log("This is the previous index " + event.previousContainer);
-    //console.log("This is the new index " + event.currentIndex);
-  }
-
-  //code below is for counting how many component of the same type are in the componentList
-  addToNoOfComponent(value: IComponent) {
-    let componentIndex = this.componentList.indexOf(value);
-    let checkbox,
-      datepicker,
-      dropdown,
-      header,
-      image,
-      input,
-      label,
-      link,
-      modal,
-      navbar,
-      paragraph,
-      radio,
-      table,
-      textbox,
-      youtube = 0; // create a variable for each type of component
-    switch (this.componentList[componentIndex].props.typeObj) {
-      case 'buttonDrag': {
-        this.noOfButton++;
-        this.numberOfComponents.push([value], ['Button' + this.noOfButton]);
-      }
-    }
-  }
-
-  /**************End of code for component list functions *************************/
 
 
   /****************** OLD CODE STARTS HERE **********************/
