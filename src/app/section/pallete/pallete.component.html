@@ -46,18 +46,29 @@
         aria-labelledby="elements-tab">
       </app-elements>
       <app-templates 
+        [canvas]="canvas"
+        [propertyCmp]="propertyCmp"
+        (updateComponentListEvent)="updatedList($event)"
+        (updateCanvasLeftEvent)="updatedCanvasLeft($event)"
+        (updateCanvasTopEvent)="updatedCanvasTop($event)"
+        (updateCanvasWEvent)="updatedCanvasW($event)"
+        (updateMousePosX)="updatedMousePositionX($event)"
+        (updateMousePosY)="updatedMousePositionY($event)"
+        (updateWhatComponentEvent)="updatedWhatComponent($event)"
         class="tab-pane fade"
         id="templates"
         role="tabpanel"
         aria-labelledby="templates-tab">
       </app-templates>
       <button 
-      class="palette-item" 
-      (click)="logout()"
-      style="background-color: maroon;"
+        class="palette-item" 
+        (click)="logout()"
+        style="background-color: maroon;"
       >
-      Logout
-    </button>
+        Logout
+      </button>
     </div>
-    <app-component-list></app-component-list>
+      <app-component-list
+        [componentList]="componentList">
+      </app-component-list>
   </div>

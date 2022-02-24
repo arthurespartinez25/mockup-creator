@@ -1,3 +1,4 @@
+
 import {
   CdkDrag,
   CdkDragEnd,
@@ -100,7 +101,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @ViewChild('PropertyComponent') property: boolean;
   @ViewChild(CanvasComponent) canvas!: CanvasComponent;
   //@ViewChild('canvas') canvas!: ElementRef;
-  @ViewChild(PalleteComponent) palette: PalleteComponent;  
+  @ViewChild(PalleteComponent) palette: PalleteComponent; 
   @ViewChild(CodeComponent) code: CodeComponent;
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
@@ -155,6 +156,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   updateComponentList(components: IComponent) {
     console.log(components);
     this.componentList.push(components);
+    console.log(this.componentList)
     this.palette.updateComponentListDel(this.componentList); //updates the componentList in the pallete
   }
   

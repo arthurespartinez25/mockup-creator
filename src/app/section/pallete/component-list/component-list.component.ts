@@ -61,7 +61,6 @@ import { PropertyComponent } from './../../../property/property.component';
 export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewChecked {
   title = 'mockup-creator';
   index: number;
-  componentList: IComponent[] = [];
   numberOfComponents: any = [];
   selectedComponent: IComponent;
   ref: ComponentRef<any>;
@@ -110,6 +109,7 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
   @ViewChild('PropertyComponent') property: boolean;
   @Input() canvas: ElementRef;
   @Input() propertyCmp: PropertyComponent;
+  @Input() componentList: IComponent[] = [];
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
@@ -213,10 +213,6 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
 
   clearComponentList() {
     this.componentList.length = 0;
-  }
-
-  updateComponentListDel(value : IComponent[]) {
-    this.componentList = value;
   }
 
   returnComponentList() {
