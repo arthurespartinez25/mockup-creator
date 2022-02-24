@@ -32,7 +32,10 @@ import { AppRegisterComponent } from './app-register/app-register.component';
 import { DatePipe } from '@angular/common';
 import { CanvasComponent } from './section/canvas/canvas.component';
 import { PalleteComponent } from './section/pallete/pallete.component'
-import { CodeComponent } from './section/code/code.component'
+import { CodeComponent } from './section/code/code.component';
+import { TemplatesComponent } from './section/pallete/templates/templates.component';
+import { ElementsComponent } from './section/pallete/elements/elements.component';
+import { ComponentListComponent } from './section/pallete/component-list/component-list.component';
 
 @NgModule({
   declarations: [
@@ -60,8 +63,10 @@ import { CodeComponent } from './section/code/code.component'
     AppRegisterComponent,
     CanvasComponent,
     PalleteComponent,
-    
-    CodeComponent
+    CodeComponent,
+    TemplatesComponent,
+    ElementsComponent,
+    ComponentListComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule, FormsModule, HttpClientModule],
   providers: [DragDropModule, AppComponent, DatePipe],

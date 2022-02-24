@@ -1,0 +1,192 @@
+<div
+      >
+        <div
+          class="palette-container"
+          cdkDropListGroup
+          cdkDropList
+          cdkDropListSortingDisabled
+        >
+          <button
+            class="palette-item"
+            (click)="addComponent('nav')"
+            cdkDrag
+            (cdkDragEnded)="onDragEndedAddComponent($event, 'nav')"
+          >
+            Navbar
+          </button>
+          <button
+            class="palette-item"
+            (click)="addComponent('link')"
+            cdkDrag
+            (cdkDragEnded)="onDragEndedAddComponent($event, 'link')"
+          >
+            Link
+          </button>
+
+          <!-- text-dropdown-menu start -->
+          <div
+            class="palette-item sub-menu"
+            id="subMenuItem2"
+            #subMenuItem2
+            style="padding: 0px; padding-top: 0px"
+          >
+            <button class="sub-menu-button palette-item"
+            (focus)="isDisabled = false"
+            (focusout)="timerDisable()">Text*</button>
+            <div class="sub-menu-dropdown">
+              <button
+                class="palette-item"
+                (click)="addComponent('header')"
+                cdkDrag
+                (cdkDragEnded)="onDragEndedAddComponent($event, 'header')"
+                [disabled]="isDisabled"
+              >
+                Header
+              </button>
+
+              <button
+                class="palette-item"
+                (click)="addComponent('paragraph')"
+                cdkDrag
+                (cdkDragEnded)="onDragEndedAddComponent($event, 'paragraph')"
+                [disabled]="isDisabled"
+              >
+                Paragraph
+              </button>
+
+              <button
+                class="palette-item"
+                (click)="addComponent('label')"
+                cdkDrag
+                (cdkDragEnded)="onDragEndedAddComponent($event, 'label')"
+                [disabled]="isDisabled"
+              >
+                Label
+              </button>
+            </div>
+          </div>
+          <!-- text-dropdown end -->
+
+          <!-- input-dropdown-menu start -->
+          <div
+            class="palette-item sub-menu"
+            id="subMenuItem"
+            #subMenuItem
+            style="padding: 0px; padding-top: 0px"
+          >
+            <button class="sub-menu-button palette-item" (focus)="isDisabled = false"
+            (focusout)="timerDisable()">Input*</button>
+            <div class="sub-menu-dropdown">
+              <button
+                class="palette-item"
+                (click)="addComponent('button')"
+                cdkDrag
+                (cdkDragEnded)="onDragEndedAddComponent($event, 'button')"
+                [disabled]="isDisabled"
+              >
+                Button
+              </button>
+
+              <button
+                class="palette-item"
+                (click)="addComponent('dropdown')"
+                cdkDrag
+                (cdkDragEnded)="onDragEndedAddComponent($event, 'dropdown')"
+                [disabled]="isDisabled"ms
+              >
+                Dropdown
+              </button>
+              <button
+                class="palette-item"
+                (click)="addComponent('checkbox')"
+                cdkDrag
+                (cdkDragEnded)="onDragEndedAddComponent($event, 'checkbox')"
+                [disabled]="isDisabled"
+              >
+                Checkbox
+              </button>
+
+              <button
+                class="palette-item"
+                (click)="addComponent('radio')"
+                cdkDrag
+                (cdkDragEnded)="onDragEndedAddComponent($event, 'radio')"
+                [disabled]="isDisabled"
+              >
+                Radio
+              </button>
+              <button
+                class="palette-item"
+                (click)="addComponent('input')"
+                cdkDrag
+                (cdkDragEnded)="onDragEndedAddComponent($event, 'input')"
+                [disabled]="isDisabled"
+              >
+                Input Field
+              </button>
+              <button
+                class="palette-item"
+                (click)="addComponent('textbox')"
+                cdkDrag
+                (cdkDragEnded)="onDragEndedAddComponent($event, 'textbox')"
+                [disabled]="isDisabled"
+              >
+                Textbox
+              </button>
+              <button
+                class="palette-item"
+                (click)="addComponent('datepicker')"
+                cdkDrag
+                (cdkDragEnded)="onDragEndedAddComponent($event, 'datepicker')"
+                [disabled]="isDisabled"
+              >
+                DatePicker
+              </button>
+            </div>
+          </div>
+
+          <!-- input-dropdown-menu end -->
+
+          <!-- <button
+            class="palette-item"
+            (click)="addComponent('modal')"
+            cdkDrag
+            (cdkDragEnded)="onDragEndedAddComponent($event, 'modal')"
+          >
+            Modal
+          </button> -->
+          <button
+            class="palette-item"
+            (click)="addComponent('popup')"
+            cdkDrag
+            (cdkDragEnded)="onDragEndedAddComponent($event, 'popup')"
+            [hidden]="true"
+          >
+            Popup
+          </button>
+          <button
+            class="palette-item"
+            (click)="addComponent('img')"
+            cdkDrag
+            (cdkDragEnded)="onDragEndedAddComponent($event, 'img')"
+          >
+            Image
+          </button>
+          <button
+            class="palette-item"
+            (click)="addComponent('table')"
+            cdkDrag
+            (cdkDragEnded)="onDragEndedAddComponent($event, 'table')"
+          >
+            Table
+          </button>
+          <button 
+          class="palette-item" 
+          (click)="addComponent('youtube')"
+          cdkDrag
+          (cdkDragEnded)="onDragEndedAddComponent($event,'youtube')"
+          >
+          Iframe
+        </button>
+        </div>
+      </div>
