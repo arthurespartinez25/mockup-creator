@@ -1,5 +1,5 @@
 .component-list{
-    height: 30px;
+    height: 36px;
     width: 100%;
     color: white;
     background-color: #16324f;
@@ -9,10 +9,15 @@
   }
   
   .component-items{
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
     margin-top: 5px;
     margin-bottom: 5px;
     margin-right: 3px;
     margin-left: 3px;
+    padding-right: 5px;
   }
   
   .component-button-hide{

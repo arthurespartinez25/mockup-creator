@@ -133,3 +133,7 @@ td.properties-table-data textarea:focus {
   font-weight: bolder;
   font-size: x-large;
 }
+
+#clearScreen:hover {
+  background-color: #c51b29;
+}
