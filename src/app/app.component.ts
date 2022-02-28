@@ -223,7 +223,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   canvasTopY = 0;
   mousePositionX = 110;
   mousePositionY = 110;
-  domInsideCanvas = false;
+  domInsideCanvas: boolean;
   offsetLeft: any = 0;
   offsetTop:any  = 0;
   xDis: any = 0;
@@ -250,11 +250,13 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   updateSelected(value: IProperty) {
     this.selected = value;
-    console.log(this.selected);
   }
 
   updateSelectedComponent(value: IComponent) {
     this.selectedComponent = value;
+  }
+  updateDomInsideCanvas(value: boolean){
+    this.domInsideCanvas = value;
   }
   //----------------------------------------------------------------------------
 
@@ -470,7 +472,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.mousePositionX = this.canvasLeft;
     this.mousePositionY = this.canvasTop + 40;
 
-    this.componentList.push(temp);
+    this.componentList.push(temp)
 
     setTimeout(() => {
       this.whatComponent = 'HPNav2';

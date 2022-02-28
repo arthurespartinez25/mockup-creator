@@ -110,6 +110,7 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
   @ViewChild('PropertyComponent') property: boolean;
   @Input() canvas: ElementRef;
   @Input() propertyCmp: PropertyComponent;
+  @Input() domInsideCanvas: boolean;
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
@@ -148,7 +149,6 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
   inSession: boolean = this.sessionID == "12345";
 
   ngOnInit() {
-    console.log(this.inSession);
     if(this.inSession) {
       this._router.navigateByUrl("/canvas");
       //api call
@@ -158,9 +158,7 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
       }) */
     }
   }
-  ngAfterViewInit(): void {
-    console.log(this.canvas);
-  }
+  ngAfterViewInit(): void {}
   //////////////////////////////////////////////////////////////////////////////
   //   THIS PROJECT WAS STARTED BY BATO BOYS AND CEBU TEAM  
   //                          JUPAO  
@@ -186,7 +184,6 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
   canvasTopY = 0;
   mousePositionX = 110;
   mousePositionY = 110;
-  domInsideCanvas = false;
   offsetLeft: any = 0;
   offsetTop:any  = 0;
   xDis: any = 0;
@@ -299,7 +296,6 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
       default:
         temp = new ButtonDragComponent(this.canvas);
     }
-    console.log(this.canvas);
     this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
     this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
     this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;    
@@ -356,6 +352,8 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
       this.mousePositionY = this.offsetTop + this.yDistance + this.canvasTopY;
     }
     this.addComponent(component);
+    this.updateMousePosX.emit(this.mousePositionX);
+    this.updateMousePosY.emit(this.mousePositionY);
   }
 
   //----------------------------------------------------------------------------

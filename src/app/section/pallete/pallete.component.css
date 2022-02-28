@@ -1,3 +1,7 @@
+.palette-div {
+  height: 100vh;
+  width: 220px;
+}
 .palette-item {
   height: fit-content;
   width: 100%;

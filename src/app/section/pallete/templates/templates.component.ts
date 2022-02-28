@@ -148,7 +148,6 @@ export class TemplatesComponent implements OnInit, AfterViewInit, AfterViewCheck
   inSession: boolean = this.sessionID == "12345";
 
   ngOnInit() {
-    console.log(this.inSession);
     if(this.inSession) {
       this._router.navigateByUrl("/canvas");
       //api call
@@ -158,9 +157,7 @@ export class TemplatesComponent implements OnInit, AfterViewInit, AfterViewCheck
       }) */
     }
   }
-  ngAfterViewInit(): void {
-    console.log(this.canvas);
-  }
+  ngAfterViewInit(): void {}
   //////////////////////////////////////////////////////////////////////////////
   //   THIS PROJECT WAS STARTED BY BATO BOYS AND CEBU TEAM  
   //                          JUPAO  
