@@ -196,13 +196,6 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
   yDistance: any = 0;
   theUsername = "";
 
-  
-  loggedIn($event) {
-    /* console.log("eto value natin lods: " + this.sessionID); */
-    this.theUsername = $event;
-    console.log(this.theUsername as string);
-    console.log("nakapagpasa na po");
-  }
   logout() {
     this.loginCookie.deleteAll();
     this._router.navigate(['/']);
