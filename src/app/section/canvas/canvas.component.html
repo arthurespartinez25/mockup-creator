@@ -3,8 +3,8 @@
       id="canvas"
       class="solid-lines"
       #canvas
-      (mouseenter)="domInsideCanvas = true"
-      (mouseleave)="domInsideCanvas = false"
+      (mouseenter)="updateDomInsideCanvas(true)"
+      (mouseleave)="updateDomInsideCanvas(false)"
     >
       <div id="canvasBody">
         <app-wrapper

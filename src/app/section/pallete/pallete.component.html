@@ -33,6 +33,7 @@
       <app-elements 
         [canvas]="canvas"
         [propertyCmp]="propertyCmp"
+        [domInsideCanvas] = "domInsideCanvas"
         (updateComponentListEvent)="updatedList($event)"
         (updateCanvasLeftEvent)="updatedCanvasLeft($event)"
         (updateCanvasTopEvent)="updatedCanvasTop($event)"

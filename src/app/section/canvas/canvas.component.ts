@@ -74,6 +74,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
 
   @Output() updateSelectedEvent = new EventEmitter<IProperty>();
   @Output() updateSelectedComponentEvent = new EventEmitter<IComponent>();
+  @Output() updateDomInsideCanvasEvent = new EventEmitter<boolean>();
 
   @Input() componentList : IComponent[] = [];
   @Input() mousePositionX: any;
@@ -120,7 +121,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
 
   canvasLeftX = 0;
   canvasTopY = 0;
-  domInsideCanvas = false;
+  domInsideCanvas: boolean;
   offsetLeft: any = 0;
   offsetTop:any  = 0;
   xDis: any = 0;
@@ -133,7 +134,10 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   passCanvas() {
     return this.canvas;
   }
-  
+  updateDomInsideCanvas(value: boolean){
+    this.domInsideCanvas = value;
+    this.updateDomInsideCanvasEvent.emit(this.domInsideCanvas)
+  }
   loggedIn($event) {
     /* console.log("eto value natin lods: " + this.sessionID); */
     this.theUsername = $event;

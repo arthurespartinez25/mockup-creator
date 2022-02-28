@@ -5,7 +5,7 @@
 
 /********************** CANVAS CSS ********************/
 
-#canvas-container {
+/* #canvas-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -53,7 +53,7 @@
 .nav-wrapper {
   width: 100% !important;
   height: fit-content;
-}
+} */
 
 /********************** CODE CSS ********************/
 /*
