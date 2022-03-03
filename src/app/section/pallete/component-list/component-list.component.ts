@@ -20,10 +20,13 @@ import { Location } from '@angular/common';
 import { IComponent } from './../../../interfaces/icomponent';
 import { IProperty } from './../../../interfaces/iproperty';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { DatePipe } from '@angular/common'
 import { PropertyComponent } from './../../../property/property.component';
+import { WrapperComponent } from 'src/app/wrapper/wrapper.component';
+import { IPosition } from 'src/app/interfaces/iposition';
+import { ComponentClickService } from 'src/app/service/component-click.service';
 
 @Component({
   selector: 'app-component-list',
@@ -53,8 +56,10 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
     selected : false,
     hidden: false,
     mouseDragPositionX: 0,
-    mouseDragPositionY: 0,
+    mouseDragPositionY: 0
   };
+
+  public hideButtonClickEvent = new Subject();
 
   public cssRuleCount = document.styleSheets[0].cssRules.length;
   public _popupCount = 0;
@@ -63,9 +68,11 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
   @Input() canvas: ElementRef;
   @Input() propertyCmp: PropertyComponent;
   @Input() componentList: IComponent[] = [];
+  @Input() pixelPosition: IPosition[] = [];
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
+  @ViewChild(WrapperComponent) wrapper: WrapperComponent;
   //@ViewChild(PropertyComponent) propertyCmp:PropertyComponent;
 
   @Output() updateComponentListEvent = new EventEmitter<IComponent>();
@@ -75,6 +82,7 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
   @Output() updateMousePosX = new EventEmitter<number>();
   @Output() updateMousePosY = new EventEmitter<number>();
   @Output() updateWhatComponentEvent = new EventEmitter<string>();
+
   changeref: ChangeDetectorRef;
   constructor(
     private loginCookie:CookieService,
@@ -83,6 +91,7 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
     public _location: Location,
     public sanitizer: DomSanitizer,
     public datepipe: DatePipe,
+    private componentClick: ComponentClickService
   ) {
     this.changeref = changeDetectorRef;
   }
@@ -132,6 +141,8 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
   canvasTopY = 0;
   mousePositionX = 110;
   mousePositionY = 110;
+  pixelPosX = 0;
+  pixelPosY = 0;
   domInsideCanvas = false;
   offsetLeft: any = 0;
   offsetTop:any  = 0;
@@ -177,10 +188,10 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
         this.styleHolder +
         'position:sticky;' +
         'left:' +
-        this.selected.mouseDragPositionX +
+        (this.pixelPosX + (this.pixelPosX*100)/1280) +
         '%;' +
         'top:' +
-        this.selected.mouseDragPositionY +
+        (this.pixelPosY + (this.pixelPosY*100)/720) +
         '%;';
       //  this.selected.mouseDragPositionX = 0;
       //  this.selected.mouseDragPositionY = 0;
@@ -208,6 +219,7 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
       this.selected.mouseDragPositionX = 0;
       this.selected.mouseDragPositionY = 0;
     }
+    console.log(this.selected);
   }
   onDragEnd(component: IComponent) {
     console.log(component);
@@ -236,8 +248,11 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
 
   hideComponent(value: any) {
     let componentIndex = this.componentList.indexOf(value); //gets the index of the selected component inside the canvas
+    console.log(this.componentList[componentIndex].props.id);
+    this.componentClick.setID(this.componentList[componentIndex].props.id);
+    
     this.componentList[componentIndex].props.hidden =
-      !this.componentList[componentIndex].props.hidden; //removes visibility of a component from the canvas 
+      !this.componentList[componentIndex].props.hidden; //removes visibility of a component from the canvas
   }
 
   drop(event: CdkDragDrop<string[]>) {

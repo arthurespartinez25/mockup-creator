@@ -1,9 +1,11 @@
 import { DragDrop } from '@angular/cdk/drag-drop';
 import { Icu } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { throwError } from 'rxjs';
+import { Subscription, throwError } from 'rxjs';
 import { IComponent } from '../interfaces/icomponent';
+import { IPosition } from '../interfaces/iposition';
 import { IProperty } from '../interfaces/iproperty';
+import { ComponentClickService } from '../service/component-click.service';
 
 @Component({
   selector: 'app-wrapper',
@@ -15,6 +17,7 @@ export class WrapperComponent implements OnInit {
   canvas: ElementRef;
   compList: IComponent[] = [];
   canvasWidth: string;
+  subscription: Subscription;
 
   @Input() mousePositionX: any;
   @Input() mousePositionY: any;
@@ -22,9 +25,17 @@ export class WrapperComponent implements OnInit {
   @Input() canvasTop: any;
   @Input() canvasW: any;
   @Input() whatComponent:any;
+  @Input() pixelPosition: IPosition[] = [];
 
+  @Output() updatePixelPositionEvent = new EventEmitter<IPosition[]>();
+
+  index = 0;
   mousePositionX2 = 0;
   mousePositionY2 = 0;
+  initPosX = 0;
+  initPosY = 0;
+  pixelPosX = 0;
+  pixelPosY = 0;
   canvasPositionX = 0;
   canvasPositionY = 0;
   canvasWidth2 = 0;
@@ -58,7 +69,19 @@ export class WrapperComponent implements OnInit {
     this.compList = value;
   }
 
-  constructor(private ref: ElementRef, private drag: DragDrop) {}
+  constructor(
+    private ref: ElementRef, 
+    private drag: DragDrop,
+    private componentClick: ComponentClickService
+    ) {
+      this.subscription = this.componentClick.getID().subscribe(id => {
+        if (id) {
+          this.index = this.pixelPosition.map(object => object.key).indexOf(id.id);
+          this.initPosX = this.pixelPosition[this.index].pos.pixelPositionX!;
+          this.initPosY = this.pixelPosition[this.index].pos.pixelPositionY!;
+        }
+      })
+    }
   stylish ={};
   ngOnInit(): void {
     this.mousePositionX2 = this.mousePositionX;
@@ -68,7 +91,7 @@ export class WrapperComponent implements OnInit {
     this.canvasWidth2 = this.canvasW;
     this.whatComponent2 = this.whatComponent;
   }
-  removeElement(remove:IComponent):void {
-
+  updatePixelPosition(value: IPosition[]) {
+    this.updatePixelPositionEvent.emit(value);
   }
 }

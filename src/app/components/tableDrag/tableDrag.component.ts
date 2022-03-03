@@ -10,6 +10,7 @@ import {
   Output,
 } from '@angular/core';
 import { IComponent } from 'src/app/interfaces/icomponent';
+import { IPosition } from 'src/app/interfaces/iposition';
 import { IProperty } from 'src/app/interfaces/iproperty';
 
 @Component({
@@ -145,6 +146,11 @@ export class TableDragComponent implements OnInit, IComponent {
   @Input() mousePositionX2: any;
   @Input() mousePositionY2: any;
   @Input() whatComponent2: any;
+  
+  @Input() pixelPosition: IPosition[] = [];
+
+  @Output() updatePixelPositionEvent = new EventEmitter<IPosition[]>();
+  
   canvasPositionLeft = 0;
   canvasPositionTop = 0;
   mousePositionLeft = 0;
@@ -167,17 +173,54 @@ export class TableDragComponent implements OnInit, IComponent {
     this.mousePositionTop = this.mousePositionY2;
     this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
     this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
+    this.props.mouseDragPositionX = this.percentageX;
+    this.props.mouseDragPositionY = this.percentageY;
     this.props.style='position:sticky;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
   }
  
-
   onDragEnded($event: any) {
+    let index = this.pixelPosition.map(object => object.key).indexOf(this.props.id);
+    let prevMouseDragPosY = (this.props.mouseDragPositionY/100)*720;
+    let prevMouseDragPosX = (this.props.mouseDragPositionX/100)*1280;
+    if ((((this.props.mouseDragPositionY/100)*720) == this.pixelPosition[index].pos.pixelPositionY) && ((this.props.mouseDragPositionX/100) * 1280) == this.pixelPosition[index].pos.pixelPositionX) {
+      //this function checks if the hide button has been clicked or not. If the mouseDragPosition pixel values and the corresponding pixelPosition values
+      //in the pixelPosition array are equal to each other, then this means that the component has not yet been hidden. 
+      this.pixelPosition[index].pos.pixelPositionX = 0;
+      this.pixelPosition[index].pos.pixelPositionY = 0;
+      prevMouseDragPosY = 0;
+      prevMouseDragPosX = 0;
+    }
     this.props.mouseDragPositionX =
     (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
     * 100;
     this.props.mouseDragPositionY =
     (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
     * 100;
+    //this section handles the changes in the X axis of the component, and stores them into the pixelPosition array accordingly
+    if ((this.pixelPosition[index].pos.pixelPositionX! + (this.props.mouseDragPositionX/100)*1280) < this.pixelPosition[index].pos.pixelPositionX!) {
+      this.pixelPosition[index].pos.pixelPositionX! -= prevMouseDragPosX;
+      if (this.props.mouseDragPositionX >= 0) {
+        this.pixelPosition[index].pos.pixelPositionX = this.pixelPosition[index].pos.pixelPositionX! - ((this.props.mouseDragPositionX/100)*1280);
+      } else {
+        this.pixelPosition[index].pos.pixelPositionX = this.pixelPosition[index].pos.pixelPositionX! + ((this.props.mouseDragPositionX/100)*1280);
+      }
+    } else {
+      this.pixelPosition[index].pos.pixelPositionX! -= prevMouseDragPosX;
+      this.pixelPosition[index].pos.pixelPositionX = this.pixelPosition[index].pos.pixelPositionX! + ((this.props.mouseDragPositionX/100)*1280);
+    }
+    //this section handles the changes in the Y axis of the component, and stores them into the pixelPosition array accordingly
+    if ((this.pixelPosition[index].pos.pixelPositionY! + (this.props.mouseDragPositionY/100)*720) < this.pixelPosition[index].pos.pixelPositionY!) {
+      this.pixelPosition[index].pos.pixelPositionY! -= prevMouseDragPosY;
+      if (this.props.mouseDragPositionY >= 0) {
+        this.pixelPosition[index].pos.pixelPositionY = this.pixelPosition[index].pos.pixelPositionY! - ((this.props.mouseDragPositionY/100)*720);
+      } else {
+        this.pixelPosition[index].pos.pixelPositionY = this.pixelPosition[index].pos.pixelPositionY! + ((this.props.mouseDragPositionY/100)*720);
+      }
+    } else {
+      this.pixelPosition[index].pos.pixelPositionY! -= prevMouseDragPosY;
+      this.pixelPosition[index].pos.pixelPositionY = this.pixelPosition[index].pos.pixelPositionY! + ((this.props.mouseDragPositionY/100)*720);
+    }
+    this.updatePixelPositionEvent.emit(this.pixelPosition);
   }
 
   constructor(canvas: ElementRef, changeDetectorRef: ChangeDetectorRef) {

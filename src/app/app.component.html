@@ -15,6 +15,7 @@
     [canvas] = "passCanvas"
     [propertyCmp] = "propertyCmp"
     [domInsideCanvas] = "domInsideCanvas"
+    [pixelPosition] = "pixelPos"
     (updateComponentListEvent)="updateComponentList($event)"
     (updateCanvasLeftEvent)="updateCanvasLeft($event)"
     (updateCanvasTopEvent)="updateCanvasTop($event)"
@@ -22,6 +23,7 @@
     (updateMousePosX)="updateMousePositionX($event)"
     (updateMousePosY)="updateMousePositionY($event)"
     (updateWhatComponentEvent)="updateWhatComponent($event)"
+    (updatePositionListEvent)="updatePositionList($event)"
     ></app-pallete>
   
   
@@ -57,6 +59,7 @@
   </div> -->
   <app-canvas 
     [componentList]="componentList"
+    [pixelPos]="pixelPos"
     [mousePositionX]="mousePositionX"
     [mousePositionY]="mousePositionY"
     [canvasLeft]="canvasLeft"
@@ -66,6 +69,7 @@
     (updateSelectedEvent)="updateSelected($event)"
     (updateSelectedComponentEvent)="updateSelectedComponent($event)"
     (updateDomInsideCanvasEvent)="updateDomInsideCanvas($event)"
+    (updatePixelPositionEvent)="updatePixelPosition($event)"
     ></app-canvas>
   <!-- CODE SECTION -->
 <!--

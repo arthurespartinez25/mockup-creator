@@ -5,9 +5,12 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject } from 'rxjs';
+import { WrapperComponent } from 'src/app/wrapper/wrapper.component';
 import { IComponent } from './../../interfaces/icomponent';
 import { IProperty } from './../../interfaces/iproperty';
+import { IPosition } from './../../interfaces/iposition';
 import { PropertyComponent } from './../../property/property.component';
+import { IPosProperty } from 'src/app/interfaces/iposproperty';
 
 @Component({
   selector: 'app-canvas',
@@ -44,6 +47,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
 
   @ViewChild('PropertyComponent') property: boolean;
   @ViewChild('canvas') canvas!: ElementRef;
+  @ViewChild(WrapperComponent) wrapper: WrapperComponent;
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
@@ -52,14 +56,18 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   @Output() updateSelectedEvent = new EventEmitter<IProperty>();
   @Output() updateSelectedComponentEvent = new EventEmitter<IComponent>();
   @Output() updateDomInsideCanvasEvent = new EventEmitter<boolean>();
+  @Output() updatePixelPositionEvent = new EventEmitter<IPosition[]>();
 
   @Input() componentList : IComponent[] = [];
+  @Input() pixelPos: IPosition[] = [];
   @Input() mousePositionX: any;
   @Input() mousePositionY: any;
   @Input() canvasLeft: any;
   @Input() canvasTop: any;
   @Input() canvasW: any;
   @Input() whatComponent:any;
+  @Input() pixelPositionX: number;
+  @Input() pixelPositionY: number;
 
   changeref: ChangeDetectorRef;
   constructor(
@@ -110,6 +118,9 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   updateDomInsideCanvas(value: boolean){
     this.domInsideCanvas = value;
     this.updateDomInsideCanvasEvent.emit(this.domInsideCanvas)
+  }
+  updatePixelPosition(value: IPosition[]) {
+    this.updatePixelPositionEvent.emit(value);
   }
   //----------------------------------------------------------------------------
 
@@ -172,6 +183,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
       this.selected.mouseDragPositionX = 0;
       this.selected.mouseDragPositionY = 0;
     }
+    //this.wrapper.updateMousePos(this.selected.mouseDragPositionX, this.selected.mouseDragPositionY);
     this.updateSelectedEvent.emit(this.selected);
   }
   onDragEnd(component: IComponent) {

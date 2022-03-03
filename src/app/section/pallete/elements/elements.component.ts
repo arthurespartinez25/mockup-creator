@@ -40,6 +40,8 @@ import { YoutubeDragComponent } from './../../../components/youtubeDrag/youtubeD
 import { CookieService } from 'ngx-cookie-service';
 import { DatePipe } from '@angular/common'
 import { PropertyComponent } from './../../../property/property.component';
+import { IPosProperty } from 'src/app/interfaces/iposproperty';
+import { IPosition } from 'src/app/interfaces/iposition';
 
 @Component({
   selector: 'app-elements',
@@ -73,6 +75,8 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
     mouseDragPositionY: 0,
   };
 
+  pixelPosition: IPosition[] = [];
+
   public cssRuleCount = document.styleSheets[0].cssRules.length;
   public _popupCount = 0;
 
@@ -92,6 +96,7 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
   @Output() updateMousePosX = new EventEmitter<number>();
   @Output() updateMousePosY = new EventEmitter<number>();
   @Output() updateWhatComponentEvent = new EventEmitter<string>();
+  @Output() updatePositionListEvent = new EventEmitter<IPosition>();
   changeref: ChangeDetectorRef;
   constructor(
     private loginCookie:CookieService,
@@ -172,6 +177,14 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
 
   addComponent(component: string) {
     let temp: IComponent;
+    let pixPos: IPosProperty = {
+      pixelPositionX: 0,
+      pixelPositionY: 0
+    }
+    let pixelPositionPass: IPosition = {
+      key: '',
+      pos: pixPos
+    };
 
     switch (component) {
       case 'button':
@@ -258,7 +271,14 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
       this.updateMousePosX.emit(this.mousePositionX);
       this.updateMousePosY.emit(this.mousePositionY);
     }
+    pixelPositionPass.key = temp.props.id;
+    pixelPositionPass.pos.pixelPositionX = temp.props.mouseDragPositionX;
+    pixelPositionPass.pos.pixelPositionY = temp.props.mouseDragPositionY;
+    //this.pixelPosition.push(pixelPositionPass);
+
+    //console.log(this.pixelPosition);
     ////this.componentList.push(temp);
+    this.updatePositionListEvent.emit(pixelPositionPass);
     this.updateComponentListEvent.emit(temp);
   }
   //----------------------------------------------------------------------------

@@ -25,6 +25,8 @@ import { PropertyComponent } from './property/property.component';
 import { CanvasComponent } from './section/canvas/canvas.component';
 import { PalleteComponent } from './section/pallete/pallete.component';
 import { CodeComponent } from './section/code/code.component';
+import { WrapperComponent } from './wrapper/wrapper.component';
+import { IPosition } from './interfaces/iposition';
 
 @Component({
   selector: 'app-root',
@@ -57,6 +59,8 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     mouseDragPositionX: 0,
     mouseDragPositionY: 0,
   };
+
+  pixelPos: IPosition[] = [];
 
   public cssRuleCount = document.styleSheets[0].cssRules.length;
   public _popupCount = 0;
@@ -153,6 +157,15 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   updateComponentListDel(value: IComponent[]) {
     this.palette.updateComponentListDel(value);
     this.componentList = value;
+  }
+
+  updatePositionList(value: IPosition) {
+    this.pixelPos.push(value);
+  }
+
+  updatePixelPosition(value: IPosition[]) {
+    console.log(value);
+    //this.pixelPos = value;
   }
 
   //////////////////////////////////////////////////////////////////////////////

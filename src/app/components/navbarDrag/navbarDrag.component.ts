@@ -7,7 +7,10 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
+import { openStdin } from 'process';
 import { IComponent } from 'src/app/interfaces/icomponent';
+import { IPosition } from 'src/app/interfaces/iposition';
+import { IPosProperty } from 'src/app/interfaces/iposproperty';
 import { IProperty } from 'src/app/interfaces/iproperty';
 
 @Component({
@@ -41,6 +44,9 @@ export class NavbarDragComponent implements OnInit, IComponent {
   @Input() mousePositionX2: any;
   @Input() mousePositionY2: any;
   @Input() whatComponent2: any;
+  @Input() pixelPosition: IPosition[] = [];
+
+  @Output() updatePixelPositionEvent = new EventEmitter<IPosition[]>();
   canvasPositionLeft = 0;
   canvasPositionTop = 0;
   mousePositionLeft = 0;
@@ -112,11 +118,30 @@ export class NavbarDragComponent implements OnInit, IComponent {
     }
   }
 
-  onDragEnded($event: CdkDragEnd) {
+  onDragEnded($event: CdkDragEnd) { //get pixel value of input and store it in array
+    let index = this.pixelPosition.map(object => object.key).indexOf(this.props.id);
+    let prevMouseDragPosY = (this.props.mouseDragPositionY/100)*720;
     this.props.mouseDragPositionX = 0;
-    this.props.mouseDragPositionY =
-    (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
-    * 100;
+    if (((this.props.mouseDragPositionY/100)*720) == this.pixelPosition[index].pos.pixelPositionY) {
+      this.pixelPosition[index].pos.pixelPositionY = 0;
+      prevMouseDragPosY = 0;
+    }
+    this.props.mouseDragPositionY = (($event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) * 100;
+    this.pixelPosition[index].pos.pixelPositionX = 0;
+    
+    if ((this.pixelPosition[index].pos.pixelPositionY! + (this.props.mouseDragPositionY/100)*720) < this.pixelPosition[index].pos.pixelPositionY!) {
+      this.pixelPosition[index].pos.pixelPositionY! -= prevMouseDragPosY;
+      if (this.props.mouseDragPositionY >= 0) {
+        this.pixelPosition[index].pos.pixelPositionY = this.pixelPosition[index].pos.pixelPositionY! - ((this.props.mouseDragPositionY/100)*720);
+      } else {
+        this.pixelPosition[index].pos.pixelPositionY = this.pixelPosition[index].pos.pixelPositionY! + ((this.props.mouseDragPositionY/100)*720);
+      }
+    } else {
+      this.pixelPosition[index].pos.pixelPositionY! -= prevMouseDragPosY;
+      this.pixelPosition[index].pos.pixelPositionY = this.pixelPosition[index].pos.pixelPositionY! + ((this.props.mouseDragPositionY/100)*720);
+    }
+    console.log(this.pixelPosition);
+    this.updatePixelPositionEvent.emit(this.pixelPosition);
   }
 
   constructor(canvas: ElementRef) {

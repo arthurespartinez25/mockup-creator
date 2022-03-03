@@ -41,6 +41,7 @@
         (updateMousePosX)="updatedMousePositionX($event)"
         (updateMousePosY)="updatedMousePositionY($event)"
         (updateWhatComponentEvent)="updatedWhatComponent($event)"
+        (updatePositionListEvent)="updatePositionList($event)"
         class="tab-pane fade show active"
         id="elements"
         role="tabpanel"
@@ -70,6 +71,8 @@
       </button>
     </div>
       <app-component-list
-        [componentList]="componentList">
+        [componentList]="componentList"
+        [pixelPosition]="pixelPosition"
+        >
       </app-component-list>
   </div>

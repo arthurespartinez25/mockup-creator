@@ -12,6 +12,7 @@
           class="wrapper"
           (click)="clickHandler(component)"
           [childComp]="component"
+          [pixelPosition]="pixelPos"
           [canvasRef]="component.canvas"
           [componentList]="componentList"
           [mousePositionX]="mousePositionX"
@@ -21,6 +22,7 @@
           [canvasW]="canvasW"
           [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
           [whatComponent]="whatComponent"
+          (updatePixelPositionEvent)="updatePixelPosition($event)"
         >
         </app-wrapper>
       </div>

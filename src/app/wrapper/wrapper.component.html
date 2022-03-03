@@ -120,9 +120,12 @@
       'height': '1px',
       'position': 'absolute',
       'top':mousePositionY2,
-      'left':mousePositionX2
+      'left':mousePositionX2,
+      'top.px':initPosY,
+      'left.px':initPosX
     }"
-    
+    [pixelPosition]="pixelPosition"
+    (updatePixelPositionEvent)="updatePixelPosition($event)"
   >
   </app-buttonDrag>
 
@@ -236,8 +239,12 @@
     [whatComponent2]="whatComponent2"
     [ngStyle]="{
       'height': '1px',
-      'float': 'right'
+      'float': 'right',
+      'top.px':initPosY,
+      'left.px':initPosX
     }"
+    [pixelPosition]="pixelPosition"
+    (updatePixelPositionEvent)="updatePixelPosition($event)"
   ></app-checkboxDrag>
 
   <app-dropdownDrag
@@ -271,9 +278,11 @@
       'height': '1px',
       'width':'1px',
       'position': 'absolute',
-      'top':'0px',
-      'left':'0px'
+      'top.px':initPosY,
+      'left.px':initPosX
     }"
+    [pixelPosition]="pixelPosition"
+    (updatePixelPositionEvent)="updatePixelPosition($event)"
   ></app-navbarDrag>
 
   <app-inputDrag
@@ -349,9 +358,11 @@
     [ngStyle]="{
       'height': '1px',
       'position': 'absolute',
-      'top':mousePositionY2,
-      'left':mousePositionX2
+      'top.px':initPosY,
+      'left.px':initPosX
     }"
+    [pixelPosition]="pixelPosition"
+    (updatePixelPositionEvent)="updatePixelPosition($event)"
   ></app-tableDrag>
 
   <app-youtubeDrag
