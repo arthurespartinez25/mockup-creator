@@ -36,6 +36,9 @@ import { CodeComponent } from './section/code/code.component';
 import { TemplatesComponent } from './section/pallete/templates/templates.component';
 import { ElementsComponent } from './section/pallete/elements/elements.component';
 import { ComponentListComponent } from './section/pallete/component-list/component-list.component';
+import { NavigationComponent } from './section/code/navigation/navigation.component';
+import { CssComponent } from './section/code/css/css.component';
+import { CodeSegmentComponent } from './section/code/code-segment/code-segment.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +70,9 @@ import { ComponentListComponent } from './section/pallete/component-list/compone
     TemplatesComponent,
     ElementsComponent,
     ComponentListComponent,
+    NavigationComponent,
+    CssComponent,
+    CodeSegmentComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule, FormsModule, HttpClientModule],
   providers: [DragDropModule, AppComponent, DatePipe],
