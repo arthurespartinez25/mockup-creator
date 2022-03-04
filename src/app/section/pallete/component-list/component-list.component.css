@@ -27,6 +27,11 @@
     min-width: 20px;
     background-color: #67717a;
     border: #16324f solid 2px;
+    color: white;
+  }
+
+  .component-button-hide:hover {
+    background-color: #4a5257;
   }
   
   .component-button-remove{
@@ -36,4 +41,9 @@
     min-width: 20px;
     background-color: rgb(214, 87, 87);
     border: #16324f solid 2px;
+    color: white;
+  }
+
+  .component-button-remove:hover {
+    background-color:rgb(133, 55, 55);
   }
