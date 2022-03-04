@@ -238,12 +238,17 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
     let componentIndex = this.componentList.indexOf(value); //gets the index of the selected component inside the canvas
     let element = document.getElementById(this.componentList[componentIndex].props.id);
     let oldStyle = element?.getAttribute('style');
+    let htmlCodeStyle = "";
     if (!element?.style.visibility) { //due to old code, there is no visibility element in the styles
       element?.setAttribute('style', oldStyle + 'visibility: hidden;');
+      htmlCodeStyle = "visibility: " + element?.style.visibility + ";";
+      this.componentList[componentIndex].props.style = this.componentList[componentIndex].props.style + htmlCodeStyle;
     } else {
       if (element.style.visibility == "hidden") {
+        this.componentList[componentIndex].props.style = this.componentList[componentIndex].props.style.replace("visibility: hidden;", "visibility: visible;");
         element.style.visibility = "visible";
       } else {
+        this.componentList[componentIndex].props.style = this.componentList[componentIndex].props.style.replace("visibility: visible;", "visibility: hidden;");
         element.style.visibility = "hidden";
       }
     }

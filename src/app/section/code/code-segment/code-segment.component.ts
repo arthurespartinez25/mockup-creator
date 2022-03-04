@@ -125,22 +125,6 @@ export class CodeSegmentComponent implements OnInit {
     //                        (/ /^\ \)-'
     //                         ""' '""
   
-  
-  
-    canvasLeftX = 0;
-    canvasTopY = 0;
-    mousePositionX = 110;
-    mousePositionY = 110;
-    domInsideCanvas = false;
-    offsetLeft: any = 0;
-    offsetTop:any  = 0;
-    xDis: any = 0;
-    yDis: any = 0;
-    noOfButton: number = 0;
-    xDistance: any = 0;
-    yDistance: any = 0;
-    theUsername = "";
-  
     get dragDisabled(): boolean {
       return this.dragDisabled;
     }
