@@ -241,14 +241,14 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
     let htmlCodeStyle = "";
     if (!element?.style.visibility) { //due to old code, there is no visibility element in the styles
       element?.setAttribute('style', oldStyle + 'visibility: hidden;');
-      htmlCodeStyle = "visibility: " + element?.style.visibility + ";";
-      this.componentList[componentIndex].props.style = this.componentList[componentIndex].props.style + htmlCodeStyle;
+      htmlCodeStyle = "visibility: " + element?.style.visibility + ";"; //this part adds the hidden attribute to the htmlCode
+      this.componentList[componentIndex].props.style = this.componentList[componentIndex].props.style + htmlCodeStyle; //this part adds the hidden attribute to the htmlCode
     } else {
       if (element.style.visibility == "hidden") {
-        this.componentList[componentIndex].props.style = this.componentList[componentIndex].props.style.replace("visibility: hidden;", "visibility: visible;");
+        this.componentList[componentIndex].props.style = this.componentList[componentIndex].props.style.replace("visibility: hidden;", "visibility: visible;"); //this part adds the hidden attribute to the htmlCode
         element.style.visibility = "visible";
       } else {
-        this.componentList[componentIndex].props.style = this.componentList[componentIndex].props.style.replace("visibility: visible;", "visibility: hidden;");
+        this.componentList[componentIndex].props.style = this.componentList[componentIndex].props.style.replace("visibility: visible;", "visibility: hidden;"); //this part adds the hidden attribute to the htmlCode
         element.style.visibility = "hidden";
       }
     }
