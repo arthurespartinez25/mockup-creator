@@ -236,8 +236,17 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
 
   hideComponent(value: any) {
     let componentIndex = this.componentList.indexOf(value); //gets the index of the selected component inside the canvas
-    this.componentList[componentIndex].props.hidden =
-      !this.componentList[componentIndex].props.hidden; //removes visibility of a component from the canvas 
+    let element = document.getElementById(this.componentList[componentIndex].props.id);
+    let oldStyle = element?.getAttribute('style');
+    if (!element?.style.visibility) { //due to old code, there is no visibility element in the styles
+      element?.setAttribute('style', oldStyle + 'visibility: hidden;');
+    } else {
+      if (element.style.visibility == "hidden") {
+        element.style.visibility = "visible";
+      } else {
+        element.style.visibility = "hidden";
+      }
+    }
   }
 
   drop(event: CdkDragDrop<string[]>) {
