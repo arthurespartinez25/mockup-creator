@@ -24,7 +24,9 @@
         role="tabpanel"
         aria-labelledby="css-tab"
       >
-        <app-css></app-css>
+        <app-css
+          (updateStyleEvent)="updateStyle($event)"
+        ></app-css>
       </div>
       <div
         class="tab-pane fade"
@@ -34,6 +36,7 @@
       >
         <app-code-segment
           [componentList]="componentList"
+          [_styleBody]="style"
         ></app-code-segment>
       </div>
     </div>
