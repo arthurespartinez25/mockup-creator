@@ -182,12 +182,7 @@ export class CodeComponent implements OnInit, AfterViewInit, AfterViewChecked {
         this._router.navigate([decodeURI(this._location.path())]);
       });
   }
-
-  cssString() {
-    console.log(this._styleStart + '\n' + this.style + '\n' + this._styleEnd);
-    return this._styleStart + '\n' + this.style + '\n' + this._styleEnd;
-  }
-
+  
   cssReceiveMessage() {
     this.cssComponent.cssReceiveMessage();
   }
