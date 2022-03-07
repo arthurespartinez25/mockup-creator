@@ -118,6 +118,10 @@ td.properties-table-data textarea:focus {
   font-weight: lighter;
 }
 
+#properties-header #delete:hover {
+  background-color: #8f1b27;
+}
+
 #properties-table {
   width: 100%;
 }
