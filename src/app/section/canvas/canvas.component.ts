@@ -131,19 +131,19 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     this.selectedComp(this.selectedComponent);
     if (this.selected.typeObj != 'nav' || 'navDrag') {
       this.styleHolder = this.selected.style;
-      let regexLeft = /left(.+?);/;
-      let regexTop = /top(.+?);/;
+      let regexLeft = /margin-left(.+?);/;
+      let regexTop = /margin-top(.+?);/;
       let regexPosition = /position(.+?);/;
       this.styleHolder = this.styleHolder.replace(regexLeft, '');
       this.styleHolder = this.styleHolder.replace(regexTop, '');
       this.styleHolder = this.styleHolder.replace(regexPosition, '');
       this.selected.style =
         this.styleHolder +
-        'position:sticky;' +
-        'left:' +
+        'position:relative;' +
+        'margin-left:' +
         this.selected.mouseDragPositionX +
         '%;' +
-        'top:' +
+        'margin-top:' +
         this.selected.mouseDragPositionY +
         '%;';
       //  this.selected.mouseDragPositionX = 0;
@@ -153,8 +153,8 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
       (this.selected.typeObj == 'nav' || 'navDrag')
     ) {
       this.styleHolder = this.selected.style;
-      let regexLeft = /left(.+?);/;
-      let regexTop = /top(.+?);/;
+      let regexLeft = /margin-left(.+?);/;
+      let regexTop = /margin-top(.+?);/;
       let regexPosition = /position(.+?);/;
       this.styleHolder = this.styleHolder.replace(regexLeft, '');
       this.styleHolder = this.styleHolder.replace(regexTop, '');
@@ -162,16 +162,17 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
       this.selected.style = this.selected.style;
       this.selected.style =
         this.styleHolder +
-        'position:sticky;' +
-        'left:' +
+        'position:relative;' +
+        'margin-left:' +
         this.selected.mouseDragPositionX +
         'px;' +
-        'top:' +
+        'margin-top:' +
         this.selected.mouseDragPositionY +
         '%;';
       this.selected.mouseDragPositionX = 0;
       this.selected.mouseDragPositionY = 0;
     }
+    console.log(this.selected.style);
     this.updateSelectedEvent.emit(this.selected);
   }
   onDragEnd(component: IComponent) {

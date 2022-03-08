@@ -54,7 +54,7 @@ export class PropertyComponent implements OnInit {
       if(this.props.typeObj == 'datepickerDrag')
         {
         this.props.dummyDate = this.datepipe.transform(this.props.value, 'MM/dd/YYYY');
-        this.props.value = this.props.dummyDate.transform(this.props.value, 'YYYY/MM/dd');
+        this.props.value = this.datepipe.transform(this.props.value, 'YYYY/MM/dd');
          }
       }, 1);
       
