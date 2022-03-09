@@ -39,6 +39,7 @@ import { ComponentListComponent } from './section/pallete/component-list/compone
 import { NavigationComponent } from './section/code/navigation/navigation.component';
 import { CssComponent } from './section/code/css/css.component';
 import { CodeSegmentComponent } from './section/code/code-segment/code-segment.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,7 @@ import { CodeSegmentComponent } from './section/code/code-segment/code-segment.c
     CssComponent,
     CodeSegmentComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule, FormsModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule, FormsModule, HttpClientModule, MatTabsModule],
   providers: [DragDropModule, AppComponent, DatePipe],
   bootstrap: [AppComponent],
 })

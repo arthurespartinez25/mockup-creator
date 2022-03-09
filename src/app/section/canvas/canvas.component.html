@@ -1,28 +1,57 @@
 <div id="canvas-container">
-    <div
-      id="canvas"
-      class="solid-lines"
-      #canvas
-      (mouseenter)="updateDomInsideCanvas(true)"
-      (mouseleave)="updateDomInsideCanvas(false)"
-    >
-      <div id="canvasBody">
-        <app-wrapper
-          *ngFor="let component of componentList; let i = index"
-          class="wrapper"
-          (click)="clickHandler(component)"
-          [childComp]="component"
-          [canvasRef]="component.canvas"
-          [componentList]="componentList"
-          [mousePositionX]="mousePositionX"
-          [mousePositionY]="mousePositionY"
-          [canvasLeft]="canvasLeft"
-          [canvasTop]="canvasTop"
-          [canvasW]="canvasW"
-          [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
-          [whatComponent]="whatComponent"
+  <div>
+    <mat-tab-group class="tabs" dynamicHeight id="canvasTabGroup" [(selectedIndex)]="selectedTab" (selectedTabChange)="myTabSelectedTabChange($event)">
+      <mat-tab *ngFor="let tab of tabs; let index = index">
+        <ng-template mat-tab-label>
+          <span class="tab-label">{{tab}} </span>
+          <button [disabled]="tabs.length === 1" type="button" class="btn btn-close" (click)="removeTab(index)"></button>
+        </ng-template>
+        <div
+        id="canvas"
+        #canvas
+        (mouseenter)="updateDomInsideCanvas(true)"
+        (mouseleave)="updateDomInsideCanvas(false)"
         >
-        </app-wrapper>
-      </div>
-    </div>
+          <div id="canvasBody">
+            <app-wrapper
+              *ngFor="let component of componentList; let i = index"
+              class="wrapper"
+              (click)="clickHandler(component)"
+              [childComp]="component"
+              [canvasRef]="component.canvas"
+              [componentList]="componentList"
+              [mousePositionX]="mousePositionX"
+              [mousePositionY]="mousePositionY"
+              [canvasLeft]="canvasLeft"
+              [canvasTop]="canvasTop"
+              [canvasW]="canvasW"
+              [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
+              [whatComponent]="whatComponent"
+            >
+            </app-wrapper>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab disabled>
+        <ng-template mat-tab-label>
+            <button type="button" class="btn btn-outline-dark" (click)="addTab()"><i class="fa-solid fa-plus"></i></button>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
   </div>
+</div>
+
+<!--
+<mat-tab-group [selectedIndex]="selected.value"
+               (selectedIndexChange)="selected.setValue($event)">
+  <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab">
+    Contents for {{tab}} tab
+
+    <button mat-raised-button
+            class="example-delete-tab-button"
+            [disabled]="tabs.length === 1"
+            (click)="removeTab(index)">
+      Delete Tab
+    </button>
+  </mat-tab>
+</mat-tab-group>-->

@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ComponentRef, ElementRef, Input, OnInit, Output, Renderer2, ViewChild, EventEmitter } from '@angular/core';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
@@ -15,6 +16,9 @@ import { PropertyComponent } from './../../property/property.component';
   styleUrls: ['./canvas.component.css']
 })
 export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked {
+  tabs = ['Canvas 1'];
+  selectedTab = 0;
+  currentTab: number;
   index: number;
   numberOfComponents: any = [];
   selectedComponent: IComponent;
@@ -52,6 +56,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   @Output() updateSelectedEvent = new EventEmitter<IProperty>();
   @Output() updateSelectedComponentEvent = new EventEmitter<IComponent>();
   @Output() updateDomInsideCanvasEvent = new EventEmitter<boolean>();
+  @Output() selectedTabChange: EventEmitter<MatTabChangeEvent>;
 
   @Input() componentList : IComponent[] = [];
   @Input() mousePositionX: any;
@@ -196,6 +201,30 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
         this._router.navigate([decodeURI(this._location.path())]);
       });
   }
+
+  /* PAGINATION CODE */
+  addTab() {
+    this.tabs.push("Canvas " + (this.tabs.length + 1));
+  }
+  
+  removeTab(index: number) {
+    let result = window.confirm("Are you sure you want to remove this tab?");
+    if (result) {
+      this.tabs.splice(index, 1);
+      
+      for (let i = 0; i < this.tabs.length; i++) {
+        this.tabs[i] = "Canvas " + (i + 1);
+      }
+
+      if (this.currentTab == this.selectedTab) {
+        this.selectedTab = (index - 1) < 0 ? 0 : (index - 1); //changes the selected tab to the previous one
+      }
+    }
+  }
+
+  myTabSelectedTabChange(changeEvent: MatTabChangeEvent) {
+    this.currentTab = changeEvent.index;
+  } 
 
   /****************** OLD CODE STARTS HERE **********************/
 }
