@@ -1,5 +1,5 @@
 <div id="canvas-container">
-  <div>
+  <div class="pagination-container">
     <mat-tab-group class="tabs" dynamicHeight id="canvasTabGroup" [(selectedIndex)]="selectedTab" (selectedTabChange)="myTabSelectedTabChange($event)">
       <mat-tab *ngFor="let tab of tabs; let index = index">
         <ng-template mat-tab-label>

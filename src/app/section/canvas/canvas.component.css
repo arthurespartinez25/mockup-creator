@@ -203,4 +203,12 @@ a.custom-nav-link:hover {
 .btn-remove {
   border-radius: 40%;
 }
-
+#canvas-container .mat-tab-labels :last-child.mat-tab-label {
+  min-width: 0;
+  padding: 0 12px;
+  color: unset;
+  opacity: unset;
+}
+.pagination-container {
+  width: 1280px;
+}
