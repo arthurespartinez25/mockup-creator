@@ -35,6 +35,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   title = 'mockup-creator';
   index: number;
   componentList: IComponent[] = [];
+  componentListMap = new Map<number, IComponent[]>();
   numberOfComponents: any = [];
   selectedComponent: IComponent;
   ref: ComponentRef<any>;
@@ -88,6 +89,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   passCanvas: ElementRef;
   propertyCmp : PropertyComponent;
   canvasBG: string;
+  currentTab = 0;
   canvasLeft = 0;
   canvasTop = 0;
   canvasW = 0;
@@ -113,8 +115,21 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
 
   updateComponentList(components: IComponent) {
-    this.componentList.push(components);
-    this.palette.updateComponentListDel(this.componentList); //updates the componentList in the pallete
+    //this.componentList.push(components);
+
+    let tempCompList: IComponent[] = [];
+    if (this.componentListMap.has(this.currentTab)) {
+      tempCompList = this.componentListMap.get(this.currentTab)!;
+    }
+    tempCompList.push(components);
+    this.componentListMap.set(this.currentTab, tempCompList);
+    console.log(this.componentListMap);
+    
+    this.componentList = this.componentListMap.get(this.currentTab)!;
+
+    console.log(this.componentList);
+
+    //this.palette.updateComponentListDel(this.componentList); //updates the componentList in the pallete
   }
   
   updateCanvasLeft(value: number) {
@@ -153,6 +168,15 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   updateComponentListDel(value: IComponent[]) {
     this.palette.updateComponentListDel(value);
     this.componentList = value;
+  }
+
+  updateSelectedTab(value: number) {
+    this.currentTab = value;
+    if (this.componentListMap.has(this.currentTab)) {
+      this.componentList = this.componentListMap.get(this.currentTab)!;
+    } else {
+      this.componentList = [];
+    }
   }
 
   //////////////////////////////////////////////////////////////////////////////

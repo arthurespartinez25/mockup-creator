@@ -14,7 +14,7 @@
         >
           <div id="canvasBody">
             <app-wrapper
-              *ngFor="let component of componentList; let i = index"
+              *ngFor="let component of componentListMap.get(index); let i = index"
               class="wrapper"
               (click)="clickHandler(component)"
               [childComp]="component"

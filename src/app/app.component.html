@@ -14,6 +14,7 @@
     <app-pallete
     [canvas] = "passCanvas"
     [propertyCmp] = "propertyCmp"
+    [componentList] = "componentList"
     [domInsideCanvas] = "domInsideCanvas"
     (updateComponentListEvent)="updateComponentList($event)"
     (updateCanvasLeftEvent)="updateCanvasLeft($event)"
@@ -63,9 +64,11 @@
     [canvasTop]="canvasTop"
     [canvasW]="canvasW"
     [whatComponent]="whatComponent"
+    [componentListMap]="componentListMap"
     (updateSelectedEvent)="updateSelected($event)"
     (updateSelectedComponentEvent)="updateSelectedComponent($event)"
     (updateDomInsideCanvasEvent)="updateDomInsideCanvas($event)"
+    (updateSelectedTabEvent)="updateSelectedTab($event)"
     ></app-canvas>
   <!-- CODE SECTION -->
 <!--

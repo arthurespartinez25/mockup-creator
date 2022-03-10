@@ -57,6 +57,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   @Output() updateSelectedComponentEvent = new EventEmitter<IComponent>();
   @Output() updateDomInsideCanvasEvent = new EventEmitter<boolean>();
   @Output() selectedTabChange: EventEmitter<MatTabChangeEvent>;
+  @Output() updateSelectedTabEvent = new EventEmitter<number>();
 
   @Input() componentList : IComponent[] = [];
   @Input() mousePositionX: any;
@@ -65,6 +66,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   @Input() canvasTop: any;
   @Input() canvasW: any;
   @Input() whatComponent:any;
+  @Input() componentListMap : Map<number, IComponent[]>;
 
   changeref: ChangeDetectorRef;
   constructor(
@@ -178,6 +180,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
       this.selected.mouseDragPositionY = 0;
     }
     this.updateSelectedEvent.emit(this.selected);
+    console.log(this.componentListMap);
   }
   onDragEnd(component: IComponent) {
     console.log(component);
@@ -220,10 +223,12 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
         this.selectedTab = (index - 1) < 0 ? 0 : (index - 1); //changes the selected tab to the previous one
       }
     }
+    console.log(this.tabs);
   }
 
   myTabSelectedTabChange(changeEvent: MatTabChangeEvent) {
     this.currentTab = changeEvent.index;
+    this.updateSelectedTabEvent.emit(this.currentTab);
   } 
 
   /****************** OLD CODE STARTS HERE **********************/
