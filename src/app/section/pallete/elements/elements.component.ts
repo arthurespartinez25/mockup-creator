@@ -246,7 +246,7 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
       default:
         temp = new ButtonDragComponent(this.canvas);
     }
-    if (component == 'youtube') {
+    if (component == 'youtube') { //band-aid fix until youtubeComponent gets fixed
       this.canvasLeft = (this.canvas.nativeElement.parentElement.parentElement.parentElement as HTMLElement).offsetLeft;
       this.canvasTop = (this.canvas.nativeElement.parentElement.parentElement.parentElement as HTMLElement).offsetTop;
     } else {
