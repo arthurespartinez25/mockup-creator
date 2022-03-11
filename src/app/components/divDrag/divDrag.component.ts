@@ -22,7 +22,7 @@ export class DivDragComponent implements OnInit, IComponent {
     id: '',
     value: '',
     class: '',
-    style: 'width: 100px; height: 100px;',
+    style: 'width: 100px; height: 100px; background-color: #12355B;',
     typeObj: 'divDrag',
     type: '',
     draggable: true,
