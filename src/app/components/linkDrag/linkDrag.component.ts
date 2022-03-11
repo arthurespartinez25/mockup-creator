@@ -31,6 +31,7 @@ export class LinkDragComponent implements OnInit, IComponent {
     href: '#',
     mouseDragPositionX:0,
     mouseDragPositionY:0,
+    isIcon: false,
   };
 
   @Input() canvasPositionX: any;
@@ -193,10 +194,17 @@ export class LinkDragComponent implements OnInit, IComponent {
     }
 
     if (this.props.style.trim().length > 0) {
-      tmpHtmlCode += ' style="' + this.props.style + '"';
+      tmpHtmlCode += ' style="' + this.props.style + '">';
     }
 
-    tmpHtmlCode += '>' + this.props.value + '</a>';
+    if(this.props.isIcon == false){
+      tmpHtmlCode += this.props.value
+    }
+
+    if(this.props.isIcon == true){
+      tmpHtmlCode += '<i class="' + this.props.value + '"></i>'
+    }
+    tmpHtmlCode += '</a>';
 
     return tmpHtmlCode;
   }

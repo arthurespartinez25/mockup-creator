@@ -31,7 +31,8 @@ import { IProperty } from 'src/app/interfaces/iproperty';
     }"
     [type]="props.type"
   >
-    {{ props.value }}
+    <span *ngIf="props.isIcon == false">{{props.value}}</span>
+    <i *ngIf="props.isIcon == true" class={{props.value}}></i>
   </button>`,
 })
 export class ButtonDragComponent implements IComponent {
@@ -49,6 +50,7 @@ export class ButtonDragComponent implements IComponent {
     hidden:false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
+    isIcon: false,
   };
 
   @Input() canvasPositionX: any;
@@ -174,10 +176,17 @@ export class ButtonDragComponent implements IComponent {
     }
 
     if (this.props.style.trim().length > 0) {
-      tmpHtmlCode += ' style="' + this.props.style + '"';
+      tmpHtmlCode += ' style="' + this.props.style + '">';
     }
 
-    tmpHtmlCode += '>' + this.props.value + '</button></div>';
+    if(this.props.isIcon == false){
+      tmpHtmlCode += this.props.value
+    }
+
+    if(this.props.isIcon == true){
+      tmpHtmlCode += '<i class="' + this.props.value + '"></i>'
+    }
+    tmpHtmlCode += '</button></div>';
 
     return tmpHtmlCode;
   }

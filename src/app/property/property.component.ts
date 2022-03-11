@@ -27,6 +27,7 @@ export class PropertyComponent implements OnInit {
     mouseDragPositionX:0,
     mouseDragPositionY:0,
     dummyDate:'',
+    isIcon:false,
   };
   style2 = '';
   @Output() addAllCSSRule = new EventEmitter<string>();
@@ -34,6 +35,7 @@ export class PropertyComponent implements OnInit {
   @Output() cssReceiveMessage = new EventEmitter<string>();
   @Output() clearComponentListEvent = new EventEmitter<number>();
   @Output() updateComponentListEvent = new EventEmitter<IComponent[]>();
+  // @Output() isIcon = new EventEmitter<boolean>();
 
   @Input() get property(): IProperty {
     
@@ -120,6 +122,18 @@ export class PropertyComponent implements OnInit {
         this.props.dummyDate = this.datepipe.transform(this.props.value, 'MM/dd/YYYY');
         
       }, 3000);
+    }
+    else if(this.props.typeObj == 'linkDrag' || this.props.typeObj == 'buttonDrag')
+    {
+      if(this.checkIcon(event.target.value))
+      {
+        this.props.isIcon = true;
+        this.props.value = event.target.value.slice(10, -6);
+      }
+      else
+      {
+        this.props.value = event.target.value;
+      }
     }
     else
     {
@@ -232,6 +246,12 @@ export class PropertyComponent implements OnInit {
       {
         this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl('https://ps.w.org/all-404-redirect-to-homepage/assets/icon-128x128.png?rev=1515215');
       }
+  }
+  checkIcon(icon: string){
+    if(icon.match(/^<i class=".*"><\/i>$/)){
+      return true;
+    }
+    return false;
   }
   /* END OF CODE FOR TABLE ELEMENT */
 }
