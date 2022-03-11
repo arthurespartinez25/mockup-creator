@@ -15,7 +15,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
   styleUrls: ['./buttonDrag.component.css'],  
   template: `<button
     cdkDrag
-    cdkDragBoundary="#canvas"
+    cdkDragBoundary=".canvas"
     [cdkDragDisabled]="!props.draggable"
     (cdkDragEnded)="onDragEnded($event)"
     [id]="props.id"

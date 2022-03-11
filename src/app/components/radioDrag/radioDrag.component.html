@@ -1,4 +1,4 @@
-<div class="form-check" cdkDrag cdkDragBoundary="#canvas" (cdkDragEnded)="onDragEnded($event)"
+<div class="form-check" cdkDrag cdkDragBoundary=".canvas" (cdkDragEnded)="onDragEnded($event)"
 [cdkDragDisabled]="!props.draggable" [class]="props.class"  [ngStyle]="{
     position: 'sticky',
     left: mousePositionLeft + 'px',

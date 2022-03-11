@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { DatePipe } from '@angular/common';
-import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ComponentRef, ElementRef, Input, OnInit, Output, Renderer2, ViewChild, EventEmitter } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ComponentRef, ElementRef, Input, OnInit, Output, Renderer2, ViewChild, EventEmitter, ViewChildren, QueryList } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -49,6 +49,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   public _popupCount = 0;
 
   @ViewChild('PropertyComponent') property: boolean;
+  @ViewChildren('canvas') canvasListElements: QueryList<ElementRef>;
   @ViewChild('canvas') canvas!: ElementRef;
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
@@ -61,6 +62,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   @Output() selectedTabChange: EventEmitter<MatTabChangeEvent>;
   @Output() updateSelectedTabEvent = new EventEmitter<string>();
   @Output() updateComponentListMapEvent = new EventEmitter<Map<string, IComponent[]>>();
+  @Output() updateSelectedCanvasEvent = new EventEmitter<ElementRef>();
 
   @Input() componentList : IComponent[] = [];
   @Input() mousePositionX: any;
@@ -85,7 +87,6 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   delete: boolean;
   cssBody: SafeStyle;
   canvasBG: string;
-  canvasPass = this.canvas;
   sessionID = this.loginCookie.get("sessionID");
   inSession: boolean = this.sessionID == "12345";
 
@@ -100,7 +101,9 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
       }) */
     }
   }
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {
+    this.canvasListElements.toArray();
+  }
 
   canvasLeftX = 0;
   canvasTopY = 0;
@@ -238,6 +241,8 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   myTabSelectedTabChange(changeEvent: MatTabChangeEvent) {
     this.currentTab = changeEvent.index;
     this.updateSelectedTabEvent.emit(this.tabs[this.currentTab].id);
+    this.canvas = this.canvasListElements.toArray()[this.currentTab];
+    this.updateSelectedCanvasEvent.emit(this.canvas);
   } 
 
   /****************** OLD CODE STARTS HERE **********************/

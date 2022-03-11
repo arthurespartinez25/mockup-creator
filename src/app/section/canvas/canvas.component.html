@@ -7,7 +7,8 @@
           <button [disabled]="tabs.length === 1" type="button" class="btn btn-close" (click)="removeTab(index)"></button>
         </ng-template>
         <div
-        id="canvas"
+        class="canvas"
+        [id]="tabs[index].id"
         #canvas
         (mouseenter)="updateDomInsideCanvas(true)"
         (mouseleave)="updateDomInsideCanvas(false)"

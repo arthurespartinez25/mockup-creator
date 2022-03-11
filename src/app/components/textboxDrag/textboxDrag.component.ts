@@ -6,7 +6,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
 @Component({
   selector: 'app-textboxDrag',
   styleUrls: ['./textboxDrag.component.css'],
-  template: `<textarea cdkDrag cdkDragBoundary="#canvas" [id]="props.id" [style]="props.style"
+  template: `<textarea cdkDrag cdkDragBoundary=".canvas" [id]="props.id" [style]="props.style"
    [placeholder]="props.placeholder" [rows]="props.rows" [class]="props.class"
     [cols]="props.cols"
     (cdkDragEnded)="onDragEnded($event)"

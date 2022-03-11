@@ -126,7 +126,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     console.log(this.componentListMap);
     
     this.componentList = this.componentListMap.get(this.currentTab)!;
-    
+
     //this.palette.updateComponentListDel(this.componentList); //updates the componentList in the pallete
   }
   
@@ -175,10 +175,15 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     } else {
       this.componentList = [];
     }
+    console.log(this.componentListMap);
   }
 
   updateComponentListMap(value: Map<string, IComponent[]>) {
     this.componentListMap = value;
+  }
+
+  updateSelectedCanvas(value: ElementRef) {
+    this.passCanvas = value;
   }
 
   //////////////////////////////////////////////////////////////////////////////
