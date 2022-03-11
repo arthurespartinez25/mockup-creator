@@ -1,0 +1,26 @@
+<div class="wrapper">
+    <div id="content">
+        <div class="login-header">
+            Login
+        </div>
+        <div class="form-content">
+            <input id="username" placeholder="Username" type="text" #uname required>
+            <input id="password" placeholder="Password" type="password" #pword required>
+            <br>
+            <br>
+            <div *ngIf="isEmpty" role="alert"> 
+                <strong>Empty Input Fields</strong>
+            </div>
+            <div *ngIf="doesNotExist" role="alert"> 
+                <strong>Wrong credentials</strong>
+            </div>
+            <button id="loginButton" (click)="login(uname.value, pword.value)">Log-in</button>
+            <br>
+            <br>
+            
+            <hr>
+            <a (click)="register()" class="dnthave">Don’t have an account? Sign up</a>
+        </div>
+        
+    </div>
+</div>

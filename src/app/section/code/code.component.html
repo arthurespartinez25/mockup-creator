@@ -1,0 +1,43 @@
+<div id="code-container">
+  <app-navigation></app-navigation>
+    <div class="tab-content tab-container" id="myTabContent">
+      <div
+        class="tab-pane fade show active"
+        id="properties"
+        role="tabpanel"
+        aria-labelledby="properties-tab"
+      >
+        <app-property
+          [property]="selected"
+          [selectedIdx]="selectedComponent"
+          [compList]="componentList"
+          (addAllCSSRule) = "addAllCSSRule($event)"
+          (cssReceiveMessage)="cssReceiveMessage()"
+          (clearCss) = "clearCss()"
+          (clearComponentListEvent)="clearComponentList()"
+          (updateComponentListEvent)="updateComponentList($event)"
+        ></app-property> <!-- pass these values to the app.property component-->
+      </div>
+      <div
+        class="tab-pane fade css-textarea-container"
+        id="css"
+        role="tabpanel"
+        aria-labelledby="css-tab"
+      >
+        <app-css
+          (updateStyleEvent)="updateStyle($event)"
+        ></app-css>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="code"
+        role="tabpanel"
+        aria-labelledby="code-tab"
+      >
+        <app-code-segment
+          [componentList]="componentList"
+          [_styleBody]="style"
+        ></app-code-segment>
+      </div>
+    </div>
+  </div>

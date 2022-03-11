@@ -1,0 +1,15 @@
+/********************** IMG CSS ********************/
+
+.imgResize {
+  resize: both;
+  min-width: 300px;
+  min-height: 200px;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: auto;
+}
+
+.img-rounded {
+  max-width: 600px;
+  height: 200px;
+}

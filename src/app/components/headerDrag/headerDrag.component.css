@@ -1,0 +1,11 @@
+.text{
+    resize: both;
+    min-width: 70px;
+    min-height: 20px;
+    max-width: 1200px;
+    max-height: 750;
+    overflow:auto;
+}
+.text:hover {
+    background:rgba(173, 173, 173, 0.2);
+}

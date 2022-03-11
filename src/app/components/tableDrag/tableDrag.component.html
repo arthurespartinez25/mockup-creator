@@ -1,0 +1,42 @@
+<div
+  cdkDrag
+  cdkDragBoundary="#canvas"
+  (cdkDragEnded)="onDragEnded($event)"
+  [cdkDragDisabled]="!props.draggable"
+  [class]="props.class"
+  [id]="props.id"
+  [style]="props.style"
+  [ngStyle]="{
+    position: 'sticky',
+    left: mousePositionLeft + 'px',
+    top: mousePositionTop + 'px',
+    'width': 'auto',
+    'border-color' : props.selected == true ? 'red': (props.selected == false ? 'none': null),
+    'border-style' : props.selected == true ? 'solid': (props.selected == false ? 'none': null),
+    'border-width' : props.selected == true ? '1px': (props.selected == false ? '0px': null)
+  }" 
+>
+  <br />
+  <table [class]="props.class">
+    <tr *ngFor="let row of this.props.tblArrayRow; let i = index" >
+      <td
+        *ngFor="let column of this.props.tblArrayCol"
+        style="padding: 10px; border: 1px solid black"
+        (click)="editTableValue(i,column,row[column],props.value)"
+      >
+      <!--  (click)="getCellPosition(i,column,row[column])"
+      <span *ngIf="this.props.tblArrayRow[i][column]==''">{{ props.value }}</span>
+      -->
+        {{ row[column] }}
+      </td>
+    </tr>
+  </table>
+  <!--
+  <button
+    (click)="editTableDimension(props.tblRows, props.tblCols)"
+    style="float: right; width: 20px; height: 20px"
+  >
+    *
+  </button>
+  -->
+</div>

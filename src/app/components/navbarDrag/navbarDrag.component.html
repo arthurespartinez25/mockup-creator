@@ -1,0 +1,14 @@
+<nav cdkDrag cdkDragBoundary="#canvas" [class]="props.class" [id]="props.id" [style]="props.style"
+(cdkDragEnded)="onDragEnded($event)" 
+[cdkDragDisabled]="!props.draggable"
+[ngStyle]="{
+    'width':+this.theCanvasWidth+'px',
+    'position': 'sticky',
+    'left': (canvasPositionLeft) + 'px',
+    'top': (mousePositionTop) + 'px',
+    'border-color' : props.selected == true ? 'red': (props.selected == false ? 'none': null),
+    'border-style' : props.selected == true ? 'solid': (props.selected == false ? 'none': null),
+    'border-width' : props.selected == true ? '1px': (props.selected == false ? '0px': null)
+  }">
+  {{ props.value }}
+</nav>

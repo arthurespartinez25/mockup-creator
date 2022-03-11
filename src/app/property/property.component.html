@@ -1,0 +1,311 @@
+<div id="properties">
+  <div id="properties-header">
+    Component Property
+    <button
+      [ngClass]="{ invisible: !this.props.id }"
+      id="delete"
+      (click)="deleteComponent()"
+    >
+      Remove
+    </button>
+  </div>
+
+  <table id="properties-table" border="1" [cellSpacing]="1">
+    <tr class="properties-table-row">
+      <th class="properties-table-header" class="properties-table-header">
+        <label>id</label>
+      </th>
+      <td class="properties-table-data">
+        <input
+          [disabled]="!this.props.id"
+          type="text"
+          [value]="props.id"
+          (keyup)="idChangeHandler($event)"
+        />
+      </td>
+    </tr>
+    <tr class="properties-table-row" *ngIf="props.typeObj !== 'table' && props.typeObj !== 'dropdownDrag' && props.typeObj !== 'datepickerDrag'">
+      <th class="properties-table-header"><label>value</label></th>
+      <td class="properties-table-data">
+        <input
+          [disabled]="!this.props.id"
+          type="text"
+          [value]="props.value"
+          (keyup)="valueChangeHandler($event)"
+        />
+      </td>
+    </tr>
+     <tr class="properties-table-row" *ngIf="props.typeObj == 'datepickerDrag'">
+      <th class="properties-table-header"><label>value</label></th>
+      <td class="properties-table-data">
+        <input
+          [disabled]="!this.props.id"
+          type="text"
+          [value]="props.dummyDate"
+          (keyup)="valueChangeHandler($event)"
+        />
+      </td>
+    </tr>
+    <tr class="properties-table-row">
+      <th class="properties-table-header"><label>draggable</label></th>
+      <td class="properties-table-data">
+        <input
+          [disabled]="!this.props.id"
+          type="checkbox"
+          [checked]="this.props.draggable"
+          (change)="enableDragging($event)"
+        />
+      </td>
+    </tr>
+    
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'youtubeDrag'">
+      <th class="properties-table-header"><label>Update</label></th>
+      <td class="properties-table-data">
+      <button
+      *ngIf="props.typeObj == 'youtubeDrag'"
+        id="updateLink"
+        (click)="updateLink()"
+        class="updateLink"
+      >
+        Update Link
+      </button>
+    </td>
+    </tr>
+
+    <!-- start of Table Cell input -->
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'table'">
+      <th class="properties-table-header"><label>Cell Value</label></th>
+      <td class="properties-table-data">
+        <input
+          [disabled]="!this.props.id"
+          type="text"
+          [value]="props.value"
+          (keyup)="valueChangeHandler($event)"
+        />
+      </td>
+      <!-- end of Table Cell input -->
+    </tr>
+
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'input'"></tr>
+    <tr
+      class="properties-table-row"
+      *ngIf="props.typeObj == 'input' || props.typeObj == 'inputDrag'"
+    >
+      <th class="properties-table-header"><label>type</label></th>
+      <td class="properties-table-data">
+        <input
+          [disabled]="!this.props.id"
+          type="text"
+          [value]="props.type"
+          (keyup)="typeChangeHandler($event)"
+        />
+      </td>
+    </tr>
+    <tr class="properties-table-row">
+      <th class="properties-table-header"><label>class</label></th>
+      <td class="properties-table-data">
+        <input
+          [disabled]="!this.props.id"
+          type="text"
+          [value]="props.class"
+          (keyup)="classChangeHandler($event)"
+        />
+      </td>
+    </tr>
+
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'dropdown' || props.typeObj == 'dropdownDrag'">
+      <th class="properties-table-header"><label>Option Values</label></th>
+      <td class="properties-table-data">
+
+        <input
+          [disabled]="!this.props.id"
+          type="text"
+          [value]="props.linkValue"
+          (change)="linkValueChangeHandler($event)"
+        />
+      </td>
+    </tr>
+    <tr
+      class="properties-table-row"
+      *ngIf="props.typeObj == 'textbox' || props.typeObj == 'textboxDrag' || props.typeObj == 'inputDrag'"
+    >
+      <th class="properties-table-header"><label>placeholder</label></th>
+      <td class="properties-table-data">
+        <input
+          [disabled]="!this.props.id"
+          type="text"
+          [value]="props.placeholder"
+          (keyup)="placeholderChangeHandler($event)"
+        />
+      </td>
+    </tr>
+    <tr
+      class="properties-table-row"
+      *ngIf="props.typeObj == 'textbox' || props.typeObj == 'textboxDrag'"
+    >
+      <th class="properties-table-header"><label>rows</label></th>
+      <td class="properties-table-data">
+        <input
+          [disabled]="!this.props.id"
+          type="number"
+          [value]="props.rows"
+          (change)="rowsChangeHandler($event)"
+        />
+      </td>
+    </tr>
+    <tr
+      class="properties-table-row"
+      *ngIf="props.typeObj == 'textbox' || props.typeObj == 'textboxDrag'"
+    >
+      <th class="properties-table-header"><label>columns</label></th>
+      <td class="properties-table-data">
+        <input
+          [disabled]="!this.props.id"
+          type="number"
+          [value]="props.cols"
+          (change)="colsChangeHandler($event)"
+        />
+      </td>
+    </tr>
+
+    <tr class="properties-table-row">
+      <th class="properties-table-header"><label>style</label></th>
+      <td class="properties-table-data">
+        <textarea
+          [disabled]="!this.props.id"
+          name="style"
+          id="taID"
+          #taID
+          [value]="style2"
+          cols="21"
+          rows="5"
+          (keyup)="styleChangeHandler($event)"
+          (click)="styleChangeHandler2($event)"
+        ></textarea>
+      </td>
+    </tr>
+
+    <tr
+      class="properties-table-row"
+      *ngIf="props.typeObj == 'popup' || props.typeObj == 'popupDrag'"
+    >
+      <th class="properties-table-header"><label>data-bs-content</label></th>
+      <td class="properties-table-data">
+        <input
+          [disabled]="!this.props.id"
+          type="text"
+          [value]="props.content"
+          (keyup)="contentChangeHandler($event)"
+        />
+        <tr *ngIf="props.name">
+          <th><label>name</label></th>
+          <input
+            type="text"
+            [value]="this.props.name"
+            (keyup)="nameChangeHandler($event)"
+          />
+        </tr>
+        <tr></tr>
+      </td>
+    </tr>
+
+    <!-- TABLE -->
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'table' || props.typeObj == 'tableDrag'">
+      <th class="properties-table-header"><label>row</label></th>
+      <td class="properties-table-data">
+        <input
+          [disabled]="!this.props.id"
+          type="number"
+          [value]="this.props.tblRows"
+          (change)="tblRowsChangeHandler($event)"
+        />
+        <tr></tr>
+      </td>
+    </tr>
+
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'table' || props.typeObj == 'tableDrag'">
+      <th class="properties-table-header"><label>column</label></th>
+      <td class="properties-table-data">
+        <input
+          [disabled]="!this.props.id"
+          type="number"
+          [value]="this.props.tblCols"
+          (change)="tblColsChangeHandler($event)"
+        />
+        <tr></tr>
+      </td>
+    </tr>
+
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'radio' || props.typeObj == 'radioDrag'">
+      <th class="properties-table-header"><label>name</label></th>
+      <td class="properties-table-data">
+        <input
+          [disabled]="!this.props.id"
+          type="text"
+          [value]="this.props.name"
+          (keyup)="nameChangeHandler($event)"
+        />
+      </td>
+    </tr>
+
+
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'link' || props.typeObj == 'linkDrag'">
+      <th class="properties-table-header"><label>href</label></th>
+      <td class="properties-table-data">
+        <input
+        [disabled]="!this.props.id"
+        type="text"
+        [value]="this.props.href"
+        (keyup)="hrefChangeHandler($event)"
+        />
+      </td>
+    </tr>
+    
+  </table>
+</div>
+
+<button
+      id="clearScreen"
+      #clearScreen
+      (click)="clearComponent()"
+    >
+      Clear
+</button>
+{{"X: "+props.mouseDragPositionX.toFixed(2)+"%"}}
+<br>
+{{"Y: "+props.mouseDragPositionY.toFixed(2)+"%"}}
+
+
+
+<!--
+<button (click)="removeElement($event)" type="button" class="btn btn-danger delete" title="Delete Element">
+  <span aria-hidden="true">&times;</span>
+</button>
+-->
+
+<style>
+  th {
+    background-color: thistle;
+  }
+  tr {
+    background-color: white;
+    border: solid;
+  }
+  input,
+  textarea {
+    border: none;
+  }
+
+  .delete {
+    max-height: 50px;
+    
+    position: absolute;
+    bottom: 26%;
+    right: 34%;
+    z-index: 9999;
+  }
+  #updateLink
+  {
+    
+  }
+</style>

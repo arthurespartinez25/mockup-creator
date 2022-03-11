@@ -1,0 +1,75 @@
+<div class="palette-div" style="overflow: auto;">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link active"
+          id="elements-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#elements"
+          type="button"
+          role="tab"
+          aria-controls="elements"
+          aria-selected="true"
+        >
+          Elements
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="templates-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#templates"
+          type="button"
+          role="tab"
+          aria-controls="templates"
+          aria-selected="false"
+        >
+          Templates
+        </button>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <app-elements 
+        [canvas]="canvas"
+        [propertyCmp]="propertyCmp"
+        [domInsideCanvas] = "domInsideCanvas"
+        (updateComponentListEvent)="updatedList($event)"
+        (updateCanvasLeftEvent)="updatedCanvasLeft($event)"
+        (updateCanvasTopEvent)="updatedCanvasTop($event)"
+        (updateCanvasWEvent)="updatedCanvasW($event)"
+        (updateMousePosX)="updatedMousePositionX($event)"
+        (updateMousePosY)="updatedMousePositionY($event)"
+        (updateWhatComponentEvent)="updatedWhatComponent($event)"
+        class="tab-pane fade show active"
+        id="elements"
+        role="tabpanel"
+        aria-labelledby="elements-tab">
+      </app-elements>
+      <app-templates 
+        [canvas]="canvas"
+        [propertyCmp]="propertyCmp"
+        (updateComponentListEvent)="updatedList($event)"
+        (updateCanvasLeftEvent)="updatedCanvasLeft($event)"
+        (updateCanvasTopEvent)="updatedCanvasTop($event)"
+        (updateCanvasWEvent)="updatedCanvasW($event)"
+        (updateMousePosX)="updatedMousePositionX($event)"
+        (updateMousePosY)="updatedMousePositionY($event)"
+        (updateWhatComponentEvent)="updatedWhatComponent($event)"
+        class="tab-pane fade"
+        id="templates"
+        role="tabpanel"
+        aria-labelledby="templates-tab">
+      </app-templates>
+      <button 
+        class="palette-item" 
+        (click)="logout()"
+        style="background-color: maroon;"
+      >
+        Logout
+      </button>
+    </div>
+      <app-component-list
+        [componentList]="componentList">
+      </app-component-list>
+  </div>
