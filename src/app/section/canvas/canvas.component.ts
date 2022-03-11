@@ -186,6 +186,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
       this.selected.mouseDragPositionY = 0;
     }
     this.updateSelectedEvent.emit(this.selected);
+    console.log(this.canvas);
   }
   onDragEnd(component: IComponent) {
     console.log(component);
