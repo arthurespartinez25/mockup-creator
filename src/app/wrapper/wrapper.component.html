@@ -369,4 +369,19 @@
     }"
   ></app-youtubeDrag>
 
+  <app-div-drag
+    [property]="child.props"
+    [canvasPositionX]="canvasPositionX"
+    [canvasPositionY]="canvasPositionY"
+    [mousePositionX2]="mousePositionX2"
+    [mousePositionY2]="mousePositionY2"
+    [whatComponent2]="whatComponent2"
+    [ngStyle]="{
+      'height': '1px',
+      'position': 'absolute',
+      'top':mousePositionY2,
+      'left':mousePositionX2
+    }"
+  ></app-div-drag>
+
 </div>

@@ -188,5 +188,12 @@
           >
           Iframe
         </button>
+      <button 
+      class="palette-item"
+      (click)="addComponent('div')"
+      cdkDrag
+      (cdkDragEnded)="onDragEndedAddComponent($event,'div')">
+        Empty Div
+    </button>
         </div>
       </div>

@@ -39,6 +39,7 @@ import { ComponentListComponent } from './section/pallete/component-list/compone
 import { NavigationComponent } from './section/code/navigation/navigation.component';
 import { CssComponent } from './section/code/css/css.component';
 import { CodeSegmentComponent } from './section/code/code-segment/code-segment.component';
+import { DivDragComponent } from './div-drag/div-drag.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { CodeSegmentComponent } from './section/code/code-segment/code-segment.c
     NavigationComponent,
     CssComponent,
     CodeSegmentComponent,
+    DivDragComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule, FormsModule, HttpClientModule],
   providers: [DragDropModule, AppComponent, DatePipe],

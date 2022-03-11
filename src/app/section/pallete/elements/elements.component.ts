@@ -40,7 +40,7 @@ import { YoutubeDragComponent } from './../../../components/youtubeDrag/youtubeD
 import { CookieService } from 'ngx-cookie-service';
 import { DatePipe } from '@angular/common'
 import { PropertyComponent } from './../../../property/property.component';
-
+import { DivDragComponent } from 'src/app/div-drag/div-drag.component';
 @Component({
   selector: 'app-elements',
   templateUrl: './elements.component.html',
@@ -243,6 +243,10 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
         temp = new YoutubeDragComponent(this.canvas, this.sanitizer);
         break;
 
+      case 'div':
+        temp = new DivDragComponent(this.canvas);
+        break;
+
       default:
         temp = new ButtonDragComponent(this.canvas);
     }
@@ -282,7 +286,8 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
         component == 'nav' ||
         component == 'link' ||
         component == 'table' ||
-        component == 'youtube'
+        component == 'youtube' ||
+        component == 'div'
       ) {
         this.canvasLeftX = 0;
         this.canvasTopY = 0;
