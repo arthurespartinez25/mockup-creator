@@ -3,7 +3,7 @@
     <mat-tab-group class="tabs" dynamicHeight id="canvasTabGroup" [(selectedIndex)]="selectedTab" (selectedTabChange)="myTabSelectedTabChange($event)">
       <mat-tab *ngFor="let tab of tabs; let index = index">
         <ng-template mat-tab-label>
-          <span class="tab-label">{{tab}} </span>
+          <span class="tab-label">{{tab.name}} </span>
           <button [disabled]="tabs.length === 1" type="button" class="btn btn-close" (click)="removeTab(index)"></button>
         </ng-template>
         <div
@@ -14,7 +14,7 @@
         >
           <div id="canvasBody">
             <app-wrapper
-              *ngFor="let component of componentListMap.get(index); let i = index"
+              *ngFor="let component of componentListMap.get(tabs[index].id); let i = index"
               class="wrapper"
               (click)="clickHandler(component)"
               [childComp]="component"

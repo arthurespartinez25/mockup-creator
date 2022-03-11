@@ -16,9 +16,11 @@ import { PropertyComponent } from './../../property/property.component';
   styleUrls: ['./canvas.component.css']
 })
 export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked {
-  tabs = ['Canvas 1'];
+  tabs = [{id: 'canvas1',
+          name: "Canvas 1"}];
   selectedTab = 0;
   currentTab: number;
+  totalTabs = 0;
   index: number;
   numberOfComponents: any = [];
   selectedComponent: IComponent;
@@ -57,7 +59,8 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   @Output() updateSelectedComponentEvent = new EventEmitter<IComponent>();
   @Output() updateDomInsideCanvasEvent = new EventEmitter<boolean>();
   @Output() selectedTabChange: EventEmitter<MatTabChangeEvent>;
-  @Output() updateSelectedTabEvent = new EventEmitter<number>();
+  @Output() updateSelectedTabEvent = new EventEmitter<string>();
+  @Output() updateComponentListMapEvent = new EventEmitter<Map<string, IComponent[]>>();
 
   @Input() componentList : IComponent[] = [];
   @Input() mousePositionX: any;
@@ -66,7 +69,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   @Input() canvasTop: any;
   @Input() canvasW: any;
   @Input() whatComponent:any;
-  @Input() componentListMap : Map<number, IComponent[]>;
+  @Input() componentListMap : Map<string, IComponent[]>;
 
   changeref: ChangeDetectorRef;
   constructor(
@@ -180,7 +183,6 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
       this.selected.mouseDragPositionY = 0;
     }
     this.updateSelectedEvent.emit(this.selected);
-    console.log(this.componentListMap);
   }
   onDragEnd(component: IComponent) {
     console.log(component);
@@ -207,28 +209,35 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
 
   /* PAGINATION CODE */
   addTab() {
-    this.tabs.push("Canvas " + (this.tabs.length + 1));
+    this.totalTabs++;
+    let toInsert = {
+      id: "canvas" + (this.totalTabs + 1),
+      name: "Canvas " + (this.tabs.length + 1)
+    };
+    this.tabs.push(toInsert);
+    this.selectedTab = this.tabs.length - 1;
   }
   
   removeTab(index: number) {
     let result = window.confirm("Are you sure you want to remove this tab?");
     if (result) {
+      this.componentListMap.delete(this.tabs[index].id);
+      this.updateComponentListMapEvent.emit(this.componentListMap); //updates the componentList in app.component
       this.tabs.splice(index, 1);
-      
+
       for (let i = 0; i < this.tabs.length; i++) {
-        this.tabs[i] = "Canvas " + (i + 1);
+        this.tabs[i].name = "Canvas " + (i + 1);
       }
 
       if (this.currentTab == this.selectedTab) {
         this.selectedTab = (index - 1) < 0 ? 0 : (index - 1); //changes the selected tab to the previous one
       }
     }
-    console.log(this.tabs);
   }
 
   myTabSelectedTabChange(changeEvent: MatTabChangeEvent) {
     this.currentTab = changeEvent.index;
-    this.updateSelectedTabEvent.emit(this.currentTab);
+    this.updateSelectedTabEvent.emit(this.tabs[this.currentTab].id);
   } 
 
   /****************** OLD CODE STARTS HERE **********************/
