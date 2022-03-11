@@ -99,6 +99,20 @@
           </div>
         </div>
         <div class="component-items"
+        *ngSwitchCase="'divDrag'"
+        (click)="clickHandler(this.componentList[i])"
+        >
+          <div>{{i+1}} Empty Div</div>
+          <div class="component-buttons">
+            <button class="component-button-remove"
+            (click)="deleteComponent(this.componentList[i])"
+            ><i class="fa-solid fa-trash-can fa-2xs"></i></button>
+            <button class="component-button-hide"
+            (click)="hideComponent(this.componentList[i])"
+            ><i class="fa-solid fa-eye-slash fa-2xs"></i></button>
+          </div>
+        </div>
+        <div class="component-items"
         *ngSwitchCase="'inputDrag'"
         (click)="clickHandler(this.componentList[i])"
         >

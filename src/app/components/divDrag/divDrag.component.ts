@@ -11,22 +11,22 @@ import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
 
 @Component({
-  selector: 'app-div-drag',
-  templateUrl: './div-drag.component.html',
-  styleUrls: ['./div-drag.component.css']
+  selector: 'app-divDrag',
+  templateUrl: './divDrag.component.html',
+  styleUrls: ['./divDrag.component.css'],
 })
 export class DivDragComponent implements OnInit, IComponent {
   canvas: ElementRef;
   props: IProperty = {
     key: '',
     id: '',
-    value: 'https://media.istockphoto.com/vectors/stamprsimp2red-vector-id1096052566?k=20&m=1096052566&s=612x612&w=0&h=CPU7LLHBwJm2OKoXCLxqKDzGaR0Xa1WGTQoryfdWQ3g=',
+    value: '',
     class: '',
-    style: '',
-    typeObj: 'imgDrag',
+    style: 'width: 100px; height: 100px;',
+    typeObj: 'divDrag',
     type: '',
     draggable: true,
-    selected : false,
+    selected : true,
     hidden: false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
@@ -55,7 +55,7 @@ export class DivDragComponent implements OnInit, IComponent {
     this.props.mouseDragPositionX = this.percentageX;
     this.props.mouseDragPositionY = this.percentageY;
   }
-    
+
   onDragEnded($event: CdkDragEnd) {
     this.props.mouseDragPositionX =
     (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
@@ -83,23 +83,25 @@ export class DivDragComponent implements OnInit, IComponent {
   }
 
   get htmlCode(): string {
-    let tmpHtmlCode = '<div';
-    tmpHtmlCode +=
-      ' class="' +
-      this.props.class +
-      '" id="' +
-      this.props.id +
-      '" type="' +
-      this.props.type +
-      '" style="' +
-      this.props.style +
-      '" src = " ' +
-      this.props.value +
-      '"> </div>';
+    let tmpHtmlCode = '<blankdiv';
+    if (this.props.id.trim().length > 0) {
+      tmpHtmlCode += ' id="' + this.props.id + '"';
+    }
 
-   return tmpHtmlCode;
+    if (this.props.type.trim().length > 0) {
+      tmpHtmlCode += ' type="' + this.props.type + '"';
+    }
+
+    if (this.props.class.trim().length > 0) {
+      tmpHtmlCode += ' class="' + this.props.class + '"';
+    }
+
+    if (this.props.style.trim().length > 0) {
+      tmpHtmlCode += ' style="' + this.props.style + '"';
+    }
+
+    tmpHtmlCode += '>' + this.props.value + '</blankdiv>';
+
+    return tmpHtmlCode;
   }
 }
-
-
-

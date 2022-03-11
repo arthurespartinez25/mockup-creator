@@ -14,6 +14,8 @@
         ? 'absolute'
         : child.props.typeObj === 'datepickerDrag'
         ? 'absolute'
+        : child.props.typeObj === 'divDrag'
+        ? 'absolute'
         : child.props.typeObj === 'modalDrag'
         ? 'absolute'
         : child.props.typeObj === 'imgDrag'
@@ -48,6 +50,8 @@
         ? mousePositionY2 + 'px'
         : child.props.typeObj === 'datepickerDrag'
         ? mousePositionY2 + 'px'
+        : child.props.typeObj === 'divDrag'
+        ? mousePositionY2 + 'px'
         : child.props.typeObj === 'modalDrag'
         ? mousePositionY2 + 'px'
         : child.props.typeObj === 'linkDrag'
@@ -79,6 +83,8 @@
         : child.props.typeObj === 'textboxDrag'
         ? mousePositionX2 + 'px'
         : child.props.typeObj === 'datepickerDrag'
+        ? mousePositionX2 + 'px'
+        : child.props.typeObj === 'divDrag'
         ? mousePositionX2 + 'px'
         : child.props.typeObj === 'modalDrag'
         ? mousePositionX2 + 'px'
@@ -150,6 +156,22 @@
       'left':mousePositionX2
     }"
   ></app-datepickerDrag>
+
+  <app-divDrag
+  [property]="child.props"
+  *ngSwitchCase="'divDrag'"
+  [canvasPositionX]="canvasPositionX"
+  [canvasPositionY]="canvasPositionY"
+  [mousePositionX2]="mousePositionX2"
+  [mousePositionY2]="mousePositionY2"
+  [whatComponent2]="whatComponent2"
+  [ngStyle]="{
+    'height': '1px',
+    'position': 'absolute',
+    'top':mousePositionY2,
+    'left':mousePositionX2
+  }"
+></app-divDrag>
 
   <app-imageDrag
     [property]="child.props"
@@ -368,20 +390,5 @@
       'left':mousePositionX2
     }"
   ></app-youtubeDrag>
-
-  <app-div-drag
-    [property]="child.props"
-    [canvasPositionX]="canvasPositionX"
-    [canvasPositionY]="canvasPositionY"
-    [mousePositionX2]="mousePositionX2"
-    [mousePositionY2]="mousePositionY2"
-    [whatComponent2]="whatComponent2"
-    [ngStyle]="{
-      'height': '1px',
-      'position': 'absolute',
-      'top':mousePositionY2,
-      'left':mousePositionX2
-    }"
-  ></app-div-drag>
 
 </div>

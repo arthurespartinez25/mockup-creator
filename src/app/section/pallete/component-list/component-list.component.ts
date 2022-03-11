@@ -269,6 +269,7 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
     let componentIndex = this.componentList.indexOf(value);
     let checkbox,
       datepicker,
+      div,
       dropdown,
       header,
       image,
@@ -298,4 +299,3 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
 function readCSSFile(arg0: string) {
   throw new Error('Function not implemented.');
 }
-

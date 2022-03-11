@@ -39,7 +39,7 @@ import { ComponentListComponent } from './section/pallete/component-list/compone
 import { NavigationComponent } from './section/code/navigation/navigation.component';
 import { CssComponent } from './section/code/css/css.component';
 import { CodeSegmentComponent } from './section/code/code-segment/code-segment.component';
-import { DivDragComponent } from './div-drag/div-drag.component';
+import { DivDragComponent } from './components/divDrag/divDrag.component';
 
 @NgModule({
   declarations: [
@@ -81,4 +81,3 @@ import { DivDragComponent } from './div-drag/div-drag.component';
   bootstrap: [AppComponent],
 })
 export class AppModule {}
-

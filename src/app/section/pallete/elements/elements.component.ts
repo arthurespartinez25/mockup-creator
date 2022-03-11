@@ -23,6 +23,7 @@ import { LabelDragComponent } from './../../../components/labelDrag/labelDrag.co
 import { CheckboxDragComponent } from './../../../components/checkboxDrag/checkboxDrag.component';
 import { DropdownDragComponent } from './../../../components/dropdownDrag/dropdownDrag.component';
 import { ImageDragComponent } from './../../../components/imageDrag/imageDrag.component';
+import { DivDragComponent } from './../../../components/divDrag/divDrag.component';
 import { RadioDragComponent } from './../../../components/radioDrag/radioDrag.component';
 import { TextboxDragComponent } from './../../../components/textboxDrag/textboxDrag.component';
 import { PopupDragComponent } from './../../../components/popupDrag/popupDrag.component';
@@ -40,7 +41,7 @@ import { YoutubeDragComponent } from './../../../components/youtubeDrag/youtubeD
 import { CookieService } from 'ngx-cookie-service';
 import { DatePipe } from '@angular/common'
 import { PropertyComponent } from './../../../property/property.component';
-import { DivDragComponent } from 'src/app/div-drag/div-drag.component';
+
 @Component({
   selector: 'app-elements',
   templateUrl: './elements.component.html',
@@ -194,6 +195,10 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
         temp = new ImageDragComponent(this.canvas);
         break;
 
+      case 'div':
+        temp = new DivDragComponent(this.canvas);
+        break;  
+
       case 'radio':
         temp = new RadioDragComponent(this.canvas);
         break;
@@ -243,10 +248,6 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
         temp = new YoutubeDragComponent(this.canvas, this.sanitizer);
         break;
 
-      case 'div':
-        temp = new DivDragComponent(this.canvas);
-        break;
-
       default:
         temp = new ButtonDragComponent(this.canvas);
     }
@@ -283,11 +284,11 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
       console.log(this.canvasTopY);
       if (
         component == 'img' ||
+        component == 'div' ||
         component == 'nav' ||
         component == 'link' ||
         component == 'table' ||
-        component == 'youtube' ||
-        component == 'div'
+        component == 'youtube'
       ) {
         this.canvasLeftX = 0;
         this.canvasTopY = 0;
@@ -328,4 +329,3 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
 function readCSSFile(arg0: string) {
   throw new Error('Function not implemented.');
 }
-
