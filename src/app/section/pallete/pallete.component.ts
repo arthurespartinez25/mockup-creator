@@ -33,6 +33,7 @@ import { LabelDragComponent } from './../../components/labelDrag/labelDrag.compo
 import { CheckboxDragComponent } from './../../components/checkboxDrag/checkboxDrag.component';
 import { DropdownDragComponent } from './../../components/dropdownDrag/dropdownDrag.component';
 import { ImageDragComponent } from './../../components/imageDrag/imageDrag.component';
+import { DivDragComponent } from './../../components/divDrag/divDrag.component';
 import { RadioDragComponent } from './../../components/radioDrag/radioDrag.component';
 import { TextboxDragComponent } from './../../components/textboxDrag/textboxDrag.component';
 import { PopupDragComponent } from './../../components/popupDrag/popupDrag.component';
@@ -327,6 +328,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
       dropdown,
       header,
       image,
+      div,
       input,
       label,
       link,
@@ -353,4 +355,3 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
 function readCSSFile(arg0: string) {
   throw new Error('Function not implemented.');
 }
-
