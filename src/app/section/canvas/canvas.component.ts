@@ -19,7 +19,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   tabs = [{id: 'canvas1',
           name: "Canvas 1"}];
   selectedTab = 0;
-  currentTab: number;
+  currentTab = 0;
   totalTabs = 0;
   index: number;
   numberOfComponents: any = [];
@@ -233,7 +233,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
         this.tabs[i].name = "Canvas " + (i + 1);
       }
 
-      if (this.currentTab == this.selectedTab) {
+      if (index == this.selectedTab) {
         this.selectedTab = (index - 1) < 0 ? 0 : (index - 1); //changes the selected tab to the previous one
       }
     }
