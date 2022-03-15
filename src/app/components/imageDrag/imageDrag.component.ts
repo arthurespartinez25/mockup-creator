@@ -152,12 +152,14 @@ export class ImageDragComponent implements OnInit, IComponent {
 
   get htmlCode(): string {
     if(this.props.usedMarginPercent){
-      if(this.props.style.match(/(margin-left):(\s)*(\d)*\.?(\d)*px;/)){
+      if(this.props.style.match(/(margin-left):(\s)*(\d)*\.?(\d)*px;/) && 
+        this.props.style.match(/(margin-top):(\s)*(\d)*\.?(\d)*px;/)){
         this.finalStyle = this.props.style.replace(/(margin-left):(\s)*(\d)*\.?(\d)*px;/, "")
-        console.log(this.finalStyle)
-      }
-      if(this.finalStyle.match(/(margin-top):(\s)*(\d)*\.?(\d)*px;/)){
         this.finalStyle = this.finalStyle.replace(/(margin-top):(\s)*(\d)*\.?(\d)*px;/, "")
+      } else if (this.props.style.match(/(margin-left):(\s)*(\d)*\.?(\d)*px;/)){
+        this.finalStyle = this.props.style.replace(/(margin-left):(\s)*(\d)*\.?(\d)*px;/, "")
+      } else if (this.props.style.replace(/(margin-top):(\s)*(\d)*\.?(\d)*px;/, "")){
+        this.finalStyle = this.props.style.replace(/(margin-top):(\s)*(\d)*\.?(\d)*px;/, "")
         console.log(this.finalStyle)
       }
     } else {

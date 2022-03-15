@@ -172,7 +172,8 @@ export class PropertyComponent implements OnInit {
     let position2 = this.props.style.match(regexPosition2);
     let position3 = this.props.style.match(regexPosition3);
     this.props.style = x+position+position2![0]+position3![0]+marginTop+marginLeft;
-    console.log(marginTop)
+    console.log(this.props.style)
+    console.log(this.props.mouseDragPositionX)
   }
   @ViewChild('taID') styleText!: ElementRef;
   styleChangeHandler2(event: any) {
