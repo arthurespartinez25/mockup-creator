@@ -17,7 +17,7 @@
       </li>
       <li class="nav-item" role="presentation">
         <button
-          class="nav-link unhide"
+          class="nav-link"
           id="templates-tab"
           data-bs-toggle="tab"
           data-bs-target="#templates"
@@ -27,6 +27,21 @@
           aria-selected="false"
         >
         <i class="fa-solid fa-cubes"></i>
+        <!--<div><strong>Templates</strong></div>-->
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="templates-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#save"
+          type="button"
+          role="tab"
+          aria-controls="save"
+          aria-selected="false"
+        >
+        <i class="fa-solid fa-floppy-disk"></i>
         <!--<div><strong>Templates</strong></div>-->
         </button>
       </li>
@@ -63,6 +78,13 @@
         role="tabpanel"
         aria-labelledby="templates-tab">
       </app-templates>
+      <app-save
+        class="tab-pane fade"
+        id="save"
+        role="savepanel"
+        aria-labelledby="saves-tab"
+      >
+      </app-save>
       <button 
         class="palette-item" 
         (click)="logout()"

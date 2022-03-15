@@ -40,6 +40,7 @@ import { NavigationComponent } from './section/code/navigation/navigation.compon
 import { CssComponent } from './section/code/css/css.component';
 import { CodeSegmentComponent } from './section/code/code-segment/code-segment.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import { SaveComponent } from './section/pallete/save/save.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     NavigationComponent,
     CssComponent,
     CodeSegmentComponent,
+    SaveComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule, FormsModule, HttpClientModule, MatTabsModule],
   providers: [DragDropModule, AppComponent, DatePipe],
