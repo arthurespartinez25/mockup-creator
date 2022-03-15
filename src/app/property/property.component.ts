@@ -28,6 +28,7 @@ export class PropertyComponent implements OnInit {
     mouseDragPositionY:0,
     dummyDate:'',
     isIcon:false,
+    usedMarginPercent:false
   };
   style2 = '';
   @Output() addAllCSSRule = new EventEmitter<string>();
@@ -35,7 +36,6 @@ export class PropertyComponent implements OnInit {
   @Output() cssReceiveMessage = new EventEmitter<string>();
   @Output() clearComponentListEvent = new EventEmitter<number>();
   @Output() updateComponentListEvent = new EventEmitter<IComponent[]>();
-  // @Output() isIcon = new EventEmitter<boolean>();
 
   @Input() get property(): IProperty {
     
@@ -149,13 +149,30 @@ export class PropertyComponent implements OnInit {
   styleChangeHandler(event: any) {
     let x = event.target.value;
     let regexPosition = /position(.+?);/;
+    let marginLeft = '';
+    let marginTop = '';
+  
+    if(x.match(/(margin-left):(\s)*(\d)*%;/g)){
+      let marginValueLeft = x.match(/(margin-left):(\s)*(\d)*%;/g).toString().replace(/\D/g, "");
+      let finalValueLeft = ((marginValueLeft-(this.props.mouseDragPositionX.toFixed(2)))/100)*1280;
+      marginLeft = 'margin-left:'+finalValueLeft+'px;';
+      this.props.usedMarginPercent = true;
+    }
+
+    if(x.match(/(margin-top):(\s)*(\d)*%;/g)){
+      let marginValueTop = x.match(/(margin-top):(\s)*(\d)*%;/g).toString().replace(/\D/g, "");
+      let finalValueTop = ((marginValueTop-(this.props.mouseDragPositionY.toFixed(2)))/100)*720;
+      marginTop = 'margin-top:'+finalValueTop+'px;';
+      this.props.usedMarginPercent = true;
+    }
+   
     let regexPosition2 = /top(.+?);/;
     let regexPosition3 = /left(.+?);/;
     let position = 'position:sticky;';
     let position2 = this.props.style.match(regexPosition2);
     let position3 = this.props.style.match(regexPosition3);
-    this.props.style = event.target.value+position+position2![0]+position3![0];
-    
+    this.props.style = x+position+position2![0]+position3![0]+marginTop+marginLeft;
+    console.log(marginTop)
   }
   @ViewChild('taID') styleText!: ElementRef;
   styleChangeHandler2(event: any) {

@@ -30,6 +30,7 @@ export class ImageDragComponent implements OnInit, IComponent {
     hidden: false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
+    usedMarginPercent:false
   };
 
   @Input() canvasPositionX: any;
@@ -43,7 +44,7 @@ export class ImageDragComponent implements OnInit, IComponent {
   mousePositionTop = 0;
   percentageX = 0;
   percentageY = 0;
-
+  finalStyle: string;
 
   ngOnInit(): void {
     this.canvasPositionLeft = this.canvasPositionX;
@@ -150,6 +151,18 @@ export class ImageDragComponent implements OnInit, IComponent {
   }
 
   get htmlCode(): string {
+    if(this.props.usedMarginPercent){
+      if(this.props.style.match(/(margin-left):(\s)*(\d)*\.?(\d)*px;/)){
+        this.finalStyle = this.props.style.replace(/(margin-left):(\s)*(\d)*\.?(\d)*px;/, "")
+        console.log(this.finalStyle)
+      }
+      if(this.finalStyle.match(/(margin-top):(\s)*(\d)*\.?(\d)*px;/)){
+        this.finalStyle = this.finalStyle.replace(/(margin-top):(\s)*(\d)*\.?(\d)*px;/, "")
+        console.log(this.finalStyle)
+      }
+    } else {
+      this.finalStyle = this.props.style;
+    }
     let tmpHtmlCode = '<img';
     tmpHtmlCode +=
       ' class="' +
@@ -158,8 +171,8 @@ export class ImageDragComponent implements OnInit, IComponent {
       this.props.id +
       '" type="' +
       this.props.type +
-      '" style="' +
-      this.props.style +
+      '" style="'+
+      this.finalStyle +
       '" src = " ' +
       this.props.value +
       '"> </img>';
