@@ -17,4 +17,9 @@ export class UsersService {
     let url="http://localhost:8000/register";
     return this.http.post(url, datas);
   }
+
+  saveData(datas:any) {
+    let url="http://localhost:8000/save";
+    return this.http.post(url, datas);
+  }
 }

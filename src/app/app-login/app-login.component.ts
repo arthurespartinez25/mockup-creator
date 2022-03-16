@@ -11,6 +11,7 @@ import { UsersService } from '../service/users.service';
 })
 
 export class AppLoginComponent implements OnInit {
+  userID: number;
   loginUsername:string;
   loginPassword:string;
   sessionID:string;
@@ -33,7 +34,7 @@ export class AppLoginComponent implements OnInit {
     this.loginCookie.set("username",this.loginUsername);
     this.loginCookie.set("password",this.loginPassword);
     this.loginCookie.set("sessionID",this.sessionID);
-    
+    this.loginCookie.set("userID",this.userID.toString());
   }
 
   loggingIn(value: string) {
@@ -50,6 +51,7 @@ export class AppLoginComponent implements OnInit {
   login(uname:string, pword: string){
     for (var i=0; i < this.users.length; i++) {
       if (this.users[i].UserName == uname && this.users[i].Password == pword){
+        this.userID = this.users[i].UserID;
         this.loginUsername = this.users[i].UserName;
         this.loginPassword = this.users[i].Password;
         break;

@@ -1,15 +1,9 @@
-import { AppComponent } from './../../app.component';
 import {
-  CdkDrag,
-  CdkDragEnd,
-  DragDrop,
-  CdkDragDrop,
-  moveItemInArray,
+  DragDrop
 } from '@angular/cdk/drag-drop';
 import {
   AfterViewChecked,
   AfterViewInit,
-  ApplicationRef,
   ChangeDetectorRef,
   Component,
   ComponentRef,
@@ -18,42 +12,20 @@ import {
   Input,
   OnInit,
   Output,
-  QueryList,
   Renderer2,
   ViewChild,
-  ViewChildren
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { IComponent } from './../../interfaces/icomponent';
 import { IProperty } from './../../interfaces/iproperty';
-import { ButtonDragComponent } from './../../components/buttonDrag/buttonDrag.component';
-import { LabelDragComponent } from './../../components/labelDrag/labelDrag.component';
-import { CheckboxDragComponent } from './../../components/checkboxDrag/checkboxDrag.component';
-import { DropdownDragComponent } from './../../components/dropdownDrag/dropdownDrag.component';
-import { ImageDragComponent } from './../../components/imageDrag/imageDrag.component';
-import { RadioDragComponent } from './../../components/radioDrag/radioDrag.component';
-import { TextboxDragComponent } from './../../components/textboxDrag/textboxDrag.component';
-import { PopupDragComponent } from './../../components/popupDrag/popupDrag.component';
-import { FormArray } from '@angular/forms';
-import { ParagraphDragComponent } from './../../components/paragraphDrag/paragraphDrag.component';
-import { NavbarDragComponent } from './../../components/navbarDrag/navbarDrag.component';
-import { ModalDragComponent } from './../../components/modalDrag/modalDrag.component';
-import { DatepickerDragComponent } from './../../components/datepickerDrag/datepickerDrag.component';
-import { HeaderDragComponent } from './../../components/headerDrag/headerDrag.component';
-import { InputDragComponent } from './../../components/inputDrag/inputDrag.component';
-import { LinkDragComponent } from './../../components/linkDrag/linkDrag.component';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
-import { TableDragComponent } from './../../components/tableDrag/tableDrag.component';
-import { YoutubeDragComponent } from './../../components/youtubeDrag/youtubeDrag.component';
-import { AppLoginComponent } from './../../app-login/app-login.component';
 import { CookieService } from 'ngx-cookie-service';
 import { UsersService } from './../../service/users.service';
 import { DatePipe } from '@angular/common'
 import { PropertyComponent } from './../../property/property.component';
-import { emit } from 'process';
 
 @Component({
   selector: 'app-pallete',
@@ -113,6 +85,8 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
   @Input() propertyCmp: PropertyComponent;
   @Input() domInsideCanvas: boolean;
   @Input() componentList: IComponent[] = [];
+  @Input() componentListMap: Map<string, IComponent[]>;
+  //@Input() componentListMap:
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;

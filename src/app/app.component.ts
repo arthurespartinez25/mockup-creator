@@ -19,7 +19,6 @@ import { IProperty } from './interfaces/iproperty';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
-import { UsersService } from './service/users.service';
 import { DatePipe } from '@angular/common'
 import { PropertyComponent } from './property/property.component';
 import { CanvasComponent } from './section/canvas/canvas.component';
