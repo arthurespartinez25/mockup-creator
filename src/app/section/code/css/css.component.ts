@@ -127,6 +127,7 @@ export class CssComponent implements OnInit, AfterViewInit, AfterViewChecked {
   xDistance: any = 0;
   yDistance: any = 0;
   theUsername = "";
+  usedMarginPercent: boolean;
   
   get dragDisabled(): boolean {
     return this.dragDisabled;
@@ -181,9 +182,22 @@ export class CssComponent implements OnInit, AfterViewInit, AfterViewChecked {
     console.log(document.styleSheets.item(0));
     let newCssRuleCount = document.styleSheets[0].cssRules.length; //gets the total CSSRule inside the stylesheet
     let cssString: string;
+    let marginTop, marginValueTop, finalValueTop;
+    let marginLeft, marginValueLeft, finalValueLeft;
 
     for (let i = this.cssRuleCount; i < newCssRuleCount; i++) { //compares web-app default cssRule count with the added cssRules
-      cssString = document.styleSheets[0].cssRules[i].cssText.toString();  
+      cssString = document.styleSheets[0].cssRules[i].cssText.toString();
+      if(this.usedMarginPercent){
+        marginTop = cssString.match(/(margin-top):(\s)*(\d)*\.?(\d)*px;/)?.toString();
+        marginValueTop = marginTop.match(/\d+\.?\d+/)?.toString();
+        finalValueTop = Math.round(((marginValueTop/720)*100));
+        cssString = cssString.replace(/(margin-top):(\s)*(\d)*\.?(\d)*px;/g, "margin-top: "+finalValueTop+"vh;")
+
+        marginLeft = cssString.match(/(margin-left):(\s)*(\d)*\.?(\d)*px;/)?.toString();
+        marginValueLeft = marginLeft.match(/\d+\.?\d+/)?.toString();
+        finalValueLeft = Math.round(((marginValueLeft/1280)*100));
+        cssString = cssString.replace(/(margin-left):(\s)*(\d)*\.?(\d)*px;/g, "margin-left: "+finalValueLeft+"%;")
+      }
       if (
         document.styleSheets[0].cssRules[i].cssText
           .toString()
@@ -202,7 +216,7 @@ export class CssComponent implements OnInit, AfterViewInit, AfterViewChecked {
           }
       } 
       else {
-        this.style += document.styleSheets[0].cssRules[i].cssText.toString(); //adds regular selector to style
+        this.style += cssString; //adds regular selector to style
         this.style += '\n';
       }
     }
@@ -268,6 +282,7 @@ export class CssComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
 
   addCSSRule(cssString: string) {
+    this.usedMarginPercent = false;
     let newCssRuleCount = document.styleSheets[0].cssRules.length;
     let cssStringTemp;
     let cssRuleStringTemp: string;
@@ -276,6 +291,26 @@ export class CssComponent implements OnInit, AfterViewInit, AfterViewChecked {
     let ruleFound = 0;
     let ruleNumber;
     let generalRule = false;
+    let marginValueLeft, finalValueLeft, marginLeft;
+    let marginValueTop, finalValueTop, marginTop;
+
+    if(cssString.match(/(margin-left):(\s)*(\d)*%;/g)){
+      marginValueLeft = cssString.match(/(margin-left):(\s)*(\d)*%;/g)?.toString().replace(/\D/g, "");
+      finalValueLeft = (marginValueLeft/100)*1280;
+      marginLeft = 'margin-left:'+finalValueLeft+'px;';
+      cssString = cssString.replace(/(margin-left):(\s)*(\d)*%;/g, marginLeft);
+      this.usedMarginPercent = true;
+    }
+
+    if(cssString.match(/(margin-top):(\s)*(\d)*%;/g)){
+      marginValueTop = cssString.match(/(margin-top):(\s)*(\d)*%;/g)?.toString().replace(/\D/g, "");
+      finalValueTop = (marginValueTop/100)*720;
+      marginTop = 'margin-top:'+finalValueTop+'px;';
+      cssString = cssString.replace(/(margin-top):(\s)*(\d)*%;/g, marginTop);
+      this.usedMarginPercent = true;
+    }
+
+    console.log(cssString)
 
     if (cssString[0] == '.') { 
       //checks if the string is a class

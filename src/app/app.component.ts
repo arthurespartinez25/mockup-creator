@@ -190,7 +190,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   yDistance: any = 0;
   theUsername = "";
 
-  
   loggedIn($event) {
     /* console.log("eto value natin lods: " + this.sessionID); */
     this.theUsername = $event;

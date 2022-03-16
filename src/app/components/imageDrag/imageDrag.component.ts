@@ -158,9 +158,10 @@ export class ImageDragComponent implements OnInit, IComponent {
         this.finalStyle = this.finalStyle.replace(/(margin-top):(\s)*(\d)*\.?(\d)*px;/, "")
       } else if (this.props.style.match(/(margin-left):(\s)*(\d)*\.?(\d)*px;/)){
         this.finalStyle = this.props.style.replace(/(margin-left):(\s)*(\d)*\.?(\d)*px;/, "")
-      } else if (this.props.style.replace(/(margin-top):(\s)*(\d)*\.?(\d)*px;/, "")){
-        this.finalStyle = this.props.style.replace(/(margin-top):(\s)*(\d)*\.?(\d)*px;/, "")
-        console.log(this.finalStyle)
+      } else if (this.props.style.match(/(margin-top):(\s)*(\d)*\.?(\d)*px;/)){
+        let marginValueTop = this.props.style.match(/(margin-top):(\s)*(\d)*%;/g)?.toString().replace(/\D/g, "");
+        this.finalStyle = this.props.style.replace(/(margin-top):(\s)*(\d)*\.?(\d)*%;/, 'margin-top:'+marginValueTop+'vh;');
+        this.finalStyle = this.finalStyle.replace(/(margin-top):(\s)*(\d)*\.?(\d)*px;/, "");
       }
     } else {
       this.finalStyle = this.props.style;
