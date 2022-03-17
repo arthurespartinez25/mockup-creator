@@ -2,6 +2,7 @@ const router = require("express").Router();
 
 var Users = require('./users');
 const dboperations = require('./dboperations');
+const { resourceLimits } = require("worker_threads");
 
 
 /*****************************/
@@ -146,6 +147,29 @@ router.post("/register", (req, res) => {
  */
 }); 
 
+router.get('/total/:userID', (req, res) => {
+  const {userID} = req.params;
+  dboperations.getTotal(userID).then(result => {
+    console.log(result);
+    return res.status(200).json({result});
+ });
+});
+
+router.post('/save', (req, res) => {
+  const {userID, projectName, projectID} = req.body;
+  const save = dboperations.saveProject(userID, projectName, projectID); 
+  save.then(function(result) {
+    try{
+      console.log(result);
+      return res.status(200).json({ Message: "This is the save result: " + result });
+    }
+    catch(error){
+      console.log(error);
+      return res.status(500).json({ Error: error });
+    }
+  });
+});
+
 
 router.get("/deleteUser/:userID", (req, res) => {
   const {userID} = req.params;
@@ -157,6 +181,5 @@ router.get("/deleteUser/:userID", (req, res) => {
     return res.status(200).json({ message: "This is the delete result: " + result });
   });
 });
-
 
 module.exports = router;

@@ -2,11 +2,11 @@
 <div mat-dialog-content>
     <div class="form-group" style="margin-bottom:10px;">
         <p><strong>Save as:</strong></p>
-        <input type="email" class="form-control" id="saveName" placeholder="Enter save data name">
+        <input type="email" class="form-control" id="saveName" placeholder="Enter save data name" required #saveData>
     </div>
 </div>
 <div mat-dialog-actions>   
-    <button type="submit" class="btn btn-primary" mat-button>Save</button>
+    <button type="submit" class="btn btn-primary" (click)="onSaveClick(saveData.value)" mat-button>Save</button>
     &nbsp;
     <button class="btn btn-danger" (click)="onCancelClick()" mat-button>Cancel</button>
 </div>

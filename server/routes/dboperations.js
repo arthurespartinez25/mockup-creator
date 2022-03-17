@@ -42,6 +42,17 @@ async function insertUser(username, password, fname, lname, email){
     }
 }
 
+async function getTotal(userID){
+    try{
+        let pool = await sql.connect(config);
+        let total = await pool.request().query(`SELECT * from projects_table WHERE user_id=${userID}`);
+        return total.rowsAffected[0];
+    }
+    catch (error) {
+        console.warn(error);
+    }
+}
+
 async function deleteUser(userID){
     try{
         let pool = await sql.connect(config);
@@ -57,8 +68,31 @@ async function deleteUser(userID){
 
 }
 
+async function saveProject(userID, projectName, projectID) {
+    let query = `INSERT INTO projects_table (user_id, project_id, project_name, date) VALUES ('${userID}', '${projectID}', '${projectName}', CURRENT_TIMESTAMP);`;
+    try {
+        let pool = await sql.connect(config);
+        let total = await pool.request().query(query);
+        return total;
+        /*try {
+            let total = await pool.request().query(`SELECT * FROM projects_table WHERE user_id = ${userID}`);
+            console.log(total);
+        }
+        catch (error) {
+            console.warn(error);
+            return error;
+        }*/
+    }
+    catch (error) {
+        console.warn(error);
+        return error;
+    }
+}
+
 module.exports = {
     getUsers : getUsers,
     insertUser : insertUser,
-    deleteUser : deleteUser
+    deleteUser : deleteUser,
+    saveProject : saveProject,
+    getTotal : getTotal
 }

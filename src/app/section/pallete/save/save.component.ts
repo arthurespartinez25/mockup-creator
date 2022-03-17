@@ -1,7 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { IComponent } from 'src/app/interfaces/icomponent';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { UsersService } from '../../../service/users.service';
 
 @Component({
   selector: 'app-save',
@@ -13,18 +15,19 @@ export class SaveComponent implements OnInit {
   @Input() componentListMap: Map<string, IComponent[]>;
   
   constructor(
-    private loginCookie:CookieService,
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
 
   onSave() {
-    console.log(parseInt(this.loginCookie.get("userID")));
     console.log(this.componentListMap);
-    this.dialog.open(SaveDataComponent);
+    this.dialog.open(SaveDataComponent, {
+      data: {
+        value: this.componentListMap
+      }
+    });
   }
-
 }
 
 @Component({
@@ -32,11 +35,37 @@ export class SaveComponent implements OnInit {
   templateUrl: './save.data.html'
 })
 export class SaveDataComponent {
+  saveName: string;
   constructor(
-    public dialogRef: MatDialogRef<SaveDataComponent>
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private loginCookie:CookieService,
+    public dialogRef: MatDialogRef<SaveDataComponent>,
+    public _router: Router,
+    private service: UsersService
   ) {}
 
-  onCancelClick() {
+  ngOnInit(): void {
+  }
+
+  onCancelClick() { //closes dialog box
     this.dialogRef.close();
+  }
+
+  onSaveClick(value: string) {
+    let id = {
+      userID: this.loginCookie.get("userID")
+    }
+    this.service.getSaveTotal(id).subscribe(res => {
+      let projID = "user" + this.loginCookie.get("userID") + "_proj" + (Object.values(res)[0] + 1);
+      let val = { 
+        userID: parseInt(this.loginCookie.get("userID")),
+        projectName: value,
+        projectID: projID
+      }
+
+      this.service.saveData(val).subscribe(res=> {
+        console.log(res.toString());
+      });
+    });
   }
 }

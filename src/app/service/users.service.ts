@@ -22,4 +22,9 @@ export class UsersService {
     let url="http://localhost:8000/save";
     return this.http.post(url, datas);
   }
+
+  getSaveTotal(datas: any) {
+    let url="http://localhost:8000/total/"+datas.userID;
+    return this.http.get(url);
+  }
 }
