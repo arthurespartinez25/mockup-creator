@@ -39,9 +39,9 @@ import { ComponentListComponent } from './section/pallete/component-list/compone
 import { NavigationComponent } from './section/code/navigation/navigation.component';
 import { CssComponent } from './section/code/css/css.component';
 import { CodeSegmentComponent } from './section/code/code-segment/code-segment.component';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { SaveComponent } from './section/pallete/save/save.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [

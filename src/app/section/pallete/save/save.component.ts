@@ -32,7 +32,8 @@ export class SaveComponent implements OnInit {
 
 @Component({
   selector: 'app-save-data',
-  templateUrl: './save.data.html'
+  templateUrl: './save.data.html',
+  styleUrls: ['./save.component.css']
 })
 export class SaveDataComponent {
   saveName: string;
@@ -52,7 +53,8 @@ export class SaveDataComponent {
   }
 
   onSaveClick(value: string) {
-    let id = {
+    alert(value);
+    /*let id = {
       userID: this.loginCookie.get("userID")
     }
     this.service.getSaveTotal(id).subscribe(res => {
@@ -66,6 +68,6 @@ export class SaveDataComponent {
       this.service.saveData(val).subscribe(res=> {
         console.log(res.toString());
       });
-    });
+    });*/
   }
 }
