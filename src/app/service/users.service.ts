@@ -18,8 +18,21 @@ export class UsersService {
     return this.http.post(url, datas);
   }
 
-  saveData(datas:any) {
-    let url="http://localhost:8000/save";
+  saveData(datas:any, type: string) {
+    let url = '';
+    
+    switch(type) {
+      case "project":
+        url="http://localhost:8000/save";
+        break;
+      case "tab":
+        url="http://localhost:8000/saveTabs";
+        break;
+      case "components":
+        url="http://localhost:8000/saveComponents"
+        break;
+    }
+
     return this.http.post(url, datas);
   }
 
@@ -28,9 +41,9 @@ export class UsersService {
     return this.http.get(url);
   }
 
-  saveTabData(datas: any) {
+  /*saveTabData(datas: any) {
     console.log(datas);
     let url="http://localhost:8000/saveTabs";
     return this.http.post(url, datas);
-  }
+  }*/
 }

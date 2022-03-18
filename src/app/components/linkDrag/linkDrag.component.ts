@@ -28,9 +28,9 @@ export class LinkDragComponent implements OnInit, IComponent {
     draggable: true,
     selected : false,
     hidden: false,
-    href: '#',
     mouseDragPositionX:0,
     mouseDragPositionY:0,
+    href: '#',
   };
 
   @Input() canvasPositionX: any;

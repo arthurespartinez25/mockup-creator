@@ -27,14 +27,14 @@ export class TextboxDragComponent implements IComponent {
     style: 'resize: none;',
     typeObj: 'textboxDrag',
     type: 'textbox',
-    placeholder: 'Type your text here...',
-    rows: 3,
-    cols: 20,
     draggable: true,
     selected : false,
     hidden: false,
-  mouseDragPositionX:0,
+    mouseDragPositionX:0,
     mouseDragPositionY:0,
+    placeholder: 'Type your text here...',
+    cols: 20,
+    rows: 3,
   };
 
   @Input() canvasPositionX: any;

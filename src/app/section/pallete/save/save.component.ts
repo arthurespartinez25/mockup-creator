@@ -5,6 +5,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { Router } from '@angular/router';
 import { UsersService } from '../../../service/users.service';
 import { FormControl } from '@angular/forms';
+import { map, zip } from 'rxjs';
 
 @Component({
   selector: 'app-save',
@@ -58,10 +59,11 @@ export class SaveDataComponent {
   }
 
   onSaveClick(value: string) {
-    let id = { //saves project to database
+    let id = { //fetch the current user's user id
       userID: this.loginCookie.get("userID")
     }
-    this.service.getSaveTotal(id).subscribe(res => {
+
+    this.service.getSaveTotal(id).subscribe(res => { //gets the total projects the user has saved under the account
       let projID = "user" + this.loginCookie.get("userID") + "_proj" + (Object.values(res)[0] + 1);
       let projVal = { 
         userID: parseInt(this.loginCookie.get("userID")),
@@ -69,13 +71,13 @@ export class SaveDataComponent {
         projectID: projID
       }
 
-      this.service.saveData(projVal).subscribe(res=> {
-        //console.log(res.toString());
-        console.log(this.componentListMap);
+      this.service.saveData(projVal, "project").subscribe(res=> { //saves the project to projects_table
         let keys: string[] = [];
+        let nativeKeys: string[] = [];
         let canvasNames: string[] = [];
 
         for (let key of this.componentListMap.keys()) {
+          nativeKeys.push(key);
           keys.push(projID + "_" + key);
         }
 
@@ -88,8 +90,38 @@ export class SaveDataComponent {
           canvasNames: canvasNames
         }
 
-        this.service.saveTabData(tabVal).subscribe(res=> {
-          console.log(res.toString());
+        this.service.saveData(tabVal, "tab").subscribe(res=> { //saves the tab details to tab_table
+          let tabSort = {};
+          /*****
+           * The for-loop below is a manual conversion to JSON. We commonly use Iterate and Stringify method, or the ES6 fromEntries method
+           * when we want to convert a TypeScript Map to JSON. Both of these methods would significantly reduce the number of lines to convert
+           * a TS Map to JSON. However, with how the IComponent is structured, using these two methods will result to a cyclic object value
+           * TypeError. For the future developers of this system, if you can find a better way to this, by all means change the code. -"el gwapo"
+           * P.S. The conversion is done because JS cannot read TypeScript Map, thus rendering it impossible to save the data to the database.
+           *****/
+          for (let i = 0; i < nativeKeys.length; i++) { 
+            let componentList = {};                     
+            console.log(this.componentListMap.get(nativeKeys[i])?.length);
+            for (let j = 0; j < this.componentListMap.get(nativeKeys[i])?.length!; j++) {
+              let props = {};
+              let propKeys = Object.keys(this.componentListMap.get(nativeKeys[i])![j].props);
+              for (let k = 0; k < propKeys.length; k++) {
+                props[propKeys[k]] = this.componentListMap.get(nativeKeys[i])![j].props[propKeys[k]];
+              }
+              componentList[j] = props;
+            }
+            tabSort[nativeKeys[i]] = componentList;
+          }
+
+          let compListVal = {
+            componentList: tabSort,
+            canvasKeys: keys,
+            canvasNativeKeys: nativeKeys
+          }
+          
+          this.service.saveData(compListVal, "components").subscribe(res => {
+            //some stuff
+          });
         });
       });
     });

@@ -128,16 +128,16 @@ export class TableDragComponent implements OnInit, IComponent {
     style: '',
     typeObj: 'tableDrag',
     type: '',
-    tblCols: 5,
-    tblRows: 3,
-    tblArrayCol: [],
-    tblArrayRow: [],
-    updateCallback: this.editTableDimension,
     draggable : true,
     selected : false,
     hidden : false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
+    tblCols: 5,
+    tblRows: 3,
+    tblArrayCol: [],
+    tblArrayRow: [],
+    updateCallback: this.editTableDimension,
   };
 
   @Input() canvasPositionX: any;

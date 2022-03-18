@@ -19,13 +19,13 @@ export class RadioDragComponent implements OnInit,IComponent {
     style: '',
     typeObj: 'radioDrag',
     type: 'radio',
-    name: 'defaultName',
-    checked: 'false',
     draggable: true,
     selected : false,
     hidden: false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
+    name: 'defaultName',
+    checked: 'false',
   };
 
   @Input() canvasPositionX: any;

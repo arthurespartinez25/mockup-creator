@@ -25,13 +25,13 @@ export class DropdownDragComponent implements OnInit, IComponent {
     style: '',
     typeObj: 'dropdownDrag',
     type: '',
-    linkValue: ['link1', 'link2', 'link3'],
-    linksArray: [],
     draggable: true,
     selected : false,
     hidden: false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
+    linkValue: ['link1', 'link2', 'link3'],
+    linksArray: [],
   };
 
   @Input() canvasPositionX: any;

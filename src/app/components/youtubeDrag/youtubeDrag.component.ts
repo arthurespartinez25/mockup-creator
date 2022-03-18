@@ -32,12 +32,12 @@ export class YoutubeDragComponent implements OnInit, IComponent {
       style: '',
       typeObj: 'youtubeDrag',
       type: '',
-      url : '',
       draggable: true,
       selected : false,
       hidden: false,
       mouseDragPositionX:0,
       mouseDragPositionY:0,
+      url : '',
     };
 
     @Input() canvasPositionX: any;

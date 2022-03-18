@@ -14,7 +14,6 @@ export class InputDragComponent implements OnInit, IComponent {
     key: '',
     id: '',
     value: '',
-    placeholder: 'Input field',
     class: '',
     style: 'width:200px;',
     typeObj: 'inputDrag',
@@ -24,6 +23,7 @@ export class InputDragComponent implements OnInit, IComponent {
     hidden: false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
+    placeholder: 'Input field',
   };
 
   @Input() canvasPositionX: any;

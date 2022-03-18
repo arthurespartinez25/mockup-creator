@@ -45,8 +45,8 @@ async function insertUser(username, password, fname, lname, email){
 async function getTotal(userID){
     try{
         let pool = await sql.connect(config);
-        let total = await pool.request().query(`SELECT * from projects_table WHERE user_id=${userID}`);
-        return total.rowsAffected[0];
+        //let total = await pool.request().query(`SELECT * from projects_table WHERE user_id=${userID}`);
+        //return total.rowsAffected[0];
     }
     catch (error) {
         console.warn(error);
@@ -71,8 +71,8 @@ async function saveProject(userID, projectName, projectID) {
     let query = `INSERT INTO projects_table (user_id, project_id, project_name, date) VALUES ('${userID}', '${projectID}', '${projectName}', CURRENT_TIMESTAMP);`;
     try {
         let pool = await sql.connect(config);
-        let total = await pool.request().query(query);
-        return total;
+        //let total = await pool.request().query(query);
+        //return total;
     }
     catch (error) {
         console.warn(error);
@@ -92,13 +92,47 @@ async function saveTabs(canvasKeys, canvasNames) {
     
     try {
         let pool = await sql.connect(config);
-        let results = await pool.request().query(query);
-        return results;
+        //let results = await pool.request().query(query);
+        //return results;
     }
     catch (error) {
         console.warn(error);
         return error;
     }
+}
+
+async function saveComponents(componentList, canvasKeys, canvasNativeKeys) {
+    let checkNames = ["linksValue", "href", "name", "placeholder", "columns", "rows", "tblContent"];
+    let query = `INSERT INTO component_table (tabs_id, 
+                                              componentID,
+                                              componentValue,
+                                              componentClass,
+                                              componentStyle,
+                                              componentTypeObj,
+                                              componentType,
+                                              componentDraggable,
+                                              componentPositionX,
+                                              componentPositionY,
+                                              componentOptionValues,
+                                              componentHREF,
+                                              componentName,
+                                              componentPlaceholder,
+                                              componentColumns,
+                                              componentRows,
+                                              componentTblContent) VALUES `;
+    
+    console.log(componentList);
+    for (let i = 0; i < canvasNativeKeys.length; i++) {
+        for (let j = 0; j < Object.keys(componentList[canvasNativeKeys[i]]).length; j++) {
+            let propKeys = Object.keys(componentList[canvasNativeKeys[i]][j]);
+            query += `('${canvasKeys[i]}', `;
+            for (let k = 0; k < propKeys.length; k++) {
+                //
+            }
+        }
+    }
+
+    //console.log(componentList["canvas1"][0].tblContent[0]); //for getting tblContent info
 }
 
 module.exports = {
@@ -107,5 +141,6 @@ module.exports = {
     deleteUser : deleteUser,
     saveProject : saveProject,
     getTotal : getTotal,
-    saveTabs : saveTabs
+    saveTabs : saveTabs,
+    saveComponents : saveComponents
 }

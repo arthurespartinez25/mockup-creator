@@ -185,6 +185,21 @@ router.post('/saveTabs', (req,res) => {
   });
 });
 
+router.post('/saveComponents', (req, res) => {
+  const {componentList, canvasKeys, canvasNativeKeys} = req.body;
+  const save = dboperations.saveComponents(componentList, canvasKeys, canvasNativeKeys);
+  save.then(function(result) {
+    try{
+      console.log(result);
+      return res.status(200).json({ Message: "This is the save result: " + result });
+    }
+    catch(error){
+      console.log(error);
+      return res.status(500).json({ Error: error });
+    }
+  });
+});
+
 router.get("/deleteUser/:userID", (req, res) => {
   const {userID} = req.params;
   //return res.send(req.params);
