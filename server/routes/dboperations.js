@@ -65,7 +65,6 @@ async function deleteUser(userID){
         console.warn(error);
         return error;
     }
-
 }
 
 async function saveProject(userID, projectName, projectID) {
@@ -74,14 +73,27 @@ async function saveProject(userID, projectName, projectID) {
         let pool = await sql.connect(config);
         let total = await pool.request().query(query);
         return total;
-        /*try {
-            let total = await pool.request().query(`SELECT * FROM projects_table WHERE user_id = ${userID}`);
-            console.log(total);
+    }
+    catch (error) {
+        console.warn(error);
+        return error;
+    }
+}
+
+async function saveTabs(canvasKeys, canvasNames) {
+    let query = `INSERT INTO tab_table (tab_id, tab_name) VALUES `;
+
+    for (let i = 0; i < canvasKeys.length; i++) { //query builder for single query insert
+        query += `('${canvasKeys[i]}', '${canvasNames[i]}')`;
+        if (i < (canvasKeys.length - 1)) {
+            query += `, `;
         }
-        catch (error) {
-            console.warn(error);
-            return error;
-        }*/
+    }
+    
+    try {
+        let pool = await sql.connect(config);
+        let results = await pool.request().query(query);
+        return results;
     }
     catch (error) {
         console.warn(error);
@@ -94,5 +106,6 @@ module.exports = {
     insertUser : insertUser,
     deleteUser : deleteUser,
     saveProject : saveProject,
-    getTotal : getTotal
+    getTotal : getTotal,
+    saveTabs : saveTabs
 }

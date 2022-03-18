@@ -22,7 +22,6 @@ export class SaveComponent implements OnInit {
   }
 
   onSave() {
-    console.log(this.componentListMap);
     this.dialog.open(SaveDataComponent, {
       data: {
         value: this.componentListMap
@@ -38,6 +37,7 @@ export class SaveComponent implements OnInit {
 })
 export class SaveDataComponent {
   saveName: string;
+  componentListMap: Map<string, IComponent[]>;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -45,7 +45,9 @@ export class SaveDataComponent {
     public dialogRef: MatDialogRef<SaveDataComponent>,
     public _router: Router,
     private service: UsersService
-  ) {}
+  ) {
+    this.componentListMap = data.value;
+  }
 
   ngOnInit(): void {
     this.saveName = "Project";
@@ -56,21 +58,40 @@ export class SaveDataComponent {
   }
 
   onSaveClick(value: string) {
-    alert(value);
-    /*let id = { //saves project to database
+    let id = { //saves project to database
       userID: this.loginCookie.get("userID")
     }
     this.service.getSaveTotal(id).subscribe(res => {
       let projID = "user" + this.loginCookie.get("userID") + "_proj" + (Object.values(res)[0] + 1);
-      let val = { 
+      let projVal = { 
         userID: parseInt(this.loginCookie.get("userID")),
         projectName: value,
         projectID: projID
       }
 
-      this.service.saveData(val).subscribe(res=> {
-        console.log(res.toString());
+      this.service.saveData(projVal).subscribe(res=> {
+        //console.log(res.toString());
+        console.log(this.componentListMap);
+        let keys: string[] = [];
+        let canvasNames: string[] = [];
+
+        for (let key of this.componentListMap.keys()) {
+          keys.push(projID + "_" + key);
+        }
+
+        for (let i = 0; i < keys.length; i++) { //temporary canvas names until tabs can be renamed. Once possible, remove this for-loop
+          canvasNames.push("Canvas " + (i + 1));//and fetch the data from the tab names instead
+        }
+
+        let tabVal = {
+          canvasKeys: keys,
+          canvasNames: canvasNames
+        }
+
+        this.service.saveTabData(tabVal).subscribe(res=> {
+          console.log(res.toString());
+        });
       });
-    });*/
+    });
   }
 }

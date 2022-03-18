@@ -170,6 +170,20 @@ router.post('/save', (req, res) => {
   });
 });
 
+router.post('/saveTabs', (req,res) => {
+  const {canvasKeys, canvasNames} = req.body;
+  const save = dboperations.saveTabs(canvasKeys, canvasNames);
+  save.then(function(result) {
+    try{
+      console.log(result);
+      return res.status(200).json({ Message: "This is the save result: " + result });
+    }
+    catch(error){
+      console.log(error);
+      return res.status(500).json({ Error: error });
+    }
+  });
+});
 
 router.get("/deleteUser/:userID", (req, res) => {
   const {userID} = req.params;
