@@ -27,3 +27,8 @@
   background-color: white;
   border: #16324f solid 1px;
 }
+
+.required-field::after {
+  content: "*";
+  color: red;
+}

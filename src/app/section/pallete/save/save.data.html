@@ -1,8 +1,19 @@
 
 <div mat-dialog-content>
     <div class="form-group" style="margin-bottom:10px;">
-        <p><strong>Save as:</strong></p>
-        <input type="text" class="form-control" id="saveName" placeholder="Enter save data name" #saveData>
+        <p class="required-field"><strong>Save as:</strong></p>
+        <input 
+                type="text" 
+                class="form-control" 
+                id="saveName" 
+                placeholder="Enter save data name" 
+                [value]="saveName" 
+                matTooltip="This field cannot be empty."
+                matTooltipClass="tool-tip"
+                matTooltipPosition="right"
+                (keyup)="saveData.value === '' ? tooltip.show() : tooltip.hide()"
+                #tooltip="matTooltip"
+                #saveData>
     </div>
 </div>
 <div mat-dialog-actions>   

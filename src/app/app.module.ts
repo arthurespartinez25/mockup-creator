@@ -41,7 +41,9 @@ import { CssComponent } from './section/code/css/css.component';
 import { CodeSegmentComponent } from './section/code/code-segment/code-segment.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SaveComponent } from './section/pallete/save/save.component';
+import { SaveDataComponent } from './section/pallete/save/save.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -77,8 +79,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     CssComponent,
     CodeSegmentComponent,
     SaveComponent,
+    SaveDataComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule, FormsModule, HttpClientModule, MatTabsModule, MatDialogModule],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule, FormsModule, HttpClientModule, MatTabsModule, MatDialogModule, MatTooltipModule],
   providers: [DragDropModule, AppComponent, DatePipe],
   bootstrap: [AppComponent],
 })

@@ -4,6 +4,7 @@ import { IComponent } from 'src/app/interfaces/icomponent';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UsersService } from '../../../service/users.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-save',
@@ -37,6 +38,7 @@ export class SaveComponent implements OnInit {
 })
 export class SaveDataComponent {
   saveName: string;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private loginCookie:CookieService,
@@ -46,6 +48,7 @@ export class SaveDataComponent {
   ) {}
 
   ngOnInit(): void {
+    this.saveName = "Project";
   }
 
   onCancelClick() { //closes dialog box
@@ -54,7 +57,7 @@ export class SaveDataComponent {
 
   onSaveClick(value: string) {
     alert(value);
-    /*let id = {
+    /*let id = { //saves project to database
       userID: this.loginCookie.get("userID")
     }
     this.service.getSaveTotal(id).subscribe(res => {
