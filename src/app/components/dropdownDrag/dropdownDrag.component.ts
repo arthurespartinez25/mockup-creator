@@ -30,7 +30,7 @@ export class DropdownDragComponent implements OnInit, IComponent {
     hidden: false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
-    linkValue: 'link1, link2, link3',
+    linkValue: 'link1,link2,link3',
     linksArray: [],
   };
 
@@ -86,7 +86,7 @@ export class DropdownDragComponent implements OnInit, IComponent {
     let date = Date.now();
     this.props.key = date.toString();
     this.props.id = 'dropdown' + date.toString();
-    this.selectedOption = this.linkValue[0];
+    this.selectedOption = 'link1';
   }
 
   @Input() get property(): IProperty {
