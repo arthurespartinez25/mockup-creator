@@ -45,8 +45,8 @@ async function insertUser(username, password, fname, lname, email){
 async function getTotal(userID){
     try{
         let pool = await sql.connect(config);
-        //let total = await pool.request().query(`SELECT * from projects_table WHERE user_id=${userID}`);
-        //return total.rowsAffected[0];
+        let total = await pool.request().query(`SELECT * from projects_table WHERE user_id=${userID}`);
+        return total.rowsAffected[0];
     }
     catch (error) {
         console.warn(error);
@@ -71,8 +71,8 @@ async function saveProject(userID, projectName, projectID) {
     let query = `INSERT INTO projects_table (user_id, project_id, project_name, date) VALUES ('${userID}', '${projectID}', '${projectName}', CURRENT_TIMESTAMP);`;
     try {
         let pool = await sql.connect(config);
-        //let total = await pool.request().query(query);
-        //return total;
+        let total = await pool.request().query(query);
+        return total;
     }
     catch (error) {
         console.warn(error);
@@ -92,8 +92,8 @@ async function saveTabs(canvasKeys, canvasNames) {
     
     try {
         let pool = await sql.connect(config);
-        //let results = await pool.request().query(query);
-        //return results;
+        let results = await pool.request().query(query);
+        return results;
     }
     catch (error) {
         console.warn(error);
@@ -102,7 +102,8 @@ async function saveTabs(canvasKeys, canvasNames) {
 }
 
 async function saveComponents(componentList, canvasKeys, canvasNativeKeys) {
-    let checkNames = ["linksValue", "href", "name", "placeholder", "columns", "rows", "tblContent"];
+    let checkNames = ["id", "value", "class", "style", "typeObj", "type", "draggable", "mouseDragPositionX", "mouseDragPositionY", "linkValue", "href", "name", "placeholder", "tblCols", "tblRows", "tblContent"]; //datatypes to be saved
+    let skip = ["key", "selected", "hidden", "dummyDate", "checked", "tblArrayCol", "tblArrayRow", "url"];
     let query = `INSERT INTO component_table (tabs_id, 
                                               componentID,
                                               componentValue,
@@ -121,17 +122,45 @@ async function saveComponents(componentList, canvasKeys, canvasNativeKeys) {
                                               componentRows,
                                               componentTblContent) VALUES `;
     
-    console.log(componentList);
+    //console.log(componentList);
     for (let i = 0; i < canvasNativeKeys.length; i++) {
         for (let j = 0; j < Object.keys(componentList[canvasNativeKeys[i]]).length; j++) {
+            let l = 0;
             let propKeys = Object.keys(componentList[canvasNativeKeys[i]][j]);
             query += `('${canvasKeys[i]}', `;
-            for (let k = 0; k < propKeys.length; k++) {
-                //
+            for (let k = 0; l < checkNames.length; k++) {
+                if (skip.includes(propKeys[k]) == false) { //skip some unneeded data
+                    if (checkNames[l] == propKeys[k]) {   
+                        query += `'${componentList[canvasNativeKeys[i]][j][propKeys[k]]}'`;
+                    } else {
+                        query += `''`;
+                        k--;
+                    }  
+                    if (l < (checkNames.length - 1)) {
+                        query += `, `;
+                    }
+                    l++;
+                }
+            }
+            query += `)`;
+            if (j < (Object.keys(componentList[canvasNativeKeys[i]]).length - 1)) {
+                query += `, `;
             }
         }
+        if (i < (canvasNativeKeys.length - 1)) {
+            query += `, `;
+        }
     }
-
+    console.log(query);
+    try {
+        let pool = await sql.connect(config);
+        let results = await pool.request().query(query);
+        return results;
+    }
+    catch (error) {
+        console.warn(error);
+        return error;
+    }
     //console.log(componentList["canvas1"][0].tblContent[0]); //for getting tblContent info
 }
 

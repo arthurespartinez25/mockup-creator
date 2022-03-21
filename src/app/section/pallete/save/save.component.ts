@@ -106,7 +106,11 @@ export class SaveDataComponent {
               let props = {};
               let propKeys = Object.keys(this.componentListMap.get(nativeKeys[i])![j].props);
               for (let k = 0; k < propKeys.length; k++) {
-                props[propKeys[k]] = this.componentListMap.get(nativeKeys[i])![j].props[propKeys[k]];
+                let value = this.componentListMap.get(nativeKeys[i])![j].props[propKeys[k]];
+                if (typeof value === 'object') {
+                  value = JSON.stringify(value);
+                }
+                props[propKeys[k]] = value;
               }
               componentList[j] = props;
             }
