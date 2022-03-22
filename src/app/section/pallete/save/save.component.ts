@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Inject, Input, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -11,17 +11,27 @@ import { UsersService } from '../../../service/users.service';
   styleUrls: ['./save.component.css']
 })
 export class SaveComponent implements OnInit {
-
+  canClose: boolean = false;
   @Input() componentListMap: Map<string, IComponent[]>;
   @Input() style: string;
+  @Input() tabList: any;
+  @Input() currentTab: string;
   
   constructor(
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
+  
+  @HostListener('window:beforeunload', ['$event'])
+  beforeunloadHandler(event:any) {
+    return false;
+  }
+
 
   onSave() {
+    console.log(this.tabList);
+    console.log(this.currentTab);
     this.dialog.open(SaveDataComponent, {
       data: {
         value: this.componentListMap,

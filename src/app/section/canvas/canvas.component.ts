@@ -63,6 +63,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   @Output() updateSelectedTabEvent = new EventEmitter<string>();
   @Output() updateComponentListMapEvent = new EventEmitter<Map<string, IComponent[]>>();
   @Output() updateSelectedCanvasEvent = new EventEmitter<ElementRef>();
+  @Output() updateTabListEvent = new EventEmitter<any>();
 
   @Input() componentList : IComponent[] = [];
   @Input() mousePositionX: any;
@@ -103,6 +104,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   }
   ngAfterViewInit(): void {
     this.canvasListElements.toArray();
+    this.updateTabListEvent.emit(this.tabs);
   }
 
   canvasLeftX = 0;
@@ -219,6 +221,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
       name: "Canvas " + (this.tabs.length + 1)
     };
     this.tabs.push(toInsert);
+    this.updateTabListEvent.emit(this.tabs); //also update this when changing of order of tabs is implemented
     this.selectedTab = this.tabs.length - 1;
   }
   

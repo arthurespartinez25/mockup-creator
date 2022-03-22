@@ -2,14 +2,11 @@
 import {
   AfterViewChecked,
   AfterViewInit,
-  ApplicationRef,
   ChangeDetectorRef,
   Component,
   ComponentRef,
   ElementRef,
-  Input,
   OnInit,
-  Renderer2,
   ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
@@ -24,7 +21,6 @@ import { PropertyComponent } from './property/property.component';
 import { CanvasComponent } from './section/canvas/canvas.component';
 import { PalleteComponent } from './section/pallete/pallete.component';
 import { CodeComponent } from './section/code/code.component';
-import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-root',
@@ -43,6 +39,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   refreshCSS = new BehaviorSubject<boolean>(true);
   cssDocument?: StyleSheet;
   users: any;
+  tabList: any;
 
   selected: IProperty = {
     key: '',
@@ -176,7 +173,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     } else {
       this.componentList = [];
     }
-    console.log(this.componentListMap);
   }
 
   updateComponentListMap(value: Map<string, IComponent[]>) {
@@ -189,6 +185,10 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   updateStyleEvent(value: string) {
     this.style = value;
+  }
+
+  updateTabList(value: any) {
+    this.tabList = value;
   }
 
   //////////////////////////////////////////////////////////////////////////////
