@@ -164,6 +164,29 @@ async function saveComponents(componentList, canvasKeys, canvasNativeKeys) {
     //console.log(componentList["canvas1"][0].tblContent[0]); //for getting tblContent info
 }
 
+async function saveCss(projectID, name, properties) {
+    let query = `INSERT INTO css_table (project_id, css_name, properties) VALUES `;
+
+    for (let i = 0; i < name.length; i++) {
+        query += `('${projectID}', '${name[i]}', '${properties[i]}')`;
+        if (i < (name.length - 1)) {
+            query += `, `;
+        }
+    }
+
+    console.log(query);
+
+    try {
+        let pool = await sql.connect(config);
+        let results = await pool.request().query(query);
+        return results;
+    }
+    catch (error) {
+        console.warn(error);
+        return error;
+    }
+}
+
 module.exports = {
     getUsers : getUsers,
     insertUser : insertUser,
@@ -171,5 +194,6 @@ module.exports = {
     saveProject : saveProject,
     getTotal : getTotal,
     saveTabs : saveTabs,
-    saveComponents : saveComponents
+    saveComponents : saveComponents,
+    saveCss: saveCss
 }

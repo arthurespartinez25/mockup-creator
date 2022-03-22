@@ -4,8 +4,6 @@ import { IComponent } from 'src/app/interfaces/icomponent';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UsersService } from '../../../service/users.service';
-import { FormControl } from '@angular/forms';
-import { map, zip } from 'rxjs';
 
 @Component({
   selector: 'app-save',
@@ -15,6 +13,7 @@ import { map, zip } from 'rxjs';
 export class SaveComponent implements OnInit {
 
   @Input() componentListMap: Map<string, IComponent[]>;
+  @Input() style: string;
   
   constructor(
     public dialog: MatDialog) { }
@@ -25,7 +24,8 @@ export class SaveComponent implements OnInit {
   onSave() {
     this.dialog.open(SaveDataComponent, {
       data: {
-        value: this.componentListMap
+        value: this.componentListMap,
+        style: this.style
       }
     });
   }
@@ -39,6 +39,7 @@ export class SaveComponent implements OnInit {
 export class SaveDataComponent {
   saveName: string;
   componentListMap: Map<string, IComponent[]>;
+  style: string;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -48,6 +49,7 @@ export class SaveDataComponent {
     private service: UsersService
   ) {
     this.componentListMap = data.value;
+    this.style = data.style;
   }
 
   ngOnInit(): void {
@@ -69,7 +71,7 @@ export class SaveDataComponent {
         userID: parseInt(this.loginCookie.get("userID")),
         projectName: value,
         projectID: projID
-      }
+      };
 
       this.service.saveData(projVal, "project").subscribe(res=> { //saves the project to projects_table
         let keys: string[] = [];
@@ -123,8 +125,28 @@ export class SaveDataComponent {
             canvasNativeKeys: nativeKeys
           }
           
-          this.service.saveData(compListVal, "components").subscribe(res => {
-            //some stuff
+          this.service.saveData(compListVal, "components").subscribe(res => { //saves components to database
+            this.style = this.style.replace(/\n/g, ''); //remove newline from the string
+            let splitted = this.style.split("}");
+            let cssName: string[] = [];
+            let cssProps: string[] = [];
+
+            for (let i = 0; i < (splitted.length - 1); i++) { //-1? split somehow includes a "" at the end of the array
+              let toSplit: string[];
+              toSplit = splitted[i].split("{");
+              cssName.push(toSplit[0].trim());
+              cssProps.push(toSplit[1]);
+            }
+
+            let cssRuleSet = {
+              projectID: projID,
+              name: cssName,
+              properties: cssProps
+            }
+
+            this.service.saveData(cssRuleSet, "css").subscribe(res => { //saves css to database
+              //stuff
+            });
           });
         });
       });

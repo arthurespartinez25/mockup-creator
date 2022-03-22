@@ -24,6 +24,7 @@ import { PropertyComponent } from './property/property.component';
 import { CanvasComponent } from './section/canvas/canvas.component';
 import { PalleteComponent } from './section/pallete/pallete.component';
 import { CodeComponent } from './section/code/code.component';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-root',
@@ -88,6 +89,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   passCanvas: ElementRef;
   propertyCmp : PropertyComponent;
   canvasBG: string;
+  style: string;
   currentTab = "canvas1";
   canvasLeft = 0;
   canvasTop = 0;
@@ -183,6 +185,10 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   updateSelectedCanvas(value: ElementRef) {
     this.passCanvas = value;
+  }
+
+  updateStyleEvent(value: string) {
+    this.style = value;
   }
 
   //////////////////////////////////////////////////////////////////////////////

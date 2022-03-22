@@ -86,6 +86,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
   @Input() domInsideCanvas: boolean;
   @Input() componentList: IComponent[] = [];
   @Input() componentListMap: Map<string, IComponent[]>;
+  @Input() style: string;
   //@Input() componentListMap:
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
@@ -102,14 +103,10 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
   changeref: ChangeDetectorRef;
   constructor(
     private loginCookie:CookieService,
-    private renderer: Renderer2,
-    private drag: DragDrop,
     changeDetectorRef: ChangeDetectorRef,
-    private http: HttpClient,
     public _router: Router,
     public _location: Location,
     public sanitizer: DomSanitizer,
-    private user:UsersService,
     public datepipe: DatePipe,
   ) {
     this.changeref = changeDetectorRef;
@@ -216,70 +213,6 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
 
   get dragDisabled(): boolean {
     return this.dragDisabled;
-  }
-
-  get style(): string {
-    return this._styleBody;
-  }
-
-  set style(value: string) {
-    this._styleBody = value;
-  }
-
-  styleHandler(event: any) {
-    this._styleBody = event.target.value;
-  }
-
-  private htmlBody(): string {
-    let tmpHtmlBody = '\n';
-
-    this.componentList.forEach((value) => {
-      let regexPosition = /sticky/;
-
-      tmpHtmlBody = tmpHtmlBody + value.htmlCode + '\n';
-      tmpHtmlBody = tmpHtmlBody.replace(regexPosition, 'absolute');
-    });
-    return tmpHtmlBody;
-  }
-
-  get htmlCode(): string {
-    let bootstrap = '';
-    let script = '';
-    if (this._popupCount > 0) {
-      bootstrap += this._bootstrapLink + '\n' + this._bootstrapScript + '\n';
-      script += this._popupFunction + '\n';
-    }
-
-    return (
-      this._htmlStart +
-      '\n' +
-      this._styleBody1 +
-      '\n' +
-      this._styleBody2 +
-      '\n' +
-      this._styleBody3 +
-      '\n' +
-      this._styleBody4 +
-      '\n' +
-      bootstrap +
-      this.htmlBody() +
-      '\n' +
-      this._htmlEnd +
-      '\n' +
-      script +
-      this._styleStart +
-      '\n' +
-      this.style +
-      
-      '@media (min-width: 901px) and  (max-width: 1000px) { html { zoom: 82%; } }'+
-      '@media (min-width: 1001px) and  (max-width: 1150px) { html { zoom: 87%; } }'+
-      '@media (min-width: 1151px) and  (max-width: 1300px) { html { zoom: 95%; } }'+
-      '@media (min-width: 1301px) and  (max-width: 1500px) { html { zoom: 95%; } }'+
-      '@media (min-width: 1501px) and  (max-width: 1900px) { html { zoom: 135%; } }'+
-      '@media (min-width: 1919px) and (max-width: 2000px) { html { zoom: 150%; } }'+
-      '\n' +
-      this._styleEnd
-    );
   }
 
   ngAfterViewChecked() {

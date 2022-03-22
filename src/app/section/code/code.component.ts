@@ -73,6 +73,7 @@ export class CodeComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @Output() updatePropertyComponentEvent = new EventEmitter<PropertyComponent>();
   @Output() clearComponentListEvent = new EventEmitter<number>();
   @Output() updateComponentListEvent = new EventEmitter<IComponent[]>();
+  @Output() updateStyleEvent = new EventEmitter<string>();  
 
   changeref: ChangeDetectorRef;
   constructor(
@@ -156,6 +157,7 @@ export class CodeComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   updateStyle(value: string) {
     this.style = value;
+    this.updateStyleEvent.emit(value);
   }
   //----------------------------------------------------------------------------
 

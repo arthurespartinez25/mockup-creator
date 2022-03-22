@@ -29,7 +29,10 @@ export class UsersService {
         url="http://localhost:8000/saveTabs";
         break;
       case "components":
-        url="http://localhost:8000/saveComponents"
+        url="http://localhost:8000/saveComponents";
+        break;
+      case "css":
+        url="http://localhost:8000/saveCss";
         break;
     }
 
