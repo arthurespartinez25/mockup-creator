@@ -33,7 +33,7 @@ export class TextboxDragComponent implements IComponent {
     draggable: true,
     selected : false,
     hidden: false,
-  mouseDragPositionX:0,
+    mouseDragPositionX:0,
     mouseDragPositionY:0,
   };
 

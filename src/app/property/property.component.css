@@ -141,3 +141,9 @@ td.properties-table-data textarea:focus {
 #clearScreen:hover {
   background-color: #c51b29;
 }
+
+.redirect {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

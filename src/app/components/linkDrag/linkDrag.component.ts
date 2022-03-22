@@ -31,6 +31,7 @@ export class LinkDragComponent implements OnInit, IComponent {
     href: '#',
     mouseDragPositionX:0,
     mouseDragPositionY:0,
+    target: false
   };
 
   @Input() canvasPositionX: any;
@@ -178,6 +179,10 @@ export class LinkDragComponent implements OnInit, IComponent {
       if(this.props.href?.trim().length > 0){
       tmpHtmlCode += ' href="' + this.props.href + '"';
       }
+    }
+
+    if (this.props.target == true) {
+      tmpHtmlCode += ' target="_blank"';
     }
 
     if (this.props.id.trim().length > 0) {

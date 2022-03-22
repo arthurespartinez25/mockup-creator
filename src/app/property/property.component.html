@@ -46,6 +46,39 @@
         />
       </td>
     </tr>
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'buttonDrag'">
+      <th class="properties-table-header"><label>redirection</label></th>
+      <td class="properties-table-data redirect">
+        <input
+          [disabled]="!this.props.id"
+          type="text"
+          [value]="props.redirection"
+          (keyup)="redirectionChangeHandler($event)"
+        />
+      </td>
+    </tr>
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'linkDrag'">
+      <th class="properties-table-header"><label>href</label></th>
+      <td class="properties-table-data">
+        <input
+        [disabled]="!this.props.id"
+        type="text"
+        [value]="this.props.href"
+        (keyup)="hrefChangeHandler($event)"
+        />
+      </td>
+    </tr>
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'linkDrag' || props.typeObj == 'buttonDrag'">
+      <th class="properties-table-header"><label>new tab</label></th>
+      <td class="properties-table-data">
+        <input
+          [disabled]="!this.props.id"
+          type="checkbox"
+          [checked]="this.props.target"
+          (change)="newTab($event)"
+        />
+      </td>
+    </tr>
     <tr class="properties-table-row">
       <th class="properties-table-header"><label>draggable</label></th>
       <td class="properties-table-data">
@@ -244,19 +277,6 @@
           type="text"
           [value]="this.props.name"
           (keyup)="nameChangeHandler($event)"
-        />
-      </td>
-    </tr>
-
-
-    <tr class="properties-table-row" *ngIf="props.typeObj == 'link' || props.typeObj == 'linkDrag'">
-      <th class="properties-table-header"><label>href</label></th>
-      <td class="properties-table-data">
-        <input
-        [disabled]="!this.props.id"
-        type="text"
-        [value]="this.props.href"
-        (keyup)="hrefChangeHandler($event)"
         />
       </td>
     </tr>
