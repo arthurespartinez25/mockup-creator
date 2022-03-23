@@ -11,31 +11,63 @@ import { UsersService } from '../../../service/users.service';
   styleUrls: ['./save.component.css']
 })
 export class SaveComponent implements OnInit {
-  canClose: boolean = false;
+  projID: string; //change this to a fetched string 
+
   @Input() componentListMap: Map<string, IComponent[]>;
   @Input() style: string;
   @Input() tabList: any;
   @Input() currentTab: string;
   
   constructor(
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private service: UsersService) { }
 
   ngOnInit(): void {
   }
   
   @HostListener('window:beforeunload', ['$event'])
-  beforeunloadHandler(event:any) {
+  beforeunloadHandler(event) {
+    if (this.componentListMap.size != 0) {
+      if (this.projID) {
+        this.previousStateSave();
+      }
+      for (let i = 0; i < this.componentListMap.size; i++) {
+        if (this.componentListMap.get(this.tabList[i].id)?.length != 0) {
+          event.preventDefault();
+          event.returnValue = '';
+          this.onSave();
+          break;
+        }
+      }
+    }
     return false;
   }
 
+  previousStateSave() {
+    let tabIDs: string[] = [];
+    for (let i = 0; i < this.tabList.length; i++) {
+      tabIDs.push(this.tabList[i].id);
+    }
+    let prevStateData = {
+      projectID : this.projID,
+      tabID : this.currentTab,
+      tabSequence : tabIDs
+    }
+    this.service.saveData(prevStateData, "previousState").subscribe();
+  }
 
   onSave() {
-    console.log(this.tabList);
-    console.log(this.currentTab);
+    const documentSaveDialogRef =
     this.dialog.open(SaveDataComponent, {
       data: {
         value: this.componentListMap,
         style: this.style
+      }
+    });
+
+    documentSaveDialogRef.afterClosed().subscribe(res => {
+      if (res.data) {
+        this.projID = res.data;
       }
     });
   }
@@ -50,6 +82,7 @@ export class SaveDataComponent {
   saveName: string;
   componentListMap: Map<string, IComponent[]>;
   style: string;
+  projID: string;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -67,7 +100,7 @@ export class SaveDataComponent {
   }
 
   onCancelClick() { //closes dialog box
-    this.dialogRef.close();
+    this.dialogRef.close({data: this.projID});
   }
 
   onSaveClick(value: string) {
@@ -76,21 +109,22 @@ export class SaveDataComponent {
     }
 
     this.service.getSaveTotal(id).subscribe(res => { //gets the total projects the user has saved under the account
-      let projID = "user" + this.loginCookie.get("userID") + "_proj" + (Object.values(res)[0] + 1);
+      this.projID = "user" + this.loginCookie.get("userID") + "_proj" + (Object.values(res)[0] + 1);
       let projVal = { 
         userID: parseInt(this.loginCookie.get("userID")),
         projectName: value,
-        projectID: projID
+        projectID: this.projID
       };
 
       this.service.saveData(projVal, "project").subscribe(res=> { //saves the project to projects_table
+        console.log(res);
         let keys: string[] = [];
         let nativeKeys: string[] = [];
         let canvasNames: string[] = [];
 
         for (let key of this.componentListMap.keys()) {
           nativeKeys.push(key);
-          keys.push(projID + "_" + key);
+          keys.push(this.projID + "_" + key);
         }
 
         for (let i = 0; i < keys.length; i++) { //temporary canvas names until tabs can be renamed. Once possible, remove this for-loop
@@ -136,27 +170,30 @@ export class SaveDataComponent {
           }
           
           this.service.saveData(compListVal, "components").subscribe(res => { //saves components to database
-            this.style = this.style.replace(/\n/g, ''); //remove newline from the string
-            let splitted = this.style.split("}");
-            let cssName: string[] = [];
-            let cssProps: string[] = [];
+            if (this.style) {
+              this.style = this.style.replace(/\n/g, ''); //remove newline from the string
+              let splitted = this.style.split("}");
+              let cssName: string[] = [];
+              let cssProps: string[] = [];
 
-            for (let i = 0; i < (splitted.length - 1); i++) { //-1? split somehow includes a "" at the end of the array
-              let toSplit: string[];
-              toSplit = splitted[i].split("{");
-              cssName.push(toSplit[0].trim());
-              cssProps.push(toSplit[1]);
+              for (let i = 0; i < (splitted.length - 1); i++) { //-1? split somehow includes a "" at the end of the array
+                let toSplit: string[];
+                toSplit = splitted[i].split("{");
+                cssName.push(toSplit[0].trim());
+                cssProps.push(toSplit[1]);
+              }
+
+              let cssRuleSet = {
+                projectID: this.projID,
+                name: cssName,
+                properties: cssProps
+              }
+
+              this.service.saveData(cssRuleSet, "css").subscribe(res => { //saves css to database
+                //stuff
+              });
             }
-
-            let cssRuleSet = {
-              projectID: projID,
-              name: cssName,
-              properties: cssProps
-            }
-
-            this.service.saveData(cssRuleSet, "css").subscribe(res => { //saves css to database
-              //stuff
-            });
+            this.onCancelClick();
           });
         });
       });

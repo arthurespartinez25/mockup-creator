@@ -215,6 +215,21 @@ router.post('/saveCss', (req, res) => {
   });
 });
 
+router.post('/previousState', (req, res) => {
+  const {projectID, tabID, tabSequence} = req.body;
+  const save = dboperations.savePrevious(projectID, tabID, tabSequence);
+  save.then(function(result) {
+    try{
+      console.log(result);
+      return res.status(200).json({ Message: "This is the save result: " + result });
+    }
+    catch(error){
+      console.log(error);
+      return res.status(500).json({ Error: error });
+    }
+  });
+});
+
 router.get("/deleteUser/:userID", (req, res) => {
   const {userID} = req.params;
   //return res.send(req.params);

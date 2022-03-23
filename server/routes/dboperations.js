@@ -187,6 +187,21 @@ async function saveCss(projectID, name, properties) {
     }
 }
 
+async function savePrevious(projectID, tabID, tabSequence) {
+    let query = `INSERT INTO previous_state_table (project_id, tab_id, tab_sequence) VALUES ('${projectID}', '${tabID}', '${JSON.stringify(tabSequence)}')`;
+    console.log(query);
+    
+    try {
+        let pool = await sql.connect(config);
+        let results = await pool.request().query(query);
+        return results;
+    }
+    catch (error) {
+        console.warn(error);
+        return error;
+    }
+}
+
 module.exports = {
     getUsers : getUsers,
     insertUser : insertUser,
@@ -195,5 +210,6 @@ module.exports = {
     getTotal : getTotal,
     saveTabs : saveTabs,
     saveComponents : saveComponents,
-    saveCss: saveCss
+    saveCss: saveCss,
+    savePrevious : savePrevious
 }

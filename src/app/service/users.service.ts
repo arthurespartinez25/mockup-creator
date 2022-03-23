@@ -21,9 +21,9 @@ export class UsersService {
   saveData(datas:any, type: string) {
     let url = '';
     
-    switch(type) {
+    switch(type) { //code can be simplified by removing the switch-case and directly passing the route instead
       case "project":
-        url="http://localhost:8000/save";
+        url="http://localhost:8000/save"; //^above comment cont.: ex. url="http://localhost:8000/"+type; -"el gwapo"
         break;
       case "tab":
         url="http://localhost:8000/saveTabs";
@@ -33,6 +33,9 @@ export class UsersService {
         break;
       case "css":
         url="http://localhost:8000/saveCss";
+        break;
+      case "previousState":
+        url="http://localhost:8000/previousState";
         break;
     }
 
