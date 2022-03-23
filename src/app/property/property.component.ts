@@ -148,44 +148,10 @@ export class PropertyComponent implements OnInit {
 
   styleChangeHandler(event: any) {
     let x = event.target.value;
-    let regexPosition = /position(.+?);/;
-    let marginLeft = '';
-    let marginTop = '';
-    let marginValueLeft = 0;
-    let finalValueLeft = 0;
-    let marginValueTop = 0;
-    let finalValueTop = 0;
-
-    if(x.match(/(margin-left):(\s)*(\d)*%;/g) &&
-        x.match(/(margin-top):(\s)*(\d)*%;/g)){
-      marginValueLeft = x.match(/(margin-left):(\s)*(\d)*%;/g).toString().replace(/\D/g, "");
-      marginValueTop = x.match(/(margin-top):(\s)*(\d)*%;/g).toString().replace(/\D/g, "");
-      finalValueLeft = (marginValueLeft/100)*1280;
-      finalValueTop = (marginValueTop/100)*720;
-      marginLeft = 'margin-left:'+finalValueLeft+'px;';
-      marginTop = 'margin-top:'+finalValueTop+'px;';
-      this.props.usedMarginPercent = true;
-      x=x+marginLeft+marginTop;
-    } else if(x.match(/(margin-left):(\s)*(\d)*%;/g)){
-      marginValueLeft = x.match(/(margin-left):(\s)*(\d)*%;/g).toString().replace(/\D/g, "");
-      finalValueLeft = (marginValueLeft/100)*1280;
-      marginLeft = 'margin-left:'+finalValueLeft+'px;';
-      this.props.usedMarginPercent = true;
-      x=x+marginLeft;
-    } else if(x.match(/(margin-top):(\s)*(\d)*%;/g)){
-      marginValueTop = x.match(/(margin-top):(\s)*(\d)*%;/g).toString().replace(/\D/g, "");
-      finalValueTop = (marginValueTop/100)*720;
-      marginTop = 'margin-top:'+finalValueTop+'px;';
-      this.props.usedMarginPercent = true;
-      x=x+marginTop;
-    }
-   
-    let regexPosition2 = /top(.+?);/;
-    let regexPosition3 = /left(.+?);/;
-    let position = 'position:sticky;';
-    let position2 = this.props.style.match(regexPosition2);
-    let position3 = this.props.style.match(regexPosition3);
-    this.props.style = x+position+position2![0]+position3![0];
+    let position = 'position:absolute;';
+    let topPosition = 'top:'+this.props.mouseDragPositionY+'%;';
+    let leftPosition = 'left:'+this.props.mouseDragPositionX+'%;';
+    this.props.style = position+topPosition+leftPosition+x;
   }
   @ViewChild('taID') styleText!: ElementRef;
   styleChangeHandler2(event: any) {

@@ -3,115 +3,9 @@
   class="wrapper componentHover"
   [ngSwitch]="child.props.typeObj"
   [ngStyle]="{
-    position:
-      child.props.typeObj === 'headerDrag'
-        ? 'absolute'
-        : child.props.typeObj === 'buttonDrag'
-        ? 'absolute'
-        : child.props.typeObj === 'inputDrag'
-        ? 'absolute'
-        : child.props.typeObj === 'textboxDrag'
-        ? 'absolute'
-        : child.props.typeObj === 'datepickerDrag'
-        ? 'absolute'
-        : child.props.typeObj === 'divDrag'
-        ? 'absolute'
-        : child.props.typeObj === 'modalDrag'
-        ? 'absolute'
-        : child.props.typeObj === 'imgDrag'
-        ? 'absolute'
-        : child.props.typeObj === 'linkDrag'
-        ? 'absolute'
-        : child.props.typeObj === 'paragraphDrag'
-        ? 'absolute'
-        : child.props.typeObj === 'labelDrag'
-        ? 'absolute'
-        : child.props.typeObj === 'dropdownDrag'
-        ? 'absolute'
-        : child.props.typeObj === 'checkboxDrag'
-        ? 'absolute'
-        : child.props.typeObj === 'radioDrag'
-        ? 'absolute'
-        : child.props.typeObj === 'tableDrag'
-        ? 'absolute'
-        : child.props.typeObj === 'youtubeDrag'
-        ? 'absolute'
-        : child.props.typeObj === 'navDrag'
-        ? 'absolute'
-        : 'absolute',
-    top:
-      child.props.typeObj === 'headerDrag'
-        ? mousePositionY2 + 'px'
-        : child.props.typeObj === 'buttonDrag'
-        ? mousePositionY2 + 'px'
-        : child.props.typeObj === 'inputDrag'
-        ? mousePositionY2 + 'px'
-        : child.props.typeObj === 'textboxDrag'
-        ? mousePositionY2 + 'px'
-        : child.props.typeObj === 'datepickerDrag'
-        ? mousePositionY2 + 'px'
-        : child.props.typeObj === 'divDrag'
-        ? mousePositionY2 + 'px'
-        : child.props.typeObj === 'modalDrag'
-        ? mousePositionY2 + 'px'
-        : child.props.typeObj === 'linkDrag'
-        ? mousePositionY2 + 'px'
-        : child.props.typeObj === 'imgDrag'
-        ? mousePositionY2 + 'px'
-        : child.props.typeObj === 'paragraphDrag'
-        ? mousePositionY2 + 'px'
-        : child.props.typeObj === 'labelDrag'
-        ? mousePositionY2 + 'px'
-        : child.props.typeObj === 'dropdownDrag'
-        ? mousePositionY2 + 'px'
-        : child.props.typeObj === 'checkboxDrag'
-        ? mousePositionY2 + 'px'
-        : child.props.typeObj === 'radioDrag'
-        ? mousePositionY2 + 'px'
-        : child.props.typeObj === 'tableDrag'
-        ? mousePositionY2 + 'px'
-        : child.props.typeObj === 'youtubeDrag'
-        ? mousePositionY2 + 'px'
-        : child.props.typeObj === 'navDrag'
-        ? mousePositionY2 + 'px'
-        : canvasPositionY + 'px',
-    left:
-      child.props.typeObj === 'buttonDrag'
-        ? mousePositionX2 + 'px'
-        : child.props.typeObj === 'headerDrag'
-        ? mousePositionX2 + 'px'
-        : child.props.typeObj === 'textboxDrag'
-        ? mousePositionX2 + 'px'
-        : child.props.typeObj === 'datepickerDrag'
-        ? mousePositionX2 + 'px'
-        : child.props.typeObj === 'divDrag'
-        ? mousePositionX2 + 'px'
-        : child.props.typeObj === 'modalDrag'
-        ? mousePositionX2 + 'px'
-        : child.props.typeObj === 'linkDrag'
-        ? mousePositionX2 + 'px'
-        : child.props.typeObj === 'imgDrag'
-        ? mousePositionX2 + 'px'
-        : child.props.typeObj === 'paragraphDrag'
-        ? mousePositionX2 + 'px'
-        : child.props.typeObj === 'labelDrag'
-        ? mousePositionX2 + 'px'
-        : child.props.typeObj === 'dropdownDrag'
-        ? mousePositionX2 + 'px'
-        : child.props.typeObj === 'checkboxDrag'
-        ? mousePositionX2 + 'px'
-        : child.props.typeObj === 'radioDrag'
-        ? mousePositionX2 + 'px'
-        : child.props.typeObj === 'tableDrag'
-        ? mousePositionX2 + 'px'
-        : child.props.typeObj === 'youtubeDrag'
-        ? mousePositionX2 + 'px'
-        : child.props.typeObj === 'inputDrag'
-        ? mousePositionX2 + 'px'
-        : canvasPositionX + 'px',
-    height: '1px',
     width: child.props.typeObj === 'navDrag' ? canvasWidth2 + 'px' : 'fit-content'
   }"
+  
 >
   <app-buttonDrag
     #rawr
@@ -289,13 +183,6 @@
     [canvasWidth2]="canvasWidth2"
     [ngStyle]="{ width: canvasWidth }"
     [whatComponent2]="whatComponent2"
-    [ngStyle]="{
-      'height': '1px',
-      'width':'1px',
-      'position': 'absolute',
-      'top':'0px',
-      'left':'0px'
-    }"
   ></app-navbarDrag>
 
   <app-inputDrag

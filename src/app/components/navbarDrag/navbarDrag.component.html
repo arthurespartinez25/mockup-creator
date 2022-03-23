@@ -3,9 +3,9 @@
 [cdkDragDisabled]="!props.draggable"
 [ngStyle]="{
     'width':+this.theCanvasWidth+'px',
-    'position': 'sticky',
-    'left': (canvasPositionLeft) + 'px',
-    'top': (mousePositionTop) + 'px',
+    position: 'absolute',
+    left: props.mouseDragPositionX + '%',
+    top: props.mouseDragPositionY + '%',
     'border-color' : props.selected == true ? 'red': (props.selected == false ? 'none': null),
     'border-style' : props.selected == true ? 'solid': (props.selected == false ? 'none': null),
     'border-width' : props.selected == true ? '1px': (props.selected == false ? '0px': null)

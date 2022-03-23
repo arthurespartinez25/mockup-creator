@@ -63,6 +63,8 @@ export class HeaderDragComponent implements OnInit, IComponent {
     this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
     this.props.mouseDragPositionX = this.percentageX;
     this.props.mouseDragPositionY = this.percentageY;
+    console.log(this.mousePositionLeft)
+    console.log(this.canvasPositionLeft)
     if (this.whatComponent2 == 'loginHeader') {
       this.props.value = 'Welcome!';
       this.props.style =
@@ -87,15 +89,25 @@ export class HeaderDragComponent implements OnInit, IComponent {
         this.percentageY +
         '%;';
     }
+    console.log(this.props.style)
   }
 
   onDragEnded($event: CdkDragEnd) {
     this.props.mouseDragPositionX =
     (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
     * 100;
+    console.log($event.source.getFreeDragPosition())
+    console.log(this.mousePositionLeft)
+    console.log(this.canvasPositionLeft)
+    console.log(this.props.mouseDragPositionX)
     this.props.mouseDragPositionY =
     (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
     * 100;
+    console.log($event.source.getFreeDragPosition())
+    console.log(this.mousePositionTop)
+    console.log(this.canvasPositionTop)
+    console.log(this.props.mouseDragPositionY)
+    console.log(this.props.style)
   }
 
   constructor(canvas: ElementRef) {

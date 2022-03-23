@@ -139,7 +139,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
       this.styleHolder = this.styleHolder.replace(regexPosition, '');
       this.selected.style =
         this.styleHolder +
-        'position:sticky;' +
+        'position:absolute;' +
         'left:' +
         this.selected.mouseDragPositionX +
         '%;' +
