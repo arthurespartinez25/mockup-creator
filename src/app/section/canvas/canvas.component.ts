@@ -139,7 +139,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     }, 100);
   }
   clickHandler(component: IComponent) {
-    console.log(component.props);
+    console.log(component);
     this.selected = component.props;
     this.selectedComponent = component;
     this.updateSelectedComponentEvent.emit(this.selectedComponent);

@@ -12,6 +12,7 @@ import { UsersService } from '../../../service/users.service';
 })
 export class SaveComponent implements OnInit {
   projID: string; //change this to a fetched string 
+  canvasKeys: string[] = [];
 
   @Input() componentListMap: Map<string, IComponent[]>;
   @Input() style: string;
@@ -48,10 +49,11 @@ export class SaveComponent implements OnInit {
     for (let i = 0; i < this.tabList.length; i++) {
       tabIDs.push(this.tabList[i].id);
     }
+    let tabIndex = tabIDs.indexOf(this.currentTab) > (this.canvasKeys.length - 1) ? (this.canvasKeys.length - 1) : tabIDs.indexOf(this.currentTab);
     let prevStateData = {
       projectID : this.projID,
-      tabID : this.currentTab,
-      tabSequence : tabIDs
+      tabID : this.canvasKeys[tabIndex],
+      tabSequence : this.canvasKeys
     }
     this.service.saveData(prevStateData, "previousState").subscribe();
   }
@@ -68,6 +70,7 @@ export class SaveComponent implements OnInit {
     documentSaveDialogRef.afterClosed().subscribe(res => {
       if (res.data) {
         this.projID = res.data;
+        this.canvasKeys = res.keys;
       }
     });
   }
@@ -83,6 +86,7 @@ export class SaveDataComponent {
   componentListMap: Map<string, IComponent[]>;
   style: string;
   projID: string;
+  keys: string[] = [];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -100,10 +104,14 @@ export class SaveDataComponent {
   }
 
   onCancelClick() { //closes dialog box
-    this.dialogRef.close({data: this.projID});
+    this.dialogRef.close({
+      data: this.projID,
+      keys: this.keys
+    });
   }
 
   onSaveClick(value: string) {
+    console.log(this.componentListMap);
     let id = { //fetch the current user's user id
       userID: this.loginCookie.get("userID")
     }
@@ -118,26 +126,28 @@ export class SaveDataComponent {
 
       this.service.saveData(projVal, "project").subscribe(res=> { //saves the project to projects_table
         console.log(res);
-        let keys: string[] = [];
         let nativeKeys: string[] = [];
         let canvasNames: string[] = [];
 
         for (let key of this.componentListMap.keys()) {
           nativeKeys.push(key);
-          keys.push(this.projID + "_" + key);
+          this.keys.push(this.projID + "_" + key);
         }
 
-        for (let i = 0; i < keys.length; i++) { //temporary canvas names until tabs can be renamed. Once possible, remove this for-loop
+        for (let i = 0; i < this.keys.length; i++) { //temporary canvas names until tabs can be renamed. Once possible, remove this for-loop
           canvasNames.push("Canvas " + (i + 1));//and fetch the data from the tab names instead
         }
 
         let tabVal = {
-          canvasKeys: keys,
+          canvasKeys: this.keys,
           canvasNames: canvasNames
         }
 
         this.service.saveData(tabVal, "tab").subscribe(res=> { //saves the tab details to tab_table
+          console.log(this.componentListMap)
           let tabSort = {};
+          let tableIds: string[] = [];
+          let tableContent: any[] = [];
           /*****
            * The for-loop below is a manual conversion to JSON. We commonly use Iterate and Stringify method, or the ES6 fromEntries method
            * when we want to convert a TypeScript Map to JSON. Both of these methods would significantly reduce the number of lines to convert
@@ -153,7 +163,15 @@ export class SaveDataComponent {
               let propKeys = Object.keys(this.componentListMap.get(nativeKeys[i])![j].props);
               for (let k = 0; k < propKeys.length; k++) {
                 let value = this.componentListMap.get(nativeKeys[i])![j].props[propKeys[k]];
+                if (propKeys[k] == "id") {
+                  if (this.componentListMap.get(nativeKeys[i])![j].props.typeObj == "tableDrag") {
+                    tableIds.push(value);
+                  }
+                }
                 if (typeof value === 'object') {
+                  if (propKeys[k] == "tblContent") {
+                    tableContent.push(value);
+                  }
                   value = JSON.stringify(value);
                 }
                 props[propKeys[k]] = value;
@@ -163,13 +181,24 @@ export class SaveDataComponent {
             tabSort[nativeKeys[i]] = componentList;
           }
 
+          console.log(tableIds);
+          console.log(tableContent);
+
           let compListVal = {
             componentList: tabSort,
-            canvasKeys: keys,
+            canvasKeys: this.keys,
             canvasNativeKeys: nativeKeys
           }
           
           this.service.saveData(compListVal, "components").subscribe(res => { //saves components to database
+            if (tableIds.length != 0) {
+              let tableContentData = {
+                projectID: this.projID,
+                tblIds: tableIds,
+                tblContent: tableContent
+              }
+              this.service.saveData(tableContentData, "tableContent").subscribe();
+            }
             if (this.style) {
               this.style = this.style.replace(/\n/g, ''); //remove newline from the string
               let splitted = this.style.split("}");

@@ -230,6 +230,21 @@ router.post('/previousState', (req, res) => {
   });
 });
 
+router.post('/tableContent', (req, res) => {
+  const {projectID, tblIds, tblContent} = req.body;
+  const save = dboperations.saveTableContent(projectID, tblIds, tblContent);
+  save.then(function(result) {
+    try{
+      console.log(result);
+      return res.status(200).json({ Message: "This is the save result: " + result });
+    }
+    catch(error){
+      console.log(error);
+      return res.status(500).json({ Error: error });
+    }
+  });
+});
+
 router.get("/deleteUser/:userID", (req, res) => {
   const {userID} = req.params;
   //return res.send(req.params);

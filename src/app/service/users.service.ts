@@ -37,6 +37,9 @@ export class UsersService {
       case "previousState":
         url="http://localhost:8000/previousState";
         break;
+      case "tableContent":
+        url="http://localhost:8000/tableContent";
+        break;
     }
 
     return this.http.post(url, datas);

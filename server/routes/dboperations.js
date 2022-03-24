@@ -102,8 +102,8 @@ async function saveTabs(canvasKeys, canvasNames) {
 }
 
 async function saveComponents(componentList, canvasKeys, canvasNativeKeys) {
-    let checkNames = ["id", "value", "class", "style", "typeObj", "type", "draggable", "mouseDragPositionX", "mouseDragPositionY", "linkValue", "href", "name", "placeholder", "tblCols", "tblRows", "tblContent"]; //datatypes to be saved
-    let skip = ["key", "selected", "hidden", "dummyDate", "checked", "tblArrayCol", "tblArrayRow", "url"];
+    let checkNames = ["id", "value", "class", "style", "typeObj", "type", "draggable", "mouseDragPositionX", "mouseDragPositionY", "linkValue", "href", "name", "placeholder", "tblCols", "tblRows"]; //datatypes to be saved
+    let skip = ["key", "selected", "hidden", "dummyDate", "checked", "tblArrayCol", "tblArrayRow", "url", "tblContent"]; //skip these properties
     let query = `INSERT INTO component_table (tabs_id, 
                                               componentID,
                                               componentValue,
@@ -119,8 +119,7 @@ async function saveComponents(componentList, canvasKeys, canvasNativeKeys) {
                                               componentName,
                                               componentPlaceholder,
                                               componentColumns,
-                                              componentRows,
-                                              componentTblContent) VALUES `;
+                                              componentRows) VALUES `;
     
     //console.log(componentList);
     for (let i = 0; i < canvasNativeKeys.length; i++) {
@@ -202,6 +201,35 @@ async function savePrevious(projectID, tabID, tabSequence) {
     }
 }
 
+async function saveTableContent(projectID, tblIds, tblContent) {
+    let query = `INSERT INTO tbl_content_table (project_id, table_id, tbl_content) VALUES `;
+
+    for (let i = 0; i < tblIds.length; i++) {
+        for (let j = 0; j < tblContent[i].length; j++) {
+            query += `('${projectID}', '${tblIds[i]}', '${JSON.stringify(tblContent[i][j])}')`;
+
+            if (j < (tblContent[i].length - 1)) {
+                query += `, `;
+            }
+        }
+
+        if (i < (tblIds.length - 1)) {
+            query += `, `;
+        }
+    }
+
+    try {
+        let pool = await sql.connect(config);
+        let results = await pool.request().query(query);
+        return results;
+    }
+    catch (error) {
+        console.warn(error);
+        return error;
+    }
+
+}
+
 module.exports = {
     getUsers : getUsers,
     insertUser : insertUser,
@@ -211,5 +239,6 @@ module.exports = {
     saveTabs : saveTabs,
     saveComponents : saveComponents,
     saveCss: saveCss,
-    savePrevious : savePrevious
+    savePrevious : savePrevious,
+    saveTableContent: saveTableContent
 }
