@@ -1,0 +1,28 @@
+
+
+.confirmDialogContainer .contentContainer {
+    margin: 5px 5px 15px 5px;
+    color: #8f9cb5;
+    display: flex;
+}
+
+.confirmDialogContainer #closeIcon {
+    margin-left: auto;
+    order: 2;
+    font-weight: bolder;
+}
+
+.btnDialogClose {
+    width: 45px;
+    min-width: 0px !important;
+    height: 40px;
+    padding: 0px !important;
+}
+
+.confirmDialogContainer #yesButton {
+    height: 50px;
+    width: 50%;
+    background-color: #b6bcbe;
+    color: white;
+    border-radius: opx;
+}

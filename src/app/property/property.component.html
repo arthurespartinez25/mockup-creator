@@ -267,14 +267,15 @@
 <button
       id="clearScreen"
       #clearScreen
-      (click)="clearComponent()"
+      mat-button (click)="clearComponent()"
     >
       Clear
 </button>
+<!-- <button mat-raised-button color="primary" (click)="openConfirmDialog()">Clear</button> -->
+
 {{"X: "+props.mouseDragPositionX.toFixed(2)+"%"}}
 <br>
 {{"Y: "+props.mouseDragPositionY.toFixed(2)+"%"}}
-
 
 
 <!--
@@ -303,9 +304,9 @@
     bottom: 26%;
     right: 34%;
     z-index: 9999;
-  /* }
-  #updateLink
+   }
+  /* #updateLink
   {
-     */
-  }
+     
+  } */
 </style>

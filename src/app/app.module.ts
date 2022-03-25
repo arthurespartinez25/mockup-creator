@@ -40,6 +40,9 @@ import { NavigationComponent } from './section/code/navigation/navigation.compon
 import { CssComponent } from './section/code/css/css.component';
 import { CodeSegmentComponent } from './section/code/code-segment/code-segment.component';
 import { DivDragComponent } from './components/divDrag/divDrag.component';
+import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
@@ -75,9 +78,12 @@ import { DivDragComponent } from './components/divDrag/divDrag.component';
     CssComponent,
     CodeSegmentComponent,
     DivDragComponent,
+    MatConfirmDialogComponent,
+  
   ],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule, FormsModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule, FormsModule, HttpClientModule, MatDialogModule],
   providers: [DragDropModule, AppComponent, DatePipe],
   bootstrap: [AppComponent],
+  entryComponents: [MatConfirmDialogComponent],
 })
 export class AppModule {}
