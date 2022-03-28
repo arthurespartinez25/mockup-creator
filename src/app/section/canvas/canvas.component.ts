@@ -253,6 +253,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   }
 
   myTabSelectedTabChange(changeEvent: MatTabChangeEvent) {
+    this.tabs[this.currentTab].allowEdit = false;
     this.currentTab = changeEvent.index;
     this.updateSelectedTabEvent.emit(this.tabs[this.currentTab].id);
     this.canvas = this.canvasListElements.toArray()[this.currentTab];
