@@ -163,7 +163,7 @@ export class ButtonDragComponent implements IComponent {
 
   get htmlCode(): string {
     let tmpHtmlCode = '<div><button';
-    if(this.props.redirection != undefined){
+    if(this.props.redirection != undefined){/*
       if (this.props.redirection?.trim().length > 0) {
         tmpHtmlCode += ' onClick="window.open(' + "'" + this.props.redirection + "'";
       }
@@ -173,7 +173,10 @@ export class ButtonDragComponent implements IComponent {
       else {
         tmpHtmlCode += ", '_self'";
       }      
-      tmpHtmlCode += ')"'
+      tmpHtmlCode += ')"'*/
+      if (this.props.redirection?.trim().length > 0) {
+        tmpHtmlCode += 'onClick=" "';
+      }
     }
 
     if (this.props.id.trim().length > 0) {
