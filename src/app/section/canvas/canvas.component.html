@@ -3,7 +3,7 @@
     <mat-tab-group class="tabs" dynamicHeight id="canvasTabGroup" [(selectedIndex)]="selectedTab" (selectedTabChange)="myTabSelectedTabChange($event)">
       <mat-tab *ngFor="let tab of tabs; let index = index">
         <ng-template mat-tab-label>
-          <span class="tab-label">{{tab.name}} </span>
+          <span class="tab-label" [attr.contenteditable]="tabs[index].allowEdit" (dblclick)="onDblClick($event)" (focusout)="onDblClick($event)">{{tab.name}} </span>
           <button [disabled]="tabs.length === 1" type="button" class="btn btn-close" (click)="removeTab(index)"></button>
         </ng-template>
         <div

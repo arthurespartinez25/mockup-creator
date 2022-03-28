@@ -16,8 +16,10 @@ import { PropertyComponent } from './../../property/property.component';
   styleUrls: ['./canvas.component.css']
 })
 export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked {
+  editable: boolean;
   tabs = [{id: 'canvas1',
-          name: "Canvas 1"}];
+          name: "Canvas 1",
+          allowEdit: false }];
   selectedTab = 0;
   currentTab = 0;
   totalTabs = 0;
@@ -194,6 +196,13 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     console.log(component);
   }
 
+  onDblClick($event) {
+    let prevName = this.tabs[this.currentTab].name;
+    this.tabs[this.currentTab].allowEdit = !this.tabs[this.currentTab].allowEdit;
+    this.tabs[this.currentTab].name = $event.srcElement.innerHTML.trim() == '' ? prevName : $event.srcElement.innerHTML.trim();
+    console.log(this.tabs);
+  }
+
   selectedComp(value: any) {
     let componentIndex = this.componentList.indexOf(value);
     if (componentIndex !== -1) {
@@ -218,7 +227,8 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     this.totalTabs++;
     let toInsert = {
       id: "canvas" + (this.totalTabs + 1),
-      name: "Canvas " + (this.tabs.length + 1)
+      name: "Canvas " + (this.tabs.length + 1),
+      allowEdit: false
     };
     this.tabs.push(toInsert);
     this.updateTabListEvent.emit(this.tabs); //also update this when changing of order of tabs is implemented
