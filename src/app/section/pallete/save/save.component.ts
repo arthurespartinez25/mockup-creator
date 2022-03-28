@@ -1,4 +1,4 @@
-import { Component, HostListener, Inject, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostListener, Inject, Input, OnInit, Output } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -13,11 +13,14 @@ import { UsersService } from '../../../service/users.service';
 export class SaveComponent implements OnInit {
   projID: string; //change this to a fetched string 
   canvasKeys: string[] = [];
+  projectName: string;
 
   @Input() componentListMap: Map<string, IComponent[]>;
   @Input() style: string;
   @Input() tabList: any;
   @Input() currentTab: string;
+
+  @Output() updateProjectNameEvent = new EventEmitter<string>();
   
   constructor(
     public dialog: MatDialog,
@@ -71,7 +74,9 @@ export class SaveComponent implements OnInit {
       if (res.data) {
         this.projID = res.data;
         this.canvasKeys = res.keys;
+        this.projectName = res.projectName;
       }
+      this.updateProjectNameEvent.emit(this.projectName);
     });
   }
 }
@@ -86,6 +91,7 @@ export class SaveDataComponent {
   componentListMap: Map<string, IComponent[]>;
   style: string;
   projID: string;
+  projectName: string;
   keys: string[] = [];
 
   constructor(
@@ -106,7 +112,8 @@ export class SaveDataComponent {
   onCancelClick() { //closes dialog box
     this.dialogRef.close({
       data: this.projID,
-      keys: this.keys
+      keys: this.keys,
+      projectName: this.projectName
     });
   }
 
@@ -118,6 +125,7 @@ export class SaveDataComponent {
 
     this.service.getSaveTotal(id).subscribe(res => { //gets the total projects the user has saved under the account
       this.projID = "user" + this.loginCookie.get("userID") + "_proj" + (Object.values(res)[0] + 1);
+      this.projectName = value;
       let projVal = { 
         userID: parseInt(this.loginCookie.get("userID")),
         projectName: value,
@@ -180,9 +188,6 @@ export class SaveDataComponent {
             }
             tabSort[nativeKeys[i]] = componentList;
           }
-
-          console.log(tableIds);
-          console.log(tableContent);
 
           let compListVal = {
             componentList: tabSort,

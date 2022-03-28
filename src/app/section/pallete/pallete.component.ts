@@ -102,6 +102,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
   @Output() updateMousePosX = new EventEmitter<number>();
   @Output() updateMousePosY = new EventEmitter<number>();
   @Output() updateWhatComponentEvent = new EventEmitter<string>();
+  @Output() updateProjectNameEvent = new EventEmitter<string>();
   changeref: ChangeDetectorRef;
   constructor(
     private loginCookie:CookieService,
@@ -209,6 +210,9 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
   }
   updatedWhatComponent(value: string){
     this.updateWhatComponentEvent.emit(value)
+  }
+  updateProjectName(value: string) {
+    this.updateProjectNameEvent.emit(value);
   }
 
   //----------------------------------------------------------------------------

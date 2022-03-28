@@ -65,6 +65,8 @@ export class CodeComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @Input() selected: IProperty;
   @Input() selectedComponent: IComponent;
   @Input() componentList: IComponent[];
+  @Input() projectName: string;
+  @Input() tabList: any;
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;

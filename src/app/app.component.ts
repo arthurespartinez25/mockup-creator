@@ -87,6 +87,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   propertyCmp : PropertyComponent;
   canvasBG: string;
   style: string;
+  projectName: string = "";
   currentTab = "canvas1";
   canvasLeft = 0;
   canvasTop = 0;
@@ -189,6 +190,11 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   updateTabList(value: any) {
     this.tabList = value;
+  }
+
+  updateProjectName(value: string) {
+    console.log(value);
+    this.projectName = value;
   }
 
   //////////////////////////////////////////////////////////////////////////////

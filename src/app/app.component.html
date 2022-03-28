@@ -27,6 +27,7 @@
     (updateMousePosX)="updateMousePositionX($event)"
     (updateMousePosY)="updateMousePositionY($event)"
     (updateWhatComponentEvent)="updateWhatComponent($event)"
+    (updateProjectNameEvent)="updateProjectName($event)"
     ></app-pallete>
   
   
@@ -187,6 +188,8 @@
   [selected] = "selected"
   [selectedComponent] = "selectedComponent"
   [componentList] = "componentList"
+  [projectName] = "projectName"
+  [tabList] = "tabList"
   (updatePropertyComponentEvent) = "updatePropertyComponent($event)"
   (clearComponentListEvent) = "clearComponentList()"
   (updateComponentListEvent) = "updateComponentListDel($event)"
