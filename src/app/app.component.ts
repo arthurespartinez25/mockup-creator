@@ -193,7 +193,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
 
   updateProjectName(value: string) {
-    console.log(value);
     this.projectName = value;
   }
 

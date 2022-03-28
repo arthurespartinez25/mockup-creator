@@ -4,6 +4,8 @@ import { IComponent } from 'src/app/interfaces/icomponent';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UsersService } from '../../../service/users.service';
+import { Subscription } from 'rxjs';
+import { CrossComponentBridge } from 'src/app/service/crossComponentBridge.service';
 
 @Component({
   selector: 'app-save',
@@ -14,6 +16,7 @@ export class SaveComponent implements OnInit {
   projID: string; //change this to a fetched string 
   canvasKeys: string[] = [];
   projectName: string;
+  subscription: Subscription;
 
   @Input() componentListMap: Map<string, IComponent[]>;
   @Input() style: string;
@@ -24,7 +27,14 @@ export class SaveComponent implements OnInit {
   
   constructor(
     public dialog: MatDialog,
-    private service: UsersService) { }
+    private service: UsersService,
+    private crossComponentBridge: CrossComponentBridge) {
+      this.subscription = this.crossComponentBridge.getValue().subscribe(trigger => {
+        if (trigger.value == 1) {
+          this.onSave();
+        }
+      })
+    }
 
   ngOnInit(): void {
   }

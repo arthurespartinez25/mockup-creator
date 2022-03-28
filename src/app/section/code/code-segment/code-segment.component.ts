@@ -18,6 +18,7 @@ import { BehaviorSubject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { DatePipe } from '@angular/common'
 import { PropertyComponent } from 'src/app/property/property.component';
+import { CrossComponentBridge } from 'src/app/service/crossComponentBridge.service';
 
 @Component({
   selector: 'app-code-segment',
@@ -63,6 +64,7 @@ export class CodeSegmentComponent implements OnInit {
     @Input() componentList: IComponent[];
     @Input() projectName: string;
     @Input() tabList: any;
+    @Input() currentTab: string;
     //@ViewChild('textOp') textBtn!: ElementRef;
     @ViewChild('subMenuItem') subMenuItem!: ElementRef;
     @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
@@ -80,6 +82,7 @@ export class CodeSegmentComponent implements OnInit {
       public _location: Location,
       public sanitizer: DomSanitizer,
       public datepipe: DatePipe,
+      private crossComponentBridge: CrossComponentBridge
     ) {
       this.changeref = changeDetectorRef;
     }
@@ -228,11 +231,18 @@ export class CodeSegmentComponent implements OnInit {
       }, 0);
     }
     buildCode(val: string) {
-      console.log(this.tabList);
-      let file = new Blob([val], { type: 'text/html' });
-      const fileURL = URL.createObjectURL(file);
-      window.open(fileURL); //multiple tabs can be opened
-      //window.open(fileURL, 'index.html'); //only opens in one tab
+      if (this.projectName == '') {
+        this.crossComponentBridge.setValue(1);
+      } else {
+        let index = this.tabList.findIndex(x => x.id === this.currentTab);
+        let fileName = this.tabList[index].name + ".html";
+        fileName = fileName.replace(/ +/g, "");
+        let file = new Blob([val], { type: 'text/html' });
+        console.log(fileName);
+        const fileURL = URL.createObjectURL(file);
+        window.open(fileURL, fileName); //multiple tabs can be opened (since there are multiple file names)
+        //window.open(fileURL, 'index.html'); //only opens in one tab
+      }
     }
     refresh(): void {
       this._router
