@@ -1,5 +1,5 @@
 
-.confirmDialogContainer .matDialogContainer {
+.matDialogContainer {
     border-radius: .25em .25em .4em .4em;
     padding: 0px;
 }
@@ -8,6 +8,7 @@
     margin: 5px 5px 15px 5px;
     color: #8f9cb5;
     display: flex;
+    text-align: justify;
 }
 
 .confirmButton {
