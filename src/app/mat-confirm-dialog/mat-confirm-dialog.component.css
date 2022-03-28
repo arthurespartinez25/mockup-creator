@@ -1,28 +1,28 @@
 
+.confirmDialogContainer .matDialogContainer {
+    border-radius: .25em .25em .4em .4em;
+    padding: 0px;
+}
 
-.confirmDialogContainer .contentContainer {
+.contentContainer {
     margin: 5px 5px 15px 5px;
     color: #8f9cb5;
     display: flex;
 }
 
-.confirmDialogContainer #closeIcon {
-    margin-left: auto;
-    order: 2;
-    font-weight: bolder;
-}
-
-.btnDialogClose {
-    width: 45px;
-    min-width: 0px !important;
+.confirmButton {
     height: 40px;
-    padding: 0px !important;
+    width: 30%;
+    background-color: #b6bcbe;
+    color: black;
+    border-radius: opx;
 }
 
-.confirmDialogContainer #yesButton {
-    height: 50px;
-    width: 50%;
-    background-color: #b6bcbe;
+.cancelButton {
+    height: 40px;
+    width: 30%;
+    background-color: tomato;
     color: white;
     border-radius: opx;
 }
+

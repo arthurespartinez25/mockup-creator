@@ -267,22 +267,17 @@
 <button
       id="clearScreen"
       #clearScreen
-      mat-button (click)="clearComponent()"
+      mat-button (click)="confirmClear()"
     >
       Clear
 </button>
-<!-- <button mat-raised-button color="primary" (click)="openConfirmDialog()">Clear</button> -->
 
 {{"X: "+props.mouseDragPositionX.toFixed(2)+"%"}}
 <br>
 {{"Y: "+props.mouseDragPositionY.toFixed(2)+"%"}}
 
 
-<!--
-<button (click)="removeElement($event)" type="button" class="btn btn-danger delete" title="Delete Element">
-  <span aria-hidden="true">&times;</span>
-</button>
--->
+
 
 <style>
   th {

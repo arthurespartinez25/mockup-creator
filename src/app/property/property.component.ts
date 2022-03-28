@@ -96,15 +96,23 @@ export class PropertyComponent implements OnInit {
   }
   @ViewChild('taID') styleBox: ElementRef;
   clearComponent() {
-        // this.componentList.length = 0;
-        // this.props = this.defaultProps;
-        // this.styleBox.nativeElement.value = "";
-        // this.addAllCSSRule.next("");
-        // this.clearCss.next("");
-        // this.cssReceiveMessage.next("");
-        // this.props.draggable = false;        
-        // this.clearComponentListEvent.next(0);
-        this.dialogService.openConfirmDialog();
+        this.componentList.length = 0;
+        this.props = this.defaultProps;
+        this.styleBox.nativeElement.value = "";
+        this.addAllCSSRule.next("");
+        this.clearCss.next("");
+        this.cssReceiveMessage.next("");
+        this.props.draggable = false;        
+        this.clearComponentListEvent.next(0);
+  }
+
+  confirmClear() {
+    this.dialogService.openConfirmDialog('Confirm to clear all components from this canvas.')
+    .afterClosed().subscribe(res =>{
+      if(res){
+        this.clearComponent();
+      }
+    });
   }
 
       
@@ -259,5 +267,6 @@ export class PropertyComponent implements OnInit {
   }
   /* END OF CODE FOR TABLE ELEMENT */
 
-  // this.dialogService.openConfirmDialog();
+  
 }
+

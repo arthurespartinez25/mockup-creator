@@ -1,8 +1,9 @@
-<!-- <div>
+<div class="matDialogContainer">
     <div class="contentContainer">
-        <mat-icon id="closeIcon">close</mat-icon>
+        <h2 mat-dialog-title>{{data.message}}</h2>
     </div>
-    <button class="">no</button>
-    <button class="">yes</button>
-</div> -->
-<div>Goods ka Jes Romar!</div>
+    <mat-dialog-actions align="end">
+        <button class="confirmButton" mat-button [mat-dialog-close]="true">confirm</button>
+        <button class="cancelButton" mat-button mat-dialog-close>cancel</button>
+    </mat-dialog-actions>
+</div>
