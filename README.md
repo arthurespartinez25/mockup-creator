@@ -165,3 +165,10 @@ This Mockup Creation Tool is developed by the following trainees with the help o
     - Meryll Avanceña (Meryll)
     - VJ Marlo Concha (VJ)
     - James Wilmer Lim (James)
+
+    B35B Cebu Trainees:
+    - Stephen Caña (Stip)
+    - Art Espartinez (Art)
+    - Jesu Jomari "el gwapo" Lacastesantos (Jay)
+    - Jes Romar Nuevarez (Jes)
+
