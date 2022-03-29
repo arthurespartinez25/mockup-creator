@@ -224,10 +224,11 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
 
   /* PAGINATION CODE */
   addTab() {
+    this.tabs[this.currentTab].allowEdit = false;
     this.totalTabs++;
     let toInsert = {
       id: "canvas" + (this.totalTabs + 1),
-      name: "Canvas " + (this.tabs.length + 1),
+      name: "Canvas " + (this.totalTabs + 1),
       allowEdit: false
     };
     this.tabs.push(toInsert);
@@ -236,15 +237,16 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   }
   
   removeTab(index: number) {
+    this.tabs[this.currentTab].allowEdit = false;
     let result = window.confirm("Are you sure you want to remove this tab?");
     if (result) {
       this.componentListMap.delete(this.tabs[index].id);
       this.updateComponentListMapEvent.emit(this.componentListMap); //updates the componentList in app.component
       this.tabs.splice(index, 1);
 
-      for (let i = 0; i < this.tabs.length; i++) {
+      /*for (let i = 0; i < this.tabs.length; i++) { //renames tabs
         this.tabs[i].name = "Canvas " + (i + 1);
-      }
+      }*/
 
       if (index == this.selectedTab) {
         this.selectedTab = (index - 1) < 0 ? 0 : (index - 1); //changes the selected tab to the previous one
