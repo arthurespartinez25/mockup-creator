@@ -28,9 +28,11 @@ export class PropertyComponent implements OnInit {
     mouseDragPositionY:0,
     dummyDate:'',
     isIcon:false,
-    usedMarginPercent:false
+    usedMarginPercent:false,
+    style2: ''
   };
   style2 = '';
+  tempStyle = '';
   @Output() addAllCSSRule = new EventEmitter<string>();
   @Output() clearCss = new EventEmitter<string>();
   @Output() cssReceiveMessage = new EventEmitter<string>();
@@ -45,14 +47,17 @@ export class PropertyComponent implements OnInit {
   set property(value: IProperty) {
     if (value) {
       this.props = value;
-      this.style2 = this.props.style;
+      this.style2 = this.tempStyle = this.props.style;
       setTimeout(() => {
-        let regexPosition = /position(.+?);/;
+      let regexPosition = /position(.+?);/;
       let regexPosition2 = /top(.+?);/;
       let regexPosition3 = /left(.+?);/;
+      let regexPosition4 = /visibility:\s?visible;/;
       this.style2 = this.style2.replace(regexPosition, '');
       this.style2 = this.style2.replace(regexPosition2, '');
       this.style2 = this.style2.replace(regexPosition3, '');
+      this.style2 = this.style2.replace(regexPosition4, '');
+      
       if(this.props.typeObj == 'datepickerDrag')
         {
         this.props.dummyDate = this.datepipe.transform(this.props.value, 'MM/dd/YYYY');
@@ -148,10 +153,15 @@ export class PropertyComponent implements OnInit {
 
   styleChangeHandler(event: any) {
     let x = event.target.value;
-    let position = 'position:absolute;';
-    let topPosition = 'top:'+this.props.mouseDragPositionY+'%;';
-    let leftPosition = 'left:'+this.props.mouseDragPositionX+'%;';
+    let topRegex = /;top:\s?\d+(\.\d+)?%/g
+    let leftRegex = /;left:\s?\d+(\.\d+)?%;/g
+    let topPosition = this.tempStyle.match(topRegex)?.toString();
+    let leftPosition = this.tempStyle.match(leftRegex)?.toString();
+    let position = 'position:absolute'
     this.props.style = position+topPosition+leftPosition+x;
+    this.props.style2 = this.props.style;
+    this.props.style2=this.props.style2.replace(topRegex, ';top:'+this.props.mouseDragPositionY+'%');
+    this.props.style2=this.props.style2.replace(leftRegex, ';left:'+this.props.mouseDragPositionX+'%;')
   }
   @ViewChild('taID') styleText!: ElementRef;
   styleChangeHandler2(event: any) {

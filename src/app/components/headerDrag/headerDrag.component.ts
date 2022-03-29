@@ -6,6 +6,8 @@ import {
   Input,
   OnInit,
   Output,
+  Renderer2,
+  ViewChild,
 } from '@angular/core';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
@@ -30,6 +32,7 @@ export class HeaderDragComponent implements OnInit, IComponent {
     hidden: false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
+    style2: '',
   };
 
   @Input() get property(): IProperty {
@@ -47,6 +50,7 @@ export class HeaderDragComponent implements OnInit, IComponent {
   @Input() mousePositionX2: any;
   @Input() mousePositionY2: any;
   @Input() whatComponent2: any;
+  @ViewChild('elem') elem: ElementRef;
   canvasPositionLeft = 0;
   canvasPositionTop = 0;
   mousePositionLeft = 0;
@@ -63,8 +67,6 @@ export class HeaderDragComponent implements OnInit, IComponent {
     this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
     this.props.mouseDragPositionX = this.percentageX;
     this.props.mouseDragPositionY = this.percentageY;
-    console.log(this.mousePositionLeft)
-    console.log(this.canvasPositionLeft)
     if (this.whatComponent2 == 'loginHeader') {
       this.props.value = 'Welcome!';
       this.props.style =
@@ -88,26 +90,21 @@ export class HeaderDragComponent implements OnInit, IComponent {
         '%;top:' +
         this.percentageY +
         '%;';
+      this.props.style2=this.props.style;
     }
-    console.log(this.props.style)
   }
-
   onDragEnded($event: CdkDragEnd) {
+    this.props.style2=this.props.style;
+    let regexPosition = /;top(.+?);/;
+    let regexPosition2 = /;left(.+?);/;
     this.props.mouseDragPositionX =
     (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
     * 100;
-    console.log($event.source.getFreeDragPosition())
-    console.log(this.mousePositionLeft)
-    console.log(this.canvasPositionLeft)
-    console.log(this.props.mouseDragPositionX)
     this.props.mouseDragPositionY =
     (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
     * 100;
-    console.log($event.source.getFreeDragPosition())
-    console.log(this.mousePositionTop)
-    console.log(this.canvasPositionTop)
-    console.log(this.props.mouseDragPositionY)
-    console.log(this.props.style)
+    this.props.style2=this.props.style2.replace(regexPosition, ';top:'+this.props.mouseDragPositionY+'%;');
+    this.props.style2=this.props.style2.replace(regexPosition2, ';left:'+this.props.mouseDragPositionX+'%;');
   }
 
   constructor(canvas: ElementRef) {
@@ -127,7 +124,7 @@ export class HeaderDragComponent implements OnInit, IComponent {
     }
 
     if (this.props.style.trim().length > 0) {
-      tmpHtmlCode += ' style="' + this.props.style + '"';
+      tmpHtmlCode += ' style="' + this.props.style2 +'"';
     }
 
     tmpHtmlCode += '>' + this.props.value + '</h1>';

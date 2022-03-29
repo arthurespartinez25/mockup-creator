@@ -306,6 +306,8 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
       }
       this.mousePositionX = this.offsetLeft + this.xDistance + this.canvasLeftX;
       this.mousePositionY = this.offsetTop + this.yDistance + this.canvasTopY;
+      console.log(this.mousePositionX)
+      console.log(this.mousePositionY)
     }
     this.addComponent(component);
     this.updateMousePosX.emit(this.mousePositionX);
