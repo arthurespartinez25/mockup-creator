@@ -1,6 +1,6 @@
-<div id="canvas-container" class="pagination-container" style="position: relative;">
+<div id="canvas-container" class="pagination-container">
   <div class="pagination-container">
-    <mat-tab-group class="tabs" dynamicHeight id="canvasTabGroup" [(selectedIndex)]="selectedTab" (selectedTabChange)="myTabSelectedTabChange($event)" #tabGroup>
+    <mat-tab-group class="tabs" dynamicHeight id="canvasTabGroup" [(selectedIndex)]="selectedTab" (selectedTabChange)="myTabSelectedTabChange($event)">
       <mat-tab *ngFor="let tab of tabs; let index = index">
         <ng-template mat-tab-label>
           <span class="tab-label" [attr.contenteditable]="tabs[index].allowEdit" (dblclick)="onDblClick($event)" (focusout)="onDblClick($event)">{{tab.name}} </span>
@@ -40,12 +40,4 @@
       </mat-tab>
     </mat-tab-group>
   </div>
-  <div style="position: absolute; top: 18px; left: 1255px; z-index: 5;">
-    <label class="switch">
-      <input type="checkbox" checked>
-      <span class="play"></span>
-    </label>
-  </div>
-  <div class="box" style="position: absolute; top: 16px; left: 1253px; z-index: 4;">
-  </div> 
 </div>
