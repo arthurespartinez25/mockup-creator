@@ -33,6 +33,7 @@ export class NavbarDragComponent implements OnInit, IComponent {
     hidden: false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
+    finalStyle: ''
   };
 
   @Input() canvasWidth2: any;
@@ -57,6 +58,9 @@ export class NavbarDragComponent implements OnInit, IComponent {
     this.mousePositionLeft = this.mousePositionX2;
     this.mousePositionTop = this.mousePositionY2;
     this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
+    console.log(this.percentageX)
+    console.log(this.mousePositionX2)
+    console.log(this.canvasPositionLeft)
     this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
     this.props.mouseDragPositionX = this.percentageX;
     this.props.mouseDragPositionY = this.percentageY;
@@ -109,14 +113,23 @@ export class NavbarDragComponent implements OnInit, IComponent {
         'position:absolute;width:100%;color: white;padding: 10px;background-color: #12355B;font-size: 20px;left:0%;top:' +
         this.percentageY +
         '%;';
+      this.props.mouseDragPositionX =0;
+      this.props.finalStyle = this.props.style;
     }
   }
 
   onDragEnded($event: CdkDragEnd) {
-    this.props.mouseDragPositionX = 0;
+    this.props.finalStyle=this.props.style;
+    let regexPosition = /;top(.+?);/g;
+    let regexPosition2 = /;left(.+?);/g;
+    this.props.mouseDragPositionX =
+    (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
+    * 100;
     this.props.mouseDragPositionY =
     (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
     * 100;
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition, ';top:'+this.props.mouseDragPositionY+'%;');
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition2, ';left:'+this.props.mouseDragPositionX+'%;');
   }
 
   constructor(canvas: ElementRef) {
@@ -147,7 +160,7 @@ export class NavbarDragComponent implements OnInit, IComponent {
     }
 
     if (this.props.style.trim().length > 0) {
-      htmlCode += ' style="' + this.props.style + '"';
+      htmlCode += ' style="' + this.props.finalStyle + '"';
     }
 
     htmlCode += '>' + this.props.value + '</nav>';

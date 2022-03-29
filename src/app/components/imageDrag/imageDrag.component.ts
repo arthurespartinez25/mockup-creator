@@ -30,7 +30,7 @@ export class ImageDragComponent implements OnInit, IComponent {
     hidden: false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
-    usedMarginPercent:false
+    finalStyle: ''
   };
 
   @Input() canvasPositionX: any;
@@ -44,7 +44,6 @@ export class ImageDragComponent implements OnInit, IComponent {
   mousePositionTop = 0;
   percentageX = 0;
   percentageY = 0;
-  finalStyle: string;
 
   ngOnInit(): void {
     this.canvasPositionLeft = this.canvasPositionX;
@@ -120,17 +119,23 @@ export class ImageDragComponent implements OnInit, IComponent {
           '%;top:' +
           this.percentageY +
           '%;';
+        this.props.finalStyle=this.props.style;
         break;
     }
   }
 
   onDragEnded($event: CdkDragEnd) {
+    this.props.finalStyle=this.props.style;
+    let regexPosition = /;top(.+?);/g;
+    let regexPosition2 = /;left(.+?);/g;
     this.props.mouseDragPositionX =
     (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
     * 100;
     this.props.mouseDragPositionY =
     (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
     * 100;
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition, ';top:'+this.props.mouseDragPositionY+'%;');
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition2, ';left:'+this.props.mouseDragPositionX+'%;');
   }
 
   constructor(canvas: ElementRef) {
@@ -151,21 +156,6 @@ export class ImageDragComponent implements OnInit, IComponent {
   }
 
   get htmlCode(): string {
-    if(this.props.usedMarginPercent){
-      if(this.props.style.match(/(margin-left):(\s)*(\d)*\.?(\d)*px;/) && 
-        this.props.style.match(/(margin-top):(\s)*(\d)*\.?(\d)*px;/)){
-        this.finalStyle = this.props.style.replace(/(margin-left):(\s)*(\d)*\.?(\d)*px;/, "")
-        this.finalStyle = this.finalStyle.replace(/(margin-top):(\s)*(\d)*\.?(\d)*px;/, "")
-      } else if (this.props.style.match(/(margin-left):(\s)*(\d)*\.?(\d)*px;/)){
-        this.finalStyle = this.props.style.replace(/(margin-left):(\s)*(\d)*\.?(\d)*px;/, "")
-      } else if (this.props.style.match(/(margin-top):(\s)*(\d)*\.?(\d)*px;/)){
-        let marginValueTop = this.props.style.match(/(margin-top):(\s)*(\d)*%;/g)?.toString().replace(/\D/g, "");
-        this.finalStyle = this.props.style.replace(/(margin-top):(\s)*(\d)*\.?(\d)*%;/, 'margin-top:'+marginValueTop+'vh;');
-        this.finalStyle = this.finalStyle.replace(/(margin-top):(\s)*(\d)*\.?(\d)*px;/, "");
-      }
-    } else {
-      this.finalStyle = this.props.style;
-    }
     let tmpHtmlCode = '<img';
     tmpHtmlCode +=
       ' class="' +
@@ -175,7 +165,7 @@ export class ImageDragComponent implements OnInit, IComponent {
       '" type="' +
       this.props.type +
       '" style="'+
-      this.finalStyle +
+      this.props.finalStyle +
       '" src = " ' +
       this.props.value +
       '"> </img>';

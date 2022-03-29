@@ -29,7 +29,7 @@ export class PropertyComponent implements OnInit {
     dummyDate:'',
     isIcon:false,
     usedMarginPercent:false,
-    style2: ''
+    finalStyle: ''
   };
   style2 = '';
   tempStyle = '';
@@ -159,9 +159,9 @@ export class PropertyComponent implements OnInit {
     let leftPosition = this.tempStyle.match(leftRegex)?.toString();
     let position = 'position:absolute'
     this.props.style = position+topPosition+leftPosition+x;
-    this.props.style2 = this.props.style;
-    this.props.style2=this.props.style2.replace(topRegex, ';top:'+this.props.mouseDragPositionY+'%');
-    this.props.style2=this.props.style2.replace(leftRegex, ';left:'+this.props.mouseDragPositionX+'%;')
+    this.props.finalStyle = this.props.style;
+    this.props.finalStyle=this.props.finalStyle.replace(topRegex, ';top:'+this.props.mouseDragPositionY+'%');
+    this.props.finalStyle=this.props.finalStyle.replace(leftRegex, ';left:'+this.props.mouseDragPositionX+'%;')
   }
   @ViewChild('taID') styleText!: ElementRef;
   styleChangeHandler2(event: any) {

@@ -11,11 +11,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
     [cols]="props.cols"
     (cdkDragEnded)="onDragEnded($event)"
     [cdkDragDisabled]="!props.draggable"
-    [ngStyle]="{
-      position: 'sticky',
-      left: mousePositionLeft + 'px',
-      top: mousePositionTop + 'px'
-  }" >{{props.value}}</textarea>`
+     >{{props.value}}</textarea>`
 })
 export class TextboxDragComponent implements IComponent {
   canvas: ElementRef;
@@ -35,6 +31,7 @@ export class TextboxDragComponent implements IComponent {
     hidden: false,
   mouseDragPositionX:0,
     mouseDragPositionY:0,
+    finalStyle:''
   };
 
   @Input() canvasPositionX: any;
@@ -60,6 +57,7 @@ export class TextboxDragComponent implements IComponent {
     this.props.mouseDragPositionX = this.percentageX;
     this.props.mouseDragPositionY = this.percentageY;
     this.props.style='resize:none;position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
+    this.props.finalStyle=this.props.style;
   }
   ngAfterViewInit()
   {
@@ -70,12 +68,17 @@ export class TextboxDragComponent implements IComponent {
   }
 
   onDragEnded($event: CdkDragEnd) {
+    this.props.finalStyle=this.props.style;
+    let regexPosition = /;top(.+?);/g;
+    let regexPosition2 = /;left(.+?);/g;
     this.props.mouseDragPositionX =
-    (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280)
+    (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
     * 100;
     this.props.mouseDragPositionY =
-    (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720)
+    (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
     * 100;
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition, ';top:'+this.props.mouseDragPositionY+'%;');
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition2, ';left:'+this.props.mouseDragPositionX+'%;');
   }
 
   constructor(canvas: ElementRef) {
@@ -106,7 +109,7 @@ export class TextboxDragComponent implements IComponent {
     }
 
     if (this.props.style.trim().length > 0) {
-      tmpHtmlCode += ' style="' + this.props.style + '"';
+      tmpHtmlCode += ' style="' + this.props.finalStyle + '"';
     }
 
     if (this.props.placeholder != undefined) {

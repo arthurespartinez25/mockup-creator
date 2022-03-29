@@ -285,13 +285,16 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
       if (
         component == 'img' ||
         component == 'div' ||
-        component == 'nav' ||
         component == 'link' ||
         component == 'table' ||
         component == 'youtube'
       ) {
         this.canvasLeftX = 0;
         this.canvasTopY = 0;
+      } else if ( component == 'nav') {
+        this.canvasLeftX = 0;
+        this.canvasTopY = 0;
+        this.xDistance = 240;
       } else if (
         component == 'header' ||
         component == 'paragraph' ||
@@ -306,8 +309,6 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
       }
       this.mousePositionX = this.offsetLeft + this.xDistance + this.canvasLeftX;
       this.mousePositionY = this.offsetTop + this.yDistance + this.canvasTopY;
-      console.log(this.mousePositionX)
-      console.log(this.mousePositionY)
     }
     this.addComponent(component);
     this.updateMousePosX.emit(this.mousePositionX);

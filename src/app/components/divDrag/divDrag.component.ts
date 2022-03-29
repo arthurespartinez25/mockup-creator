@@ -22,7 +22,7 @@ export class DivDragComponent implements OnInit, IComponent {
     id: '',
     value: '',
     class: '',
-    style: 'width: 100px; height: 100px; background-color: #12355B;',
+    style: '',
     typeObj: 'divDrag',
     type: '',
     draggable: true,
@@ -30,6 +30,7 @@ export class DivDragComponent implements OnInit, IComponent {
     hidden: false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
+    finalStyle:''
   };
 
   @Input() canvasPositionX: any;
@@ -54,15 +55,27 @@ export class DivDragComponent implements OnInit, IComponent {
     this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
     this.props.mouseDragPositionX = this.percentageX;
     this.props.mouseDragPositionY = this.percentageY;
+    this.props.style =
+          'height:100px;width:100px;position:absolute;background-color:#12355B;left:' +
+          this.percentageX +
+          '%;top:' +
+          this.percentageY +
+          '%;';
+    this.props.finalStyle=this.props.style;
   }
 
   onDragEnded($event: CdkDragEnd) {
+    this.props.finalStyle=this.props.style;
+    let regexPosition = /;top(.+?);/g;
+    let regexPosition2 = /;left(.+?);/g;
     this.props.mouseDragPositionX =
     (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
     * 100;
     this.props.mouseDragPositionY =
     (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
     * 100;
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition, ';top:'+this.props.mouseDragPositionY+'%;');
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition2, ';left:'+this.props.mouseDragPositionX+'%;');
   }
 
   constructor(canvas: ElementRef) {
@@ -83,7 +96,7 @@ export class DivDragComponent implements OnInit, IComponent {
   }
 
   get htmlCode(): string {
-    let tmpHtmlCode = '<blankdiv';
+    let tmpHtmlCode = '<div';
     if (this.props.id.trim().length > 0) {
       tmpHtmlCode += ' id="' + this.props.id + '"';
     }
@@ -97,10 +110,10 @@ export class DivDragComponent implements OnInit, IComponent {
     }
 
     if (this.props.style.trim().length > 0) {
-      tmpHtmlCode += ' style="' + this.props.style + '"';
+      tmpHtmlCode += ' style="' + this.props.finalStyle + '"';
     }
 
-    tmpHtmlCode += '>' + this.props.value + '</blankdiv>';
+    tmpHtmlCode += '>' + this.props.value + '</div>';
 
     return tmpHtmlCode;
   }

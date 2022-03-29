@@ -24,6 +24,7 @@ export class InputDragComponent implements OnInit, IComponent {
     hidden: false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
+    finalStyle:''
   };
 
   @Input() canvasPositionX: any;
@@ -94,17 +95,23 @@ export class InputDragComponent implements OnInit, IComponent {
     {
       this.props.style='width:200px;position:absolute;left:'
       +this.percentageX+'%;top:'+this.percentageY+'%;';
+      this.props.finalStyle=this.props.style;
     }
   }
   
 
   onDragEnded($event: CdkDragEnd) {
+    this.props.finalStyle=this.props.style;
+    let regexPosition = /;top(.+?);/g;
+    let regexPosition2 = /;left(.+?);/g;
     this.props.mouseDragPositionX =
     (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
     * 100;
     this.props.mouseDragPositionY =
     (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
     * 100;
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition, ';top:'+this.props.mouseDragPositionY+'%;');
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition2, ';left:'+this.props.mouseDragPositionX+'%;');
   }
 
   constructor(canvas: ElementRef) {
@@ -147,7 +154,7 @@ export class InputDragComponent implements OnInit, IComponent {
     }
 
     if (this.props.style.trim().length > 0) {
-      tmpHtmlCode += ' style="' + this.props.style + '"';
+      tmpHtmlCode += ' style="' + this.props.finalStyle + '"';
     }
 
     tmpHtmlCode += ' placeholder="' + this.props.placeholder + '">';

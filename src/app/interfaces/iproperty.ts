@@ -37,5 +37,5 @@ export interface IProperty {
   dummyDate?:any;
   isIcon?:boolean;
   usedMarginPercent?:boolean;
-  style2?: string;
+  finalStyle?: string;
 }

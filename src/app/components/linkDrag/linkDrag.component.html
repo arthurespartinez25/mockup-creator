@@ -1,16 +1,12 @@
-<div cdkDrag cdkDragBoundary="#canvas" (cdkDragEnded)="onDragEnded($event)" 
+<a  [id]="props.id" [style]="props.style" [class]="props.class"
+    cdkDrag cdkDragBoundary="#canvas" (cdkDragEnded)="onDragEnded($event)" 
 [cdkDragDisabled]="!props.draggable"
 [ngStyle]="{
-  position: 'sticky',
-  left: mousePositionLeft + 'px',
-  top: mousePositionTop + 'px',
   'border-color' : props.selected == true ? 'red': (props.selected == false ? 'none': null),
   'border-style' : props.selected == true ? 'solid': (props.selected == false ? 'none': null),
   'border-width' : props.selected == true ? '1px': (props.selected == false ? '0px': null)
-}" >
-    <a [href]="props.href" [id]="props.id" [style]="props.style" [class]="props.class"
+}" 
     >
         <span *ngIf="props.isIcon == false">{{props.value}}</span>
         <i *ngIf="props.isIcon == true" class={{props.value}}></i>
-    </a>
-</div>
+</a>
