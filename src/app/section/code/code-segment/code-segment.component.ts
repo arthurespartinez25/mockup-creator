@@ -231,7 +231,8 @@ export class CodeSegmentComponent implements OnInit {
     buildCode(val: string) {
       let file = new Blob([val], { type: 'text/html' });
       const fileURL = URL.createObjectURL(file);
-      window.open(fileURL, 'index.html');
+      window.open(fileURL); //multiple tabs can be opened
+      //window.open(fileURL, 'index.html'); //only opens in one tab
     }
     refresh(): void {
       this._router

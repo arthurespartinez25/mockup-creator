@@ -64,7 +64,6 @@ import { emit } from 'process';
 export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked {
   title = 'mockup-creator';
   index: number;
-  componentList: IComponent[] = [];
   numberOfComponents: any = [];
   selectedComponent: IComponent;
   ref: ComponentRef<any>;
@@ -115,6 +114,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
   @Input() canvas: ElementRef;
   @Input() propertyCmp: PropertyComponent;
   @Input() domInsideCanvas: boolean;
+  @Input() componentList: IComponent[] = [];
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;

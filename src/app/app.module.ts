@@ -40,6 +40,7 @@ import { NavigationComponent } from './section/code/navigation/navigation.compon
 import { CssComponent } from './section/code/css/css.component';
 import { CodeSegmentComponent } from './section/code/code-segment/code-segment.component';
 import { DivDragComponent } from './components/divDrag/divDrag.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,7 @@ import { DivDragComponent } from './components/divDrag/divDrag.component';
     CodeSegmentComponent,
     DivDragComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule, FormsModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule, FormsModule, HttpClientModule, MatTabsModule],
   providers: [DragDropModule, AppComponent, DatePipe],
   bootstrap: [AppComponent],
 })

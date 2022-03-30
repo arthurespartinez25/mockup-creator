@@ -1,28 +1,43 @@
 <div id="canvas-container">
-    <div
-      id="canvas"
-      class="solid-lines"
-      #canvas
-      (mouseenter)="updateDomInsideCanvas(true)"
-      (mouseleave)="updateDomInsideCanvas(false)"
-    >
-      <div id="canvasBody">
-        <app-wrapper
-          *ngFor="let component of componentList; let i = index"
-          class="wrapper"
-          (click)="clickHandler(component)"
-          [childComp]="component"
-          [canvasRef]="component.canvas"
-          [componentList]="componentList"
-          [mousePositionX]="mousePositionX"
-          [mousePositionY]="mousePositionY"
-          [canvasLeft]="canvasLeft"
-          [canvasTop]="canvasTop"
-          [canvasW]="canvasW"
-          [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
-          [whatComponent]="whatComponent"
+  <div class="pagination-container">
+    <mat-tab-group class="tabs" dynamicHeight id="canvasTabGroup" [(selectedIndex)]="selectedTab" (selectedTabChange)="myTabSelectedTabChange($event)">
+      <mat-tab *ngFor="let tab of tabs; let index = index">
+        <ng-template mat-tab-label>
+          <span class="tab-label">{{tab.name}} </span>
+          <button [disabled]="tabs.length === 1" type="button" class="btn btn-close" (click)="removeTab(index)"></button>
+        </ng-template>
+        <div
+        class="canvas"
+        [id]="tabs[index].id"
+        #canvas
+        (mouseenter)="updateDomInsideCanvas(true)"
+        (mouseleave)="updateDomInsideCanvas(false)"
         >
-        </app-wrapper>
-      </div>
-    </div>
+          <div id="canvasBody">
+            <app-wrapper
+              *ngFor="let component of componentListMap.get(tabs[index].id); let i = index"
+              class="wrapper"
+              (click)="clickHandler(component)"
+              [childComp]="component"
+              [canvasRef]="component.canvas"
+              [componentList]="componentList"
+              [mousePositionX]="mousePositionX"
+              [mousePositionY]="mousePositionY"
+              [canvasLeft]="canvasLeft"
+              [canvasTop]="canvasTop"
+              [canvasW]="canvasW"
+              [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
+              [whatComponent]="whatComponent"
+            >
+            </app-wrapper>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab disabled>
+        <ng-template mat-tab-label>
+            <button type="button" class="btn btn-outline-dark" (click)="addTab()"><i class="fa-solid fa-plus"></i></button>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
   </div>
+</div>

@@ -252,8 +252,13 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
       default:
         temp = new ButtonDragComponent(this.canvas);
     }
-    this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
-    this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
+    if (component == 'youtube') { //band-aid fix until youtubeComponent gets fixed
+      this.canvasLeft = (this.canvas.nativeElement.parentElement.parentElement.parentElement as HTMLElement).offsetLeft;
+      this.canvasTop = (this.canvas.nativeElement.parentElement.parentElement.parentElement as HTMLElement).offsetTop;
+    } else {
+      this.canvasLeft = (this.canvas.nativeElement as HTMLElement).offsetLeft;
+      this.canvasTop = (this.canvas.nativeElement as HTMLElement).offsetTop;
+    }
     this.canvasW = (this.canvas.nativeElement as HTMLElement).offsetWidth;    
     this.updateCanvasLeftEvent.emit(this.canvasLeft);
     this.updateCanvasTopEvent.emit(this.canvasTop);
@@ -266,6 +271,7 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
     }
     ////this.componentList.push(temp);
     this.updateComponentListEvent.emit(temp);
+    console.log(this.canvas);
   }
   //----------------------------------------------------------------------------
   onDragEndedAddComponent(event: CdkDragEnd, component: string) {

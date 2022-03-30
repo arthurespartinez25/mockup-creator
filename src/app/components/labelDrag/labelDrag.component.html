@@ -1,4 +1,4 @@
-<label cdkDrag cdkDragBoundary="#canvas" [id]="props.id" [style]="props.style" (cdkDragEnded)="onDragEnded($event)"
+<label cdkDrag cdkDragBoundary=".canvas" [id]="props.id" [style]="props.style" (cdkDragEnded)="onDragEnded($event)"
 [cdkDragDisabled]="!props.draggable" [class]="props.class"
 [ngStyle]="{
   'border-color' : props.selected == true ? 'red': (props.selected == false ? 'none': null),

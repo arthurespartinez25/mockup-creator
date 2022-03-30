@@ -1,7 +1,8 @@
 import { CdkDragEnd } from '@angular/cdk/drag-drop';
 import { Location } from '@angular/common';
 import { DatePipe } from '@angular/common';
-import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ComponentRef, ElementRef, Input, OnInit, Output, Renderer2, ViewChild, EventEmitter } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ComponentRef, ElementRef, Input, OnInit, Output, Renderer2, ViewChild, EventEmitter, ViewChildren, QueryList } from '@angular/core';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
@@ -16,6 +17,11 @@ import { PropertyComponent } from './../../property/property.component';
   styleUrls: ['./canvas.component.css']
 })
 export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked {
+  tabs = [{id: 'canvas1',
+          name: "Canvas 1"}];
+  selectedTab = 0;
+  currentTab = 0;
+  totalTabs = 0;
   index: number;
   numberOfComponents: any = [];
   selectedComponent: IComponent;
@@ -45,6 +51,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   public _popupCount = 0;
 
   @ViewChild('PropertyComponent') property: boolean;
+  @ViewChildren('canvas') canvasListElements: QueryList<ElementRef>;
   @ViewChild('canvas') canvas!: ElementRef;
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
@@ -54,6 +61,10 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   @Output() updateSelectedEvent = new EventEmitter<IProperty>();
   @Output() updateSelectedComponentEvent = new EventEmitter<IComponent>();
   @Output() updateDomInsideCanvasEvent = new EventEmitter<boolean>();
+  @Output() selectedTabChange: EventEmitter<MatTabChangeEvent>;
+  @Output() updateSelectedTabEvent = new EventEmitter<string>();
+  @Output() updateComponentListMapEvent = new EventEmitter<Map<string, IComponent[]>>();
+  @Output() updateSelectedCanvasEvent = new EventEmitter<ElementRef>();
 
   @Input() componentList : IComponent[] = [];
   @Input() mousePositionX: any;
@@ -62,6 +73,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   @Input() canvasTop: any;
   @Input() canvasW: any;
   @Input() whatComponent:any;
+  @Input() componentListMap : Map<string, IComponent[]>;
 
   changeref: ChangeDetectorRef;
   props: any;
@@ -78,7 +90,6 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   delete: boolean;
   cssBody: SafeStyle;
   canvasBG: string;
-  canvasPass = this.canvas;
   sessionID = this.loginCookie.get("sessionID");
   inSession: boolean = this.sessionID == "12345";
 
@@ -93,7 +104,9 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
       }) */
     }
   }
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {
+    this.canvasListElements.toArray();
+  }
 
   canvasLeftX = 0;
   canvasTopY = 0;
@@ -174,6 +187,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
       this.selected.mouseDragPositionY = 0;
     }
     this.updateSelectedEvent.emit(this.selected);
+    console.log(this.canvas);
   }
   onDragEnd(component: IComponent) {
     console.log(component);
@@ -197,6 +211,41 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
         this._router.navigate([decodeURI(this._location.path())]);
       });
   }
+
+  /* PAGINATION CODE */
+  addTab() {
+    this.totalTabs++;
+    let toInsert = {
+      id: "canvas" + (this.totalTabs + 1),
+      name: "Canvas " + (this.tabs.length + 1)
+    };
+    this.tabs.push(toInsert);
+    this.selectedTab = this.tabs.length - 1;
+  }
+  
+  removeTab(index: number) {
+    let result = window.confirm("Are you sure you want to remove this tab?");
+    if (result) {
+      this.componentListMap.delete(this.tabs[index].id);
+      this.updateComponentListMapEvent.emit(this.componentListMap); //updates the componentList in app.component
+      this.tabs.splice(index, 1);
+
+      for (let i = 0; i < this.tabs.length; i++) {
+        this.tabs[i].name = "Canvas " + (i + 1);
+      }
+
+      if (index == this.selectedTab) {
+        this.selectedTab = (index - 1) < 0 ? 0 : (index - 1); //changes the selected tab to the previous one
+      }
+    }
+  }
+
+  myTabSelectedTabChange(changeEvent: MatTabChangeEvent) {
+    this.currentTab = changeEvent.index;
+    this.updateSelectedTabEvent.emit(this.tabs[this.currentTab].id);
+    this.canvas = this.canvasListElements.toArray()[this.currentTab];
+    this.updateSelectedCanvasEvent.emit(this.canvas);
+  } 
 
   /****************** OLD CODE STARTS HERE **********************/
 }

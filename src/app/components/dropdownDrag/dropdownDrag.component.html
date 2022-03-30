@@ -2,7 +2,7 @@
   <select [class]="props.class" [id]="props.id" [style]="props.style" (click)="editNumLinks()" [(ngModel)]="selectedOption"
   class="dropdown"
   cdkDrag
-  cdkDragBoundary="#canvas"
+  cdkDragBoundary=".canvas"
   (cdkDragEnded)="onDragEnded($event)"
   [cdkDragDisabled]="!props.draggable"
   [ngStyle]="{
