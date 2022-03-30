@@ -74,6 +74,7 @@ export class HeaderDragComponent implements OnInit, IComponent {
         '%;top:' +
         this.percentageY +
         '%;';
+      this.props.finalStyle = this.props.style;
     } else if (this.whatComponent2 == 'searchHeader') {
       this.props.value = 'error message to reflect here';
       this.props.style =
@@ -82,6 +83,7 @@ export class HeaderDragComponent implements OnInit, IComponent {
         '%;top:' +
         this.percentageY +
         '%;';
+      this.props.finalStyle = this.props.style;
     } else {
       this.props.style =
         'width:150px;color:red;position:absolute;left:' +

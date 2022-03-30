@@ -61,6 +61,7 @@ export class TemplatesComponent implements OnInit, AfterViewInit, AfterViewCheck
     hidden: false,
     mouseDragPositionX: 0,
     mouseDragPositionY: 0,
+    finalStyle:''
   };
 
   @ViewChild('PropertyComponent') property: boolean;

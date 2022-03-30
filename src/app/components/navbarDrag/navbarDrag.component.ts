@@ -58,9 +58,6 @@ export class NavbarDragComponent implements OnInit, IComponent {
     this.mousePositionLeft = this.mousePositionX2;
     this.mousePositionTop = this.mousePositionY2;
     this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
-    console.log(this.percentageX)
-    console.log(this.mousePositionX2)
-    console.log(this.canvasPositionLeft)
     this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
     this.props.mouseDragPositionX = this.percentageX;
     this.props.mouseDragPositionY = this.percentageY;
@@ -78,6 +75,7 @@ export class NavbarDragComponent implements OnInit, IComponent {
         '%;top:' +
         this.percentageY +
         '%;';
+      this.props.finalStyle = this.props.style;
     } else if (this.whatComponent2 == 'HPNav1') {
       this.props.style = `width: 100%; 
       height: 100px;
@@ -88,6 +86,7 @@ export class NavbarDragComponent implements OnInit, IComponent {
       border-bottom: 1px solid  white;
       position:absolute;left:`+this.percentageX+`%;top:`+this.percentageY+`%;`;
       this.props.value = '';
+      this.props.finalStyle = this.props.style;
     } else if (this.whatComponent2 == 'HPNav2') {
       this.props.style = `width: 100%; 
       color: white;
@@ -98,6 +97,7 @@ export class NavbarDragComponent implements OnInit, IComponent {
       height:50px;
       position:absolute;left:`+this.percentageX+`%;top:`+this.percentageY+`%;`;
       this.props.value = `50% OFF  OUR A LA CARTE MENU IN FEBRUARY!`;
+      this.props.finalStyle = this.props.style;
     } else if (this.whatComponent2 == 'HPNav3') {
       this.props.style = `width: 100%; 
       height: 140px;
@@ -108,6 +108,7 @@ export class NavbarDragComponent implements OnInit, IComponent {
       border-bottom: 1px solid  white;
       position:absolute;left:`+this.percentageX+`%;top:`+this.percentageY+`%;`;
       this.props.value = ``;
+      this.props.finalStyle = this.props.style;
     } else {
       this.props.style =
         'position:absolute;width:100%;color: white;padding: 10px;background-color: #12355B;font-size: 20px;left:0%;top:' +

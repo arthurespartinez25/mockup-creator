@@ -64,8 +64,9 @@ export class LinkDragComponent implements OnInit, IComponent {
         font-size: 15px;
         text-decoration: none;
         letter-spacing: 0.1em;
-        position: sticky; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
+        position: absolute; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
         this.props.value = `Branches`;
+        this.props.finalStyle = this.props.style;
         break;
       case 'HPLink2':
         this.props.style = `color: white;
@@ -73,8 +74,9 @@ export class LinkDragComponent implements OnInit, IComponent {
         font-size: 15px;
         text-decoration: none;
         letter-spacing: 0.1em;
-        position: sticky; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
+        position: absolute; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
         this.props.value = `Events`;
+        this.props.finalStyle = this.props.style;
         break;
       case 'HPLink3':
         this.props.style = `color: white;
@@ -82,8 +84,9 @@ export class LinkDragComponent implements OnInit, IComponent {
         font-size: 15px;
         text-decoration: none;
         letter-spacing: 0.1em;
-        position: sticky; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
+        position: absolute; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
         this.props.value = `Contact`;
+        this.props.finalStyle = this.props.style;
         break;
       case 'HPLink4':
         this.props.style = `color: white;
@@ -91,8 +94,9 @@ export class LinkDragComponent implements OnInit, IComponent {
         font-size: 12px;
         letter-spacing: 0.1em;
         text-decoration: none;
-        position: sticky; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
+        position: absolute; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
         this.props.value = `THEMED MENU`;
+        this.props.finalStyle = this.props.style;
         break;
       case 'HPLink5':
         this.props.style = `color: white;
@@ -100,8 +104,9 @@ export class LinkDragComponent implements OnInit, IComponent {
         font-size: 12px;
         letter-spacing: 0.1em;
         text-decoration: none;
-        position: sticky; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
+        position: absolute; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
         this.props.value = `Dec. 31 - Feb. 20`;
+        this.props.finalStyle = this.props.style;
         break;
       case 'HPLink6':
         this.props.style = `color: white;
@@ -109,32 +114,36 @@ export class LinkDragComponent implements OnInit, IComponent {
         font-size: 12px;
         letter-spacing: 0.1em;
         text-decoration: none;
-        position: sticky; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
+        position: absolute; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
         this.props.value = `TIME LIMITED KAARAGE`;
+        this.props.finalStyle = this.props.style;
         break;
       case 'HPLink7':
         this.props.style = `color: white;
         font-family: Georgia,  serif;
         font-size: 15px;
         text-decoration: none;
-        position: sticky; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
+        position: absolute; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
         this.props.value = `Our Story`;
+        this.props.finalStyle = this.props.style;
         break;
       case 'HPLink8':
         this.props.style = `color: white;
         font-family: Georgia,  serif;
         font-size: 15px;
         text-decoration: none;
-        position: sticky; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
+        position: absolute; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
         this.props.value = `Opportunities`;
+        this.props.finalStyle = this.props.style;
         break;
       case 'HPLink9':
         this.props.style = `color: white;
         font-family: Georgia,  serif;
         font-size: 15px;
         text-decoration: none;
-        position: sticky; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
+        position: absolute; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
         this.props.value = `Careers`;
+        this.props.finalStyle = this.props.style;
         break;
 
       default:

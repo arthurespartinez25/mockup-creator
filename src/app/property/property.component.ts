@@ -28,7 +28,6 @@ export class PropertyComponent implements OnInit {
     mouseDragPositionY:0,
     dummyDate:'',
     isIcon:false,
-    usedMarginPercent:false,
     finalStyle: ''
   };
   style2 = '';

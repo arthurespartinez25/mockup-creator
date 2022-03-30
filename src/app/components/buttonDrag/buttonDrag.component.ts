@@ -82,6 +82,7 @@ export class ButtonDragComponent implements IComponent {
         '%;' +
         'width: 20%;max-width: 270px;min-width: 220px; overflow-y: auto;background-color: white;color: black;border-radius: 10px;' +
         'padding: 10px 10px; border: none;font-weight: bolder; font-size: x-large; margin-bottom: 5px;border: solid 1px black; text-transform: uppercase;';
+      this.props.finalStyle = this.props.style;
     } else if (this.whatComponent2 == 'SearchButton') {
       this.props.value = 'Search';
       this.props.style =
@@ -92,6 +93,7 @@ export class ButtonDragComponent implements IComponent {
         '%;' +
         'background-color: blue;color: white;border-radius: 10px;' +
         'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
+      this.props.finalStyle = this.props.style;
     } else if (this.whatComponent2 == 'ClearButton') {
       this.props.value = 'Clear';
       this.props.style =
@@ -102,6 +104,7 @@ export class ButtonDragComponent implements IComponent {
         '%;' +
         'background-color: gray;color: white;border-radius: 10px;' +
         'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
+      this.props.finalStyle = this.props.style;
     } else if (this.whatComponent2 == 'HomeButton') {
       this.props.value = 'Home';
       this.props.style =
@@ -112,6 +115,7 @@ export class ButtonDragComponent implements IComponent {
         '%;' +
         'background-color: #ADD8E6;color: white;border-radius: 10px;' +
         'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
+      this.props.finalStyle = this.props.style;
     } else if (this.whatComponent2 == 'ProfileButton') {
       this.props.value = 'Profile';
       this.props.style =
@@ -122,6 +126,7 @@ export class ButtonDragComponent implements IComponent {
         '%;' +
         'background-color: #ADD8E6;color: white;border-radius: 10px;' +
         'padding: 3px 5px; border: none; font-size: medium; margin-bottom: 5px;';
+      this.props.finalStyle = this.props.style;
     } else {
       this.props.value = 'Button';
       this.props.style =

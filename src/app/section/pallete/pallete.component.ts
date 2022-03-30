@@ -86,6 +86,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
     hidden: false,
     mouseDragPositionX: 0,
     mouseDragPositionY: 0,
+    finalStyle:''
   };
 
   public cssRuleCount = document.styleSheets[0].cssRules.length;

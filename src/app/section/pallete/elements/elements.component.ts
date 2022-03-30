@@ -72,6 +72,7 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
     hidden: false,
     mouseDragPositionX: 0,
     mouseDragPositionY: 0,
+    finalStyle:''
   };
 
   public cssRuleCount = document.styleSheets[0].cssRules.length;

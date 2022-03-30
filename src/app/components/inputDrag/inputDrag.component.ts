@@ -54,42 +54,49 @@ export class InputDragComponent implements OnInit, IComponent {
       this.props.placeholder = "Username";
       this.props.style='width:200px;position:absolute;left:'
       +this.percentageX+'%;top:'+this.percentageY+'%;';
+      this.props.finalStyle = this.props.style;
     }
     else if(this.whatComponent2=="loginInputPass")
     {
       this.props.placeholder = "Password";
       this.props.style='width:200px;position:absolute;left:'
       +this.percentageX+'%;top:'+this.percentageY+'%;';
+      this.props.finalStyle = this.props.style;
     }
     else if(this.whatComponent2=="carrierInput")
     {
       this.props.placeholder = "xxxxx";
       this.props.style='width:200px;position:absolute;left:'
       +this.percentageX+'%;top:'+this.percentageY+'%;';
+      this.props.finalStyle = this.props.style;
     }
     else if(this.whatComponent2=="invoiceInput")
     {
       this.props.placeholder = "xxx-xxxx-xxxx";
       this.props.style='width:200px;position:absolute;left:'
       +this.percentageX+'%;top:'+this.percentageY+'%;';
+      this.props.finalStyle = this.props.style;
     }
     else if(this.whatComponent2=="deliveryInput")
     {
       this.props.placeholder = "Enter delivery name";
       this.props.style='width:200px;position:absolute;left:'
       +this.percentageX+'%;top:'+this.percentageY+'%;';
+      this.props.finalStyle = this.props.style;
     }
     else if(this.whatComponent2=="addressInput")
     {
       this.props.placeholder = "Enter address";
       this.props.style='width:200px;position:absolute;left:'
       +this.percentageX+'%;top:'+this.percentageY+'%;';
+      this.props.finalStyle = this.props.style;
     }
     else if(this.whatComponent2=="remarksInput")
     {
       this.props.placeholder = "Enter remarks";
       this.props.style='width:200px;position:absolute;left:'
       +this.percentageX+'%;top:'+this.percentageY+'%;';
+      this.props.finalStyle = this.props.style;
     }
     else
     {

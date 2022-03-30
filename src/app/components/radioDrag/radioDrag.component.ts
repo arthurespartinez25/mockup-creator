@@ -26,6 +26,7 @@ export class RadioDragComponent implements OnInit,IComponent {
     hidden: false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
+    finalStyle:''
   };
 
   @Input() canvasPositionX: any;
@@ -50,18 +51,24 @@ export class RadioDragComponent implements OnInit,IComponent {
     this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
     this.props.mouseDragPositionX = this.percentageX;
     this.props.mouseDragPositionY = this.percentageY;
-    this.props.style='text-decoration: none;position:sticky;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
+    this.props.style='text-decoration: none;position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
+    this.props.finalStyle=this.props.style;
    
   }
   
 
   onDragEnded($event: CdkDragEnd) {
+    this.props.finalStyle=this.props.style;
+    let regexPosition = /;top(.+?);/g;
+    let regexPosition2 = /;left(.+?);/g;
     this.props.mouseDragPositionX =
     (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
     * 100;
     this.props.mouseDragPositionY =
     (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
     * 100;
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition, ';top:'+this.props.mouseDragPositionY+'%;');
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition2, ';left:'+this.props.mouseDragPositionX+'%;');
   }
 
   constructor(canvas: ElementRef) {
@@ -111,19 +118,15 @@ export class RadioDragComponent implements OnInit,IComponent {
 
   get htmlCode(): string {
     let dummyStyle = this.props.style;
-      let regexLeft = /left(.+?);/;
-      let regexTop = /top(.+?);/;
+      let regexLeft = /;left(.+?);/g;
+      let regexTop = /;top(.+?);/g;
       let regexPosition = /position(.+?);/;
 
       dummyStyle = dummyStyle.replace(regexLeft,"");
       dummyStyle = dummyStyle.replace(regexTop,"");
       dummyStyle = dummyStyle.replace(regexPosition,"");
 
-    let tmpHtmlCode = '<div class="form-check"'+ ' style="' + this.props.style +'"> \n <input';
-   
-    if (this.props.class.trim().length > 0) {
-      tmpHtmlCode += ' class="' + this.props.class + '"';
-    }
+    let tmpHtmlCode = '<div class="form-check '+this.props.class+'"'+ ' style="' + this.props.finalStyle +'"> \n <input';
 
     if (this.props.type.trim().length > 0) {
       tmpHtmlCode += ' type="' + this.props.type + '"';

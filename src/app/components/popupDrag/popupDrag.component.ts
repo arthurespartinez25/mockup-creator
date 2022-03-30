@@ -25,6 +25,7 @@ export class PopupDragComponent implements IComponent {
     content: "Popup text here...",
     draggable: true,
     selected : false,
+    finalStyle:''
   };
 
   constructor(canvas: ElementRef) {

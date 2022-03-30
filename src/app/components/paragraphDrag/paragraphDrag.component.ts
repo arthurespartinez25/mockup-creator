@@ -64,6 +64,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         this.percentageY
         +'%;';
         this.props.value = `All customers are required to use face masks and be fully vaccinated.`;
+        this.props.finalStyle = this.props.style;
         break;
       case 'HPP2':
         this.props.style = `color: black;
@@ -78,6 +79,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         this.percentageY
         +'%;';
         this.props.value = `Monday to Friday:`;
+        this.props.finalStyle = this.props.style;
         break;
       case 'HPP3':
         this.props.style = `color: black;
@@ -92,6 +94,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         this.percentageY
         +'%;';
         this.props.value = `Saturday to Sunday:`;
+        this.props.finalStyle = this.props.style;
         break;
       case 'HPP4':
         this.props.style = `color: black;
@@ -106,6 +109,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         this.percentageY
         +'%;';
         this.props.value = `For Reservations:`;
+        this.props.finalStyle = this.props.style;
         break;
       case 'HPP5':
         this.props.style = `color: black;
@@ -120,6 +124,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         this.percentageY
         +'%;';
         this.props.value = `12:00pm - 10:00pm`;
+        this.props.finalStyle = this.props.style;
         break;
       case 'HPP6':
         this.props.style = `color: black;
@@ -134,6 +139,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         this.percentageY
         +'%;';
         this.props.value = `2:00pm to 12:00am`;
+        this.props.finalStyle = this.props.style;
         break;
       case 'HPP7':
         this.props.style = `color: black;
@@ -148,6 +154,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         this.percentageY
         +'%;';
         this.props.value = `341-987-69`;
+        this.props.finalStyle = this.props.style;
         break;
       case 'HPP8':
         this.props.style = `width:200px;
@@ -159,6 +166,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         this.percentageY
         +'%;';
         this.props.value = `All customers are required to use face masks and be fully vaccinated.`;
+        this.props.finalStyle = this.props.style;
         break;
 
       default:
