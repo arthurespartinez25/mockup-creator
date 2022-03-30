@@ -24,6 +24,7 @@ import { BehaviorSubject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { DatePipe } from '@angular/common'
 import { PropertyComponent } from './../../../property/property.component';
+import { DialogService } from 'src/app/service/dialog.service';
 
 @Component({
   selector: 'app-component-list',
@@ -83,6 +84,7 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
     public _location: Location,
     public sanitizer: DomSanitizer,
     public datepipe: DatePipe,
+    private dialogService: DialogService
   ) {
     this.changeref = changeDetectorRef;
   }
@@ -145,6 +147,8 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
   clearComponentList() {
     this.componentList.length = 0;
   }
+
+  
 
   returnComponentList() {
     return this.componentList;
@@ -227,12 +231,23 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
 
   /*************The code below is for component list functions**********************/
 
+  
+
   deleteComponent(value: any) {
     let componentIndex = this.componentList.indexOf(value); //gets the index of the selected component inside the canvas
     if (componentIndex !== -1) {
       this.componentList.splice(componentIndex, 1); //removes the component from the canvas
     }
   }
+  confirmDelete(value: any) {
+    this.dialogService.openConfirmDialog('Are you sure to delete this component?')
+    .afterClosed().subscribe(res =>{
+      if(res){
+        this.deleteComponent(value);
+      }
+    });
+  }
+  
 
   hideComponent(value: any) {
     let componentIndex = this.componentList.indexOf(value); //gets the index of the selected component inside the canvas
@@ -290,6 +305,8 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
       }
     }
   }
+
+ 
 
   /**************End of code for component list functions *************************/
 

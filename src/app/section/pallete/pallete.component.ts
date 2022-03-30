@@ -55,6 +55,7 @@ import { UsersService } from './../../service/users.service';
 import { DatePipe } from '@angular/common'
 import { PropertyComponent } from './../../property/property.component';
 import { emit } from 'process';
+import { DialogService } from 'src/app/service/dialog.service';
 
 @Component({
   selector: 'app-pallete',
@@ -138,6 +139,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
     public sanitizer: DomSanitizer,
     private user:UsersService,
     public datepipe: DatePipe,
+    private dialogService: DialogService,
   ) {
     this.changeref = changeDetectorRef;
   }
@@ -203,6 +205,15 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
     setTimeout(() => {
       window.location.reload();
     }, 100);
+  }
+
+  confirmLogOut() {
+    this.dialogService.openConfirmDialog('Log out?')
+    .afterClosed().subscribe(res =>{
+      if(res){
+        this.logout();
+      }
+    });
   }
 
   clearComponentList() {

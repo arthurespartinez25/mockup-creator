@@ -4,7 +4,7 @@
     <button
       [ngClass]="{ invisible: !this.props.id }"
       id="delete"
-      (click)="deleteComponent()"
+      mat-button (click)="confirmRemove()"
     >
       Remove
     </button>

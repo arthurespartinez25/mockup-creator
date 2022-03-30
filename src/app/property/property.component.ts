@@ -94,6 +94,18 @@ export class PropertyComponent implements OnInit {
     }
     this.updateComponentListEvent.emit(this.componentList);
   }
+
+  confirmRemove() {
+    this.dialogService.openConfirmDialog('Are you sure to remove this component?')
+    .afterClosed().subscribe(res =>{
+      if(res){
+        this.deleteComponent();
+      }
+    });
+  }
+
+
+
   @ViewChild('taID') styleBox: ElementRef;
   clearComponent() {
         this.componentList.length = 0;
@@ -107,7 +119,7 @@ export class PropertyComponent implements OnInit {
   }
 
   confirmClear() {
-    this.dialogService.openConfirmDialog('Confirm to clear all components from this canvas.')
+    this.dialogService.openConfirmDialog('Are you sure to clear all components from this canvas?')
     .afterClosed().subscribe(res =>{
       if(res){
         this.clearComponent();
