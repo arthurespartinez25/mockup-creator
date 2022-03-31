@@ -102,23 +102,26 @@ The following are the steps to set-up the database:
     GO
     
 4.Create “Users” TABLE with the following columns
-        CREATE TABLE Users (
-    	UserID int IDENTITY(1,1) PRIMARY KEY,
-    	UserName varchar(255) NOT NULL UNIQUE,
-    	Password varchar(255) NOT NULL,
+
+    CREATE TABLE Users (
+    UserID int IDENTITY(1,1) PRIMARY KEY,
+    UserName varchar(255) NOT NULL UNIQUE,
+    Password varchar(255) NOT NULL,
    	FirstName varchar(255) NOT NULL,
    	LastName varchar(255) NOT NULL,
    	Email varchar(255) NOT NULL UNIQUE,
     );
+
 5.Insert a record in Users table 
+
 	INSERT INTO Users(UserName, Password, FirstName, LastName, Email) VALUES (
-    
     'mmiller0001',
     'password',
     'Mike',
     'Miller',
     'mike.miller2021@gmail.com'
     );
+    
 6. Set security property of Server to "SQL Server and Windows Authentication mode". Restart your server.
 7.  Try to login your server with the credentials created.
     - Set Authentication to "SQL Server Authenticaton"
