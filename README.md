@@ -111,7 +111,7 @@ The following are the steps to installation and setting-up the database:
 
 1.Click "New Query". Create “mockupdb” Database by running the command below, then click "Execute":
 
-     	CREATE DATABASE mockupdb;
+    CREATE DATABASE mockupdb;
 
 ![Step1.0!](images/databaseSetUp/Step1.0.png)
 ![Step1.1!](images/databaseSetUp/Step1.1.png)
