@@ -301,7 +301,7 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
       } else if ( component == 'nav') {
         this.canvasLeftX = 0;
         this.canvasTopY = 0;
-        this.xDistance = 240;
+        this.xDistance = 0;
       } else if (
         component == 'header' ||
         component == 'paragraph' ||
