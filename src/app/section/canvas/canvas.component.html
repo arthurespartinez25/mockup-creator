@@ -33,6 +33,7 @@
           </div>
         </div>
       </mat-tab>
+
       <mat-tab disabled>
         <ng-template mat-tab-label>
             <button type="button" class="btn btn-outline-dark" (click)="addTab()"><i class="fa-solid fa-plus"></i></button>
@@ -40,12 +41,27 @@
       </mat-tab>
     </mat-tab-group>
   </div>
-  <div style="position: absolute; top: 18px; left: 1255px; z-index: 5;">
+
+  <!-- <div style="position: absolute; top: 18px; left: 1255px; z-index: 5;">
     <label class="switch">
-      <input type="checkbox" checked>
+      <input  type="checkbox" checked>
       <span class="play"></span>
     </label>
   </div>
   <div class="box" style="position: absolute; top: 16px; left: 1253px; z-index: 4;">
   </div> 
+</div> -->
+
+<div>
+  
+   <button class="playButton" (click)="isPlay(true)" *ngIf="!this.isPlaying">
+    <i class="fa-solid fa-play"></i>
+  </button>
+
+  <button class="playButton" (click)="isPlay(false)" *ngIf="this.isPlaying"> 
+    <i class="fa-solid fa-pause"></i>
+    </button>
 </div>
+
+
+

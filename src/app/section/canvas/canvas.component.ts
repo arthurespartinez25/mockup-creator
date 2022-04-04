@@ -45,6 +45,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     hidden: false,
     mouseDragPositionX: 0,
     mouseDragPositionY: 0,
+    
   };
 
   public cssRuleCount = document.styleSheets[0].cssRules.length;
@@ -75,6 +76,8 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   @Input() canvasW: any;
   @Input() whatComponent:any;
   @Input() componentListMap : Map<string, IComponent[]>;
+  
+ 
 
   changeref: ChangeDetectorRef;
   constructor(
@@ -92,6 +95,8 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   canvasBG: string;
   sessionID = this.loginCookie.get("sessionID");
   inSession: boolean = this.sessionID == "12345";
+  isPlaying: boolean = false;
+  
 
   ngOnInit() {
     console.log(this.inSession);
@@ -103,6 +108,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
         this.users = data;
       }) */
     }
+    
   }
   ngAfterViewInit(): void {
     this.canvasListElements.toArray();
@@ -128,6 +134,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     this.domInsideCanvas = value;
     this.updateDomInsideCanvasEvent.emit(this.domInsideCanvas)
   }
+
   //----------------------------------------------------------------------------
 
   ngAfterViewChecked() {
@@ -261,6 +268,16 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     this.canvas = this.canvasListElements.toArray()[this.currentTab];
     this.updateSelectedCanvasEvent.emit(this.canvas);
   } 
+
+ isPlay(value: any) {
+    this.isPlaying = value;
+
+ }
+  
+   
+
+
+ 
 
   /****************** OLD CODE STARTS HERE **********************/
 }

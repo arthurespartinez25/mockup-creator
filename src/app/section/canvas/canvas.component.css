@@ -265,3 +265,7 @@ input:checked + .play {
   height: 38px;
   width: 38px;
 }
+
+.playButton {
+  position: absolute; top: 18px; left: 1255px; z-index: 5;
+}
