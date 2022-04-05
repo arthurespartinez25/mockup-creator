@@ -37,4 +37,6 @@ export interface IProperty {
   dummyDate?:any;
   isIcon?:boolean;
   finalStyle: string;
+  redirection?: string;
+  target?: boolean;
 }

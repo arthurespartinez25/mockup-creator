@@ -231,6 +231,12 @@ export class PropertyComponent implements OnInit {
   enableDragging(event: any) {
     this.props.draggable = !this.props.draggable;
   }
+  redirectionChangeHandler(event: any){
+    this.props.redirection = event.target.value;
+  }
+  newTab(event: any) {
+    this.props.target = !this.props.target;
+  }  
   
   /* CODE BELOW IS FOR TABLE ELEMENT */
 

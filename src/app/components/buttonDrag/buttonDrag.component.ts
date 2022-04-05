@@ -48,7 +48,9 @@ export class ButtonDragComponent implements IComponent {
     mouseDragPositionX:0,
     mouseDragPositionY:0,
     isIcon: false,
-    finalStyle: ''
+    finalStyle: '',
+    redirection: 'link',
+    target: false
   };
 
   @Input() canvasPositionX: any;
@@ -172,6 +174,22 @@ export class ButtonDragComponent implements IComponent {
 
   get htmlCode(): string {
     let tmpHtmlCode = '<div><button';
+    if(this.props.redirection != undefined){/*
+      if (this.props.redirection?.trim().length > 0) {
+        tmpHtmlCode += ' onClick="window.open(' + "'" + this.props.redirection + "'";
+      }
+      if (this.props.target == true) {
+        tmpHtmlCode += ", '_blank'";
+      }  
+      else {
+        tmpHtmlCode += ", '_self'";
+      }      
+      tmpHtmlCode += ')"'*/
+      if (this.props.redirection?.trim().length > 0) {
+        tmpHtmlCode += 'onClick=" "';
+      }
+    }
+
     if (this.props.id.trim().length > 0) {
       tmpHtmlCode += ' id="' + this.props.id + '"';
     }
