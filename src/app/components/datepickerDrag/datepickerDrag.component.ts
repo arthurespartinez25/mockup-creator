@@ -14,9 +14,6 @@ import { DatePipe } from '@angular/common'
   (change)="dateValue($event)"
   (cdkDragEnded)="onDragEnded($event)" 
   [ngStyle]="{
-    position: 'sticky',
-    left: mousePositionLeft + 'px',
-    top: mousePositionTop + 'px',
     'border-color' : props.selected == true ? 'red': (props.selected == false ? 'none': null),
     'border-style' : props.selected == true ? 'solid': (props.selected == false ? 'none': null),
     'border-width' : props.selected == true ? '1px': (props.selected == false ? '0px': null)
@@ -38,6 +35,7 @@ export class DatepickerDragComponent implements OnInit,IComponent {
     mouseDragPositionX:0,
     mouseDragPositionY:0,
     dummyDate:0,
+    finalStyle:''
   };
 
   @Input() canvasPositionX: any;
@@ -69,16 +67,22 @@ export class DatepickerDragComponent implements OnInit,IComponent {
     let date = mm + '-' + dd + '-' + yyyy;
     this.props.value = this.datepipe.transform(date, 'yyyy-MM-dd');
     this.props.style='position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
+    this.props.finalStyle=this.props.style;
   }
   
 
   onDragEnded($event: CdkDragEnd) {
+    this.props.finalStyle=this.props.style;
+    let regexPosition = /;top(.+?);/g;
+    let regexPosition2 = /;left(.+?);/g;
     this.props.mouseDragPositionX =
     (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
     * 100;
     this.props.mouseDragPositionY =
     (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
     * 100;
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition, ';top:'+this.props.mouseDragPositionY+'%;');
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition2, ';left:'+this.props.mouseDragPositionX+'%;');
   }
 
   constructor(canvas: ElementRef, public datepipe: DatePipe) {
@@ -119,7 +123,7 @@ export class DatepickerDragComponent implements OnInit,IComponent {
     }
 
     if (this.props.style.trim().length > 0) {
-      tmpHtmlCode += ' style="' + this.props.style + '"';
+      tmpHtmlCode += ' style="' + this.props.finalStyle + '"';
     }
 
     if(this.props.value.trim().length > 0){

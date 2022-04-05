@@ -19,8 +19,8 @@ th.properties-table-header label {
   font-weight: lighter;
 }
 
-td.properties-table-data {
-}
+/* td.properties-table-data {
+} */
 
 td.properties-table-data input,
 td.properties-table-data textarea #updateLink .updateLink{
@@ -140,4 +140,10 @@ td.properties-table-data textarea:focus {
 
 #clearScreen:hover {
   background-color: #c51b29;
+}
+
+.redirect {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -30,6 +30,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
     hidden: false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
+    finalStyle: ''
   };
 
   @Input() canvasPositionX: any;
@@ -63,6 +64,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         this.percentageY
         +'%;';
         this.props.value = `All customers are required to use face masks and be fully vaccinated.`;
+        this.props.finalStyle = this.props.style;
         break;
       case 'HPP2':
         this.props.style = `color: black;
@@ -77,6 +79,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         this.percentageY
         +'%;';
         this.props.value = `Monday to Friday:`;
+        this.props.finalStyle = this.props.style;
         break;
       case 'HPP3':
         this.props.style = `color: black;
@@ -91,6 +94,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         this.percentageY
         +'%;';
         this.props.value = `Saturday to Sunday:`;
+        this.props.finalStyle = this.props.style;
         break;
       case 'HPP4':
         this.props.style = `color: black;
@@ -105,6 +109,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         this.percentageY
         +'%;';
         this.props.value = `For Reservations:`;
+        this.props.finalStyle = this.props.style;
         break;
       case 'HPP5':
         this.props.style = `color: black;
@@ -119,6 +124,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         this.percentageY
         +'%;';
         this.props.value = `12:00pm - 10:00pm`;
+        this.props.finalStyle = this.props.style;
         break;
       case 'HPP6':
         this.props.style = `color: black;
@@ -133,6 +139,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         this.percentageY
         +'%;';
         this.props.value = `2:00pm to 12:00am`;
+        this.props.finalStyle = this.props.style;
         break;
       case 'HPP7':
         this.props.style = `color: black;
@@ -147,6 +154,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         this.percentageY
         +'%;';
         this.props.value = `341-987-69`;
+        this.props.finalStyle = this.props.style;
         break;
       case 'HPP8':
         this.props.style = `width:200px;
@@ -158,6 +166,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
         this.percentageY
         +'%;';
         this.props.value = `All customers are required to use face masks and be fully vaccinated.`;
+        this.props.finalStyle = this.props.style;
         break;
 
       default:
@@ -167,17 +176,23 @@ export class ParagraphDragComponent implements OnInit, IComponent {
           '%;top:' +
           this.percentageY +
           '%;';
+        this.props.finalStyle=this.props.style;
         break;
     }
   }
 
   onDragEnded($event: CdkDragEnd) {
+    this.props.finalStyle=this.props.style;
+    let regexPosition = /;top(.+?);/g;
+    let regexPosition2 = /;left(.+?);/g;
     this.props.mouseDragPositionX =
     (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
     * 100;
     this.props.mouseDragPositionY =
     (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
     * 100;
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition, ';top:'+this.props.mouseDragPositionY+'%;');
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition2, ';left:'+this.props.mouseDragPositionX+'%;');
   }
 
   constructor(canvas: ElementRef) {
@@ -212,7 +227,7 @@ export class ParagraphDragComponent implements OnInit, IComponent {
     }
 
     if (this.props.style.trim().length > 0) {
-      tmpHtmlCode += ' style="' + this.props.style + '"';
+      tmpHtmlCode += ' style="' + this.props.finalStyle + '"';
     }
 
     tmpHtmlCode += '>' + this.props.value + '</p>';

@@ -56,7 +56,8 @@ export class CodeSegmentComponent implements OnInit {
       '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>';
     private _popupFunction =
       '<script>\nvar popoverTriggerList = [].slice.call(document.querySelectorAll(\'[data-bs-toggle="popover"]\'))\nvar popoverList = popoverTriggerList.map(function (popoverTriggerEl) {\nreturn new bootstrap.Popover(popoverTriggerEl)\n})\n</script>';
-  
+    private _fontAwesome =
+      '<script src="https://kit.fontawesome.com/13b1404cdb.js" crossorigin="anonymous"></script>';
     @ViewChild('PropertyComponent') property: boolean;
     @Input() canvas: ElementRef;
     @Input() selected: IProperty;
@@ -176,6 +177,8 @@ export class CodeSegmentComponent implements OnInit {
         this._styleBody3 +
         '\n' +
         this._styleBody4 +
+        '\n' +
+        this._fontAwesome +
         '\n' +
         bootstrap +
         this.htmlBody() +

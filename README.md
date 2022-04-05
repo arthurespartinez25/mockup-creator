@@ -132,6 +132,19 @@ The following are the steps to set-up the database:
 14. Connect your server by running node server.js, then login your Users data on your angular app.
     - Username: "mmiller0001"
     - Password: "password"
+
+## Updating the database
+
+In the event that there are changes to the current database, such as the addition of new tables, please refer to the steps below:
+1. Open Microsoft SQL Management Studio and log in via Windows Authentication.
+2. Under databases, select the 'mockupdb' database and delete it by right-clicking and selecting Delete.
+3. Once finished, open the script file* for the updated database. This can either be done by double-clicking on the script file, or
+   by using Microsoft SQL Management Studio and selecting File -> Open and opening the script file.
+4. After opening the script file, the entire query should be displayed. Press F5 to execute the query. Refresh the Object explorer
+   (the small window on the left), and the updated database should be under Databases.
+
+*If you are not in possession of the script file, request the file from the person who issued the database update.
+
 ## Known bugs
 
 ## Areas of Improvement

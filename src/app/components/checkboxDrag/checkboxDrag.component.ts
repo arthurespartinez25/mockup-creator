@@ -24,6 +24,7 @@ export class CheckboxDragComponent implements OnInit, IComponent {
     hidden: false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
+    finalStyle:''
   };
 
   @Input() canvasPositionX: any;
@@ -52,24 +53,30 @@ export class CheckboxDragComponent implements OnInit, IComponent {
     if(this.whatComponent2=="LoginCheckbox")
     {
       this.props.value = "Remember Password";
-      this.props.style='color:green;cursor: pointer;position:sticky;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
-    
+      this.props.style='color:green;cursor: pointer;position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
+      this.props.finalStyle=this.props.style;
     }
     else
     {
-      this.props.style='cursor:pointer;position:sticky;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
+      this.props.style='cursor:pointer;position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
+      this.props.finalStyle=this.props.style;
     }
   }
   
 
 
   onDragEnded($event: CdkDragEnd) {
+    this.props.finalStyle=this.props.style;
+    let regexPosition = /;top(.+?);/g;
+    let regexPosition2 = /;left(.+?);/g;
     this.props.mouseDragPositionX =
     (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
     * 100;
     this.props.mouseDragPositionY =
     (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
     * 100;
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition, ';top:'+this.props.mouseDragPositionY+'%;');
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition2, ';left:'+this.props.mouseDragPositionX+'%;');
   }
 
   constructor(canvas: ElementRef) {
@@ -106,22 +113,15 @@ export class CheckboxDragComponent implements OnInit, IComponent {
   }
 
   get htmlCode(): string {
-      let dummyStyle = this.props.style;
-      let regexLeft = /left(.+?);/;
-      let regexTop = /top(.+?);/;
-      let regexPosition = /position(.+?);/;
-      dummyStyle = dummyStyle.replace(regexLeft,"");
-      dummyStyle = dummyStyle.replace(regexTop,"");
-      dummyStyle = dummyStyle.replace(regexPosition,"");
     let tmpHtmlCode = '<div';
-    tmpHtmlCode += ' style="' + this.props.style +'">';
+    tmpHtmlCode += ' style="' + this.props.finalStyle + '" class="' +  this.props.class +'">';
     if (this.props.checked == "true") {
-      tmpHtmlCode +="\n" + ' <input id="'+ this.props.id + '" class="' +  this.props.class + '" type="' +  this.props.type + '" checked>';
+      tmpHtmlCode +="\n" + ' <input id="'+ this.props.id + '" type="' +  this.props.type + '" checked>';
     }
     else {
-      tmpHtmlCode +="\n" + ' <input id="'+ this.props.id + '" class="' +  this.props.class + '" type="' +  this.props.type + '">';
+      tmpHtmlCode +="\n" + ' <input id="'+ this.props.id + '" type="' +  this.props.type + '">';
     }
-    tmpHtmlCode +="\n" + ' <label for="'+ this.props.id +'" style="'+ dummyStyle +'"> ' + this.props.value + ' </label>';
+    tmpHtmlCode +="\n" + ' <label for="'+ this.props.id +'"> ' + this.props.value + ' </label>';
     tmpHtmlCode +="\n" + ' </div>';
     
 

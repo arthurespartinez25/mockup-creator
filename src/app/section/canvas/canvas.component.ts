@@ -1,3 +1,4 @@
+import { CdkDragEnd } from '@angular/cdk/drag-drop';
 import { Location } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ComponentRef, ElementRef, Input, OnInit, Output, Renderer2, ViewChild, EventEmitter, ViewChildren, QueryList } from '@angular/core';
@@ -45,7 +46,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     hidden: false,
     mouseDragPositionX: 0,
     mouseDragPositionY: 0,
-    
+    finalStyle:''
   };
 
   public cssRuleCount = document.styleSheets[0].cssRules.length;
@@ -80,6 +81,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
  
 
   changeref: ChangeDetectorRef;
+  props: any;
   constructor(
     private loginCookie:CookieService,
     changeDetectorRef: ChangeDetectorRef,
@@ -154,24 +156,22 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     this.updateSelectedComponentEvent.emit(this.selectedComponent);
     this.selectedComp(this.selectedComponent);
     if (this.selected.typeObj != 'nav' || 'navDrag') {
-      this.styleHolder = this.selected.style;
-      let regexLeft = /left(.+?);/;
-      let regexTop = /top(.+?);/;
-      let regexPosition = /position(.+?);/;
-      this.styleHolder = this.styleHolder.replace(regexLeft, '');
-      this.styleHolder = this.styleHolder.replace(regexTop, '');
-      this.styleHolder = this.styleHolder.replace(regexPosition, '');
-      this.selected.style =
-        this.styleHolder +
-        'position:sticky;' +
-        'left:' +
-        this.selected.mouseDragPositionX +
-        '%;' +
-        'top:' +
-        this.selected.mouseDragPositionY +
-        '%;';
-      //  this.selected.mouseDragPositionX = 0;
-      //  this.selected.mouseDragPositionY = 0;
+      // this.styleHolder = this.selected.style;
+      // let regexLeft = /left(.+?);/;
+      // let regexTop = /top(.+?);/;
+      // let regexPosition = /position(.+?);/;
+      // this.styleHolder = this.styleHolder.replace(regexLeft, '');
+      // this.styleHolder = this.styleHolder.replace(regexTop, '');
+      // this.styleHolder = this.styleHolder.replace(regexPosition, '');
+      // this.selected.style =
+      //   this.styleHolder +
+      //   'position:absolute;' +
+      //   'left:' +
+      //   this.selected.mouseDragPositionX +
+      //   '%;' +
+      //   'top:' +
+      //   this.selected.mouseDragPositionY +
+      //   '%;';
     } else if (
       this.selected.mouseDragPositionY != 0 &&
       (this.selected.typeObj == 'nav' || 'navDrag')

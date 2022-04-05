@@ -44,6 +44,9 @@ import { SaveComponent } from './section/pallete/save/save.component';
 import { SaveDataComponent } from './section/pallete/save/save.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { DivDragComponent } from './components/divDrag/divDrag.component';
+import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -79,11 +82,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     CssComponent,
     CodeSegmentComponent,
     SaveComponent,
-    SaveDataComponent
+    SaveDataComponent,
+    DivDragComponent,
+    MatConfirmDialogComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule, FormsModule, HttpClientModule, MatTabsModule, MatDialogModule, MatTooltipModule],
   providers: [DragDropModule, AppComponent, DatePipe],
   bootstrap: [AppComponent],
+  entryComponents: [MatConfirmDialogComponent],
 })
 export class AppModule {}
-

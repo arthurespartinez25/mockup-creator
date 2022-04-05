@@ -6,6 +6,8 @@ import {
   Input,
   OnInit,
   Output,
+  Renderer2,
+  ViewChild,
 } from '@angular/core';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
@@ -30,6 +32,7 @@ export class HeaderDragComponent implements OnInit, IComponent {
     hidden: false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
+    finalStyle: '',
   };
 
   @Input() get property(): IProperty {
@@ -61,6 +64,8 @@ export class HeaderDragComponent implements OnInit, IComponent {
     this.mousePositionTop = this.mousePositionY2;
     this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
     this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
+    this.props.mouseDragPositionX = this.percentageX;
+    this.props.mouseDragPositionY = this.percentageY;
     if (this.whatComponent2 == 'loginHeader') {
       this.props.value = 'Welcome!';
       this.props.style =
@@ -69,6 +74,7 @@ export class HeaderDragComponent implements OnInit, IComponent {
         '%;top:' +
         this.percentageY +
         '%;';
+      this.props.finalStyle = this.props.style;
     } else if (this.whatComponent2 == 'searchHeader') {
       this.props.value = 'error message to reflect here';
       this.props.style =
@@ -77,6 +83,7 @@ export class HeaderDragComponent implements OnInit, IComponent {
         '%;top:' +
         this.percentageY +
         '%;';
+      this.props.finalStyle = this.props.style;
     } else {
       this.props.style =
         'width:150px;color:red;position:absolute;left:' +
@@ -84,16 +91,21 @@ export class HeaderDragComponent implements OnInit, IComponent {
         '%;top:' +
         this.percentageY +
         '%;';
+      this.props.finalStyle=this.props.style;
     }
   }
-
   onDragEnded($event: CdkDragEnd) {
+    this.props.finalStyle=this.props.style;
+    let regexPosition = /;top(.+?);/g;
+    let regexPosition2 = /;left(.+?);/g;
     this.props.mouseDragPositionX =
     (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
     * 100;
     this.props.mouseDragPositionY =
     (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
     * 100;
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition, ';top:'+this.props.mouseDragPositionY+'%;');
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition2, ';left:'+this.props.mouseDragPositionX+'%;');
   }
 
   constructor(canvas: ElementRef) {
@@ -113,7 +125,7 @@ export class HeaderDragComponent implements OnInit, IComponent {
     }
 
     if (this.props.style.trim().length > 0) {
-      tmpHtmlCode += ' style="' + this.props.style + '"';
+      tmpHtmlCode += ' style="' + this.props.finalStyle +'"';
     }
 
     tmpHtmlCode += '>' + this.props.value + '</h1>';

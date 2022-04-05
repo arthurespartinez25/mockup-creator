@@ -30,6 +30,7 @@ export class LabelDragComponent implements OnInit, IComponent {
     hidden: false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
+    finalStyle:''
   };
 
   @Input() canvasPositionX: any;
@@ -63,6 +64,7 @@ export class LabelDragComponent implements OnInit, IComponent {
         '%;top:' +
         this.percentageY +
         '%;';
+      this.props.finalStyle = this.props.style;
     } else if (this.whatComponent2 == 'loginLabelPass') {
       this.props.value = 'Password';
       this.props.style =
@@ -71,6 +73,7 @@ export class LabelDragComponent implements OnInit, IComponent {
         '%;top:' +
         this.percentageY +
         '%;';
+      this.props.finalStyle = this.props.style;
     } else if (this.whatComponent2 == 'carrierLabel') {
       this.props.value = 'Carrier';
       this.props.style =
@@ -79,6 +82,7 @@ export class LabelDragComponent implements OnInit, IComponent {
         '%;top:' +
         this.percentageY +
         '%;';
+      this.props.finalStyle = this.props.style;
     } else if (this.whatComponent2 == 'invoiceFromLabel') {
       this.props.value = 'Invoice number from';
       this.props.style =
@@ -87,6 +91,7 @@ export class LabelDragComponent implements OnInit, IComponent {
         '%;top:' +
         this.percentageY +
         '%;width:500px';
+      this.props.finalStyle = this.props.style;
     } else if (this.whatComponent2 == 'invoiceToLabel') {
       this.props.value = 'Invoice number to';
       this.props.style =
@@ -95,6 +100,7 @@ export class LabelDragComponent implements OnInit, IComponent {
         '%;top:' +
         this.percentageY +
         '%;';
+      this.props.finalStyle = this.props.style;
     } else if (this.whatComponent2 == 'shippingFromLabel') {
       this.props.value = 'Shipping Date from';
       this.props.style =
@@ -103,6 +109,7 @@ export class LabelDragComponent implements OnInit, IComponent {
         '%;top:' +
         this.percentageY +
         '%;';
+      this.props.finalStyle = this.props.style;
     } else if (this.whatComponent2 == 'shippingToLabel') {
       this.props.value = 'Shipping Date to';
       this.props.style =
@@ -111,6 +118,7 @@ export class LabelDragComponent implements OnInit, IComponent {
         '%;top:' +
         this.percentageY +
         '%;';
+      this.props.finalStyle = this.props.style;
     } else if (this.whatComponent2 == 'addressLabel') {
       this.props.value = 'Address';
       this.props.style =
@@ -119,6 +127,7 @@ export class LabelDragComponent implements OnInit, IComponent {
         '%;top:' +
         this.percentageY +
         '%;';
+      this.props.finalStyle = this.props.style;
     } else if (this.whatComponent2 == 'deliveryNameLabel') {
       this.props.value = 'Delivery name';
       this.props.style =
@@ -127,6 +136,7 @@ export class LabelDragComponent implements OnInit, IComponent {
         '%;top:' +
         this.percentageY +
         '%;';
+      this.props.finalStyle = this.props.style;
     } else if (this.whatComponent2 == 'remarksLabel') {
       this.props.value = 'Remarks';
       this.props.style =
@@ -135,6 +145,7 @@ export class LabelDragComponent implements OnInit, IComponent {
         '%;top:' +
         this.percentageY +
         '%;';
+      this.props.finalStyle = this.props.style;
     } else if (this.whatComponent2 == 'userIDLabel') {
       this.props.value = 'UserID';
       this.props.style =
@@ -143,6 +154,7 @@ export class LabelDragComponent implements OnInit, IComponent {
         '%;top:' +
         this.percentageY +
         '%;';
+      this.props.finalStyle = this.props.style;
     } else if (this.whatComponent2 == 'usernameLabel') {
       this.props.value = 'UserName';
       this.props.style =
@@ -151,11 +163,13 @@ export class LabelDragComponent implements OnInit, IComponent {
         '%;top:' +
         this.percentageY +
         '%;';
+      this.props.finalStyle = this.props.style;
     } else if (this.whatComponent2 == 'HPLabel1') {
       this.props.value = `チケン・サンズ・グルメ・バーガー`;
       this.props.style = `color: white;
       font-size: 30px;
       width: 600px;position:absolute;top:8.472222222222223%;left:0.9375%;`;
+      this.props.finalStyle = this.props.style;
     } else if (this.whatComponent2 == 'HPLabel2') {
       this.props.value = `Event Highlight`;
       this.props.style = `color: white;
@@ -163,11 +177,13 @@ export class LabelDragComponent implements OnInit, IComponent {
       font-style: italic;
       font-size: 15px;
       width: 600px;position:absolute;left:47.34375%;top:21.666666666666668%;`;
+      this.props.finalStyle = this.props.style;
     } else if (this.whatComponent2 == 'HPLabel3') {
       this.props.value = `冬の不思議`;
       this.props.style = `color: white;
       font-size: 40px;
       width: 600px;position:absolute;top:24.500000000000004%;left:43.046875%;`;
+      this.props.finalStyle = this.props.style;
     } else {
       this.props.style =
         'font-size:1rem;position:absolute;left:' +
@@ -175,16 +191,22 @@ export class LabelDragComponent implements OnInit, IComponent {
         '%;top:' +
         this.percentageY +
         '%;';
+      this.props.finalStyle=this.props.style;
     }
   }
 
   onDragEnded($event: CdkDragEnd) {
+    this.props.finalStyle=this.props.style;
+    let regexPosition = /;top(.+?);/g;
+    let regexPosition2 = /;left(.+?);/g;
     this.props.mouseDragPositionX =
     (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
     * 100;
     this.props.mouseDragPositionY =
     (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
     * 100;
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition, ';top:'+this.props.mouseDragPositionY+'%;');
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition2, ';left:'+this.props.mouseDragPositionX+'%;');
   }
 
   constructor(canvas: ElementRef) {
@@ -219,7 +241,7 @@ export class LabelDragComponent implements OnInit, IComponent {
     }
 
     if (this.props.style.trim().length > 0) {
-      tmpHtmlCode += ' style="' + this.props.style + '"';
+      tmpHtmlCode += ' style="' + this.props.finalStyle + '"';
     }
 
     tmpHtmlCode += '>' + this.props.value + '</label>';

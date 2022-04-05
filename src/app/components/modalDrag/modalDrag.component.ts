@@ -21,6 +21,7 @@ export class ModalDragComponent implements IComponent {
     draggable: true,
     selected : false,
     hidden: false,
+    finalStyle:''
   };
 
   @Output() updateDataEvent = new EventEmitter<any>();

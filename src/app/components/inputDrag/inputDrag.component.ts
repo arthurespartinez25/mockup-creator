@@ -24,6 +24,7 @@ export class InputDragComponent implements OnInit, IComponent {
     mouseDragPositionX:0,
     mouseDragPositionY:0,
     placeholder: 'Input field',
+    finalStyle:''
   };
 
   @Input() canvasPositionX: any;
@@ -53,58 +54,71 @@ export class InputDragComponent implements OnInit, IComponent {
       this.props.placeholder = "Username";
       this.props.style='width:200px;position:absolute;left:'
       +this.percentageX+'%;top:'+this.percentageY+'%;';
+      this.props.finalStyle = this.props.style;
     }
     else if(this.whatComponent2=="loginInputPass")
     {
       this.props.placeholder = "Password";
       this.props.style='width:200px;position:absolute;left:'
       +this.percentageX+'%;top:'+this.percentageY+'%;';
+      this.props.finalStyle = this.props.style;
     }
     else if(this.whatComponent2=="carrierInput")
     {
       this.props.placeholder = "xxxxx";
       this.props.style='width:200px;position:absolute;left:'
       +this.percentageX+'%;top:'+this.percentageY+'%;';
+      this.props.finalStyle = this.props.style;
     }
     else if(this.whatComponent2=="invoiceInput")
     {
       this.props.placeholder = "xxx-xxxx-xxxx";
       this.props.style='width:200px;position:absolute;left:'
       +this.percentageX+'%;top:'+this.percentageY+'%;';
+      this.props.finalStyle = this.props.style;
     }
     else if(this.whatComponent2=="deliveryInput")
     {
       this.props.placeholder = "Enter delivery name";
       this.props.style='width:200px;position:absolute;left:'
       +this.percentageX+'%;top:'+this.percentageY+'%;';
+      this.props.finalStyle = this.props.style;
     }
     else if(this.whatComponent2=="addressInput")
     {
       this.props.placeholder = "Enter address";
       this.props.style='width:200px;position:absolute;left:'
       +this.percentageX+'%;top:'+this.percentageY+'%;';
+      this.props.finalStyle = this.props.style;
     }
     else if(this.whatComponent2=="remarksInput")
     {
       this.props.placeholder = "Enter remarks";
       this.props.style='width:200px;position:absolute;left:'
       +this.percentageX+'%;top:'+this.percentageY+'%;';
+      this.props.finalStyle = this.props.style;
     }
     else
     {
       this.props.style='width:200px;position:absolute;left:'
       +this.percentageX+'%;top:'+this.percentageY+'%;';
+      this.props.finalStyle=this.props.style;
     }
   }
   
 
   onDragEnded($event: CdkDragEnd) {
+    this.props.finalStyle=this.props.style;
+    let regexPosition = /;top(.+?);/g;
+    let regexPosition2 = /;left(.+?);/g;
     this.props.mouseDragPositionX =
     (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
     * 100;
     this.props.mouseDragPositionY =
     (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
     * 100;
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition, ';top:'+this.props.mouseDragPositionY+'%;');
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition2, ';left:'+this.props.mouseDragPositionX+'%;');
   }
 
   constructor(canvas: ElementRef) {
@@ -147,7 +161,7 @@ export class InputDragComponent implements OnInit, IComponent {
     }
 
     if (this.props.style.trim().length > 0) {
-      tmpHtmlCode += ' style="' + this.props.style + '"';
+      tmpHtmlCode += ' style="' + this.props.finalStyle + '"';
     }
 
     tmpHtmlCode += ' placeholder="' + this.props.placeholder + '">';

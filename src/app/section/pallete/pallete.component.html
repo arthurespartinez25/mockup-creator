@@ -92,13 +92,14 @@
       </app-save>
       <button 
         class="palette-item" 
-        (click)="logout()"
+        mat-button (click)="confirmLogOut()"
         style="background-color: maroon;"
       >
         Logout
       </button>
     </div>
       <app-component-list
-        [componentList]="componentList">
+        [componentList]="componentList"
+        (updateSelectedEvent)="updateSelected($event)">
       </app-component-list>
   </div>

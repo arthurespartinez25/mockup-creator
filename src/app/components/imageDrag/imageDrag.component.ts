@@ -30,6 +30,7 @@ export class ImageDragComponent implements OnInit, IComponent {
     hidden: false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
+    finalStyle: ''
   };
 
   @Input() canvasPositionX: any;
@@ -43,7 +44,6 @@ export class ImageDragComponent implements OnInit, IComponent {
   mousePositionTop = 0;
   percentageX = 0;
   percentageY = 0;
-
 
   ngOnInit(): void {
     this.canvasPositionLeft = this.canvasPositionX;
@@ -65,6 +65,7 @@ export class ImageDragComponent implements OnInit, IComponent {
           '%;top:' +
           this.percentageY +
           '%;';
+        this.props.finalStyle = this.props.style;
         break;
 
       case 'HPImage1':
@@ -77,6 +78,7 @@ export class ImageDragComponent implements OnInit, IComponent {
         this.percentageY
         +'%;';
         this.props.value = /* `https://images-cdn.9gag.com/photo/arVBvwX_700b.jpg` */ `https://media.discordapp.net/attachments/699657972611153982/932194877024907284/gourmet-burger.png`;
+        this.props.finalStyle = this.props.style;
         break;
       case 'HPImage2':
         this.props.style = `height: 390px;
@@ -88,6 +90,7 @@ export class ImageDragComponent implements OnInit, IComponent {
         this.percentageY
         +'%;';
         this.props.value = /* `https://i.pinimg.com/474x/50/8e/4e/508e4e9d7380526dff7e7346f9c5d013.jpg` */ `https://st4.depositphotos.com/8522652/i/600/depositphotos_281396182-stock-photo-karaage-japanese-fried-chicken-with.jpg`;
+        this.props.finalStyle = this.props.style;
         break;
       case 'HPImage3':
         this.props.style = `height: 390px;
@@ -99,6 +102,7 @@ export class ImageDragComponent implements OnInit, IComponent {
         this.percentageY
         +'%;';
         this.props.value = /* `https://external-preview.redd.it/mWEhfBkJ-YMbQAQs5oIYJDWA8IpEXa8DjGO6gk1APNQ.jpg?width=640&crop=smart&auto=webp&s=acb8ce5ac8a5fe870af5a1613b34fb6607e996a2` */ `https://cdn.shopify.com/s/files/1/0353/5621/articles/JAPANESERECIPES6343.jpg?v=1612904909`;
+        this.props.finalStyle = this.props.style;
         break;
       case 'HPImage4':
         this.props.style = `height: 390px;
@@ -110,6 +114,7 @@ export class ImageDragComponent implements OnInit, IComponent {
         this.percentageY
         +'%;';
         this.props.value = `https://www.cookingclassy.com/wp-content/uploads/2019/07/steak-marinade-12-768x1152.jpg`;
+        this.props.finalStyle = this.props.style;
         break;
 
       default:
@@ -119,17 +124,23 @@ export class ImageDragComponent implements OnInit, IComponent {
           '%;top:' +
           this.percentageY +
           '%;';
+        this.props.finalStyle=this.props.style;
         break;
     }
   }
 
   onDragEnded($event: CdkDragEnd) {
+    this.props.finalStyle=this.props.style;
+    let regexPosition = /;top(.+?);/g;
+    let regexPosition2 = /;left(.+?);/g;
     this.props.mouseDragPositionX =
     (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
     * 100;
     this.props.mouseDragPositionY =
     (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
     * 100;
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition, ';top:'+this.props.mouseDragPositionY+'%;');
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition2, ';left:'+this.props.mouseDragPositionX+'%;');
   }
 
   constructor(canvas: ElementRef) {
@@ -158,8 +169,8 @@ export class ImageDragComponent implements OnInit, IComponent {
       this.props.id +
       '" type="' +
       this.props.type +
-      '" style="' +
-      this.props.style +
+      '" style="'+
+      this.props.finalStyle +
       '" src = " ' +
       this.props.value +
       '"> </img>';

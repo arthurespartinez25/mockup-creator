@@ -1,18 +1,15 @@
 <div class="form-check" cdkDrag cdkDragBoundary=".canvas" (cdkDragEnded)="onDragEnded($event)"
-[cdkDragDisabled]="!props.draggable" [class]="props.class"  [ngStyle]="{
-    position: 'sticky',
-    left: mousePositionLeft + 'px',
-    top: mousePositionTop + 'px',
+[cdkDragDisabled]="!props.draggable" [class]="props.class"  [style]="props.style" [ngStyle]="{
     'border-color' : props.selected == true ? 'red': (props.selected == false ? 'none': null),
     'border-style' : props.selected == true ? 'solid': (props.selected == false ? 'none': null),
     'border-width' : props.selected == true ? '1px': (props.selected == false ? '0px': null)
   }" >
     <div *ngIf="props.checked=='true'">
-        <input [class]="props.class" [type]="props.type" [name]="props.name" [id]="props.id" (click)="isChecked($event)"  checked>
-        <label class= "form-check-label" [for]="props.id" [style]="props.style" >{{ props.value }}</label>
+        <input  [type]="props.type" [name]="props.name" [id]="props.id" (click)="isChecked($event)"  checked>
+        <label class= "form-check-label" [for]="props.id" >{{ props.value }}</label>
     </div>
     <div *ngIf="props.checked=='false'">
-        <input [class]="props.class" [type]="props.type" [name]="props.name" [id]="props.id" (click)="isChecked($event)">
-        <label class= "form-check-label" [for]="props.id" [style]="props.style" >{{ props.value }}</label>
+        <input [type]="props.type" [name]="props.name" [id]="props.id" (click)="isChecked($event)">
+        <label class= "form-check-label" [for]="props.id" >{{ props.value }}</label>
     </div>
 </div>

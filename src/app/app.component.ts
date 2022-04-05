@@ -54,6 +54,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     hidden: false,
     mouseDragPositionX: 0,
     mouseDragPositionY: 0,
+    finalStyle:''
   };
 
   public cssRuleCount = document.styleSheets[0].cssRules.length;
@@ -231,7 +232,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   yDistance: any = 0;
   theUsername = "";
 
-  
   loggedIn($event) {
     /* console.log("eto value natin lods: " + this.sessionID); */
     this.theUsername = $event;

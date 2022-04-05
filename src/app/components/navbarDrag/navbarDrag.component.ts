@@ -33,6 +33,7 @@ export class NavbarDragComponent implements OnInit, IComponent {
     hidden: false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
+    finalStyle: ''
   };
 
   @Input() canvasWidth2: any;
@@ -74,6 +75,7 @@ export class NavbarDragComponent implements OnInit, IComponent {
         '%;top:' +
         this.percentageY +
         '%;';
+      this.props.finalStyle = this.props.style;
     } else if (this.whatComponent2 == 'HPNav1') {
       this.props.style = `width: 100%; 
       height: 100px;
@@ -84,6 +86,7 @@ export class NavbarDragComponent implements OnInit, IComponent {
       border-bottom: 1px solid  white;
       position:absolute;left:`+this.percentageX+`%;top:`+this.percentageY+`%;`;
       this.props.value = '';
+      this.props.finalStyle = this.props.style;
     } else if (this.whatComponent2 == 'HPNav2') {
       this.props.style = `width: 100%; 
       color: white;
@@ -94,6 +97,7 @@ export class NavbarDragComponent implements OnInit, IComponent {
       height:50px;
       position:absolute;left:`+this.percentageX+`%;top:`+this.percentageY+`%;`;
       this.props.value = `50% OFF  OUR A LA CARTE MENU IN FEBRUARY!`;
+      this.props.finalStyle = this.props.style;
     } else if (this.whatComponent2 == 'HPNav3') {
       this.props.style = `width: 100%; 
       height: 140px;
@@ -104,19 +108,29 @@ export class NavbarDragComponent implements OnInit, IComponent {
       border-bottom: 1px solid  white;
       position:absolute;left:`+this.percentageX+`%;top:`+this.percentageY+`%;`;
       this.props.value = ``;
+      this.props.finalStyle = this.props.style;
     } else {
       this.props.style =
         'position:absolute;width:100%;color: white;padding: 10px;background-color: #12355B;font-size: 20px;left:0%;top:' +
         this.percentageY +
         '%;';
+      this.props.mouseDragPositionX =0;
+      this.props.finalStyle = this.props.style;
     }
   }
 
   onDragEnded($event: CdkDragEnd) {
-    this.props.mouseDragPositionX = 0;
+    this.props.finalStyle=this.props.style;
+    let regexPosition = /;top(.+?);/g;
+    let regexPosition2 = /;left(.+?);/g;
+    this.props.mouseDragPositionX =
+    (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
+    * 100;
     this.props.mouseDragPositionY =
     (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
     * 100;
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition, ';top:'+this.props.mouseDragPositionY+'%;');
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition2, ';left:'+this.props.mouseDragPositionX+'%;');
   }
 
   constructor(canvas: ElementRef) {
@@ -147,7 +161,7 @@ export class NavbarDragComponent implements OnInit, IComponent {
     }
 
     if (this.props.style.trim().length > 0) {
-      htmlCode += ' style="' + this.props.style + '"';
+      htmlCode += ' style="' + this.props.finalStyle + '"';
     }
 
     htmlCode += '>' + this.props.value + '</nav>';

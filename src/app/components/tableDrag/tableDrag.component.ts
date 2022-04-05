@@ -138,6 +138,7 @@ export class TableDragComponent implements OnInit, IComponent {
     tblArrayCol: [],
     tblArrayRow: [],
     updateCallback: this.editTableDimension,
+    finalStyle:''
   };
 
   @Input() canvasPositionX: any;
@@ -167,17 +168,25 @@ export class TableDragComponent implements OnInit, IComponent {
     this.mousePositionTop = this.mousePositionY2;
     this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
     this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
-    this.props.style='position:sticky;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
+    this.props.mouseDragPositionX = this.percentageX;
+    this.props.mouseDragPositionY = this.percentageY;
+    this.props.style='position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
+    this.props.finalStyle=this.props.style;
   }
  
 
   onDragEnded($event: any) {
+    this.props.finalStyle=this.props.style;
+    let regexPosition = /;top(.+?);/g;
+    let regexPosition2 = /;left(.+?);/g;
     this.props.mouseDragPositionX =
     (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
     * 100;
     this.props.mouseDragPositionY =
     (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
     * 100;
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition, ';top:'+this.props.mouseDragPositionY+'%;');
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition2, ';left:'+this.props.mouseDragPositionX+'%;');
   }
 
   constructor(canvas: ElementRef, changeDetectorRef: ChangeDetectorRef) {
@@ -224,7 +233,7 @@ export class TableDragComponent implements OnInit, IComponent {
     dummyStyle = dummyStyle.replace(regexPosition, '');
 
     let tmpHtmlCode =
-      '<div class="btn-group"' + ' style="' + this.props.style + '"';
+      '<div class="btn-group"' + ' style="' + this.props.finalStyle + '"';
     tmpHtmlCode += 'id="' + this.props.id + '">';
     tmpHtmlCode += '\n' + '<table class='+ this.props.class +'>'
     for(var i=0; i<this.props.tblArrayRow.length; i++) {

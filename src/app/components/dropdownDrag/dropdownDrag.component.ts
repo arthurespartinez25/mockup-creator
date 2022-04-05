@@ -32,6 +32,7 @@ export class DropdownDragComponent implements OnInit, IComponent {
     mouseDragPositionY:0,
     linkValue: 'link1,link2,link3',
     linksArray: [],
+    finalStyle: ''
   };
 
   @Input() canvasPositionX: any;
@@ -63,22 +64,28 @@ export class DropdownDragComponent implements OnInit, IComponent {
 
       default:
         this.props.style =
-          'position:sticky;left:' +
+          'position:absolute;left:' +
           this.percentageX +
           '%;top:' +
           this.percentageY +
           '%;';
+        this.props.finalStyle=this.props.style;
         break;
     }
   }
 
   onDragEnded($event: CdkDragEnd) {
+    this.props.finalStyle=this.props.style;
+    let regexPosition = /;top(.+?);/g;
+    let regexPosition2 = /;left(.+?);/g;
     this.props.mouseDragPositionX =
     (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
     * 100;
     this.props.mouseDragPositionY =
     (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
     * 100;
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition, ';top:'+this.props.mouseDragPositionY+'%;');
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition2, ';left:'+this.props.mouseDragPositionX+'%;');
   }
 
   constructor(canvas: ElementRef) {
@@ -133,7 +140,7 @@ export class DropdownDragComponent implements OnInit, IComponent {
     dummyStyle = dummyStyle.replace(regexPosition, '');
 
     let tmpHtmlCode =
-      '<select class="' + this.props.class + '" id="' + this.props.id + '" style="' + this.props.style + '">';
+      '<select class="' + this.props.class + '" id="' + this.props.id + '" style="' + this.props.finalStyle + '">';
 
         for (var i = 0; i < this.props.linksArray.length; i++) {
           if(this.props.linksArray[i] == this.props.value) {

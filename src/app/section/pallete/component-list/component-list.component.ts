@@ -24,6 +24,7 @@ import { BehaviorSubject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { DatePipe } from '@angular/common'
 import { PropertyComponent } from './../../../property/property.component';
+import { DialogService } from 'src/app/service/dialog.service';
 
 @Component({
   selector: 'app-component-list',
@@ -54,6 +55,23 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
     hidden: false,
     mouseDragPositionX: 0,
     mouseDragPositionY: 0,
+    finalStyle:''
+  };
+
+  defaultProps: IProperty = {
+    key: '',
+    id: '',
+    value: '',
+    class: '',
+    style: '',
+    typeObj: '',
+    type: '',
+    draggable: false,
+    selected : false,
+    hidden: false,
+    mouseDragPositionX: 0,
+    mouseDragPositionY: 0,
+    finalStyle:''
   };
 
   public cssRuleCount = document.styleSheets[0].cssRules.length;
@@ -67,7 +85,7 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
   //@ViewChild(PropertyComponent) propertyCmp:PropertyComponent;
-
+  @Output() updateSelectedEvent = new EventEmitter<IProperty>();
   @Output() updateComponentListEvent = new EventEmitter<IComponent>();
   @Output() updateCanvasLeftEvent = new EventEmitter<number>();
   @Output() updateCanvasTopEvent = new EventEmitter<number>();
@@ -83,6 +101,7 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
     public _location: Location,
     public sanitizer: DomSanitizer,
     public datepipe: DatePipe,
+    private dialogService: DialogService
   ) {
     this.changeref = changeDetectorRef;
   }
@@ -146,6 +165,8 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
     this.componentList.length = 0;
   }
 
+  
+
   returnComponentList() {
     return this.componentList;
   }
@@ -173,15 +194,15 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
       this.styleHolder = this.styleHolder.replace(regexLeft, '');
       this.styleHolder = this.styleHolder.replace(regexTop, '');
       this.styleHolder = this.styleHolder.replace(regexPosition, '');
-      this.selected.style =
-        this.styleHolder +
-        'position:sticky;' +
-        'left:' +
-        this.selected.mouseDragPositionX +
-        '%;' +
-        'top:' +
-        this.selected.mouseDragPositionY +
-        '%;';
+      // this.selected.style =
+      //   this.styleHolder +
+      //   'position:absolute;' +
+      //   'left:' +
+      //   this.selected.mouseDragPositionX +
+      //   '%;' +
+      //   'top:' +
+      //   this.selected.mouseDragPositionY +
+      //   '%;';
       //  this.selected.mouseDragPositionX = 0;
       //  this.selected.mouseDragPositionY = 0;
     } else if (
@@ -208,6 +229,7 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
       this.selected.mouseDragPositionX = 0;
       this.selected.mouseDragPositionY = 0;
     }
+    this.updateSelectedEvent.emit(this.selected);
   }
   onDragEnd(component: IComponent) {
     console.log(component);
@@ -227,12 +249,24 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
 
   /*************The code below is for component list functions**********************/
 
+  
+
   deleteComponent(value: any) {
+    this.updateSelectedEvent.emit(this.defaultProps);
     let componentIndex = this.componentList.indexOf(value); //gets the index of the selected component inside the canvas
     if (componentIndex !== -1) {
       this.componentList.splice(componentIndex, 1); //removes the component from the canvas
     }
   }
+  confirmDelete(value: any) {
+    this.dialogService.openConfirmDialog('Are you sure to delete this component?')
+    .afterClosed().subscribe(res =>{
+      if(res){
+        this.deleteComponent(value);
+      }
+    });
+  }
+  
 
   hideComponent(value: any) {
     let componentIndex = this.componentList.indexOf(value); //gets the index of the selected component inside the canvas
@@ -269,6 +303,7 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
     let componentIndex = this.componentList.indexOf(value);
     let checkbox,
       datepicker,
+      div,
       dropdown,
       header,
       image,
@@ -290,6 +325,8 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
     }
   }
 
+ 
+
   /**************End of code for component list functions *************************/
 
 
@@ -298,4 +335,3 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
 function readCSSFile(arg0: string) {
   throw new Error('Function not implemented.');
 }
-

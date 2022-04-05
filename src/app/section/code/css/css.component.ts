@@ -183,7 +183,7 @@ export class CssComponent implements OnInit, AfterViewInit, AfterViewChecked {
     let cssString: string;
 
     for (let i = this.cssRuleCount; i < newCssRuleCount; i++) { //compares web-app default cssRule count with the added cssRules
-      cssString = document.styleSheets[0].cssRules[i].cssText.toString();  
+      cssString = document.styleSheets[0].cssRules[i].cssText.toString();
       if (
         document.styleSheets[0].cssRules[i].cssText
           .toString()
@@ -202,7 +202,7 @@ export class CssComponent implements OnInit, AfterViewInit, AfterViewChecked {
           }
       } 
       else {
-        this.style += document.styleSheets[0].cssRules[i].cssText.toString(); //adds regular selector to style
+        this.style += cssString; //adds regular selector to style
         this.style += '\n';
       }
     }

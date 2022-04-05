@@ -23,6 +23,7 @@ import { LabelDragComponent } from './../../../components/labelDrag/labelDrag.co
 import { CheckboxDragComponent } from './../../../components/checkboxDrag/checkboxDrag.component';
 import { DropdownDragComponent } from './../../../components/dropdownDrag/dropdownDrag.component';
 import { ImageDragComponent } from './../../../components/imageDrag/imageDrag.component';
+import { DivDragComponent } from './../../../components/divDrag/divDrag.component';
 import { RadioDragComponent } from './../../../components/radioDrag/radioDrag.component';
 import { TextboxDragComponent } from './../../../components/textboxDrag/textboxDrag.component';
 import { PopupDragComponent } from './../../../components/popupDrag/popupDrag.component';
@@ -71,6 +72,7 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
     hidden: false,
     mouseDragPositionX: 0,
     mouseDragPositionY: 0,
+    finalStyle:''
   };
 
   public cssRuleCount = document.styleSheets[0].cssRules.length;
@@ -194,6 +196,10 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
         temp = new ImageDragComponent(this.canvas);
         break;
 
+      case 'div':
+        temp = new DivDragComponent(this.canvas);
+        break;  
+
       case 'radio':
         temp = new RadioDragComponent(this.canvas);
         break;
@@ -285,13 +291,17 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
       console.log(this.canvasTopY);
       if (
         component == 'img' ||
-        component == 'nav' ||
+        component == 'div' ||
         component == 'link' ||
         component == 'table' ||
         component == 'youtube'
       ) {
         this.canvasLeftX = 0;
         this.canvasTopY = 0;
+      } else if ( component == 'nav') {
+        this.canvasLeftX = 0;
+        this.canvasTopY = 0;
+        this.xDistance = 0;
       } else if (
         component == 'header' ||
         component == 'paragraph' ||
@@ -329,4 +339,3 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
 function readCSSFile(arg0: string) {
   throw new Error('Function not implemented.');
 }
-

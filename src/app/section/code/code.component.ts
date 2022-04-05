@@ -68,6 +68,7 @@ export class CodeComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @Input() projectName: string;
   @Input() tabList: any;
   @Input() currentTab: string;
+
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;

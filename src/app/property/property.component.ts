@@ -4,6 +4,7 @@ import { IProperty } from '../interfaces/iproperty';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { DatePipe } from '@angular/common'
 import { CodeComponent } from '../section/code/code.component';
+import { DialogService } from '../service/dialog.service';
 
 @Component({
   selector: 'app-property',
@@ -27,8 +28,11 @@ export class PropertyComponent implements OnInit {
     mouseDragPositionX:0,
     mouseDragPositionY:0,
     dummyDate:'',
+    isIcon:false,
+    finalStyle: ''
   };
   style2 = '';
+  tempStyle = '';
   @Output() addAllCSSRule = new EventEmitter<string>();
   @Output() clearCss = new EventEmitter<string>();
   @Output() cssReceiveMessage = new EventEmitter<string>();
@@ -43,14 +47,17 @@ export class PropertyComponent implements OnInit {
   set property(value: IProperty) {
     if (value) {
       this.props = value;
-      this.style2 = this.props.style;
+      this.style2 = this.tempStyle = this.props.style;
       setTimeout(() => {
-        let regexPosition = /position(.+?);/;
+      let regexPosition = /position(.+?);/;
       let regexPosition2 = /top(.+?);/;
       let regexPosition3 = /left(.+?);/;
+      let regexPosition4 = /visibility:\s?visible;/;
       this.style2 = this.style2.replace(regexPosition, '');
       this.style2 = this.style2.replace(regexPosition2, '');
       this.style2 = this.style2.replace(regexPosition3, '');
+      this.style2 = this.style2.replace(regexPosition4, '');
+      
       if(this.props.typeObj == 'datepickerDrag')
         {
         this.props.dummyDate = this.datepipe.transform(this.props.value, 'MM/dd/YYYY');
@@ -75,7 +82,7 @@ export class PropertyComponent implements OnInit {
     this.selectedcomp = value;
   }
 
-  constructor(public sanitizer:DomSanitizer, public datepipe: DatePipe) {
+  constructor(public sanitizer:DomSanitizer, public datepipe: DatePipe, private dialogService: DialogService) {
     this.props = this.property;
     this.componentList = this.compList;
     this.selectedcomp = this.selectedIdx;
@@ -91,6 +98,18 @@ export class PropertyComponent implements OnInit {
     }
     this.updateComponentListEvent.emit(this.componentList);
   }
+
+  confirmRemove() {
+    this.dialogService.openConfirmDialog('Are you sure to remove this component?')
+    .afterClosed().subscribe(res =>{
+      if(res){
+        this.deleteComponent();
+      }
+    });
+  }
+
+
+
   @ViewChild('taID') styleBox: ElementRef;
   clearComponent() {
         this.componentList.length = 0;
@@ -102,6 +121,17 @@ export class PropertyComponent implements OnInit {
         this.props.draggable = false;        
         this.clearComponentListEvent.next(0);
   }
+
+  confirmClear() {
+    this.dialogService.openConfirmDialog('Are you sure to clear all components from this canvas?')
+    .afterClosed().subscribe(res =>{
+      if(res){
+        this.clearComponent();
+      }
+    });
+  }
+
+      
 
   ngOnInit(): void {
     this.style2 = this.props.style;
@@ -121,6 +151,18 @@ export class PropertyComponent implements OnInit {
         
       }, 3000);
     }
+    else if(this.props.typeObj == 'linkDrag' || this.props.typeObj == 'buttonDrag')
+    {
+      if(this.checkIcon(event.target.value))
+      {
+        this.props.isIcon = true;
+        this.props.value = event.target.value.slice(10, -6);
+      }
+      else
+      {
+        this.props.value = event.target.value;
+      }
+    }
     else
     {
       this.props.value = event.target.value;
@@ -134,14 +176,15 @@ export class PropertyComponent implements OnInit {
 
   styleChangeHandler(event: any) {
     let x = event.target.value;
-    let regexPosition = /position(.+?);/;
-    let regexPosition2 = /top(.+?);/;
-    let regexPosition3 = /left(.+?);/;
-    let position = 'position:sticky;';
-    let position2 = this.props.style.match(regexPosition2);
-    let position3 = this.props.style.match(regexPosition3);
-    this.props.style = event.target.value+position+position2![0]+position3![0];
-    
+    let topRegex = /;top:\s?\d+(\.\d+)?%/g
+    let leftRegex = /;left:\s?\d+(\.\d+)?%;/g
+    let topPosition = this.tempStyle.match(topRegex)?.toString();
+    let leftPosition = this.tempStyle.match(leftRegex)?.toString();
+    let position = 'position:absolute'
+    this.props.style = position+topPosition+leftPosition+x;
+    this.props.finalStyle = this.props.style;
+    this.props.finalStyle=this.props.finalStyle.replace(topRegex, ';top:'+this.props.mouseDragPositionY+'%');
+    this.props.finalStyle=this.props.finalStyle.replace(leftRegex, ';left:'+this.props.mouseDragPositionX+'%;')
   }
   @ViewChild('taID') styleText!: ElementRef;
   styleChangeHandler2(event: any) {
@@ -188,6 +231,12 @@ export class PropertyComponent implements OnInit {
   enableDragging(event: any) {
     this.props.draggable = !this.props.draggable;
   }
+  redirectionChangeHandler(event: any){
+    this.props.redirection = event.target.value;
+  }
+  newTab(event: any) {
+    this.props.target = !this.props.target;
+  }  
   
   /* CODE BELOW IS FOR TABLE ELEMENT */
 
@@ -233,5 +282,14 @@ export class PropertyComponent implements OnInit {
         this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl('https://ps.w.org/all-404-redirect-to-homepage/assets/icon-128x128.png?rev=1515215');
       }
   }
+  checkIcon(icon: string){
+    if(icon.match(/^<i class=".*"><\/i>$/)){
+      return true;
+    }
+    return false;
+  }
   /* END OF CODE FOR TABLE ELEMENT */
+
+  
 }
+
