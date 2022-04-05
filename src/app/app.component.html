@@ -28,6 +28,7 @@
     (updateMousePosY)="updateMousePositionY($event)"
     (updateWhatComponentEvent)="updateWhatComponent($event)"
     (updateProjectNameEvent)="updateProjectName($event)"
+    [isPlaying]="isPlaying"
     ></app-pallete>
   
   
@@ -77,6 +78,8 @@
     (updateComponentListMapEvent)="updateComponentListMap($event)"
     (updateSelectedCanvasEvent)="updateSelectedCanvas($event)"
     (updateTabListEvent)="updateTabList($event)"
+    (updateIsPlaying)="updateIsPlayingEvent($event)"
+    
     ></app-canvas>
   <!-- CODE SECTION -->
 <!--
@@ -195,6 +198,7 @@
   (clearComponentListEvent) = "clearComponentList()"
   (updateComponentListEvent) = "updateComponentListDel($event)"
   (updateStyleEvent) = "updateStyleEvent($event)"
+  [isPlaying]="isPlaying"
   >
   </app-code>
 </div>

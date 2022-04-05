@@ -89,11 +89,13 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
   @Input() style: string;
   @Input() tabList: any;
   @Input() currentTab: string;
+  @Input() isPlaying: boolean;
   //@Input() componentListMap:
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
   //@ViewChild(PropertyComponent) propertyCmp:PropertyComponent;
+  
 
   @Output() updateComponentListEvent = new EventEmitter<IComponent>();
   @Output() updateCanvasLeftEvent = new EventEmitter<number>();

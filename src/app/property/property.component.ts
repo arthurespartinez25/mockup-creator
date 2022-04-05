@@ -74,6 +74,7 @@ export class PropertyComponent implements OnInit {
   set selectedIdx(value: IComponent) {
     this.selectedcomp = value;
   }
+  @Input() isPlaying: boolean;
 
   constructor(public sanitizer:DomSanitizer, public datepipe: DatePipe) {
     this.props = this.property;

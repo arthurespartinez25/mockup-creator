@@ -96,6 +96,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   sessionID = this.loginCookie.get("sessionID");
   inSession: boolean = this.sessionID == "12345";
   isPlaying: boolean = false;
+  // disabledValue = false;
   
 
   ngOnInit() {
@@ -108,6 +109,12 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
         this.users = data;
       }) */
     }
+    // if(this.isPlaying) {
+    //   this.disabledValue = true;
+    // }
+    // else{
+    //   this.disabledValue = false;
+    // }
     
   }
   ngAfterViewInit(): void {
@@ -269,9 +276,10 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     this.updateSelectedCanvasEvent.emit(this.canvas);
   } 
 
+  @Output() updateIsPlaying = new EventEmitter<boolean>();
  isPlay(value: any) {
     this.isPlaying = value;
-
+    this.updateIsPlaying.emit(this.isPlaying);
  }
   
    

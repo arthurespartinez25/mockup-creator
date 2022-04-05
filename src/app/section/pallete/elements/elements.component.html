@@ -11,14 +11,17 @@
             (click)="addComponent('nav')"
             cdkDrag
             (cdkDragEnded)="onDragEndedAddComponent($event, 'nav')"
+            [disabled]="isPlaying"
           >
             Navbar
           </button>
           <button
+            [disabled]="isPlaying"
             class="palette-item"
             (click)="addComponent('link')"
             cdkDrag
             (cdkDragEnded)="onDragEndedAddComponent($event, 'link')"
+           
           >
             Link
           </button>
@@ -32,7 +35,8 @@
           >
             <button class="sub-menu-button palette-item"
             (focus)="isDisabled = false"
-            (focusout)="timerDisable()">Text*</button>
+            (focusout)="timerDisable()"
+            [disabled]="isPlaying">Text*</button>
             <div class="sub-menu-dropdown">
               <button
                 class="palette-item"
@@ -40,6 +44,7 @@
                 cdkDrag
                 (cdkDragEnded)="onDragEndedAddComponent($event, 'header')"
                 [disabled]="isDisabled"
+                [disabled]="isPlaying"
               >
                 Header
               </button>
@@ -50,6 +55,7 @@
                 cdkDrag
                 (cdkDragEnded)="onDragEndedAddComponent($event, 'paragraph')"
                 [disabled]="isDisabled"
+                [disabled]="isPlaying"
               >
                 Paragraph
               </button>
@@ -60,6 +66,7 @@
                 cdkDrag
                 (cdkDragEnded)="onDragEndedAddComponent($event, 'label')"
                 [disabled]="isDisabled"
+                [disabled]="isPlaying"
               >
                 Label
               </button>
@@ -75,7 +82,7 @@
             style="padding: 0px; padding-top: 0px"
           >
             <button class="sub-menu-button palette-item" (focus)="isDisabled = false"
-            (focusout)="timerDisable()">Input*</button>
+            (focusout)="timerDisable()" [disabled]="isPlaying">Input*</button>
             <div class="sub-menu-dropdown">
               <button
                 class="palette-item"
@@ -83,6 +90,7 @@
                 cdkDrag
                 (cdkDragEnded)="onDragEndedAddComponent($event, 'button')"
                 [disabled]="isDisabled"
+                [disabled]="isPlaying"
               >
                 Button
               </button>
@@ -92,7 +100,8 @@
                 (click)="addComponent('dropdown')"
                 cdkDrag
                 (cdkDragEnded)="onDragEndedAddComponent($event, 'dropdown')"
-                [disabled]="isDisabled"ms
+                [disabled]="isDisabled"
+                [disabled]="isPlaying"
               >
                 Dropdown
               </button>
@@ -102,6 +111,7 @@
                 cdkDrag
                 (cdkDragEnded)="onDragEndedAddComponent($event, 'checkbox')"
                 [disabled]="isDisabled"
+                [disabled]="isPlaying"
               >
                 Checkbox
               </button>
@@ -112,6 +122,7 @@
                 cdkDrag
                 (cdkDragEnded)="onDragEndedAddComponent($event, 'radio')"
                 [disabled]="isDisabled"
+                [disabled]="isPlaying"
               >
                 Radio
               </button>
@@ -121,6 +132,7 @@
                 cdkDrag
                 (cdkDragEnded)="onDragEndedAddComponent($event, 'input')"
                 [disabled]="isDisabled"
+                [disabled]="isPlaying"
               >
                 Input Field
               </button>
@@ -130,6 +142,7 @@
                 cdkDrag
                 (cdkDragEnded)="onDragEndedAddComponent($event, 'textbox')"
                 [disabled]="isDisabled"
+                [disabled]="isPlaying"
               >
                 Textbox
               </button>
@@ -139,6 +152,7 @@
                 cdkDrag
                 (cdkDragEnded)="onDragEndedAddComponent($event, 'datepicker')"
                 [disabled]="isDisabled"
+                [disabled]="isPlaying"
               >
                 DatePicker
               </button>
@@ -161,6 +175,7 @@
             cdkDrag
             (cdkDragEnded)="onDragEndedAddComponent($event, 'popup')"
             [hidden]="true"
+            [disabled]="isPlaying"
           >
             Popup
           </button>
@@ -169,6 +184,7 @@
             (click)="addComponent('img')"
             cdkDrag
             (cdkDragEnded)="onDragEndedAddComponent($event, 'img')"
+            [disabled]="isPlaying"
           >
             Image
           </button>
@@ -177,6 +193,7 @@
             (click)="addComponent('table')"
             cdkDrag
             (cdkDragEnded)="onDragEndedAddComponent($event, 'table')"
+            [disabled]="isPlaying"
           >
             Table
           </button>
@@ -185,6 +202,7 @@
           (click)="addComponent('youtube')"
           cdkDrag
           (cdkDragEnded)="onDragEndedAddComponent($event,'youtube')"
+          [disabled]="isPlaying"
           >
           Iframe
         </button>

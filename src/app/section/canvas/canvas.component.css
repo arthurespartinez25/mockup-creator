@@ -213,7 +213,7 @@ a.custom-nav-link:hover {
   width: 1280px;
 }
 
-.switch {
+/* .switch {
   position: relative;
   display: inline-block;
   width: 34px;
@@ -224,9 +224,9 @@ a.custom-nav-link:hover {
   opacity: 0;
   width: 0;
   height: 0;
-}
+} */
 
-input:checked + .play {
+/* input:checked + .play {
   position: absolute;
   content: "";
   height: 26px;
@@ -241,9 +241,9 @@ input:checked + .play {
   bottom: 4px;
   -webkit-transition: .4s;
   transition: .4s;
-}
+} */
 
-.play {
+/* .play {
   position: absolute;
   content: "";
   height: 26px;
@@ -264,8 +264,8 @@ input:checked + .play {
   border-radius: 4px;
   height: 38px;
   width: 38px;
-}
+} */
 
 .playButton {
-  position: absolute; top: 18px; left: 1255px; z-index: 5;
+  position: absolute; bottom: 20px; 
 }

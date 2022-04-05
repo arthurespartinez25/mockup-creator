@@ -4,7 +4,7 @@
       <mat-tab *ngFor="let tab of tabs; let index = index">
         <ng-template mat-tab-label>
           <span class="tab-label" [attr.contenteditable]="tabs[index].allowEdit" (dblclick)="onDblClick($event)" (focusout)="onDblClick($event)">{{tab.name}} </span>
-          <button [disabled]="tabs.length === 1" type="button" class="btn btn-close" (click)="removeTab(index)"></button>
+          <button [disabled]="this.isPlaying" [disabled]="tabs.length === 1" type="button" class="btn btn-close" (click)="removeTab(index)"></button>
         </ng-template>
         <div
         class="canvas"
@@ -28,6 +28,7 @@
               [canvasW]="canvasW"
               [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
               [whatComponent]="whatComponent"
+              
             >
             </app-wrapper>
           </div>
@@ -36,7 +37,7 @@
 
       <mat-tab disabled>
         <ng-template mat-tab-label>
-            <button type="button" class="btn btn-outline-dark" (click)="addTab()"><i class="fa-solid fa-plus"></i></button>
+            <button [disabled]="this.isPlaying" type="button" class="btn btn-outline-dark" (click)="addTab()"><i class="fa-solid fa-plus" ></i></button>
         </ng-template>
       </mat-tab>
     </mat-tab-group>
