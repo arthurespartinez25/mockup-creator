@@ -4,6 +4,7 @@ import { IProperty } from '../interfaces/iproperty';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { DatePipe } from '@angular/common'
 import { CodeComponent } from '../section/code/code.component';
+import { DialogService } from '../service/dialog.service';
 
 @Component({
   selector: 'app-property',
@@ -81,7 +82,7 @@ export class PropertyComponent implements OnInit {
     this.selectedcomp = value;
   }
 
-  constructor(public sanitizer:DomSanitizer, public datepipe: DatePipe) {
+  constructor(public sanitizer:DomSanitizer, public datepipe: DatePipe, private dialogService: DialogService) {
     this.props = this.property;
     this.componentList = this.compList;
     this.selectedcomp = this.selectedIdx;
@@ -97,6 +98,18 @@ export class PropertyComponent implements OnInit {
     }
     this.updateComponentListEvent.emit(this.componentList);
   }
+
+  confirmRemove() {
+    this.dialogService.openConfirmDialog('Are you sure to remove this component?')
+    .afterClosed().subscribe(res =>{
+      if(res){
+        this.deleteComponent();
+      }
+    });
+  }
+
+
+
   @ViewChild('taID') styleBox: ElementRef;
   clearComponent() {
         this.componentList.length = 0;
@@ -108,6 +121,17 @@ export class PropertyComponent implements OnInit {
         this.props.draggable = false;        
         this.clearComponentListEvent.next(0);
   }
+
+  confirmClear() {
+    this.dialogService.openConfirmDialog('Are you sure to clear all components from this canvas?')
+    .afterClosed().subscribe(res =>{
+      if(res){
+        this.clearComponent();
+      }
+    });
+  }
+
+      
 
   ngOnInit(): void {
     this.style2 = this.props.style;
@@ -259,4 +283,7 @@ export class PropertyComponent implements OnInit {
     return false;
   }
   /* END OF CODE FOR TABLE ELEMENT */
+
+  
 }
+

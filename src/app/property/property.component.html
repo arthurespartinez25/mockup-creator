@@ -4,7 +4,7 @@
     <button
       [ngClass]="{ invisible: !this.props.id }"
       id="delete"
-      (click)="deleteComponent()"
+      mat-button (click)="confirmRemove()"
     >
       Remove
     </button>
@@ -267,21 +267,17 @@
 <button
       id="clearScreen"
       #clearScreen
-      (click)="clearComponent()"
+      mat-button (click)="confirmClear()"
     >
       Clear
 </button>
+
 {{"X: "+props.mouseDragPositionX.toFixed(2)+"%"}}
 <br>
 {{"Y: "+props.mouseDragPositionY.toFixed(2)+"%"}}
 
 
 
-<!--
-<button (click)="removeElement($event)" type="button" class="btn btn-danger delete" title="Delete Element">
-  <span aria-hidden="true">&times;</span>
-</button>
--->
 
 <style>
   th {
@@ -303,9 +299,9 @@
     bottom: 26%;
     right: 34%;
     z-index: 9999;
-  }
-  #updateLink
+   }
+  /* #updateLink
   {
-    
-  }
+     
+  } */
 </style>

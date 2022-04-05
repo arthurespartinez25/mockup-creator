@@ -41,6 +41,9 @@ import { CssComponent } from './section/code/css/css.component';
 import { CodeSegmentComponent } from './section/code/code-segment/code-segment.component';
 import { DivDragComponent } from './components/divDrag/divDrag.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
@@ -76,9 +79,12 @@ import {MatTabsModule} from '@angular/material/tabs';
     CssComponent,
     CodeSegmentComponent,
     DivDragComponent,
+    MatConfirmDialogComponent,
+  
   ],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule, FormsModule, HttpClientModule, MatTabsModule],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule, FormsModule, HttpClientModule, MatTabsModule, MatDialogModule],
   providers: [DragDropModule, AppComponent, DatePipe],
   bootstrap: [AppComponent],
+  entryComponents: [MatConfirmDialogComponent],
 })
 export class AppModule {}
