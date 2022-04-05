@@ -9,6 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 import { IComponent } from './../../interfaces/icomponent';
 import { IProperty } from './../../interfaces/iproperty';
 import { PropertyComponent } from './../../property/property.component';
+import { ButtonService } from 'src/app/button-service.service';
 
 @Component({
   selector: 'app-canvas',
@@ -31,6 +32,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   refreshCSS = new BehaviorSubject<boolean>(true);
   cssDocument?: StyleSheet;
   users: any;
+  canvasIndex: number;
 
   selected: IProperty = {
     key: '',
@@ -87,8 +89,15 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     public _location: Location,
     public sanitizer: DomSanitizer,
     public datepipe: DatePipe,
+    private buttonService?: ButtonService
   ) {
     this.changeref = changeDetectorRef;
+    if(buttonService) {
+      this.buttonService?.listen().subscribe((m:any) => {
+        this.canvasIndex = this.tabs.findIndex(x => x.name == m);
+        this.changeIndex(this.canvasIndex);
+      })
+    }
   }
   delete: boolean;
   cssBody: SafeStyle;
@@ -282,10 +291,9 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     this.updateIsPlaying.emit(this.isPlaying);
  }
   
-   
-
-
- 
+ changeIndex(number: number) {
+  this.selectedTab = number;
+}    
 
   /****************** OLD CODE STARTS HERE **********************/
 }

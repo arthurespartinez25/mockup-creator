@@ -26,7 +26,7 @@ export class PropertyComponent implements OnInit {
     selected: false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
-    dummyDate:'',
+    dummyDate:''
   };
   style2 = '';
   @Output() addAllCSSRule = new EventEmitter<string>();
@@ -188,6 +188,12 @@ export class PropertyComponent implements OnInit {
   }
   enableDragging(event: any) {
     this.props.draggable = !this.props.draggable;
+  }
+  redirectionChangeHandler(event: any) {
+    this.props.redirection = event.target.value;
+  }
+  newTab(value: any) {
+    this.props.target = !this.props.target;
   }
   
   /* CODE BELOW IS FOR TABLE ELEMENT */

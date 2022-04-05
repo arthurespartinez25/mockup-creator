@@ -35,5 +35,6 @@ export interface IProperty {
   mouseDragPositionY?: any;
   dummystyle?:any;
   dummyDate?:any;
- 
+  redirection?: any;
+  target?: boolean;
 }

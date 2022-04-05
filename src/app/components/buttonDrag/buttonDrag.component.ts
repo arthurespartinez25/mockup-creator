@@ -9,11 +9,14 @@ import {
 } from '@angular/core';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
+import { ButtonService } from 'src/app/button-service.service';
+import { CanvasComponent } from 'src/app/section/canvas/canvas.component';
 
 @Component({
   selector: 'app-buttonDrag',
   styleUrls: ['./buttonDrag.component.css'],  
   template: `<button
+    (click)="passName()"
     cdkDrag
     cdkDragBoundary=".canvas"
     [cdkDragDisabled]="!props.draggable"
@@ -49,6 +52,8 @@ export class ButtonDragComponent implements IComponent {
     hidden:false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
+    redirection: 'Enter canvas name',
+    target: false
   };
 
   @Input() canvasPositionX: any;
@@ -56,12 +61,14 @@ export class ButtonDragComponent implements IComponent {
   @Input() mousePositionX2: any;
   @Input() mousePositionY2: any;
   @Input() whatComponent2: any;
+  @Output() passCanvas: EventEmitter<number> = new EventEmitter();
   canvasPositionLeft = 0;
   canvasPositionTop = 0;
   mousePositionLeft = 0;
   mousePositionTop = 0;
   percentageX = 0;
   percentageY = 0;
+  selectedIndex = 0;
 
   ngOnInit(): void {
     this.canvasPositionLeft = this.canvasPositionX;
@@ -142,7 +149,7 @@ export class ButtonDragComponent implements IComponent {
     * 100;
   }
 
-  constructor(canvas: ElementRef) {
+  constructor(canvas: ElementRef, private buttonService?: ButtonService) {
     this.canvas = canvas;
     let date = Date.now();
     this.props.key = date.toString();
@@ -159,8 +166,26 @@ export class ButtonDragComponent implements IComponent {
     }
   }
 
+  passName():void {
+    this.passCanvas.emit(this.props.redirection);
+    this.buttonService?.passCanvasName(this.props.redirection);
+  }
+
   get htmlCode(): string {
     let tmpHtmlCode = '<div><button';
+    if(this.props.redirection != undefined) {
+      if(this.props.redirection?.trim().length > 0) {
+        tmpHtmlCode += ' onClick="window.open(' + "'" + this.props.redirection + "'";
+      }
+      if(this.props.target == true) {
+        tmpHtmlCode += ", '_blank'";
+      }
+      else {
+        tmpHtmlCode += ", '_self'";
+      }
+      tmpHtmlCode += ')"';
+    }
+
     if (this.props.id.trim().length > 0) {
       tmpHtmlCode += ' id="' + this.props.id + '"';
     }
