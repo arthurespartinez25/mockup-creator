@@ -119,7 +119,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
   //@ViewChild(PropertyComponent) propertyCmp:PropertyComponent;
-
+  @Output() updateSelectedEvent = new EventEmitter<IProperty>();
   @Output() updateComponentListEvent = new EventEmitter<IComponent>();
   @Output() updateCanvasLeftEvent = new EventEmitter<number>();
   @Output() updateCanvasTopEvent = new EventEmitter<number>();
@@ -239,7 +239,9 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
   updatedWhatComponent(value: string){
     this.updateWhatComponentEvent.emit(value)
   }
-
+  updateSelected(value: IProperty){
+    this.updateSelectedEvent.emit(value)
+  }
   //----------------------------------------------------------------------------
 
   get dragDisabled(): boolean {

@@ -68,7 +68,7 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
   //@ViewChild(PropertyComponent) propertyCmp:PropertyComponent;
-
+  @Output() updateSelectedEvent = new EventEmitter<IProperty>();
   @Output() updateComponentListEvent = new EventEmitter<IComponent>();
   @Output() updateCanvasLeftEvent = new EventEmitter<number>();
   @Output() updateCanvasTopEvent = new EventEmitter<number>();
@@ -209,6 +209,7 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
       this.selected.mouseDragPositionX = 0;
       this.selected.mouseDragPositionY = 0;
     }
+    this.updateSelectedEvent.emit(this.selected);
   }
   onDragEnd(component: IComponent) {
     console.log(component);
