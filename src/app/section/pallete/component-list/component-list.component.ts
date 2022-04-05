@@ -57,6 +57,22 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
     finalStyle:''
   };
 
+  defaultProps: IProperty = {
+    key: '',
+    id: '',
+    value: '',
+    class: '',
+    style: '',
+    typeObj: '',
+    type: '',
+    draggable: false,
+    selected : false,
+    hidden: false,
+    mouseDragPositionX: 0,
+    mouseDragPositionY: 0,
+    finalStyle:''
+  };
+
   public cssRuleCount = document.styleSheets[0].cssRules.length;
   public _popupCount = 0;
 
@@ -230,6 +246,8 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
   /*************The code below is for component list functions**********************/
 
   deleteComponent(value: any) {
+
+    this.updateSelectedEvent.emit(this.defaultProps);
     let componentIndex = this.componentList.indexOf(value); //gets the index of the selected component inside the canvas
     if (componentIndex !== -1) {
       this.componentList.splice(componentIndex, 1); //removes the component from the canvas
