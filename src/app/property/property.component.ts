@@ -96,9 +96,9 @@ export class PropertyComponent implements OnInit {
   }
 
   confirmRemove() {
-    this.dialogService.openConfirmDialog("This operation is ireversible.\n\
+    this.dialogService.openConfirmDialog('This operation is ireversible.\n\
     This action will remove the selected component from canvas.\n\
-    Do you want to proceed?")
+    Do you want to proceed?')
     .afterClosed().subscribe(res =>{
       if(res){
         this.removeComponent();
@@ -121,9 +121,9 @@ export class PropertyComponent implements OnInit {
   }
 
   confirmClear() {
-    this.dialogService.openConfirmDialog("This operation is ireversible.\n\
+    this.dialogService.openConfirmDialog('This operation is ireversible.\n\
     This action will clear all the components in the canvas.\n\
-     Do you want to proceed?")
+     Do you want to proceed?')
     .afterClosed().subscribe(res =>{
       if(res){
         this.clearComponent();

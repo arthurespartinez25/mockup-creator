@@ -11,15 +11,16 @@
     text-align: left;
 }
 
-.confirmButton {
+.yesButton {
     height: 40px;
     width: 30%;
     background-color: #b6bcbe;
     color: black;
     border-radius: opx;
+    margin-right: 10px;
 }
 
-.cancelButton {
+.noButton {
     height: 40px;
     width: 30%;
     background-color: tomato;
