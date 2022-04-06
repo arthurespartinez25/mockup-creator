@@ -37,6 +37,7 @@ export class VideoDragComponent implements OnInit, IComponent {
        hidden: false,
        mouseDragPositionX:0,
        mouseDragPositionY:0,
+       finalStyle:''
      };
  
      @Input() canvasPositionX: any;

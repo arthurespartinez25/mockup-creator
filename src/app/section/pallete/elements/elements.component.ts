@@ -38,6 +38,7 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
 import { TableDragComponent } from './../../../components/tableDrag/tableDrag.component';
 import { YoutubeDragComponent } from './../../../components/youtubeDrag/youtubeDrag.component';
+import { VideoDragComponent } from './../../../components/videoDrag/videoDrag.component';
 import { CookieService } from 'ngx-cookie-service';
 import { DatePipe } from '@angular/common'
 import { PropertyComponent } from './../../../property/property.component';
@@ -248,6 +249,10 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
       case 'youtube':
         temp = new YoutubeDragComponent(this.canvas, this.sanitizer);
         break;
+      
+      case 'video':
+      temp = new VideoDragComponent(this.canvas, this.sanitizer);
+      break;
 
       default:
         temp = new ButtonDragComponent(this.canvas);

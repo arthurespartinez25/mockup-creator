@@ -196,5 +196,13 @@
           >
           Iframe
         </button>
+        <button 
+          class="palette-item" 
+          (click)="addComponent('video')"
+          cdkDrag
+          (cdkDragEnded)="onDragEndedAddComponent($event,'video')"
+          >
+          Video
+        </button>
         </div>
       </div>

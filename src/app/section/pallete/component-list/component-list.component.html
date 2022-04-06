@@ -270,5 +270,20 @@
             <i *ngIf="!this.componentList[i].props.hidden" class='fas fa-eye fa-2xs'></i></button>
           </div>
         </div>
+        <div class="component-items"
+        *ngSwitchCase="'videoDrag'"
+        (click)="clickHandler(this.componentList[i])"
+        >
+          <div>{{i+1}} Video</div>
+          <div class="component-buttons">
+            <button class="component-button-remove"
+            mat-button (click)="confirmDelete(this.componentList[i])"
+            ><i class="fa-solid fa-trash-can fa-2xs"></i></button>
+            <button class="component-button-hide"
+            (click)="hideComponent(this.componentList[i])"
+            ><i *ngIf="this.componentList[i].props.hidden" class="fa-solid fa-eye-slash fa-2xs"></i>
+            <i *ngIf="!this.componentList[i].props.hidden" class='fas fa-eye fa-2xs'></i></button>
+          </div>
+        </div>
       </div>
     </div>
