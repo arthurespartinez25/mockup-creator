@@ -74,15 +74,21 @@ export class VideoDragComponent implements OnInit, IComponent {
         this.percentageY +
         '%;';
       this.props.poster = this.sanitizer.bypassSecurityTrustResourceUrl('https://i.ytimg.com/vi/7QSnNfMSkLg/hqdefault.jpg');
+      this.props.finalStyle = this.props.style;
    }
  
    onDragEnded($event: CdkDragEnd) {
-     this.props.mouseDragPositionX =
-     (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
-     * 100;
-     this.props.mouseDragPositionY =
-     (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
-     * 100;
+    this.props.finalStyle=this.props.style;
+    let regexPosition = /;top(.+?);/g;
+    let regexPosition2 = /;left(.+?);/g;
+    this.props.mouseDragPositionX =
+    (( $event.source.getFreeDragPosition().x+ this.mousePositionLeft - this.canvasPositionLeft) / 1280) 
+    * 100;
+    this.props.mouseDragPositionY =
+    (( $event.source.getFreeDragPosition().y+ this.mousePositionTop - this.canvasPositionTop) / 720) 
+    * 100;
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition, ';top:'+this.props.mouseDragPositionY+'%;');
+    this.props.finalStyle=this.props.finalStyle.replace(regexPosition2, ';left:'+this.props.mouseDragPositionX+'%;');
    }
  
      
@@ -100,7 +106,7 @@ export class VideoDragComponent implements OnInit, IComponent {
      get htmlCode(): string {      
       let tmpHtmlCode = '<video';
       tmpHtmlCode += ' class="' + this.props.class + '" id="' + this.props.id + '" type="' +  this.props.type + 
-      '" style="' + this.props.style + '" src="' + this.props.value + '" controls></video>';
+      '" style="' + this.props.finalStyle + '" src="' + this.props.value + '" controls></video>';
        return tmpHtmlCode;
      }
 

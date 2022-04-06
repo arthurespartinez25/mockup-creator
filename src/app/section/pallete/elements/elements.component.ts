@@ -299,7 +299,8 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
         component == 'div' ||
         component == 'link' ||
         component == 'table' ||
-        component == 'youtube'
+        component == 'youtube' ||
+        component == 'video'
       ) {
         this.canvasLeftX = 0;
         this.canvasTopY = 0;
