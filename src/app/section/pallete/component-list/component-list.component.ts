@@ -24,7 +24,7 @@ import { BehaviorSubject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { DatePipe } from '@angular/common'
 import { PropertyComponent } from './../../../property/property.component';
-import { DialogService } from 'src/app/service/dialog.service';
+import { DialogService } from 'src/app/service/dialog/dialog.service';
 
 @Component({
   selector: 'app-component-list',

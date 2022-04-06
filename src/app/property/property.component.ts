@@ -4,7 +4,7 @@ import { IProperty } from '../interfaces/iproperty';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { DatePipe } from '@angular/common'
 import { CodeComponent } from '../section/code/code.component';
-import { DialogService } from '../service/dialog.service';
+import { DialogService } from '../service/dialog/dialog.service';
 
 @Component({
   selector: 'app-property',
