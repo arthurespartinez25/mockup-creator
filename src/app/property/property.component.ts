@@ -195,7 +195,6 @@ export class PropertyComponent implements OnInit {
     this.style2 = this.style2.replace(regexPosition2, '');
     this.style2 = this.style2.replace(regexPosition3, '');
   }
-
   classChangeHandler(event: any) {
     this.props.class = event.target.value;
   }
@@ -281,6 +280,19 @@ export class PropertyComponent implements OnInit {
       {
         this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl('https://ps.w.org/all-404-redirect-to-homepage/assets/icon-128x128.png?rev=1515215');
       }
+      console.log(this.props.url)
+  }
+
+  changeLink() {
+      let validation = this.checkLink(this.props.value);
+      //val = val.toLowerCase().replace(/[^a-z0-9]+/g,'-');
+      if (validation == true) {
+        this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value);
+        this.props.poster = this.sanitizer.bypassSecurityTrustResourceUrl('https://i.ytimg.com/vi/7QSnNfMSkLg/hqdefault.jpg');
+      } else {  
+        this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl('');
+        this.props.poster = this.sanitizer.bypassSecurityTrustResourceUrl('https://ps.w.org/all-404-redirect-to-homepage/assets/icon-128x128.png?rev=1515215');
+      }
   }
   checkIcon(icon: string){
     if(icon.match(/^<i class=".*"><\/i>$/)){
@@ -288,6 +300,13 @@ export class PropertyComponent implements OnInit {
     }
     return false;
   }
+
+  checkLink(toEvaluate:string) {
+    var res = toEvaluate.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)\.(mp4|webm|ogv)$/g);
+    return (res != null);
+  }
+  
+
   /* END OF CODE FOR TABLE ELEMENT */
 
   

@@ -245,4 +245,16 @@
     }"
   ></app-youtubeDrag>
 
+  <app-videoDrag
+    [property]="child.props"
+    *ngSwitchCase="'videoDrag'"
+    [canvasPositionX]="canvasPositionX"
+    [canvasPositionY]="canvasPositionY"
+    [mousePositionX2]="mousePositionX2"
+    [mousePositionY2]="mousePositionY2"
+    [ngStyle]="{
+      'height': '1px'
+    }"
+  ></app-videoDrag>
+
 </div>

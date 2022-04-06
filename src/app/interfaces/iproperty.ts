@@ -39,4 +39,5 @@ export interface IProperty {
   finalStyle: string;
   redirection?: string;
   target?: boolean;
+  poster?:any;
 }

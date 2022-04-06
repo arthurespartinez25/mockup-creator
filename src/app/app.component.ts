@@ -21,6 +21,7 @@ import { PropertyComponent } from './property/property.component';
 import { CanvasComponent } from './section/canvas/canvas.component';
 import { PalleteComponent } from './section/pallete/pallete.component';
 import { CodeComponent } from './section/code/code.component';
+import { VideoDragComponent } from './components/videoDrag/videoDrag.component';
 
 @Component({
   selector: 'app-root',
