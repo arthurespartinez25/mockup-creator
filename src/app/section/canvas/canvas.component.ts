@@ -10,6 +10,8 @@ import { IComponent } from './../../interfaces/icomponent';
 import { IProperty } from './../../interfaces/iproperty';
 import { PropertyComponent } from './../../property/property.component';
 import { ButtonService } from 'src/app/button-service.service';
+import { keyframes } from '@angular/animations';
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 @Component({
   selector: 'app-canvas',
@@ -17,6 +19,7 @@ import { ButtonService } from 'src/app/button-service.service';
   styleUrls: ['./canvas.component.css']
 })
 export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked {
+  props: IProperty;
   editable: boolean;
   tabs = [{id: 'canvas1',
           name: "Canvas 1",
@@ -33,6 +36,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   cssDocument?: StyleSheet;
   users: any;
   canvasIndex: number;
+  
 
   selected: IProperty = {
     key: '',
@@ -69,6 +73,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   @Output() updateComponentListMapEvent = new EventEmitter<Map<string, IComponent[]>>();
   @Output() updateSelectedCanvasEvent = new EventEmitter<ElementRef>();
   @Output() updateTabListEvent = new EventEmitter<any>();
+  @Output() updateIsPlaying = new EventEmitter<boolean>();
 
   @Input() componentList : IComponent[] = [];
   @Input() mousePositionX: any;
@@ -105,7 +110,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   sessionID = this.loginCookie.get("sessionID");
   inSession: boolean = this.sessionID == "12345";
   isPlaying: boolean = false;
-  // disabledValue = false;
+  
   
 
   ngOnInit() {
@@ -118,12 +123,6 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
         this.users = data;
       }) */
     }
-    // if(this.isPlaying) {
-    //   this.disabledValue = true;
-    // }
-    // else{
-    //   this.disabledValue = false;
-    // }
     
   }
   ngAfterViewInit(): void {
@@ -145,6 +144,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
 
   passCanvas() {
     return this.canvas;
+    
   }
   updateDomInsideCanvas(value: boolean){
     this.domInsideCanvas = value;
@@ -285,12 +285,18 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     this.updateSelectedCanvasEvent.emit(this.canvas);
   } 
 
-  @Output() updateIsPlaying = new EventEmitter<boolean>();
+ 
  isPlay(value: any) {
     this.isPlaying = value;
     this.updateIsPlaying.emit(this.isPlaying);
+    this.selected.draggable = !this.isPlaying;
+    this.notDraggable();
  }
-  
+ notDraggable() {
+  this.componentListMap.forEach(x=>x.map(y=>y.props.draggable=!this.isPlaying));
+  }
+ 
+
  changeIndex(number: number) {
   this.selectedTab = number;
 }    

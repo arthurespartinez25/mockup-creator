@@ -1,12 +1,13 @@
-<h3
-style="background-color: #2e9c6b; margin: 0"
+<button [disabled]="isPlaying" class="saveBtn"
 (click)="addAllCSSRule(cssTextArea.value)"
-(click)="cssReceiveMessage()"
->
+(click)="cssReceiveMessage()">
 Save CSS
-</h3>
+</button>
+
+
 
 <textarea
+[disabled]="isPlaying"
 style="margin: 0; width: 100%"
 cols="30"
 rows="5"

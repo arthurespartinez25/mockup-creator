@@ -78,8 +78,9 @@
         class="tab-pane fade"
         id="templates"
         role="tabpanel"
-        aria-labelledby="templates-tab">
-    
+        aria-labelledby="templates-tab"
+        [isPlaying]="isPlaying"
+        >
       </app-templates>
       <app-save
         [componentListMap]="componentListMap"

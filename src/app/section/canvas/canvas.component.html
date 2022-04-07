@@ -15,6 +15,7 @@
         >
           <div id="canvasBody">
             <app-wrapper
+              
               *ngFor="let component of componentListMap.get(tabs[index].id); let i = index"
               class="wrapper"
               (click)="clickHandler(component)"
@@ -28,7 +29,6 @@
               [canvasW]="canvasW"
               [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
               [whatComponent]="whatComponent"
-              
             >
             </app-wrapper>
           </div>

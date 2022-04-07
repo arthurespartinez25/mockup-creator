@@ -70,6 +70,7 @@ export class TemplatesComponent implements OnInit, AfterViewInit, AfterViewCheck
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
   //@ViewChild(PropertyComponent) propertyCmp:PropertyComponent;
+  @Input() isPlaying: boolean;
 
   @Output() updateComponentListEvent = new EventEmitter<IComponent>();
   @Output() updateCanvasLeftEvent = new EventEmitter<number>();
