@@ -49,7 +49,6 @@ export class UsersService {
     let url="http://localhost:8000/total/"+datas.userID;
     return this.http.get(url);
   }
-
   /*saveTabData(datas: any) {
     console.log(datas);
     let url="http://localhost:8000/saveTabs";

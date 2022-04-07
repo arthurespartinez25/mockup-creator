@@ -53,6 +53,28 @@ async function getTotal(userID){
     }
 }
 
+async function getProject(projectID){
+    try{
+        let pool = await sql.connect(config);
+        let project = await pool.request().query(`SELECT * from projects_table WHERE project_id='${projectID}'`);
+        return project.recordset;
+    }
+    catch (error) {
+        console.warn(error);
+    }
+}
+
+async function getComponents(tabsID){
+    try{
+        let pool = await sql.connect(config);
+        let components = await pool.request().query(`SELECT * from component_table WHERE tabs_id='${tabsID}'`);
+        return components.recordsets;
+    }
+    catch (error) {
+        console.warn(error);
+    }
+}
+
 async function deleteUser(userID){
     try{
         let pool = await sql.connect(config);
@@ -240,5 +262,7 @@ module.exports = {
     saveComponents : saveComponents,
     saveCss: saveCss,
     savePrevious : savePrevious,
-    saveTableContent: saveTableContent
+    saveTableContent: saveTableContent,
+    getProject: getProject,
+    getComponents: getComponents
 }

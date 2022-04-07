@@ -256,4 +256,21 @@ router.get("/deleteUser/:userID", (req, res) => {
   });
 });
 
+router.get("/getProject/:projectID", (req, res) => {
+  const {projectID} = req.params;
+  const del = dboperations.getProject(projectID);
+  console.log(del); // Promise { <pending> }
+  del.then(function(result) {
+    // console.log(result) // "Some User token"
+    return res.status(200).json({result});
+  });
+});
+
+router.get("/getComponents/:tabsID", (req, res) => {
+  const {tabsID} = req.params;
+  dboperations.getComponents(tabsID).then(result => {
+    res.json(result[0])
+ })
+});
+
 module.exports = router;
