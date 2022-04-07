@@ -14,6 +14,11 @@
         (mouseleave)="updateDomInsideCanvas(false)"
         >
           <div id="canvasBody">
+            <div id="invisible" style="display: grid;
+            width: 1280px;
+            height: 720px;
+            min-width: 1280px;
+            min-height: 720px;" (click)="deselect()"></div>
             <app-wrapper
               
               *ngFor="let component of componentListMap.get(tabs[index].id); let i = index"
@@ -29,6 +34,7 @@
               [canvasW]="canvasW"
               [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
               [whatComponent]="whatComponent"
+              [initialName]="initialName"
             >
             </app-wrapper>
           </div>
