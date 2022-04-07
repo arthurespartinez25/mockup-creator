@@ -6,13 +6,13 @@ import { Observable, Subject } from 'rxjs';
 })
 export class ButtonService {
 
-  private listener = new Subject<number>();
+  private listener = new Subject<string>();
 
-  listen(): Observable<any> {
+  listen(): Observable<string> {
     return this.listener.asObservable();
   }
 
-  passCanvasName(name: number) {
+  passCanvasName(name: string) {
     this.listener.next(name);
   }
 }

@@ -52,7 +52,7 @@ export class ButtonDragComponent implements IComponent {
     hidden:false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
-    redirection: 'Enter canvas name',
+    redirection: '',
     target: false
   };
 
@@ -61,6 +61,7 @@ export class ButtonDragComponent implements IComponent {
   @Input() mousePositionX2: any;
   @Input() mousePositionY2: any;
   @Input() whatComponent2: any;
+  @Input() initialName: string;
   @Output() passCanvas: EventEmitter<number> = new EventEmitter();
   canvasPositionLeft = 0;
   canvasPositionTop = 0;
@@ -79,6 +80,7 @@ export class ButtonDragComponent implements IComponent {
     this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
     this.props.mouseDragPositionX = this.percentageX;
     this.props.mouseDragPositionY = this.percentageY;
+    this.props.redirection = this.initialName;
     if (this.whatComponent2 == 'LoginButton') {
       this.props.value = 'Login';
       this.props.style =

@@ -33,6 +33,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   cssDocument?: StyleSheet;
   users: any;
   canvasIndex: number;
+  initialName = "Canvas 1";
 
   selected: IProperty = {
     key: '',
@@ -47,8 +48,22 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     hidden: false,
     mouseDragPositionX: 0,
     mouseDragPositionY: 0,
-    
   };
+
+  defaultProps: IProperty = {
+    key: '',
+    id: '',
+    value: '',
+    class: '',
+    style: '',
+    typeObj: '',
+    type: '',
+    draggable: true,
+    selected: false,
+    mouseDragPositionX:0,
+    mouseDragPositionY:0,
+    dummyDate:''
+  }
 
   public cssRuleCount = document.styleSheets[0].cssRules.length;
   public _popupCount = 0;
@@ -93,7 +108,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   ) {
     this.changeref = changeDetectorRef;
     if(buttonService) {
-      this.buttonService?.listen().subscribe((m:any) => {
+      this.buttonService?.listen().subscribe((m:string) => {
         this.canvasIndex = this.tabs.findIndex(x => x.name == m);
         this.changeIndex(this.canvasIndex);
       })
@@ -224,6 +239,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     this.tabs[this.currentTab].allowEdit = !this.tabs[this.currentTab].allowEdit;
     this.tabs[this.currentTab].name = $event.srcElement.innerHTML.trim() == '' ? prevName : $event.srcElement.innerHTML.trim();
     console.log(this.tabs);
+    this.initialName = (this.tabs[this.currentTab].name);
   }
 
   selectedComp(value: any) {
@@ -257,6 +273,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     this.tabs.push(toInsert);
     this.updateTabListEvent.emit(this.tabs); //also update this when changing of order of tabs is implemented
     this.selectedTab = this.tabs.length - 1;
+    this.initialName = toInsert.name;
   }
   
   removeTab(index: number) {
@@ -283,17 +300,25 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     this.updateSelectedTabEvent.emit(this.tabs[this.currentTab].id);
     this.canvas = this.canvasListElements.toArray()[this.currentTab];
     this.updateSelectedCanvasEvent.emit(this.canvas);
+    this.updateSelectedEvent.emit(this.defaultProps);
+    this.selectedComponent.props.selected = false;
   } 
 
   @Output() updateIsPlaying = new EventEmitter<boolean>();
- isPlay(value: any) {
+  isPlay(value: any) {
     this.isPlaying = value;
     this.updateIsPlaying.emit(this.isPlaying);
- }
+  }
   
- changeIndex(number: number) {
-  this.selectedTab = number;
-}    
+  changeIndex(number: number) {
+    this.selectedTab = number;
+    console.log(this.componentListMap.get(this.tabs[number].id));
+  }    
+
+  deselect() {
+    this.selectedComponent.props.selected = false;
+    this.updateSelectedEvent.emit(this.defaultProps);
+  }
 
   /****************** OLD CODE STARTS HERE **********************/
 }
