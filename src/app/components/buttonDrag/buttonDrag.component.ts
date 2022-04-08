@@ -218,7 +218,7 @@ export class ButtonDragComponent implements IComponent {
     }
 
     if(this.props.isIcon == true){
-      tmpHtmlCode += '<i class="' + this.props.value + '"></i>'
+      tmpHtmlCode += this.props.iconLabel1 + '<i class="' + this.props.iconValue + '"></i>' + this.props.iconLabel2
     }
     tmpHtmlCode += '</button></div>';
 
