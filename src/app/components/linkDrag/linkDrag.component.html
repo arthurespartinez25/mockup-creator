@@ -8,5 +8,9 @@
 }" 
     >
         <span *ngIf="props.isIcon == false">{{props.value}}</span>
-        <i *ngIf="props.isIcon == true" class={{props.value}}></i>
+        <span *ngIf="props.isIcon == true">
+          {{props.iconLabel1}}
+          <i class={{props.iconValue}}></i>
+          {{props.iconLabel2}}
+        </span>
 </a>

@@ -40,4 +40,7 @@ export interface IProperty {
   redirection?: string;
   target?: boolean;
   poster?:any;
+  iconValue?:string;
+  iconLabel1?:string;
+  iconLabel2?:string;
 }

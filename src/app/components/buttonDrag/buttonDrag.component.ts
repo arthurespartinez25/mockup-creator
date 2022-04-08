@@ -29,7 +29,11 @@ import { IProperty } from 'src/app/interfaces/iproperty';
     [type]="props.type"
   >
     <span *ngIf="props.isIcon == false">{{props.value}}</span>
-    <i *ngIf="props.isIcon == true" class={{props.value}}></i>
+    <span *ngIf="props.isIcon == true">
+      {{props.iconLabel1}}
+      <i class={{props.iconValue}}></i>
+      {{props.iconLabel2}}
+    </span>
   </button>`,
 })
 export class ButtonDragComponent implements IComponent {
@@ -50,7 +54,10 @@ export class ButtonDragComponent implements IComponent {
     isIcon: false,
     finalStyle: '',
     redirection: 'link',
-    target: false
+    target: false,
+    iconValue:'',
+    iconLabel1:'',
+    iconLabel2:''
   };
 
   @Input() canvasPositionX: any;

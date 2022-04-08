@@ -29,7 +29,10 @@ export class PropertyComponent implements OnInit {
     mouseDragPositionY:0,
     dummyDate:'',
     isIcon:false,
-    finalStyle: ''
+    finalStyle: '',
+    iconValue:'',
+    iconLabel1:'',
+    iconLabel2:''
   };
   style2 = '';
   tempStyle = '';
@@ -156,10 +159,20 @@ export class PropertyComponent implements OnInit {
       if(this.checkIcon(event.target.value))
       {
         this.props.isIcon = true;
-        this.props.value = event.target.value.slice(10, -6);
+        let icon = event.target.value.match(/<i class=".*"><\/i>/g).toString();
+        this.props.iconValue = icon.slice(10, -6);
+        let regex1 = new RegExp(".+?(?=" + icon + ")", "g");
+        let regex2 = new RegExp("(?<="  + icon + ").*", "g");
+        if(event.target.value.match(regex1)){
+          this.props.iconLabel1 = event.target.value.match(regex1).toString();
+        }
+        if(event.target.value.match(regex2)){
+          this.props.iconLabel2 = event.target.value.match(regex2).toString();
+        }
       }
       else
       {
+        this.props.isIcon = false;
         this.props.value = event.target.value;
       }
     }
@@ -295,7 +308,7 @@ export class PropertyComponent implements OnInit {
       }
   }
   checkIcon(icon: string){
-    if(icon.match(/^<i class=".*"><\/i>$/)){
+    if(icon.match(/<i class=".*"><\/i>/g)){
       return true;
     }
     return false;

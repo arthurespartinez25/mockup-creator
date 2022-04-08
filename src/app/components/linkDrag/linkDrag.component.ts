@@ -33,7 +33,10 @@ export class LinkDragComponent implements OnInit, IComponent {
     href: '#',
     isIcon: false,
     finalStyle: '',
-    target: false
+    target: false,
+    iconValue:'',
+    iconLabel1:'',
+    iconLabel2:''
   };
 
   @Input() canvasPositionX: any;
@@ -160,7 +163,6 @@ export class LinkDragComponent implements OnInit, IComponent {
   }
 
   onDragEnded($event: CdkDragEnd) {
-    console.log(this.props.style)
     this.props.finalStyle=this.props.style;
     let regexPosition = /;top(.+?);/g;
     let regexPosition2 = /;left(.+?);/g;
