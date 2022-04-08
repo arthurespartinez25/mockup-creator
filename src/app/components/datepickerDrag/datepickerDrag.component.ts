@@ -13,6 +13,7 @@ import { DatePipe } from '@angular/common'
   [value]="props.value" [class]="props.class" [style]="props.style" [class]="props.class"
   (change)="dateValue($event)"
   (cdkDragEnded)="onDragEnded($event)" 
+  [cdkDragDisabled]="!props.draggable"
   [ngStyle]="{
     position: 'sticky',
     left: mousePositionLeft + 'px',

@@ -22,7 +22,7 @@
           type="text"
           [value]="props.id"
           (keyup)="idChangeHandler($event)"
-          [disabled]="isPlaying"
+          [readonly]="isPlaying"
         />
       </td>
     </tr>
@@ -34,7 +34,7 @@
           type="text"
           [value]="props.value"
           (keyup)="valueChangeHandler($event)"
-          [disabled]="isPlaying"
+          [readonly]="isPlaying"
         />
       </td>
     </tr>
@@ -46,7 +46,7 @@
           type="text"
           [value]="props.dummyDate"
           (keyup)="valueChangeHandler($event)"
-          [disabled]="isPlaying"
+          [readonly]="isPlaying"
         />
       </td>
     </tr>
@@ -58,7 +58,7 @@
           type="text"
           [value]="this.props.redirection"
           (keyup)="redirectionChangeHandler($event)"
-          [disabled]="isPlaying"
+          [readonly]="isPlaying"
         />
       </td>
     </tr>
@@ -70,7 +70,7 @@
         type="text"
         [value]="this.props.href"
         (keyup)="hrefChangeHandler($event)"
-        [disabled]="isPlaying"
+        [readonly]="isPlaying"
         />
       </td>
     </tr>
@@ -82,7 +82,7 @@
           type="checkbox"
           [checked]="this.props.target"
           (change)="newTab($event)"
-          [disabled]="isPlaying"
+          (click)="onNoClick($event)"
         />
       </td>
     </tr>
@@ -94,7 +94,7 @@
           type="checkbox"
           [checked]="this.props.draggable"
           (change)="enableDragging($event)"
-          [disabled]="isPlaying"
+          (click)="onNoClick($event)"
         />
       </td>
     </tr>
@@ -123,7 +123,7 @@
           type="text"
           [value]="props.value"
           (keyup)="valueChangeHandler($event)"
-          [disabled]="isPlaying"
+          [readonly]="isPlaying"
         />
       </td>
       <!-- end of Table Cell input -->
@@ -141,7 +141,7 @@
           type="text"
           [value]="props.type"
           (keyup)="typeChangeHandler($event)"
-          [disabled]="isPlaying"
+          [readonly]="isPlaying"
         />
       </td>
     </tr>
@@ -153,7 +153,7 @@
           type="text"
           [value]="props.class"
           (keyup)="classChangeHandler($event)"
-          [disabled]="isPlaying"
+          [readonly]="isPlaying"
         />
       </td>
     </tr>
@@ -167,7 +167,7 @@
           type="text"
           [value]="props.linkValue"
           (change)="linkValueChangeHandler($event)"
-          [disabled]="isPlaying"
+          [readonly]="isPlaying"
         />
       </td>
     </tr>
@@ -182,7 +182,7 @@
           type="text"
           [value]="props.placeholder"
           (keyup)="placeholderChangeHandler($event)"
-          [disabled]="isPlaying"
+          [readonly]="isPlaying"
         />
       </td>
     </tr>
@@ -197,7 +197,7 @@
           type="number"
           [value]="props.rows"
           (change)="rowsChangeHandler($event)"
-          [disabled]="isPlaying"
+          [readonly]="isPlaying"
         />
       </td>
     </tr>
@@ -212,7 +212,7 @@
           type="number"
           [value]="props.cols"
           (change)="colsChangeHandler($event)"
-          [disabled]="isPlaying"
+          [readonly]="isPlaying"
         />
       </td>
     </tr>
@@ -230,7 +230,7 @@
           rows="5"
           (keyup)="styleChangeHandler($event)"
           (click)="styleChangeHandler2($event)"
-          [disabled]="isPlaying"
+          [readonly]="isPlaying"
         ></textarea>
       </td>
     </tr>
@@ -246,7 +246,7 @@
           type="text"
           [value]="props.content"
           (keyup)="contentChangeHandler($event)"
-          [disabled]="isPlaying"
+          [readonly]="isPlaying"
         />
         <tr *ngIf="props.name">
           <th><label>name</label></th>
@@ -254,6 +254,7 @@
             type="text"
             [value]="this.props.name"
             (keyup)="nameChangeHandler($event)"
+            [readonly]="isPlaying"
           />
         </tr>
         <tr></tr>
@@ -269,7 +270,7 @@
           type="number"
           [value]="this.props.tblRows"
           (change)="tblRowsChangeHandler($event)"
-          [disabled]="isPlaying"
+          [readonly]="isPlaying"
         />
         <tr></tr>
       </td>
@@ -283,7 +284,7 @@
           type="number"
           [value]="this.props.tblCols"
           (change)="tblColsChangeHandler($event)"
-          [disabled]="isPlaying"
+          [readonly]="isPlaying"
         />
         <tr></tr>
       </td>
@@ -297,7 +298,7 @@
           type="text"
           [value]="this.props.name"
           (keyup)="nameChangeHandler($event)"
-          [disabled]="isPlaying"
+          [readonly]="isPlaying"
         />
       </td>
     </tr>

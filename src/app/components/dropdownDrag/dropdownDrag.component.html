@@ -21,7 +21,7 @@
       props.selected == true ? '1px' : props.selected == false ? '0px' : null
   }"
 >
-  <select [class]="props.class" [id]="props.id" [style]="props.style" (click)="editNumLinks()" [(ngModel)]="selectedOption">
+  <select [disabled]="isPlaying" [class]="props.class" [id]="props.id" [style]="props.style" (click)="editNumLinks()" [(ngModel)]="selectedOption">
     <option *ngFor="let option of props.linksArray; let i = index;" value="{{option}}">{{option}}</option>
   </select>
 </div>

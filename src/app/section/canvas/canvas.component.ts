@@ -178,6 +178,8 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     }, 100);
   }
   clickHandler(component: IComponent) {
+    this.updateIsPlaying.emit(this.isPlaying);
+    console.log(this.isPlaying);
     console.log(component);
     this.selected = component.props;
     this.selectedComponent = component;
@@ -308,11 +310,15 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     this.isPlaying = value;
     this.updateIsPlaying.emit(this.isPlaying);
     this.notDraggable();
+    
+    
  }
  notDraggable() {
   this.componentListMap.forEach(x=>x.map(y=>y.props.draggable=!this.isPlaying));
   }
- 
+ play() {
+  console.log(this.isPlaying);
+ }
 
   
   
@@ -324,6 +330,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   deselect() {
     this.selectedComponent.props.selected = false;
     this.updateSelectedEvent.emit(this.defaultProps);
+    this.updateIsPlaying.emit(this.isPlaying);
   }
 
   /****************** OLD CODE STARTS HERE **********************/

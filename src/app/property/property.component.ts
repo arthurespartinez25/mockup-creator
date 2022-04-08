@@ -89,6 +89,7 @@ export class PropertyComponent implements OnInit {
       this.props = this.defaultProps;
       this.styleBox.nativeElement.value = "";
       this.props.draggable = false;
+      console.log(this.isPlaying);
     }
     this.updateComponentListEvent.emit(this.componentList);
   }
@@ -194,6 +195,11 @@ export class PropertyComponent implements OnInit {
   }
   newTab(value: any) {
     this.props.target = !this.props.target;
+  }
+  onNoClick(event: Event): void {
+    if(this.isPlaying) {
+      event.preventDefault();
+    }
   }
   
   /* CODE BELOW IS FOR TABLE ELEMENT */
