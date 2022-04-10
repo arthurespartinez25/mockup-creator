@@ -6,10 +6,10 @@
           role="tabpanel"
           aria-labelledby="elements-tab"
         >
-          <button class="palette-item" (click)="addComponentHomePage()">
+          <button [disabled]="isPlaying" class="palette-item" (click)="addComponentHomePage()">
             Home Page
           </button>
-          <button class="palette-item" (click)="addComponentLogin()">
+          <button [disabled]="isPlaying" class="palette-item" (click)="addComponentLogin()">
             Login Page
           </button>
 
@@ -17,7 +17,7 @@
             Image Label
           </button> -->
 
-          <button class="palette-item" (click)="addComponentSearchScreen()">
+          <button [disabled]="isPlaying" class="palette-item" (click)="addComponentSearchScreen()">
             Search Screen Page
           </button>
         </div>

@@ -10,6 +10,9 @@ import { BehaviorSubject } from 'rxjs';
 import { IComponent } from './../../interfaces/icomponent';
 import { IProperty } from './../../interfaces/iproperty';
 import { PropertyComponent } from './../../property/property.component';
+import { ButtonService } from 'src/app/button-service.service';
+import { keyframes } from '@angular/animations';
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 @Component({
   selector: 'app-canvas',
@@ -17,6 +20,7 @@ import { PropertyComponent } from './../../property/property.component';
   styleUrls: ['./canvas.component.css']
 })
 export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked {
+  props: IProperty;
   editable: boolean;
   tabs = [{id: 'canvas1',
           name: "Canvas 1",
@@ -32,6 +36,8 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   refreshCSS = new BehaviorSubject<boolean>(true);
   cssDocument?: StyleSheet;
   users: any;
+  canvasIndex: number;
+  initialName = "Canvas 1";
 
   selected: IProperty = {
     key: '',
@@ -48,6 +54,22 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     mouseDragPositionY: 0,
     finalStyle:''
   };
+
+  defaultProps: IProperty = {
+    key: '',
+    id: '',
+    value: '',
+    class: '',
+    style: '',
+    typeObj: '',
+    type: '',
+    draggable: true,
+    selected: false,
+    mouseDragPositionX:0,
+    mouseDragPositionY:0,
+    dummyDate:'',
+    finalStyle:''
+  }
 
   public cssRuleCount = document.styleSheets[0].cssRules.length;
   public _popupCount = 0;
@@ -68,6 +90,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   @Output() updateComponentListMapEvent = new EventEmitter<Map<string, IComponent[]>>();
   @Output() updateSelectedCanvasEvent = new EventEmitter<ElementRef>();
   @Output() updateTabListEvent = new EventEmitter<any>();
+  @Output() updateIsPlaying = new EventEmitter<boolean>();
 
   @Input() componentList : IComponent[] = [];
   @Input() mousePositionX: any;
@@ -81,7 +104,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
  
 
   changeref: ChangeDetectorRef;
-  props: any;
+  // props: any;
   constructor(
     private loginCookie:CookieService,
     changeDetectorRef: ChangeDetectorRef,
@@ -89,8 +112,15 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     public _location: Location,
     public sanitizer: DomSanitizer,
     public datepipe: DatePipe,
+    private buttonService?: ButtonService
   ) {
     this.changeref = changeDetectorRef;
+    if(buttonService) {
+      this.buttonService?.listen().subscribe((m:string) => {
+        this.canvasIndex = this.tabs.findIndex(x => x.name == m);
+        this.changeIndex(this.canvasIndex);
+      })
+    }
   }
   delete: boolean;
   cssBody: SafeStyle;
@@ -98,6 +128,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   sessionID = this.loginCookie.get("sessionID");
   inSession: boolean = this.sessionID == "12345";
   isPlaying: boolean = false;
+  
   
 
   ngOnInit() {
@@ -131,6 +162,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
 
   passCanvas() {
     return this.canvas;
+    
   }
   updateDomInsideCanvas(value: boolean){
     this.domInsideCanvas = value;
@@ -150,6 +182,8 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     }, 100);
   }
   clickHandler(component: IComponent) {
+    this.updateIsPlaying.emit(this.isPlaying);
+    console.log(this.isPlaying);
     console.log(component);
     this.selected = component.props;
     this.selectedComponent = component;
@@ -208,6 +242,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     this.tabs[this.currentTab].allowEdit = !this.tabs[this.currentTab].allowEdit;
     this.tabs[this.currentTab].name = $event.srcElement.innerHTML.trim() == '' ? prevName : $event.srcElement.innerHTML.trim();
     console.log(this.tabs);
+    this.initialName = (this.tabs[this.currentTab].name);
   }
 
   selectedComp(value: any) {
@@ -241,6 +276,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     this.tabs.push(toInsert);
     this.updateTabListEvent.emit(this.tabs); //also update this when changing of order of tabs is implemented
     this.selectedTab = this.tabs.length - 1;
+    this.initialName = toInsert.name;
   }
   
   removeTab(index: number) {
@@ -267,17 +303,37 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     this.updateSelectedTabEvent.emit(this.tabs[this.currentTab].id);
     this.canvas = this.canvasListElements.toArray()[this.currentTab];
     this.updateSelectedCanvasEvent.emit(this.canvas);
+    this.updateSelectedEvent.emit(this.defaultProps);
+    this.selectedComponent.props.selected = false;
   } 
 
+ 
  isPlay(value: any) {
     this.isPlaying = value;
-
+    this.updateIsPlaying.emit(this.isPlaying);
+    this.notDraggable();
+    
+    
  }
+ notDraggable() {
+  this.componentListMap.forEach(x=>x.map(y=>y.props.draggable=!this.isPlaying));
+  }
+ play() {
+  console.log(this.isPlaying);
+ }
+
   
-   
+  
+  changeIndex(number: number) {
+    this.selectedTab = number;
+    console.log(this.componentListMap.get(this.tabs[number].id));
+  }    
 
-
- 
+  deselect() {
+    this.selectedComponent.props.selected = false;
+    this.updateSelectedEvent.emit(this.defaultProps);
+    this.updateIsPlaying.emit(this.isPlaying);
+  }
 
   /****************** OLD CODE STARTS HERE **********************/
 }

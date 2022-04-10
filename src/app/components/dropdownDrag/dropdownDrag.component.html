@@ -17,5 +17,6 @@
     'border-width':
       props.selected == true ? '1px' : props.selected == false ? '0px' : null
   }">
+  <select [disabled]="isPlaying" [class]="props.class" [id]="props.id" [style]="props.style" (click)="editNumLinks()" [(ngModel)]="selectedOption">
     <option *ngFor="let option of props.linksArray; let i = index;" value="{{option}}">{{option}}</option>
   </select>

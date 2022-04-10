@@ -66,6 +66,7 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
   @Input() canvas: ElementRef;
   @Input() propertyCmp: PropertyComponent;
   @Input() componentList: IComponent[] = [];
+  @Input() isPlaying: boolean;
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;

@@ -97,6 +97,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   whatComponent = 'none';
   sessionID = this.loginCookie.get("sessionID");
   inSession: boolean = this.sessionID == "12345";
+  isPlaying: boolean;
 
   ngOnInit() {
     console.log(this.inSession);
@@ -196,6 +197,11 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   updateProjectName(value: string) {
     this.projectName = value;
+  }
+
+  updateIsPlayingEvent(value: any) {
+    this.isPlaying = value;
+    //console.log(this.isPlaying);
   }
 
   //////////////////////////////////////////////////////////////////////////////

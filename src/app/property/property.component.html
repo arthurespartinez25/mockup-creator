@@ -5,6 +5,7 @@
       [ngClass]="{ invisible: !this.props.id }"
       id="delete"
       mat-button (click)="confirmRemove()"
+      [disabled]="isPlaying"
     >
       Remove
     </button>
@@ -21,6 +22,7 @@
           type="text"
           [value]="props.id"
           (keyup)="idChangeHandler($event)"
+          [readonly]="isPlaying"
         />
       </td>
     </tr>
@@ -32,6 +34,7 @@
           type="text"
           [value]="props.value"
           (keyup)="valueChangeHandler($event)"
+          [readonly]="isPlaying"
         />
         <input *ngIf="props.typeObj == 'videoDrag'"
           [disabled]="!this.props.id"
@@ -49,17 +52,19 @@
           type="text"
           [value]="props.dummyDate"
           (keyup)="valueChangeHandler($event)"
+          [readonly]="isPlaying"
         />
       </td>
     </tr>
     <tr class="properties-table-row" *ngIf="props.typeObj == 'buttonDrag'">
       <th class="properties-table-header"><label>redirection</label></th>
-      <td class="properties-table-data redirect">
+      <td class="properties-table-data">
         <input
           [disabled]="!this.props.id"
           type="text"
-          [value]="props.redirection"
+          [value]="this.props.redirection"
           (keyup)="redirectionChangeHandler($event)"
+          [readonly]="isPlaying"
         />
       </td>
     </tr>
@@ -71,10 +76,11 @@
         type="text"
         [value]="this.props.href"
         (keyup)="hrefChangeHandler($event)"
+        [readonly]="isPlaying"
         />
       </td>
     </tr>
-    <tr class="properties-table-row" *ngIf="props.typeObj == 'linkDrag' || props.typeObj == 'buttonDrag'">
+    <tr class="properties-table-row" *ngIf="props.typeObj == 'linkDrag' || props.typeObj == 'buttonDrag' ">
       <th class="properties-table-header"><label>new tab</label></th>
       <td class="properties-table-data">
         <input
@@ -82,6 +88,7 @@
           type="checkbox"
           [checked]="this.props.target"
           (change)="newTab($event)"
+          (click)="onNoClick($event)"
         />
       </td>
     </tr>
@@ -93,6 +100,7 @@
           type="checkbox"
           [checked]="this.props.draggable"
           (change)="enableDragging($event)"
+          (click)="onNoClick($event)"
         />
       </td>
     </tr>
@@ -105,6 +113,7 @@
         id="updateLink"
         (click)="updateLink()"
         class="updateLink"
+        [disabled]="isPlaying"
       >
         Update Link
       </button>
@@ -128,6 +137,7 @@
           type="text"
           [value]="props.value"
           (keyup)="valueChangeHandler($event)"
+          [readonly]="isPlaying"
         />
       </td>
       <!-- end of Table Cell input -->
@@ -145,6 +155,7 @@
           type="text"
           [value]="props.type"
           (keyup)="typeChangeHandler($event)"
+          [readonly]="isPlaying"
         />
       </td>
     </tr>
@@ -156,6 +167,7 @@
           type="text"
           [value]="props.class"
           (keyup)="classChangeHandler($event)"
+          [readonly]="isPlaying"
         />
       </td>
     </tr>
@@ -169,6 +181,7 @@
           type="text"
           [value]="props.linkValue"
           (change)="linkValueChangeHandler($event)"
+          [readonly]="isPlaying"
         />
       </td>
     </tr>
@@ -183,6 +196,7 @@
           type="text"
           [value]="props.placeholder"
           (keyup)="placeholderChangeHandler($event)"
+          [readonly]="isPlaying"
         />
       </td>
     </tr>
@@ -197,6 +211,7 @@
           type="number"
           [value]="props.rows"
           (change)="rowsChangeHandler($event)"
+          [readonly]="isPlaying"
         />
       </td>
     </tr>
@@ -211,6 +226,7 @@
           type="number"
           [value]="props.cols"
           (change)="colsChangeHandler($event)"
+          [readonly]="isPlaying"
         />
       </td>
     </tr>
@@ -228,6 +244,7 @@
           rows="5"
           (keyup)="styleChangeHandler($event)"
           (click)="styleChangeHandler2($event)"
+          [readonly]="isPlaying"
         ></textarea>
       </td>
     </tr>
@@ -243,6 +260,7 @@
           type="text"
           [value]="props.content"
           (keyup)="contentChangeHandler($event)"
+          [readonly]="isPlaying"
         />
         <tr *ngIf="props.name">
           <th><label>name</label></th>
@@ -250,6 +268,7 @@
             type="text"
             [value]="this.props.name"
             (keyup)="nameChangeHandler($event)"
+            [readonly]="isPlaying"
           />
         </tr>
         <tr></tr>
@@ -265,6 +284,7 @@
           type="number"
           [value]="this.props.tblRows"
           (change)="tblRowsChangeHandler($event)"
+          [readonly]="isPlaying"
         />
         <tr></tr>
       </td>
@@ -278,6 +298,7 @@
           type="number"
           [value]="this.props.tblCols"
           (change)="tblColsChangeHandler($event)"
+          [readonly]="isPlaying"
         />
         <tr></tr>
       </td>
@@ -291,6 +312,7 @@
           type="text"
           [value]="this.props.name"
           (keyup)="nameChangeHandler($event)"
+          [readonly]="isPlaying"
         />
       </td>
     </tr>
@@ -302,6 +324,7 @@
       id="clearScreen"
       #clearScreen
       mat-button (click)="confirmClear()"
+      [disabled]="isPlaying"
     >
       Clear
 </button>

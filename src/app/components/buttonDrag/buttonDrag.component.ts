@@ -9,11 +9,14 @@ import {
 } from '@angular/core';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
+import { ButtonService } from 'src/app/button-service.service';
+import { CanvasComponent } from 'src/app/section/canvas/canvas.component';
 
 @Component({
   selector: 'app-buttonDrag',
   styleUrls: ['./buttonDrag.component.css'],  
   template: `<button
+    (click)="passName()"
     cdkDrag
     cdkDragBoundary=".canvas"
     [cdkDragDisabled]="!props.draggable"
@@ -53,11 +56,11 @@ export class ButtonDragComponent implements IComponent {
     mouseDragPositionY:0,
     isIcon: false,
     finalStyle: '',
-    redirection: 'link',
     target: false,
     iconValue:'',
     iconLabel1:'',
-    iconLabel2:''
+    iconLabel2:'',
+    redirection: ''
   };
 
   @Input() canvasPositionX: any;
@@ -65,12 +68,15 @@ export class ButtonDragComponent implements IComponent {
   @Input() mousePositionX2: any;
   @Input() mousePositionY2: any;
   @Input() whatComponent2: any;
+  @Input() initialName: string;
+  @Output() passCanvas: EventEmitter<number> = new EventEmitter();
   canvasPositionLeft = 0;
   canvasPositionTop = 0;
   mousePositionLeft = 0;
   mousePositionTop = 0;
   percentageX = 0;
   percentageY = 0;
+  selectedIndex = 0;
 
   ngOnInit(): void {
     this.canvasPositionLeft = this.canvasPositionX;
@@ -81,6 +87,7 @@ export class ButtonDragComponent implements IComponent {
     this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
     this.props.mouseDragPositionX = this.percentageX;
     this.props.mouseDragPositionY = this.percentageY;
+    this.props.redirection = this.initialName;
     if (this.whatComponent2 == 'LoginButton') {
       this.props.value = 'Login';
       this.props.style =
@@ -162,7 +169,7 @@ export class ButtonDragComponent implements IComponent {
     this.props.finalStyle=this.props.finalStyle.replace(regexPosition2, ';left:'+this.props.mouseDragPositionX+'%;');
   }
 
-  constructor(canvas: ElementRef) {
+  constructor(canvas: ElementRef, private buttonService?: ButtonService) {
     this.canvas = canvas;
     let date = Date.now();
     this.props.key = date.toString();
@@ -179,22 +186,24 @@ export class ButtonDragComponent implements IComponent {
     }
   }
 
+  passName():void {
+    this.passCanvas.emit(this.props.redirection);
+    this.buttonService?.passCanvasName(this.props.redirection);
+  }
+
   get htmlCode(): string {
     let tmpHtmlCode = '<div><button';
-    if(this.props.redirection != undefined){/*
-      if (this.props.redirection?.trim().length > 0) {
+    if(this.props.redirection != undefined) {
+      if(this.props.redirection?.trim().length > 0) {
         tmpHtmlCode += ' onClick="window.open(' + "'" + this.props.redirection + "'";
       }
-      if (this.props.target == true) {
+      if(this.props.target == true) {
         tmpHtmlCode += ", '_blank'";
-      }  
+      }
       else {
         tmpHtmlCode += ", '_self'";
-      }      
-      tmpHtmlCode += ')"'*/
-      if (this.props.redirection?.trim().length > 0) {
-        tmpHtmlCode += 'onClick=" "';
       }
+      tmpHtmlCode += ')"';
     }
 
     if (this.props.id.trim().length > 0) {

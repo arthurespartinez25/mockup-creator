@@ -84,6 +84,7 @@ export class PropertyComponent implements OnInit {
   set selectedIdx(value: IComponent) {
     this.selectedcomp = value;
   }
+  @Input() isPlaying: boolean;
 
   constructor(public sanitizer:DomSanitizer, public datepipe: DatePipe, private dialogService: DialogService) {
     this.props = this.property;
@@ -98,6 +99,7 @@ export class PropertyComponent implements OnInit {
       this.props = this.defaultProps;
       this.styleBox.nativeElement.value = "";
       this.props.draggable = false;
+      console.log(this.isPlaying);
     }
     this.updateComponentListEvent.emit(this.componentList);
   }
@@ -240,12 +242,17 @@ export class PropertyComponent implements OnInit {
   enableDragging(event: any) {
     this.props.draggable = !this.props.draggable;
   }
-  redirectionChangeHandler(event: any){
+  redirectionChangeHandler(event: any) {
     this.props.redirection = event.target.value;
   }
-  newTab(event: any) {
+  newTab(value: any) {
     this.props.target = !this.props.target;
-  }  
+  }
+  onNoClick(event: Event): void {
+    if(this.isPlaying) {
+      event.preventDefault();
+    }
+  }
   
   /* CODE BELOW IS FOR TABLE ELEMENT */
 

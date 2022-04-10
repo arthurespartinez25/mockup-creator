@@ -4,7 +4,7 @@
       <mat-tab *ngFor="let tab of tabs; let index = index">
         <ng-template mat-tab-label>
           <span class="tab-label" [attr.contenteditable]="tabs[index].allowEdit" (dblclick)="onDblClick($event)" (focusout)="onDblClick($event)">{{tab.name}} </span>
-          <button [disabled]="tabs.length === 1" type="button" class="btn btn-close" (click)="removeTab(index)"></button>
+          <button [disabled]="this.isPlaying" [disabled]="tabs.length === 1" type="button" class="btn btn-close" (click)="removeTab(index)"></button>
         </ng-template>
         <div
         class="canvas"
@@ -14,7 +14,13 @@
         (mouseleave)="updateDomInsideCanvas(false)"
         >
           <div id="canvasBody">
+            <div id="invisible" style="display: grid;
+            width: 1280px;
+            height: 720px;
+            min-width: 1280px;
+            min-height: 720px;" (click)="deselect()"></div>
             <app-wrapper
+              
               *ngFor="let component of componentListMap.get(tabs[index].id); let i = index"
               class="wrapper"
               (click)="clickHandler(component)"
@@ -28,6 +34,7 @@
               [canvasW]="canvasW"
               [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
               [whatComponent]="whatComponent"
+              [initialName]="initialName"
             >
             </app-wrapper>
           </div>
@@ -36,7 +43,7 @@
 
       <mat-tab disabled>
         <ng-template mat-tab-label>
-            <button type="button" class="btn btn-outline-dark" (click)="addTab()"><i class="fa-solid fa-plus"></i></button>
+            <button [disabled]="this.isPlaying" type="button" class="btn btn-outline-dark" (click)="addTab()"><i class="fa-solid fa-plus" ></i></button>
         </ng-template>
       </mat-tab>
     </mat-tab-group>

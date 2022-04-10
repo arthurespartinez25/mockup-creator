@@ -21,10 +21,10 @@
             {{i+1}} Button
           </div>
           <div class="component-buttons">
-            <button class="component-button-remove"
+            <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
             ><i class="fa-solid fa-trash-can fa-2xs"></i></button>
-            <button class="component-button-hide"
+            <button [disabled]="isPlaying" class="component-button-hide"
             (click)="hideComponent(this.componentList[i])"
             ><i *ngIf="this.componentList[i].props.hidden" class="fa-solid fa-eye-slash fa-2xs"></i>
             <i *ngIf="!this.componentList[i].props.hidden" class='fas fa-eye fa-2xs'></i></button>
@@ -36,10 +36,10 @@
         >
           <div>{{i+1}} Checkbox</div>
           <div class="component-buttons">
-            <button class="component-button-remove"
+            <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
             ><i class="fa-solid fa-trash-can fa-2xs"></i></button>
-            <button class="component-button-hide"
+            <button [disabled]="isPlaying" class="component-button-hide"
             (click)="hideComponent(this.componentList[i])"
             ><i *ngIf="this.componentList[i].props.hidden" class="fa-solid fa-eye-slash fa-2xs"></i>
             <i *ngIf="!this.componentList[i].props.hidden" class='fas fa-eye fa-2xs'></i></button>
@@ -51,10 +51,10 @@
         >
           <div>{{i+1}} Datepicker</div>
           <div class="component-buttons">
-            <button class="component-button-remove"
+            <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
             ><i class="fa-solid fa-trash-can fa-2xs"></i></button>
-            <button class="component-button-hide"
+            <button [disabled]="isPlaying" class="component-button-hide"
             (click)="hideComponent(this.componentList[i])"
             ><i *ngIf="this.componentList[i].props.hidden" class="fa-solid fa-eye-slash fa-2xs"></i>
             <i *ngIf="!this.componentList[i].props.hidden" class='fas fa-eye fa-2xs'></i></button>
@@ -66,10 +66,10 @@
         >
           <div>{{i+1}} Dropdown</div>
           <div class="component-buttons">
-            <button class="component-button-remove"
+            <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
             ><i class="fa-solid fa-trash-can fa-2xs"></i></button>
-            <button class="component-button-hide"
+            <button [disabled]="isPlaying" class="component-button-hide"
             (click)="hideComponent(this.componentList[i])"
             ><i *ngIf="this.componentList[i].props.hidden" class="fa-solid fa-eye-slash fa-2xs"></i>
             <i *ngIf="!this.componentList[i].props.hidden" class='fas fa-eye fa-2xs'></i></button>
@@ -81,10 +81,10 @@
         >
           <div>{{i+1}} Header</div>
           <div class="component-buttons">
-            <button class="component-button-remove"
+            <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
             ><i class="fa-solid fa-trash-can fa-2xs"></i></button>
-            <button class="component-button-hide"
+            <button [disabled]="isPlaying" class="component-button-hide"
             (click)="hideComponent(this.componentList[i])"
             ><i *ngIf="this.componentList[i].props.hidden" class="fa-solid fa-eye-slash fa-2xs"></i>
             <i *ngIf="!this.componentList[i].props.hidden" class='fas fa-eye fa-2xs'></i></button>
@@ -96,10 +96,10 @@
         >
           <div>{{i+1}} Image</div>
           <div class="component-buttons">
-            <button class="component-button-remove"
+            <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
             ><i class="fa-solid fa-trash-can fa-2xs"></i></button>
-            <button class="component-button-hide"
+            <button [disabled]="isPlaying" class="component-button-hide"
             (click)="hideComponent(this.componentList[i])"
             ><i *ngIf="this.componentList[i].props.hidden" class="fa-solid fa-eye-slash fa-2xs"></i>
             <i *ngIf="!this.componentList[i].props.hidden" class='fas fa-eye fa-2xs'></i></button>
@@ -126,10 +126,10 @@
         >
           <div>{{i+1}} Input Field</div>
           <div class="component-buttons">
-            <button class="component-button-remove"
+            <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
             ><i class="fa-solid fa-trash-can fa-2xs"></i></button>
-            <button class="component-button-hide"
+            <button [disabled]="isPlaying" class="component-button-hide"
             (click)="hideComponent(this.componentList[i])"
             ><i *ngIf="this.componentList[i].props.hidden" class="fa-solid fa-eye-slash fa-2xs"></i>
             <i *ngIf="!this.componentList[i].props.hidden" class='fas fa-eye fa-2xs'></i></button>
@@ -141,10 +141,10 @@
         >
           <div>{{i+1}} Label</div>
           <div class="component-buttons">
-            <button class="component-button-remove"
+            <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
             ><i class="fa-solid fa-trash-can fa-2xs"></i></button>
-            <button class="component-button-hide"
+            <button [disabled]="isPlaying" class="component-button-hide"
             (click)="hideComponent(this.componentList[i])"
             ><i *ngIf="this.componentList[i].props.hidden" class="fa-solid fa-eye-slash fa-2xs"></i>
             <i *ngIf="!this.componentList[i].props.hidden" class='fas fa-eye fa-2xs'></i></button>
@@ -156,10 +156,10 @@
         >
           <div>{{i+1}} Link</div>
           <div class="component-buttons">
-            <button class="component-button-remove"
+            <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
             ><i class="fa-solid fa-trash-can fa-2xs"></i></button>
-            <button class="component-button-hide"
+            <button [disabled]="isPlaying" class="component-button-hide"
             (click)="hideComponent(this.componentList[i])"
             ><i *ngIf="this.componentList[i].props.hidden" class="fa-solid fa-eye-slash fa-2xs"></i>
             <i *ngIf="!this.componentList[i].props.hidden" class='fas fa-eye fa-2xs'></i></button>
@@ -171,10 +171,10 @@
         >
           <div>{{i+1}} Modal</div>
           <div class="component-buttons">
-            <button class="component-button-remove"
+            <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
             ><i class="fa-solid fa-trash-can fa-2xs"></i></button>
-            <button class="component-button-hide"
+            <button [disabled]="isPlaying" class="component-button-hide"
             (click)="hideComponent(this.componentList[i])"
             ><i *ngIf="this.componentList[i].props.hidden" class="fa-solid fa-eye-slash fa-2xs"></i>
             <i *ngIf="!this.componentList[i].props.hidden" class='fas fa-eye fa-2xs'></i></button>
@@ -186,10 +186,10 @@
         >
           <div>{{i+1}} Navigation Bar</div>
           <div class="component-buttons">
-            <button class="component-button-remove"
+            <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
             ><i class="fa-solid fa-trash-can fa-2xs"></i></button>
-            <button class="component-button-hide"
+            <button [disabled]="isPlaying" class="component-button-hide"
             (click)="hideComponent(this.componentList[i])"
             ><i *ngIf="this.componentList[i].props.hidden" class="fa-solid fa-eye-slash fa-2xs"></i>
             <i *ngIf="!this.componentList[i].props.hidden" class='fas fa-eye fa-2xs'></i></button>
@@ -201,10 +201,10 @@
         >
           <div>{{i+1}} Paragraph</div>
           <div class="component-buttons">
-            <button class="component-button-remove"
+            <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
             ><i class="fa-solid fa-trash-can fa-2xs"></i></button>
-            <button class="component-button-hide"
+            <button [disabled]="isPlaying" class="component-button-hide"
             (click)="hideComponent(this.componentList[i])"
             ><i *ngIf="this.componentList[i].props.hidden" class="fa-solid fa-eye-slash fa-2xs"></i>
             <i *ngIf="!this.componentList[i].props.hidden" class='fas fa-eye fa-2xs'></i></button>
@@ -216,10 +216,10 @@
         >
           <div>{{i+1}} Radio</div>
           <div class="component-buttons">
-            <button class="component-button-remove"
+            <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
             ><i class="fa-solid fa-trash-can fa-2xs"></i></button>
-            <button class="component-button-hide"
+            <button [disabled]="isPlaying" class="component-button-hide"
             (click)="hideComponent(this.componentList[i])"
             ><i *ngIf="this.componentList[i].props.hidden" class="fa-solid fa-eye-slash fa-2xs"></i>
             <i *ngIf="!this.componentList[i].props.hidden" class='fas fa-eye fa-2xs'></i></button>
@@ -231,10 +231,10 @@
         >
           <div>{{i+1}} Table</div>
           <div class="component-buttons">
-            <button class="component-button-remove"
+            <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
             ><i class="fa-solid fa-trash-can fa-2xs"></i></button>
-            <button class="component-button-hide"
+            <button [disabled]="isPlaying" class="component-button-hide"
             (click)="hideComponent(this.componentList[i])"
             ><i *ngIf="this.componentList[i].props.hidden" class="fa-solid fa-eye-slash fa-2xs"></i>
             <i *ngIf="!this.componentList[i].props.hidden" class='fas fa-eye fa-2xs'></i></button>
@@ -246,10 +246,10 @@
         >
           <div>{{i+1}} Textbox</div>
           <div class="component-buttons">
-            <button class="component-button-remove"
+            <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
             ><i class="fa-solid fa-trash-can fa-2xs"></i></button>
-            <button class="component-button-hide"
+            <button [disabled]="isPlaying" class="component-button-hide"
             (click)="hideComponent(this.componentList[i])"
             ><i *ngIf="this.componentList[i].props.hidden" class="fa-solid fa-eye-slash fa-2xs"></i>
             <i *ngIf="!this.componentList[i].props.hidden" class='fas fa-eye fa-2xs'></i></button>
@@ -261,10 +261,10 @@
         >
           <div>{{i+1}} iFrame</div>
           <div class="component-buttons">
-            <button class="component-button-remove"
+            <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
             ><i class="fa-solid fa-trash-can fa-2xs"></i></button>
-            <button class="component-button-hide"
+            <button [disabled]="isPlaying" class="component-button-hide"
             (click)="hideComponent(this.componentList[i])"
             ><i *ngIf="this.componentList[i].props.hidden" class="fa-solid fa-eye-slash fa-2xs"></i>
             <i *ngIf="!this.componentList[i].props.hidden" class='fas fa-eye fa-2xs'></i></button>
@@ -276,10 +276,10 @@
         >
           <div>{{i+1}} Video</div>
           <div class="component-buttons">
-            <button class="component-button-remove"
+            <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
             ><i class="fa-solid fa-trash-can fa-2xs"></i></button>
-            <button class="component-button-hide"
+            <button [disabled]="isPlaying" class="component-button-hide"
             (click)="hideComponent(this.componentList[i])"
             ><i *ngIf="this.componentList[i].props.hidden" class="fa-solid fa-eye-slash fa-2xs"></i>
             <i *ngIf="!this.componentList[i].props.hidden" class='fas fa-eye fa-2xs'></i></button>

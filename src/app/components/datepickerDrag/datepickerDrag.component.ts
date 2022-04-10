@@ -13,6 +13,7 @@ import { DatePipe } from '@angular/common'
   [value]="props.value" [class]="props.class" [style]="props.style" [class]="props.class"
   (change)="dateValue($event)"
   (cdkDragEnded)="onDragEnded($event)" 
+  [cdkDragDisabled]="!props.draggable"
   [ngStyle]="{
     'border-color' : props.selected == true ? 'red': (props.selected == false ? 'none': null),
     'border-style' : props.selected == true ? 'solid': (props.selected == false ? 'none': null),
