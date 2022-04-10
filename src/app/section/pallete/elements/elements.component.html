@@ -193,6 +193,7 @@
             (click)="addComponent('div')"
             cdkDrag
             (cdkDragEnded)="onDragEndedAddComponent($event, 'div')"
+            [disabled]="isPlaying"
           >
             Empty Div
           </button>
@@ -219,6 +220,7 @@
           (click)="addComponent('video')"
           cdkDrag
           (cdkDragEnded)="onDragEndedAddComponent($event,'video')"
+          [disabled]="isPlaying"
           >
           Video
         </button>

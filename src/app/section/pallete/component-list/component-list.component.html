@@ -111,10 +111,10 @@
         >
           <div>{{i+1}} Empty Div</div>
           <div class="component-buttons">
-            <button class="component-button-remove"
+            <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
             ><i class="fa-solid fa-trash-can fa-2xs"></i></button>
-            <button class="component-button-hide"
+            <button [disabled]="isPlaying" class="component-button-hide"
             (click)="hideComponent(this.componentList[i])"
             ><i *ngIf="this.componentList[i].props.hidden" class="fa-solid fa-eye-slash fa-2xs"></i>
             <i *ngIf="!this.componentList[i].props.hidden" class='fas fa-eye fa-2xs'></i></button>
