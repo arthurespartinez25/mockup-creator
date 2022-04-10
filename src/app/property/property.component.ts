@@ -161,14 +161,11 @@ export class PropertyComponent implements OnInit {
         this.props.isIcon = true;
         let icon = event.target.value.match(/<i class=".*"><\/i>/g).toString();
         this.props.iconValue = icon.slice(10, -6);
-        let regex1 = new RegExp(".+?(?=" + icon + ")", "g");
+        let regex1 = new RegExp(".*?(?=" + icon + ")", "g");
         let regex2 = new RegExp("(?<="  + icon + ").*", "g");
-        if(event.target.value.match(regex1)){
-          this.props.iconLabel1 = event.target.value.match(regex1).toString();
-        }
-        if(event.target.value.match(regex2)){
-          this.props.iconLabel2 = event.target.value.match(regex2).toString();
-        }
+        this.props.iconLabel1 = event.target.value.match(regex1).toString().slice(0,-1);
+        this.props.iconLabel2 = event.target.value.match(regex2).toString();
+        this.props.value=event.target.value;
       }
       else
       {
