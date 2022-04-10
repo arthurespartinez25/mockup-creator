@@ -7,7 +7,7 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject } from 'rxjs';
-import { IComponent } from './../../interfaces/icomponent';
+import { IComponent, defaultProps } from './../../interfaces/icomponent';
 import { IProperty } from './../../interfaces/iproperty';
 import { PropertyComponent } from './../../property/property.component';
 import { ButtonService } from 'src/app/button-service.service';
@@ -38,6 +38,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   users: any;
   canvasIndex: number;
   initialName = "Canvas 1";
+  defaultProps = defaultProps;
 
   selected: IProperty = {
     key: '',
@@ -55,22 +56,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     finalStyle:''
   };
 
-  defaultProps: IProperty = {
-    key: '',
-    id: '',
-    value: '',
-    class: '',
-    style: '',
-    typeObj: '',
-    type: '',
-    draggable: true,
-    selected: false,
-    mouseDragPositionX:0,
-    mouseDragPositionY:0,
-    dummyDate:'',
-    finalStyle:''
-  }
-
+  
   public cssRuleCount = document.styleSheets[0].cssRules.length;
   public _popupCount = 0;
 
