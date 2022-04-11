@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
-import { ButtonService } from 'src/app/button-service.service';
+import { ButtonService } from 'src/app/service/button-service/button-service.service';
 import { CanvasComponent } from 'src/app/section/canvas/canvas.component';
 
 @Component({

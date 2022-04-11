@@ -18,7 +18,7 @@ import { BehaviorSubject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { DatePipe } from '@angular/common'
 import { PropertyComponent } from 'src/app/property/property.component';
-import { CrossComponentBridge } from 'src/app/service/crossComponentBridge.service';
+import { CrossComponentBridge } from 'src/app/service/cross-component-bridge/crossComponentBridge.service';
 
 @Component({
   selector: 'app-code-segment',
