@@ -1,6 +1,8 @@
 .palette-div {
   height: 100vh;
   width: 220px;
+  display: flex;
+  flex-direction: column;
 }
 .palette-item {
   height: fit-content;
@@ -19,5 +21,5 @@
   border: #16324f solid 1px;
 }
 .tab-content {
-  margin-bottom: 5px;
+  /* margin-bottom: 5px; */
 }
