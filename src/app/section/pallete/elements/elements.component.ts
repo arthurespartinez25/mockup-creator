@@ -277,7 +277,6 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
     }
     ////this.componentList.push(temp);
     this.updateComponentListEvent.emit(temp);
-    console.log(this.canvas);
   }
   //----------------------------------------------------------------------------
   onDragEndedAddComponent(event: CdkDragEnd, component: string) {

@@ -1,3 +1,5 @@
+import { LinkDragComponent } from './components/linkDrag/linkDrag.component';
+import { ElementsComponent } from './section/pallete/elements/elements.component';
 
 import {
   AfterViewChecked,
@@ -22,7 +24,32 @@ import { CanvasComponent } from './section/canvas/canvas.component';
 import { PalleteComponent } from './section/pallete/pallete.component';
 import { CodeComponent } from './section/code/code.component';
 import { VideoDragComponent } from './components/videoDrag/videoDrag.component';
+import { HttpClient } from '@angular/common/http';
+import { NavbarDragComponent } from './components/navbarDrag/navbarDrag.component';
+import { TableDragComponent } from './components/tableDrag/tableDrag.component';
+import { ButtonDragComponent } from './components/buttonDrag/buttonDrag.component';
 
+export class List {
+  constructor(
+    public id: number,
+    public tabs_id: string,
+    public componentID: string,
+    public componentValue: string,
+    public componentClass: string,
+    public componentStyle: string,
+    public componentTypeObj: string,
+    public componentType: string,
+    public componentDraggable: boolean,
+    public componentPositionX: string,
+    public componentPositionY: string,
+    public componentOptionValues: string,
+    public componentHREF: string,
+    public componentName: string,
+    public componentPlaceholder: string,
+    public componentColumns: number,
+    public componentRows: number
+  ){}
+}
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -41,6 +68,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   cssDocument?: StyleSheet;
   users: any;
   tabList: any;
+  components: List[]
 
   selected: IProperty = {
     key: '',
@@ -65,6 +93,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @ViewChild(CanvasComponent) canvas!: CanvasComponent;
   //@ViewChild('canvas') canvas!: ElementRef;
   @ViewChild(PalleteComponent) palette: PalleteComponent; 
+  @ViewChild(ElementsComponent) elements: ElementsComponent;
   @ViewChild(CodeComponent) code: CodeComponent;
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
@@ -79,6 +108,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     public _location: Location,
     public sanitizer: DomSanitizer,
     public datepipe: DatePipe,
+    private httpClient: HttpClient
   ) {
     this.changeref = changeDetectorRef;
   }
@@ -109,12 +139,51 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         this.users = data;
       }) */
     }
+    // this.getComponents()
   }
   ngAfterViewInit(): void {     
     this.canvasDirective = this.canvas.passCanvas();    
-    this.passCanvas = this.canvasDirective;   
-    //this.componentList = this.palette.returnComponentList();
+    this.passCanvas = this.canvasDirective;
   }
+  // getComponents(){
+  //   this.httpClient.get<any>('http://localhost:8000/getComponents/user1_proj5_canvas1').subscribe(
+  //     response=>{
+  //       this.components=response;
+  //       this.components.map(x=>{
+  //         let props: IProperty= {
+  //           key: '',
+  //           id: x.componentID,
+  //           value: x.componentValue,
+  //           class: x.componentClass,
+  //           style: x.componentStyle,
+  //           typeObj: x.componentTypeObj,
+  //           type: x.componentType,
+  //           draggable: x.componentDraggable,
+  //           selected : false,
+  //           hidden: false,
+  //           mouseDragPositionX:x.componentPositionX,
+  //           mouseDragPositionY:x.componentPositionY,
+  //           finalStyle: ''
+  //         }
+  //         switch(x.componentTypeObj){
+  //           case 'navDrag':
+  //             this.updateComponentList(new NavbarDragComponent(this.passCanvas));
+  //             console.log(x)
+  //             break;
+  //           case 'tableDrag':
+  //             this.updateComponentList(new TableDragComponent(this.passCanvas, this.changeref));
+  //             break;
+  //           case 'buttonDrag':
+  //             this.updateComponentList(new ButtonDragComponent(this.passCanvas));
+  //             break;
+  //           case 'linkDrag':
+  //             this.updateComponentList(new LinkDragComponent(this.passCanvas));
+  //             break;
+  //         }
+  //       })
+  //     }
+  //   )
+  // }
 
   updateComponentList(components: IComponent) {
     //this.componentList.push(components);
@@ -128,7 +197,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     console.log(this.componentListMap);
     
     this.componentList = this.componentListMap.get(this.currentTab)!;
-
     //this.palette.updateComponentListDel(this.componentList); //updates the componentList in the pallete
   }
   
@@ -203,7 +271,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.isPlaying = value;
     //console.log(this.isPlaying);
   }
-
   //////////////////////////////////////////////////////////////////////////////
   //   THIS PROJECT WAS STARTED BY BATO BOYS AND CEBU TEAM  
   //                          JUPAO  

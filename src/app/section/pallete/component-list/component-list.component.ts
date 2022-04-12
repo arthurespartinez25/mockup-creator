@@ -239,7 +239,6 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
 
   deleteComponent(value: any) {
     this.updateSelectedEvent.emit(this.defaultProps);
-    console.log(this.defaultProps)
     let componentIndex = this.componentList.indexOf(value); //gets the index of the selected component inside the canvas
     if (componentIndex !== -1) {
       this.componentList.splice(componentIndex, 1); //removes the component from the canvas

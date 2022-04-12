@@ -91,7 +91,6 @@ export class CssComponent implements OnInit, AfterViewInit, AfterViewChecked {
     }
   }
   ngAfterViewInit(): void {
-    console.log(this.canvas);
     this.updatePropertyComponentEvent.emit(this.propertyCmp);
   }
   //////////////////////////////////////////////////////////////////////////////

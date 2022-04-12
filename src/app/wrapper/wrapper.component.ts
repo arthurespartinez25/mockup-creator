@@ -64,7 +64,6 @@ export class WrapperComponent implements OnInit {
   stylish ={};
   ngOnInit(): void {
     this.mousePositionX2 = this.mousePositionX;
-    console.log(this.mousePositionX2)
     this.mousePositionY2 = this.mousePositionY;
     this.canvasPositionX = this.canvasLeft;
     this.canvasPositionY = this.canvasTop;

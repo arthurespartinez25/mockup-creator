@@ -127,7 +127,6 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
         this.users = data;
       }) */
     }
-    
   }
   ngAfterViewInit(): void {
     this.canvasListElements.toArray();
