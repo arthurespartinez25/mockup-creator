@@ -17,16 +17,15 @@
 
 #code-container {
   height: 100vh;
-  width: 25%;
-  max-width: 300px;
-  min-width: 275px;
-  overflow: auto;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
 }
 
 #code {
   background-color: white;
   padding: 10px;
-  height: 100%;
 }
 
 code {

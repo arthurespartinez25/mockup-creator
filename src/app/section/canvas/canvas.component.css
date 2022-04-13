@@ -11,11 +11,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  width: 100%;
-  min-width: 1300px;
-  min-height: 800;
-  padding: 20px;
+  height: 100vh;
+  width: calc(100vw - 520px);
   flex-grow: 3;
   background-color: gray;
   position:static;
@@ -23,11 +20,11 @@
 
 .canvas {
   display: grid;
-  width: 1280px;
-  height: 720px;
-  min-width: 1280px;
-  min-height: 720px;
-  background-color: white;  
+  width: 100%;
+  height: auto;
+  max-width: 1280px;
+  background-color: white;
+  aspect-ratio: 16/9;
 }
 
 .solid-lines {
@@ -37,11 +34,11 @@
 
 #canvasBody {
   display: grid;
-  width: 1280px;
-  height: 720px;
-  min-width: 1280px;
-  min-height: 720px;
+  width: calc(100vw - 520px);
+  height: auto;
+  max-width: 1280px;
   position: relative;
+  aspect-ratio: 16/9;
 }
 
 .wrapper {
@@ -211,7 +208,8 @@ a.custom-nav-link:hover {
   opacity: unset;
 }
 .pagination-container {
-  width: 1280px;
+  width: 100%;
+  max-width: 1280px;
 }
 
 /* .switch {

@@ -1,17 +1,15 @@
-<button [disabled]="isPlaying" class="saveBtn"
-(click)="addAllCSSRule(cssTextArea.value)"
-(click)="cssReceiveMessage()">
-Save CSS
-</button>
-
-
-
-<textarea
-[readonly]="isPlaying"
-style="margin: 0; width: 100%"
-cols="30"
-rows="5"
-#cssTextArea
-name="css-textarea"
-id="css-textarea"
-></textarea>
+<div>
+    <button [disabled]="isPlaying" class="saveBtn"
+    (click)="addAllCSSRule(cssTextArea.value)"
+    (click)="cssReceiveMessage()">
+    Save CSS
+    </button>
+</div>
+<div style="box-sizing: border-box; width: 300px; height: calc(100% - 30px); overflow-y: auto; display: flex;">
+    <textarea
+    [readonly]="isPlaying"
+    #cssTextArea
+    name="css-textarea"
+    id="css-textarea"
+    ></textarea>
+</div>
