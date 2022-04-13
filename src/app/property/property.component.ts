@@ -5,6 +5,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { DatePipe } from '@angular/common'
 import { CodeComponent } from '../section/code/code.component';
 import { DialogService } from '../service/dialog.service';
+import { ClearComponentsService } from '../service/clearComponents/clear-components.service';
 
 @Component({
   selector: 'app-property',
@@ -86,10 +87,17 @@ export class PropertyComponent implements OnInit {
   }
   @Input() isPlaying: boolean;
 
-  constructor(public sanitizer:DomSanitizer, public datepipe: DatePipe, private dialogService: DialogService) {
+  constructor(public sanitizer:DomSanitizer, public datepipe: DatePipe, private dialogService: DialogService, private clearComponents: ClearComponentsService) {
     this.props = this.property;
     this.componentList = this.compList;
     this.selectedcomp = this.selectedIdx;
+    if(clearComponents) {
+      this.clearComponents.listen().subscribe(value => {
+        if(value == 0){
+         this.confirmClear(); 
+       }
+      }); 
+    }
   }
 
   deleteComponent() {

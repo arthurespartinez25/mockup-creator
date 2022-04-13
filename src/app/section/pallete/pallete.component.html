@@ -103,7 +103,7 @@
       </button>
       <div style="display: flex; flex-direction: row; margin: 5px 0px;">
         <div style="height: fit-content; width: 50%; padding: 10px 0px; text-align: center;"><strong>Component List</strong></div>
-        <button style="height: fit-content; width: 50%; padding: 10px 0px; background-color: #FF2E2E;" *ngIf="componentList.length != 0"><strong>Clear</strong></button>
+        <button (click)="clearComponent()" [disabled]="isPlaying" id="clear" style="height: fit-content; width: 50%; padding: 10px 0px;" *ngIf="componentList.length != 0"><strong>Clear</strong></button>
       </div>
     </div>
       <app-component-list

@@ -1,8 +1,10 @@
-<div>
-    <button class="btnCopy" (click)="copyMessage(htmlCode)">Copy</button>
-    <button class="btnCopy" (click)="downloadCode(htmlCode)">Download</button>
-    <button class="btnCopy" (click)="buildCode(htmlCode)">Build</button>
-</div>
-<div style="width: 100%; flex-grow: 1; overflow-y: auto;">
-    <code id="code" [innerText]="htmlCode"> </code>
+<div style="display: flex; flex-direction: column; height: 100%;">
+    <div style=" align-content: center; padding: 15px;">
+        <button class="btnCopy" (click)="copyMessage(htmlCode)">Copy</button>
+        <button class="btnCopy" (click)="downloadCode(htmlCode)">Download</button>
+        <button class="btnCopy" (click)="buildCode(htmlCode)">Build</button>
+    </div>
+    <div style="width: 300px; height: calc(100vh - 180px); overflow-y: auto; padding: 10px;">
+        <code id="code" [innerText]="htmlCode"> </code>
+    </div>
 </div>

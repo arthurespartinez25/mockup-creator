@@ -16,9 +16,9 @@
           <div id="canvasBody">
             <div id="invisible" style="display: grid;
             width: 100%;
-            height: 100%;
-            min-width: 100%;
-            min-height: 100%;" (click)="deselect()"></div>
+            height: auto;
+            aspect-ratio: 16/9;"
+            (click)="deselect()"></div>
             <app-wrapper
               
               *ngFor="let component of componentListMap.get(tabs[index].id); let i = index"

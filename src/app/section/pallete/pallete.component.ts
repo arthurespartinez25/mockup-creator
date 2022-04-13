@@ -45,6 +45,7 @@ import { DatePipe } from '@angular/common'
 import { PropertyComponent } from './../../property/property.component';
 import { emit } from 'process';
 import { DialogService } from 'src/app/service/dialog.service';
+import { ClearComponentsService } from 'src/app/service/clearComponents/clear-components.service';
 
 @Component({
   selector: 'app-pallete',
@@ -135,6 +136,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
     public sanitizer: DomSanitizer,
     public datepipe: DatePipe,
     private dialogService: DialogService,
+    private clearComponents: ClearComponentsService
   ) {
     this.changeref = changeDetectorRef;
   }
@@ -250,6 +252,10 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
 
   updateSelected(value: IProperty){
     this.updateSelectedEvent.emit(value)
+  }
+
+  clearComponent(): void {
+    this.clearComponents.clearComponents();
   }
   //----------------------------------------------------------------------------
 

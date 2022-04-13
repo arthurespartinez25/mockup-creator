@@ -24,3 +24,12 @@
 .tab-content {
   /* margin-bottom: 5px; */
 }
+
+#clear {
+  color: white;
+  border-radius: 20px;
+  background-color: #c51b29;
+  border: none;
+  font-weight: lighter;
+  margin: 0px 5px 0px 0px;
+}
