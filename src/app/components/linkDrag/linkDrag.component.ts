@@ -44,7 +44,7 @@ export class LinkDragComponent implements OnInit, IComponent {
   @Input() mousePositionX2: any;
   @Input() mousePositionY2: any;
   @Input() whatComponent2: any;
-
+  @Input() isLoaded: boolean;
 
   canvasPositionLeft = 0;
   canvasPositionTop = 0;
@@ -61,8 +61,7 @@ export class LinkDragComponent implements OnInit, IComponent {
     this.mousePositionTop = this.mousePositionY2;
     this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
     this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
-    this.props.mouseDragPositionX = this.percentageX;
-    this.props.mouseDragPositionY = this.percentageY;
+    
     switch (this.whatComponent2) {
       case 'HPLink1':
         this.props.style = `color: white;
@@ -153,13 +152,17 @@ export class LinkDragComponent implements OnInit, IComponent {
         break;
 
       default:
-        this.props.style =
+        if(this.isLoaded != true){
+          this.props.style =
           'text-decoration: none;position:absolute;left:' +
           this.percentageX +
           '%;top:' +
           this.percentageY +
           '%;';
-        this.props.finalStyle = this.props.style;
+          this.props.finalStyle = this.props.style;
+          this.props.mouseDragPositionX = this.percentageX;
+          this.props.mouseDragPositionY = this.percentageY;
+        }
         break;
     }
   }

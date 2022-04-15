@@ -24,6 +24,7 @@ export class WrapperComponent implements OnInit {
   @Input() whatComponent:any;
   @Input() initialName: string;
   @Input() isPlaying: boolean;
+  @Input() isLoaded: boolean;
 
   mousePositionX2 = 0;
   mousePositionY2 = 0;

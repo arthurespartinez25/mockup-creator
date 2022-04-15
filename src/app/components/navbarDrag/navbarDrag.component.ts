@@ -3,8 +3,10 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  Inject,
   Input,
   OnInit,
+  Optional,
   Output,
 } from '@angular/core';
 import { IComponent } from 'src/app/interfaces/icomponent';
@@ -35,6 +37,7 @@ export class NavbarDragComponent implements OnInit, IComponent {
     mouseDragPositionY:0,
     finalStyle: ''
   };
+  
 
   @Input() canvasWidth2: any;
   @Input() canvasPositionX: any;
@@ -42,6 +45,7 @@ export class NavbarDragComponent implements OnInit, IComponent {
   @Input() mousePositionX2: any;
   @Input() mousePositionY2: any;
   @Input() whatComponent2: any;
+  @Input() isLoaded: boolean;
   canvasPositionLeft = 0;
   canvasPositionTop = 0;
   mousePositionLeft = 0;
@@ -52,15 +56,17 @@ export class NavbarDragComponent implements OnInit, IComponent {
 
   ngOnInit(): void {
     //this.drag.createDrag(this.ref).withBoundaryElement(this.canvas);
-    this.theCanvasWidth = this.canvasWidth2;
-    this.canvasPositionLeft = this.canvasPositionX;
-    this.canvasPositionTop = this.canvasPositionY;
-    this.mousePositionLeft = this.mousePositionX2;
-    this.mousePositionTop = this.mousePositionY2;
-    this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
-    this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
-    this.props.mouseDragPositionX = this.percentageX;
-    this.props.mouseDragPositionY = this.percentageY;
+    if(!this.isLoaded){
+      this.theCanvasWidth = this.canvasWidth2;
+      this.canvasPositionLeft = this.canvasPositionX;
+      this.canvasPositionTop = this.canvasPositionY;
+      this.mousePositionLeft = this.mousePositionX2;
+      this.mousePositionTop = this.mousePositionY2;
+      this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
+      this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
+      this.props.mouseDragPositionX = this.percentageX;
+      this.props.mouseDragPositionY = this.percentageY;
+    }
     if (this.percentageX < 0){
       this.percentageX = 0;
     }
@@ -109,7 +115,7 @@ export class NavbarDragComponent implements OnInit, IComponent {
       position:absolute;left:`+this.percentageX+`%;top:`+this.percentageY+`%;`;
       this.props.value = ``;
       this.props.finalStyle = this.props.style;
-    } else {
+    } else if (!this.isLoaded) {
       this.props.style =
         'position:absolute;width:100%;color: white;padding: 10px;background-color: #12355B;font-size: 20px;left:0%;top:' +
         this.percentageY +

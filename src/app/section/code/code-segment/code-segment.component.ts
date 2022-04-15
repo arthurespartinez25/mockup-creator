@@ -109,7 +109,6 @@ export class CodeSegmentComponent implements OnInit {
       }
     }
     ngAfterViewInit(): void {
-      console.log(this.canvas);
       this.updatePropertyComponentEvent.emit(this.propertyCmp);
     }
     //////////////////////////////////////////////////////////////////////////////

@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { IComponent } from './interfaces/icomponent';
+import { IComponent, defaultProps } from './interfaces/icomponent';
 import { IProperty } from './interfaces/iproperty';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
@@ -48,7 +48,12 @@ export class List {
     public componentName: string,
     public componentPlaceholder: string,
     public componentColumns: number,
-    public componentRows: number
+    public componentRows: number,
+    public componentFinalStyle: string,
+    public componentIsIcon: boolean,
+    public componentIconValue: string,
+    public componentIconLabel1: string,
+    public componentIconLabel2: string
   ){}
 }
 @Component({
@@ -129,6 +134,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   sessionID = this.loginCookie.get("sessionID");
   inSession: boolean = this.sessionID == "12345";
   isPlaying: boolean;
+  isLoaded:any;
 
   ngOnInit() {
     console.log(this.inSession);
@@ -140,33 +146,41 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         this.users = data;
       }) */
     }
-    this.getComponents()
+    // this.getComponents()
   }
   ngAfterViewInit(): void {     
     this.canvasDirective = this.canvas.passCanvas();    
     this.passCanvas = this.canvasDirective;
   }
   getComponents(){
-    this.httpClient.get<any>('http://localhost:8000/getComponents/user1_proj7_canvas1').subscribe(
+    this.httpClient.get<any>('http://localhost:8000/getComponents/user1_proj5_canvas1').subscribe(
       response=>{
         this.components=response;
-        this.components.map(x=>{
+        for(let i=0; i<this.components.length; i++){
           let props: IProperty= {
-            key: '',
-            id: x.componentID,
-            value: x.componentValue,
-            class: x.componentClass,
-            style: x.componentStyle,
-            typeObj: x.componentTypeObj,
-            type: x.componentType,
-            draggable: x.componentDraggable,
+            key: this.components[i].componentID.replace(/\D/g, ""),
+            id: this.components[i].componentID,
+            value: this.components[i].componentValue,
+            class: this.components[i].componentClass,
+            style: this.components[i].componentFinalStyle,
+            typeObj: this.components[i].componentTypeObj,
+            type: this.components[i].componentType,
+            draggable: Boolean(this.components[i].componentDraggable),
             selected : false,
             hidden: false,
-            mouseDragPositionX:x.componentPositionX,
-            mouseDragPositionY:x.componentPositionY,
-            finalStyle: ''
+            mouseDragPositionX:Number(this.components[i].componentPositionX),
+            mouseDragPositionY:Number(this.components[i].componentPositionY),
+            finalStyle: this.components[i].componentFinalStyle,
+            href: this.components[i].componentHREF,
+            placeholder: this.components[i].componentPlaceholder,
+            tblCols: Number(this.components[i].componentColumns),
+            tblArrayRow: Number(this.components[i].componentRows),
+            isIcon: Boolean(this.components[i].componentIsIcon),
+            iconValue: this.components[i].componentIconValue,
+            iconLabel1: this.components[i].componentIconLabel1,
+            iconLabel2: this.components[i].componentIconLabel2
           }
-          switch(x.componentTypeObj){
+          switch(props.typeObj){
             case 'navDrag':
               this.updateComponentList(new NavbarDragComponent(this.passCanvas));
               break;
@@ -182,8 +196,12 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
             case 'imgDrag':
               this.updateComponentList(new ImageDragComponent(this.passCanvas));
               break;
-          }
-        })
+          } 
+          this.componentListMap.forEach(component=>{
+            Object.keys(component[i].props).forEach(key=>component[i].props[key]=props[key])
+          });
+          this.isLoaded=true;
+        }
       }
     )
   }

@@ -86,6 +86,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   @Input() canvasW: any;
   @Input() whatComponent:any;
   @Input() componentListMap : Map<string, IComponent[]>;
+  @Input() isLoaded: boolean;
   
  
 

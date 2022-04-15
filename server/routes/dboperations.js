@@ -124,7 +124,8 @@ async function saveTabs(canvasKeys, canvasNames) {
 }
 
 async function saveComponents(componentList, canvasKeys, canvasNativeKeys) {
-    let checkNames = ["id", "value", "class", "style", "typeObj", "type", "draggable", "mouseDragPositionX", "mouseDragPositionY", "linkValue", "href", "name", "placeholder", "tblCols", "tblRows"]; //datatypes to be saved
+    let checkNames = ["id", "value", "class", "style", "typeObj", "type", "draggable", "mouseDragPositionX", "mouseDragPositionY", "linkValue", "href", "name", "placeholder", "tblCols", "tblRows", 
+                        "finalStyle", "isIcon", "iconValue", "iconLabel1", "iconLabel2"]; //datatypes to be saved
     let skip = ["key", "selected", "hidden", "dummyDate", "checked", "tblArrayCol", "tblArrayRow", "url", "tblContent"]; //skip these properties
     let query = `INSERT INTO component_table (tabs_id, 
                                               componentID,
@@ -141,9 +142,14 @@ async function saveComponents(componentList, canvasKeys, canvasNativeKeys) {
                                               componentName,
                                               componentPlaceholder,
                                               componentColumns,
-                                              componentRows) VALUES `;
+                                              componentRows,
+                                              componentFinalStyle,
+                                              componentIsIcon,
+                                              componentIconValue,
+                                              componentIconLabel1,
+                                              componentIconLabel2) VALUES `;
     
-    //console.log(componentList);
+    // console.log(componentList);
     for (let i = 0; i < canvasNativeKeys.length; i++) {
         for (let j = 0; j < Object.keys(componentList[canvasNativeKeys[i]]).length; j++) {
             let l = 0;

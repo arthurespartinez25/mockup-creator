@@ -191,7 +191,7 @@ router.post('/saveComponents', (req, res) => {
   save.then(function(result) {
     try{
       console.log(result);
-      return res.status(200).json({ Message: "This is the save result: " + result });
+      return res.status(200).json(result);
     }
     catch(error){
       console.log(error);

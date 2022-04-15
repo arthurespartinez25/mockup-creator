@@ -7,10 +7,10 @@
   'border-width' : props.selected == true ? '1px': (props.selected == false ? '0px': null)
 }" 
     >
-        <span *ngIf="props.isIcon == false">{{props.value}}</span>
-        <span *ngIf="props.isIcon == true">
+        <div *ngIf="props.isIcon == false">{{props.value}}</div>
+        <div *ngIf="props.isIcon == true">
           {{props.iconLabel1}}
           <i class={{props.iconValue}}></i>
           {{props.iconLabel2}}
-        </span>
+        </div>
 </a>
