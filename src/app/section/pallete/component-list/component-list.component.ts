@@ -56,7 +56,8 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
     hidden: false,
     mouseDragPositionX: 0,
     mouseDragPositionY: 0,
-    finalStyle:''
+    finalStyle:'',
+    isSavedComponent: false
   };
 
   public cssRuleCount = document.styleSheets[0].cssRules.length;

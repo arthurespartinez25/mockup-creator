@@ -32,7 +32,8 @@ export class DropdownDragComponent implements OnInit, IComponent {
     mouseDragPositionY:0,
     linkValue: 'link1,link2,link3',
     linksArray: [],
-    finalStyle: ''
+    finalStyle: '',
+    isSavedComponent: false
   };
 
   @Input() canvasPositionX: any;
@@ -41,6 +42,7 @@ export class DropdownDragComponent implements OnInit, IComponent {
   @Input() mousePositionY2: any;
   @Input() whatComponent2: any;
   @Input() isPlaying: boolean;
+  @Input() isLoaded: boolean;
   
   canvasPositionLeft = 0;
   canvasPositionTop = 0;
@@ -52,27 +54,33 @@ export class DropdownDragComponent implements OnInit, IComponent {
   selectedOption: string;
 
   ngOnInit(): void {
-    this.canvasPositionLeft = this.canvasPositionX;
-    this.canvasPositionTop = this.canvasPositionY;
-    this.mousePositionLeft = this.mousePositionX2;
-    this.mousePositionTop = this.mousePositionY2;
-    this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
-    this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
-    this.props.mouseDragPositionX = this.percentageX;
-    this.props.mouseDragPositionY = this.percentageY;
-    switch (this.whatComponent2) {
-      case 'HPDropdown1':
-        break;
+    if(this.props.isSavedComponent){
+      this.mousePositionLeft = (this.props.mouseDragPositionX/100)*1280;
+      this.mousePositionTop = (this.props.mouseDragPositionY/100)*720;
+    }
+    if(!this.props.isSavedComponent){
+      this.canvasPositionLeft = this.canvasPositionX;
+      this.canvasPositionTop = this.canvasPositionY;
+      this.mousePositionLeft = this.mousePositionX2;
+      this.mousePositionTop = this.mousePositionY2;
+      this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
+      this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
+      this.props.mouseDragPositionX = this.percentageX;
+      this.props.mouseDragPositionY = this.percentageY;
+      switch (this.whatComponent2) {
+        case 'HPDropdown1':
+          break;
 
-      default:
-        this.props.style =
-          'position:absolute;left:' +
-          this.percentageX +
-          '%;top:' +
-          this.percentageY +
-          '%;';
-        this.props.finalStyle=this.props.style;
-        break;
+        default:
+          this.props.style =
+            'position:absolute;left:' +
+            this.percentageX +
+            '%;top:' +
+            this.percentageY +
+            '%;';
+          this.props.finalStyle=this.props.style;
+          break;
+      }
     }
   }
 

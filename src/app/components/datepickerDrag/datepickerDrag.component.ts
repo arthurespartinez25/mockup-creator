@@ -36,7 +36,8 @@ export class DatepickerDragComponent implements OnInit,IComponent {
     mouseDragPositionX:0,
     mouseDragPositionY:0,
     dummyDate:0,
-    finalStyle:''
+    finalStyle:'',
+    isSavedComponent: false
   };
 
   @Input() canvasPositionX: any;
@@ -44,6 +45,7 @@ export class DatepickerDragComponent implements OnInit,IComponent {
   @Input() mousePositionX2: any;
   @Input() mousePositionY2: any;
   @Input() whatComponent2: any;
+  @Input() isLoaded: boolean;
   canvasPositionLeft = 0;
   canvasPositionTop = 0;
   mousePositionLeft = 0;
@@ -53,22 +55,28 @@ export class DatepickerDragComponent implements OnInit,IComponent {
 
 
   ngOnInit(): void {
-    this.canvasPositionLeft = this.canvasPositionX;
-    this.canvasPositionTop = this.canvasPositionY;
-    this.mousePositionLeft = this.mousePositionX2;
-    this.mousePositionTop = this.mousePositionY2;
-    this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
-    this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
-    this.props.mouseDragPositionX = this.percentageX;
-    this.props.mouseDragPositionY = this.percentageY;
-    let today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
-    let date = mm + '-' + dd + '-' + yyyy;
-    this.props.value = this.datepipe.transform(date, 'yyyy-MM-dd');
-    this.props.style='position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
-    this.props.finalStyle=this.props.style;
+    if(this.props.isSavedComponent){
+      this.mousePositionLeft = (this.props.mouseDragPositionX/100)*1280;
+      this.mousePositionTop = (this.props.mouseDragPositionY/100)*720;
+    }
+    if(!this.props.isSavedComponent){
+      this.canvasPositionLeft = this.canvasPositionX;
+      this.canvasPositionTop = this.canvasPositionY;
+      this.mousePositionLeft = this.mousePositionX2;
+      this.mousePositionTop = this.mousePositionY2;
+      this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
+      this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
+      this.props.mouseDragPositionX = this.percentageX;
+      this.props.mouseDragPositionY = this.percentageY;
+      let today = new Date();
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var yyyy = today.getFullYear();
+      let date = mm + '-' + dd + '-' + yyyy;
+      this.props.value = this.datepipe.transform(date, 'yyyy-MM-dd');
+      this.props.style='position:absolute;left:'+this.percentageX+'%;top:'+this.percentageY+'%;';
+      this.props.finalStyle=this.props.style;
+    }
   }
   
 

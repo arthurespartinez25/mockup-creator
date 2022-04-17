@@ -73,7 +73,8 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
     hidden: false,
     mouseDragPositionX: 0,
     mouseDragPositionY: 0,
-    finalStyle:''
+    finalStyle:'',
+    isSavedComponent: false
   };
 
   public cssRuleCount = document.styleSheets[0].cssRules.length;
@@ -96,6 +97,7 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
   @Output() updateMousePosX = new EventEmitter<number>();
   @Output() updateMousePosY = new EventEmitter<number>();
   @Output() updateWhatComponentEvent = new EventEmitter<string>();
+  @Output() updateIsLoaded = new EventEmitter<boolean>();
   changeref: ChangeDetectorRef;
   constructor(
     private loginCookie:CookieService,
@@ -252,8 +254,8 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
         break;
       
       case 'video':
-      temp = new VideoDragComponent(this.canvas, this.sanitizer);
-      break;
+        temp = new VideoDragComponent(this.canvas, this.sanitizer);
+        break;
 
       default:
         temp = new ButtonDragComponent(this.canvas);
@@ -277,6 +279,7 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
     }
     ////this.componentList.push(temp);
     this.updateComponentListEvent.emit(temp);
+    this.updateIsLoaded.emit(false);
   }
   //----------------------------------------------------------------------------
   onDragEndedAddComponent(event: CdkDragEnd, component: string) {
@@ -292,8 +295,6 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
       this.canvasTopY = (
         this.subMenuItem.nativeElement as HTMLElement
       ).offsetTop;
-      console.log(this.canvasLeftX);
-      console.log(this.canvasTopY);
       if (
         component == 'img' ||
         component == 'div' ||
@@ -323,6 +324,8 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
       this.mousePositionX = this.offsetLeft + this.xDistance + this.canvasLeftX;
       this.mousePositionY = this.offsetTop + this.yDistance + this.canvasTopY;
     }
+    console.log(this.mousePositionX)
+    console.log(this.mousePositionY)
     this.addComponent(component);
     this.updateMousePosX.emit(this.mousePositionX);
     this.updateMousePosY.emit(this.mousePositionY);

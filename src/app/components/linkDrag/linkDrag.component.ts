@@ -31,12 +31,13 @@ export class LinkDragComponent implements OnInit, IComponent {
     mouseDragPositionX:0,
     mouseDragPositionY:0,
     href: '#',
-    isIcon: false,
     finalStyle: '',
-    target: false,
+    isIcon: false,
     iconValue:'',
     iconLabel1:'',
-    iconLabel2:''
+    iconLabel2:'',
+    target: false,
+    isSavedComponent: false
   };
 
   @Input() canvasPositionX: any;
@@ -55,104 +56,110 @@ export class LinkDragComponent implements OnInit, IComponent {
 
 
   ngOnInit(): void {
-    this.canvasPositionLeft = this.canvasPositionX;
-    this.canvasPositionTop = this.canvasPositionY;
-    this.mousePositionLeft = this.mousePositionX2;
-    this.mousePositionTop = this.mousePositionY2;
-    this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
-    this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
-    
-    switch (this.whatComponent2) {
-      case 'HPLink1':
-        this.props.style = `color: white;
-        font-family: Georgia,  serif;
-        font-size: 15px;
-        text-decoration: none;
-        letter-spacing: 0.1em;
-        position: absolute; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
-        this.props.value = `Branches`;
-        this.props.finalStyle = this.props.style;
-        break;
-      case 'HPLink2':
-        this.props.style = `color: white;
-        font-family: Georgia,  serif;
-        font-size: 15px;
-        text-decoration: none;
-        letter-spacing: 0.1em;
-        position: absolute; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
-        this.props.value = `Events`;
-        this.props.finalStyle = this.props.style;
-        break;
-      case 'HPLink3':
-        this.props.style = `color: white;
-        font-family: Georgia,  serif;
-        font-size: 15px;
-        text-decoration: none;
-        letter-spacing: 0.1em;
-        position: absolute; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
-        this.props.value = `Contact`;
-        this.props.finalStyle = this.props.style;
-        break;
-      case 'HPLink4':
-        this.props.style = `color: white;
-        font-family: Georgia,  serif;
-        font-size: 12px;
-        letter-spacing: 0.1em;
-        text-decoration: none;
-        position: absolute; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
-        this.props.value = `THEMED MENU`;
-        this.props.finalStyle = this.props.style;
-        break;
-      case 'HPLink5':
-        this.props.style = `color: white;
-        font-family: Georgia,  serif;
-        font-size: 12px;
-        letter-spacing: 0.1em;
-        text-decoration: none;
-        position: absolute; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
-        this.props.value = `Dec. 31 - Feb. 20`;
-        this.props.finalStyle = this.props.style;
-        break;
-      case 'HPLink6':
-        this.props.style = `color: white;
-        font-family: Georgia,  serif;
-        font-size: 12px;
-        letter-spacing: 0.1em;
-        text-decoration: none;
-        position: absolute; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
-        this.props.value = `TIME LIMITED KAARAGE`;
-        this.props.finalStyle = this.props.style;
-        break;
-      case 'HPLink7':
-        this.props.style = `color: white;
-        font-family: Georgia,  serif;
-        font-size: 15px;
-        text-decoration: none;
-        position: absolute; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
-        this.props.value = `Our Story`;
-        this.props.finalStyle = this.props.style;
-        break;
-      case 'HPLink8':
-        this.props.style = `color: white;
-        font-family: Georgia,  serif;
-        font-size: 15px;
-        text-decoration: none;
-        position: absolute; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
-        this.props.value = `Opportunities`;
-        this.props.finalStyle = this.props.style;
-        break;
-      case 'HPLink9':
-        this.props.style = `color: white;
-        font-family: Georgia,  serif;
-        font-size: 15px;
-        text-decoration: none;
-        position: absolute; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
-        this.props.value = `Careers`;
-        this.props.finalStyle = this.props.style;
-        break;
+    if(this.props.isSavedComponent){
+      this.mousePositionLeft = (this.props.mouseDragPositionX/100)*1280;
+      this.mousePositionTop = (this.props.mouseDragPositionY/100)*720;
+    }
+    if(!this.props.isSavedComponent){
+      this.canvasPositionLeft = this.canvasPositionX;
+      this.canvasPositionTop = this.canvasPositionY;
+      this.mousePositionLeft = this.mousePositionX2;
+      this.mousePositionTop = this.mousePositionY2;
+      this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
+      this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
+      this.props.mouseDragPositionX = this.percentageX;
+      this.props.mouseDragPositionY = this.percentageY;
+        
+      switch (this.whatComponent2) {
+        case 'HPLink1':
+          this.props.style = `color: white;
+          font-family: Georgia,  serif;
+          font-size: 15px;
+          text-decoration: none;
+          letter-spacing: 0.1em;
+          position: absolute; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
+          this.props.value = `Branches`;
+          this.props.finalStyle = this.props.style;
+          break;
+        case 'HPLink2':
+          this.props.style = `color: white;
+          font-family: Georgia,  serif;
+          font-size: 15px;
+          text-decoration: none;
+          letter-spacing: 0.1em;
+          position: absolute; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
+          this.props.value = `Events`;
+          this.props.finalStyle = this.props.style;
+          break;
+        case 'HPLink3':
+          this.props.style = `color: white;
+          font-family: Georgia,  serif;
+          font-size: 15px;
+          text-decoration: none;
+          letter-spacing: 0.1em;
+          position: absolute; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
+          this.props.value = `Contact`;
+          this.props.finalStyle = this.props.style;
+          break;
+        case 'HPLink4':
+          this.props.style = `color: white;
+          font-family: Georgia,  serif;
+          font-size: 12px;
+          letter-spacing: 0.1em;
+          text-decoration: none;
+          position: absolute; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
+          this.props.value = `THEMED MENU`;
+          this.props.finalStyle = this.props.style;
+          break;
+        case 'HPLink5':
+          this.props.style = `color: white;
+          font-family: Georgia,  serif;
+          font-size: 12px;
+          letter-spacing: 0.1em;
+          text-decoration: none;
+          position: absolute; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
+          this.props.value = `Dec. 31 - Feb. 20`;
+          this.props.finalStyle = this.props.style;
+          break;
+        case 'HPLink6':
+          this.props.style = `color: white;
+          font-family: Georgia,  serif;
+          font-size: 12px;
+          letter-spacing: 0.1em;
+          text-decoration: none;
+          position: absolute; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
+          this.props.value = `TIME LIMITED KAARAGE`;
+          this.props.finalStyle = this.props.style;
+          break;
+        case 'HPLink7':
+          this.props.style = `color: white;
+          font-family: Georgia,  serif;
+          font-size: 15px;
+          text-decoration: none;
+          position: absolute; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
+          this.props.value = `Our Story`;
+          this.props.finalStyle = this.props.style;
+          break;
+        case 'HPLink8':
+          this.props.style = `color: white;
+          font-family: Georgia,  serif;
+          font-size: 15px;
+          text-decoration: none;
+          position: absolute; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
+          this.props.value = `Opportunities`;
+          this.props.finalStyle = this.props.style;
+          break;
+        case 'HPLink9':
+          this.props.style = `color: white;
+          font-family: Georgia,  serif;
+          font-size: 15px;
+          text-decoration: none;
+          position: absolute; left:`+this.percentageX+`%; top:`+this.percentageY+`%;`;
+          this.props.value = `Careers`;
+          this.props.finalStyle = this.props.style;
+          break;
 
-      default:
-        if(this.isLoaded != true){
+        default:
           this.props.style =
           'text-decoration: none;position:absolute;left:' +
           this.percentageX +
@@ -160,10 +167,8 @@ export class LinkDragComponent implements OnInit, IComponent {
           this.percentageY +
           '%;';
           this.props.finalStyle = this.props.style;
-          this.props.mouseDragPositionX = this.percentageX;
-          this.props.mouseDragPositionY = this.percentageY;
-        }
-        break;
+          break;
+      }
     }
   }
 

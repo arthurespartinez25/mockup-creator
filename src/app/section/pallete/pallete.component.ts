@@ -75,7 +75,8 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
     hidden: false,
     mouseDragPositionX: 0,
     mouseDragPositionY: 0,
-    finalStyle:''
+    finalStyle:'',
+    isSavedComponent: false
   };
 
   public cssRuleCount = document.styleSheets[0].cssRules.length;
@@ -126,6 +127,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
   @Output() updateMousePosY = new EventEmitter<number>();
   @Output() updateWhatComponentEvent = new EventEmitter<string>();
   @Output() updateProjectNameEvent = new EventEmitter<string>();
+  @Output() updateIsLoaded = new EventEmitter<boolean>();
   changeref: ChangeDetectorRef;
   constructor(
     private loginCookie:CookieService,
@@ -250,6 +252,9 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
 
   updateSelected(value: IProperty){
     this.updateSelectedEvent.emit(value)
+  }
+  updateIsLoadedEvent(value: boolean){
+    this.updateIsLoaded.emit(value)
   }
   //----------------------------------------------------------------------------
 

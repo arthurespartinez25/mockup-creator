@@ -33,6 +33,7 @@ export class HeaderDragComponent implements OnInit, IComponent {
     mouseDragPositionX:0,
     mouseDragPositionY:0,
     finalStyle: '',
+    isSavedComponent: false
   };
 
   @Input() get property(): IProperty {
@@ -50,6 +51,7 @@ export class HeaderDragComponent implements OnInit, IComponent {
   @Input() mousePositionX2: any;
   @Input() mousePositionY2: any;
   @Input() whatComponent2: any;
+  @Input() isLoaded: boolean;
   canvasPositionLeft = 0;
   canvasPositionTop = 0;
   mousePositionLeft = 0;
@@ -58,40 +60,46 @@ export class HeaderDragComponent implements OnInit, IComponent {
   percentageY = 0;
 
   ngOnInit(): void {
-    this.canvasPositionLeft = this.canvasPositionX;
-    this.canvasPositionTop = this.canvasPositionY;
-    this.mousePositionLeft = this.mousePositionX2;
-    this.mousePositionTop = this.mousePositionY2;
-    this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
-    this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
-    this.props.mouseDragPositionX = this.percentageX;
-    this.props.mouseDragPositionY = this.percentageY;
-    if (this.whatComponent2 == 'loginHeader') {
-      this.props.value = 'Welcome!';
-      this.props.style =
-        'text-transform:uppercase;color:black;position:absolute;left:' +
-        this.percentageX +
-        '%;top:' +
-        this.percentageY +
-        '%;';
-      this.props.finalStyle = this.props.style;
-    } else if (this.whatComponent2 == 'searchHeader') {
-      this.props.value = 'error message to reflect here';
-      this.props.style =
-        'color:red;position:absolute;font-size: medium;left:' +
-        this.percentageX +
-        '%;top:' +
-        this.percentageY +
-        '%;';
-      this.props.finalStyle = this.props.style;
-    } else {
-      this.props.style =
-        'width:150px;color:red;position:absolute;left:' +
-        this.percentageX +
-        '%;top:' +
-        this.percentageY +
-        '%;';
-      this.props.finalStyle=this.props.style;
+    if(this.props.isSavedComponent){
+      this.mousePositionLeft = (this.props.mouseDragPositionX/100)*1280;
+      this.mousePositionTop = (this.props.mouseDragPositionY/100)*720;
+    }
+    if(!this.props.isSavedComponent){
+      this.canvasPositionLeft = this.canvasPositionX;
+      this.canvasPositionTop = this.canvasPositionY;
+      this.mousePositionLeft = this.mousePositionX2;
+      this.mousePositionTop = this.mousePositionY2;
+      this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
+      this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
+      this.props.mouseDragPositionX = this.percentageX;
+      this.props.mouseDragPositionY = this.percentageY;
+      if (this.whatComponent2 == 'loginHeader') {
+        this.props.value = 'Welcome!';
+        this.props.style =
+          'text-transform:uppercase;color:black;position:absolute;left:' +
+          this.percentageX +
+          '%;top:' +
+          this.percentageY +
+          '%;';
+        this.props.finalStyle = this.props.style;
+      } else if (this.whatComponent2 == 'searchHeader') {
+        this.props.value = 'error message to reflect here';
+        this.props.style =
+          'color:red;position:absolute;font-size: medium;left:' +
+          this.percentageX +
+          '%;top:' +
+          this.percentageY +
+          '%;';
+        this.props.finalStyle = this.props.style;
+      } else {
+        this.props.style =
+          'width:150px;color:red;position:absolute;left:' +
+          this.percentageX +
+          '%;top:' +
+          this.percentageY +
+          '%;';
+        this.props.finalStyle=this.props.style;
+      }
     }
   }
   onDragEnded($event: CdkDragEnd) {

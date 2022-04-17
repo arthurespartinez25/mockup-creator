@@ -32,3 +32,19 @@
   content: "*";
   color: red;
 }
+
+#exampleModalLongTitle{
+  color:black;
+  padding-top: 20px;
+}
+.projectsList{
+  text-decoration: none;
+  color: black;
+  display: block;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+}
+.projectsList:hover{
+  background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25));
+}

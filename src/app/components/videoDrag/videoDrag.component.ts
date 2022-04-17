@@ -37,7 +37,8 @@ export class VideoDragComponent implements OnInit, IComponent {
        hidden: false,
        mouseDragPositionX:0,
        mouseDragPositionY:0,
-       finalStyle:''
+       finalStyle:'',
+       isSavedComponent: false
      };
  
      @Input() canvasPositionX: any;
@@ -45,6 +46,7 @@ export class VideoDragComponent implements OnInit, IComponent {
      @Input() mousePositionX2: any;
      @Input() mousePositionY2: any;
      @Input() whatComponent2: any;
+     @Input() isLoaded: boolean;
      mousePositionDropX = 310;
      mousePositionDropY = 110;
      canvasPositionLeft = 0;
@@ -56,25 +58,31 @@ export class VideoDragComponent implements OnInit, IComponent {
    
  
      ngOnInit(): void {
-       this.canvasPositionLeft = this.canvasPositionX;
-       this.canvasPositionTop = this.canvasPositionY;
-       this.mousePositionLeft = this.mousePositionX2;
-       this.mousePositionTop = this.mousePositionY2;
-       this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
-       this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
-       this.props.mouseDragPositionX = this.percentageX;
-       this.props.mouseDragPositionY = this.percentageY;
-       this.props.value = '';
-       this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value);      
-       this.props.type = 'video/mp4';
-       this.props.style =
-        'position:absolute;left:' +
-        this.percentageX +
-        '%;top:' +
-        this.percentageY +
-        '%;';
-      this.props.poster = this.sanitizer.bypassSecurityTrustResourceUrl('https://i.ytimg.com/vi/7QSnNfMSkLg/hqdefault.jpg');
-      this.props.finalStyle = this.props.style;
+      if(this.props.isSavedComponent){
+        this.mousePositionLeft = (this.props.mouseDragPositionX/100)*1280;
+        this.mousePositionTop = (this.props.mouseDragPositionY/100)*720;
+      }
+      if(!this.props.isSavedComponent){
+        this.canvasPositionLeft = this.canvasPositionX;
+        this.canvasPositionTop = this.canvasPositionY;
+        this.mousePositionLeft = this.mousePositionX2;
+        this.mousePositionTop = this.mousePositionY2;
+        this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
+        this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
+        this.props.mouseDragPositionX = this.percentageX;
+        this.props.mouseDragPositionY = this.percentageY;
+        this.props.value = '';
+        this.props.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.props.value);      
+        this.props.type = 'video/mp4';
+        this.props.style =
+          'position:absolute;left:' +
+          this.percentageX +
+          '%;top:' +
+          this.percentageY +
+          '%;';
+        this.props.poster = this.sanitizer.bypassSecurityTrustResourceUrl('https://i.ytimg.com/vi/7QSnNfMSkLg/hqdefault.jpg');
+        this.props.finalStyle = this.props.style;
+      }
    }
  
    onDragEnded($event: CdkDragEnd) {

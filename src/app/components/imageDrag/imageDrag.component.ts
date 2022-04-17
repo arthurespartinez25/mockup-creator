@@ -30,7 +30,8 @@ export class ImageDragComponent implements OnInit, IComponent {
     hidden: false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
-    finalStyle: ''
+    finalStyle: '',
+    isSavedComponent: false
   };
 
   @Input() canvasPositionX: any;
@@ -47,88 +48,93 @@ export class ImageDragComponent implements OnInit, IComponent {
   percentageY = 0;
 
   ngOnInit(): void {
-    this.canvasPositionLeft = this.canvasPositionX;
-    this.canvasPositionTop = this.canvasPositionY;
-    this.mousePositionLeft = this.mousePositionX2;
-    this.mousePositionTop = this.mousePositionY2;
-    this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
-    this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
+    if(this.props.isSavedComponent){
+      this.mousePositionLeft = (this.props.mouseDragPositionX/100)*1280;
+      this.mousePositionTop = (this.props.mouseDragPositionY/100)*720;
+    }
+    if(!this.props.isSavedComponent){
+      this.canvasPositionLeft = this.canvasPositionX;
+      this.canvasPositionTop = this.canvasPositionY;
+      this.mousePositionLeft = this.mousePositionX2;
+      this.mousePositionTop = this.mousePositionY2;
+      this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
+      this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
+      this.props.mouseDragPositionX = this.percentageX;
+      this.props.mouseDragPositionY = this.percentageY;
 
-    switch (this.whatComponent2) {
-      case 'sampleImage':
-        this.props.value =
-          'https://dlcdnrog.asus.com/rog/media/1610273282904.jpg';
-        this.props.style =
-          'position:absolute;left:' +
+      switch (this.whatComponent2) {
+        case 'sampleImage':
+          this.props.value =
+            'https://dlcdnrog.asus.com/rog/media/1610273282904.jpg';
+          this.props.style =
+            'position:absolute;left:' +
+            this.percentageX +
+            '%;top:' +
+            this.percentageY +
+            '%;';
+          this.props.finalStyle = this.props.style;
+          break;
+
+        case 'HPImage1':
+          this.props.style = `height: 390px;
+          width: 300px;
+          border-radius: 5%;`
+          +'position:absolute;left:' +
           this.percentageX +
           '%;top:' +
-          this.percentageY +
-          '%;';
-        this.props.finalStyle = this.props.style;
-        break;
+          this.percentageY
+          +'%;';
+          this.props.value = /* `https://images-cdn.9gag.com/photo/arVBvwX_700b.jpg` */ `https://media.discordapp.net/attachments/699657972611153982/932194877024907284/gourmet-burger.png`;
+          this.props.finalStyle = this.props.style;
+          break;
+        case 'HPImage2':
+          this.props.style = `height: 390px;
+          width: 300px;
+          border-radius: 5%;`
+          +'position:absolute;left:' +
+          this.percentageX +
+          '%;top:' +
+          this.percentageY
+          +'%;';
+          this.props.value = /* `https://i.pinimg.com/474x/50/8e/4e/508e4e9d7380526dff7e7346f9c5d013.jpg` */ `https://st4.depositphotos.com/8522652/i/600/depositphotos_281396182-stock-photo-karaage-japanese-fried-chicken-with.jpg`;
+          this.props.finalStyle = this.props.style;
+          break;
+        case 'HPImage3':
+          this.props.style = `height: 390px;
+          width: 300px;
+          border-radius: 5%;`
+          +'position:absolute;left:' +
+          this.percentageX +
+          '%;top:' +
+          this.percentageY
+          +'%;';
+          this.props.value = /* `https://external-preview.redd.it/mWEhfBkJ-YMbQAQs5oIYJDWA8IpEXa8DjGO6gk1APNQ.jpg?width=640&crop=smart&auto=webp&s=acb8ce5ac8a5fe870af5a1613b34fb6607e996a2` */ `https://cdn.shopify.com/s/files/1/0353/5621/articles/JAPANESERECIPES6343.jpg?v=1612904909`;
+          this.props.finalStyle = this.props.style;
+          break;
+        case 'HPImage4':
+          this.props.style = `height: 390px;
+          width: 300px;
+          border-radius: 5%;`
+          +'position:absolute;left:' +
+          this.percentageX +
+          '%;top:' +
+          this.percentageY
+          +'%;';
+          this.props.value = `https://www.cookingclassy.com/wp-content/uploads/2019/07/steak-marinade-12-768x1152.jpg`;
+          this.props.finalStyle = this.props.style;
+          break;
 
-      case 'HPImage1':
-        this.props.style = `height: 390px;
-        width: 300px;
-        border-radius: 5%;`
-        +'position:absolute;left:' +
-        this.percentageX +
-        '%;top:' +
-        this.percentageY
-        +'%;';
-        this.props.value = /* `https://images-cdn.9gag.com/photo/arVBvwX_700b.jpg` */ `https://media.discordapp.net/attachments/699657972611153982/932194877024907284/gourmet-burger.png`;
-        this.props.finalStyle = this.props.style;
-        break;
-      case 'HPImage2':
-        this.props.style = `height: 390px;
-        width: 300px;
-        border-radius: 5%;`
-        +'position:absolute;left:' +
-        this.percentageX +
-        '%;top:' +
-        this.percentageY
-        +'%;';
-        this.props.value = /* `https://i.pinimg.com/474x/50/8e/4e/508e4e9d7380526dff7e7346f9c5d013.jpg` */ `https://st4.depositphotos.com/8522652/i/600/depositphotos_281396182-stock-photo-karaage-japanese-fried-chicken-with.jpg`;
-        this.props.finalStyle = this.props.style;
-        break;
-      case 'HPImage3':
-        this.props.style = `height: 390px;
-        width: 300px;
-        border-radius: 5%;`
-        +'position:absolute;left:' +
-        this.percentageX +
-        '%;top:' +
-        this.percentageY
-        +'%;';
-        this.props.value = /* `https://external-preview.redd.it/mWEhfBkJ-YMbQAQs5oIYJDWA8IpEXa8DjGO6gk1APNQ.jpg?width=640&crop=smart&auto=webp&s=acb8ce5ac8a5fe870af5a1613b34fb6607e996a2` */ `https://cdn.shopify.com/s/files/1/0353/5621/articles/JAPANESERECIPES6343.jpg?v=1612904909`;
-        this.props.finalStyle = this.props.style;
-        break;
-      case 'HPImage4':
-        this.props.style = `height: 390px;
-        width: 300px;
-        border-radius: 5%;`
-        +'position:absolute;left:' +
-        this.percentageX +
-        '%;top:' +
-        this.percentageY
-        +'%;';
-        this.props.value = `https://www.cookingclassy.com/wp-content/uploads/2019/07/steak-marinade-12-768x1152.jpg`;
-        this.props.finalStyle = this.props.style;
-        break;
-
-      default:
-        if(!this.isLoaded){
+        default:
           this.props.style =
           'height:100px;width:100px;position:absolute;left:' +
           this.percentageX +
           '%;top:' +
           this.percentageY +
           '%;';
-          this.props.mouseDragPositionX = this.percentageX;
-          this.props.mouseDragPositionY = this.percentageY;
+          
           this.props.finalStyle=this.props.style;
-        }
-        break;
+          break;
+      }
     }
   }
 

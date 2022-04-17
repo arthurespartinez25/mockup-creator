@@ -64,10 +64,10 @@ async function getProject(projectID){
     }
 }
 
-async function getComponents(tabsID){
+async function getComponents(projectID){
     try{
         let pool = await sql.connect(config);
-        let components = await pool.request().query(`SELECT * from component_table WHERE tabs_id='${tabsID}'`);
+        let components = await pool.request().query(`SELECT * from component_table WHERE tabs_id LIKE '%${projectID}%'`);
         return components.recordsets;
     }
     catch (error) {
@@ -125,8 +125,8 @@ async function saveTabs(canvasKeys, canvasNames) {
 
 async function saveComponents(componentList, canvasKeys, canvasNativeKeys) {
     let checkNames = ["id", "value", "class", "style", "typeObj", "type", "draggable", "mouseDragPositionX", "mouseDragPositionY", "linkValue", "href", "name", "placeholder", "tblCols", "tblRows", 
-                        "finalStyle", "isIcon", "iconValue", "iconLabel1", "iconLabel2"]; //datatypes to be saved
-    let skip = ["key", "selected", "hidden", "dummyDate", "checked", "tblArrayCol", "tblArrayRow", "url", "tblContent"]; //skip these properties
+                        "finalStyle", "isIcon", "iconValue", "iconLabel1", "iconLabel2", "target", "redirection"]; //datatypes to be saved
+    let skip = ["key", "selected", "hidden", "dummyDate", "checked", "tblArrayCol", "tblArrayRow", "url", "tblContent", "isSavedComponent"]; //skip these properties
     let query = `INSERT INTO component_table (tabs_id, 
                                               componentID,
                                               componentValue,
@@ -147,7 +147,9 @@ async function saveComponents(componentList, canvasKeys, canvasNativeKeys) {
                                               componentIsIcon,
                                               componentIconValue,
                                               componentIconLabel1,
-                                              componentIconLabel2) VALUES `;
+                                              componentIconLabel2,
+                                              componentTarget,
+                                              componentRedirection) VALUES `;
     
     // console.log(componentList);
     for (let i = 0; i < canvasNativeKeys.length; i++) {

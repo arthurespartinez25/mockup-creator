@@ -32,7 +32,8 @@ export class PropertyComponent implements OnInit {
     finalStyle: '',
     iconValue:'',
     iconLabel1:'',
-    iconLabel2:''
+    iconLabel2:'',
+    isSavedComponent: false
   };
   style2 = '';
   tempStyle = '';

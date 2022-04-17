@@ -30,6 +30,7 @@
     (updateProjectNameEvent)="updateProjectName($event)"
     (updateSelectedEvent)="updateSelected($event)"
     [isPlaying]="isPlaying"
+    (updateIsLoaded)="updateIsLoadedEvent($event)"
     ></app-pallete>
   
   
@@ -81,6 +82,7 @@
     (updateTabListEvent)="updateTabList($event)"
     (updateIsPlaying)="updateIsPlayingEvent($event)"
     [isLoaded]="isLoaded"
+    (updateCanvasListElements)="updateCanvasArray($event)"
     ></app-canvas>
   <!-- CODE SECTION -->
 <!--

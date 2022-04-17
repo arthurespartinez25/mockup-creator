@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { UsersService } from '../../../service/users.service';
 import { Subscription } from 'rxjs';
 import { CrossComponentBridge } from 'src/app/service/crossComponentBridge.service';
+import { MdbModalRef} from 'mdb-angular-ui-kit/modal';
+import { LoadComponent } from './load/load.component';
 
 @Component({
   selector: 'app-save',
@@ -13,6 +15,7 @@ import { CrossComponentBridge } from 'src/app/service/crossComponentBridge.servi
   styleUrls: ['./save.component.css']
 })
 export class SaveComponent implements OnInit {
+  modalRef: MdbModalRef<LoadComponent> | null = null;
   projID: string; //change this to a fetched string 
   canvasKeys: string[] = [];
   projectName: string;

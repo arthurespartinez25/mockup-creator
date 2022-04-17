@@ -53,7 +53,8 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     hidden: false,
     mouseDragPositionX: 0,
     mouseDragPositionY: 0,
-    finalStyle:''
+    finalStyle:'',
+    isSavedComponent: false
   };
 
   
@@ -77,6 +78,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   @Output() updateSelectedCanvasEvent = new EventEmitter<ElementRef>();
   @Output() updateTabListEvent = new EventEmitter<any>();
   @Output() updateIsPlaying = new EventEmitter<boolean>();
+  @Output() updateCanvasListElements = new EventEmitter<ElementRef[]>();
 
   @Input() componentList : IComponent[] = [];
   @Input() mousePositionX: any;
@@ -132,6 +134,9 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   ngAfterViewInit(): void {
     this.canvasListElements.toArray();
     this.updateTabListEvent.emit(this.tabs);
+    // for(let i =0; i<2; i++){
+    //   this.addTab()
+    // }
   }
 
   canvasLeftX = 0;
@@ -261,6 +266,11 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     this.updateTabListEvent.emit(this.tabs); //also update this when changing of order of tabs is implemented
     this.selectedTab = this.tabs.length - 1;
     this.initialName = toInsert.name;
+    this.canvasListElements.changes.subscribe(c=>{
+      let canvasArray = this.canvasListElements.toArray()
+      this.updateCanvasListElements.emit(canvasArray)
+    })
+    
   }
   
   removeTab(index: number) {
@@ -288,7 +298,9 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     this.canvas = this.canvasListElements.toArray()[this.currentTab];
     this.updateSelectedCanvasEvent.emit(this.canvas);
     this.updateSelectedEvent.emit(this.defaultProps);
-    this.selectedComponent.props.selected = false;
+    if(this.selectedComponent){
+      this.selectedComponent.props.selected = false;
+    }
   } 
 
  
@@ -308,8 +320,10 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   }    
 
   deselect() {
-    this.selectedComponent.props.selected = false;
-    this.updateSelectedEvent.emit(this.defaultProps);
+    if(this.selectedComponent){
+      this.selectedComponent.props.selected = false;
+      this.updateSelectedEvent.emit(this.defaultProps);
+    }
   }
 
   /****************** OLD CODE STARTS HERE **********************/

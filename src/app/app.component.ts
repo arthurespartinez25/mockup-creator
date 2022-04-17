@@ -9,7 +9,9 @@ import {
   ComponentRef,
   ElementRef,
   OnInit,
+  QueryList,
   ViewChild,
+  ViewChildren,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -29,6 +31,17 @@ import { NavbarDragComponent } from './components/navbarDrag/navbarDrag.componen
 import { TableDragComponent } from './components/tableDrag/tableDrag.component';
 import { ButtonDragComponent } from './components/buttonDrag/buttonDrag.component';
 import { ImageDragComponent } from './components/imageDrag/imageDrag.component';
+import { LabelDragComponent } from './components/labelDrag/labelDrag.component';
+import { CheckboxDragComponent } from './components/checkboxDrag/checkboxDrag.component';
+import { DropdownDragComponent } from './components/dropdownDrag/dropdownDrag.component';
+import { DivDragComponent } from './components/divDrag/divDrag.component';
+import { RadioDragComponent } from './components/radioDrag/radioDrag.component';
+import { TextboxDragComponent } from './components/textboxDrag/textboxDrag.component';
+import { ParagraphDragComponent } from './components/paragraphDrag/paragraphDrag.component';
+import { DatepickerDragComponent } from './components/datepickerDrag/datepickerDrag.component';
+import { HeaderDragComponent } from './components/headerDrag/headerDrag.component';
+import { InputDragComponent } from './components/inputDrag/inputDrag.component';
+import { YoutubeDragComponent } from './components/youtubeDrag/youtubeDrag.component';
 
 export class List {
   constructor(
@@ -40,7 +53,7 @@ export class List {
     public componentStyle: string,
     public componentTypeObj: string,
     public componentType: string,
-    public componentDraggable: boolean,
+    public componentDraggable: string,
     public componentPositionX: string,
     public componentPositionY: string,
     public componentOptionValues: string,
@@ -50,10 +63,12 @@ export class List {
     public componentColumns: number,
     public componentRows: number,
     public componentFinalStyle: string,
-    public componentIsIcon: boolean,
+    public componentIsIcon: string,
     public componentIconValue: string,
     public componentIconLabel1: string,
-    public componentIconLabel2: string
+    public componentIconLabel2: string,
+    public componentTarget: string,
+    public componentRedirection: string
   ){}
 }
 @Component({
@@ -89,7 +104,8 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     hidden: false,
     mouseDragPositionX: 0,
     mouseDragPositionY: 0,
-    finalStyle:''
+    finalStyle:'',
+    isSavedComponent:false
   };
 
   public cssRuleCount = document.styleSheets[0].cssRules.length;
@@ -135,6 +151,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   inSession: boolean = this.sessionID == "12345";
   isPlaying: boolean;
   isLoaded:any;
+  canvasArray: ElementRef[]
 
   ngOnInit() {
     console.log(this.inSession);
@@ -146,14 +163,14 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         this.users = data;
       }) */
     }
-    // this.getComponents()
+    this.getComponents()
   }
-  ngAfterViewInit(): void {     
+  ngAfterViewInit(): void {
     this.canvasDirective = this.canvas.passCanvas();    
     this.passCanvas = this.canvasDirective;
   }
   getComponents(){
-    this.httpClient.get<any>('http://localhost:8000/getComponents/user1_proj5_canvas1').subscribe(
+    this.httpClient.get<any>('http://localhost:8000/getComponents/user1_proj1').subscribe(
       response=>{
         this.components=response;
         for(let i=0; i<this.components.length; i++){
@@ -165,7 +182,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
             style: this.components[i].componentFinalStyle,
             typeObj: this.components[i].componentTypeObj,
             type: this.components[i].componentType,
-            draggable: Boolean(this.components[i].componentDraggable),
+            draggable: JSON.parse(this.components[i].componentDraggable),
             selected : false,
             hidden: false,
             mouseDragPositionX:Number(this.components[i].componentPositionX),
@@ -175,32 +192,70 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
             placeholder: this.components[i].componentPlaceholder,
             tblCols: Number(this.components[i].componentColumns),
             tblArrayRow: Number(this.components[i].componentRows),
-            isIcon: Boolean(this.components[i].componentIsIcon),
+            isIcon: JSON.parse(this.components[i].componentIsIcon),
             iconValue: this.components[i].componentIconValue,
             iconLabel1: this.components[i].componentIconLabel1,
-            iconLabel2: this.components[i].componentIconLabel2
+            iconLabel2: this.components[i].componentIconLabel2,
+            target: JSON.parse(this.components[i].componentTarget),
+            redirection: this.components[i].componentRedirection,
+            isSavedComponent: true
           }
           switch(props.typeObj){
+            case 'buttonDrag':
+              this.updateComponentList(new ButtonDragComponent(this.passCanvas));
+              break;
+            case 'labelDrag':
+              this.updateComponentList(new LabelDragComponent(this.passCanvas));
+              break;
+            case 'checkboxDrag':
+              this.updateComponentList(new CheckboxDragComponent(this.passCanvas));
+              break;
+            case 'dropdownDrag':
+              this.updateComponentList(new DropdownDragComponent(this.passCanvas));
+              break;
+            case 'imgDrag':
+              this.updateComponentList(new ImageDragComponent(this.passCanvas));
+              break;
+            case 'divDrag':
+              this.updateComponentList(new DivDragComponent(this.passCanvas));
+              break;
+            case 'radioDrag':
+              this.updateComponentList(new RadioDragComponent(this.passCanvas));
+              break;
+            case 'textboxDrag':
+              this.updateComponentList(new TextboxDragComponent(this.passCanvas));
+              break;
+            case 'paragraphDrag':
+              this.updateComponentList(new ParagraphDragComponent(this.passCanvas));
+              break;
             case 'navDrag':
               this.updateComponentList(new NavbarDragComponent(this.passCanvas));
               break;
-            case 'tableDrag':
-              this.updateComponentList(new TableDragComponent(this.passCanvas, this.changeref));
+            case 'datepickerDrag':
+              this.updateComponentList(new DatepickerDragComponent(this.passCanvas, this.datepipe));
               break;
-            case 'buttonDrag':
-              this.updateComponentList(new ButtonDragComponent(this.passCanvas));
+            case 'headerDrag':
+              this.updateComponentList(new HeaderDragComponent(this.passCanvas));
+              break;
+            case 'inputDrag':
+              this.updateComponentList(new InputDragComponent(this.passCanvas));
               break;
             case 'linkDrag':
               this.updateComponentList(new LinkDragComponent(this.passCanvas));
               break;
-            case 'imgDrag':
-              this.updateComponentList(new ImageDragComponent(this.passCanvas));
+            case 'tableDrag':
+              this.updateComponentList(new TableDragComponent(this.passCanvas, this.changeref));
+              break;
+            case 'youtubeDrag':
+              this.updateComponentList(new YoutubeDragComponent(this.passCanvas, this.sanitizer));
+              break;
+            case 'videoDrag':
+              this.updateComponentList(new VideoDragComponent(this.passCanvas, this.sanitizer));
               break;
           } 
           this.componentListMap.forEach(component=>{
             Object.keys(component[i].props).forEach(key=>component[i].props[key]=props[key])
           });
-          this.isLoaded=true;
         }
       }
     )
@@ -289,7 +344,14 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   updateIsPlayingEvent(value: any) {
     this.isPlaying = value;
-    //console.log(this.isPlaying);
+  }
+
+  updateIsLoadedEvent(value: boolean){
+    this.isLoaded = value;
+  }
+  updateCanvasArray(value: any){
+    this.canvasArray=value;
+    console.log(value)
   }
   //////////////////////////////////////////////////////////////////////////////
   //   THIS PROJECT WAS STARTED BY BATO BOYS AND CEBU TEAM  

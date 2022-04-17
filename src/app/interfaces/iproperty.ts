@@ -43,4 +43,5 @@ export interface IProperty {
   iconLabel2?:string;
   redirection?: any;
   target?: boolean;
+  isSavedComponent: boolean;
 }

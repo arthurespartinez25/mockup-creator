@@ -261,7 +261,6 @@ router.get("/getProject/:projectID", (req, res) => {
   const del = dboperations.getProject(projectID);
   console.log(del); // Promise { <pending> }
   del.then(function(result) {
-    // console.log(result) // "Some User token"
     return res.status(200).json({result});
   });
 });

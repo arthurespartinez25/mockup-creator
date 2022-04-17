@@ -21,7 +21,8 @@ export class ModalDragComponent implements IComponent {
     draggable: true,
     selected : false,
     hidden: false,
-    finalStyle:''
+    finalStyle:'',
+    isSavedComponent: false
   };
 
   @Output() updateDataEvent = new EventEmitter<any>();
@@ -31,6 +32,7 @@ export class ModalDragComponent implements IComponent {
   @Input() mousePositionX2: any;
   @Input() mousePositionY2: any;
   @Input() whatComponent2: any;
+  @Input() isLoaded: boolean;
   mousePositionDropX = 310;
   mousePositionDropY = 110;
   canvasPositionLeft = 0;
@@ -41,18 +43,24 @@ export class ModalDragComponent implements IComponent {
   percentageY = 0;
 
   ngOnInit(): void {
-    this.canvasPositionLeft = this.canvasPositionX;
-    this.canvasPositionTop = this.canvasPositionY;
-    this.mousePositionLeft = this.mousePositionX2;
-    this.mousePositionTop = this.mousePositionY2;
-    this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
-    this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
-    this.props.style =
-          'position:sticky;left:' +
-          this.percentageX +
-          '%;top:' +
-          this.percentageY +
-          '%;';
+    if(this.props.isSavedComponent){
+      this.mousePositionLeft = (this.props.mouseDragPositionX/100)*1280;
+      this.mousePositionTop = (this.props.mouseDragPositionY/100)*720;
+    }
+    if(!this.props.isSavedComponent){
+      this.canvasPositionLeft = this.canvasPositionX;
+      this.canvasPositionTop = this.canvasPositionY;
+      this.mousePositionLeft = this.mousePositionX2;
+      this.mousePositionTop = this.mousePositionY2;
+      this.percentageX = ((this.mousePositionX2 - this.canvasPositionLeft) / 1280) * 100;
+      this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
+      this.props.style =
+            'position:absolute;left:' +
+            this.percentageX +
+            '%;top:' +
+            this.percentageY +
+            '%;';
+    }
   }
 
   onDragEnded($event: CdkDragEnd) {
