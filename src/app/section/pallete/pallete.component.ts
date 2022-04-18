@@ -40,7 +40,7 @@ import { LinkDragComponent } from './../../components/linkDrag/linkDrag.componen
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
-import { UsersService } from './../../service/users.service';
+import { UsersService } from '../../service/users/users.service';
 import { DatePipe } from '@angular/common'
 import { PropertyComponent } from './../../property/property.component';
 import { emit } from 'process';

@@ -3,9 +3,9 @@ import { CookieService } from 'ngx-cookie-service';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { UsersService } from '../../../service/users.service';
+import { UsersService } from '../../../service/users/users.service';
 import { Subscription } from 'rxjs';
-import { CrossComponentBridge } from 'src/app/service/crossComponentBridge.service';
+import { CrossComponentBridge } from 'src/app/service/cross-component-bridge/crossComponentBridge.service';
 
 @Component({
   selector: 'app-save',
