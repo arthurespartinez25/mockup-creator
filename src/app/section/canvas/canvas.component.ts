@@ -309,28 +309,22 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     this.selectedComponent.props.selected = false;
   } 
 
- 
  isPlay(value: any) {
     this.isPlaying = value;
     this.updateIsPlaying.emit(this.isPlaying);
     this.notDraggable();
-    
-    
+
  }
+
  notDraggable() {
   this.componentListMap.forEach(x=>x.map(y=>y.props.draggable=!this.isPlaying));
   }
- play() {
-  console.log(this.isPlaying);
- }
 
-  
-  
   changeIndex(number: number) {
     this.selectedTab = number;
     console.log(this.componentListMap.get(this.tabs[number].id));
   }    
-
+  
   deselect() {
     this.selectedComponent.props.selected = false;
     this.updateSelectedEvent.emit(this.defaultProps);

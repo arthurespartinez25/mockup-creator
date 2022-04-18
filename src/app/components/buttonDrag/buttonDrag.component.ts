@@ -62,6 +62,7 @@ export class ButtonDragComponent implements IComponent {
   @Input() mousePositionY2: any;
   @Input() whatComponent2: any;
   @Input() initialName: string;
+  @Input() isPlaying: boolean;
   @Output() passCanvas: EventEmitter<number> = new EventEmitter();
   canvasPositionLeft = 0;
   canvasPositionTop = 0;
@@ -169,9 +170,14 @@ export class ButtonDragComponent implements IComponent {
   }
 
   passName():void {
-    this.passCanvas.emit(this.props.redirection);
-    this.buttonService?.passCanvasName(this.props.redirection);
+    if(this.isPlaying) {
+      this.buttonService?.passCanvasName(this.props.redirection);
+      this.passCanvas.emit(this.props.redirection);
+    }
+      
+      console.log(this.isPlaying);
   }
+
 
   get htmlCode(): string {
     let tmpHtmlCode = '<div><button';
