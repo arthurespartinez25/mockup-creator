@@ -31,6 +31,29 @@ router.post("/login", (req, res) => {
   return res.status(200).json({ message: "call to login" });
 });
 
+router.post("/logIns", (req, res) =>{
+  let user = {
+    username: req.body.username,
+    password: req.body.password
+  }
+  dboperations.logIn(user.username, user.password).then(result=>{
+    if(result.length !== 0){
+      userObject = {
+        userID: result[0].UserID
+      }
+      return res.status(200).json({ access: auth.createAccesToken(userObject)})
+    } else {
+      return false
+    }
+  })
+})
+router.get("/details", auth.verify, (req, res) => {
+
+	const userData = auth.decode(req.headers.authorization)
+	console.log(userData)
+
+	dboperations.getProfile(userData.id).then( result => res.send(result))
+})
 
 router.post("/register", (req, res) => {
   let newUser = {

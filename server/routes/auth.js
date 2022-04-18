@@ -4,9 +4,9 @@ let secret = "mockup";
 // creates token
 module.exports.createAccesToken = (user) => {
 	const data = {
-		id: user.userID,
-		email: user.Email
+		id: user.userID
 	}
+	console.log(data)
 
 	return jwt.sign(data, secret, {});
 }

@@ -22,6 +22,7 @@ export class AppLoginComponent implements OnInit {
   
   @Output() loggingSession:EventEmitter<any> = new EventEmitter<any>();
   @Output() getUsername = new EventEmitter<string>();
+  @Output() getID = new EventEmitter<number>()
 
   constructor(
     private loginCookie:CookieService,

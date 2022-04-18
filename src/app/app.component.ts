@@ -124,6 +124,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @ViewChild(AppLoginComponent) login:AppLoginComponent;
   
   changeref: ChangeDetectorRef;
+  userID: any;
   constructor(
     private loginCookie:CookieService,
     changeDetectorRef: ChangeDetectorRef,
@@ -406,6 +407,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   updateDomInsideCanvas(value: boolean){
     this.domInsideCanvas = value;
   }
+
   //----------------------------------------------------------------------------
 
   ngAfterViewChecked() {

@@ -12,11 +12,22 @@ async function getUsers(){
         console.warn(error);
     }
 }
-async function getUserDetails(userID){
+async function logIn(username, password){
+    try{
+        let pool = await sql.connect(config);
+        let users = await pool.request().query(`SELECT * from Users WHERE Username='${username}' AND Password='${password}'`);
+        return users.recordsets[0];
+    }
+    catch (error) {
+        console.warn(error);
+    }
+}
+async function getProfile(userID){
     try{
         let pool = await sql.connect(config);
         let users = await pool.request().query(`SELECT * from Users WHERE UserID=${userID}`);
-        return users.recordsets;
+        users.recordsets[0][0].Password = "******"
+        return users.recordsets[0][0];
     }
     catch (error) {
         console.warn(error);
@@ -283,5 +294,6 @@ module.exports = {
     saveTableContent: saveTableContent,
     getProject: getProject,
     getComponents: getComponents,
-    getUserDetails: getUserDetails
+    logIn: logIn,
+    getProfile: getProfile
 }
