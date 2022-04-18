@@ -24,7 +24,7 @@ import { BehaviorSubject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { DatePipe } from '@angular/common'
 import { PropertyComponent } from './../../../property/property.component';
-import { DialogService } from 'src/app/service/dialog.service';
+import { DialogService } from 'src/app/service/dialog/dialog.service';
 
 @Component({
   selector: 'app-component-list',
@@ -245,7 +245,9 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
     }
   }
   confirmDelete(value: any) {
-    this.dialogService.openConfirmDialog('Are you sure to delete this component?')
+    this.dialogService.openConfirmDialog('This operation is ireversible.\n\
+    This action will remove the selected component from canvas.\n\
+    Do you want to proceed?')
     .afterClosed().subscribe(res =>{
       if(res){
         this.deleteComponent(value);

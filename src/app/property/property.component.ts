@@ -4,7 +4,7 @@ import { IProperty } from '../interfaces/iproperty';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { DatePipe } from '@angular/common'
 import { CodeComponent } from '../section/code/code.component';
-import { DialogService } from '../service/dialog.service';
+import { DialogService } from '../service/dialog/dialog.service';
 
 @Component({
   selector: 'app-property',
@@ -105,7 +105,9 @@ export class PropertyComponent implements OnInit {
   }
 
   confirmRemove() {
-    this.dialogService.openConfirmDialog('Are you sure to remove this component?')
+    this.dialogService.openConfirmDialog('This operation is ireversible.\n\
+    This action will remove the selected component from canvas.\n\
+    Do you want to proceed?')
     .afterClosed().subscribe(res =>{
       if(res){
         this.deleteComponent();
@@ -128,7 +130,9 @@ export class PropertyComponent implements OnInit {
   }
 
   confirmClear() {
-    this.dialogService.openConfirmDialog('Are you sure to clear all components from this canvas?')
+    this.dialogService.openConfirmDialog('This operation is ireversible.\n\
+    This action will clear all the components in the canvas.\n\
+    Do you want to proceed?')
     .afterClosed().subscribe(res =>{
       if(res){
         this.clearComponent();
