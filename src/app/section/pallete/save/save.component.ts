@@ -20,6 +20,7 @@ export class SaveComponent implements OnInit {
   canvasKeys: string[] = [];
   projectName: string;
   subscription: Subscription;
+  userId: number;
 
   @Input() componentListMap: Map<string, IComponent[]>;
   @Input() style: string;

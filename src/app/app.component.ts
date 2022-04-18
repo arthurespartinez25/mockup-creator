@@ -42,6 +42,7 @@ import { DatepickerDragComponent } from './components/datepickerDrag/datepickerD
 import { HeaderDragComponent } from './components/headerDrag/headerDrag.component';
 import { InputDragComponent } from './components/inputDrag/inputDrag.component';
 import { YoutubeDragComponent } from './components/youtubeDrag/youtubeDrag.component';
+import { AppLoginComponent } from './app-login/app-login.component';
 
 export class List {
   constructor(
@@ -120,7 +121,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
-  //@ViewChild(PropertyComponent) propertyCmp:PropertyComponent;
+  @ViewChild(AppLoginComponent) login:AppLoginComponent;
   
   changeref: ChangeDetectorRef;
   constructor(
@@ -154,16 +155,16 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   canvasArray: ElementRef[]
 
   ngOnInit() {
-    console.log(this.inSession);
-    if(this.inSession) {
+    console.log(this.sessionID);
+    if(this.sessionID) {
       this._router.navigateByUrl("/canvas");
       //api call
-      /* this.user.getData().subscribe((data)=> {
-        console.warn("get api data", data);
-        this.users = data;
-      }) */
+      //  this.users.getData().subscribe((data)=> {
+      //   console.warn("get api data", data);
+      //   this.users = data;
+      // }) 
     }
-    this.getComponents()
+    // this.getComponents()
   }
   ngAfterViewInit(): void {
     this.canvasDirective = this.canvas.passCanvas();    

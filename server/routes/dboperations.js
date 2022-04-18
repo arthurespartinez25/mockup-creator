@@ -12,6 +12,16 @@ async function getUsers(){
         console.warn(error);
     }
 }
+async function getUserDetails(userID){
+    try{
+        let pool = await sql.connect(config);
+        let users = await pool.request().query(`SELECT * from Users WHERE UserID=${userID}`);
+        return users.recordsets;
+    }
+    catch (error) {
+        console.warn(error);
+    }
+}
 
 async function insertUser(username, password, fname, lname, email){
     try{
@@ -272,5 +282,6 @@ module.exports = {
     savePrevious : savePrevious,
     saveTableContent: saveTableContent,
     getProject: getProject,
-    getComponents: getComponents
+    getComponents: getComponents,
+    getUserDetails: getUserDetails
 }

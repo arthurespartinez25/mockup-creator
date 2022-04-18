@@ -3,6 +3,8 @@ const router = require("express").Router();
 var Users = require('./users');
 const dboperations = require('./dboperations');
 const { resourceLimits } = require("worker_threads");
+const bcrypt = require("bcrypt");
+const auth = require('./auth')
 
 
 /*****************************/
@@ -31,11 +33,17 @@ router.post("/login", (req, res) => {
 
 
 router.post("/register", (req, res) => {
-
-  const {username, password, fname, lname, email} = req.body;
+  let newUser = {
+		username: req.body.username,
+		password: bcrypt.hashSync(req.body.password, 8),
+    fname: req.body.fname,
+    lname: req.body.lname,
+    email: req.body.email
+	}
+  // const {username, password, fname, lname, email} = req.body;
   //console.log(req.body);
   //console.log(`${userID}, ${username}, ${password}, ${fname}, ${lname}, ${email}`);
-  const add = dboperations.insertUser(username, password, fname, lname, email); 
+  const add = dboperations.insertUser(newUser.username, newUser.password, newUser.fname, newUser.lname, newUser.email); 
   //console.log(add); // Promise { <pending> }
   add.then(function(result) {
     //console.log(result) // "Some User token"
@@ -146,6 +154,13 @@ router.post("/register", (req, res) => {
 
  */
 }); 
+router.get("/details", auth.verify, (req, res) => {
+
+	const userData = auth.decode(req.headers.authorization)
+	console.log(userData)
+	dboperations.getProfile(userData.UserID).then( result => res.send(result))
+})
+
 
 router.get('/total/:userID', (req, res) => {
   const {userID} = req.params;
