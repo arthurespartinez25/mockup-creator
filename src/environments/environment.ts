@@ -11,6 +11,9 @@ export const environment = {
           This action will remove the selected component from canvas.\n\
            Do you want to proceed?',
   logOut: 'Log Out?',
+  removeTab: 'This operation is ireversible.\n\
+            This action will remove the selected canvas.\n\
+            Do you want to proceed?',
 };
 
 /*
