@@ -215,7 +215,7 @@ a.custom-nav-link:hover {
 }
 
 .playButton {
-  position: absolute; bottom: 20px; 
+  position: relative; bottom: 820px; left: 1253px; z-index: 4;
   height: 30px;
   width: 30px;
 }

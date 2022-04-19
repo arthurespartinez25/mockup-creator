@@ -39,15 +39,27 @@
             >
             </app-wrapper>
           </div>
+         
         </div>
+        
+
       </mat-tab>
 
       <mat-tab disabled>
         <ng-template mat-tab-label>
             <button [disabled]="this.isPlaying" type="button" class="btn btn-outline-dark" (click)="addTab()"><i class="fa-solid fa-plus" ></i></button>
-        </ng-template>
+          </ng-template>
       </mat-tab>
     </mat-tab-group>
+
+    <button class="playButton" (click)="isPlay(true)" *ngIf="!this.isPlaying">
+      <i class="fa-solid fa-play"></i>
+    </button>
+  
+    <button class="playButton" (click)="isPlay(false)" *ngIf="this.isPlaying"> 
+      <i class="fa-solid fa-pause"></i>
+      </button>
+    
   </div>
 
   <!-- <div style="position: absolute; top: 18px; left: 1255px; z-index: 5;">
@@ -60,16 +72,11 @@
   </div> 
 </div> -->
 
-<div>
+<!-- <div>
   
-   <button class="playButton" (click)="isPlay(true)" *ngIf="!this.isPlaying">
-    <i class="fa-solid fa-play"></i>
-  </button>
-
-  <button class="playButton" (click)="isPlay(false)" *ngIf="this.isPlaying"> 
-    <i class="fa-solid fa-pause"></i>
-    </button>
-</div>
+   class="playButton"
+   class="playButton"
+</div> -->
 
 
 
