@@ -43,35 +43,8 @@ import { HeaderDragComponent } from './components/headerDrag/headerDrag.componen
 import { InputDragComponent } from './components/inputDrag/inputDrag.component';
 import { YoutubeDragComponent } from './components/youtubeDrag/youtubeDrag.component';
 import { AppLoginComponent } from './app-login/app-login.component';
+import { UsersService } from './service/users.service';
 
-export class List {
-  constructor(
-    public id: number,
-    public tabs_id: string,
-    public componentID: string,
-    public componentValue: string,
-    public componentClass: string,
-    public componentStyle: string,
-    public componentTypeObj: string,
-    public componentType: string,
-    public componentDraggable: string,
-    public componentPositionX: string,
-    public componentPositionY: string,
-    public componentOptionValues: string,
-    public componentHREF: string,
-    public componentName: string,
-    public componentPlaceholder: string,
-    public componentColumns: number,
-    public componentRows: number,
-    public componentFinalStyle: string,
-    public componentIsIcon: string,
-    public componentIconValue: string,
-    public componentIconLabel1: string,
-    public componentIconLabel2: string,
-    public componentTarget: string,
-    public componentRedirection: string
-  ){}
-}
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -90,7 +63,8 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   cssDocument?: StyleSheet;
   users: any;
   tabList: any;
-  components: List[]
+  components: any;
+  cssArray: any;
 
   selected: IProperty = {
     key: '',
@@ -124,7 +98,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @ViewChild(AppLoginComponent) login:AppLoginComponent;
   
   changeref: ChangeDetectorRef;
-  userID: any;
+  userID: number;
   constructor(
     private loginCookie:CookieService,
     changeDetectorRef: ChangeDetectorRef,
@@ -132,7 +106,8 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     public _location: Location,
     public sanitizer: DomSanitizer,
     public datepipe: DatePipe,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private service: UsersService,
   ) {
     this.changeref = changeDetectorRef;
   }
@@ -154,6 +129,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   isPlaying: boolean;
   isLoaded:any;
   canvasArray: ElementRef[]
+  canvasList: any;
 
   ngOnInit() {
     console.log(this.sessionID);
@@ -165,16 +141,12 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       //   this.users = data;
       // }) 
     }
-    // this.getComponents()
   }
   ngAfterViewInit(): void {
     this.canvasDirective = this.canvas.passCanvas();    
     this.passCanvas = this.canvasDirective;
   }
-  getComponents(){
-    this.httpClient.get<any>('http://localhost:8000/getComponents/user1_proj1').subscribe(
-      response=>{
-        this.components=response;
+  addComponents(){
         for(let i=0; i<this.components.length; i++){
           let props: IProperty= {
             key: this.components[i].componentID.replace(/\D/g, ""),
@@ -184,7 +156,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
             style: this.components[i].componentFinalStyle,
             typeObj: this.components[i].componentTypeObj,
             type: this.components[i].componentType,
-            draggable: JSON.parse(this.components[i].componentDraggable),
+            draggable: this.components[i].componentDraggable === "true",
             selected : false,
             hidden: false,
             mouseDragPositionX:Number(this.components[i].componentPositionX),
@@ -194,13 +166,16 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
             placeholder: this.components[i].componentPlaceholder,
             tblCols: Number(this.components[i].componentColumns),
             tblArrayRow: Number(this.components[i].componentRows),
-            isIcon: JSON.parse(this.components[i].componentIsIcon),
+            isIcon: this.components[i].componentIsIcon === "true",
             iconValue: this.components[i].componentIconValue,
             iconLabel1: this.components[i].componentIconLabel1,
             iconLabel2: this.components[i].componentIconLabel2,
-            target: JSON.parse(this.components[i].componentTarget),
+            target: this.components[i].componentTarget === "true",
             redirection: this.components[i].componentRedirection,
-            isSavedComponent: true
+            isSavedComponent: true,
+            name: this.components[i].componentName,
+            checked: this.components[i].componentChecked,
+            url: this.sanitizer.bypassSecurityTrustResourceUrl(this.components[i].componentValue)
           }
           switch(props.typeObj){
             case 'buttonDrag':
@@ -259,8 +234,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
             Object.keys(component[i].props).forEach(key=>component[i].props[key]=props[key])
           });
         }
-      }
-    )
   }
 
   updateComponentList(components: IComponent) {
@@ -338,6 +311,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   updateTabList(value: any) {
     this.tabList = value;
+    console.log(this.tabList)
   }
 
   updateProjectName(value: string) {
@@ -354,6 +328,41 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   updateCanvasArray(value: any){
     this.canvasArray=value;
     console.log(value)
+  }
+  updateProjectId(value:any){
+    this.componentListMap.clear();
+    this.cssArray = [];
+
+    
+    if(this.tabList.length>=2){
+      for(let i = this.tabList.length-1; i > 0; i--){
+        this.canvas.removeTab(i);
+      }
+    }
+
+    this.service.getCanvas(value).subscribe((res)=>{
+      this.canvasList = res;
+      if(this.canvasList.length>=2){
+        for(let i = 1; i< this.canvasList.length; i++){
+          this.canvas.addTab()
+        }
+      }
+    })
+
+    this.service.getComponents(value).subscribe((res)=>{
+      this.components=res;
+      this.addComponents()
+    })
+
+    this.service.getCss(value).subscribe((res)=>{
+      this.cssArray = res;
+      let css = ""
+      for(let i = 0; i<this.cssArray.length; i++){
+        css += this.cssArray[i].css_name + "{\n" + this.cssArray[i].properties + "}\n"
+      }
+      this.code.getCss(css.split(";").join(";\n"))
+    })
+    
   }
   //////////////////////////////////////////////////////////////////////////////
   //   THIS PROJECT WAS STARTED BY BATO BOYS AND CEBU TEAM  

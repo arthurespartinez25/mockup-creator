@@ -12,27 +12,6 @@ async function getUsers(){
         console.warn(error);
     }
 }
-async function logIn(username, password){
-    try{
-        let pool = await sql.connect(config);
-        let users = await pool.request().query(`SELECT * from Users WHERE Username='${username}' AND Password='${password}'`);
-        return users.recordsets[0];
-    }
-    catch (error) {
-        console.warn(error);
-    }
-}
-async function getProfile(userID){
-    try{
-        let pool = await sql.connect(config);
-        let users = await pool.request().query(`SELECT * from Users WHERE UserID=${userID}`);
-        users.recordsets[0][0].Password = "******"
-        return users.recordsets[0][0];
-    }
-    catch (error) {
-        console.warn(error);
-    }
-}
 
 async function insertUser(username, password, fname, lname, email){
     try{
@@ -74,10 +53,10 @@ async function getTotal(userID){
     }
 }
 
-async function getProject(projectID){
+async function getProjects(userID){
     try{
         let pool = await sql.connect(config);
-        let project = await pool.request().query(`SELECT * from projects_table WHERE project_id='${projectID}'`);
+        let project = await pool.request().query(`SELECT * from projects_table WHERE user_id=${userID}`);
         return project.recordset;
     }
     catch (error) {
@@ -95,6 +74,26 @@ async function getComponents(projectID){
         console.warn(error);
     }
 }
+async function getCanvas(projectID){
+    try{
+        let pool = await sql.connect(config);
+        let project = await pool.request().query(`SELECT * from tab_table WHERE tab_id LIKE '%${projectID}%'`);
+        return project.recordset;
+    }
+    catch (error) {
+        console.warn(error);
+    }
+}
+async function getCss(projectID){
+    try{
+        let pool = await sql.connect(config);
+        let project = await pool.request().query(`SELECT * from css_table WHERE project_id='${projectID}'`);
+        return project.recordset;
+    }
+    catch (error) {
+        console.warn(error);
+    }
+}
 
 async function deleteUser(userID){
     try{
@@ -102,6 +101,18 @@ async function deleteUser(userID){
         //let tobeDeletedUser = await pool.request().query(`SELECT FROM Users WHERE UserID=${userID};`);
         let deleteUser = await pool.request().query(`DELETE FROM Users WHERE UserID=${userID};`);
         //console.log(tobeDeletedUser);
+        return deleteUser;
+    }
+    catch (error) {
+        console.warn(error);
+        return error;
+    }
+}
+
+async function deleteProject(projectID){
+    try{
+        let pool = await sql.connect(config);
+        let deleteUser = await pool.request().query(`DELETE FROM projects_table WHERE project_id='${projectID}';`);
         return deleteUser;
     }
     catch (error) {
@@ -145,9 +156,9 @@ async function saveTabs(canvasKeys, canvasNames) {
 }
 
 async function saveComponents(componentList, canvasKeys, canvasNativeKeys) {
-    let checkNames = ["id", "value", "class", "style", "typeObj", "type", "draggable", "mouseDragPositionX", "mouseDragPositionY", "linkValue", "href", "name", "placeholder", "tblCols", "tblRows", 
+    let checkNames = ["id", "value", "class", "style", "typeObj", "type", "draggable", "mouseDragPositionX", "mouseDragPositionY", "linkValue", "href", "name", "checked", "placeholder", "tblCols", "tblRows", 
                         "finalStyle", "isIcon", "iconValue", "iconLabel1", "iconLabel2", "target", "redirection"]; //datatypes to be saved
-    let skip = ["key", "selected", "hidden", "dummyDate", "checked", "tblArrayCol", "tblArrayRow", "url", "tblContent", "isSavedComponent"]; //skip these properties
+    let skip = ["key", "selected", "hidden", "dummyDate", "tblArrayCol", "tblArrayRow", "url", "tblContent", "isSavedComponent"]; //skip these properties
     let query = `INSERT INTO component_table (tabs_id, 
                                               componentID,
                                               componentValue,
@@ -161,6 +172,7 @@ async function saveComponents(componentList, canvasKeys, canvasNativeKeys) {
                                               componentOptionValues,
                                               componentHREF,
                                               componentName,
+                                              componentChecked,
                                               componentPlaceholder,
                                               componentColumns,
                                               componentRows,
@@ -292,8 +304,9 @@ module.exports = {
     saveCss: saveCss,
     savePrevious : savePrevious,
     saveTableContent: saveTableContent,
-    getProject: getProject,
+    getProjects: getProjects,
     getComponents: getComponents,
-    logIn: logIn,
-    getProfile: getProfile
+    deleteProject: deleteProject,
+    getCanvas: getCanvas,
+    getCss: getCss
 }

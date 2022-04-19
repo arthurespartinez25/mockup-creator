@@ -256,7 +256,7 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
   
 
   hideComponent(value: any) {
-    // value.props.hidden = !value.props.hidden;
+    value.props.hidden = !value.props.hidden;
     let componentIndex = this.componentList.indexOf(value); //gets the index of the selected component inside the canvas
     let element = document.getElementById(this.componentList[componentIndex].props.id);
     let oldStyle = element?.getAttribute('style');

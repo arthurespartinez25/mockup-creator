@@ -128,6 +128,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
   @Output() updateWhatComponentEvent = new EventEmitter<string>();
   @Output() updateProjectNameEvent = new EventEmitter<string>();
   @Output() updateIsLoaded = new EventEmitter<boolean>();
+  @Output() updateProjectIdEvent = new EventEmitter<any>();
   changeref: ChangeDetectorRef;
   constructor(
     private loginCookie:CookieService,
@@ -255,6 +256,9 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
   }
   updateIsLoadedEvent(value: boolean){
     this.updateIsLoaded.emit(value)
+  }
+  updateProjectId(value: any){
+    this.updateProjectIdEvent.emit(value)
   }
   //----------------------------------------------------------------------------
 

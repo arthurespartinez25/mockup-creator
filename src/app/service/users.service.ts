@@ -54,4 +54,24 @@ export class UsersService {
     let url="http://localhost:8000/saveTabs";
     return this.http.post(url, datas);
   }*/
+  getProjects(id: any){
+    let url="http://localhost:8000/getProjects/"+id;
+    return this.http.get(url);
+  }
+  deleteProject(id: any){
+    let url="http://localhost:8000/deleteProject/"+id;
+    return this.http.get(url);
+  }
+  getCanvas(id: any){
+    let url="http://localhost:8000/getCanvas/"+id;
+    return this.http.get(url);
+  }
+  getComponents(id: any){
+    let url="http://localhost:8000/getComponents/"+id;
+    return this.http.get(url);
+  }
+  getCss(id: any){
+    let url="http://localhost:8000/getCss/"+id;
+    return this.http.get(url);
+  }
 }

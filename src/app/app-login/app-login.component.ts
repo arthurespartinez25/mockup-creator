@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
@@ -44,7 +45,6 @@ export class AppLoginComponent implements OnInit {
 
   ngOnInit() {
     this.user.getData().subscribe((data)=> {
-      
       this.users = data;
     })
   }

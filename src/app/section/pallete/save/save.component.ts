@@ -15,12 +15,14 @@ import { LoadComponent } from './load/load.component';
   styleUrls: ['./save.component.css']
 })
 export class SaveComponent implements OnInit {
-  modalRef: MdbModalRef<LoadComponent> | null = null;
   projID: string; //change this to a fetched string 
   canvasKeys: string[] = [];
   projectName: string;
   subscription: Subscription;
   userId: number;
+  projects: any;
+  tabs: any;
+  loadedProjectId: string;
 
   @Input() componentListMap: Map<string, IComponent[]>;
   @Input() style: string;
@@ -28,10 +30,13 @@ export class SaveComponent implements OnInit {
   @Input() currentTab: string;
 
   @Output() updateProjectNameEvent = new EventEmitter<string>();
+  @Output() updateProjectIdEvent = new EventEmitter<any>()
   
   constructor(
+    private loginCookie:CookieService,
     public dialog: MatDialog,
     private service: UsersService,
+    public _router: Router,
     private crossComponentBridge: CrossComponentBridge) {
       this.subscription = this.crossComponentBridge.getValue().subscribe(trigger => {
         if (trigger.value == 1) {
@@ -41,6 +46,7 @@ export class SaveComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.userId=Number(this.loginCookie.get('userID'))
   }
   
   @HostListener('window:beforeunload', ['$event'])
@@ -92,6 +98,21 @@ export class SaveComponent implements OnInit {
       }
       this.updateProjectNameEvent.emit(this.projectName);
     });
+  }
+  loadProjects(id: number){
+    this.service.getProjects(id).subscribe((res)=>{
+      this.projects = res;
+    })
+  }
+  deleteProject(id: any){
+    this.loadedProjectId = id;
+    this.service.deleteProject(id).subscribe((res)=>{})
+    this.loadProjects(this.userId)
+  }
+  openProject(id: any){
+    this.loadedProjectId = id;
+    this.updateProjectIdEvent.emit(this.loadedProjectId)
+    this._router.navigateByUrl("/canvas/"+id);
   }
 }
 

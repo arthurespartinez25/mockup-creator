@@ -32,19 +32,52 @@
   content: "*";
   color: red;
 }
-
+.modal-header{
+  padding: 0px !important;
+  margin: 0px 25px !important;
+}
 #exampleModalLongTitle{
   color:black;
-  padding-top: 20px;
+  padding-top: 30px;
+  font-weight: bold;
+  margin-left: 5px;
 }
 .projectsList{
   text-decoration: none;
   color: black;
-  display: block;
+}
+
+.projectContainer{
+  display: flex;
+  border-radius: 5px;
+  justify-content: space-between;
+  align-items: center;
   padding: 10px;
   margin: 5px;
-  border-radius: 5px;
+  cursor: pointer;
 }
-.projectsList:hover{
+.projectContainer:hover{
   background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25));
+}
+.projectContainer button{
+  border: none;
+  margin: 0px 4px;
+  border-radius: 3px;
+}
+.projectContainer button i {
+  padding: 0px;
+  color: white;
+}
+.edit{
+  color: green;
+  background-color: #16324f;
+}
+.delete{
+  background-color: red;
+}
+.edit:hover{
+  filter: brightness(0.7)
+}
+.delete:hover{
+  filter: brightness(0.7)
 }

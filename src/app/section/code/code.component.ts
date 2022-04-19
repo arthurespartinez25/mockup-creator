@@ -74,6 +74,7 @@ export class CodeComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
   @ViewChild(PropertyComponent) propertyCmp:PropertyComponent;
+  @ViewChild(CssComponent) css: CssComponent;
 
   @Output() updatePropertyComponentEvent = new EventEmitter<PropertyComponent>();
   @Output() clearComponentListEvent = new EventEmitter<number>();
@@ -200,7 +201,9 @@ export class CodeComponent implements OnInit, AfterViewInit, AfterViewChecked {
   clearCss() {
     this.cssComponent.clearCss();
   } 
-
+  getCss(value: any){
+    this.css.addAllCSSRule(value)
+  }
   /****************** OLD CODE STARTS HERE **********************/
 }
 function readCSSFile(arg0: string) {

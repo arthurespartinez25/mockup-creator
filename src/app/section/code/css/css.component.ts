@@ -35,6 +35,7 @@ export class CssComponent implements OnInit, AfterViewInit, AfterViewChecked {
   refreshCSS = new BehaviorSubject<boolean>(true);
   cssDocument?: StyleSheet;
   users: any;
+  savedCss: string;
 
   public cssRuleCount = document.styleSheets[0].cssRules.length;
   public _popupCount = 0;
@@ -181,9 +182,10 @@ export class CssComponent implements OnInit, AfterViewInit, AfterViewChecked {
     console.log(document.styleSheets.item(0));
     let newCssRuleCount = document.styleSheets[0].cssRules.length; //gets the total CSSRule inside the stylesheet
     let cssString: string;
-
+    
     for (let i = this.cssRuleCount; i < newCssRuleCount; i++) { //compares web-app default cssRule count with the added cssRules
       cssString = document.styleSheets[0].cssRules[i].cssText.toString();
+      
       if (
         document.styleSheets[0].cssRules[i].cssText
           .toString()
@@ -210,6 +212,8 @@ export class CssComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
 
   addAllCSSRule(allCSSRule: any) {
+    this.savedCss = allCSSRule;
+    this.cssReceiveMessage()
     let allCSSRuleCount = 0;
     let stringIndex = 0;
     let startingIndex = 0;
@@ -219,6 +223,7 @@ export class CssComponent implements OnInit, AfterViewInit, AfterViewChecked {
     let newCSSRuleCount = document.styleSheets[0].cssRules.length;
 
     while (document.styleSheets[0].cssRules.length != this.cssRuleCount) {
+      
       let numberOfRules =
       document.styleSheets[0].cssRules.length - this.cssRuleCount;
       //you can uncomment code below if you want to log and test the data

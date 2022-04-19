@@ -275,8 +275,8 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   
   removeTab(index: number) {
     this.tabs[this.currentTab].allowEdit = false;
-    let result = window.confirm("Are you sure you want to remove this tab?");
-    if (result) {
+    // let result = window.confirm("Are you sure you want to remove this tab?");
+  
       this.componentListMap.delete(this.tabs[index].id);
       this.updateComponentListMapEvent.emit(this.componentListMap); //updates the componentList in app.component
       this.tabs.splice(index, 1);
@@ -288,7 +288,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
       if (index == this.selectedTab) {
         this.selectedTab = (index - 1) < 0 ? 0 : (index - 1); //changes the selected tab to the previous one
       }
-    }
+    
   }
 
   myTabSelectedTabChange(changeEvent: MatTabChangeEvent) {

@@ -31,30 +31,6 @@ router.post("/login", (req, res) => {
   return res.status(200).json({ message: "call to login" });
 });
 
-router.post("/logIns", (req, res) =>{
-  let user = {
-    username: req.body.username,
-    password: req.body.password
-  }
-  dboperations.logIn(user.username, user.password).then(result=>{
-    if(result.length !== 0){
-      userObject = {
-        userID: result[0].UserID
-      }
-      return res.status(200).json({ access: auth.createAccesToken(userObject)})
-    } else {
-      return false
-    }
-  })
-})
-router.get("/details", auth.verify, (req, res) => {
-
-	const userData = auth.decode(req.headers.authorization)
-	console.log(userData)
-
-	dboperations.getProfile(userData.id).then( result => res.send(result))
-})
-
 router.post("/register", (req, res) => {
   let newUser = {
 		username: req.body.username,
@@ -177,13 +153,12 @@ router.post("/register", (req, res) => {
 
  */
 }); 
-router.get("/details", auth.verify, (req, res) => {
-
-	const userData = auth.decode(req.headers.authorization)
-	console.log(userData)
-	dboperations.getProfile(userData.UserID).then( result => res.send(result))
+router.get('/getProjects/:userID', (req, res)=>{
+  const {userID} = req.params;
+  dboperations.getProjects(userID).then(result=>{
+    return res.status(200).json(result);
+  })
 })
-
 
 router.get('/total/:userID', (req, res) => {
   const {userID} = req.params;
@@ -294,12 +269,11 @@ router.get("/deleteUser/:userID", (req, res) => {
   });
 });
 
-router.get("/getProject/:projectID", (req, res) => {
+router.get("/deleteProject/:projectID", (req, res) => {
   const {projectID} = req.params;
-  const del = dboperations.getProject(projectID);
-  console.log(del); // Promise { <pending> }
+  const del = dboperations.deleteProject(projectID);
   del.then(function(result) {
-    return res.status(200).json({result});
+    return res.status(200).json(result);
   });
 });
 
@@ -307,6 +281,18 @@ router.get("/getComponents/:tabsID", (req, res) => {
   const {tabsID} = req.params;
   dboperations.getComponents(tabsID).then(result => {
     res.json(result[0])
+ })
+});
+router.get("/getCanvas/:tabID", (req, res) => {
+  const {tabID} = req.params;
+  dboperations.getCanvas(tabID+`_`).then(result => {
+    res.json(result)
+ })
+});
+router.get("/getCss/:projectID", (req, res) => {
+  const {projectID} = req.params;
+  dboperations.getCss(projectID).then(result => {
+    res.json(result)
  })
 });
 

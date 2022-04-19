@@ -24,7 +24,11 @@ const routes: Routes = [
   {
     path: "save",
     component: SaveComponent
-  }
+  },
+  {
+    path: "canvas/:id",
+    component: AppComponent
+  },
 
 ];
 
