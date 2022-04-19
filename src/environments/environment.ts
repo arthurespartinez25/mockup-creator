@@ -3,7 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  clear: 'This operation is ireversible.\n\
+          This action will clear all the components in the canvas.\n\
+           Do you want to proceed?',
+ delete: 'This operation is ireversible.\n\
+          This action will remove the selected component from canvas.\n\
+           Do you want to proceed?',
+  logOut: 'Log Out?',
 };
 
 /*
