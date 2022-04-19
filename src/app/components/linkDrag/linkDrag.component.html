@@ -1,16 +1,30 @@
-<a  [id]="props.id" [style]="props.style" [class]="props.class"
-    cdkDrag cdkDragBoundary=".canvas" (cdkDragEnded)="onDragEnded($event)" 
-[cdkDragDisabled]="!props.draggable"
-[ngStyle]="{
-  'border-color' : props.selected == true ? 'red': (props.selected == false ? 'none': null),
-  'border-style' : props.selected == true ? 'solid': (props.selected == false ? 'none': null),
-  'border-width' : props.selected == true ? '1px': (props.selected == false ? '0px': null)
-}" 
-    >
-        <span *ngIf="props.isIcon == false">{{props.value}}</span>
-        <span *ngIf="props.isIcon == true">
-          {{props.iconLabel1}}
-          <i class={{props.iconValue}}></i>
-          {{props.iconLabel2}}
-        </span>
-</a>
+<div cdkDrag cdkDragBoundary=".canvas" (cdkDragEnded)="onDragEnded($event)" [cdkDragDisabled]="!props.draggable">
+  <a  [id]="props.id" [style]="props.style" [class]="props.class" href="{{props.href}}" target="_blank"
+  [ngStyle]="{
+    'border-color' : props.selected == true ? 'red': (props.selected == false ? 'none': null),
+    'border-style' : props.selected == true ? 'solid': (props.selected == false ? 'none': null),
+    'border-width' : props.selected == true ? '1px': (props.selected == false ? '0px': null)
+  }" *ngIf="isPlaying == true"
+      >
+          <span *ngIf="props.isIcon == false">{{props.value}}</span>
+          <span *ngIf="props.isIcon == true">
+            {{props.iconLabel1}}
+            <i class={{props.iconValue}}></i>
+            {{props.iconLabel2}}
+          </span>
+  </a>
+  <a  [id]="props.id" [style]="props.style" [class]="props.class"
+  [ngStyle]="{
+    'border-color' : props.selected == true ? 'red': (props.selected == false ? 'none': null),
+    'border-style' : props.selected == true ? 'solid': (props.selected == false ? 'none': null),
+    'border-width' : props.selected == true ? '1px': (props.selected == false ? '0px': null)
+  }" *ngIf="isPlaying == false"
+      >
+          <span *ngIf="props.isIcon == false">{{props.value}}</span>
+          <span *ngIf="props.isIcon == true">
+            {{props.iconLabel1}}
+            <i class={{props.iconValue}}></i>
+            {{props.iconLabel2}}
+          </span>
+  </a>
+</div>
