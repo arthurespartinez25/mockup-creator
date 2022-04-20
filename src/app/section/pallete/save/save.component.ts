@@ -86,7 +86,8 @@ export class SaveComponent implements OnInit {
     this.dialog.open(SaveDataComponent, {
       data: {
         value: this.componentListMap,
-        style: this.style
+        style: this.style,
+        tabList: this.tabList,
       }
     });
 
@@ -128,6 +129,7 @@ export class SaveDataComponent {
   projID: string;
   projectName: string;
   keys: string[] = [];
+  tabList: any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -138,6 +140,7 @@ export class SaveDataComponent {
   ) {
     this.componentListMap = data.value;
     this.style = data.style;
+    this.tabList = data.tabList;
   }
 
   ngOnInit(): void {
@@ -177,8 +180,8 @@ export class SaveDataComponent {
           this.keys.push(this.projID + "_" + key);
         }
 
-        for (let i = 0; i < this.keys.length; i++) { //temporary canvas names until tabs can be renamed. Once possible, remove this for-loop
-          canvasNames.push("Canvas " + (i + 1));//and fetch the data from the tab names instead
+        for (let i = 0; i < this.tabList.length; i++) { //temporary canvas names until tabs can be renamed. Once possible, remove this for-loop
+          canvasNames.push(this.tabList[i].name);//and fetch the data from the tab names instead
         }
 
         let tabVal = {
@@ -188,6 +191,7 @@ export class SaveDataComponent {
 
         this.service.saveData(tabVal, "tab").subscribe(res=> { //saves the tab details to tab_table
           console.log(this.componentListMap)
+          console.log(this.tabList)
           let tabSort = {};
           let tableIds: string[] = [];
           let tableContent: any[] = [];

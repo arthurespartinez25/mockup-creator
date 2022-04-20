@@ -11,8 +11,6 @@ import { IComponent, defaultProps } from './../../interfaces/icomponent';
 import { IProperty } from './../../interfaces/iproperty';
 import { PropertyComponent } from './../../property/property.component';
 import { ButtonService } from 'src/app/button-service.service';
-import { keyframes } from '@angular/animations';
-import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 @Component({
   selector: 'app-canvas',
@@ -89,6 +87,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   @Input() whatComponent:any;
   @Input() componentListMap : Map<string, IComponent[]>;
   @Input() isLoaded: boolean;
+  @Input() isSavedTabs: boolean;
   
  
 
@@ -101,7 +100,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     public _location: Location,
     public sanitizer: DomSanitizer,
     public datepipe: DatePipe,
-    private buttonService?: ButtonService
+    private buttonService?: ButtonService,
   ) {
     this.changeref = changeDetectorRef;
     if(buttonService) {
@@ -117,6 +116,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   sessionID = this.loginCookie.get("sessionID");
   inSession: boolean = this.sessionID == "12345";
   isPlaying: boolean = false;
+  canvasArray: any;
   
   
 
@@ -134,9 +134,6 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   ngAfterViewInit(): void {
     this.canvasListElements.toArray();
     this.updateTabListEvent.emit(this.tabs);
-    // for(let i =0; i<2; i++){
-    //   this.addTab()
-    // }
   }
 
   canvasLeftX = 0;
@@ -232,6 +229,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     this.tabs[this.currentTab].name = $event.srcElement.innerHTML.trim() == '' ? prevName : $event.srcElement.innerHTML.trim();
     console.log(this.tabs);
     this.initialName = (this.tabs[this.currentTab].name);
+    console.log(this.tabs[0].name)
   }
 
   selectedComp(value: any) {
@@ -255,28 +253,24 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
 
   /* PAGINATION CODE */
   addTab() {
-    this.tabs[this.currentTab].allowEdit = false;
+    // this.tabs[this.currentTab].allowEdit = false;
+      
     this.totalTabs++;
-    let toInsert = {
-      id: "canvas" + (this.totalTabs + 1),
-      name: "Canvas " + (this.totalTabs + 1),
-      allowEdit: false
-    };
+      let toInsert = {
+        id: "canvas" + (this.totalTabs + 1),
+        name: "Canvas " + (this.totalTabs + 1),
+        allowEdit: false
+      };
     this.tabs.push(toInsert);
+    this.initialName = toInsert.name;
     this.updateTabListEvent.emit(this.tabs); //also update this when changing of order of tabs is implemented
     this.selectedTab = this.tabs.length - 1;
-    this.initialName = toInsert.name;
-    this.canvasListElements.changes.subscribe(c=>{
-      let canvasArray = this.canvasListElements.toArray()
-      this.updateCanvasListElements.emit(canvasArray)
-    })
-    
   }
   
   removeTab(index: number) {
-    this.tabs[this.currentTab].allowEdit = false;
-    // let result = window.confirm("Are you sure you want to remove this tab?");
-  
+    // this.tabs[this.currentTab].allowEdit = false;
+    let result = window.confirm("Are you sure you want to remove this tab?");
+    if(result){
       this.componentListMap.delete(this.tabs[index].id);
       this.updateComponentListMapEvent.emit(this.componentListMap); //updates the componentList in app.component
       this.tabs.splice(index, 1);
@@ -288,11 +282,11 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
       if (index == this.selectedTab) {
         this.selectedTab = (index - 1) < 0 ? 0 : (index - 1); //changes the selected tab to the previous one
       }
-    
+    }
   }
 
   myTabSelectedTabChange(changeEvent: MatTabChangeEvent) {
-    this.tabs[this.currentTab].allowEdit = false;
+    // this.tabs[this.currentTab].allowEdit = false;
     this.currentTab = changeEvent.index;
     this.updateSelectedTabEvent.emit(this.tabs[this.currentTab].id);
     this.canvas = this.canvasListElements.toArray()[this.currentTab];
@@ -325,7 +319,20 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
       this.updateSelectedEvent.emit(this.defaultProps);
     }
   }
-
+  updateSavedCanvas( savedTabs: any){
+    this.tabs = [];
+    for(let i =0; i<savedTabs.length; i++){
+      let toInsert = {id: savedTabs[i].tab_id,
+          name: savedTabs[i].tab_name,
+          allowEdit: false };
+      this.tabs.push(toInsert)
+    }
+    this.totalTabs = savedTabs.length-1;
+    this.canvasListElements.changes.subscribe(c=>{
+      let canvasArray = this.canvasListElements.toArray()
+      this.updateCanvasListElements.emit(canvasArray)
+    })
+  }
   /****************** OLD CODE STARTS HERE **********************/
 }
 function readCSSFile(arg0: string) {

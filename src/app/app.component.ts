@@ -130,6 +130,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   isLoaded:any;
   canvasArray: ElementRef[]
   canvasList: any;
+  isSavedTabs: boolean = false;
 
   ngOnInit() {
     console.log(this.sessionID);
@@ -177,6 +178,10 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
             checked: this.components[i].componentChecked,
             url: this.sanitizer.bypassSecurityTrustResourceUrl(this.components[i].componentValue)
           }
+          // for(let j = 0; j< this.canvasArray.length; i++){
+          //   let componentTabId = this.components.tabs_id
+          //   console.log(componentTabId)
+          // }
           switch(props.typeObj){
             case 'buttonDrag':
               this.updateComponentList(new ButtonDragComponent(this.passCanvas));
@@ -329,24 +334,16 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.canvasArray=value;
     console.log(value)
   }
+
   updateProjectId(value:any){
     this.componentListMap.clear();
     this.cssArray = [];
-
-    
-    if(this.tabList.length>=2){
-      for(let i = this.tabList.length-1; i > 0; i--){
-        this.canvas.removeTab(i);
-      }
-    }
+    this.isSavedTabs = true;
 
     this.service.getCanvas(value).subscribe((res)=>{
       this.canvasList = res;
-      if(this.canvasList.length>=2){
-        for(let i = 1; i< this.canvasList.length; i++){
-          this.canvas.addTab()
-        }
-      }
+      this.canvas.updateSavedCanvas(this.canvasList)
+      this.isSavedTabs = false;
     })
 
     this.service.getComponents(value).subscribe((res)=>{
