@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { IProperty } from 'src/app/interfaces/iproperty';
-import { ButtonService } from 'src/app/button-service.service';
+import { ButtonService } from 'src/app/service/button-service/button-service.service';
 import { CanvasComponent } from 'src/app/section/canvas/canvas.component';
 
 @Component({
@@ -71,6 +71,7 @@ export class ButtonDragComponent implements IComponent {
   @Input() whatComponent2: any;
   @Input() initialName: string;
   @Input() isLoaded: boolean;
+  @Input() isPlaying: boolean;
   @Output() passCanvas: EventEmitter<number> = new EventEmitter();
   canvasPositionLeft = 0;
   canvasPositionTop = 0;
@@ -196,9 +197,14 @@ export class ButtonDragComponent implements IComponent {
   }
 
   passName():void {
-    this.passCanvas.emit(this.props.redirection);
-    this.buttonService?.passCanvasName(this.props.redirection);
+    if(this.isPlaying) {
+      this.buttonService?.passCanvasName(this.props.redirection);
+      this.passCanvas.emit(this.props.redirection);
+    }
+      
+      console.log(this.isPlaying);
   }
+
 
   get htmlCode(): string {
     let tmpHtmlCode = '<div><button';

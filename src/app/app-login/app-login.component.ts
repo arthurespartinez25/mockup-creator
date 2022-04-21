@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { UsersService } from '../service/users.service';
+import { UsersService } from '../service/users/users.service';
 
 @Component({
   selector: 'app-app-login',

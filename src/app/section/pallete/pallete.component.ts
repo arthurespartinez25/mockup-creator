@@ -18,9 +18,11 @@ import { IProperty } from './../../interfaces/iproperty';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
+import { UsersService } from '../../service/users/users.service';
 import { DatePipe } from '@angular/common'
 import { PropertyComponent } from './../../property/property.component';
-import { DialogService } from 'src/app/service/dialog.service';
+import { emit } from 'process';
+import { DialogService } from 'src/app/service/dialog/dialog.service';
 
 @Component({
   selector: 'app-pallete',

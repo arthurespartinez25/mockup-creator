@@ -10,7 +10,9 @@ import { BehaviorSubject } from 'rxjs';
 import { IComponent, defaultProps } from './../../interfaces/icomponent';
 import { IProperty } from './../../interfaces/iproperty';
 import { PropertyComponent } from './../../property/property.component';
-import { ButtonService } from 'src/app/button-service.service';
+import { ButtonService } from 'src/app/service/button-service/button-service.service';
+import { keyframes } from '@angular/animations';
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 @Component({
   selector: 'app-canvas',
@@ -290,12 +292,17 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     this.canvas = this.canvasListElements.toArray()[this.currentTab];
     this.updateSelectedCanvasEvent.emit(this.canvas);
     this.updateSelectedEvent.emit(this.defaultProps);
-    if(this.selectedComponent){
-      this.selectedComponent.props.selected = false;
-    }
+    // if(this.selectedComponent){
+    //   this.selectedComponent.props.selected = false;
+    // }
+    if(this.selectedTab == 0) {
+      this.initialName = "Canvas 1";
+    } else {
+      this.initialName = "Canvas " + (this.selectedTab + 1);
+    }  
+    this.selectedComponent.props.selected = false;
   } 
 
- 
  isPlay(value: any) {
     this.isPlaying = value;
     this.updateIsPlaying.emit(this.isPlaying);
@@ -310,7 +317,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     this.selectedTab = number;
     console.log(this.componentListMap.get(this.tabs[number].id));
   }    
-
+  
   deselect() {
     if(this.selectedComponent){
       this.selectedComponent.props.selected = false;

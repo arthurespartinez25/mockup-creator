@@ -47,6 +47,7 @@ export class LinkDragComponent implements OnInit, IComponent {
   @Input() whatComponent2: any;
   @Input() isLoaded: boolean;
 
+  
   canvasPositionLeft = 0;
   canvasPositionTop = 0;
   mousePositionLeft = 0;
