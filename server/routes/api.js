@@ -279,13 +279,14 @@ router.get("/deleteProject/:projectID", (req, res) => {
 
 router.get("/getComponents/:tabsID", (req, res) => {
   const {tabsID} = req.params;
-  dboperations.getComponents(tabsID).then(result => {
+  dboperations.getComponents(`${tabsID}_canvas`).then(result => {
+
     res.json(result[0])
  })
 });
 router.get("/getCanvas/:tabID", (req, res) => {
   const {tabID} = req.params;
-  dboperations.getCanvas(tabID+`_`).then(result => {
+  dboperations.getCanvas(`${tabID}_canvas`).then(result => {
     res.json(result)
  })
 });

@@ -87,10 +87,8 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   @Input() whatComponent:any;
   @Input() componentListMap : Map<string, IComponent[]>;
   @Input() isLoaded: boolean;
-  @Input() isSavedTabs: boolean;
   
  
-
   changeref: ChangeDetectorRef;
   // props: any;
   constructor(
@@ -320,13 +318,13 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     }
   }
   updateSavedCanvas( savedTabs: any){
-    this.tabs = [];
-    for(let i =0; i<savedTabs.length; i++){
-      let toInsert = {id: savedTabs[i].tab_id,
-          name: savedTabs[i].tab_name,
-          allowEdit: false };
-      this.tabs.push(toInsert)
-    }
+    this.tabs =[];
+      for(let i =0; i<savedTabs.length; i++){
+        let toInsert = {id: savedTabs[i].tab_id,
+            name: savedTabs[i].tab_name,
+            allowEdit: false };
+        this.tabs.push(toInsert)
+      }
     this.totalTabs = savedTabs.length-1;
     this.canvasListElements.changes.subscribe(c=>{
       let canvasArray = this.canvasListElements.toArray()

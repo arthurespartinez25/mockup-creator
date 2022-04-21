@@ -9,13 +9,11 @@ import {
   ComponentRef,
   ElementRef,
   OnInit,
-  QueryList,
   ViewChild,
-  ViewChildren,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { IComponent, defaultProps } from './interfaces/icomponent';
+import { IComponent} from './interfaces/icomponent';
 import { IProperty } from './interfaces/iproperty';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
@@ -42,7 +40,6 @@ import { DatepickerDragComponent } from './components/datepickerDrag/datepickerD
 import { HeaderDragComponent } from './components/headerDrag/headerDrag.component';
 import { InputDragComponent } from './components/inputDrag/inputDrag.component';
 import { YoutubeDragComponent } from './components/youtubeDrag/youtubeDrag.component';
-import { AppLoginComponent } from './app-login/app-login.component';
 import { UsersService } from './service/users.service';
 
 @Component({
@@ -95,7 +92,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
-  @ViewChild(AppLoginComponent) login:AppLoginComponent;
   
   changeref: ChangeDetectorRef;
   userID: number;
@@ -130,7 +126,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   isLoaded:any;
   canvasArray: ElementRef[]
   canvasList: any;
-  isSavedTabs: boolean = false;
 
   ngOnInit() {
     console.log(this.sessionID);
@@ -147,111 +142,124 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.canvasDirective = this.canvas.passCanvas();    
     this.passCanvas = this.canvasDirective;
   }
-  addComponents(){
-        for(let i=0; i<this.components.length; i++){
-          let props: IProperty= {
-            key: this.components[i].componentID.replace(/\D/g, ""),
-            id: this.components[i].componentID,
-            value: this.components[i].componentValue,
-            class: this.components[i].componentClass,
-            style: this.components[i].componentFinalStyle,
-            typeObj: this.components[i].componentTypeObj,
-            type: this.components[i].componentType,
-            draggable: this.components[i].componentDraggable === "true",
-            selected : false,
-            hidden: false,
-            mouseDragPositionX:Number(this.components[i].componentPositionX),
-            mouseDragPositionY:Number(this.components[i].componentPositionY),
-            finalStyle: this.components[i].componentFinalStyle,
-            href: this.components[i].componentHREF,
-            placeholder: this.components[i].componentPlaceholder,
-            tblCols: Number(this.components[i].componentColumns),
-            tblArrayRow: Number(this.components[i].componentRows),
-            isIcon: this.components[i].componentIsIcon === "true",
-            iconValue: this.components[i].componentIconValue,
-            iconLabel1: this.components[i].componentIconLabel1,
-            iconLabel2: this.components[i].componentIconLabel2,
-            target: this.components[i].componentTarget === "true",
-            redirection: this.components[i].componentRedirection,
-            isSavedComponent: true,
-            name: this.components[i].componentName,
-            checked: this.components[i].componentChecked,
-            url: this.sanitizer.bypassSecurityTrustResourceUrl(this.components[i].componentValue)
-          }
-          // for(let j = 0; j< this.canvasArray.length; i++){
-          //   let componentTabId = this.components.tabs_id
-          //   console.log(componentTabId)
-          // }
+  loadComponents(){
+    for(let j = 0; j<this.canvasArray.length; j++){
+      let canvas = this.canvasArray[j];
+      let canvasId = canvas.nativeElement.id;
+      let index = 0;
+      for(let i=0; i<this.components.length; i++){
+        let props: IProperty= {
+          key: this.components[i].componentID.replace(/\D/g, ""),
+          id: this.components[i].componentID,
+          value: this.components[i].componentValue,
+          class: this.components[i].componentClass,
+          style: this.components[i].componentFinalStyle,
+          typeObj: this.components[i].componentTypeObj,
+          type: this.components[i].componentType,
+          draggable: this.components[i].componentDraggable === "true",
+          selected : false,
+          hidden: false,
+          mouseDragPositionX:Number(this.components[i].componentPositionX),
+          mouseDragPositionY:Number(this.components[i].componentPositionY),
+          finalStyle: this.components[i].componentFinalStyle,
+          href: this.components[i].componentHREF,
+          placeholder: this.components[i].componentPlaceholder,
+          tblCols: Number(this.components[i].componentColumns),
+          tblArrayRow: Number(this.components[i].componentRows),
+          isIcon: this.components[i].componentIsIcon === "true",
+          iconValue: this.components[i].componentIconValue,
+          iconLabel1: this.components[i].componentIconLabel1,
+          iconLabel2: this.components[i].componentIconLabel2,
+          target: this.components[i].componentTarget === "true",
+          redirection: this.components[i].componentRedirection,
+          isSavedComponent: true,
+          name: this.components[i].componentName,
+          checked: this.components[i].componentChecked,
+          url: this.sanitizer.bypassSecurityTrustResourceUrl(this.components[i].componentValue)
+        }
+        if(canvasId == this.components[i].tabs_id){
           switch(props.typeObj){
             case 'buttonDrag':
-              this.updateComponentList(new ButtonDragComponent(this.passCanvas));
+              this.updateComponentList(new ButtonDragComponent(canvas), canvas);
               break;
             case 'labelDrag':
-              this.updateComponentList(new LabelDragComponent(this.passCanvas));
+              this.updateComponentList(new LabelDragComponent(canvas), canvas);
               break;
             case 'checkboxDrag':
-              this.updateComponentList(new CheckboxDragComponent(this.passCanvas));
+              this.updateComponentList(new CheckboxDragComponent(canvas), canvas);
               break;
             case 'dropdownDrag':
-              this.updateComponentList(new DropdownDragComponent(this.passCanvas));
+              this.updateComponentList(new DropdownDragComponent(canvas), canvas);
               break;
             case 'imgDrag':
-              this.updateComponentList(new ImageDragComponent(this.passCanvas));
+              this.updateComponentList(new ImageDragComponent(canvas), canvas);
               break;
             case 'divDrag':
-              this.updateComponentList(new DivDragComponent(this.passCanvas));
+              this.updateComponentList(new DivDragComponent(canvas), canvas);
               break;
             case 'radioDrag':
-              this.updateComponentList(new RadioDragComponent(this.passCanvas));
+              this.updateComponentList(new RadioDragComponent(canvas), canvas);
               break;
             case 'textboxDrag':
-              this.updateComponentList(new TextboxDragComponent(this.passCanvas));
+              this.updateComponentList(new TextboxDragComponent(canvas), canvas);
               break;
             case 'paragraphDrag':
-              this.updateComponentList(new ParagraphDragComponent(this.passCanvas));
+              this.updateComponentList(new ParagraphDragComponent(canvas), canvas);
               break;
             case 'navDrag':
-              this.updateComponentList(new NavbarDragComponent(this.passCanvas));
+              this.updateComponentList(new NavbarDragComponent(canvas), canvas);
               break;
             case 'datepickerDrag':
-              this.updateComponentList(new DatepickerDragComponent(this.passCanvas, this.datepipe));
+              this.updateComponentList(new DatepickerDragComponent(canvas, this.datepipe), canvas);
               break;
             case 'headerDrag':
-              this.updateComponentList(new HeaderDragComponent(this.passCanvas));
+              this.updateComponentList(new HeaderDragComponent(canvas), canvas);
               break;
             case 'inputDrag':
-              this.updateComponentList(new InputDragComponent(this.passCanvas));
+              this.updateComponentList(new InputDragComponent(canvas), canvas);
               break;
             case 'linkDrag':
-              this.updateComponentList(new LinkDragComponent(this.passCanvas));
+              this.updateComponentList(new LinkDragComponent(canvas), canvas);
               break;
             case 'tableDrag':
-              this.updateComponentList(new TableDragComponent(this.passCanvas, this.changeref));
+              this.updateComponentList(new TableDragComponent(canvas, this.changeref), canvas);
               break;
             case 'youtubeDrag':
-              this.updateComponentList(new YoutubeDragComponent(this.passCanvas, this.sanitizer));
+              this.updateComponentList(new YoutubeDragComponent(canvas, this.sanitizer), canvas);
               break;
             case 'videoDrag':
-              this.updateComponentList(new VideoDragComponent(this.passCanvas, this.sanitizer));
+              this.updateComponentList(new VideoDragComponent(canvas, this.sanitizer), canvas);
               break;
-          } 
-          this.componentListMap.forEach(component=>{
-            Object.keys(component[i].props).forEach(key=>component[i].props[key]=props[key])
+          }
+          Object.keys(this.componentListMap.get(canvasId)![index].props).forEach(key=>{
+            this.componentListMap.get(canvasId)![index].props[key]=props[key]
           });
+          index++;
         }
+      }
+    }  
+    this.currentTab = this.canvasArray[0].nativeElement.id;
   }
 
-  updateComponentList(components: IComponent) {
+  updateComponentList(components: IComponent, canvas?: any) {
     //this.componentList.push(components);
-
     let tempCompList: IComponent[] = [];
-    if (this.componentListMap.has(this.currentTab)) {
-      tempCompList = this.componentListMap.get(this.currentTab)!;
+    if(canvas){
+      let id = canvas.nativeElement.id;
+      if(this.componentListMap.has(id)){
+        tempCompList = this.componentListMap.get(id)!;
+      } 
+      tempCompList.push(components);
+      this.componentListMap.set(id, tempCompList);
+      this.componentList = this.componentListMap.get(id)!;
+    } else {
+      if (this.componentListMap.has(this.currentTab)) {
+        tempCompList = this.componentListMap.get(this.currentTab)!;
+      }
+      tempCompList.push(components);
+      this.componentListMap.set(this.currentTab, tempCompList);
+      this.componentList = this.componentListMap.get(this.currentTab)!;
     }
-    tempCompList.push(components);
-    this.componentListMap.set(this.currentTab, tempCompList);
-    
-    this.componentList = this.componentListMap.get(this.currentTab)!;
     //this.palette.updateComponentListDel(this.componentList); //updates the componentList in the pallete
   }
   
@@ -295,6 +303,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   updateSelectedTab(value: string) {
     this.currentTab = value;
+    console.log(value)
     if (this.componentListMap.has(this.currentTab)) {
       this.componentList = this.componentListMap.get(this.currentTab)!;
     } else {
@@ -316,7 +325,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   updateTabList(value: any) {
     this.tabList = value;
-    console.log(this.tabList)
   }
 
   updateProjectName(value: string) {
@@ -332,23 +340,20 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
   updateCanvasArray(value: any){
     this.canvasArray=value;
-    console.log(value)
   }
 
   updateProjectId(value:any){
     this.componentListMap.clear();
     this.cssArray = [];
-    this.isSavedTabs = true;
 
     this.service.getCanvas(value).subscribe((res)=>{
       this.canvasList = res;
       this.canvas.updateSavedCanvas(this.canvasList)
-      this.isSavedTabs = false;
     })
 
     this.service.getComponents(value).subscribe((res)=>{
       this.components=res;
-      this.addComponents()
+      this.loadComponents()
     })
 
     this.service.getCss(value).subscribe((res)=>{
