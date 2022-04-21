@@ -45,6 +45,7 @@ import { DatePipe } from '@angular/common'
 import { PropertyComponent } from './../../property/property.component';
 import { emit } from 'process';
 import { DialogService } from 'src/app/service/dialog/dialog.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-pallete',
@@ -203,7 +204,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
   }
 
   confirmLogOut() {
-    this.dialogService.openConfirmDialog('Log out?')
+    this.dialogService.openConfirmDialog(environment.logOut)
     .afterClosed().subscribe(res =>{
       if(res){
         this.logout();
