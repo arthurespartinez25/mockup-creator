@@ -292,15 +292,16 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     this.canvas = this.canvasListElements.toArray()[this.currentTab];
     this.updateSelectedCanvasEvent.emit(this.canvas);
     this.updateSelectedEvent.emit(this.defaultProps);
-    // if(this.selectedComponent){
-    //   this.selectedComponent.props.selected = false;
-    // }
+    
     if(this.selectedTab == 0) {
       this.initialName = "Canvas 1";
     } else {
       this.initialName = "Canvas " + (this.selectedTab + 1);
     }  
-    this.selectedComponent.props.selected = false;
+    if(this.selectedComponent){
+      this.selectedComponent.props.selected = false;
+    }
+    // this.selectedComponent.props.selected = false;
   } 
 
  isPlay(value: any) {
