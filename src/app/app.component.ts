@@ -40,7 +40,7 @@ import { DatepickerDragComponent } from './components/datepickerDrag/datepickerD
 import { HeaderDragComponent } from './components/headerDrag/headerDrag.component';
 import { InputDragComponent } from './components/inputDrag/inputDrag.component';
 import { YoutubeDragComponent } from './components/youtubeDrag/youtubeDrag.component';
-import { UsersService } from './service/users.service';
+import { UsersService } from './service/users/users.service';
 
 @Component({
   selector: 'app-root',
