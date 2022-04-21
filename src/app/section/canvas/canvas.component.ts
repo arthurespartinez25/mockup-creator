@@ -13,6 +13,8 @@ import { PropertyComponent } from './../../property/property.component';
 import { ButtonService } from 'src/app/service/button-service/button-service.service';
 import { keyframes } from '@angular/animations';
 import { ValueConverter } from '@angular/compiler/src/render3/view/template';
+import { DialogService } from 'src/app/service/dialog/dialog.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-canvas',
@@ -100,7 +102,8 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     public _location: Location,
     public sanitizer: DomSanitizer,
     public datepipe: DatePipe,
-    private buttonService?: ButtonService,
+    private dialogService: DialogService,
+    private buttonService?: ButtonService
   ) {
     this.changeref = changeDetectorRef;
     if(buttonService) {
@@ -271,6 +274,8 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     // this.tabs[this.currentTab].allowEdit = false;
     let result = window.confirm("Are you sure you want to remove this tab?");
     if(result){
+    // this.tabs[this.currentTab].allowEdit = false;
+    
       this.componentListMap.delete(this.tabs[index].id);
       this.updateComponentListMapEvent.emit(this.componentListMap); //updates the componentList in app.component
       this.tabs.splice(index, 1);
@@ -284,6 +289,16 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
       }
     }
   }
+  
+    confirmRemoveTab(index: number) {
+      this.dialogService.openConfirmDialog(environment.removeTab)
+      .afterClosed().subscribe(res =>{
+        if(res){
+          this.removeTab(index);
+        }
+      });
+    }
+    
 
   myTabSelectedTabChange(changeEvent: MatTabChangeEvent) {
     // this.tabs[this.currentTab].allowEdit = false;

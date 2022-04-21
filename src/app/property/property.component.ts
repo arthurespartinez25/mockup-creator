@@ -5,6 +5,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { DatePipe } from '@angular/common'
 import { CodeComponent } from '../section/code/code.component';
 import { DialogService } from '../service/dialog/dialog.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-property',
@@ -106,9 +107,7 @@ export class PropertyComponent implements OnInit {
   }
 
   confirmRemove() {
-    this.dialogService.openConfirmDialog('This operation is ireversible.\n\
-    This action will remove the selected component from canvas.\n\
-    Do you want to proceed?')
+    this.dialogService.openConfirmDialog(environment.delete)
     .afterClosed().subscribe(res =>{
       if(res){
         this.deleteComponent();
@@ -131,9 +130,7 @@ export class PropertyComponent implements OnInit {
   }
 
   confirmClear() {
-    this.dialogService.openConfirmDialog('This operation is ireversible.\n\
-    This action will clear all the components in the canvas.\n\
-    Do you want to proceed?')
+    this.dialogService.openConfirmDialog(environment.clear)
     .afterClosed().subscribe(res =>{
       if(res){
         this.clearComponent();
