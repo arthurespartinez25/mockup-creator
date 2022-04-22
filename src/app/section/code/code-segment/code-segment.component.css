@@ -23,12 +23,6 @@
     overflow: auto;
   }
   
-  #code {
-    background-color: white;
-    padding: 10px;
-    height: 100%;
-  }
-  
   code {
     color: black;
   }
@@ -110,14 +104,14 @@
   }
   
   .btnCopy{
-    width: 20%;
+    width: 270px;
+    height: 30px;
     max-width: 270px;
     min-width: 220px;
-    overflow-y: auto;
     background-color: green;
     color: white;
     border-radius: 10px;
-    padding: 5px 10px;
+    padding: 5px 0px;
     border: none;
     font-weight: bolder;
     font-size: x-large;

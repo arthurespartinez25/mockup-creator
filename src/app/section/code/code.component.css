@@ -17,15 +17,14 @@
 
 #code-container {
   height: 100vh;
-  width: 25%;
-  max-width: 300px;
-  min-width: 275px;
-  overflow: auto;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
 }
 
 #code {
   background-color: white;
-  padding: 10px;
   height: 100%;
 }
 
@@ -117,7 +116,7 @@ a.custom-nav-link:hover {
   background-color: green;
   color: white;
   border-radius: 10px;
-  padding: 5px 10px;
+  padding: 5px 0px;
   border: none;
   font-weight: bolder;
   font-size: x-large;

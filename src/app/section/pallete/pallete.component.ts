@@ -18,12 +18,11 @@ import { IProperty } from './../../interfaces/iproperty';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
-import { UsersService } from '../../service/users/users.service';
 import { DatePipe } from '@angular/common'
 import { PropertyComponent } from './../../property/property.component';
-import { emit } from 'process';
 import { DialogService } from 'src/app/service/dialog/dialog.service';
 import { environment } from 'src/environments/environment';
+import { ClearComponentsService } from 'src/app/service/clearComponents/clear-components.service';
 
 @Component({
   selector: 'app-pallete',
@@ -117,6 +116,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
     public sanitizer: DomSanitizer,
     public datepipe: DatePipe,
     private dialogService: DialogService,
+    private clearComponents: ClearComponentsService
   ) {
     this.changeref = changeDetectorRef;
   }
@@ -238,6 +238,9 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
   }
   updateProjectId(value: any){
     this.updateProjectIdEvent.emit(value)
+  }
+  clearComponent(): void {
+    this.clearComponents.clearComponents();
   }
   //----------------------------------------------------------------------------
 
