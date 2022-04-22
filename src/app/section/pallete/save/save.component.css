@@ -45,6 +45,8 @@
 .projectsList{
   text-decoration: none;
   color: black;
+  width: 83%;
+  padding: 10px;
 }
 
 .projectContainer{
@@ -52,8 +54,6 @@
   border-radius: 5px;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  margin: 5px;
   cursor: pointer;
 }
 .projectContainer:hover{
@@ -61,15 +61,18 @@
 }
 .projectContainer button{
   border: none;
-  margin: 0px 4px;
   border-radius: 3px;
+  margin: 0px 10px 0px 0px;
+}
+.buttonsContainer{
+  display: flex;
+  justify-content: space-evenly;
 }
 .projectContainer button i {
-  padding: 0px;
+  padding: 3px 0px;
   color: white;
 }
 .edit{
-  color: green;
   background-color: #16324f;
 }
 .delete{

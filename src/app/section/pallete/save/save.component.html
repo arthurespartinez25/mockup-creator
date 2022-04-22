@@ -16,8 +16,9 @@
           </button>
           <button
             class="palette-item"
-            data-toggle="modal" data-target="#exampleModalCenter"
+            [attr.data-toggle]="showModal" data-target="#exampleModalCenter"
             (click)="loadProjects(userId)"
+            #loadModal
           >
           <i class="fa-solid fa-cloud-arrow-down"></i>&nbsp; Load
           </button>
@@ -35,9 +36,9 @@
         </button>
       </div>
       <div class="modal-body">
-        <div *ngFor = 'let project of projects' class="projectContainer" (click)="openProject(project.project_id)" type="button" data-dismiss="modal">
-          <a href="" class="projectsList" >{{project.project_name}}</a>
-          <div>
+        <div *ngFor = 'let project of projects' class="projectContainer" >
+          <a class="projectsList" data-dismiss="modal" (click)="openProject(project.project_id)">{{project.project_name}}</a>
+          <div class="buttonsContainer">
             <button class="edit"><i class="fa-solid fa-pen-to-square"></i></button>
             <button class="delete" ><i class="fa-solid fa-trash-can"></i></button>
           </div>

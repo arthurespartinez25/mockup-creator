@@ -157,8 +157,8 @@ async function saveTabs(canvasKeys, canvasNames) {
 
 async function saveComponents(componentList, canvasKeys, canvasNativeKeys) {
     let checkNames = ["id", "value", "class", "style", "typeObj", "type", "draggable", "mouseDragPositionX", "mouseDragPositionY", "linkValue", "href", "name", "checked", "placeholder", "tblCols", "tblRows", 
-                        "finalStyle", "isIcon", "iconValue", "iconLabel1", "iconLabel2", "target", "redirection"]; //datatypes to be saved
-    let skip = ["key", "selected", "hidden", "dummyDate", "tblArrayCol", "tblArrayRow", "url", "tblContent", "isSavedComponent"]; //skip these properties
+                        "cols", "rows", "finalStyle", "isIcon", "iconValue", "iconLabel1", "iconLabel2", "target", "redirection"]; //datatypes to be saved
+    let skip = ["key", "selected", "hidden", "dummyDate", "tblArrayCol", "tblArrayRow", "url", "tblContent", "linksArray", "isSavedComponent"]; //skip these properties
     let query = `INSERT INTO component_table (tabs_id, 
                                               componentID,
                                               componentValue,
@@ -176,6 +176,8 @@ async function saveComponents(componentList, canvasKeys, canvasNativeKeys) {
                                               componentPlaceholder,
                                               componentColumns,
                                               componentRows,
+                                              componentTextboxCols,
+                                              componentTextboxRows,
                                               componentFinalStyle,
                                               componentIsIcon,
                                               componentIconValue,
@@ -184,7 +186,6 @@ async function saveComponents(componentList, canvasKeys, canvasNativeKeys) {
                                               componentTarget,
                                               componentRedirection) VALUES `;
     
-    // console.log(componentList);
     for (let i = 0; i < canvasNativeKeys.length; i++) {
         for (let j = 0; j < Object.keys(componentList[canvasNativeKeys[i]]).length; j++) {
             let l = 0;
@@ -213,7 +214,7 @@ async function saveComponents(componentList, canvasKeys, canvasNativeKeys) {
             query += `, `;
         }
     }
-    console.log(query);
+    // console.log(query);
     try {
         let pool = await sql.connect(config);
         let results = await pool.request().query(query);

@@ -18,12 +18,12 @@ export class CheckboxDragComponent implements OnInit, IComponent {
     style: 'cursor: pointer;',
     typeObj: 'checkboxDrag',
     type: 'checkbox',
-    checked: 'true',
     draggable: true,
     selected : false,
     hidden: false,
     mouseDragPositionX:0,
     mouseDragPositionY:0,
+    checked: 'true',
     finalStyle:'',
     isSavedComponent: false
   };

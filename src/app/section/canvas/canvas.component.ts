@@ -1,4 +1,3 @@
-import { CdkDragEnd } from '@angular/cdk/drag-drop';
 import { Location } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ComponentRef, ElementRef, Input, OnInit, Output, Renderer2, ViewChild, EventEmitter, ViewChildren, QueryList } from '@angular/core';
@@ -11,10 +10,9 @@ import { IComponent, defaultProps } from './../../interfaces/icomponent';
 import { IProperty } from './../../interfaces/iproperty';
 import { PropertyComponent } from './../../property/property.component';
 import { ButtonService } from 'src/app/service/button-service/button-service.service';
-import { keyframes } from '@angular/animations';
-import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 import { DialogService } from 'src/app/service/dialog/dialog.service';
-import { environment } from 'src/environments/environment';
+import { environment} from 'src/environments/environment';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-canvas',
@@ -257,7 +255,6 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   /* PAGINATION CODE */
   addTab() {
     // this.tabs[this.currentTab].allowEdit = false;
-      
     this.totalTabs++;
       let toInsert = {
         id: "canvas" + (this.totalTabs + 1),
@@ -272,21 +269,17 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   
   removeTab(index: number) {
     // this.tabs[this.currentTab].allowEdit = false;
-    let result = window.confirm("Are you sure you want to remove this tab?");
-    if(result){
-    // this.tabs[this.currentTab].allowEdit = false;
     
-      this.componentListMap.delete(this.tabs[index].id);
-      this.updateComponentListMapEvent.emit(this.componentListMap); //updates the componentList in app.component
-      this.tabs.splice(index, 1);
+    this.componentListMap.delete(this.tabs[index].id);
+    this.updateComponentListMapEvent.emit(this.componentListMap); //updates the componentList in app.component
+    this.tabs.splice(index, 1);
 
-      /*for (let i = 0; i < this.tabs.length; i++) { //renames tabs
-        this.tabs[i].name = "Canvas " + (i + 1);
-      }*/
+    /*for (let i = 0; i < this.tabs.length; i++) { //renames tabs
+      this.tabs[i].name = "Canvas " + (i + 1);
+    }*/
 
-      if (index == this.selectedTab) {
-        this.selectedTab = (index - 1) < 0 ? 0 : (index - 1); //changes the selected tab to the previous one
-      }
+    if (index == this.selectedTab) {
+      this.selectedTab = (index - 1) < 0 ? 0 : (index - 1); //changes the selected tab to the previous one
     }
   }
   

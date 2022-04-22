@@ -175,7 +175,11 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
           isSavedComponent: true,
           name: this.components[i].componentName,
           checked: this.components[i].componentChecked,
-          url: this.sanitizer.bypassSecurityTrustResourceUrl(this.components[i].componentValue)
+          url: this.sanitizer.bypassSecurityTrustResourceUrl(this.components[i].componentValue),
+          linkValue: this.components[i].componentOptionValues,
+          linksArray: this.components[i].componentOptionValues.split(','),
+          cols: this.components[i].componentTextboxCols,
+          rows: this.components[i].componentTextboxRows
         }
         if(canvasId == this.components[i].tabs_id){
           switch(props.typeObj){
@@ -353,6 +357,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
     this.service.getComponents(value).subscribe((res)=>{
       this.components=res;
+      console.log(this.components)
       this.loadComponents()
     })
 

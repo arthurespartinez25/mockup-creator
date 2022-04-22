@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Inject, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Inject, Input, OnInit, Output, ViewChild, ElementRef } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { IComponent } from 'src/app/interfaces/icomponent';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { UsersService } from '../../../service/users/users.service';
 import { Subscription } from 'rxjs';
 import { CrossComponentBridge } from 'src/app/service/cross-component-bridge/crossComponentBridge.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-save',
@@ -21,6 +22,7 @@ export class SaveComponent implements OnInit {
   projects: any;
   tabs: any;
   loadedProjectId: string;
+  showModal: string = "";
 
   @Input() componentListMap: Map<string, IComponent[]>;
   @Input() style: string;
@@ -28,8 +30,8 @@ export class SaveComponent implements OnInit {
   @Input() currentTab: string;
 
   @Output() updateProjectNameEvent = new EventEmitter<string>();
-  @Output() updateProjectIdEvent = new EventEmitter<any>()
-  
+  @Output() updateProjectIdEvent = new EventEmitter<any>();
+
   constructor(
     private loginCookie:CookieService,
     public dialog: MatDialog,
@@ -101,6 +103,17 @@ export class SaveComponent implements OnInit {
   loadProjects(id: number){
     this.service.getProjects(id).subscribe((res)=>{
       this.projects = res;
+      if(this.projects.length==0){
+        this.showModal="";
+        Swal.fire({
+          position: 'center',
+          icon: 'warning',
+          title: 'You don\'t have any saved project',
+          showConfirmButton: false,
+        })
+      } else {
+        this.showModal="modal";
+      }
     })
   }
   deleteProject(id: any){
