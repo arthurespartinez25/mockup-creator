@@ -1,8 +1,8 @@
 <div id="canvas-container" class="pagination-container" style="position: relative;">
-  <div class="pagination-container">
+  <div class="pagination-container" style="position: relative;">
     <mat-tab-group class="tabs" dynamicHeight id="canvasTabGroup" [(selectedIndex)]="selectedTab" (selectedTabChange)="myTabSelectedTabChange($event)">
       <mat-tab *ngFor="let tab of tabs; let index = index">
-        <ng-template mat-tab-label>
+        <ng-template mat-tab-label style="width: 100%;">
           <span class="tab-label" [attr.contenteditable]="tabs[index].allowEdit" (dblclick)="onDblClick($event)" (focusout)="onDblClick($event)">{{tab.name}} </span>
           <button [disabled]="this.isPlaying" [disabled]="tabs.length === 1" type="button" class="btn btn-close" (click)="confirmRemoveTab(index)"></button>
         </ng-template>
@@ -35,49 +35,28 @@
               [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
               [whatComponent]="whatComponent"
               [initialName]="initialName"
-              [isLoaded]="isLoaded"
               [isPlaying]="isPlaying"
             >
             </app-wrapper>
+            
           </div>
-         
         </div>
         
-
       </mat-tab>
-
       <mat-tab disabled>
-        <ng-template mat-tab-label>
+        <ng-template mat-tab-label style="width: 100%;">
             <button [disabled]="this.isPlaying" type="button" class="btn btn-outline-dark" (click)="addTab()"><i class="fa-solid fa-plus" ></i></button>
           </ng-template>
       </mat-tab>
     </mat-tab-group>
-
     <button class="playButton" (click)="isPlay(true)" *ngIf="!this.isPlaying">
       <i class="fa-solid fa-play"></i>
     </button>
-  
     <button class="playButton" (click)="isPlay(false)" *ngIf="this.isPlaying"> 
       <i class="fa-solid fa-pause"></i>
       </button>
-    
   </div>
-
-  <!-- <div style="position: absolute; top: 18px; left: 1255px; z-index: 5;">
-    <label class="switch">
-      <input  type="checkbox" checked>
-      <span class="play"></span>
-    </label>
-  </div>
-  <div class="box" style="position: absolute; top: 16px; left: 1253px; z-index: 4;">
-  </div> 
-</div> -->
-
-<!-- <div>
   
-   class="playButton"
-   class="playButton"
-</div> -->
-
+</div> 
 
 

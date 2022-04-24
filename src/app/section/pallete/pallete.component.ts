@@ -105,7 +105,6 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
   @Output() updateMousePosY = new EventEmitter<number>();
   @Output() updateWhatComponentEvent = new EventEmitter<string>();
   @Output() updateProjectNameEvent = new EventEmitter<string>();
-  @Output() updateIsLoaded = new EventEmitter<boolean>();
   @Output() updateProjectIdEvent = new EventEmitter<any>();
   changeref: ChangeDetectorRef;
   constructor(
@@ -232,9 +231,6 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
 
   updateSelected(value: IProperty){
     this.updateSelectedEvent.emit(value)
-  }
-  updateIsLoadedEvent(value: boolean){
-    this.updateIsLoaded.emit(value)
   }
   updateProjectId(value: any){
     this.updateProjectIdEvent.emit(value)

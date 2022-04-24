@@ -191,8 +191,8 @@ export class SaveDataComponent {
           this.keys.push(this.projID + "_" + key);
         }
 
-        for (let i = 0; i < this.tabList.length; i++) { //temporary canvas names until tabs can be renamed. Once possible, remove this for-loop
-          canvasNames.push(this.tabList[i].name);//and fetch the data from the tab names instead
+        for (let i = 0; i < this.tabList.length; i++) {
+          canvasNames.push(this.tabList[i].name);
         }
 
         let tabVal = {
@@ -278,6 +278,12 @@ export class SaveDataComponent {
               });
             }
             this.onCancelClick();
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Your project has been saved',
+              showConfirmButton: false,
+            })
           });
         });
       });

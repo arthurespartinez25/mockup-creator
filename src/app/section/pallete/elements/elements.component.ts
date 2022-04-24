@@ -97,7 +97,6 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
   @Output() updateMousePosX = new EventEmitter<number>();
   @Output() updateMousePosY = new EventEmitter<number>();
   @Output() updateWhatComponentEvent = new EventEmitter<string>();
-  @Output() updateIsLoaded = new EventEmitter<boolean>();
   changeref: ChangeDetectorRef;
   constructor(
     private loginCookie:CookieService,
@@ -279,7 +278,6 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
     }
     ////this.componentList.push(temp);
     this.updateComponentListEvent.emit(temp);
-    this.updateIsLoaded.emit(false);
   }
   //----------------------------------------------------------------------------
   onDragEndedAddComponent(event: CdkDragEnd, component: string) {

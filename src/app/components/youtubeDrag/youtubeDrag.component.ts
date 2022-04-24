@@ -47,7 +47,6 @@ export class YoutubeDragComponent implements OnInit, IComponent {
     @Input() mousePositionX2: any;
     @Input() mousePositionY2: any;
     @Input() whatComponent2: any;
-    @Input() isLoaded: boolean;
     mousePositionDropX = 310;
     mousePositionDropY = 110;
     canvasPositionLeft = 0;

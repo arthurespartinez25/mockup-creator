@@ -123,7 +123,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   sessionID = this.loginCookie.get("sessionID");
   inSession: boolean = this.sessionID == "12345";
   isPlaying: boolean;
-  isLoaded:any;
   canvasArray: ElementRef[]
   canvasList: any;
 
@@ -339,9 +338,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.isPlaying = value;
   }
 
-  updateIsLoadedEvent(value: boolean){
-    this.isLoaded = value;
-  }
   updateCanvasArray(value: any){
     this.canvasArray=value;
   }
@@ -357,7 +353,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
     this.service.getComponents(value).subscribe((res)=>{
       this.components=res;
-      console.log(this.components)
       this.loadComponents()
     })
 

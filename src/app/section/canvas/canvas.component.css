@@ -211,9 +211,11 @@ a.custom-nav-link:hover {
   width: 100%;
   max-width: 1280px;
 }
-
+::ng-deep .mat-tab-header{
+  max-width: 97%;
+}
 .playButton {
-  position: relative; bottom: 820px; left: 1253px; z-index: 4;
-  height: 30px;
-  width: 30px;
+  position: absolute;
+  top:10px;
+  right:10px;
 }

@@ -237,7 +237,7 @@ export class CodeSegmentComponent implements OnInit {
         this.crossComponentBridge.setValue(1);
       } else {
         let index = this.tabList.findIndex(x => x.id === this.currentTab);
-        let fileName = this.tabList[index].name + ".html";
+        let fileName = this.tabList[index] + ".html";
         fileName = fileName.replace(/ +/g, "");
         let file = new Blob([val], { type: 'text/html' });
         console.log(fileName);

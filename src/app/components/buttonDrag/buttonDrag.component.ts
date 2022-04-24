@@ -70,7 +70,6 @@ export class ButtonDragComponent implements IComponent {
   @Input() mousePositionY2: any;
   @Input() whatComponent2: any;
   @Input() initialName: string;
-  @Input() isLoaded: boolean;
   @Input() isPlaying: boolean;
   @Output() passCanvas: EventEmitter<number> = new EventEmitter();
   canvasPositionLeft = 0;

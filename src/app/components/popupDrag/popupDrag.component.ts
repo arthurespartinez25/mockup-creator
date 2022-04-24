@@ -28,7 +28,6 @@ export class PopupDragComponent implements IComponent {
     finalStyle:'',
     isSavedComponent: false
   };
-  @Input() isLoaded: boolean;
 
   constructor(canvas: ElementRef) {
     this.canvas = canvas;

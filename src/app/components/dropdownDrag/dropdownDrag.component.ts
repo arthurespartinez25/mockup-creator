@@ -42,7 +42,6 @@ export class DropdownDragComponent implements OnInit, IComponent {
   @Input() mousePositionY2: any;
   @Input() whatComponent2: any;
   @Input() isPlaying: boolean;
-  @Input() isLoaded: boolean;
   
   canvasPositionLeft = 0;
   canvasPositionTop = 0;
