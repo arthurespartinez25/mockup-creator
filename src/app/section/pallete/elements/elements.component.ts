@@ -59,6 +59,7 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
   refreshCSS = new BehaviorSubject<boolean>(true);
   cssDocument?: StyleSheet;
   users: any;
+  
 
   selected: IProperty = {
     key: '',
@@ -88,6 +89,7 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
   //@ViewChild(PropertyComponent) propertyCmp:PropertyComponent;
   @Input() isPlaying: boolean;
+  @Input() selectedLanguage: any;
 
   @Output() updateComponentListEvent = new EventEmitter<IComponent>();
   @Output() updateCanvasLeftEvent = new EventEmitter<number>();
@@ -97,6 +99,7 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
   @Output() updateMousePosY = new EventEmitter<number>();
   @Output() updateWhatComponentEvent = new EventEmitter<string>();
   changeref: ChangeDetectorRef;
+ 
   constructor(
     private loginCookie:CookieService,
     changeDetectorRef: ChangeDetectorRef,
@@ -116,16 +119,19 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
   whatComponent = 'none';
   sessionID = this.loginCookie.get("sessionID");
   inSession: boolean = this.sessionID == "12345";
+  compLanguage: any;
 
   ngOnInit() {
     if(this.inSession) {
       this._router.navigateByUrl("/canvas");
+   
       //api call
       /* this.user.getData().subscribe((data)=> {
         console.warn("get api data", data);
         this.users = data;
       }) */
     }
+    
   }
   ngAfterViewInit(): void {}
   //////////////////////////////////////////////////////////////////////////////
@@ -162,6 +168,7 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
   yDistance: any = 0;
   theUsername = "";
 
+
   clearComponentList() {
     this.componentList.length = 0;
   }
@@ -176,7 +183,7 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
 
   addComponent(component: string) {
     let temp: IComponent;
-
+    console.log(this.selectedLanguage);
     switch (component) {
       case 'button':
         temp = new ButtonDragComponent(this.canvas);

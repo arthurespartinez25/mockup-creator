@@ -147,3 +147,7 @@ td.properties-table-data textarea:focus {
   justify-content: center;
   align-items: center;
 }
+
+.languagePicker {
+  margin-left:  180px;
+}

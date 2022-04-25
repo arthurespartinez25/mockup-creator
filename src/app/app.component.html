@@ -30,6 +30,7 @@
     (updateProjectNameEvent)="updateProjectName($event)"
     (updateSelectedEvent)="updateSelected($event)"
     [isPlaying]="isPlaying"
+    [selectedLanguage]="selectedLanguage"
     ></app-pallete>
   
   
@@ -200,6 +201,7 @@
   (updateComponentListEvent) = "updateComponentListDel($event)"
   (updateStyleEvent) = "updateStyleEvent($event)"
   [isPlaying]="isPlaying"
+  (updateSelectedLanguage) = "updateSelectedLanguage($event)"
   >
   </app-code>
 </div>

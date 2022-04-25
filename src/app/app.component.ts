@@ -29,6 +29,7 @@ import { NavbarDragComponent } from './components/navbarDrag/navbarDrag.componen
 import { TableDragComponent } from './components/tableDrag/tableDrag.component';
 import { ButtonDragComponent } from './components/buttonDrag/buttonDrag.component';
 
+
 export class List {
   constructor(
     public id: number,
@@ -88,7 +89,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   public cssRuleCount = document.styleSheets[0].cssRules.length;
   public _popupCount = 0;
-
+  
   @ViewChild('PropertyComponent') property: boolean;
   @ViewChild(CanvasComponent) canvas!: CanvasComponent;
   //@ViewChild('canvas') canvas!: ElementRef;
@@ -128,6 +129,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   sessionID = this.loginCookie.get("sessionID");
   inSession: boolean = this.sessionID == "12345";
   isPlaying: boolean;
+  selectedLanguage: any;
 
   ngOnInit() {
     console.log(this.inSession);
@@ -271,6 +273,10 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.isPlaying = value;
     //console.log(this.isPlaying);
   }
+  updateSelectedLanguage(value: any) {
+    this.selectedLanguage = value;
+    console.log(this.selectedLanguage);
+  }
   //////////////////////////////////////////////////////////////////////////////
   //   THIS PROJECT WAS STARTED BY BATO BOYS AND CEBU TEAM  
   //                          JUPAO  
@@ -323,6 +329,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   updateDomInsideCanvas(value: boolean){
     this.domInsideCanvas = value;
   }
+  
   //----------------------------------------------------------------------------
 
   ngAfterViewChecked() {

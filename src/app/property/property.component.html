@@ -7,7 +7,7 @@
       mat-button (click)="confirmRemove()"
       [disabled]="isPlaying"
     >
-      Remove
+     {{compLanguage.remove}}
     </button>
   </div>
 
@@ -131,7 +131,7 @@
     </tr>
 
     <!-- start of Table Cell input -->
-    <tr class="properties-table-row" *ngIf="props.typeObj == 'table'">
+     <tr class="properties-table-row" *ngIf="props.typeObj == 'table'">
       <th class="properties-table-header"><label>Cell Value</label></th>
       <td class="properties-table-data">
         <input
@@ -142,8 +142,9 @@
           [readonly]="isPlaying"
         />
       </td>
-      <!-- end of Table Cell input -->
     </tr>
+
+            <!-- end of Table Cell input -->  
 
     <tr class="properties-table-row" *ngIf="props.typeObj == 'input'"></tr>
     <tr
@@ -334,7 +335,19 @@
 {{"X: "+props.mouseDragPositionX.toFixed(2)+"%"}}
 <br>
 {{"Y: "+props.mouseDragPositionY.toFixed(2)+"%"}}
+<br>
+<br>
 
+  <label class="languagePicker">Language</label>
+  <select (change)="selectLanguage($event)" class="languagePicker">
+   <option value="en">English</option>
+   <option value="ja">Japan</option>
+ </select>
+
+  
+
+
+ 
 
 
 
