@@ -131,7 +131,6 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
         this.users = data;
       }) */
     }
-    
   }
   ngAfterViewInit(): void {}
   //////////////////////////////////////////////////////////////////////////////
@@ -183,7 +182,6 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
 
   addComponent(component: string) {
     let temp: IComponent;
-    console.log(this.selectedLanguage);
     switch (component) {
       case 'button':
         temp = new ButtonDragComponent(this.canvas);
@@ -334,7 +332,9 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
     this.updateMousePosX.emit(this.mousePositionX);
     this.updateMousePosY.emit(this.mousePositionY);
   }
-
+  updateSelectedLanguage(value: any){
+    this.selectedLanguage = value;
+  }
   //----------------------------------------------------------------------------
 
   ngAfterViewChecked() {

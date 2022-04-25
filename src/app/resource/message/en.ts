@@ -1,5 +1,5 @@
 export const en = { 
-    element: {
+    pallete: {
         compList: "Component List",
         button: "Button",
         checkbox: "Checkbox",

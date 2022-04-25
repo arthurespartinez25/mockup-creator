@@ -146,6 +146,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   ngAfterViewInit(): void {     
     this.canvasDirective = this.canvas.passCanvas();    
     this.passCanvas = this.canvasDirective;
+    this.palette.updateSelectedLanguage(this.selectedLanguage)
   }
   // getComponents(){
   //   this.httpClient.get<any>('http://localhost:8000/getComponents/user1_proj5_canvas1').subscribe(
@@ -275,7 +276,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
   updateSelectedLanguage(value: any) {
     this.selectedLanguage = value;
-    console.log(this.selectedLanguage);
   }
   //////////////////////////////////////////////////////////////////////////////
   //   THIS PROJECT WAS STARTED BY BATO BOYS AND CEBU TEAM  

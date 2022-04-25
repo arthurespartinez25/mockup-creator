@@ -97,7 +97,6 @@ export class PropertyComponent implements OnInit {
 
   public selectLanguage(event: any) {
     // butanganan pa!
-    console.log(this.language);
   this.selectedLanguage = this.language.get(event.target.value);
   this.compLanguage = this.selectedLanguage.property;
   this.updateSelectedLanguage.emit(this.selectedLanguage);
