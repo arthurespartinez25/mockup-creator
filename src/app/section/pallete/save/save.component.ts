@@ -88,6 +88,7 @@ export class SaveComponent implements OnInit {
         value: this.componentListMap,
         style: this.style,
         tabList: this.tabList,
+        openedID: this.loadedProjectId
       }
     });
 
@@ -99,6 +100,7 @@ export class SaveComponent implements OnInit {
       }
       this.updateProjectNameEvent.emit(this.projectName);
     });
+
   }
   loadProjects(id: number){
     this.service.getProjects(id).subscribe((res)=>{
@@ -119,6 +121,9 @@ export class SaveComponent implements OnInit {
   deleteProject(id: any){
     this.loadedProjectId = id;
     this.service.deleteProject(id).subscribe((res)=>{})
+    this.service.deleteComponents(id).subscribe((res)=>{})
+    this.service.deleteCss(id).subscribe((res)=>{})
+    this.service.deleteTabs(id).subscribe((res)=>{})
     this.loadProjects(this.userId)
   }
   openProject(id: any){
@@ -141,6 +146,7 @@ export class SaveDataComponent {
   projectName: string;
   keys: string[] = [];
   tabList: any;
+  openedProjectID:any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -152,6 +158,7 @@ export class SaveDataComponent {
     this.componentListMap = data.value;
     this.style = data.style;
     this.tabList = data.tabList;
+    this.openedProjectID = data.openedID;
   }
 
   ngOnInit(): void {
@@ -188,6 +195,9 @@ export class SaveDataComponent {
 
         for (let key of this.componentListMap.keys()) {
           nativeKeys.push(key);
+          if(this.openedProjectID){
+            key = key.replace(this.openedProjectID+"_", "")
+          }
           this.keys.push(this.projID + "_" + key);
         }
 
@@ -202,7 +212,7 @@ export class SaveDataComponent {
 
         this.service.saveData(tabVal, "tab").subscribe(res=> { //saves the tab details to tab_table
           console.log(this.componentListMap)
-          console.log(this.tabList)
+          console.log(tabVal)
           let tabSort = {};
           let tableIds: string[] = [];
           let tableContent: any[] = [];
@@ -214,7 +224,9 @@ export class SaveDataComponent {
            * P.S. The conversion is done because JS cannot read TypeScript Map, thus rendering it impossible to save the data to the database.
            *****/
           for (let i = 0; i < nativeKeys.length; i++) { 
-            let componentList = {};                     
+            let componentList = {};    
+            console.log(nativeKeys)     
+            console.log(nativeKeys[i])            
             console.log(this.componentListMap.get(nativeKeys[i])?.length);
             for (let j = 0; j < this.componentListMap.get(nativeKeys[i])?.length!; j++) {
               let props = {};

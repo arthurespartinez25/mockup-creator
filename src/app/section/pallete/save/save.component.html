@@ -39,7 +39,7 @@
           <a class="projectsList" data-dismiss="modal" (click)="openProject(project.project_id)">{{project.project_name}}</a>
           <div class="buttonsContainer">
             <button class="edit"><i class="fa-solid fa-pen-to-square"></i></button>
-            <button class="delete" ><i class="fa-solid fa-trash-can"></i></button>
+            <button class="delete" (click)="deleteProject(project.project_id)"><i class="fa-solid fa-trash-can"></i></button>
           </div>
         </div>
       </div>

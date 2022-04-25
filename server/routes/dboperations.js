@@ -121,6 +121,42 @@ async function deleteProject(projectID){
     }
 }
 
+async function deleteComponents(projectID){
+    try{
+        let pool = await sql.connect(config);
+        let deleteComponents = await pool.request().query(`DELETE FROM component_table WHERE tabs_id LIKE '%${projectID}%';`);
+        return deleteComponents;
+    }
+    catch (error) {
+        console.warn(error);
+        return error;
+    }
+}
+
+async function deleteCss(projectID){
+    try{
+        let pool = await sql.connect(config);
+        let deleteCss = await pool.request().query(`DELETE FROM css_table WHERE project_id='${projectID}';`);
+        return deleteCss;
+    }
+    catch (error) {
+        console.warn(error);
+        return error;
+    }
+}
+
+async function deleteTabs(projectID){
+    try{
+        let pool = await sql.connect(config);
+        let deleteTabs = await pool.request().query(`DELETE FROM tab_table WHERE tab_id LIKE '%${projectID}%';`);
+        return deleteTabs;
+    }
+    catch (error) {
+        console.warn(error);
+        return error;
+    }
+}
+
 async function saveProject(userID, projectName, projectID) {
     let query = `INSERT INTO projects_table (user_id, project_id, project_name, date) VALUES ('${userID}', '${projectID}', '${projectName}', CURRENT_TIMESTAMP);`;
     try {
@@ -309,5 +345,8 @@ module.exports = {
     getComponents: getComponents,
     deleteProject: deleteProject,
     getCanvas: getCanvas,
-    getCss: getCss
+    getCss: getCss,
+    deleteComponents: deleteComponents,
+    deleteCss: deleteCss,
+    deleteTabs: deleteTabs
 }

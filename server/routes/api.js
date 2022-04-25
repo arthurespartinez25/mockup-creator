@@ -276,6 +276,27 @@ router.get("/deleteProject/:projectID", (req, res) => {
     return res.status(200).json(result);
   });
 });
+router.get("/deleteComponents/:projectID", (req, res) => {
+  const {projectID} = req.params;
+  const del = dboperations.deleteComponents(`${projectID}_canvas`);
+  del.then(function(result) {
+    return res.status(200).json(result);
+  });
+});
+router.get("/deleteCss/:projectID", (req, res) => {
+  const {projectID} = req.params;
+  const del = dboperations.deleteCss(`${projectID}_canvas`);
+  del.then(function(result) {
+    return res.status(200).json(result);
+  });
+});
+router.get("/deleteTabs/:projectID", (req, res) => {
+  const {projectID} = req.params;
+  const del = dboperations.deleteTabs(`${projectID}_canvas`);
+  del.then(function(result) {
+    return res.status(200).json(result);
+  });
+});
 
 router.get("/getComponents/:tabsID", (req, res) => {
   const {tabsID} = req.params;

@@ -125,6 +125,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   isPlaying: boolean;
   canvasArray: ElementRef[]
   canvasList: any;
+  openedProjectID: any;
 
   ngOnInit() {
     console.log(this.sessionID);
@@ -343,6 +344,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
 
   updateProjectId(value:any){
+    this.openedProjectID = value;
     this.componentListMap.clear();
     this.cssArray = [];
 
