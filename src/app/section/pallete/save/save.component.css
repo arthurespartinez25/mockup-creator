@@ -47,6 +47,8 @@
   color: black;
   width: 83%;
   padding: 10px;
+  background-color: transparent;
+  border: none;
 }
 
 .projectContainer{

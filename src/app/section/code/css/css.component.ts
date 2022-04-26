@@ -179,7 +179,6 @@ export class CssComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   cssReceiveMessage() {
     this.style = '';
-    console.log(document.styleSheets.item(0));
     let newCssRuleCount = document.styleSheets[0].cssRules.length; //gets the total CSSRule inside the stylesheet
     let cssString: string;
     
@@ -212,7 +211,7 @@ export class CssComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
 
   addAllCSSRule(allCSSRule: any) {
-    this.savedCss = allCSSRule;
+    // this.savedCss = allCSSRule;
     this.cssReceiveMessage()
     let allCSSRuleCount = 0;
     let stringIndex = 0;
@@ -227,14 +226,14 @@ export class CssComponent implements OnInit, AfterViewInit, AfterViewChecked {
       let numberOfRules =
       document.styleSheets[0].cssRules.length - this.cssRuleCount;
       //you can uncomment code below if you want to log and test the data
-      /* 
+      /*
       console.log('this is the start of RuleCount: ' + this.cssRuleCount);
       console.log(
         'this is the current RuleCount: ' +
           (document.styleSheets[0].cssRules.length - 1)
       );
       console.log('this is the new RuleCount: ' + numberOfRules);
-      */
+        */
       document.styleSheets.item(0)?.deleteRule(document.styleSheets[0].cssRules.length - 1); // deletes all the added CSS Rules
     }
 
@@ -397,7 +396,13 @@ export class CssComponent implements OnInit, AfterViewInit, AfterViewChecked {
   clearCss() {
     this.styleBox.nativeElement.value = '';
   } 
-  
+  @ViewChild('savedCss') applySavedCss: ElementRef;
+  getSavedCss(value: any){
+    this.savedCss = value;
+    this.styleBox.nativeElement.value = this.savedCss;
+    let el: HTMLElement = this.applySavedCss.nativeElement;
+    el.click();
+  }
 
   /*************Here Ends CSS Code******************/
 }

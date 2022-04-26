@@ -242,7 +242,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
         }
       }
     }  
-    this.currentTab = this.canvasArray[0].nativeElement.id;
+    this.currentTab = this.canvasArray[this.canvasArray.length -1].nativeElement.id;
   }
 
   updateComponentList(components: IComponent, canvas?: any) {
@@ -363,7 +363,9 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       for(let i = 0; i<this.cssArray.length; i++){
         css += this.cssArray[i].css_name + "{\n" + this.cssArray[i].properties + "}\n"
       }
-      this.code.getCss(css.split(";").join(";\n"))
+      css=css.split(";").join(";\n")
+      this.code.getCss(css)
+      this.style = css;
     })
     
   }

@@ -1,7 +1,8 @@
 <div>
     <button [disabled]="isPlaying" class="saveBtn"
     (click)="addAllCSSRule(cssTextArea.value)"
-    (click)="cssReceiveMessage()">
+    (click)="cssReceiveMessage()"
+    #savedCss>
     Save CSS
     </button>
 </div>

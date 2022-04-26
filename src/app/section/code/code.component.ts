@@ -202,7 +202,7 @@ export class CodeComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.cssComponent.clearCss();
   } 
   getCss(value: any){
-    this.css.addAllCSSRule(value)
+    this.css.getSavedCss(value)
   }
   /****************** OLD CODE STARTS HERE **********************/
 }

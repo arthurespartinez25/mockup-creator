@@ -346,6 +346,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
       this.updateCanvasListElements.emit(canvasArray)
     })
     this.updateTabListEvent.emit(this.tabs);
+    this.selectedTab=this.tabs.length - 1;
   }
   /****************** OLD CODE STARTS HERE **********************/
 }
