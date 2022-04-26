@@ -1,6 +1,6 @@
 <div id="properties">
   <div id="properties-header">
-    Component Property
+    {{compLanguage.compProp}}
     <button
       [ngClass]="{ invisible: !this.props.id }"
       id="delete"
@@ -14,7 +14,7 @@
   <table id="properties-table" border="1" [cellSpacing]="1">
     <tr class="properties-table-row">
       <th class="properties-table-header" class="properties-table-header">
-        <label>id</label>
+        <label>{{compLanguage.id}}</label>
       </th>
       <td class="properties-table-data">
         <input
@@ -27,7 +27,7 @@
       </td>
     </tr>
     <tr class="properties-table-row" *ngIf="props.typeObj !== 'table' && props.typeObj !== 'dropdownDrag' && props.typeObj !== 'datepickerDrag' && props.typeObj !== 'divDrag'">
-      <th class="properties-table-header"><label>value</label></th>
+      <th class="properties-table-header"><label>{{compLanguage.value}}</label></th>
       <td class="properties-table-data">
         <input *ngIf="props.typeObj != 'videoDrag'"
           [disabled]="!this.props.id"
@@ -45,7 +45,7 @@
       </td>
     </tr>
      <tr class="properties-table-row" *ngIf="props.typeObj == 'datepickerDrag'">
-      <th class="properties-table-header"><label>value</label></th>
+      <th class="properties-table-header"><label>{{compLanguage.value}}</label></th>
       <td class="properties-table-data">
         <input
           [disabled]="!this.props.id"
@@ -57,7 +57,7 @@
       </td>
     </tr>
     <tr class="properties-table-row" *ngIf="props.typeObj == 'buttonDrag'">
-      <th class="properties-table-header"><label>redirection</label></th>
+      <th class="properties-table-header"><label>{{compLanguage.redirect}}</label></th>
       <td class="properties-table-data">
         <input
           
@@ -70,7 +70,7 @@
       </td>
     </tr>
     <tr class="properties-table-row" *ngIf="props.typeObj == 'linkDrag'">
-      <th class="properties-table-header"><label>href</label></th>
+      <th class="properties-table-header"><label>{{compLanguage.href}}</label></th>
       <td class="properties-table-data">
         <input
         [disabled]="!this.props.id"
@@ -82,7 +82,7 @@
       </td>
     </tr>
     <tr class="properties-table-row" *ngIf="props.typeObj == 'linkDrag' || props.typeObj == 'buttonDrag' ">
-      <th class="properties-table-header"><label>new tab</label></th>
+      <th class="properties-table-header"><label>{{compLanguage.newTab}}</label></th>
       <td class="properties-table-data">
         <input
           [disabled]="!this.props.id"
@@ -94,7 +94,7 @@
       </td>
     </tr>
     <tr class="properties-table-row">
-      <th class="properties-table-header"><label>draggable</label></th>
+      <th class="properties-table-header"><label>{{compLanguage.draggable}}</label></th>
       <td class="properties-table-data">
         <input
           [disabled]="!this.props.id"
@@ -107,7 +107,7 @@
     </tr>
     
     <tr class="properties-table-row" *ngIf="props.typeObj == 'youtubeDrag' || props.typeObj == 'videoDrag'">
-      <th class="properties-table-header"><label>Update</label></th>
+      <th class="properties-table-header"><label>{{compLanguage.update}}</label></th>
       <td class="properties-table-data">
       <button
       *ngIf="props.typeObj == 'youtubeDrag'"
@@ -116,7 +116,7 @@
         class="updateLink"
         [disabled]="isPlaying"
       >
-        Update Link
+        {{compLanguage.updateLink}}
       </button>
       <button
       *ngIf="props.typeObj == 'videoDrag'"
@@ -125,14 +125,14 @@
         class="updateLink"
         [disabled]="isPlaying"
       >
-        Update Link
+        {{compLanguage.updateLink}}
       </button>
     </td>
     </tr>
 
     <!-- start of Table Cell input -->
      <tr class="properties-table-row" *ngIf="props.typeObj == 'table'">
-      <th class="properties-table-header"><label>Cell Value</label></th>
+      <th class="properties-table-header"><label>{{compLanguage.cellValue}}</label></th>
       <td class="properties-table-data">
         <input
           [disabled]="!this.props.id"
@@ -151,7 +151,7 @@
       class="properties-table-row"
       *ngIf="props.typeObj == 'input' || props.typeObj == 'inputDrag'"
     >
-      <th class="properties-table-header"><label>type</label></th>
+      <th class="properties-table-header"><label>{{compLanguage.type}}</label></th>
       <td class="properties-table-data">
         <input
           [disabled]="!this.props.id"
@@ -163,7 +163,7 @@
       </td>
     </tr>
     <tr class="properties-table-row">
-      <th class="properties-table-header"><label>class</label></th>
+      <th class="properties-table-header"><label>{{compLanguage.class}}</label></th>
       <td class="properties-table-data">
         <input
           [disabled]="!this.props.id"
@@ -176,7 +176,7 @@
     </tr>
 
     <tr class="properties-table-row" *ngIf="props.typeObj == 'dropdown' || props.typeObj == 'dropdownDrag'">
-      <th class="properties-table-header"><label>Option Values</label></th>
+      <th class="properties-table-header"><label>{{compLanguage.optVal}}</label></th>
       <td class="properties-table-data">
 
         <input
@@ -192,7 +192,7 @@
       class="properties-table-row"
       *ngIf="props.typeObj == 'textbox' || props.typeObj == 'textboxDrag' || props.typeObj == 'inputDrag'"
     >
-      <th class="properties-table-header"><label>placeholder</label></th>
+      <th class="properties-table-header"><label>{{compLanguage.placeholder}}</label></th>
       <td class="properties-table-data">
         <input
           [disabled]="!this.props.id"
@@ -207,7 +207,7 @@
       class="properties-table-row"
       *ngIf="props.typeObj == 'textbox' || props.typeObj == 'textboxDrag'"
     >
-      <th class="properties-table-header"><label>rows</label></th>
+      <th class="properties-table-header"><label>{{compLanguage.rows}}</label></th>
       <td class="properties-table-data">
         <input
           [disabled]="!this.props.id"
@@ -222,7 +222,7 @@
       class="properties-table-row"
       *ngIf="props.typeObj == 'textbox' || props.typeObj == 'textboxDrag'"
     >
-      <th class="properties-table-header"><label>columns</label></th>
+      <th class="properties-table-header"><label>{{compLanguage.columns}}</label></th>
       <td class="properties-table-data">
         <input
           [disabled]="!this.props.id"
@@ -235,7 +235,7 @@
     </tr>
 
     <tr class="properties-table-row">
-      <th class="properties-table-header"><label>style</label></th>
+      <th class="properties-table-header"><label>{{compLanguage.style}}</label></th>
       <td class="properties-table-data">
         <textarea
           [disabled]="!this.props.id"
@@ -256,7 +256,7 @@
       class="properties-table-row"
       *ngIf="props.typeObj == 'popup' || props.typeObj == 'popupDrag'"
     >
-      <th class="properties-table-header"><label>data-bs-content</label></th>
+      <th class="properties-table-header"><label>{{compLanguage.dataBsContent}}</label></th>
       <td class="properties-table-data">
         <input
           [disabled]="!this.props.id"
@@ -266,7 +266,7 @@
           [readonly]="isPlaying"
         />
         <tr *ngIf="props.name">
-          <th><label>name</label></th>
+          <th><label>{{compLanguage.name}}</label></th>
           <input
             type="text"
             [value]="this.props.name"
@@ -280,7 +280,7 @@
 
     <!-- TABLE -->
     <tr class="properties-table-row" *ngIf="props.typeObj == 'table' || props.typeObj == 'tableDrag'">
-      <th class="properties-table-header"><label>row</label></th>
+      <th class="properties-table-header"><label>{{compLanguage.row}}</label></th>
       <td class="properties-table-data">
         <input
           [disabled]="!this.props.id"
@@ -294,7 +294,7 @@
     </tr>
 
     <tr class="properties-table-row" *ngIf="props.typeObj == 'table' || props.typeObj == 'tableDrag'">
-      <th class="properties-table-header"><label>column</label></th>
+      <th class="properties-table-header"><label>{{compLanguage.column}}</label></th>
       <td class="properties-table-data">
         <input
           [disabled]="!this.props.id"
@@ -308,7 +308,7 @@
     </tr>
 
     <tr class="properties-table-row" *ngIf="props.typeObj == 'radio' || props.typeObj == 'radioDrag'">
-      <th class="properties-table-header"><label>name</label></th>
+      <th class="properties-table-header"><label>{{compLanguage.name}}</label></th>
       <td class="properties-table-data">
         <input
           [disabled]="!this.props.id"
@@ -329,7 +329,7 @@
       mat-button (click)="confirmClear()"
       [disabled]="isPlaying"
     >
-      Clear
+      {{compLanguage.clear}}
 </button>
 
 {{"X: "+props.mouseDragPositionX.toFixed(2)+"%"}}
@@ -338,10 +338,10 @@
 <br>
 <br>
 
-  <label class="languagePicker">Language</label>
+  <label class="languagePicker">{{selectedLanguage?.languagePicker.language}}</label>
   <select (change)="selectLanguage($event)" class="languagePicker">
-   <option value="en">English</option>
-   <option value="ja">Japan</option>
+   <option value="en">{{selectedLanguage?.languagePicker.english}}</option>
+   <option value="ja">{{selectedLanguage?.languagePicker.japan}}</option>
  </select>
 
   

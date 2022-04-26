@@ -3,7 +3,7 @@
     cdkDropList
     (cdkDropListDropped)="drop($event)"
     > 
-     <p>&nbsp;<strong>Component List</strong></p>
+     <p>&nbsp;<strong>{{selectedLanguage?.pallete.compList}}</strong></p>
       <div class="component-list"
         *ngFor="let component of componentList; let i = index;"
         cdkDrag
@@ -18,7 +18,7 @@
         (click)="clickHandler(this.componentList[i])"
         >
           <div>
-            {{i+1}} Button
+            {{i+1}} {{selectedLanguage?.pallete.button}}
           </div>
           <div class="component-buttons">
             <button [disabled]="isPlaying" class="component-button-remove"
@@ -34,7 +34,7 @@
         *ngSwitchCase="'checkboxDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          <div>{{i+1}} Checkbox</div>
+          <div>{{i+1}} {{selectedLanguage?.pallete.checkbox}}</div>
           <div class="component-buttons">
             <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
@@ -49,7 +49,7 @@
         *ngSwitchCase="'datepickerDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          <div>{{i+1}} Datepicker</div>
+          <div>{{i+1}} {{selectedLanguage?.pallete.datepicker}}</div>
           <div class="component-buttons">
             <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
@@ -64,7 +64,7 @@
         *ngSwitchCase="'dropdownDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          <div>{{i+1}} Dropdown</div>
+          <div>{{i+1}} {{selectedLanguage?.pallete.dropdown}}</div>
           <div class="component-buttons">
             <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
@@ -79,7 +79,7 @@
         *ngSwitchCase="'headerDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          <div>{{i+1}} Header</div>
+          <div>{{i+1}} {{selectedLanguage?.pallete.header}}</div>
           <div class="component-buttons">
             <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
@@ -94,7 +94,7 @@
         *ngSwitchCase="'imgDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          <div>{{i+1}} Image</div>
+          <div>{{i+1}} {{selectedLanguage?.pallete.image}}</div>
           <div class="component-buttons">
             <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
@@ -109,7 +109,7 @@
         *ngSwitchCase="'divDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          <div>{{i+1}} Empty Div</div>
+          <div>{{i+1}} {{selectedLanguage?.pallete.emptyDiv}}</div>
           <div class="component-buttons">
             <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
@@ -124,7 +124,7 @@
         *ngSwitchCase="'inputDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          <div>{{i+1}} Input Field</div>
+          <div>{{i+1}} {{selectedLanguage?.pallete.inputField}}</div>
           <div class="component-buttons">
             <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
@@ -139,7 +139,7 @@
         *ngSwitchCase="'labelDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          <div>{{i+1}} Label</div>
+          <div>{{i+1}} {{selectedLanguage?.pallete.label}}</div>
           <div class="component-buttons">
             <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
@@ -154,7 +154,7 @@
         *ngSwitchCase="'linkDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          <div>{{i+1}} Link</div>
+          <div>{{i+1}} {{selectedLanguage?.pallete.link}}</div>
           <div class="component-buttons">
             <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
@@ -184,7 +184,7 @@
         *ngSwitchCase="'navDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          <div>{{i+1}} Navigation Bar</div>
+          <div>{{i+1}} {{selectedLanguage?.pallete.navBar1}}</div>
           <div class="component-buttons">
             <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
@@ -199,7 +199,7 @@
         *ngSwitchCase="'paragraphDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          <div>{{i+1}} Paragraph</div>
+          <div>{{i+1}} {{selectedLanguage?.pallete.paragraph}}</div>
           <div class="component-buttons">
             <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
@@ -214,7 +214,7 @@
         *ngSwitchCase="'radioDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          <div>{{i+1}} Radio</div>
+          <div>{{i+1}} {{selectedLanguage?.pallete.radio}}</div>
           <div class="component-buttons">
             <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
@@ -229,7 +229,7 @@
         *ngSwitchCase="'tableDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          <div>{{i+1}} Table</div>
+          <div>{{i+1}} {{selectedLanguage?.pallete.table}}</div>
           <div class="component-buttons">
             <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
@@ -244,7 +244,7 @@
         *ngSwitchCase="'textboxDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          <div>{{i+1}} Textbox</div>
+          <div>{{i+1}} {{selectedLanguage?.pallete.textbox}}</div>
           <div class="component-buttons">
             <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
@@ -259,7 +259,7 @@
         *ngSwitchCase="'youtubeDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          <div>{{i+1}} iFrame</div>
+          <div>{{i+1}} {{selectedLanguage?.pallete.iFrame}}</div>
           <div class="component-buttons">
             <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"
@@ -274,7 +274,7 @@
         *ngSwitchCase="'videoDrag'"
         (click)="clickHandler(this.componentList[i])"
         >
-          <div>{{i+1}} Video</div>
+          <div>{{i+1}} {{selectedLanguage?.pallete.video}}</div>
           <div class="component-buttons">
             <button [disabled]="isPlaying" class="component-button-remove"
             mat-button (click)="confirmDelete(this.componentList[i])"

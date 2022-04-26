@@ -7,10 +7,10 @@
           aria-labelledby="elements-tab"
         >
           <button [disabled]="isPlaying" class="palette-item" (click)="addComponentHomePage()">
-            Home Page
+            {{selectedLanguage?.pallete.home}}
           </button>
           <button [disabled]="isPlaying" class="palette-item" (click)="addComponentLogin()">
-            Login Page
+            {{selectedLanguage?.pallete.logIn}}
           </button>
 
           <!-- <button class="palette-item" (click)="addComponentImageLabel()">
@@ -18,7 +18,7 @@
           </button> -->
 
           <button [disabled]="isPlaying" class="palette-item" (click)="addComponentSearchScreen()">
-            Search Screen Page
+            {{selectedLanguage?.pallete.search}}
           </button>
         </div>
       </div>

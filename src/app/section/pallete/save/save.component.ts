@@ -22,6 +22,7 @@ export class SaveComponent implements OnInit {
   @Input() style: string;
   @Input() tabList: any;
   @Input() currentTab: string;
+  @Input() selectedLanguage: any;
 
   @Output() updateProjectNameEvent = new EventEmitter<string>();
   
@@ -89,6 +90,10 @@ export class SaveComponent implements OnInit {
       this.updateProjectNameEvent.emit(this.projectName);
     });
   }
+
+  updateSelectedLanguage(value: any){
+    this.selectedLanguage = value;
+  }
 }
 
 @Component({
@@ -103,6 +108,7 @@ export class SaveDataComponent {
   projID: string;
   projectName: string;
   keys: string[] = [];
+ 
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,

@@ -66,6 +66,7 @@ export class CodeSegmentComponent implements OnInit {
     @Input() projectName: string;
     @Input() tabList: any;
     @Input() currentTab: string;
+    @Input() selectedLanguage: any;
     //@ViewChild('textOp') textBtn!: ElementRef;
     @ViewChild('subMenuItem') subMenuItem!: ElementRef;
     @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
@@ -74,7 +75,7 @@ export class CodeSegmentComponent implements OnInit {
     @Output() updatePropertyComponentEvent = new EventEmitter<PropertyComponent>();
     @Output() clearComponentListEvent = new EventEmitter<number>();
     @Output() updateComponentListEvent = new EventEmitter<IComponent[]>();
-  
+    
     changeref: ChangeDetectorRef;
     constructor(
       private loginCookie:CookieService,
@@ -146,6 +147,7 @@ export class CodeSegmentComponent implements OnInit {
     styleHandler(event: any) {
       this._styleBody = event.target.value;
     }
+
   
     private htmlBody(): string {
       let tmpHtmlBody = '\n';

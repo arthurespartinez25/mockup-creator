@@ -23,7 +23,7 @@
             (cdkDragEnded)="onDragEndedAddComponent($event, 'link')"
            
           >
-           Link
+           {{selectedLanguage?.pallete.link}}
           </button>
 
           <!-- text-dropdown-menu start -->
@@ -36,7 +36,7 @@
             <button class="sub-menu-button palette-item"
             (focus)="isDisabled = false"
             (focusout)="timerDisable()"
-            [disabled]="isPlaying">Text*</button>
+            [disabled]="isPlaying">{{selectedLanguage?.pallete.text}}</button>
             <div class="sub-menu-dropdown">
               <button
                 class="palette-item"
@@ -46,7 +46,7 @@
                 [disabled]="isDisabled"
                 [disabled]="isPlaying"
               >
-                Header
+                {{selectedLanguage?.pallete.header}}
               </button>
 
               <button
@@ -57,7 +57,7 @@
                 [disabled]="isDisabled"
                 [disabled]="isPlaying"
               >
-                Paragraph
+                {{selectedLanguage?.pallete.paragraph}}
               </button>
 
               <button
@@ -68,7 +68,7 @@
                 [disabled]="isDisabled"
                 [disabled]="isPlaying"
               >
-                Label
+                {{selectedLanguage?.pallete.label}}
               </button>
             </div>
           </div>
@@ -82,7 +82,7 @@
             style="padding: 0px; padding-top: 0px"
           >
             <button class="sub-menu-button palette-item" (focus)="isDisabled = false"
-            (focusout)="timerDisable()" [disabled]="isPlaying">Input*</button>
+            (focusout)="timerDisable()" [disabled]="isPlaying">{{selectedLanguage?.pallete.input}}</button>
             <div class="sub-menu-dropdown">
               <button
                 class="palette-item"
@@ -92,7 +92,7 @@
                 [disabled]="isDisabled"
                 [disabled]="isPlaying"
               >
-                Button
+                {{selectedLanguage?.pallete.button}}
               </button>
 
               <button
@@ -103,7 +103,7 @@
                 [disabled]="isDisabled"
                 [disabled]="isPlaying"
               >
-                Dropdown
+                {{selectedLanguage?.pallete.dropdown}}
               </button>
               <button
                 class="palette-item"
@@ -113,7 +113,7 @@
                 [disabled]="isDisabled"
                 [disabled]="isPlaying"
               >
-                Checkbox
+                {{selectedLanguage?.pallete.checkbox}}
               </button>
 
               <button
@@ -124,7 +124,7 @@
                 [disabled]="isDisabled"
                 [disabled]="isPlaying"
               >
-                Radio
+                {{selectedLanguage?.pallete.radio}}
               </button>
               <button
                 class="palette-item"
@@ -134,7 +134,7 @@
                 [disabled]="isDisabled"
                 [disabled]="isPlaying"
               >
-                Input Field
+                {{selectedLanguage?.pallete.inputField}}
               </button>
               <button
                 class="palette-item"
@@ -144,7 +144,7 @@
                 [disabled]="isDisabled"
                 [disabled]="isPlaying"
               >
-                Textbox
+                {{selectedLanguage?.pallete.textbox}}
               </button>
               <button
                 class="palette-item"
@@ -154,7 +154,7 @@
                 [disabled]="isDisabled"
                 [disabled]="isPlaying"
               >
-                DatePicker
+               {{selectedLanguage?.pallete.datepicker}}
               </button>
             </div>
           </div>
@@ -186,7 +186,7 @@
             (cdkDragEnded)="onDragEndedAddComponent($event, 'img')"
             [disabled]="isPlaying"
           >
-            Image
+            {{selectedLanguage?.pallete.image}}
           </button>
           <button
             class="palette-item"
@@ -195,7 +195,7 @@
             (cdkDragEnded)="onDragEndedAddComponent($event, 'div')"
             [disabled]="isPlaying"
           >
-            Empty Div
+            {{selectedLanguage?.pallete.emptyDiv}}
           </button>
           <button
             class="palette-item"
@@ -204,7 +204,7 @@
             (cdkDragEnded)="onDragEndedAddComponent($event, 'table')"
             [disabled]="isPlaying"
           >
-            Table
+            {{selectedLanguage?.pallete.table}}
           </button>
           <button 
           class="palette-item" 
@@ -213,7 +213,7 @@
           (cdkDragEnded)="onDragEndedAddComponent($event,'youtube')"
           [disabled]="isPlaying"
           >
-          Iframe
+          {{selectedLanguage?.pallete.iFrame}}
         </button>
         <button 
           class="palette-item" 
@@ -222,7 +222,7 @@
           (cdkDragEnded)="onDragEndedAddComponent($event,'video')"
           [disabled]="isPlaying"
           >
-          Video
+          {{selectedLanguage?.pallete.video}}
         </button>
         </div>
       </div>

@@ -48,6 +48,7 @@ export class CssComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @Input() selectedComponent: IComponent;
   @Input() componentList: IComponent[];
   @Input() isPlaying: boolean;
+  @Input() selectedLanguage: any;
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;

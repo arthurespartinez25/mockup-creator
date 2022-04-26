@@ -22,6 +22,9 @@ import { CookieService } from 'ngx-cookie-service';
 import { DatePipe } from '@angular/common'
 import { PropertyComponent } from './../../property/property.component';
 import { DialogService } from 'src/app/service/dialog/dialog.service';
+import { TemplatesComponent } from './templates/templates.component';
+import { ComponentListComponent } from './component-list/component-list.component';
+import { SaveComponent, SaveDataComponent } from './save/save.component';
 
 @Component({
   selector: 'app-pallete',
@@ -59,6 +62,9 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
   public _popupCount = 0;
   @ViewChild('PropertyComponent') property: boolean;
   @ViewChild(ElementsComponent) element: ElementsComponent;
+  @ViewChild(TemplatesComponent) template: TemplatesComponent;
+  @ViewChild(ComponentListComponent) compList: ComponentListComponent;
+  @ViewChild(SaveComponent) save: SaveComponent;
   @Input() canvas: ElementRef;
   @Input() propertyCmp: PropertyComponent;
   @Input() domInsideCanvas: boolean;
@@ -213,7 +219,12 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
 
   updateSelectedLanguage(value: any){
     this.selectedLanguage = value;
-    this.element.updateSelectedLanguage(value)
+    this.element.updateSelectedLanguage(value);
+    this.template.updateSelectedLanguage(value);
+    this.compList.updateSelectedLanguage(value);
+    this.save.updateSelectedLanguage(value);
+    
+    console.log(this.selectedLanguage);
   }
   //----------------------------------------------------------------------------
 

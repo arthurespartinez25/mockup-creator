@@ -93,7 +93,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @ViewChild('PropertyComponent') property: boolean;
   @ViewChild(CanvasComponent) canvas!: CanvasComponent;
   //@ViewChild('canvas') canvas!: ElementRef;
-  @ViewChild(PalleteComponent) palette: PalleteComponent; 
+  @ViewChild(PalleteComponent) pallette: PalleteComponent; 
   @ViewChild(ElementsComponent) elements: ElementsComponent;
   @ViewChild(CodeComponent) code: CodeComponent;
   //@ViewChild('textOp') textBtn!: ElementRef;
@@ -146,7 +146,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   ngAfterViewInit(): void {     
     this.canvasDirective = this.canvas.passCanvas();    
     this.passCanvas = this.canvasDirective;
-    this.palette.updateSelectedLanguage(this.selectedLanguage)
+    this.pallette.updateSelectedLanguage(this.selectedLanguage);
   }
   // getComponents(){
   //   this.httpClient.get<any>('http://localhost:8000/getComponents/user1_proj5_canvas1').subscribe(
@@ -232,7 +232,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
 
   clearComponentList() {
-    this.palette.clearComponentList();
+    this.pallette.clearComponentList();
     this.componentList.length = 0;
   }
 

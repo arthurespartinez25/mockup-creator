@@ -28,10 +28,12 @@ export const en = {
         home: "Home Page",
         logIn: "Login Page",
         search: "Search Screen Page",
-        logOut: "Log Out"
+        logOut: "Log Out",
+        input: "Input*",
+        text: "Text*"
         },
 
-    code: {
+    Code: {
         copy: "Copy",
         download: "Download",
         build: "Build",

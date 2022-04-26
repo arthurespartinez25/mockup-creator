@@ -28,10 +28,12 @@ export const ja = {
         home: "ホームページ",
         logIn: "ログインページ",
         search: "検索画面ページ",
-        logOut: "ログアウト"
+        logOut: "ログアウト",
+        input: "入力*",
+        text: "テキスト*"
         },
 
-    code: {
+    Code: {
         copy: "コピー",
         download: "ダウンロード",
         build: "ビルド",
