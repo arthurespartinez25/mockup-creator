@@ -365,7 +365,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
       }
       css=css.split(";").join(";\n")
       this.code.getCss(css)
-      this.style = css;
     })
     
   }

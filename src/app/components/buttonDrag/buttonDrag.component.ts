@@ -200,8 +200,6 @@ export class ButtonDragComponent implements IComponent {
       this.buttonService?.passCanvasName(this.props.redirection);
       this.passCanvas.emit(this.props.redirection);
     }
-      
-      console.log(this.isPlaying);
   }
 
 
