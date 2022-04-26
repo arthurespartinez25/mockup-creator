@@ -56,7 +56,7 @@ async function getTotal(userID){
 async function getProjects(userID){
     try{
         let pool = await sql.connect(config);
-        let project = await pool.request().query(`SELECT * from projects_table WHERE user_id=${userID}`);
+        let project = await pool.request().query(`SELECT * from projects_table WHERE user_id=${userID} ORDER BY project_id`);
         return project.recordset;
     }
     catch (error) {
@@ -88,6 +88,17 @@ async function getCss(projectID){
     try{
         let pool = await sql.connect(config);
         let project = await pool.request().query(`SELECT * from css_table WHERE project_id='${projectID}'`);
+        return project.recordset;
+    }
+    catch (error) {
+        console.warn(error);
+    }
+}
+
+async function getSingleProject(projectID){
+    try{
+        let pool = await sql.connect(config);
+        let project = await pool.request().query(`SELECT * from projects_table WHERE project_id='${projectID}'`);
         return project.recordset;
     }
     catch (error) {
@@ -156,7 +167,28 @@ async function deleteTabs(projectID){
         return error;
     }
 }
-
+async function deletePreviousState(projectID){
+    try{
+        let pool = await sql.connect(config);
+        let previousState = await pool.request().query(`DELETE FROM previous_state_table WHERE project_id='${projectID}';`);
+        return previousState;
+    }
+    catch (error) {
+        console.warn(error);
+        return error;
+    }
+}
+async function deleteTable(projectID){
+    try{
+        let pool = await sql.connect(config);
+        let tbl = await pool.request().query(`DELETE FROM tbl_content_table WHERE project_id='${projectID}';`);
+        return tbl;
+    }
+    catch (error) {
+        console.warn(error);
+        return error;
+    }
+}
 async function saveProject(userID, projectName, projectID) {
     let query = `INSERT INTO projects_table (user_id, project_id, project_name, date) VALUES ('${userID}', '${projectID}', '${projectName}', CURRENT_TIMESTAMP);`;
     try {
@@ -348,5 +380,8 @@ module.exports = {
     getCss: getCss,
     deleteComponents: deleteComponents,
     deleteCss: deleteCss,
-    deleteTabs: deleteTabs
+    deleteTabs: deleteTabs,
+    deletePreviousState: deletePreviousState,
+    deleteTable: deleteTable,
+    getSingleProject: getSingleProject
 }

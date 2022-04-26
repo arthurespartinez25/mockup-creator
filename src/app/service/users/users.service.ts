@@ -70,6 +70,10 @@ export class UsersService {
     let url="http://localhost:8000/getCss/"+id;
     return this.http.get(url);
   }
+  getProject(id: any){
+    let url="http://localhost:8000/getProject/"+id;
+    return this.http.get(url);
+  }
   deleteProject(id: any){
     let url="http://localhost:8000/deleteProject/"+id;
     return this.http.get(url);
@@ -84,6 +88,14 @@ export class UsersService {
   }
   deleteTabs(id: any){
     let url="http://localhost:8000/deleteTabs/"+id;
+    return this.http.get(url);
+  }
+  deletePreviousState(id: any){
+    let url="http://localhost:8000/deletePreviousState/"+id;
+    return this.http.get(url);
+  }
+  deleteTable(id: any){
+    let url="http://localhost:8000/deleteTable/"+id;
     return this.http.get(url);
   }
 }

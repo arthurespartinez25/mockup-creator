@@ -84,3 +84,6 @@
 .delete:hover{
   filter: brightness(0.7)
 }
+::ng-deep .mat-dialog-container{
+  z-index: 10000000 !important;
+}

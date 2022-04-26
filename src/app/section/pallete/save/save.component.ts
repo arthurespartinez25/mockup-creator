@@ -7,13 +7,15 @@ import { UsersService } from '../../../service/users/users.service';
 import { Subscription } from 'rxjs';
 import { CrossComponentBridge } from 'src/app/service/cross-component-bridge/crossComponentBridge.service';
 import Swal from 'sweetalert2';
+import { DialogService } from 'src/app/service/dialog/dialog.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-save',
   templateUrl: './save.component.html',
   styleUrls: ['./save.component.css']
 })
-export class SaveComponent implements OnInit {
+export class SaveComponent implements OnInit{
   projID: string; //change this to a fetched string 
   canvasKeys: string[] = [];
   projectName: string;
@@ -23,6 +25,7 @@ export class SaveComponent implements OnInit {
   tabs: any;
   loadedProjectId: string;
   showModal: string = "";
+  loadedProjectName: string;
 
   @Input() componentListMap: Map<string, IComponent[]>;
   @Input() style: string;
@@ -31,6 +34,7 @@ export class SaveComponent implements OnInit {
 
   @Output() updateProjectNameEvent = new EventEmitter<string>();
   @Output() updateProjectIdEvent = new EventEmitter<any>();
+
 
   constructor(
     private loginCookie:CookieService,
@@ -100,8 +104,21 @@ export class SaveComponent implements OnInit {
       }
       this.updateProjectNameEvent.emit(this.projectName);
     });
-
   }
+
+  onUpdate(){
+    this.deleteProject(this.loadedProjectId);
+    let data= {
+      value: this.componentListMap,
+      style: this.style,
+      tabList: this.tabList,
+      openedID: this.loadedProjectId,
+      openedProjectName: this.loadedProjectName
+    }
+    let dataClass = new SaveDataComponent(data, this.loginCookie, this._router, this.service) 
+    dataClass.onSaveClick(this.loadedProjectName);
+  }
+
   loadProjects(id: number){
     this.service.getProjects(id).subscribe((res)=>{
       this.projects = res;
@@ -118,16 +135,28 @@ export class SaveComponent implements OnInit {
       }
     })
   }
+  // confirmDelete(value: any) {
+  //   this.dialogService.openConfirmDialog(environment.deleteProject)
+  //   .afterClosed().subscribe(res =>{
+  //     if(res){
+  //       this.deleteProject(value);
+  //     }
+  //   });
+  // }
   deleteProject(id: any){
-    this.loadedProjectId = id;
     this.service.deleteProject(id).subscribe((res)=>{})
     this.service.deleteComponents(id).subscribe((res)=>{})
     this.service.deleteCss(id).subscribe((res)=>{})
     this.service.deleteTabs(id).subscribe((res)=>{})
+    this.service.deletePreviousState(id).subscribe((res)=>{})
+    this.service.deleteTable(id).subscribe((res)=>{})
     this.loadProjects(this.userId)
   }
   openProject(id: any){
     this.loadedProjectId = id;
+    this.service.getProject(this.loadedProjectId).subscribe((res)=>{
+      this.loadedProjectName = res[0].project_name;
+    })
     this.updateProjectIdEvent.emit(this.loadedProjectId)
     this._router.navigateByUrl("/canvas/"+id);
   }
@@ -147,26 +176,34 @@ export class SaveDataComponent {
   keys: string[] = [];
   tabList: any;
   openedProjectID:any;
+  openedProjectName: string;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private loginCookie:CookieService,
-    public dialogRef: MatDialogRef<SaveDataComponent>,
     public _router: Router,
-    private service: UsersService
+    private service: UsersService,
+    public dialogRef?: MatDialogRef<SaveDataComponent>,
   ) {
     this.componentListMap = data.value;
     this.style = data.style;
     this.tabList = data.tabList;
     this.openedProjectID = data.openedID;
+    this.openedProjectName = data.openedProjectName; //for updating only
   }
 
   ngOnInit(): void {
-    this.saveName = "Project";
+    if(this.openedProjectID){
+      this.service.getProject(this.openedProjectID).subscribe((res)=>{
+        this.saveName = res[0].project_name;
+      })
+    } else {
+      this.saveName = "Project";
+    }
   }
 
   onCancelClick() { //closes dialog box
-    this.dialogRef.close({
+    this.dialogRef?.close({
       data: this.projID,
       keys: this.keys,
       projectName: this.projectName
@@ -174,13 +211,16 @@ export class SaveDataComponent {
   }
 
   onSaveClick(value: string) {
-    console.log(this.componentListMap);
     let id = { //fetch the current user's user id
       userID: this.loginCookie.get("userID")
     }
 
     this.service.getSaveTotal(id).subscribe(res => { //gets the total projects the user has saved under the account
-      this.projID = "user" + this.loginCookie.get("userID") + "_proj" + (Object.values(res)[0] + 1);
+      if(this.openedProjectName){
+        this.projID = this.openedProjectID; // only for updating of project
+      } else {
+        this.projID = "user" + this.loginCookie.get("userID") + "_proj" + (Object.values(res)[0] + 1);
+      }
       this.projectName = value;
       let projVal = { 
         userID: parseInt(this.loginCookie.get("userID")),
@@ -202,6 +242,7 @@ export class SaveDataComponent {
         }
 
         for (let i = 0; i < this.tabList.length; i++) {
+          console.log(this.tabList)
           canvasNames.push(this.tabList[i].name);
         }
 
@@ -211,8 +252,6 @@ export class SaveDataComponent {
         }
 
         this.service.saveData(tabVal, "tab").subscribe(res=> { //saves the tab details to tab_table
-          console.log(this.componentListMap)
-          console.log(tabVal)
           let tabSort = {};
           let tableIds: string[] = [];
           let tableContent: any[] = [];
@@ -224,9 +263,7 @@ export class SaveDataComponent {
            * P.S. The conversion is done because JS cannot read TypeScript Map, thus rendering it impossible to save the data to the database.
            *****/
           for (let i = 0; i < nativeKeys.length; i++) { 
-            let componentList = {};    
-            console.log(nativeKeys)     
-            console.log(nativeKeys[i])            
+            let componentList = {};                
             console.log(this.componentListMap.get(nativeKeys[i])?.length);
             for (let j = 0; j < this.componentListMap.get(nativeKeys[i])?.length!; j++) {
               let props = {};
@@ -290,12 +327,21 @@ export class SaveDataComponent {
               });
             }
             this.onCancelClick();
-            Swal.fire({
-              position: 'center',
-              icon: 'success',
-              title: 'Your project has been saved',
-              showConfirmButton: false,
-            })
+            if(this.openedProjectName){
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Your project has been updated',
+                showConfirmButton: false,
+              })
+            } else {
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Your project has been saved',
+                showConfirmButton: false,
+              })
+            }
           });
         });
       });

@@ -345,6 +345,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
       let canvasArray = this.canvasListElements.toArray()
       this.updateCanvasListElements.emit(canvasArray)
     })
+    this.updateTabListEvent.emit(this.tabs);
   }
   /****************** OLD CODE STARTS HERE **********************/
 }

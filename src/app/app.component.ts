@@ -307,7 +307,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   updateSelectedTab(value: string) {
     this.currentTab = value;
-    console.log(value)
     if (this.componentListMap.has(this.currentTab)) {
       this.componentList = this.componentListMap.get(this.currentTab)!;
     } else {

@@ -160,6 +160,13 @@ router.get('/getProjects/:userID', (req, res)=>{
   })
 })
 
+router.get('/getProject/:projectID', (req, res)=>{
+  const {projectID} = req.params;
+  dboperations.getSingleProject(projectID).then(result=>{
+    return res.status(200).json(result);
+  })
+})
+
 router.get('/total/:userID', (req, res) => {
   const {userID} = req.params;
   dboperations.getTotal(userID).then(result => {
@@ -285,7 +292,7 @@ router.get("/deleteComponents/:projectID", (req, res) => {
 });
 router.get("/deleteCss/:projectID", (req, res) => {
   const {projectID} = req.params;
-  const del = dboperations.deleteCss(`${projectID}_canvas`);
+  const del = dboperations.deleteCss(projectID);
   del.then(function(result) {
     return res.status(200).json(result);
   });
@@ -293,6 +300,20 @@ router.get("/deleteCss/:projectID", (req, res) => {
 router.get("/deleteTabs/:projectID", (req, res) => {
   const {projectID} = req.params;
   const del = dboperations.deleteTabs(`${projectID}_canvas`);
+  del.then(function(result) {
+    return res.status(200).json(result);
+  });
+});
+router.get("/deletePreviousState/:projectID", (req, res) => {
+  const {projectID} = req.params;
+  const del = dboperations.deletePreviousState(projectID);
+  del.then(function(result) {
+    return res.status(200).json(result);
+  });
+});
+router.get("/deleteTable/:projectID", (req, res) => {
+  const {projectID} = req.params;
+  const del = dboperations.deleteTable(projectID);
   del.then(function(result) {
     return res.status(200).json(result);
   });

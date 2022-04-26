@@ -14,6 +14,9 @@ export const environment = {
   removeTab: 'This operation is ireversible.\n\
             This action will remove the selected canvas.\n\
             Do you want to proceed?',
+  deleteProject: 'This operation is ireversible.\n\
+                  This action will remove the selected project.\n\
+                  Do you want to proceed?',
 };
 
 /*
