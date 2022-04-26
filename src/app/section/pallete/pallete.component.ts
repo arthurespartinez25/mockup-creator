@@ -168,7 +168,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
   }
 
   confirmLogOut() {
-    this.dialogService.openConfirmDialog('Log out?')
+    this.dialogService.openConfirmDialog(this.selectedLanguage.confirmDialog.logOut)
     .afterClosed().subscribe(res =>{
       if(res){
         this.logout();

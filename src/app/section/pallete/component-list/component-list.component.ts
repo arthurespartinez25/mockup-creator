@@ -248,9 +248,7 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
     }
   }
   confirmDelete(value: any) {
-    this.dialogService.openConfirmDialog('This operation is ireversible.\n\
-    This action will remove the selected component from canvas.\n\
-    Do you want to proceed?')
+    this.dialogService.openConfirmDialog(this.selectedLanguage.confirmDialog.remove)
     .afterClosed().subscribe(res =>{
       if(res){
         this.deleteComponent(value);

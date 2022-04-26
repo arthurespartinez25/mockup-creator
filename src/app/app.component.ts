@@ -28,6 +28,7 @@ import { HttpClient } from '@angular/common/http';
 import { NavbarDragComponent } from './components/navbarDrag/navbarDrag.component';
 import { TableDragComponent } from './components/tableDrag/tableDrag.component';
 import { ButtonDragComponent } from './components/buttonDrag/buttonDrag.component';
+import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
 
 
 export class List {
@@ -276,6 +277,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
   updateSelectedLanguage(value: any) {
     this.selectedLanguage = value;
+    
   }
   //////////////////////////////////////////////////////////////////////////////
   //   THIS PROJECT WAS STARTED BY BATO BOYS AND CEBU TEAM  
