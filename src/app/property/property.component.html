@@ -338,18 +338,14 @@
 <br>
 <br>
 
-  <label class="languagePicker">{{selectedLanguage?.languagePicker.language}}</label>
-  <select (change)="selectLanguage($event)" class="languagePicker">
+  <div class="languagePicker">
+    <span class="languagePicker">{{selectedLanguage?.languagePicker.language}}</span>
+  <select class="selectLang" (change)="selectLanguage($event)">
    <option value="en">{{selectedLanguage?.languagePicker.english}}</option>
    <option value="ja">{{selectedLanguage?.languagePicker.japanese}}</option>
  </select>
-
+</div>
   
-
-
- 
-
-
 
 <style>
   th {

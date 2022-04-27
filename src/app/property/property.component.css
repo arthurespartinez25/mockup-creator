@@ -149,5 +149,12 @@ td.properties-table-data textarea:focus {
 }
 
 .languagePicker {
-  margin-left:  180px;
+  display: inline-flex;
+  justify-content:end;
+  width: 100%;
+  margin: 5px;
+  padding-right: 10px;
+}
+.selectLang {
+  border-radius:0.2em;
 }
