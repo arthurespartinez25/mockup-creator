@@ -35,7 +35,7 @@ export class CssComponent implements OnInit, AfterViewInit, AfterViewChecked {
   refreshCSS = new BehaviorSubject<boolean>(true);
   cssDocument?: StyleSheet;
   users: any;
-  savedCss: string;
+  savedCss= '';
 
   public cssRuleCount = document.styleSheets[0].cssRules.length;
   public _popupCount = 0;
@@ -211,7 +211,6 @@ export class CssComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
 
   addAllCSSRule(allCSSRule: any) {
-    // this.savedCss = allCSSRule;
     this.cssReceiveMessage()
     let allCSSRuleCount = 0;
     let stringIndex = 0;
