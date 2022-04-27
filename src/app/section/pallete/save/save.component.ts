@@ -1,3 +1,4 @@
+import { DialogService } from 'src/app/service/dialog/dialog.service';
 import { Component, EventEmitter, HostListener, Inject, Input, OnInit, Output, ViewChild, ElementRef } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { IComponent } from 'src/app/interfaces/icomponent';
@@ -7,7 +8,6 @@ import { UsersService } from '../../../service/users/users.service';
 import { Subscription } from 'rxjs';
 import { CrossComponentBridge } from 'src/app/service/cross-component-bridge/crossComponentBridge.service';
 import Swal from 'sweetalert2';
-import { DialogService } from 'src/app/service/dialog/dialog.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -35,8 +35,11 @@ export class SaveComponent implements OnInit{
   @Output() updateProjectNameEvent = new EventEmitter<string>();
   @Output() updateProjectIdEvent = new EventEmitter<any>();
 
+  @ViewChild('modalClose') modalClose: ElementRef;
+  @ViewChild('modalOpen') modalOpen: ElementRef;
 
   constructor(
+    private dialogService: DialogService,
     private loginCookie:CookieService,
     public dialog: MatDialog,
     private service: UsersService,
@@ -133,6 +136,7 @@ export class SaveComponent implements OnInit{
     this.getProjects(id);
     if(this.projects.length==0){
       this.showModal="";
+      this.modalClose.nativeElement.click();
       Swal.fire({
         position: 'center',
         icon: 'warning',
@@ -142,6 +146,22 @@ export class SaveComponent implements OnInit{
     } else {
       this.showModal="modal";
     }
+  }
+  confirmRemove(id : any) {
+    this.dialogService.openConfirmDialog(environment.deleteProject)
+    .afterClosed().subscribe(res =>{
+      if(res){
+        this.deleteProject(id);
+        if(this.projects.length != 0){
+          this.modalOpen.nativeElement.click();
+        } else {
+          this.modalClose.nativeElement.click();
+        }
+      } else {
+        this.modalOpen.nativeElement.click();
+      }
+    });
+    
   }
 
   deleteProject(id: any){
