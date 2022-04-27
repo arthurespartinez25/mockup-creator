@@ -160,7 +160,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
     this.loginCookie.deleteAll();
     this._router.navigate(['/']);
     setTimeout(() => {
-      window.location.reload();
+     
     }, 100);
   }
 

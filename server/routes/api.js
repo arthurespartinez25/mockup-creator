@@ -167,6 +167,12 @@ router.get('/getProject/:projectID', (req, res)=>{
   })
 })
 
+router.get('/getAllProjects/', (req, res)=>{
+  dboperations.getAllProjects().then(result=>{
+    return res.status(200).json(result);
+  })
+})
+
 router.get('/total/:userID', (req, res) => {
   const {userID} = req.params;
   dboperations.getTotal(userID).then(result => {

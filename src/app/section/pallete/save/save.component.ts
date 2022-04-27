@@ -179,6 +179,7 @@ export class SaveDataComponent {
   openedProjectID:any;
   openedProjectName: string;
   projectList: any;
+  allProjects: any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -203,6 +204,13 @@ export class SaveDataComponent {
     } else {
       this.saveName = "Project";
     }
+    this.getAllProjects();
+  }
+
+  getAllProjects(){
+    this.service.getAllProjects().subscribe((res)=>{
+      this.allProjects = res;
+    })
   }
 
   onCancelClick() { //closes dialog box
@@ -246,7 +254,9 @@ export class SaveDataComponent {
         if(this.openedProjectName){
           this.projID = this.openedProjectID; // only for updating of project
         } else {
-          this.projID = "user" + this.loginCookie.get("userID") + "_proj" + (Object.values(res)[0] + 1);
+          this.getAllProjects()
+          let lastId = this.allProjects[this.allProjects.length-1].id;
+          this.projID = "user" + this.loginCookie.get("userID") + "_proj" + (lastId + 1);
         }
         this.projectName = value;
         let projVal = { 

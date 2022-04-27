@@ -165,7 +165,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
           href: this.components[i].componentHREF,
           placeholder: this.components[i].componentPlaceholder,
           tblCols: Number(this.components[i].componentColumns),
-          tblArrayRow: Number(this.components[i].componentRows),
+          tblRows: Number(this.components[i].componentRows),
           isIcon: this.components[i].componentIsIcon === "true",
           iconValue: this.components[i].componentIconValue,
           iconLabel1: this.components[i].componentIconLabel1,
@@ -226,6 +226,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
               this.updateComponentList(new LinkDragComponent(canvas), canvas);
               break;
             case 'tableDrag':
+
               this.updateComponentList(new TableDragComponent(canvas, this.changeref), canvas);
               break;
             case 'youtubeDrag':

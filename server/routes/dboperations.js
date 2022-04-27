@@ -56,7 +56,7 @@ async function getTotal(userID){
 async function getProjects(userID){
     try{
         let pool = await sql.connect(config);
-        let project = await pool.request().query(`SELECT * from projects_table WHERE user_id=${userID} ORDER BY project_id`);
+        let project = await pool.request().query(`SELECT * from projects_table WHERE user_id=${userID} Order BY project_id DESC`);
         return project.recordset;
     }
     catch (error) {
@@ -105,7 +105,16 @@ async function getSingleProject(projectID){
         console.warn(error);
     }
 }
-
+async function getAllProjects(){
+    try{
+        let pool = await sql.connect(config);
+        let project = await pool.request().query(`SELECT * from projects_table`);
+        return project.recordset;
+    }
+    catch (error) {
+        console.warn(error);
+    }
+}
 async function deleteUser(userID){
     try{
         let pool = await sql.connect(config);
@@ -383,5 +392,6 @@ module.exports = {
     deleteTabs: deleteTabs,
     deletePreviousState: deletePreviousState,
     deleteTable: deleteTable,
-    getSingleProject: getSingleProject
+    getSingleProject: getSingleProject,
+    getAllProjects: getAllProjects
 }

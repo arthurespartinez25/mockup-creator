@@ -74,6 +74,10 @@ export class UsersService {
     let url="http://localhost:8000/getProject/"+id;
     return this.http.get(url);
   }
+  getAllProjects(){
+    let url="http://localhost:8000/getAllProjects";
+    return this.http.get(url);
+  }
   deleteProject(id: any){
     let url="http://localhost:8000/deleteProject/"+id;
     return this.http.get(url);
