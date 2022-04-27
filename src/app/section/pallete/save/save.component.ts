@@ -50,7 +50,8 @@ export class SaveComponent implements OnInit{
     }
 
   ngOnInit(): void {
-    this.userId=Number(this.loginCookie.get('userID'))
+    this.userId=Number(this.loginCookie.get('userID'));
+    this.getProjects(this.userId);
   }
   
   @HostListener('window:beforeunload', ['$event'])
@@ -86,13 +87,15 @@ export class SaveComponent implements OnInit{
   }
 
   onSave() {
+    this.getProjects(this.userId);
     const documentSaveDialogRef =
     this.dialog.open(SaveDataComponent, {
       data: {
         value: this.componentListMap,
         style: this.style,
         tabList: this.tabList,
-        openedID: this.loadedProjectId
+        openedID: this.loadedProjectId,
+        projects: this.projects
       }
     });
 
@@ -108,6 +111,7 @@ export class SaveComponent implements OnInit{
 
   onUpdate(){
     this.deleteProject(this.loadedProjectId);
+    this.getProjects(this.userId);
     let data= {
       value: this.componentListMap,
       style: this.style,
@@ -119,30 +123,27 @@ export class SaveComponent implements OnInit{
     dataClass.onSaveClick(this.loadedProjectName);
   }
 
-  loadProjects(id: number){
+  getProjects(id: number){
     this.service.getProjects(id).subscribe((res)=>{
       this.projects = res;
-      if(this.projects.length==0){
-        this.showModal="";
-        Swal.fire({
-          position: 'center',
-          icon: 'warning',
-          title: 'You don\'t have any saved project',
-          showConfirmButton: false,
-        })
-      } else {
-        this.showModal="modal";
-      }
     })
   }
-  // confirmDelete(value: any) {
-  //   this.dialogService.openConfirmDialog(environment.deleteProject)
-  //   .afterClosed().subscribe(res =>{
-  //     if(res){
-  //       this.deleteProject(value);
-  //     }
-  //   });
-  // }
+
+  loadProjects(id: number){
+    this.getProjects(id);
+    if(this.projects.length==0){
+      this.showModal="";
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: 'You don\'t have any saved project',
+        showConfirmButton: false,
+      })
+    } else {
+      this.showModal="modal";
+    }
+  }
+
   deleteProject(id: any){
     this.service.deleteProject(id).subscribe((res)=>{})
     this.service.deleteComponents(id).subscribe((res)=>{})
@@ -177,6 +178,7 @@ export class SaveDataComponent {
   tabList: any;
   openedProjectID:any;
   openedProjectName: string;
+  projectList: any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -190,6 +192,7 @@ export class SaveDataComponent {
     this.tabList = data.tabList;
     this.openedProjectID = data.openedID;
     this.openedProjectName = data.openedProjectName; //for updating only
+    this.projectList = data.projects;
   }
 
   ngOnInit(): void {
@@ -211,140 +214,165 @@ export class SaveDataComponent {
   }
 
   onSaveClick(value: string) {
+    let sameProjectName= false;
     let id = { //fetch the current user's user id
       userID: this.loginCookie.get("userID")
     }
-
-    this.service.getSaveTotal(id).subscribe(res => { //gets the total projects the user has saved under the account
-      if(this.openedProjectName){
-        this.projID = this.openedProjectID; // only for updating of project
-      } else {
-        this.projID = "user" + this.loginCookie.get("userID") + "_proj" + (Object.values(res)[0] + 1);
+    if(!this.openedProjectName){
+      for(let i = 0; i<this.projectList.length; i++){ // checks if project name is the same
+        if(this.projectList[i].project_name == value){
+          sameProjectName = true;
+          break;
+        }
       }
-      this.projectName = value;
-      let projVal = { 
-        userID: parseInt(this.loginCookie.get("userID")),
-        projectName: value,
-        projectID: this.projID
-      };
+    }
 
-      this.service.saveData(projVal, "project").subscribe(res=> { //saves the project to projects_table
-        console.log(res);
-        let nativeKeys: string[] = [];
-        let canvasNames: string[] = [];
-
-        for (let key of this.componentListMap.keys()) {
-          nativeKeys.push(key);
-          if(this.openedProjectID){
-            key = key.replace(this.openedProjectID+"_", "")
-          }
-          this.keys.push(this.projID + "_" + key);
+    if(this.componentListMap.size == 0 || this.componentListMap.size != this.tabList.length){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Empty canvas!',
+        showConfirmButton: false,
+      })
+    } else if (sameProjectName){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Project name already exists.\n Please choose another one',
+        showConfirmButton: false,
+      })
+    } else {
+      this.service.getSaveTotal(id).subscribe(res => { //gets the total projects the user has saved under the account
+        if(this.openedProjectName){
+          this.projID = this.openedProjectID; // only for updating of project
+        } else {
+          this.projID = "user" + this.loginCookie.get("userID") + "_proj" + (Object.values(res)[0] + 1);
         }
-
-        for (let i = 0; i < this.tabList.length; i++) {
-          console.log(this.tabList)
-          canvasNames.push(this.tabList[i].name);
-        }
-
-        let tabVal = {
-          canvasKeys: this.keys,
-          canvasNames: canvasNames
-        }
-
-        this.service.saveData(tabVal, "tab").subscribe(res=> { //saves the tab details to tab_table
-          let tabSort = {};
-          let tableIds: string[] = [];
-          let tableContent: any[] = [];
-          /*****
-           * The for-loop below is a manual conversion to JSON. We commonly use Iterate and Stringify method, or the ES6 fromEntries method
-           * when we want to convert a TypeScript Map to JSON. Both of these methods would significantly reduce the number of lines to convert
-           * a TS Map to JSON. However, with how the IComponent is structured, using these two methods will result to a cyclic object value
-           * TypeError. For the future developers of this system, if you can find a better way to this, by all means change the code. -"el gwapo"
-           * P.S. The conversion is done because JS cannot read TypeScript Map, thus rendering it impossible to save the data to the database.
-           *****/
-          for (let i = 0; i < nativeKeys.length; i++) { 
-            let componentList = {};                
-            console.log(this.componentListMap.get(nativeKeys[i])?.length);
-            for (let j = 0; j < this.componentListMap.get(nativeKeys[i])?.length!; j++) {
-              let props = {};
-              let propKeys = Object.keys(this.componentListMap.get(nativeKeys[i])![j].props);
-              for (let k = 0; k < propKeys.length; k++) {
-                let value = this.componentListMap.get(nativeKeys[i])![j].props[propKeys[k]];
-                if (propKeys[k] == "id") {
-                  if (this.componentListMap.get(nativeKeys[i])![j].props.typeObj == "tableDrag") {
-                    tableIds.push(value);
-                  }
-                }
-                if (typeof value === 'object') {
-                  if (propKeys[k] == "tblContent") {
-                    tableContent.push(value);
-                  }
-                  value = JSON.stringify(value);
-                }
-                props[propKeys[k]] = value;
-              }
-              componentList[j] = props;
+        this.projectName = value;
+        let projVal = { 
+          userID: parseInt(this.loginCookie.get("userID")),
+          projectName: value,
+          projectID: this.projID
+        };
+  
+        this.service.saveData(projVal, "project").subscribe(res=> { //saves the project to projects_table
+          console.log(res);
+          let nativeKeys: string[] = [];
+          let canvasNames: string[] = [];
+  
+          for (let key of this.componentListMap.keys()) {
+            nativeKeys.push(key);
+            if(this.openedProjectID){
+              key = key.replace(this.openedProjectID+"_", "")
             }
-            tabSort[nativeKeys[i]] = componentList;
+            this.keys.push(this.projID + "_" + key);
           }
-
-          let compListVal = {
-            componentList: tabSort,
+  
+          for (let i = 0; i < this.tabList.length; i++) {
+            console.log(this.tabList)
+            canvasNames.push(this.tabList[i].name);
+          }
+  
+          let tabVal = {
             canvasKeys: this.keys,
-            canvasNativeKeys: nativeKeys
+            canvasNames: canvasNames
           }
-          
-          this.service.saveData(compListVal, "components").subscribe(res => { //saves components to database
-            if (tableIds.length != 0) {
-              let tableContentData = {
-                projectID: this.projID,
-                tblIds: tableIds,
-                tblContent: tableContent
+  
+          this.service.saveData(tabVal, "tab").subscribe(res=> { //saves the tab details to tab_table
+            let tabSort = {};
+            let tableIds: string[] = [];
+            let tableContent: any[] = [];
+            /*****
+             * The for-loop below is a manual conversion to JSON. We commonly use Iterate and Stringify method, or the ES6 fromEntries method
+             * when we want to convert a TypeScript Map to JSON. Both of these methods would significantly reduce the number of lines to convert
+             * a TS Map to JSON. However, with how the IComponent is structured, using these two methods will result to a cyclic object value
+             * TypeError. For the future developers of this system, if you can find a better way to this, by all means change the code. -"el gwapo"
+             * P.S. The conversion is done because JS cannot read TypeScript Map, thus rendering it impossible to save the data to the database.
+             *****/
+            for (let i = 0; i < nativeKeys.length; i++) { 
+              let componentList = {};                
+              console.log(this.componentListMap.get(nativeKeys[i])?.length);
+              for (let j = 0; j < this.componentListMap.get(nativeKeys[i])?.length!; j++) {
+                let props = {};
+                let propKeys = Object.keys(this.componentListMap.get(nativeKeys[i])![j].props);
+                for (let k = 0; k < propKeys.length; k++) {
+                  let value = this.componentListMap.get(nativeKeys[i])![j].props[propKeys[k]];
+                  if (propKeys[k] == "id") {
+                    if (this.componentListMap.get(nativeKeys[i])![j].props.typeObj == "tableDrag") {
+                      tableIds.push(value);
+                    }
+                  }
+                  if (typeof value === 'object') {
+                    if (propKeys[k] == "tblContent") {
+                      tableContent.push(value);
+                    }
+                    value = JSON.stringify(value);
+                  }
+                  props[propKeys[k]] = value;
+                }
+                componentList[j] = props;
               }
-              this.service.saveData(tableContentData, "tableContent").subscribe();
+              tabSort[nativeKeys[i]] = componentList;
             }
-            if (this.style) {
-              this.style = this.style.replace(/\n/g, ''); //remove newline from the string
-              let splitted = this.style.split("}");
-              let cssName: string[] = [];
-              let cssProps: string[] = [];
-
-              for (let i = 0; i < (splitted.length - 1); i++) { //-1? split somehow includes a "" at the end of the array
-                let toSplit: string[];
-                toSplit = splitted[i].split("{");
-                cssName.push(toSplit[0].trim());
-                cssProps.push(toSplit[1]);
+  
+            let compListVal = {
+              componentList: tabSort,
+              canvasKeys: this.keys,
+              canvasNativeKeys: nativeKeys
+            }
+            
+            this.service.saveData(compListVal, "components").subscribe(res => { //saves components to database
+              if (tableIds.length != 0) {
+                let tableContentData = {
+                  projectID: this.projID,
+                  tblIds: tableIds,
+                  tblContent: tableContent
+                }
+                this.service.saveData(tableContentData, "tableContent").subscribe();
               }
-
-              let cssRuleSet = {
-                projectID: this.projID,
-                name: cssName,
-                properties: cssProps
+              if (this.style) {
+                this.style = this.style.replace(/\n/g, ''); //remove newline from the string
+                let splitted = this.style.split("}");
+                let cssName: string[] = [];
+                let cssProps: string[] = [];
+  
+                for (let i = 0; i < (splitted.length - 1); i++) { //-1? split somehow includes a "" at the end of the array
+                  let toSplit: string[];
+                  toSplit = splitted[i].split("{");
+                  cssName.push(toSplit[0].trim());
+                  cssProps.push(toSplit[1]);
+                }
+  
+                let cssRuleSet = {
+                  projectID: this.projID,
+                  name: cssName,
+                  properties: cssProps
+                }
+  
+                this.service.saveData(cssRuleSet, "css").subscribe(res => { //saves css to database
+                  //stuff
+                });
               }
-
-              this.service.saveData(cssRuleSet, "css").subscribe(res => { //saves css to database
-                //stuff
-              });
-            }
-            this.onCancelClick();
-            if(this.openedProjectName){
-              Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Your project has been updated',
-                showConfirmButton: false,
-              })
-            } else {
-              Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Your project has been saved',
-                showConfirmButton: false,
-              })
-            }
+              this.onCancelClick();
+              if(this.openedProjectName){
+                Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Your project has been updated',
+                  showConfirmButton: false,
+                })
+              } else {
+                Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Your project has been saved',
+                  showConfirmButton: false,
+                })
+              }
+            });
           });
         });
       });
-    });
+    }
   }
 }
