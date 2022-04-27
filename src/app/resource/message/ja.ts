@@ -80,7 +80,7 @@ export const ja = {
     languagePicker: {
         language: "言語",
         english: "英語",
-        japan: "日本"
+        japanese: "日本語"
     }
 
 
