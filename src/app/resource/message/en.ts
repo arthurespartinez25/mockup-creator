@@ -30,7 +30,8 @@ export const en = {
         search: "Search Screen Page",
         logOut: "Log Out",
         input: "Input*",
-        text: "Text*"
+        text: "Text*",
+        matToolTip: "This field cannot be empty."
         },
 
     Code: {

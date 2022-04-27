@@ -30,7 +30,8 @@ export const ja = {
         search: "検索画面ページ",
         logOut: "ログアウト",
         input: "入力*",
-        text: "テキスト*"
+        text: "テキスト*",
+        matToolTip: "このフィールドを空にすることはできません。"
         },
 
     Code: {

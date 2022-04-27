@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { UsersService } from '../../../service/users/users.service';
 import { Subscription } from 'rxjs';
 import { CrossComponentBridge } from 'src/app/service/cross-component-bridge/crossComponentBridge.service';
+import { LanguageService } from 'src/app/service/language/language.service';
 
 @Component({
   selector: 'app-save',
@@ -108,6 +109,7 @@ export class SaveDataComponent {
   projID: string;
   projectName: string;
   keys: string[] = [];
+  selectedLanguage: any;
  
 
   constructor(
@@ -115,7 +117,8 @@ export class SaveDataComponent {
     private loginCookie:CookieService,
     public dialogRef: MatDialogRef<SaveDataComponent>,
     public _router: Router,
-    private service: UsersService
+    private service: UsersService,
+    private languageService: LanguageService
   ) {
     this.componentListMap = data.value;
     this.style = data.style;
@@ -123,6 +126,7 @@ export class SaveDataComponent {
 
   ngOnInit(): void {
     this.saveName = "Project";
+    this.selectedLanguage = this.languageService.getLanguage()
   }
 
   onCancelClick() { //closes dialog box
