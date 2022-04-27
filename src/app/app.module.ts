@@ -47,6 +47,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { DivDragComponent } from './components/divDrag/divDrag.component';
 import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
 import { VideoDragComponent } from './components/videoDrag/videoDrag.component';
+import { LanguageService } from './service/language/language.service';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,7 @@ import { VideoDragComponent } from './components/videoDrag/videoDrag.component';
     
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule, FormsModule, HttpClientModule, MatTabsModule, MatDialogModule, MatTooltipModule],
-  providers: [DragDropModule, AppComponent, DatePipe],
+  providers: [DragDropModule, AppComponent, DatePipe, LanguageService],
   bootstrap: [AppComponent],
   entryComponents: [MatConfirmDialogComponent],
 })
