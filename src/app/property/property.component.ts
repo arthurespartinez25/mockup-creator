@@ -5,6 +5,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { DatePipe } from '@angular/common'
 import { CodeComponent } from '../section/code/code.component';
 import { DialogService } from '../service/dialog/dialog.service';
+import { LanguageService } from '../service/language/language.service';
 import { en } from '../resource/message/en';
 import { ja } from '../resource/message/ja';
 
@@ -95,15 +96,18 @@ export class PropertyComponent implements OnInit {
 
   
 
-  public selectLanguage(event: any) {
+  selectLanguage(event: any) {
     // butanganan pa!
   this.selectedLanguage = this.language.get(event.target.value);
   this.compLanguage = this.selectedLanguage.property;
   this.updateSelectedLanguage.emit(this.selectedLanguage);
+  this.selectedLang.setLanguage(this.selectedLanguage);
   }
 
 
-  constructor(public sanitizer:DomSanitizer, public datepipe: DatePipe, private dialogService: DialogService) {
+  constructor(public sanitizer:DomSanitizer, public datepipe: DatePipe, 
+    private dialogService: DialogService,
+    private selectedLang: LanguageService) {
     this.props = this.property;
     this.componentList = this.compList;
     this.selectedcomp = this.selectedIdx;
@@ -162,6 +166,7 @@ export class PropertyComponent implements OnInit {
     this.selectedLanguage = this.language.get("en");
     this.compLanguage = this.selectedLanguage.property;
     this.updateSelectedLanguage.emit(this.selectedLanguage);
+    this.selectedLang.setLanguage(this.selectedLanguage);
   }
 
   idChangeHandler(event: any) {

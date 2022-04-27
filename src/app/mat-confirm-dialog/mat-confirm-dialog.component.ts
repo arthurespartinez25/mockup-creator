@@ -8,12 +8,12 @@ import { LanguageService } from '../service/language/language.service';
 })
 export class MatConfirmDialogComponent implements OnInit {
 
-
-  constructor(private languageService: LanguageService, @Inject(MAT_DIALOG_DATA)public data,
+  selectedLanguage: any;
+  constructor(private language: LanguageService, @Inject(MAT_DIALOG_DATA)public data,
   public dialogRef: MatDialogRef<MatConfirmDialogComponent>) { }
 
   ngOnInit(): void {
-    
+    this.selectedLanguage = this.language.getLanguage()
   }
  
 }
