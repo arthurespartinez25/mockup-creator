@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { UsersService } from '../../../service/users/users.service';
 import { Subscription } from 'rxjs';
 import { CrossComponentBridge } from 'src/app/service/cross-component-bridge/crossComponentBridge.service';
+import { LanguageService } from 'src/app/service/language/language.service';
 
 @Component({
   selector: 'app-save',
@@ -22,6 +23,7 @@ export class SaveComponent implements OnInit {
   @Input() style: string;
   @Input() tabList: any;
   @Input() currentTab: string;
+  @Input() selectedLanguage: any;
 
   @Output() updateProjectNameEvent = new EventEmitter<string>();
   
@@ -89,6 +91,10 @@ export class SaveComponent implements OnInit {
       this.updateProjectNameEvent.emit(this.projectName);
     });
   }
+
+  updateSelectedLanguage(value: any){
+    this.selectedLanguage = value;
+  }
 }
 
 @Component({
@@ -103,13 +109,16 @@ export class SaveDataComponent {
   projID: string;
   projectName: string;
   keys: string[] = [];
+  selectedLanguage: any;
+ 
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private loginCookie:CookieService,
     public dialogRef: MatDialogRef<SaveDataComponent>,
     public _router: Router,
-    private service: UsersService
+    private service: UsersService,
+    private languageService: LanguageService
   ) {
     this.componentListMap = data.value;
     this.style = data.style;
@@ -117,6 +126,7 @@ export class SaveDataComponent {
 
   ngOnInit(): void {
     this.saveName = "Project";
+    this.selectedLanguage = this.languageService.getLanguage()
   }
 
   onCancelClick() { //closes dialog box

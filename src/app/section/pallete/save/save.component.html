@@ -7,17 +7,17 @@
             class="palette-item"
             (click)="onSave()"
           >
-          <i class="fa-solid fa-cloud-arrow-up"></i>&nbsp; Save
+          <i class="fa-solid fa-cloud-arrow-up"></i>&nbsp; {{selectedLanguage?.pallete.save}}
           </button>
           <button
             class="palette-item"
           >
-          <i class="fa-solid fa-square-pen"></i>&nbsp; Save as
+          <i class="fa-solid fa-square-pen"></i>&nbsp; {{selectedLanguage?.pallete.saveAs1}}
           </button>
           <button
             class="palette-item"
           >
-          <i class="fa-solid fa-cloud-arrow-down"></i>&nbsp; Load
+          <i class="fa-solid fa-cloud-arrow-down"></i>&nbsp; {{selectedLanguage?.pallete.load}}
           </button>
         </div>
       </div>

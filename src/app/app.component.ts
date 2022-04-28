@@ -28,6 +28,8 @@ import { HttpClient } from '@angular/common/http';
 import { NavbarDragComponent } from './components/navbarDrag/navbarDrag.component';
 import { TableDragComponent } from './components/tableDrag/tableDrag.component';
 import { ButtonDragComponent } from './components/buttonDrag/buttonDrag.component';
+import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
+
 
 export class List {
   constructor(
@@ -88,11 +90,11 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   public cssRuleCount = document.styleSheets[0].cssRules.length;
   public _popupCount = 0;
-
+  
   @ViewChild('PropertyComponent') property: boolean;
   @ViewChild(CanvasComponent) canvas!: CanvasComponent;
   //@ViewChild('canvas') canvas!: ElementRef;
-  @ViewChild(PalleteComponent) palette: PalleteComponent; 
+  @ViewChild(PalleteComponent) pallette: PalleteComponent; 
   @ViewChild(ElementsComponent) elements: ElementsComponent;
   @ViewChild(CodeComponent) code: CodeComponent;
   //@ViewChild('textOp') textBtn!: ElementRef;
@@ -128,6 +130,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   sessionID = this.loginCookie.get("sessionID");
   inSession: boolean = this.sessionID == "12345";
   isPlaying: boolean;
+  selectedLanguage: any;
 
   ngOnInit() {
     console.log(this.inSession);
@@ -144,6 +147,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   ngAfterViewInit(): void {     
     this.canvasDirective = this.canvas.passCanvas();    
     this.passCanvas = this.canvasDirective;
+    this.pallette.updateSelectedLanguage(this.selectedLanguage);
   }
   // getComponents(){
   //   this.httpClient.get<any>('http://localhost:8000/getComponents/user1_proj5_canvas1').subscribe(
@@ -229,7 +233,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
 
   clearComponentList() {
-    this.palette.clearComponentList();
+    this.pallette.clearComponentList();
     this.componentList.length = 0;
   }
 
@@ -270,6 +274,10 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   updateIsPlayingEvent(value: any) {
     this.isPlaying = value;
     //console.log(this.isPlaying);
+  }
+  updateSelectedLanguage(value: any) {
+    this.selectedLanguage = value;
+    
   }
   //////////////////////////////////////////////////////////////////////////////
   //   THIS PROJECT WAS STARTED BY BATO BOYS AND CEBU TEAM  
@@ -323,6 +331,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   updateDomInsideCanvas(value: boolean){
     this.domInsideCanvas = value;
   }
+  
   //----------------------------------------------------------------------------
 
   ngAfterViewChecked() {

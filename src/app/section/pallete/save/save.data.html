@@ -1,14 +1,14 @@
 
 <div mat-dialog-content>
     <div class="form-group" style="margin-bottom:10px;">
-        <p class="required-field"><strong>Save as:</strong></p>
+        <p class="required-field"><strong>{{selectedLanguage?.pallete.saveAs2}}</strong></p>
         <input 
                 type="text" 
                 class="form-control" 
                 id="saveName" 
                 placeholder="Enter save data name" 
                 [value]="saveName" 
-                matTooltip="This field cannot be empty."
+                matTooltip= {{selectedLanguage?.pallete.matToolTip}}
                 matTooltipClass="tool-tip"
                 matTooltipPosition="right"
                 (keyup)="saveData.value === '' ? tooltip.show() : tooltip.hide()"
@@ -17,7 +17,7 @@
     </div>
 </div>
 <div mat-dialog-actions>   
-    <button type="submit" class="btn btn-primary" [disabled]="saveData.value ===''" (click)="onSaveClick(saveData.value)" mat-button>Save</button>
+    <button type="submit" class="btn btn-primary" [disabled]="saveData.value ===''" (click)="onSaveClick(saveData.value)" mat-button>{{selectedLanguage?.pallete.save}}</button>
     &nbsp;
-    <button class="btn btn-danger" (click)="onCancelClick()" mat-button>Cancel</button>
+    <button class="btn btn-danger" (click)="onCancelClick()" mat-button>{{selectedLanguage?.pallete.cancel}}</button>
 </div>

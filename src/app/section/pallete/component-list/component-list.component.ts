@@ -67,6 +67,7 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
   @Input() propertyCmp: PropertyComponent;
   @Input() componentList: IComponent[] = [];
   @Input() isPlaying: boolean;
+  @Input() selectedLanguage: any;
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
@@ -100,6 +101,8 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
   whatComponent = 'none';
   sessionID = this.loginCookie.get("sessionID");
   inSession: boolean = this.sessionID == "12345";
+  
+  
 
   ngOnInit() {
     if(this.inSession) {
@@ -245,7 +248,7 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
     }
   }
   confirmDelete(value: any) {
-    this.dialogService.openConfirmDialog(environment.delete)
+    this.dialogService.openConfirmDialog(this.selectedLanguage.confirmDialog.remove)
     .afterClosed().subscribe(res =>{
       if(res){
         this.deleteComponent(value);
@@ -312,8 +315,10 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
     }
   }
 
- 
-
+  updateSelectedLanguage(value: any){
+    this.selectedLanguage = value;
+    console.log(this.selectedLanguage);
+  }
   /**************End of code for component list functions *************************/
 
 

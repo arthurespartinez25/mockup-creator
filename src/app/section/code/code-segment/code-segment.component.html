@@ -1,4 +1,4 @@
-<button class="btnCopy" (click)="copyMessage(htmlCode)">Copy</button>
-<button class="btnCopy" (click)="downloadCode(htmlCode)">Download</button>
-<button class="btnCopy" (click)="buildCode(htmlCode)">Build</button>
+<button class="btnCopy" (click)="copyMessage(htmlCode)">{{selectedLanguage?.Code.copy}}</button>
+<button class="btnCopy" (click)="downloadCode(htmlCode)">{{selectedLanguage?.Code.download}}</button>
+<button class="btnCopy" (click)="buildCode(htmlCode)">{{selectedLanguage?.Code.build}}</button>
 <code [innerText]="htmlCode"> </code>
