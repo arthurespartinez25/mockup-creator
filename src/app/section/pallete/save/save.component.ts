@@ -255,7 +255,7 @@ export class SaveDataComponent {
       }
     }
 
-    if(this.componentListMap.size == 0 || this.componentListMap.size != this.tabList.length){
+    if(this.componentListMap.size == 0 || this.componentListMap.size != this.tabList.length){ // checks if there is empty canvas
       Swal.fire({
         position: 'center',
         icon: 'error',
@@ -275,7 +275,7 @@ export class SaveDataComponent {
           this.projID = this.openedProjectID; // only for updating of project
         } else {
           this.getAllProjects()
-          let lastId = this.allProjects[this.allProjects.length-1].id;
+          let lastId = this.allProjects[this.allProjects.length-1].id; // gets last id of all projects
           this.projID = "user" + this.loginCookie.get("userID") + "_proj" + (lastId + 1);
         }
         this.projectName = value;
@@ -399,6 +399,7 @@ export class SaveDataComponent {
                   showConfirmButton: false,
                 })
               }
+              this.service.getProjects(id.userID).subscribe(res=>{})
             });
           });
         });
