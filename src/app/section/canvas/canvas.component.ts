@@ -348,6 +348,21 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     this.updateTabListEvent.emit(this.tabs);
     this.selectedTab=this.tabs.length - 1;
   }
+  confirmLogOut() {
+    this.dialogService.openConfirmDialog(environment.logOut)
+    .afterClosed().subscribe(res =>{
+      if(res){
+        this.logout();
+      }
+    });
+  }
+  logout() {
+    this.loginCookie.deleteAll();
+    this._router.navigate(['/']);
+    setTimeout(() => {
+      window.location.reload();
+    }, 100);
+  }
   /****************** OLD CODE STARTS HERE **********************/
 }
 function readCSSFile(arg0: string) {

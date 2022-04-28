@@ -156,23 +156,6 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
   yDistance: any = 0;
   theUsername = "";
 
-  logout() {
-    this.loginCookie.deleteAll();
-    this._router.navigate(['/']);
-    setTimeout(() => {
-      window.location.reload();
-    }, 100);
-  }
-
-  confirmLogOut() {
-    this.dialogService.openConfirmDialog(environment.logOut)
-    .afterClosed().subscribe(res =>{
-      if(res){
-        this.logout();
-      }
-    });
-  }
-
   clearComponentList() {
     this.componentList.length = 0;
   }

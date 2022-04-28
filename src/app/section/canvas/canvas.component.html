@@ -1,3 +1,28 @@
+<div class="canvasHeader">
+  <div class="linksContainer">
+    <label for="">Mockup-Creator</label>
+    <ul class="mockLinks">
+      <li><a href="#">Project</a></li>
+      <li><a href="#">Guide</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+  </div>
+  <div class="profileCOntainer">
+      <img src="https://oemfile.informamarkets-info.com/FileUpload/2019CTA_14071/2019052317540745.jpg" alt=""
+       class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <div class="dropdown-menu dropdown-menu-right">
+        <button class="dropdown-item" type="button"><i class="fas fa-user"></i> Profile</button>
+        <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#"><i class="fas fa-globe"></i> Language</a>
+          <ul class="dropdown-menu">
+            <button class="dropdown-item" type="button">English</button>
+            <button class="dropdown-item" type="button">Japanese</button>
+          </ul>
+        </li>
+        <button class="dropdown-item" type="button" mat-button (click)="confirmLogOut()"><i class="fas fa-sign-out"></i> Log Out</button>
+      </div>
+  </div>
+</div>
+
 <div id="canvas-container" class="pagination-container" style="position: relative;">
   <div class="pagination-container" style="position: relative;">
     <mat-tab-group class="tabs" dynamicHeight id="canvasTabGroup" [(selectedIndex)]="selectedTab" (selectedTabChange)="myTabSelectedTabChange($event)">
