@@ -28,7 +28,6 @@ export const en = {
         home: "Home Page",
         logIn: "Login Page",
         search: "Search Screen Page",
-        logOut: "Log Out",
         input: "Input*",
         text: "Text*",
         matToolTip: "This field cannot be empty.",
@@ -72,15 +71,22 @@ export const en = {
         closeTab: "This operation is ireversible. This action will remove the selected canvas. Do you want to proceed?",
         remove: "This operation is ireversible. This action will remove the selected component from canvas. Do you want to proceed?",
         clear: "This operation is ireversible. This action will clear all the components in the canvas. Do you want to proceed?",
+        deleteProject: "This operation is ireversible.This action will remove the selected project.Do you want to proceed?",
         logOut: "Log Out?",
         yes: "Yes",
         no: "No"
     },
 
     languagePicker: {
+        mockUp: "Mockup-Creator",
+        project: "Project",
+        guide: "Guide",
+        about: "About",
+        profile: "Profile",
         language: "Language",
         english: "English",
-        japanese: "Japanese"
+        japanese: "Japanese",
+        logOut: "Log Out",
     }
 
 

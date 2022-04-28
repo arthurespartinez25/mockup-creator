@@ -1,10 +1,10 @@
 <div class="canvasHeader">
   <div class="linksContainer">
-    <label for="">Mockup-Creator</label>
+    <label for="">{{selectedLanguage.languagePicker.mockUp}}</label>
     <ul class="mockLinks">
-      <li><a href="#">Project</a></li>
-      <li><a href="#">Guide</a></li>
-      <li><a href="#">About</a></li>
+      <li><a href="#">{{selectedLanguage.languagePicker.project}}</a></li>
+      <li><a href="#">{{selectedLanguage.languagePicker.guide}}</a></li>
+      <li><a href="#">{{selectedLanguage.languagePicker.about}}</a></li>
     </ul>
   </div>
   <div class="profileCOntainer">
@@ -18,7 +18,7 @@
             <button class="dropdown-item" type="button" (click)="selectLanguage('ja')">{{selectedLanguage.languagePicker.japanese}}</button>
           </ul>
         </li>
-        <button class="dropdown-item" type="button" mat-button (click)="confirmLogOut()"><i class="fas fa-sign-out"></i> {{selectedLanguage.pallete.logOut}}</button>
+        <button class="dropdown-item" type="button" mat-button (click)="confirmLogOut()"><i class="fas fa-sign-out"></i> {{selectedLanguage.languagePicker.logOut}}</button>
       </div>
   </div>
 </div>

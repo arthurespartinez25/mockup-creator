@@ -150,7 +150,7 @@ export class SaveComponent implements OnInit{
     }
   }
   confirmRemove(id : any) {
-    this.dialogService.openConfirmDialog(environment.deleteProject)
+    this.dialogService.openConfirmDialog(this.selectedLanguage.confirmDialog.deleteProject)
     .afterClosed().subscribe(res =>{
       if(res){
         this.deleteProject(id);

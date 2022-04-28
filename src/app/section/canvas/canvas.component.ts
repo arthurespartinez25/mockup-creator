@@ -293,7 +293,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   }
   
     confirmRemoveTab(index: number) {
-      this.dialogService.openConfirmDialog(environment.removeTab)
+      this.dialogService.openConfirmDialog(this.selectedLanguage.confirmDialog.closeTab)
       .afterClosed().subscribe(res =>{
         if(res){
           this.removeTab(index);
@@ -359,7 +359,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     this.selectedTab=this.tabs.length - 1;
   }
   confirmLogOut() {
-    this.dialogService.openConfirmDialog(environment.logOut)
+    this.dialogService.openConfirmDialog(this.selectedLanguage.confirmDialog.logOut)
     .afterClosed().subscribe(res =>{
       if(res){
         this.logout();
