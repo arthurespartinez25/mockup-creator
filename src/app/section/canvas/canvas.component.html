@@ -12,13 +12,13 @@
        class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <div class="dropdown-menu dropdown-menu-right">
         <button class="dropdown-item" type="button"><i class="fas fa-user"></i> Profile</button>
-        <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#"><i class="fas fa-globe"></i> Language</a>
+        <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#"><i class="fas fa-globe"></i> {{selectedLanguage.languagePicker.language}}</a>
           <ul class="dropdown-menu">
-            <button class="dropdown-item" type="button">English</button>
-            <button class="dropdown-item" type="button">Japanese</button>
+            <button class="dropdown-item" type="button" (click)="selectLanguage('en')">{{selectedLanguage.languagePicker.english}}</button>
+            <button class="dropdown-item" type="button" (click)="selectLanguage('ja')">{{selectedLanguage.languagePicker.japanese}}</button>
           </ul>
         </li>
-        <button class="dropdown-item" type="button" mat-button (click)="confirmLogOut()"><i class="fas fa-sign-out"></i> Log Out</button>
+        <button class="dropdown-item" type="button" mat-button (click)="confirmLogOut()"><i class="fas fa-sign-out"></i> {{selectedLanguage.pallete.logOut}}</button>
       </div>
   </div>
 </div>

@@ -31,7 +31,8 @@ export const en = {
         logOut: "Log Out",
         input: "Input*",
         text: "Text*",
-        matToolTip: "This field cannot be empty."
+        matToolTip: "This field cannot be empty.",
+        clear: "Clear"
         },
 
     Code: {
@@ -65,7 +66,6 @@ export const en = {
         style: "style",
         dataBsContent: "data-bs-content",
         name: "name",
-        clear: "Clear"
     },
 
     confirmDialog: {

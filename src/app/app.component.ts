@@ -41,7 +41,6 @@ import { HeaderDragComponent } from './components/headerDrag/headerDrag.componen
 import { InputDragComponent } from './components/inputDrag/inputDrag.component';
 import { YoutubeDragComponent } from './components/youtubeDrag/youtubeDrag.component';
 import { UsersService } from './service/users/users.service';
-import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
 
 
 @Component({
@@ -375,7 +374,6 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
   updateSelectedLanguage(value: any) {
     this.selectedLanguage = value;
-    
   }
   //////////////////////////////////////////////////////////////////////////////
   //   THIS PROJECT WAS STARTED BY BATO BOYS AND CEBU TEAM  

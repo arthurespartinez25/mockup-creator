@@ -43,7 +43,6 @@ export class PropertyComponent implements OnInit {
   style2 = '';
   tempStyle = '';
   language = new Map<string, any>();
-  selectedLanguage: any;
   compLanguage: any; 
   @Output() addAllCSSRule = new EventEmitter<string>();
   @Output() clearCss = new EventEmitter<string>();
@@ -51,6 +50,7 @@ export class PropertyComponent implements OnInit {
   @Output() clearComponentListEvent = new EventEmitter<number>();
   @Output() updateComponentListEvent = new EventEmitter<IComponent[]>();
   @Output() updateSelectedLanguage = new EventEmitter<any>();
+  @Input() selectedLanguage: any;
 
   @Input() get property(): IProperty {
     
@@ -95,16 +95,6 @@ export class PropertyComponent implements OnInit {
     this.selectedcomp = value;
   }
   @Input() isPlaying: boolean;
-
-  
-
-  selectLanguage(event: any) {
-    // butanganan pa!
-  this.selectedLanguage = this.language.get(event.target.value);
-  this.compLanguage = this.selectedLanguage.property;
-  this.updateSelectedLanguage.emit(this.selectedLanguage);
-  this.selectedLang.setLanguage(this.selectedLanguage);
-  }
 
 
   constructor(public sanitizer:DomSanitizer, public datepipe: DatePipe, 
@@ -171,12 +161,6 @@ export class PropertyComponent implements OnInit {
 
   ngOnInit(): void {
     this.style2 = this.props.style;
-    this.language.set("en", en);
-    this.language.set("ja", ja);
-    this.selectedLanguage = this.language.get("en");
-    this.compLanguage = this.selectedLanguage.property;
-    this.updateSelectedLanguage.emit(this.selectedLanguage);
-    this.selectedLang.setLanguage(this.selectedLanguage);
   }
 
   idChangeHandler(event: any) {

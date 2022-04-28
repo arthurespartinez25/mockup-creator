@@ -99,8 +99,8 @@
       >
       </app-save>
       <div style="display: flex; flex-direction: row; margin: 5px 0px;">
-        <div style="height: fit-content; width: 60%; padding: 10px 0px; text-align: center;"><strong>Component List</strong></div>
-        <button (click)="clearComponent()" [disabled]="isPlaying" id="clear" style="height: fit-content; width: 40%; padding: 10px 0px;" *ngIf="componentList.length != 0"><strong>Clear</strong></button>
+        <div style="height: fit-content; width: 60%; padding: 10px 0px; text-align: center;"><strong>{{selectedLanguage.pallete.compList}}</strong></div>
+        <button (click)="clearComponent()" [disabled]="isPlaying" id="clear" style="height: fit-content; width: 40%; padding: 10px 0px;" *ngIf="componentList.length != 0"><strong>{{selectedLanguage.pallete.clear}}</strong></button>
       </div>
     </div>
       <app-component-list

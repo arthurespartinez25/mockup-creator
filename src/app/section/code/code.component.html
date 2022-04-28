@@ -19,7 +19,7 @@
           (clearComponentListEvent)="clearComponentList()"
           (updateComponentListEvent)="updateComponentList($event)"
           [isPlaying] = "isPlaying"
-          (updateSelectedLanguage)="eventSelectedLanguage($event)"
+          [selectedLanguage]="selectedLanguage"
 
         ></app-property> <!-- pass these values to the app.property component-->
       </div>

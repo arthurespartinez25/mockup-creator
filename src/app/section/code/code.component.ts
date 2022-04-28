@@ -68,6 +68,7 @@ export class CodeComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @Input() projectName: string;
   @Input() tabList: any;
   @Input() currentTab: string;
+  @Input() selectedLanguage: any;
  
   @Input() isPlaying: boolean;
   //@ViewChild('textOp') textBtn!: ElementRef;
@@ -80,7 +81,6 @@ export class CodeComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @Output() clearComponentListEvent = new EventEmitter<number>();
   @Output() updateComponentListEvent = new EventEmitter<IComponent[]>();
   @Output() updateStyleEvent = new EventEmitter<string>();  
-  @Output() updateSelectedLanguage = new EventEmitter<any>();
 
   changeref: ChangeDetectorRef;
   constructor(
@@ -102,7 +102,6 @@ export class CodeComponent implements OnInit, AfterViewInit, AfterViewChecked {
   whatComponent = 'none';
   sessionID = this.loginCookie.get("sessionID");
   inSession: boolean = this.sessionID == "12345";
-  selectedLanguage: any;
 
   ngOnInit() {
     console.log(this.inSession);
@@ -205,12 +204,6 @@ export class CodeComponent implements OnInit, AfterViewInit, AfterViewChecked {
   } 
   getCss(value: any){
     this.css.getSavedCss(value)
-  }
-
-  eventSelectedLanguage(value: any) {
-    this.updateSelectedLanguage.emit(value);
-    this.selectedLanguage = value;
-
   }
   
   /****************** OLD CODE STARTS HERE **********************/

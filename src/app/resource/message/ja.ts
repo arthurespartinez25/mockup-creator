@@ -31,7 +31,8 @@ export const ja = {
         logOut: "ログアウト",
         input: "入力*",
         text: "テキスト*",
-        matToolTip: "このフィールドを空にすることはできません。"
+        matToolTip: "このフィールドを空にすることはできません。",
+        clear: "クリア"
         },
 
     Code: {
@@ -64,8 +65,7 @@ export const ja = {
         columns: "コラムス",
         style: "スタイル",
         dataBsContent: "data-bs-content",
-        name: "名前",
-        clear: "クリア"
+        name: "名前"
     },
 
     confirmDialog: {

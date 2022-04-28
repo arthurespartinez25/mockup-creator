@@ -83,6 +83,7 @@
     (updateTabListEvent)="updateTabList($event)"
     (updateIsPlaying)="updateIsPlayingEvent($event)"
     (updateCanvasListElements)="updateCanvasArray($event)"
+    (updateSelectedLanguageEvent)="updateSelectedLanguage($event)"
     ></app-canvas>
   <!-- CODE SECTION -->
 <!--
@@ -202,7 +203,7 @@
   (updateComponentListEvent) = "updateComponentListDel($event)"
   (updateStyleEvent) = "updateStyleEvent($event)"
   [isPlaying]="isPlaying"
-  (updateSelectedLanguage) = "updateSelectedLanguage($event)"
+  [selectedLanguage]="selectedLanguage"
   >
   </app-code>
 </div>

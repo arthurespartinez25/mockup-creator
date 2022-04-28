@@ -217,8 +217,6 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
     this.template.updateSelectedLanguage(value);
     this.compList.updateSelectedLanguage(value);
     this.save.updateSelectedLanguage(value);
-    
-    console.log(this.selectedLanguage);
   }
   //----------------------------------------------------------------------------
 

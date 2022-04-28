@@ -12,7 +12,9 @@ import { PropertyComponent } from './../../property/property.component';
 import { ButtonService } from 'src/app/service/button-service/button-service.service';
 import { DialogService } from 'src/app/service/dialog/dialog.service';
 import { environment} from 'src/environments/environment';
-import Swal from 'sweetalert2';
+import { en } from 'src/app/resource/message/en';
+import { ja } from 'src/app/resource/message/ja';
+import { LanguageService } from 'src/app/service/language/language.service';
 
 @Component({
   selector: 'app-canvas',
@@ -39,6 +41,9 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   canvasIndex: number;
   initialName = "Canvas 1";
   defaultProps = defaultProps;
+  languages = new Map<string, any>();
+  selectedLanguage: any;
+  compLanguage: any; 
 
   selected: IProperty = {
     key: '',
@@ -79,6 +84,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   @Output() updateTabListEvent = new EventEmitter<any>();
   @Output() updateIsPlaying = new EventEmitter<boolean>();
   @Output() updateCanvasListElements = new EventEmitter<ElementRef[]>();
+  @Output() updateSelectedLanguageEvent = new EventEmitter<any>();
 
   @Input() componentList : IComponent[] = [];
   @Input() mousePositionX: any;
@@ -100,6 +106,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     public sanitizer: DomSanitizer,
     public datepipe: DatePipe,
     private dialogService: DialogService,
+    private selectedLang: LanguageService,
     private buttonService?: ButtonService
   ) {
     this.changeref = changeDetectorRef;
@@ -130,6 +137,9 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
         this.users = data;
       }) */
     }
+    this.languages.set("en", en);
+    this.languages.set("ja", ja);
+    this.selectLanguage("en")
   }
   ngAfterViewInit(): void {
     this.canvasListElements.toArray();
@@ -154,7 +164,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   }
   updateDomInsideCanvas(value: boolean){
     this.domInsideCanvas = value;
-    this.updateDomInsideCanvasEvent.emit(this.domInsideCanvas)
+    this.updateDomInsideCanvasEvent.emit(this.domInsideCanvas);
   }
 
   //----------------------------------------------------------------------------
@@ -362,6 +372,11 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     setTimeout(() => {
       window.location.reload();
     }, 100);
+  }
+  selectLanguage(value: any) {
+    this.selectedLanguage = this.languages.get(value);
+    this.selectedLang.setLanguage(this.selectedLanguage);
+    this.updateSelectedLanguageEvent.emit(this.selectedLanguage);
   }
   /****************** OLD CODE STARTS HERE **********************/
 }
