@@ -1,5 +1,7 @@
 <div id="code-container">
-  <app-navigation></app-navigation>
+  <app-navigation
+  [selectedLanguage]="selectedLanguage"
+  ></app-navigation>
     <div class="tab-content tab-container" id="myTabContent">
       <div
         class="tab-pane fade show active"
@@ -17,6 +19,8 @@
           (clearComponentListEvent)="clearComponentList()"
           (updateComponentListEvent)="updateComponentList($event)"
           [isPlaying] = "isPlaying"
+          (updateSelectedLanguage)="eventSelectedLanguage($event)"
+
         ></app-property> <!-- pass these values to the app.property component-->
       </div>
       <div
@@ -28,6 +32,7 @@
         <app-css
           (updateStyleEvent)="updateStyle($event)"
           [isPlaying] = "isPlaying"
+          [selectedLanguage]="selectedLanguage"
         ></app-css>
       </div>
       <div
@@ -42,6 +47,7 @@
           [tabList]="tabList"
           [currentTab]="currentTab"
           [_styleBody]="style"
+          [selectedLanguage]="selectedLanguage"
         ></app-code-segment>
       </div>
     </div>

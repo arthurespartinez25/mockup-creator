@@ -6,6 +6,10 @@ import { DatePipe } from '@angular/common'
 import { DialogService } from '../service/dialog/dialog.service';
 import { environment } from 'src/environments/environment';
 import { ClearComponentsService } from '../service/clearComponents/clear-components.service';
+import { LanguageService } from '../service/language/language.service';
+import { en } from '../resource/message/en';
+import { ja } from '../resource/message/ja';
+
 
 @Component({
   selector: 'app-property',
@@ -38,11 +42,15 @@ export class PropertyComponent implements OnInit {
   };
   style2 = '';
   tempStyle = '';
+  language = new Map<string, any>();
+  selectedLanguage: any;
+  compLanguage: any; 
   @Output() addAllCSSRule = new EventEmitter<string>();
   @Output() clearCss = new EventEmitter<string>();
   @Output() cssReceiveMessage = new EventEmitter<string>();
   @Output() clearComponentListEvent = new EventEmitter<number>();
   @Output() updateComponentListEvent = new EventEmitter<IComponent[]>();
+  @Output() updateSelectedLanguage = new EventEmitter<any>();
 
   @Input() get property(): IProperty {
     
@@ -88,7 +96,21 @@ export class PropertyComponent implements OnInit {
   }
   @Input() isPlaying: boolean;
 
-  constructor(public sanitizer:DomSanitizer, public datepipe: DatePipe, private dialogService: DialogService, private clearComponents: ClearComponentsService) {
+  
+
+  selectLanguage(event: any) {
+    // butanganan pa!
+  this.selectedLanguage = this.language.get(event.target.value);
+  this.compLanguage = this.selectedLanguage.property;
+  this.updateSelectedLanguage.emit(this.selectedLanguage);
+  this.selectedLang.setLanguage(this.selectedLanguage);
+  }
+
+
+  constructor(public sanitizer:DomSanitizer, public datepipe: DatePipe, 
+    private dialogService: DialogService,
+    private selectedLang: LanguageService,
+    private clearComponents: ClearComponentsService) {
     this.props = this.property;
     this.componentList = this.compList;
     this.selectedcomp = this.selectedIdx;
@@ -114,7 +136,7 @@ export class PropertyComponent implements OnInit {
   }
 
   confirmRemove() {
-    this.dialogService.openConfirmDialog(environment.delete)
+    this.dialogService.openConfirmDialog(this.selectedLanguage.confirmDialog.remove)
     .afterClosed().subscribe(res =>{
       if(res){
         this.deleteComponent();
@@ -137,7 +159,7 @@ export class PropertyComponent implements OnInit {
   }
 
   confirmClear() {
-    this.dialogService.openConfirmDialog(environment.clear)
+    this.dialogService.openConfirmDialog(this.selectedLanguage.confirmDialog.clear)
     .afterClosed().subscribe(res =>{
       if(res){
         this.clearComponent();
@@ -149,6 +171,12 @@ export class PropertyComponent implements OnInit {
 
   ngOnInit(): void {
     this.style2 = this.props.style;
+    this.language.set("en", en);
+    this.language.set("ja", ja);
+    this.selectedLanguage = this.language.get("en");
+    this.compLanguage = this.selectedLanguage.property;
+    this.updateSelectedLanguage.emit(this.selectedLanguage);
+    this.selectedLang.setLanguage(this.selectedLanguage);
   }
 
   idChangeHandler(event: any) {

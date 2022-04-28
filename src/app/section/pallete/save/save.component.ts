@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 import { CrossComponentBridge } from 'src/app/service/cross-component-bridge/crossComponentBridge.service';
 import Swal from 'sweetalert2';
 import { environment } from 'src/environments/environment';
+import { LanguageService } from 'src/app/service/language/language.service';
 
 @Component({
   selector: 'app-save',
@@ -31,6 +32,7 @@ export class SaveComponent implements OnInit{
   @Input() style: string;
   @Input() tabList: any;
   @Input() currentTab: string;
+  @Input() selectedLanguage: any;
 
   @Output() updateProjectNameEvent = new EventEmitter<string>();
   @Output() updateProjectIdEvent = new EventEmitter<any>();
@@ -181,6 +183,9 @@ export class SaveComponent implements OnInit{
     this.updateProjectIdEvent.emit(this.loadedProjectId)
     this._router.navigateByUrl("/canvas/"+id);
   }
+  updateSelectedLanguage(value: any){
+    this.selectedLanguage = value;
+  }
 }
 
 @Component({
@@ -200,13 +205,18 @@ export class SaveDataComponent {
   openedProjectName: string;
   projectList: any;
   allProjects: any;
+  selectedLanguage: any;
+ 
 
   constructor(
+    
     @Inject(MAT_DIALOG_DATA) public data: any,
     private loginCookie:CookieService,
     public _router: Router,
     private service: UsersService,
     public dialogRef?: MatDialogRef<SaveDataComponent>,
+    private languageService?: LanguageService
+    
   ) {
     this.componentListMap = data.value;
     this.style = data.style;
@@ -225,6 +235,7 @@ export class SaveDataComponent {
       this.saveName = "Project";
     }
     this.getAllProjects();
+    this.selectedLanguage = this.languageService?.getLanguage()
   }
 
   getAllProjects(){

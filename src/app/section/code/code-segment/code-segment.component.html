@@ -1,8 +1,8 @@
 <div style="display: flex; flex-direction: column; height: 100%;">
     <div style=" align-content: center; padding: 15px;">
-        <button class="btnCopy" (click)="copyMessage(htmlCode)">Copy</button>
-        <button class="btnCopy" (click)="downloadCode(htmlCode)">Download</button>
-        <button class="btnCopy" (click)="buildCode(htmlCode)">Build</button>
+        <button class="btnCopy" (click)="copyMessage(htmlCode)">{{selectedLanguage?.Code.copy}}</button>
+<button class="btnCopy" (click)="downloadCode(htmlCode)">{{selectedLanguage?.Code.download}}</button>
+<button class="btnCopy" (click)="buildCode(htmlCode)">{{selectedLanguage?.Code.build}}</button>
     </div>
     <div style="width: 300px; height: calc(100vh - 180px); overflow-y: auto; padding: 10px;">
         <code id="code" [innerText]="htmlCode"> </code>

@@ -73,6 +73,7 @@ export class TemplatesComponent implements OnInit, AfterViewInit, AfterViewCheck
   @ViewChild('subMenuItem2') subMenuItem2!: ElementRef;
   //@ViewChild(PropertyComponent) propertyCmp:PropertyComponent;
   @Input() isPlaying: boolean;
+  @Input() selectedLanguage: any;
 
   @Output() updateComponentListEvent = new EventEmitter<IComponent>();
   @Output() updateCanvasLeftEvent = new EventEmitter<number>();
@@ -101,6 +102,7 @@ export class TemplatesComponent implements OnInit, AfterViewInit, AfterViewCheck
   whatComponent = 'none';
   sessionID = this.loginCookie.get("sessionID");
   inSession: boolean = this.sessionID == "12345";
+
 
   ngOnInit() {
     if(this.inSession) {
@@ -853,6 +855,10 @@ export class TemplatesComponent implements OnInit, AfterViewInit, AfterViewCheck
     }, 100);
   }
 
+  updateSelectedLanguage(value: any){
+    this.selectedLanguage = value;
+    console.log(this.selectedLanguage);
+  }
 
   /****************** OLD CODE STARTS HERE **********************/
 }

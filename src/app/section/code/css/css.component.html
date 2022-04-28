@@ -3,7 +3,7 @@
     (click)="addAllCSSRule(cssTextArea.value)"
     (click)="cssReceiveMessage()"
     #savedCss>
-    Save CSS
+    {{selectedLanguage?.Code.saveCSS}}
     </button>
 </div>
 <div style="box-sizing: border-box; width: 300px; height: calc(100% - 30px); overflow-y: auto; display: flex;">

@@ -1,3 +1,4 @@
+import { ElementsComponent } from './elements/elements.component';
 import {
   AfterViewChecked,
   AfterViewInit,
@@ -23,6 +24,9 @@ import { PropertyComponent } from './../../property/property.component';
 import { DialogService } from 'src/app/service/dialog/dialog.service';
 import { environment } from 'src/environments/environment';
 import { ClearComponentsService } from 'src/app/service/clearComponents/clear-components.service';
+import { TemplatesComponent } from './templates/templates.component';
+import { ComponentListComponent } from './component-list/component-list.component';
+import { SaveComponent, SaveDataComponent } from './save/save.component';
 
 @Component({
   selector: 'app-pallete',
@@ -61,6 +65,10 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
   public _popupCount = 0;
   
   @ViewChild('PropertyComponent') property: boolean;
+  @ViewChild(ElementsComponent) element: ElementsComponent;
+  @ViewChild(TemplatesComponent) template: TemplatesComponent;
+  @ViewChild(ComponentListComponent) compList: ComponentListComponent;
+  @ViewChild(SaveComponent) save: SaveComponent;
   @Input() canvas: ElementRef;
   @Input() propertyCmp: PropertyComponent;
   @Input() domInsideCanvas: boolean;
@@ -70,6 +78,7 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
   @Input() tabList: any;
   @Input() currentTab: string;
   @Input() isPlaying: boolean;
+  @Input() selectedLanguage: any;
   //@Input() componentListMap:
   //@ViewChild('textOp') textBtn!: ElementRef;
   @ViewChild('subMenuItem') subMenuItem!: ElementRef;
@@ -201,6 +210,15 @@ export class PalleteComponent implements OnInit, AfterViewInit, AfterViewChecked
   }
   clearComponent(): void {
     this.clearComponents.clearComponents();
+  }
+  updateSelectedLanguage(value: any){
+    this.selectedLanguage = value;
+    this.element.updateSelectedLanguage(value);
+    this.template.updateSelectedLanguage(value);
+    this.compList.updateSelectedLanguage(value);
+    this.save.updateSelectedLanguage(value);
+    
+    console.log(this.selectedLanguage);
   }
   //----------------------------------------------------------------------------
 

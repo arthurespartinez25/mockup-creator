@@ -63,6 +63,7 @@
         role="tabpanel"
         aria-labelledby="elements-tab"
         [isPlaying]="isPlaying"
+        [selectedLanguage]="selectedLanguage"
         >
       </app-elements>
       <app-templates 
@@ -80,6 +81,7 @@
         role="tabpanel"
         aria-labelledby="templates-tab"
         [isPlaying]="isPlaying"
+        [selectedLanguage]="selectedLanguage"
         >
       </app-templates>
       <app-save
@@ -92,6 +94,7 @@
         id="save"
         role="savepanel"
         aria-labelledby="saves-tab"
+        [selectedLanguage]="selectedLanguage"
         (updateProjectIdEvent)="updateProjectId($event)"
       >
       </app-save>
@@ -107,6 +110,8 @@
         style="flex-grow: 1;
         overflow-x: hidden;
         overflow-y: auto;"
+        (updateSelectedLanguage)="selectedLanguage($event)"
+        [selectedLanguage]="selectedLanguage"
         >
       </app-component-list>
   </div>
