@@ -5,7 +5,6 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { DatePipe } from '@angular/common'
 import { CodeComponent } from '../section/code/code.component';
 import { DialogService } from '../service/dialog/dialog.service';
-import { environment } from 'src/environments/environment';
 import { LanguageService } from '../service/language/language.service';
 import { en } from '../resource/message/en';
 import { ja } from '../resource/message/ja';

@@ -13,7 +13,7 @@ export class MatConfirmDialogComponent implements OnInit {
   public dialogRef: MatDialogRef<MatConfirmDialogComponent>) { }
 
   ngOnInit(): void {
-    this.selectedLanguage = this.language.getLanguage()
+    this.selectedLanguage = this.language.getLanguage();
   }
  
 }

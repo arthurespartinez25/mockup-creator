@@ -14,7 +14,6 @@ import { ButtonService } from 'src/app/service/button-service/button-service.ser
 import { keyframes } from '@angular/animations';
 import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 import { DialogService } from 'src/app/service/dialog/dialog.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-canvas',
@@ -58,7 +57,6 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     finalStyle:''
   };
 
-  
   public cssRuleCount = document.styleSheets[0].cssRules.length;
   public _popupCount = 0;
 
@@ -88,10 +86,10 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   @Input() canvasW: any;
   @Input() whatComponent:any;
   @Input() componentListMap : Map<string, IComponent[]>;
-  
- 
+  @Input() selectedLanguage: any;
 
   changeref: ChangeDetectorRef;
+ 
   // props: any;
   constructor(
     private loginCookie:CookieService,
@@ -102,8 +100,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     public datepipe: DatePipe,
     private dialogService: DialogService,
     private buttonService?: ButtonService,
-    
-    
+
   ) {
     this.changeref = changeDetectorRef;
     if(buttonService) {
@@ -120,8 +117,6 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   inSession: boolean = this.sessionID == "12345";
   isPlaying: boolean = false;
   
-  
-
   ngOnInit() {
     console.log(this.inSession);
     if(this.inSession) {
@@ -132,6 +127,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
         this.users = data;
       }) */
     }
+
   }
   ngAfterViewInit(): void {
     this.canvasListElements.toArray();
@@ -283,7 +279,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     }
   
     confirmRemoveTab(index: number) {
-      this.dialogService.openConfirmDialog(environment.removeTab)
+      this.dialogService.openConfirmDialog(this.selectedLanguage.confirmDialog.closeTab)
       .afterClosed().subscribe(res =>{
         if(res){
           this.removeTab(index);
@@ -291,7 +287,6 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
       });
     }
     
-
   myTabSelectedTabChange(changeEvent: MatTabChangeEvent) {
     this.tabs[this.currentTab].allowEdit = false;
     this.currentTab = changeEvent.index;
@@ -325,6 +320,10 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   deselect() {
     this.selectedComponent.props.selected = false;
     this.updateSelectedEvent.emit(this.defaultProps);
+  }
+
+  updateSelectedLanguage(value: any){
+    this.selectedLanguage = value;
   }
 
   /****************** OLD CODE STARTS HERE **********************/
