@@ -78,7 +78,6 @@ export const en = {
     },
 
     languagePicker: {
-        mockUp: "Mockup-Creator",
         project: "Project",
         guide: "Guide",
         about: "About",

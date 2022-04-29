@@ -78,7 +78,6 @@ export const ja = {
     },
 
     languagePicker: {
-        mockUp: "モックアップクリエイター",
         project: "プロジェクト",
         guide: "ガイド",
         about: "について",
