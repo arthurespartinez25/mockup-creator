@@ -857,7 +857,6 @@ export class TemplatesComponent implements OnInit, AfterViewInit, AfterViewCheck
 
   updateSelectedLanguage(value: any){
     this.selectedLanguage = value;
-    console.log(this.selectedLanguage);
   }
 
   /****************** OLD CODE STARTS HERE **********************/

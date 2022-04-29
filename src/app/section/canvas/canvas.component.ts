@@ -11,7 +11,6 @@ import { IProperty } from './../../interfaces/iproperty';
 import { PropertyComponent } from './../../property/property.component';
 import { ButtonService } from 'src/app/service/button-service/button-service.service';
 import { DialogService } from 'src/app/service/dialog/dialog.service';
-import { environment} from 'src/environments/environment';
 import { en } from 'src/app/resource/message/en';
 import { ja } from 'src/app/resource/message/ja';
 import { LanguageService } from 'src/app/service/language/language.service';

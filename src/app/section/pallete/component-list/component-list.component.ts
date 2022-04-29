@@ -318,7 +318,6 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
 
   updateSelectedLanguage(value: any){
     this.selectedLanguage = value;
-    console.log(this.selectedLanguage);
   }
   /**************End of code for component list functions *************************/
 
