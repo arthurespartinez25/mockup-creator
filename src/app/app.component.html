@@ -1,14 +1,9 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
 
 <!-- Toolbar -->
 <!-- <app-navbar></app-navbar> -->
+
+
 <div *ngIf="this.inSession" class="content" role="main">
   <!-- PALETTE SECTION -->
     <app-pallete
@@ -37,34 +32,6 @@
   
   <!-- CANVAS SECTION -->
 
-  <!-- <div id="canvas-container">
-    <div
-      id="canvas"
-      class="solid-lines"
-      #canvas
-      (mouseenter)="domInsideCanvas = true"
-      (mouseleave)="domInsideCanvas = false"
-    >
-      <div id="canvasBody">
-        <app-wrapper
-          *ngFor="let component of componentList; let i = index"
-          class="wrapper"
-          (click)="clickHandler(component)"
-          [childComp]="component"
-          [canvasRef]="component.canvas"
-          [componentList]="componentList"
-          [mousePositionX]="mousePositionX"
-          [mousePositionY]="mousePositionY"
-          [canvasLeft]="canvasLeft"
-          [canvasTop]="canvasTop"
-          [canvasW]="canvasW"
-          [ngClass]="{ 'nav-wrapper': component.props.typeObj == 'nav' }"
-          [whatComponent]="whatComponent"
-        >
-        </app-wrapper>
-      </div>
-    </div>
-  </div> -->
   <app-canvas 
     [componentList]="componentList"
     [mousePositionX]="mousePositionX"
@@ -86,110 +53,6 @@
     (updateSelectedLanguageEvent)="updateSelectedLanguage($event)"
     ></app-canvas>
   <!-- CODE SECTION -->
-<!--
-  <div id="code-container">
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-      <li class="nav-item" role="presentation">
-        <button
-          class="nav-link active"
-          id="properties-tab"
-          data-bs-toggle="tab"
-          data-bs-target="#properties"
-          type="button"
-          role="tab"
-          aria-controls="properties"
-          aria-selected="true"
-          
-        >
-          Properties
-        </button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button
-          class="nav-link"
-          id="css-tab"
-          data-bs-toggle="tab"
-          data-bs-target="#css"
-          type="button"
-          role="tab"
-          aria-controls="css"
-          aria-selected="false"
-        >
-          CSS
-        </button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button
-          class="nav-link"
-          id="code-tab"
-          data-bs-toggle="tab"
-          data-bs-target="#code"
-          type="button"
-          role="tab"
-          aria-controls="code"
-          aria-selected="false"
-        >
-          CODE
-        </button>
-      </li>
-    </ul>
-    <div class="tab-content tab-container" id="myTabContent">
-      <div
-        class="tab-pane fade show active"
-        id="properties"
-        role="tabpanel"
-        aria-labelledby="properties-tab"
-      >
-        <app-property
-          [property]="selected"
-          [selectedIdx]="selectedComponent"
-          [compList]="componentList"
-          (addAllCSSRule) = "addAllCSSRule($event)"
-          (cssReceiveMessage)="cssReceiveMessage()"
-          (clearCss) = "clearCss()"
-        ></app-property>
-      </div>
-      <div
-        class="tab-pane fade css-textarea-container"
-        id="css"
-        role="tabpanel"
-        aria-labelledby="css-tab"
-      >
-        <h3
-          style="background-color: #2e9c6b; margin: 0"
-          (click)="addAllCSSRule(cssTextArea.value)"
-          (click)="cssReceiveMessage()"
-        >
-          Save CSS
-        </h3>
-
-        <textarea
-          style="margin: 0; width: 100%"
-          cols="30"
-          rows="5"
-          #cssTextArea
-          name="css-textarea"
-          id="css-textarea"
-        ></textarea>
-
-        </div>
-      <div
-        class="tab-pane fade"
-        id="code"
-        role="tabpanel"
-        aria-labelledby="code-tab"
-      >
-        <button class="btnCopy" (click)="copyMessage(htmlCode)">Copy</button>
-        <button class="btnCopy" (click)="downloadCode(htmlCode)">
-          Download
-        </button>
-        <button class="btnCopy" (click)="buildCode(htmlCode)">
-          Build
-        </button>
-        <code [innerText]="htmlCode"> </code>
-      </div>
-    </div>
-  </div>-->
   <app-code
   [canvas] = "passCanvas"
   [selected] = "selected"
@@ -207,12 +70,5 @@
   >
   </app-code>
 </div>
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 <router-outlet *ngIf="!inSession"></router-outlet>

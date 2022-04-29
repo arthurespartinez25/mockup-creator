@@ -1,8 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Lexend+Deca:wght@200;400;500;600&family=Mali:ital,wght@0,300;0,400;0,500;0,600;1,500&display=swap');
-.content {
-  display: flex;
-  flex-direction: row;
-}
 
 /********************** CANVAS CSS ********************/
 
@@ -14,7 +10,7 @@
   padding-top: 10px;
   align-items: center;
   height: 100vh;
-  width: calc(100vw - 520px);
+  width: calc(100vw - 500px);
   flex-grow: 3;
   background-color: gray;
   position:static;
@@ -209,10 +205,10 @@ a.custom-nav-link:hover {
   color: unset;
   opacity: unset;
 }
-/* .pagination-container {
+.pagination-container {
   width: 100%;
   max-width: 1280px;
-} */
+}
 ::ng-deep .mat-tab-header{
   max-width: 97%;
 }
@@ -234,7 +230,7 @@ a.custom-nav-link:hover {
 }
 label{
   font-family: 'Mali', cursive;
-  font-size: 2rem;
+  font-size: 1.7rem;
   font-weight: 600;
 }
 .mockLinks{

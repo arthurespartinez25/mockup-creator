@@ -5,191 +5,97 @@
   background-color: gray;
 }
 
-/********************** CANVAS CSS ********************/
-
-/* #canvas-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100%;
-  min-width: 1300px;
-  min-height: 800;
-  padding: 20px;
-  flex-grow: 3;
-  background-color: gray;
-  position:static;
-}
-
-#canvas {
-  display: grid;
-  width: 1280px;
-  height: 720px;
-  min-width: 1280px;
-  min-height: 720px;
-  background-color: white;  
-}
-
-.solid-lines {
-  background-image:linear-gradient(to right, #fff 8px, transparent 8px), linear-gradient(rgb(65, 65, 65) 2px, transparent 2px);
-  background-size: 10px 10px;
-}
-
-#canvasBody {
-  display: grid;
-  width: 1280px;
-  height: 720px;
-  min-width: 1280px;
-  min-height: 720px;
-}
-
-.wrapper {
-  grid-column: 1;
-  grid-row: 1;
-  width: fit-content;
-  height: fit-content;
-  margin: 0;
-}
-
-.nav-wrapper {
-  width: 100% !important;
-  height: fit-content;
-} */
-
-/********************** CODE CSS ********************/
-/*
-.tab-container {
-  height: 100%;
-  width: 100%;
-  background-color: white;
-}
-
-.css-textarea-container {
-  height: 100%;
-  width: 100%;
-  background-color: white;
-}
-
-#code-container {
-  height: 100vh;
-  width: 25%;
-  max-width: 300px;
-  min-width: 250px;
-  overflow-y: auto;
-}
-
-#code {
-  background-color: white;
-  padding: 10px;
-  height: 100%;
-}
-
-code {
-  color: black;
-}
-
-#css-textarea {
-  width: 100%;
-  height: 100%;
-  resize: none;
-  overflow-y: auto;
-}
-
-#css-textarea:focus {
-  outline: none;
-}
-*/
-/********************** IMG CSS ********************/
-
 .img-rounded {
   max-width: 600px;
   height: 200px;
 }
-/********************** COMPONENT CSS ********************/
-/*
-.custom-nav {
-  background-color: #3772ff;
-  height: 10%;
-  padding: 5px;
+.canvasHeader{
+  background-color: #16324f;
+  height: 50px;
+  width: 80%;
   display: flex;
-  flex-direction: row;
-  justify-content: start;
+  color: #fff;
+  justify-content: space-between;
+  padding: 0px 15px;
+  position: sticky;
+  float: inline-start;
+  /* position: relative;
+  top: 40%;
+  left: 50%; */
+}
+label{
+  font-family: 'Mali', cursive;
+  font-size: 2rem;
+  font-weight: 600;
+}
+.mockLinks{
+  height: 100%;
+  margin: 0 !important;
+  display: flex;
   align-items: center;
 }
-
-a.custom-nav-link {
-  color: #e6e8e6;
-  margin: 0px 15px;
+.mockLinks li {
+text-decoration: none;
+list-style: none;
+display: inline-block;
+margin: 0 10px;
 }
-
-a.custom-nav-link:hover {
-  color: #080708;
+.mockLinks li a {
+  text-decoration: none;
+  color: #fff;
+  font-family: 'Mali', cursive;
+  font-size: 1.2rem;
+  vertical-align: middle;
+  height: 100%;
+  padding: 20px;
 }
-
-.custom-nav h1 {
-  margin: 0;
+.mockLinks li a:hover{
+  color:#16324f;
+  background-color: #fff;
 }
-
-.always-on-top {
-  position: fixed;
-  z-index: 999;
+.profileCOntainer{
+  height: 100%;
+  width: 50px;
+  display: flex;
+  align-items: center;
 }
-
-.inputFieldContainer {
-  min-width: 130px;
-}
-
-.inputField {
-  margin: 2px;
-}
-
-.headerFunc {
-  font-size: 25px;
-  font-weight: bold;
-  font-family: "Times New Roman", Times, serif;
-}
-.paragraphContainer {
-  width: fit-content;
-  height: fit-content;
-  margin: 2px;
-}
-
-.paragraph {
-  margin: 2px;
+.dropdown-item{
+  padding: 20px;
   width: 200px;
 }
-
-.Link {
-  color: #417ff3;
-  margin: 0px 15px;
+.profileCOntainer img {
+  height: 80%;
+  width: 80%;
+  border-radius: 50%;
+  cursor: pointer;
 }
-
-.delete {
-  max-height: 50px;
-  max-width: 60px;
+.linksContainer{
+  width: 55%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dropdown-submenu{
+  position: relative;
+}
+.dropdown-submenu a::after{
+  transform: rotate(-90deg);
   position: absolute;
-  bottom: 26%;
-  right: 34%;
+  right: 3px;
+  top: 40%;
 }
-
-.btnCopy{
-  width: 20%;
-  max-width: 270px;
-  min-width: 220px;
-  overflow-y: auto;
-  background-color: green;
-  color: white;
-  border-radius: 10px;
-  padding: 5px 10px;
-  border: none;
-  font-weight: bolder;
-  font-size: x-large;
-  margin-bottom: 5px;
-  
+.dropdown-submenu:hover .dropdown-menu, .dropdown-submenu:focus .dropdown-menu{
+  display: flex;
+  flex-direction: column;
+  position: absolute !important;
+  margin-top: -30px;
+  left: 100%;
 }
-.componentHover:hover{
-  background-color: rgba(100, 100, 100, 0.2);
-  opacity: 0.7;
+@media (max-width: 992px) {
+  .dropdown-menu{
+      width: 50%;
+  }
+  .dropdown-menu .dropdown-submenu{
+      width: auto;
+  }
 }
-*/
