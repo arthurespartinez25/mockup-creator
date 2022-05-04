@@ -115,6 +115,16 @@ async function getAllProjects(){
         console.warn(error);
     }
 }
+async function getTableContent(tableID){
+    try{
+        let pool = await sql.connect(config);
+        let table = await pool.request().query(`SELECT tbl_content from tbl_content_table WHERE table_id='${tableID}'`);
+        return table.recordset;
+    }
+    catch (error) {
+        console.warn(error);
+    }
+}
 async function deleteUser(userID){
     try{
         let pool = await sql.connect(config);
@@ -393,5 +403,6 @@ module.exports = {
     deletePreviousState: deletePreviousState,
     deleteTable: deleteTable,
     getSingleProject: getSingleProject,
-    getAllProjects: getAllProjects
+    getAllProjects: getAllProjects,
+    getTableContent: getTableContent
 }

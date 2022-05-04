@@ -16,7 +16,7 @@ import { Location } from '@angular/common';
 import { IComponent} from './interfaces/icomponent';
 import { IProperty } from './interfaces/iproperty';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { DatePipe } from '@angular/common'
 import { PropertyComponent } from './property/property.component';
@@ -63,6 +63,7 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   tabList: any;
   components: any;
   cssArray: any;
+  tableDetails: any;
 
   selected: IProperty = {
     key: '',
@@ -182,7 +183,8 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
           linkValue: this.components[i].componentOptionValues,
           linksArray: this.components[i].componentOptionValues.split(','),
           cols: this.components[i].componentTextboxCols,
-          rows: this.components[i].componentTextboxRows
+          rows: this.components[i].componentTextboxRows,
+          tblContent: []
         }
         if(canvasId == this.components[i].tabs_id){
           switch(props.typeObj){
@@ -229,7 +231,12 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
               this.updateComponentList(new LinkDragComponent(canvas), canvas);
               break;
             case 'tableDrag':
-
+              this.service.getTableContent(props.id).subscribe((res)=>{
+                
+                 for(let i = 0; i<props.tblRows!; i++){
+                  props.tblContent = res[i].tbl_content;
+                 }
+              })
               this.updateComponentList(new TableDragComponent(canvas, this.changeref), canvas);
               break;
             case 'youtubeDrag':

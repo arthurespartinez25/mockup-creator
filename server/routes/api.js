@@ -176,7 +176,13 @@ router.get('/getAllProjects/', (req, res)=>{
 router.get('/total/:userID', (req, res) => {
   const {userID} = req.params;
   dboperations.getTotal(userID).then(result => {
-    console.log(result);
+    return res.status(200).json({result});
+ });
+});
+
+router.get('/getTableContent/:tableID', (req, res) => {
+  const {tableID} = req.params;
+  dboperations.getTableContent(tableID).then(result => {
     return res.status(200).json({result});
  });
 });

@@ -25,7 +25,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { DatePipe } from '@angular/common'
 import { PropertyComponent } from './../../../property/property.component';
 import { DialogService } from 'src/app/service/dialog/dialog.service';
-import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-component-list',
   templateUrl: './component-list.component.html',
@@ -102,8 +101,6 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
   whatComponent = 'none';
   sessionID = this.loginCookie.get("sessionID");
   inSession: boolean = this.sessionID == "12345";
-  
-  
 
   ngOnInit() {
     if(this.inSession) {
@@ -259,7 +256,6 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
   
 
   hideComponent(value: any) {
-    value.props.hidden = !value.props.hidden;
     let componentIndex = this.componentList.indexOf(value); //gets the index of the selected component inside the canvas
     let element = document.getElementById(this.componentList[componentIndex].props.id);
     let oldStyle = element?.getAttribute('style');
@@ -285,8 +281,6 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
       event.previousIndex,
       event.currentIndex
     );
-    //console.log("This is the previous index " + event.previousContainer);
-    //console.log("This is the new index " + event.currentIndex);
   }
 
   //code below is for counting how many component of the same type are in the componentList
