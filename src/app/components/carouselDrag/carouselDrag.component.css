@@ -1,5 +1,5 @@
 .carouselContainer {
-  position: relative;
+  position: absolute;
   margin: auto;
   border-radius: 15px;
   box-shadow: 0 8px 12px gray;

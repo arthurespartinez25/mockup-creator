@@ -72,12 +72,13 @@ export class CarouselDragComponent implements OnInit, IComponent {
       this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
       this.props.mouseDragPositionX = this.percentageX;
       this.props.mouseDragPositionY = this.percentageY;
-      this.props.style ='width:500px; height:300px; border-radius:15px;'
-    
-      
-      this.props.finalStyle=this.props.style;
-
-      
+      this.props.style =
+      'height:300px;width:500px;position:absolute;border-radius: 15px;left:' +
+      this.percentageX +
+      '%;top:' +
+      this.percentageY +
+      '%;';
+this.props.finalStyle=this.props.style;
     }
   }
 
