@@ -1,5 +1,5 @@
 .carouselContainer {
-  position: absolute;
+  position: relative;
   margin: auto;
   border-radius: 15px;
   box-shadow: 0 8px 12px gray;
@@ -12,8 +12,8 @@
 
 .carouselContainer img.imageActive {
   display: block;
-  width: 500px;
-  height: 300px;
+  width: 100%;
+  height: 100%;
 }
 
 .carouselDot {

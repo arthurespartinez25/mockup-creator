@@ -9,7 +9,10 @@
   }" >
   <img *ngFor="let slide of slides; let i=index" 
   [ngClass]="{'imageActive': selectedIndex === i}"
-  [src]= "slide.imageSrc" [alt]="slide.imageAlt"> 
+  [src]= "slide.imageSrc" [alt]="slide.imageAlt"  
+  [class]="props.class" [id]="props.id" 
+  [style]="props.style" 
+ > 
   <div *ngIf="indicators" class="carouselDot">
       <span *ngFor="let dot of slides; let i = index"
        class="dot"
