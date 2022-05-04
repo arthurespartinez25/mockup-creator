@@ -260,4 +260,19 @@
     }"
   ></app-videoDrag>
 
+<app-carouselDrag
+  [slides]="slides"
+  [property]="child.props"
+  *ngSwitchCase="'carouselDrag'"
+  [canvasPositionX]="canvasPositionX"
+  [canvasPositionY]="canvasPositionY"
+  [mousePositionX2]="mousePositionX2"
+  [mousePositionY2]="mousePositionY2"
+  [ngStyle]="{
+    'height': '1px'
+  }"
+></app-carouselDrag>
+
+
+
 </div>

@@ -41,6 +41,12 @@ import { HeaderDragComponent } from './components/headerDrag/headerDrag.componen
 import { InputDragComponent } from './components/inputDrag/inputDrag.component';
 import { YoutubeDragComponent } from './components/youtubeDrag/youtubeDrag.component';
 import { UsersService } from './service/users/users.service';
+import { CarouselDragComponent } from './components/carouselDrag/carouselDrag.component';
+
+export interface Images{
+  imageSrc: string;
+  imageAlt: string;
+}
 
 @Component({
   selector: 'app-root',
@@ -62,6 +68,20 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
   tabList: any;
   components: any;
   cssArray: any;
+  public slides: Images[] = [
+    {
+     imageSrc:'https://previews.123rf.com/images/aquir/aquir1311/aquir131100316/23569861-sample-grunge-red-round-stamp.jpg?fj=1',
+     imageAlt: 'sample image1'
+   },
+   {
+     imageSrc: 'https://thumbs.dreamstime.com/z/example-blue-grunge-round-vintage-stamp-rubber-87353339.jpg',
+     imageAlt: 'sample image2'
+   },
+   {
+     imageSrc: 'https://image.shutterstock.com/image-vector/sample-stamp-round-grunge-sign-600w-1449476966.jpg',
+     imageAlt: 'sample image3'
+   },
+ ]; 
 
   selected: IProperty = {
     key: '',
@@ -234,6 +254,9 @@ export class AppComponent implements OnInit, AfterViewInit, AfterViewChecked {
               break;
             case 'videoDrag':
               this.updateComponentList(new VideoDragComponent(canvas, this.sanitizer), canvas);
+              break;
+              case 'carouselDrag':
+              this.updateComponentList(new CarouselDragComponent(canvas), canvas);
               break;
           }
           Object.keys(this.componentListMap.get(canvasId)![index].props).forEach(key=>{

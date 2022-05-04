@@ -13,6 +13,7 @@ import { ButtonService } from 'src/app/service/button-service/button-service.ser
 import { DialogService } from 'src/app/service/dialog/dialog.service';
 import { environment} from 'src/environments/environment';
 import Swal from 'sweetalert2';
+import { Images } from 'src/app/app.component';
 
 @Component({
   selector: 'app-canvas',
@@ -88,6 +89,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   @Input() canvasW: any;
   @Input() whatComponent:any;
   @Input() componentListMap : Map<string, IComponent[]>;
+  @Input() slides: Images[];
   
  
   changeref: ChangeDetectorRef;

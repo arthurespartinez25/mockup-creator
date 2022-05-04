@@ -44,4 +44,5 @@ export interface IProperty {
   redirection?: any;
   target?: boolean;
   isSavedComponent: boolean;
+ 
 }

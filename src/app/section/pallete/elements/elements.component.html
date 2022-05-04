@@ -224,5 +224,14 @@
           >
           Video
         </button>
+        <button
+        class="palette-item"
+        (click)="addComponent('carousel')"
+        cdkDrag
+        (cdkDragEnded)="onDragEndedAddComponent($event, 'carousel')"
+        [disabled]="isPlaying"
+      >
+        Carousel
+      </button>
         </div>
       </div>

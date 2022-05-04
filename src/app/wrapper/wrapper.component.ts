@@ -2,6 +2,7 @@ import { DragDrop } from '@angular/cdk/drag-drop';
 import { Icu } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { throwError } from 'rxjs';
+import { Images } from '../app.component';
 import { IComponent } from '../interfaces/icomponent';
 import { IProperty } from '../interfaces/iproperty';
 
@@ -24,6 +25,7 @@ export class WrapperComponent implements OnInit {
   @Input() whatComponent:any;
   @Input() initialName: string;
   @Input() isPlaying: boolean;
+  @Input() slides: Images[];
 
   mousePositionX2 = 0;
   mousePositionY2 = 0;

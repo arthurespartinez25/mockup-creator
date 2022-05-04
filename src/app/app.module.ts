@@ -48,6 +48,8 @@ import { DivDragComponent } from './components/divDrag/divDrag.component';
 import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
 import { VideoDragComponent } from './components/videoDrag/videoDrag.component';
 import { LoadComponent } from './section/pallete/save/load/load.component';
+import { CarouselDragComponent } from './components/carouselDrag/carouselDrag.component';
+
 
 @NgModule({
   declarations: [
@@ -88,6 +90,7 @@ import { LoadComponent } from './section/pallete/save/load/load.component';
     MatConfirmDialogComponent,
     VideoDragComponent,
     LoadComponent,
+    CarouselDragComponent,
     
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule, FormsModule, HttpClientModule, MatTabsModule, MatDialogModule, MatTooltipModule],

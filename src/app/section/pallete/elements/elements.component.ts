@@ -42,6 +42,7 @@ import { VideoDragComponent } from './../../../components/videoDrag/videoDrag.co
 import { CookieService } from 'ngx-cookie-service';
 import { DatePipe } from '@angular/common'
 import { PropertyComponent } from './../../../property/property.component';
+import { CarouselDragComponent } from 'src/app/components/carouselDrag/carouselDrag.component';
 
 @Component({
   selector: 'app-elements',
@@ -256,6 +257,10 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
         temp = new VideoDragComponent(this.canvas, this.sanitizer);
         break;
 
+      case 'carousel':
+        temp = new CarouselDragComponent(this.canvas);
+        break;
+
       default:
         temp = new ButtonDragComponent(this.canvas);
     }
@@ -299,7 +304,8 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
         component == 'link' ||
         component == 'table' ||
         component == 'youtube' ||
-        component == 'video'
+        component == 'video' ||
+        component == 'carousel'
       ) {
         this.canvasLeftX = 0;
         this.canvasTopY = 0;
