@@ -1,13 +1,23 @@
-<div *ngIf="slides && slides.length > 0">
-  <img *ngFor="let slide of slides; let i=index" cdkDrag cdkDragBoundary=".canvas" [class]="props.class" [id]="props.id" 
-[cdkDragDisabled]="!props.draggable" 
-[style]="props.style" [src]= "slide.imageSrc" [alt]="slide.imageAlt"
-(cdkDragEnded)="onDragEnded($event)" 
-[ngStyle]="{
-  'border-color' : props.selected == true ? 'red': (props.selected == false ? 'none': null),
-  'border-style' : props.selected == true ? 'solid': (props.selected == false ? 'none': null),
-  'border-width' : props.selected == true ? '1px': (props.selected == false ? '0px': null)
-}" > 
+<div *ngIf="slides && slides.length > 0" class="carouselContainer"  cdkDrag cdkDragBoundary=".canvas" [class]="props.class" [id]="props.id" 
+  [cdkDragDisabled]="!props.draggable" 
+  [style]="props.style" 
+  (cdkDragEnded)="onDragEnded($event)" 
+  [ngStyle]="{
+    'border-color' : props.selected == true ? 'red': (props.selected == false ? 'none': null),
+    'border-style' : props.selected == true ? 'solid': (props.selected == false ? 'none': null),
+    'border-width' : props.selected == true ? '1px': (props.selected == false ? '0px': null)
+  }" >
+  <img *ngFor="let slide of slides; let i=index" 
+  [ngClass]="{'imageActive': selectedIndex === i}"
+  [src]= "slide.imageSrc" [alt]="slide.imageAlt"> 
+  <div *ngIf="indicators" class="carouselDot">
+      <span *ngFor="let dot of slides; let i = index"
+       class="dot"
+       [ngClass]="{'active': selectedIndex === i }"
+       (click)="selectSlide(i)"
+      >
+      </span>
+  </div>
 </div>
 
 

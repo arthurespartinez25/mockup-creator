@@ -21,10 +21,7 @@ import { IProperty } from 'src/app/interfaces/iproperty';
 })
 export class CarouselDragComponent implements OnInit, IComponent {
   canvas: ElementRef;
-  slide: Images = {
-    imageSrc: '',
-    imageAlt: ''
-}
+
 
   props: IProperty = {
     key: '',
@@ -50,6 +47,7 @@ export class CarouselDragComponent implements OnInit, IComponent {
   @Input() mousePositionY2: any;
   @Input() whatComponent2: any;
   @Input() slides: Images[];
+
   
   canvasPositionLeft = 0;
   canvasPositionTop = 0;
@@ -57,7 +55,8 @@ export class CarouselDragComponent implements OnInit, IComponent {
   mousePositionTop = 0;
   percentageX = 0;
   percentageY = 0;
-  selectedIndex =0;
+  selectedIndex = 0;
+  indicators = true;
 
   ngOnInit(): void {
     if(this.props.isSavedComponent){
@@ -73,17 +72,17 @@ export class CarouselDragComponent implements OnInit, IComponent {
       this.percentageY = ((this.mousePositionY2 - this.canvasPositionTop) / 720) * 100;
       this.props.mouseDragPositionX = this.percentageX;
       this.props.mouseDragPositionY = this.percentageY;
-      this.props.style =
-      'height:300px;width:500px;position:absolute;left:' +
-      this.percentageX 
-      '%;top:' +
-      this.percentageY +
-      '%;';
+      this.props.style ='width:500px; height:300px; border-radius:15px;'
+    
       
       this.props.finalStyle=this.props.style;
 
       
     }
+  }
+
+  selectSlide(index: number): void {
+    this.selectedIndex = index;
   }
 
   onDragEnded($event: CdkDragEnd) {
