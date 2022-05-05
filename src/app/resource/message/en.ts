@@ -69,9 +69,9 @@ export const en = {
     },
 
     confirmDialog: {
-        closeTab: "This operation is ireversible. This action will remove the selected canvas. Do you want to proceed?",
-        remove: "This operation is ireversible. This action will remove the selected component from canvas. Do you want to proceed?",
-        clear: "This operation is ireversible. This action will clear all the components in the canvas. Do you want to proceed?",
+        closeTab: "This operation is irreversible. This action will remove the selected canvas. Do you want to proceed?",
+        remove: "This operation is irreversible. This action will remove the selected component from canvas. Do you want to proceed?",
+        clear: "This operation is irreversible. This action will clear all the components in the canvas. Do you want to proceed?",
         logOut: "Log Out?",
         yes: "Yes",
         no: "No"
