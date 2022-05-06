@@ -123,7 +123,8 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   inSession: boolean = this.sessionID == "12345";
   isPlaying: boolean = false;
   canvasArray: any;
-  
+  canvasNames: any = [];
+  htmlCodes: any = [];
   
 
   ngOnInit() {
@@ -143,6 +144,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
   ngAfterViewInit(): void {
     this.canvasListElements.toArray();
     this.updateTabListEvent.emit(this.tabs);
+    this.canvasNames.push("Canvas 1");
   }
 
   canvasLeftX = 0;
@@ -239,6 +241,8 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     console.log(this.tabs);
     this.initialName = (this.tabs[this.currentTab].name);
     console.log(this.tabs[0].name)
+    this.canvasNames.splice(this.selectedTab, 1, this.tabs[this.currentTab].name);
+    console.log(this.canvasNames);
   }
 
   selectedComp(value: any) {
@@ -270,6 +274,8 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
         allowEdit: false
       };
     this.tabs.push(toInsert);
+    this.canvasNames.push(toInsert.name);
+    console.log(this.canvasNames);
     this.initialName = toInsert.name;
     this.updateTabListEvent.emit(this.tabs); //also update this when changing of order of tabs is implemented
     this.selectedTab = this.tabs.length - 1;
@@ -281,6 +287,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     this.componentListMap.delete(this.tabs[index].id);
     this.updateComponentListMapEvent.emit(this.componentListMap); //updates the componentList in app.component
     this.tabs.splice(index, 1);
+    this.canvasNames.splice(index, 1);
 
     /*for (let i = 0; i < this.tabs.length; i++) { //renames tabs
       this.tabs[i].name = "Canvas " + (i + 1);
@@ -308,6 +315,17 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     this.canvas = this.canvasListElements.toArray()[this.currentTab];
     this.updateSelectedCanvasEvent.emit(this.canvas);
     this.updateSelectedEvent.emit(this.defaultProps);
+
+    let tmpHtmlBody = '\n';
+    this.componentList.forEach((value) => {
+      let regexPosition = /sticky/;
+
+      tmpHtmlBody = tmpHtmlBody + value.htmlCode + '\n';
+      tmpHtmlBody = tmpHtmlBody.replace(regexPosition, 'absolute');
+    });
+    console.log(tmpHtmlBody);
+    this.htmlCodes.push(tmpHtmlBody);
+    console.log(this.htmlCodes);
     
     if(this.selectedTab == 0) {
       this.initialName = "Canvas 1";
