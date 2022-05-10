@@ -4,8 +4,13 @@
 
 export const environment = {
   production: false,
- 
+  stripe_key: 'pk_test_51KwEvlHlRaHlxZnfZjRzN0vexgXgBc0vyAzuTMIcJ84rWtr3vXI2xf2COt3PYa0duvfyQuS63WTdAY7rV46vZo7c00ZtAYJDlW',
+  biannually: 'price_1KxVZDHlRaHlxZnftAiQHmDw',
+  weekly: 'price_1KxVYfHlRaHlxZnf0nvtyNLR',
+  yearly: 'price_1KwnzsHlRaHlxZnf6akZ0dKV',
+  monthly: 'price_1KwnzsHlRaHlxZnfhadOFU8Q'
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file

@@ -123,15 +123,15 @@ export class ElementsComponent implements OnInit, AfterViewInit, AfterViewChecke
   compLanguage: any;
 
   ngOnInit() {
-    if(this.inSession) {
-      this._router.navigateByUrl("/canvas");
+    // if(this.inSession) {
+    //   this._router.navigateByUrl("/canvas");
    
-      //api call
-      /* this.user.getData().subscribe((data)=> {
-        console.warn("get api data", data);
-        this.users = data;
-      }) */
-    }
+    //   //api call
+    //   /* this.user.getData().subscribe((data)=> {
+    //     console.warn("get api data", data);
+    //     this.users = data;
+    //   }) */
+    // }
   }
   ngAfterViewInit(): void {}
   //////////////////////////////////////////////////////////////////////////////

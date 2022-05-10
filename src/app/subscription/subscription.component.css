@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+
+button {
+	background-color: rgb(31, 25, 44);
+	border: 0;
+	border-radius: 5px ;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+	color: #fff;
+	font-family: inherit;
+	font-size: 14px;
+	padding: 10px 25px;
+
+}
+
+.modal-inner {
+	background-color: #fff;
+	border-radius: 5px;
+	padding: 30px 50px;
+	text-align: center;
+	width: 600px;
+	max-width: 100%;
+    max-height: 50vh;
+}
+
+
+.modal-inner h1 {
+	margin: 0;
+}
+
+.modal-inner p {
+	font-size: 14px;
+	opacity: 0.7;
+}
+.submit{
+	margin-top: 15px;
+	height:40.5px;
+}
+span{
+
+	float: right;
+    font-size: 18px;
+    font-weight: 600;
+	line-height: 1;
+	margin:10px 15px 0;
+    color: rgba(0, 0, 0, 0.6);
+    text-shadow: none;
+    opacity: .5;
+	cursor: pointer;
+	height: 10px;
+}
+
+/* Plan style */
+.title{
+    margin-bottom: 20px;
+    font-size: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+.hidebx{
+    display: none;
+}
+form{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px
+}
+.lbl-radio{
+    text-align: center;
+    box-shadow: 0px 4px 12px -4px rgba(0, 0, 0, 0.35);
+    padding: 20px;
+    border: 1px solid #fff;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+    border-radius: 10px;
+}
+.display-box .plan{
+ font-weight: 600;
+ margin-bottom: 5px;
+ letter-spacing: 0.5px;
+}
+
+.display-box .price{
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+input[type=radio]:checked + .lbl-radio{
+    border-color: #286ab0;
+}

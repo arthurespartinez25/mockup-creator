@@ -20,4 +20,5 @@
     <button type="submit" class="btn btn-primary" [disabled]="saveData.value ===''" (click)="onSaveClick(saveData.value)" mat-button>{{selectedLanguage?.pallete.save}}</button>
     &nbsp;
     <button class="btn btn-danger" (click)="onCancelClick()" mat-button>{{selectedLanguage?.pallete.cancel}}</button>
+    <button type="button" mat-raised-button (click)="openSubscriptionModal()">Subs</button>
 </div>

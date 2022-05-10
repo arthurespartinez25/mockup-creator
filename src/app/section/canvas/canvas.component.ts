@@ -128,14 +128,14 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
 
   ngOnInit() {
     console.log(this.inSession);
-    if(this.inSession) {
-      this._router.navigateByUrl("/canvas");
-      //api call
-      /* this.user.getData().subscribe((data)=> {
-        console.warn("get api data", data);
-        this.users = data;
-      }) */
-    }
+    // if(this.inSession) {
+    //   this._router.navigateByUrl("/canvas");
+    //   //api call
+    //   /* this.user.getData().subscribe((data)=> {
+    //     console.warn("get api data", data);
+    //     this.users = data;
+    //   }) */
+    // }
     this.languages.set("en", en);
     this.languages.set("ja", ja);
     this.selectLanguage("en")
@@ -377,6 +377,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, AfterViewChecked 
     this.selectedLang.setLanguage(this.selectedLanguage);
     this.updateSelectedLanguageEvent.emit(this.selectedLanguage);
   }
+
   /****************** OLD CODE STARTS HERE **********************/
 }
 function readCSSFile(arg0: string) {

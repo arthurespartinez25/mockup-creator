@@ -1,0 +1,76 @@
+
+  <div>
+    
+    <span id="close"> X  </span>
+    <div class="modal-inner">
+      <ng-container *ngIf="panelNum == 1"> 
+        <h1>Get Our Content In Your Inbox</h1>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+       <button class="submit " (click)="next()">Subscribe</button> 
+      </ng-container>
+      <ng-container *ngIf="panelNum == 2">
+        <div class="title">Choose your Plan</div>
+        <form action="">
+          <input type="radio" name="planType" id="1" class="hidebx" value="weekly" (change)="selectPlan($event)">
+          <label for="1" class="lbl-radio">
+            <div class="display-box">
+              <div class="plan">Weekly</div>
+              <div class="price">$5</div>
+            </div>
+          </label>
+
+          <input type="radio" name="planType" id="2" class="hidebx" value="monthly" (change)="selectPlan($event)">
+          <label for="2" class="lbl-radio">
+            <div class="display-box">
+              <div class="plan">Monthly</div>
+              <div class="price">$10</div>
+            </div>
+          </label>
+
+          <input type="radio" name="planType" id="3" class="hidebx" value="biannually" (change)="selectPlan($event)">
+          <label for="3" class="lbl-radio">
+            <div class="display-box">
+              <div class="plan">6 months</div>
+              <div class="price">$50</div>
+            </div>
+          </label>
+
+          <input type="radio" name="planType" id="4" class="hidebx" value="yearly" (change)="selectPlan($event)">
+          <label for="4" class="lbl-radio">
+            <div class="display-box">
+              <div class="plan">Yearly</div>
+              <div class="price">$100</div>
+            </div>
+          </label>
+        </form>
+        <br>
+        <button (click)="prev()">Back</button> 
+        &nbsp;
+        <button (click)="next()">Next</button> 
+      </ng-container>
+      <ng-container *ngIf="panelNum == 3">
+        <div class="title">Choose your Payment Method</div>
+        <form action="">
+          <input type="radio" name="methodType" id="1" class="hidebx" value="card" (change)="selectMethod($event)">
+          <label for="1" class="lbl-radio">
+            <div class="display-box">
+              <div class="method"><i class="fa-solid fa-credit-card"></i> Credit or debit card</div>
+            </div>
+          </label>
+
+          <input type="radio" name="methodType" id="2" class="hidebx" value="paypal" (change)="selectMethod($event)">
+          <label for="2" class="lbl-radio">
+            <div class="display-box">
+              <div class="method">
+                <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png" alt="PayPal" />
+              </div>
+            </div>
+          </label>
+        </form>
+        <br>
+        <button (click)="prev()">Back</button> 
+        &nbsp;
+        <button (click)="checkOut()" >Checkout</button> 
+      </ng-container>
+    </div>
+  </div>

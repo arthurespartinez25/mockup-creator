@@ -8,9 +8,9 @@ import { UsersService } from '../../../service/users/users.service';
 import { Subscription } from 'rxjs';
 import { CrossComponentBridge } from 'src/app/service/cross-component-bridge/crossComponentBridge.service';
 import Swal from 'sweetalert2';
-import { environment } from 'src/environments/environment';
 import { LanguageService } from 'src/app/service/language/language.service';
-
+import { SubscriptionComponent } from 'src/app/subscription/subscription.component';
+import {Location} from '@angular/common'; 
 @Component({
   selector: 'app-save',
   templateUrl: './save.component.html',
@@ -46,6 +46,7 @@ export class SaveComponent implements OnInit{
     public dialog: MatDialog,
     private service: UsersService,
     public _router: Router,
+    private location: Location,
     private crossComponentBridge: CrossComponentBridge) {
       this.subscription = this.crossComponentBridge.getValue().subscribe(trigger => {
         if (trigger.value == 1) {
@@ -181,7 +182,7 @@ export class SaveComponent implements OnInit{
       this.loadedProjectName = res[0].project_name;
     })
     this.updateProjectIdEvent.emit(this.loadedProjectId)
-    this._router.navigateByUrl("/canvas/"+id);
+    this.location.go("/canvas/"+this.loadedProjectId);
   }
   updateSelectedLanguage(value: any){
     this.selectedLanguage = value;
@@ -206,7 +207,7 @@ export class SaveDataComponent {
   projectList: any;
   allProjects: any;
   selectedLanguage: any;
- 
+
 
   constructor(
     
@@ -215,7 +216,8 @@ export class SaveDataComponent {
     public _router: Router,
     private service: UsersService,
     public dialogRef?: MatDialogRef<SaveDataComponent>,
-    private languageService?: LanguageService
+    private languageService?: LanguageService,
+    public dialog?: MatDialog
     
   ) {
     this.componentListMap = data.value;
@@ -416,5 +418,8 @@ export class SaveDataComponent {
         });
       });
     }
+  }
+  openSubscriptionModal(){
+    const dialogRef = this.dialog!.open(SubscriptionComponent, {});
   }
 }

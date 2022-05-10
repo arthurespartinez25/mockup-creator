@@ -103,14 +103,14 @@ export class ComponentListComponent implements OnInit, AfterViewInit, AfterViewC
   inSession: boolean = this.sessionID == "12345";
 
   ngOnInit() {
-    if(this.inSession) {
-      this._router.navigateByUrl("/canvas");
-      //api call
-      /* this.user.getData().subscribe((data)=> {
-        console.warn("get api data", data);
-        this.users = data;
-      }) */
-    }
+    // if(this.inSession) {
+    //   this._router.navigateByUrl("/canvas");
+    //   //api call
+    //   /* this.user.getData().subscribe((data)=> {
+    //     console.warn("get api data", data);
+    //     this.users = data;
+    //   }) */
+    // }
   }
   ngAfterViewInit(): void {}
   //////////////////////////////////////////////////////////////////////////////

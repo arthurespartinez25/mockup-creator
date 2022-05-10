@@ -100,14 +100,14 @@ export class CodeSegmentComponent implements OnInit {
   
     ngOnInit() {
       console.log(this.inSession);
-      if(this.inSession) {
-        this._router.navigateByUrl("/canvas");
-        //api call
-        /* this.user.getData().subscribe((data)=> {
-          console.warn("get api data", data);
-          this.users = data;
-        }) */
-      }
+      // if(this.inSession) {
+      //   this._router.navigateByUrl("/canvas");
+      //   //api call
+      //   /* this.user.getData().subscribe((data)=> {
+      //     console.warn("get api data", data);
+      //     this.users = data;
+      //   }) */
+      // }
     }
     ngAfterViewInit(): void {
       this.updatePropertyComponentEvent.emit(this.propertyCmp);

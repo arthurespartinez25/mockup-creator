@@ -49,6 +49,10 @@ import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dial
 import { VideoDragComponent } from './components/videoDrag/videoDrag.component';
 import { LoadComponent } from './section/pallete/save/load/load.component';
 import { LanguageService } from './service/language/language.service';
+import { SubscriptionComponent } from './subscription/subscription.component';
+import { SuccessComponent } from './subscription/success/success.component';
+import { FailureComponent } from './subscription/failure/failure.component';
+import { BodyComponent } from './body/body.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +93,10 @@ import { LanguageService } from './service/language/language.service';
     MatConfirmDialogComponent,
     VideoDragComponent,
     LoadComponent,
+    SubscriptionComponent,
+    SuccessComponent,
+    FailureComponent,
+    BodyComponent,
     
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, DragDropModule, FormsModule, HttpClientModule, MatTabsModule, MatDialogModule, MatTooltipModule],

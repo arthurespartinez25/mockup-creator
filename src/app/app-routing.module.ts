@@ -4,6 +4,9 @@ import { AppComponent } from './app.component';
 import { AppLoginComponent } from './app-login/app-login.component';
 import { AppRegisterComponent } from './app-register/app-register.component';
 import { SaveComponent, SaveDataComponent } from './section/pallete/save/save.component';
+import { SuccessComponent } from './subscription/success/success.component';
+import { FailureComponent } from './subscription/failure/failure.component';
+import { BodyComponent } from './body/body.component';
 
 const routes: Routes = [
   {
@@ -15,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: "canvas",
-    component: AppComponent
+    component: BodyComponent
   },
   {
     path: "register",
@@ -27,7 +30,15 @@ const routes: Routes = [
   },
   {
     path: "canvas/:id",
-    component: AppComponent
+    component: BodyComponent
+  },
+  {
+    path: 'success',
+    component: SuccessComponent
+  },
+  {
+    path: 'failure',
+    component: FailureComponent
   },
 
 ];

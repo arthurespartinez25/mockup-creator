@@ -17,7 +17,7 @@
           </button>
           <button
             class="palette-item"
-            [attr.data-toggle]="showModal" data-target="#exampleModalCenter"
+            [attr.data-toggle]="showModal" data-target="#projectsModal"
             (click)="loadProjects(userId)"
             #modalOpen
           >
@@ -27,11 +27,11 @@
       </div>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="projectsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h3 class="modal-title" id="exampleModalLongTitle">Your Projects</h3>
+        <h3 class="modal-title" id="yourProjects">Your Projects</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" #modalClose>
           <span aria-hidden="true">&times;</span>
         </button>

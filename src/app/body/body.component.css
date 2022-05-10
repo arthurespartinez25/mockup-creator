@@ -1,0 +1,12 @@
+.content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: gray;
+  }
+  
+  .img-rounded {
+    max-width: 600px;
+    height: 200px;
+  }
+  
