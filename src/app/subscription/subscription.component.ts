@@ -10,8 +10,6 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./subscription.component.css']
 })
 export class SubscriptionComponent implements OnInit {
-  
-  title = 'angular-stripe';
   priceId: string;
   quantity = 1;
   stripePromise = loadStripe(environment.stripe_key);

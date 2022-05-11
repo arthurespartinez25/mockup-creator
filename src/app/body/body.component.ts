@@ -106,6 +106,7 @@ export class BodyComponent implements OnInit, AfterViewInit, AfterViewChecked  {
     public datepipe: DatePipe,
     private httpClient: HttpClient,
     private service: UsersService,
+    private location: Location
   ) {
     this.changeref = changeDetectorRef;
   }
@@ -131,15 +132,9 @@ export class BodyComponent implements OnInit, AfterViewInit, AfterViewChecked  {
   selectedLanguage: any;
 
   ngOnInit() {
-    console.log(this.sessionID);
-    // if(this.sessionID) {
-    //   this._router.navigateByUrl("/canvas");
-    //   //api call
-    //   //  this.users.getData().subscribe((data)=> {
-    //   //   console.warn("get api data", data);
-    //   //   this.users = data;
-    //   // }) 
-    // }
+    if(this.sessionID) {
+      this.location.go("/canvas");
+    }
   }
   ngAfterViewInit(): void {
     this.canvasDirective = this.canvas.passCanvas();    
