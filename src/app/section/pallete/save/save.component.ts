@@ -286,7 +286,10 @@ export class SaveDataComponent {
           this.projID = this.openedProjectID; // only for updating of project
         } else {
           this.getAllProjects()
-          let lastId = this.allProjects[this.allProjects.length-1].id; // gets last id of all projects
+          let lastId = 1;
+          if(this.allProjects.length>1){
+            lastId = this.allProjects[this.allProjects.length-1].id; // gets last id of all projects
+          }
           this.projID = "user" + this.loginCookie.get("userID") + "_proj" + (lastId + 1);
         }
         this.projectName = value;
